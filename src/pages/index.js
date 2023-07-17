@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import Hero from '@/components/Global/Hero'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
 import React from 'react'
-import CTA from '@/components/Global/CTA'
 
-export default function Home({ talents }) {
+export default function Home({ content }) {
+	console.log(content)
 	return (
 		<>
 			<Head>
@@ -19,32 +18,39 @@ export default function Home({ talents }) {
 			</Head>
 
 			<Nav />
-			<main className={'relative'}>
-				<Hero
-					title={
-						<>
-							Trouver la maquilleuse qui vous correspond n&apos;a jamais été
-							aussi simple
-						</>
-					}
-				/>
-				<CTA />
-			</main>
+
+			{/*<main className={'relative'}>*/}
+			{/*	<Hero*/}
+			{/*		title={*/}
+			{/*			<>*/}
+			{/*				Trouver la maquilleuse qui vous correspond n&apos;a jamais été*/}
+			{/*				aussi simple*/}
+			{/*			</>*/}
+			{/*		}*/}
+			{/*	/>*/}
+			{/*	<CTA />*/}
+			{/*</main>*/}
 			<Footer />
 		</>
 	)
 }
 
 export async function getServerSideProps() {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/talents`, {
-		method: 'GET',
-		headers: {
-			// 	token
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-		},
-	})
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/content-website?populate=*`,
+		{
+			method: 'GET',
+			headers: {
+				// 	token
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				// 	bearer token
+				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+			},
+		}
+	)
 
+	console.log(res)
 	if (!res) {
 		return {
 			notFound: true,
@@ -55,7 +61,7 @@ export async function getServerSideProps() {
 
 	return {
 		props: {
-			talents: data.data,
+			content: data.data,
 		},
 	}
 }
