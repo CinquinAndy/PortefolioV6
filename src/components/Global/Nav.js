@@ -10,7 +10,7 @@ function Nav({ content, selectedMenu }) {
 	const socials = content.socials
 	return (
 		<>
-			<header className="fixed left-0 top-0 z-50 mt-8 flex h-[40px] w-screen flex-row-reverse items-center justify-between px-4 xl:mt-0 xl:h-[80px] xl:flex-row xl:px-20">
+			<header className="fixed left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20">
 				<div>
 					<button
 						id="btnNav"
@@ -19,7 +19,7 @@ function Nav({ content, selectedMenu }) {
 						aria-label="Main Menu"
 					>
 						<svg
-							className="z-30 h-8 w-8 xl:h-10 xl:w-10"
+							className="z-30 h-8 w-8 md:h-10 md:w-10"
 							viewBox="0 0 100 100"
 							stroke="currentColor"
 						>
@@ -35,7 +35,7 @@ function Nav({ content, selectedMenu }) {
 						</svg>
 					</button>
 				</div>
-				<Link href="/" className="h-8 w-8 xl:h-10 xl:w-10">
+				<Link href="/" className="h-8 w-8 md:h-10 md:w-10">
 					<Image
 						src="/assets/icons/logov2.svg"
 						alt="Logo Cinquin Andy Signature"
@@ -45,7 +45,7 @@ function Nav({ content, selectedMenu }) {
 				</Link>
 				<Link
 					href={'/contact'}
-					className="button-animated smoke hidden font-body text-sm xl:block"
+					className="button-animated smoke hidden font-body text-sm md:block"
 				>
 					<h2>CONTACT</h2>
 				</Link>
@@ -58,7 +58,7 @@ function Nav({ content, selectedMenu }) {
 						: 'pointer-events-auto z-40 -translate-y-0 opacity-100'
 				} fixed flex h-screen w-screen transform transition-transform`}
 			>
-				<div className="xl:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 xl:w-2/5 xl:border-r-40 xl:p-20 xl:pt-36">
+				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-2/5 md:border-r-40 md:p-20 md:pt-36">
 					{menu.map((item, index) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link
@@ -67,7 +67,7 @@ function Nav({ content, selectedMenu }) {
 								rel="noopener"
 							>
 								<svg
-									className="absolute left-0 top-1/2 h-8 w-8 -translate-x-[50px] -translate-y-1/2 transform xl:h-10 xl:w-10"
+									className="absolute left-0 top-1/2 h-8 w-8 -translate-x-[50px] -translate-y-1/2 transform md:h-10 md:w-10"
 									viewBox="0 0 156 156"
 									fill="currentColor"
 								>
@@ -76,7 +76,7 @@ function Nav({ content, selectedMenu }) {
 										opacity=".9"
 									/>
 								</svg>
-								<h2 className="text-xl font-semibold uppercase xl:text-3xl">
+								<h2 className="text-xl font-semibold uppercase md:text-3xl">
 									{menu?.Link?.label}
 								</h2>
 							</Link>
@@ -87,7 +87,7 @@ function Nav({ content, selectedMenu }) {
 								href={item?.Link?.url}
 								rel="noopener"
 							>
-								<h2 className="text-xl font-semibold uppercase xl:text-3xl">
+								<h2 className="text-xl font-semibold uppercase md:text-3xl">
 									{item?.Link?.label}
 								</h2>
 							</Link>
@@ -95,7 +95,7 @@ function Nav({ content, selectedMenu }) {
 					})}
 
 					<div>
-						<hr className="mb-20 w-32 border opacity-75 xl:mb-10 xl:w-10" />
+						<hr className="mb-20 w-32 border opacity-75 md:mb-10 md:w-10" />
 						<div className="flex">
 							<div className="flex items-center justify-evenly gap-10">
 								{/*// <!--        Facebook -->*/}
@@ -106,7 +106,7 @@ function Nav({ content, selectedMenu }) {
 									target="_blank"
 								>
 									<svg
-										className="h-6 w-6 xl:h-8 xl:w-8"
+										className="h-6 w-6 md:h-8 md:w-8"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -121,7 +121,7 @@ function Nav({ content, selectedMenu }) {
 									target="_blank"
 								>
 									<svg
-										className="h-6 w-6 xl:h-8 xl:w-8"
+										className="h-6 w-6 md:h-8 md:w-8"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -138,7 +138,7 @@ function Nav({ content, selectedMenu }) {
 									target="_blank"
 								>
 									<svg
-										className="h-6 w-6 xl:h-8 xl:w-8"
+										className="h-6 w-6 md:h-8 md:w-8"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -155,7 +155,7 @@ function Nav({ content, selectedMenu }) {
 									target="_blank"
 								>
 									<svg
-										className="h-6 w-6 xl:h-8 xl:w-8"
+										className="h-6 w-6 md:h-8 md:w-8"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -172,7 +172,7 @@ function Nav({ content, selectedMenu }) {
 									target="_blank"
 								>
 									<svg
-										className="h-6 w-6 xl:h-8 xl:w-8"
+										className="h-6 w-6 md:h-8 md:w-8"
 										viewBox="0 0 1000 1000"
 										fill="currentColor"
 									>
@@ -215,16 +215,16 @@ function Nav({ content, selectedMenu }) {
 							{content?.contact?.phone}
 						</Link>
 					</div>
-					<div className="block xl:hidden"></div>
+					<div className="block md:hidden"></div>
 				</div>
 				<div
 					id="nav-right"
 					onClick={() => setOpen(!open)}
-					className="hidden h-full w-3/5 bg-black bg-opacity-90 xl:block"
+					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
 				></div>
 			</nav>
 			<div className="relative flex h-screen w-screen items-center justify-center">
-				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest xl:text-8xl">
+				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest md:text-8xl">
 					{content?.content_home?.title_home}
 				</h1>
 				<div className="absolute left-1/2 top-1/2 z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start">
@@ -237,7 +237,7 @@ function Nav({ content, selectedMenu }) {
 					/>
 				</div>
 				{/* <!-- MEDIA --> */}
-				<div className="absolute bottom-0 right-0 mb-14 flex flex-col items-center justify-evenly gap-8 p-4 xl:mb-0 xl:gap-10 xl:p-20">
+				<div className="absolute bottom-0 right-0 mb-14 flex flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20">
 					{/* <!-- Facebook --> */}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
@@ -246,7 +246,7 @@ function Nav({ content, selectedMenu }) {
 						target="_blank"
 					>
 						<svg
-							className="h-6 w-6 xl:h-8 xl:w-8"
+							className="h-6 w-6 md:h-8 md:w-8"
 							viewBox="0 0 24 24"
 							fill="currentColor"
 						>
@@ -261,7 +261,7 @@ function Nav({ content, selectedMenu }) {
 						target="_blank"
 					>
 						<svg
-							className="h-6 w-6 xl:h-8 xl:w-8"
+							className="h-6 w-6 md:h-8 md:w-8"
 							viewBox="0 0 24 24"
 							fill="currentColor"
 						>
@@ -278,7 +278,7 @@ function Nav({ content, selectedMenu }) {
 						target="_blank"
 					>
 						<svg
-							className="h-6 w-6 xl:h-8 xl:w-8"
+							className="h-6 w-6 md:h-8 md:w-8"
 							viewBox="0 0 24 24"
 							fill="currentColor"
 						>
@@ -295,7 +295,7 @@ function Nav({ content, selectedMenu }) {
 						target="_blank"
 					>
 						<svg
-							className="h-6 w-6 xl:h-8 xl:w-8"
+							className="h-6 w-6 md:h-8 md:w-8"
 							viewBox="0 0 24 24"
 							fill="currentColor"
 						>
@@ -306,8 +306,8 @@ function Nav({ content, selectedMenu }) {
 					</Link>
 				</div>
 				{/*<!--    PAGE -->*/}
-				<div className="absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 xl:mb-0 xl:p-20">
-					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-20 xl:text-xl">
+				<div className="absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20">
+					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-20 md:text-xl">
 						‣ ANDY CINQUIN
 					</h2>
 				</div>
