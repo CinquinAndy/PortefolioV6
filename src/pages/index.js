@@ -19,17 +19,6 @@ export default function Home({ content }) {
 
 			<Nav />
 
-			{/*<main className={'relative'}>*/}
-			{/*	<Hero*/}
-			{/*		title={*/}
-			{/*			<>*/}
-			{/*				Trouver la maquilleuse qui vous correspond n&apos;a jamais été*/}
-			{/*				aussi simple*/}
-			{/*			</>*/}
-			{/*		}*/}
-			{/*	/>*/}
-			{/*	<CTA />*/}
-			{/*</main>*/}
 			<Footer />
 		</>
 	)

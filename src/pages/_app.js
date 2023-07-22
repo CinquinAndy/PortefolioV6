@@ -1,7 +1,8 @@
-import '@/styles/globals.css'
-import '@/styles/loader.css'
-import '@/styles/blog.css'
-import '@/styles/burger_menu.css'
+import '@/styles/btn.css'
+import '@/styles/carroussel.css'
+import '@/styles/distorsions.css'
+import '@/styles/main.css'
+import '@/styles/nav.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Head from 'next/head'
