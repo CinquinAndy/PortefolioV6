@@ -26,7 +26,7 @@ export default function Home({ content }) {
 
 export async function getServerSideProps() {
 	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/content-website?populate=*`,
+		`${process.env.NEXT_PUBLIC_API_URL}/api/content-website?populate=deep`,
 		{
 			method: 'GET',
 			headers: {
