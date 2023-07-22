@@ -45,7 +45,7 @@ function Nav({ content, selectedMenu }) {
 				</Link>
 				<Link
 					href={'/contact'}
-					className="button-animated smoke font-body hidden text-sm xl:block"
+					className="button-animated smoke hidden font-body text-sm xl:block"
 				>
 					<h2>CONTACT</h2>
 				</Link>
@@ -58,7 +58,7 @@ function Nav({ content, selectedMenu }) {
 						: 'pointer-events-auto z-40 -translate-y-0 opacity-100'
 				} fixed flex h-screen w-screen transform transition-transform`}
 			>
-				<div className="flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 xl:w-2/5 xl:gap-24 xl:border-r-40 xl:p-20 xl:pt-36">
+				<div className="xl:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 xl:w-2/5 xl:border-r-40 xl:p-20 xl:pt-36">
 					{menu.map((item, index) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link
@@ -76,7 +76,7 @@ function Nav({ content, selectedMenu }) {
 										opacity=".9"
 									/>
 								</svg>
-								<h2 className="text-2xl font-semibold uppercase xl:text-5xl">
+								<h2 className="text-xl font-semibold uppercase xl:text-3xl">
 									{menu?.Link?.label}
 								</h2>
 							</Link>
@@ -87,7 +87,7 @@ function Nav({ content, selectedMenu }) {
 								href={item?.Link?.url}
 								rel="noopener"
 							>
-								<h2 className="text-2xl font-semibold uppercase xl:text-5xl">
+								<h2 className="text-xl font-semibold uppercase xl:text-3xl">
 									{item?.Link?.label}
 								</h2>
 							</Link>
@@ -205,14 +205,14 @@ function Nav({ content, selectedMenu }) {
 					</div>
 					<div></div>
 					<div className="flex flex-col text-xs text-slate-300">
-						<p className="font-body normal-case">{menu?.contact?.address}</p>
+						<p className="font-body normal-case">{content?.contact?.address}</p>
 						<Link
-							className="font-body mt-2 normal-case"
-							href={`tel:${(menu?.contact?.phone ?? '')
+							className="mt-2 font-body normal-case"
+							href={`tel:${(content?.contact?.phone ?? '')
 								.toString()
 								.replace(/\s+/g, '')}`}
 						>
-							{menu?.contact?.phone}
+							{content?.contact?.phone}
 						</Link>
 					</div>
 					<div className="block xl:hidden"></div>
@@ -307,7 +307,7 @@ function Nav({ content, selectedMenu }) {
 				</div>
 				{/*<!--    PAGE -->*/}
 				<div className="absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 xl:mb-0 xl:p-20">
-					<h2 className="font-body origin-bottom-left -rotate-90 text-sm tracking-wider opacity-20 xl:text-xl">
+					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-20 xl:text-xl">
 						‣ ANDY CINQUIN
 					</h2>
 				</div>

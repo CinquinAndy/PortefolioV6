@@ -2,6 +2,10 @@
 module.exports = {
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
+		fontFamily: {
+			body: ['"Be Vietnam Pro"', 'sans-serif'],
+			display: ['"Noto Serif Display"', 'serif'],
+		},
 		extend: {
 			colors: {
 				sky: {
