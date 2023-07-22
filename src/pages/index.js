@@ -17,8 +17,8 @@ export default function Home({ content }) {
 				<link rel="canonical" href="https://andy-cinquin.fr" />
 			</Head>
 
-			<Nav />
-
+			<Nav content={content} />
+			<main>here</main>
 			<Footer />
 		</>
 	)
@@ -39,7 +39,6 @@ export async function getServerSideProps() {
 		}
 	)
 
-	console.log(res)
 	if (!res) {
 		return {
 			notFound: true,
