@@ -41,7 +41,7 @@ function Services({ content_website, services }) {
 				</div>
 				<div className="mt-10 flex flex-row justify-center xl:mt-20">
 					<div className="grid grid-cols-1 gap-[60px] md:grid-cols-2 lg:grid-cols-3 xl:gap-[80px] 2xl:grid-cols-4">
-						{services.map((service, index) => {
+						{services.map(service => {
 							return (
 								<>
 									<section
