@@ -3,18 +3,6 @@ import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
-const rotate = [
-	'rotate-[1deg]',
-	'rotate-[2deg]',
-	'rotate-[3deg]',
-	'rotate-[4deg]',
-	'rotate-[5deg]',
-	'-rotate-[1deg]',
-	'-rotate-[2deg]',
-	'-rotate-[3deg]',
-	'-rotate-[4deg]',
-	'-rotate-[5deg]',
-]
 function Services({ content_website, services }) {
 	return (
 		<>

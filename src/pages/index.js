@@ -28,6 +28,8 @@ export default function Home({ content_website, services, realisations }) {
 				<Realisations
 					content_website={content_website}
 					realisations={realisations}
+					slice={3}
+					isHome={true}
 				/>
 				<Cta />
 			</div>
