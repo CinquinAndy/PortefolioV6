@@ -2,19 +2,12 @@ import Head from 'next/head'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
 import React from 'react'
+import Services from '@/components/Global/Services'
+import Cta from '@/components/Global/Cta'
 
 export default function Home({ content_website, services }) {
 	return (
 		<>
-			{/*<Head>*/}
-			{/*	<title>{ANDY CINQUIN - Andy Cinquin - Développeur Freelance}</title>*/}
-			{/*	<meta*/}
-			{/*		name="description"*/}
-			{/*		content="Portefolio professionnel de Andy Cinquin, développeur informatique Freelance, Nantes et alentours. Développement sur-mesure, web, applicatifs"*/}
-			{/*	/>*/}
-			{/*	/!*	seo tag canonical link *!/*/}
-			{/*	<link rel="canonical" href="https://andy-cinquin.fr" />*/}
-			{/*</Head>*/}
 			<Head>
 				<title>{content_website?.attributes?.content_home?.seo_title}</title>
 				<meta
@@ -29,9 +22,10 @@ export default function Home({ content_website, services }) {
 			</Head>
 
 			<Nav content_website={content_website} />
-			<main>
+			<>
 				<Services content_website={content_website} services={services} />
-			</main>
+				<Cta />
+			</>
 			<Footer />
 		</>
 	)

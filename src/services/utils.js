@@ -28,6 +28,7 @@ export function convertStringToKebabCase(str) {
 }
 
 export const replaceTitle = title => {
+	if (!title) return ''
 	// Replace asterisks with indigo color
 	const regexAsterisk = /\*([^*]+)\*/g
 	title = title.replace(
