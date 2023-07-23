@@ -10,7 +10,11 @@ function Nav({ content_website, selectedMenu }) {
 	const socials = content_website.socials
 	return (
 		<>
-			<header className="sticky left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20">
+			<header
+				className={`${
+					!open ? 'sticky' : 'fixed'
+				} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
+			>
 				<div>
 					<button
 						id="btnNav"
@@ -47,7 +51,17 @@ function Nav({ content_website, selectedMenu }) {
 					href={'/contact'}
 					className="button-animated smoke hidden font-body text-sm md:block"
 				>
-					<h2>CONTACT</h2>
+					<h2>
+						<div>
+							<span>C</span>
+							<span>O</span>
+							<span>N</span>
+							<span>T</span>
+							<span>A</span>
+							<span>C</span>
+							<span>T</span>
+						</div>
+					</h2>
 				</Link>
 			</header>
 			<nav
@@ -93,7 +107,6 @@ function Nav({ content_website, selectedMenu }) {
 							</Link>
 						)
 					})}
-
 					<div>
 						<hr className="mb-20 w-32 border opacity-75 md:mb-10 md:w-10" />
 						<div className="flex">
@@ -225,7 +238,7 @@ function Nav({ content_website, selectedMenu }) {
 					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
 				></div>
 			</nav>
-			<div className="relative flex h-screen w-screen items-center justify-center">
+			<div className="relative flex h-[calc(100vh-80px)] w-screen items-center justify-center">
 				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest md:text-8xl">
 					{content_website?.content_home?.title_home}
 				</h1>
