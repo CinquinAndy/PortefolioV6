@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-function Nav({ content, selectedMenu }) {
+function Nav({ content_website, selectedMenu }) {
 	const [open, setOpen] = useState(false)
 
-	content = content.attributes
-	const menu = content.menu
-	const socials = content.socials
+	content_website = content_website.attributes
+	const menu = content_website.menu
+	const socials = content_website.socials
 	return (
 		<>
 			<header className="fixed left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20">
@@ -205,14 +205,16 @@ function Nav({ content, selectedMenu }) {
 					</div>
 					<div></div>
 					<div className="flex flex-col text-xs text-slate-300">
-						<p className="font-body normal-case">{content?.contact?.address}</p>
+						<p className="font-body normal-case">
+							{content_website?.contact?.address}
+						</p>
 						<Link
 							className="mt-2 font-body normal-case"
-							href={`tel:${(content?.contact?.phone ?? '')
+							href={`tel:${(content_website?.contact?.phone ?? '')
 								.toString()
 								.replace(/\s+/g, '')}`}
 						>
-							{content?.contact?.phone}
+							{content_website?.contact?.phone}
 						</Link>
 					</div>
 					<div className="block md:hidden"></div>
@@ -225,7 +227,7 @@ function Nav({ content, selectedMenu }) {
 			</nav>
 			<div className="relative flex h-screen w-screen items-center justify-center">
 				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest md:text-8xl">
-					{content?.content_home?.title_home}
+					{content_website?.content_home?.title_home}
 				</h1>
 				<div className="absolute left-1/2 top-1/2 z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start">
 					<Image

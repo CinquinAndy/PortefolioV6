@@ -26,3 +26,19 @@ export function convertStringToKebabCase(str) {
 	// Replace spaces with '-' and convert to lowercase
 	return withoutAccents.replace(/\s+/g, '-').toLowerCase()
 }
+
+export const replaceTitle = title => {
+	// Replace asterisks with indigo color
+	const regexAsterisk = /\*([^*]+)\*/g
+	title = title.replace(
+		regexAsterisk,
+		'<span class="text-indigo-500 font-display">$1</span>'
+	)
+
+	// Replace underscores with sky color
+	const regexUnderscore = /_([^_]+)_/g
+	return title.replace(
+		regexUnderscore,
+		'<span class="text-sky-500 font-display">$1</span>'
+	)
+}
