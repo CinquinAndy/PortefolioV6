@@ -48,7 +48,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 					</div>
 				)}
 				<div className="mt-10 flex w-full justify-center xl:mt-20">
-					<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px]">
+					<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
 						{realisations.map((realisation, index) => {
 							return (
 								<Link
@@ -74,7 +74,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 												}
 												alt={realisation?.attributes?.title}
 												className="z-20 h-full w-full object-cover"
-												layout="fill"
+												fill={true}
 											/>
 										</div>
 									</div>

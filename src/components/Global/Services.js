@@ -31,35 +31,34 @@ function Services({ content_website, services }) {
 					<div className="grid grid-cols-1 gap-[60px] md:grid-cols-2 lg:grid-cols-3 xl:gap-[80px] 2xl:grid-cols-4">
 						{services.map(service => {
 							return (
-								<>
-									<section
-										className={`shadow-innercustom relative flex flex-col bg-slate-1000 p-20`}
-									>
-										<div className="relative flex w-full items-center justify-center ">
-											<Image
-												src={service?.attributes?.image?.data?.attributes?.url}
-												alt={service?.attributes?.title}
-												className="h-[50px] w-[50px] xl:h-[75px] xl:w-[75px]"
-												width={50}
-												height={50}
-											/>
-										</div>
-										<header className="flex w-full items-center justify-center py-8 xl:py-6">
-											<h2
-												className="text-lg normal-case xl:text-xl"
-												dangerouslySetInnerHTML={{
-													__html: replaceTitle(service?.attributes?.title),
-												}}
-											></h2>
-										</header>
-										<article
-											className="text-xs xl:text-sm [&>*]:font-body"
+								<section
+									key={service?.id}
+									className={`shadow-innercustom relative flex flex-col bg-slate-1000 p-20`}
+								>
+									<div className="relative flex w-full items-center justify-center ">
+										<Image
+											src={service?.attributes?.image?.data?.attributes?.url}
+											alt={service?.attributes?.title}
+											className="h-[50px] w-[50px] xl:h-[75px] xl:w-[75px]"
+											width={50}
+											height={50}
+										/>
+									</div>
+									<header className="flex w-full items-center justify-center py-8 xl:py-6">
+										<h2
+											className="text-lg normal-case xl:text-xl"
 											dangerouslySetInnerHTML={{
-												__html: replaceTitle(service?.attributes?.content),
+												__html: replaceTitle(service?.attributes?.title),
 											}}
-										></article>
-									</section>
-								</>
+										></h2>
+									</header>
+									<article
+										className="text-xs xl:text-sm [&>*]:font-body"
+										dangerouslySetInnerHTML={{
+											__html: replaceTitle(service?.attributes?.content),
+										}}
+									></article>
+								</section>
 							)
 						})}
 					</div>

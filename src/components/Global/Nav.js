@@ -10,7 +10,7 @@ function Nav({ content_website, selectedMenu }) {
 	const socials = content_website.socials
 	return (
 		<>
-			<header className="fixed left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20">
+			<header className="sticky left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20">
 				<div>
 					<button
 						id="btnNav"
