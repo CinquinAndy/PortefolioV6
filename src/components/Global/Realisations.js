@@ -48,7 +48,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 					</div>
 				)}
 				<div className="mt-10 flex w-full justify-center xl:mt-20">
-					<div className="grid w-full grid-cols-12 gap-[20px] xl:gap-[40px]">
+					<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px]">
 						{realisations.map((realisation, index) => {
 							return (
 								<Link
@@ -56,9 +56,9 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 									href={'/portefolio/' + realisation?.attributes?.slug}
 									className={`${gridTemplateCustom(
 										index
-									)} relative flex aspect-[16/9] w-full flex-col items-center justify-center p-10`}
+									)} relative flex aspect-[16/9] h-[50vh] w-full flex-col items-center justify-center p-10 sm:h-auto`}
 								>
-									<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl">
+									<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 										{realisation?.attributes?.title}
 									</h2>
 									<div
@@ -78,7 +78,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 											/>
 										</div>
 									</div>
-									<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold">
+									<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 										{realisation?.attributes?.subtitle}
 									</h2>
 								</Link>
