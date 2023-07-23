@@ -4,6 +4,8 @@ import Footer from '@/components/Global/Footer'
 import React from 'react'
 import Services from '@/components/Global/Services'
 import Cta from '@/components/Global/Cta'
+import Realisations from '@/components/Global/Realisations'
+import realisations from '@/components/Global/Realisations'
 
 export default function Home({ content_website, services }) {
 	return (
@@ -24,6 +26,10 @@ export default function Home({ content_website, services }) {
 			<Nav content_website={content_website} />
 			<>
 				<Services content_website={content_website} services={services} />
+				<Realisations
+					content_website={content_website}
+					realisations={realisations}
+				/>
 				<Cta />
 			</>
 			<Footer />
@@ -58,8 +64,21 @@ export async function getServerSideProps() {
 			},
 		}
 	)
+	const res_realisations = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`,
+		{
+			method: 'GET',
+			headers: {
+				// 	token
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				// 	bearer token
+				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+			},
+		}
+	)
 
-	if (!res_content_website || !res_services) {
+	if (!res_content_website || !res_services || !res_realisations) {
 		return {
 			notFound: true,
 		}
@@ -67,11 +86,13 @@ export async function getServerSideProps() {
 
 	const data_content_website = await res_content_website.json()
 	const data_services = await res_services.json()
+	const data_realisations = await res_realisations.json()
 
 	return {
 		props: {
 			content_website: data_content_website.data,
 			services: data_services.data,
+			realisations: data_realisations.data,
 		},
 	}
 }
