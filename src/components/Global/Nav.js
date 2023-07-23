@@ -98,7 +98,7 @@ function Nav({ content, selectedMenu }) {
 						<hr className="mb-20 w-32 border opacity-75 md:mb-10 md:w-10" />
 						<div className="flex">
 							<div className="flex items-center justify-evenly gap-10">
-								{/*// <!--        Facebook -->*/}
+								{/*// <!-- Facebook -->*/}
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
 									href={socials?.facebook}
@@ -270,7 +270,7 @@ function Nav({ content, selectedMenu }) {
 							<circle cx="18.406" cy="5.595" r="1.439" />
 						</svg>
 					</Link>
-					{/*// <!--        Linkedin -->*/}
+					{/*// <!-- Linkedin -->*/}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.linkedin}
@@ -287,7 +287,7 @@ function Nav({ content, selectedMenu }) {
 							<path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z" />
 						</svg>
 					</Link>
-					{/*// <!--        GitHub-->*/}
+					{/*// <!-- GitHub-->*/}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.github}
@@ -305,7 +305,7 @@ function Nav({ content, selectedMenu }) {
 						</svg>
 					</Link>
 				</div>
-				{/*<!--    PAGE -->*/}
+				{/*<!-- PAGE -->*/}
 				<div className="absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20">
 					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-20 md:text-xl">
 						‣ ANDY CINQUIN
