@@ -3,6 +3,18 @@ import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
+const rotate = [
+	'rotate-[1deg]',
+	'rotate-[2deg]',
+	'rotate-[3deg]',
+	'rotate-[4deg]',
+	'rotate-[5deg]',
+	'-rotate-[1deg]',
+	'-rotate-[2deg]',
+	'-rotate-[3deg]',
+	'-rotate-[4deg]',
+	'-rotate-[5deg]',
+]
 function Services({ content_website, services }) {
 	return (
 		<>
@@ -27,13 +39,15 @@ function Services({ content_website, services }) {
 						</Link>
 					</div>
 				</div>
-				<div className="mt-10 flex flex-row flex-nowrap overflow-hidden xl:mt-20">
-					<div className="animate-scrolling flex flex-row flex-nowrap gap-[20px] xl:gap-[40px]">
-						{services.map(service => {
+				<div className="mt-10 flex flex-row justify-center xl:mt-20">
+					<div className="grid grid-cols-1 gap-[60px] md:grid-cols-2 lg:grid-cols-3 xl:gap-[80px] 2xl:grid-cols-4">
+						{services.map((service, index) => {
 							return (
 								<>
-									<section className="flex h-[300px] w-[300px] flex-col bg-slate-1000 p-8 xl:h-[350px] xl:w-[600px] xl:p-20">
-										<div className="flex w-full items-center justify-center">
+									<section
+										className={`shadow-innercustom relative flex flex-col bg-slate-1000 p-20`}
+									>
+										<div className="relative flex w-full items-center justify-center ">
 											<Image
 												src={service?.attributes?.image?.data?.attributes?.url}
 												alt={service?.attributes?.title}

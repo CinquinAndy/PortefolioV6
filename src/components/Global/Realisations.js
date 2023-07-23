@@ -4,7 +4,7 @@ import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
 function Realisations({ content_website, realisations }) {
-	console.log(realisations)
+	realisations = realisations.slice(0, 5)
 	return (
 		<>
 			<section className="w-full p-4 xl:p-20">
@@ -52,7 +52,7 @@ function Realisations({ content_website, realisations }) {
 											'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'
 										}
 									>
-										<div className="custom-card relative z-10 my-2 h-full w-full brightness-50">
+										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-50">
 											<Image
 												src={
 													realisation?.attributes?.image_presentation?.data
