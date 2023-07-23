@@ -5,9 +5,8 @@ import React from 'react'
 import Services from '@/components/Global/Services'
 import Cta from '@/components/Global/Cta'
 import Realisations from '@/components/Global/Realisations'
-import realisations from '@/components/Global/Realisations'
 
-export default function Home({ content_website, services }) {
+export default function Home({ content_website, services, realisations }) {
 	return (
 		<>
 			<Head>
@@ -24,14 +23,14 @@ export default function Home({ content_website, services }) {
 			</Head>
 
 			<Nav content_website={content_website} />
-			<>
+			<div>
 				<Services content_website={content_website} services={services} />
 				<Realisations
 					content_website={content_website}
 					realisations={realisations}
 				/>
 				<Cta />
-			</>
+			</div>
 			<Footer />
 		</>
 	)

@@ -24,9 +24,8 @@
     animation: scroll_rea 30s linear infinite;
 }
 
-.shadow-innercustom {
-    box-shadow: inset 0px 0px 35px 10px #1b1f4c;
-    position: relative;
+.shadow-custom {
+    box-shadow: inset 0 0 35px 10px #1b1f4c;
 }
 
 .shadow-innercustom:after {

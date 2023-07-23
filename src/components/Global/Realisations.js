@@ -4,9 +4,10 @@ import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
 function Realisations({ content_website, realisations }) {
+	console.log(realisations)
 	return (
 		<>
-			<section className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px] ">
+			<section className="w-full p-4 xl:p-20">
 				{/*// <!--     Derniers projets -->*/}
 				<div className="mt-[100px] flex justify-between xl:mt-[300px]">
 					<div className="w-1/2">
@@ -36,24 +37,29 @@ function Realisations({ content_website, realisations }) {
 				</div>
 				<div className="mt-10 flex flex-row flex-nowrap overflow-hidden xl:mt-20">
 					<div className="animate-scrolling-rea flex flex-row flex-nowrap gap-[20px] xl:gap-[40px]">
-						{realisations?.map(post => {
+						{realisations.map(realisation => {
 							return (
 								<Link
-									href={'/portefolio/' + post?.attributes?.slug}
+									key={realisation?.id}
+									href={'/portefolio/' + realisation?.attributes?.slug}
 									className="relative flex h-[400px] w-[400px] flex-col p-10 pb-4 xl:h-[350px] xl:w-[600px] xl:p-14"
 								>
 									<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl">
-										title
+										{realisation?.attributes?.title}
 									</h2>
-									<div className="custom-card shadow-innercustom bg-<?= $post->ID ?> z-10 my-2 h-full w-full brightness-50"></div>
-									{/*<style>*/}
-									{/*    .bg-<?= $post->ID ?> {*/}
-									{/*    background: url(<?= get_the_post_thumbnail_url($post)?>) no-repeat center center;*/}
-									{/*    background-size: cover;*/}
-									{/*}*/}
-									{/*</style>*/}
+									<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-50">
+										<Image
+											src={
+												realisation?.attributes?.image_presentation?.data
+													?.attributes?.url
+											}
+											alt={realisation?.attributes?.title}
+											className="shadow-custom h-full w-full object-cover"
+											layout="fill"
+										/>
+									</div>
 									<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold">
-										subtitle
+										{realisation?.attributes?.subtitle}
 									</h2>
 								</Link>
 							)

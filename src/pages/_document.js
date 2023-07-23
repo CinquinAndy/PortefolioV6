@@ -30,7 +30,7 @@ export default function Document() {
 			</Head>
 			<body
 				className={
-					'text-slate-50" relative bg-gradient-to-b from-indigo-1100 to-sky-1100'
+					'relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50'
 				}
 			>
 				<Main />
