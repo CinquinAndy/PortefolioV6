@@ -47,16 +47,22 @@ function Realisations({ content_website, realisations }) {
 									<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl">
 										{realisation?.attributes?.title}
 									</h2>
-									<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-50">
-										<Image
-											src={
-												realisation?.attributes?.image_presentation?.data
-													?.attributes?.url
-											}
-											alt={realisation?.attributes?.title}
-											className="shadow-custom h-full w-full object-cover"
-											layout="fill"
-										/>
+									<div
+										className={
+											'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'
+										}
+									>
+										<div className="custom-card relative z-10 my-2 h-full w-full brightness-50">
+											<Image
+												src={
+													realisation?.attributes?.image_presentation?.data
+														?.attributes?.url
+												}
+												alt={realisation?.attributes?.title}
+												className="z-20 h-full w-full object-cover"
+												layout="fill"
+											/>
+										</div>
 									</div>
 									<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold">
 										{realisation?.attributes?.subtitle}

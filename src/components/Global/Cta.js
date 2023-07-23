@@ -3,7 +3,7 @@ import React from 'react'
 function Cta(props) {
 	return (
 		<section className="w-full p-4 xl:p-20">
-			<div className="shadow-innercustom mt-[100px] flex items-center justify-center rounded bg-slate-1000 p-12 xl:mt-[300px] xl:p-20">
+			<div className="shadow-innercustom relative mt-[100px] flex items-center justify-center rounded bg-slate-1000 p-12 xl:mt-[300px] xl:p-20">
 				<div>
 					<div className="flex w-full items-center justify-center">
 						<h2 className="text-center text-xl font-bold xl:text-3xl">
