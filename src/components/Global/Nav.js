@@ -111,7 +111,6 @@ function Nav({ content_website, selectedMenu }) {
 						<hr className="mb-20 w-32 border opacity-75 md:mb-10 md:w-10" />
 						<div className="flex">
 							<div className="flex items-center justify-evenly gap-10">
-								{/*// <!-- Facebook -->*/}
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
 									href={socials?.facebook}
@@ -126,7 +125,6 @@ function Nav({ content_website, selectedMenu }) {
 										<path d="m15.997 3.985h2.191v-3.816c-.378-.052-1.678-.169-3.192-.169-3.159 0-5.323 1.987-5.323 5.639v3.361h-3.486v4.266h3.486v10.734h4.274v-10.733h3.345l.531-4.266h-3.877v-2.939c.001-1.233.333-2.077 2.051-2.077z" />
 									</svg>
 								</Link>
-								{/*// <!--        Insta -->*/}
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
 									href={socials?.instagram}
@@ -143,7 +141,6 @@ function Nav({ content_website, selectedMenu }) {
 										<circle cx="18.406" cy="5.595" r="1.439" />
 									</svg>
 								</Link>
-								{/*// <!--        Linkedin -->*/}
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
 									href={socials?.linkedin}
@@ -160,7 +157,6 @@ function Nav({ content_website, selectedMenu }) {
 										<path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z" />
 									</svg>
 								</Link>
-								{/*// <!-- GitHub-->*/}
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
 									href={socials?.github}
@@ -251,9 +247,7 @@ function Nav({ content_website, selectedMenu }) {
 						className="mb-32 ml-16 h-112 w-112 -rotate-12 opacity-20 brightness-75"
 					/>
 				</div>
-				{/* <!-- MEDIA --> */}
 				<div className="absolute bottom-0 right-0 mb-14 flex flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20">
-					{/* <!-- Facebook --> */}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.facebook}
@@ -268,7 +262,6 @@ function Nav({ content_website, selectedMenu }) {
 							<path d="m15.997 3.985h2.191v-3.816c-.378-.052-1.678-.169-3.192-.169-3.159 0-5.323 1.987-5.323 5.639v3.361h-3.486v4.266h3.486v10.734h4.274v-10.733h3.345l.531-4.266h-3.877v-2.939c.001-1.233.333-2.077 2.051-2.077z" />
 						</svg>
 					</Link>
-					{/*<!-- Insta -->*/}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.instagram}
@@ -285,7 +278,6 @@ function Nav({ content_website, selectedMenu }) {
 							<circle cx="18.406" cy="5.595" r="1.439" />
 						</svg>
 					</Link>
-					{/*// <!-- Linkedin -->*/}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.linkedin}
@@ -302,7 +294,6 @@ function Nav({ content_website, selectedMenu }) {
 							<path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z" />
 						</svg>
 					</Link>
-					{/*// <!-- GitHub-->*/}
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.github}
@@ -320,10 +311,9 @@ function Nav({ content_website, selectedMenu }) {
 						</svg>
 					</Link>
 				</div>
-				{/*<!-- PAGE -->*/}
 				<div className="absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20">
 					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-20 md:text-xl">
-						‣ ANDY CINQUIN
+						{content_website?.content_home?.title_vertical_left_bottom}
 					</h2>
 				</div>
 			</div>
