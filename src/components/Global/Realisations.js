@@ -4,7 +4,7 @@ import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
 function Realisations({ content_website, realisations, slice, isHome }) {
-	realisations = realisations.slice(0, slice)
+	realisations = slice ? realisations.slice(0, slice) : realisations
 	const gridTemplateCustom = index => {
 		switch (index % 3) {
 			case 0:
