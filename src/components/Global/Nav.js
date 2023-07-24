@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-function Nav({ content_website, selectedMenu }) {
+function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
 
 	content_website = content_website.attributes
@@ -236,7 +236,7 @@ function Nav({ content_website, selectedMenu }) {
 			</nav>
 			<div className="relative flex h-[calc(100vh-80px)] w-screen items-center justify-center">
 				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest md:text-8xl">
-					{content_website?.content_home?.title_home}
+					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
 				<div className="absolute left-1/2 top-1/2 z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start">
 					<Image

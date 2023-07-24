@@ -24,7 +24,11 @@ function Portefolio({ content_website, realisations }) {
 				/>
 			</Head>
 
-			<Nav content_website={content_website} />
+			<Nav
+				content_website={content_website}
+				isHome={false}
+				h1={content_website.attributes.content_home}
+			/>
 			<div>
 				<Realisations
 					content_website={content_website}
