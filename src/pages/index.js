@@ -33,7 +33,7 @@ export default function Home({ content_website, services, realisations }) {
 				/>
 				<Cta />
 			</div>
-			<Footer />
+			<Footer content_website={content_website} />
 		</>
 	)
 }
