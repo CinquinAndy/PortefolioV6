@@ -66,7 +66,7 @@ export async function getServerSideProps() {
 		}
 	)
 	const res_realisations = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`,
+		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep,2&sort=rank`,
 		{
 			method: 'GET',
 			headers: {
