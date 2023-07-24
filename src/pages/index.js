@@ -5,6 +5,8 @@ import React from 'react'
 import Services from '@/components/Global/Services'
 import Cta from '@/components/Global/Cta'
 import Realisations from '@/components/Global/Realisations'
+import { remark } from 'remark'
+import html from 'remark-html'
 
 export default function Home({ content_website, services, realisations }) {
 	return (
@@ -89,9 +91,30 @@ export async function getStaticProps() {
 	const data_services = await res_services.json()
 	const data_realisations = await res_realisations.json()
 
+	// Convert Markdown to HTML
+	const processedContentFooter = await remark()
+		.use(html)
+		.process(data_content_website.data.attributes.content_footer.content)
+
+	// replace the content_footer by the processed one
+
+	const newDataContentWebsite = {
+		...data_content_website,
+		data: {
+			...data_content_website.data,
+			attributes: {
+				...data_content_website.data.attributes,
+				content_footer: {
+					...data_content_website.data.attributes.content_footer,
+					content: processedContentFooter.toString(),
+				},
+			},
+		},
+	}
+
 	return {
 		props: {
-			content_website: data_content_website.data,
+			content_website: newDataContentWebsite.data,
 			services: data_services.data,
 			realisations: data_realisations.data,
 		},

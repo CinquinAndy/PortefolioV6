@@ -11,6 +11,10 @@
     font-weight: 400;
     color: #fff;
 }
+.layout-custom *{
+    list-style: inside;
+    text-decoration: none;
+}
 
 body {
     box-sizing: border-box;

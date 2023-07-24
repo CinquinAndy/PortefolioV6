@@ -1,7 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 import Script from 'next/script'
-import Nav from '@/components/Global/Nav'
-import Footer from '@/components/Global/Footer'
 
 export default function Document() {
 	return (

@@ -2,9 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Signature } from '@/components/Global/Signature'
+import { Layout } from '@/components/Global/Layout'
 
 function Footer({ content_website }) {
-	console.log(content_website)
 	// Sitemap
 	const sitemap = content_website?.attributes?.Sitemap.filter(
 		item => item?.categorie === 'sitemap'
@@ -33,15 +33,12 @@ function Footer({ content_website }) {
 						height={24}
 						width={24}
 					/>
-					<Link
-						className="py-4 text-xs xl:text-base"
-						href={`mailto:${content_website?.attributes?.contact?.email}`}
-					>
-						{content_website?.attributes?.contact?.email}
-					</Link>
-					<p className="text-xs xl:text-base">
-						{content_website?.attributes?.content_footer?.content}
-					</p>
+					<div className="">
+						<Layout
+							className={'prose-xs flex flex-col gap-4'}
+							value={content_website?.attributes?.content_footer?.content.toString()}
+						/>
+					</div>
 				</div>
 
 				<div className="col-span-2 col-start-5 flex flex-col gap-10 xl:col-span-1">
@@ -61,7 +58,7 @@ function Footer({ content_website }) {
 					})}
 				</div>
 				<div className="col-span-2 col-start-7 flex flex-col gap-10 xl:col-span-1">
-					<h2 className="text-sm font-bold xl:text-xl xl:font-normal">
+					<h2 className="text-sm font-bold xl:font-display xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
 					{legals?.map((item, index) => {
