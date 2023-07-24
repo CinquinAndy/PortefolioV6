@@ -75,6 +75,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 												alt={realisation?.attributes?.title}
 												className="z-20 h-full w-full object-cover"
 												fill={true}
+												sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
 											/>
 										</div>
 									</div>

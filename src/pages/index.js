@@ -38,7 +38,7 @@ export default function Home({ content_website, services, realisations }) {
 	)
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const res_content_website = await fetch(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/content-website?populate=deep`,
 		{
@@ -95,5 +95,6 @@ export async function getServerSideProps() {
 			services: data_services.data,
 			realisations: data_realisations.data,
 		},
+		revalidate: 10,
 	}
 }
