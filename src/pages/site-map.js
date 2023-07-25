@@ -48,7 +48,7 @@
 // 					<div className="mx-auto max-w-2xl">
 // 						<article>
 // 							<header className="flex flex-col">
-// 								<h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
+// 								<h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">
 // 									{'My-Makeup la plateforme pour les maquilleuses !'}
 // 								</h1>
 // 							</header>

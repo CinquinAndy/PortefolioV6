@@ -86,10 +86,10 @@
 // 					isSimpleVersionDisplayed={true}
 // 				/>
 // 				<div className="mx-auto mt-32 max-w-2xl px-4 text-center md:px-0">
-// 					<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+// 					<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
 // 						Un message en particulier ?
 // 					</h2>
-// 					<p className="mt-2 text-lg leading-8 text-gray-600">
+// 					<p className="mt-2 text-lg leading-8 text-slate-600">
 // 						{
 // 							"Une demande particulière, un bug, une idée ? N'hésitez pas à nous contacter via le formulaire ci-dessous !"
 // 						}
@@ -103,7 +103,7 @@
 // 						<div>
 // 							<label
 // 								htmlFor="first_name"
-// 								className="block text-sm font-semibold leading-6 text-gray-900"
+// 								className="block text-sm font-semibold leading-6 text-slate-900"
 // 							>
 // 								Prénom
 // 							</label>
@@ -116,7 +116,7 @@
 // 										required: true,
 // 									})}
 // 									autoComplete="given-name"
-// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 // 								/>
 // 								{errors.first_name && (
 // 									<p className={'mt-2 text-xs text-red-500/80'}>
@@ -128,7 +128,7 @@
 // 						<div>
 // 							<label
 // 								htmlFor="last_name"
-// 								className="block text-sm font-semibold leading-6 text-gray-900"
+// 								className="block text-sm font-semibold leading-6 text-slate-900"
 // 							>
 // 								Nom
 // 							</label>
@@ -141,7 +141,7 @@
 // 										required: true,
 // 									})}
 // 									autoComplete="family-name"
-// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 // 								/>
 // 							</div>
 // 							{errors.last_name && (
@@ -153,7 +153,7 @@
 // 						<div className="sm:col-span-2">
 // 							<label
 // 								htmlFor="email"
-// 								className="block text-sm font-semibold leading-6 text-gray-900"
+// 								className="block text-sm font-semibold leading-6 text-slate-900"
 // 							>
 // 								Email
 // 							</label>
@@ -166,7 +166,7 @@
 // 										required: true,
 // 									})}
 // 									autoComplete="email"
-// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 // 								/>
 // 							</div>
 // 							{errors.email && (
@@ -178,7 +178,7 @@
 // 						<div className="sm:col-span-2">
 // 							<label
 // 								htmlFor="phone_number"
-// 								className="block text-sm font-semibold leading-6 text-gray-900"
+// 								className="block text-sm font-semibold leading-6 text-slate-900"
 // 							>
 // 								Numéro de téléphone
 // 							</label>
@@ -191,7 +191,7 @@
 // 										required: true,
 // 									})}
 // 									autoComplete="tel"
-// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 // 								/>
 // 							</div>
 // 							{errors.phone_number && (
@@ -203,7 +203,7 @@
 // 						<div className="sm:col-span-2">
 // 							<label
 // 								htmlFor="message"
-// 								className="block text-sm font-semibold leading-6 text-gray-900"
+// 								className="block text-sm font-semibold leading-6 text-slate-900"
 // 							>
 // 								Message
 // 							</label>
@@ -215,7 +215,7 @@
 // 									{...register('message', {
 // 										required: true,
 // 									})}
-// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+// 									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 // 									defaultValue={''}
 // 								/>
 // 							</div>
@@ -226,7 +226,7 @@
 // 							)}
 // 						</div>
 // 						<div className={'sm:col-span-2'}>
-// 							<p className="text-sm leading-6 text-gray-600">
+// 							<p className="text-sm leading-6 text-slate-600">
 // 								En envoyant votre message, vous acceptez notre{' '}
 // 								<Link
 // 									href="/politique-de-confidentialite"
@@ -249,21 +249,21 @@
 // 				<section className={'relative py-20'}>
 // 					<div className="mx-auto flex max-w-7xl flex-col px-4 md:flex-row md:px-8 xl:px-0">
 // 						<div className="mx-auto mb-10 w-full md:w-1/2">
-// 							<h2 className="w-full text-start text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl md:w-1/2">
+// 							<h2 className="w-full text-start text-4xl font-bold tracking-tight text-slate-900 sm:text-4xl md:w-1/2">
 // 								Contactez-nous
 // 							</h2>
-// 							<p className="mt-6 w-full text-start text-lg text-gray-700 md:w-1/2">
+// 							<p className="mt-6 w-full text-start text-lg text-slate-700 md:w-1/2">
 // 								{
 // 									"My-Makeup, plus qu'une plateforme de mise en relation, une équipe de passionnés à votre service !"
 // 								}
 // 							</p>
 // 						</div>
 // 						<div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:w-1/2 lg:col-span-2 lg:gap-8">
-// 							<div className="rounded-2xl bg-gray-50 p-10">
-// 								<h3 className="text-base font-semibold leading-7 text-gray-900">
+// 							<div className="rounded-2xl bg-slate-50 p-10">
+// 								<h3 className="text-base font-semibold leading-7 text-slate-900">
 // 									Contact général
 // 								</h3>
-// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-slate-600">
 // 									<div>
 // 										<dt className="sr-only">Email</dt>
 // 										<dd>
@@ -281,11 +281,11 @@
 // 									</div>
 // 								</dl>
 // 							</div>
-// 							<div className="rounded-2xl bg-gray-50 p-10">
-// 								<h3 className="text-base font-semibold leading-7 text-gray-900">
+// 							<div className="rounded-2xl bg-slate-50 p-10">
+// 								<h3 className="text-base font-semibold leading-7 text-slate-900">
 // 									Travailler avec nous
 // 								</h3>
-// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-slate-600">
 // 									<div>
 // 										<dt className="sr-only">Email</dt>
 // 										<dd>
@@ -299,11 +299,11 @@
 // 									</div>
 // 								</dl>
 // 							</div>
-// 							<div className="rounded-2xl bg-gray-50 p-10">
-// 								<h3 className="text-base font-semibold leading-7 text-gray-900">
+// 							<div className="rounded-2xl bg-slate-50 p-10">
+// 								<h3 className="text-base font-semibold leading-7 text-slate-900">
 // 									Relation entreprise
 // 								</h3>
-// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-slate-600">
 // 									<div>
 // 										<dt className="sr-only">Email</dt>
 // 										<dd>
@@ -321,11 +321,11 @@
 // 									</div>
 // 								</dl>
 // 							</div>
-// 							<div className="rounded-2xl bg-gray-50 p-10">
-// 								<h3 className="text-base font-semibold leading-7 text-gray-900">
+// 							<div className="rounded-2xl bg-slate-50 p-10">
+// 								<h3 className="text-base font-semibold leading-7 text-slate-900">
 // 									Aide et questions
 // 								</h3>
-// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-gray-600">
+// 								<dl className="mt-3 space-y-1 text-sm leading-6 text-slate-600">
 // 									<div>
 // 										<dt className="sr-only">Email</dt>
 // 										<dd>

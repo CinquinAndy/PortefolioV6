@@ -56,22 +56,22 @@
 // 								type="button"
 // 								href={'/blog'}
 // 								aria-label="Go back to articles"
-// 								className="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-gray-800/5 ring-1 ring-gray-900/5 transition 2xl:absolute 2xl:-top-1.5 2xl:left-0 2xl:mt-0"
+// 								className="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-slate-800/5 ring-1 ring-slate-900/5 transition 2xl:absolute 2xl:-top-1.5 2xl:left-0 2xl:mt-0"
 // 							>
-// 								<ArrowLeftIcon className="h-4 w-4 stroke-gray-500 transition group-hover:stroke-gray-700" />
+// 								<ArrowLeftIcon className="h-4 w-4 stroke-slate-500 transition group-hover:stroke-slate-700" />
 // 							</Link>
 // 						}
 // 						{meta && (
 // 							<article>
 // 								<header className="flex flex-col">
-// 									<h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
+// 									<h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">
 // 										{meta.title}
 // 									</h1>
 // 									<time
 // 										dateTime={meta.updatedAt.toString()}
-// 										className="order-first flex items-center text-base text-gray-700"
+// 										className="order-first flex items-center text-base text-slate-700"
 // 									>
-// 										<span className="h-4 w-0.5 rounded-full bg-gray-200" />
+// 										<span className="h-4 w-0.5 rounded-full bg-slate-200" />
 // 										<span className="ml-3">
 // 											{convertToStringDate(meta.updatedAt)}
 // 										</span>
@@ -81,8 +81,8 @@
 // 									<div className={'prose my-8 xl:prose-lg'}>
 // 										<Layout value={meta.content.toString()} />
 // 									</div>
-// 									<p className={'flex items-center text-base text-gray-400'}>
-// 										<span className="h-4 w-0.5 rounded-full bg-gray-200" />
+// 									<p className={'flex items-center text-base text-slate-400'}>
+// 										<span className="h-4 w-0.5 rounded-full bg-slate-200" />
 // 										<span className="ml-3">Auteur.e : {meta.author}</span>
 // 									</p>
 // 								</div>

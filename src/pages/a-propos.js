@@ -49,7 +49,7 @@
 // 					<div className="mx-auto max-w-2xl">
 // 						<article>
 // 							<header className="flex flex-col">
-// 								<h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
+// 								<h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">
 // 									À Propos de My-Makeup : Votre Partenaire Beauté en ligne
 // 								</h1>
 // 							</header>
@@ -84,8 +84,8 @@
 // 									</li>
 // 								</ul>
 // 							</div>
-// 							<h3 className={'flex items-center text-base text-gray-400'}>
-// 								<span className="h-4 w-0.5 rounded-full bg-gray-200" />
+// 							<h3 className={'flex items-center text-base text-slate-400'}>
+// 								<span className="h-4 w-0.5 rounded-full bg-slate-200" />
 // 								<span className="ml-3">{"L'équipe My-Makeup"}</span>
 // 							</h3>
 // 						</article>

@@ -47,10 +47,10 @@
 // 				<section className={'relative px-4 py-20 md:px-8 2xl:px-0'}>
 // 					<div className="mx-auto max-w-7xl">
 // 						<div className="mx-auto md:mb-10">
-// 							<h2 className="w-full text-start text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl md:w-1/2">
+// 							<h2 className="w-full text-start text-4xl font-bold tracking-tight text-slate-900 sm:text-4xl md:w-1/2">
 // 								Nos derniers articles & actualités !
 // 							</h2>
-// 							<p className="mt-6 w-full text-start text-lg text-gray-700 md:w-1/2">
+// 							<p className="mt-6 w-full text-start text-lg text-slate-700 md:w-1/2">
 // 								{
 // 									"My-Makeup, plus qu'une plateforme de mise en relation, une équipe de passionnés à votre service !"
 // 								}
@@ -68,19 +68,19 @@
 // 										lastArticles.map(article => (
 // 											<div className={'flex flex-col gap-2'} key={article.id}>
 // 												<div
-// 													className={'relative pl-2 text-base text-gray-400'}
+// 													className={'relative pl-2 text-base text-slate-400'}
 // 												>
 // 													{convertToStringDate(article.attributes.updatedAt)}
 // 													<div
 // 														className={
-// 															'absolute left-0 top-0 h-full w-0.5 bg-gray-300'
+// 															'absolute left-0 top-0 h-full w-0.5 bg-slate-300'
 // 														}
 // 													></div>
 // 												</div>
-// 												<h2 className={'text-lg font-semibold text-gray-900'}>
+// 												<h2 className={'text-lg font-semibold text-slate-900'}>
 // 													{article.attributes.title}
 // 												</h2>
-// 												<p className={'text-sm text-gray-700'}>
+// 												<p className={'text-sm text-slate-700'}>
 // 													{article.attributes.excerpt}
 // 												</p>
 // 												<Link
