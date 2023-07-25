@@ -66,7 +66,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 											'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'
 										}
 									>
-										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-50">
+										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
 											<Image
 												src={
 													realisation?.attributes?.image_presentation?.data

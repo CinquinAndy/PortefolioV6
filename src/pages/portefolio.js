@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import Nav from '@/components/Global/Nav'
-import Services from '@/components/Global/Services'
 import Realisations from '@/components/Global/Realisations'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
@@ -12,22 +11,28 @@ function Portefolio({ content_website, realisations }) {
 	return (
 		<>
 			<Head>
-				<title>{content_website?.attributes?.content_home?.seo_title}</title>
+				<title>
+					{content_website?.attributes?.content_realisations?.seo?.title}
+				</title>
 				<meta
 					name="description"
-					content={content_website?.attributes?.content_home?.seo_description}
+					content={
+						content_website?.attributes?.content_realisations?.seo?.description
+					}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={content_website?.attributes?.content_home?.seo_canonical}
+					href={
+						content_website?.attributes?.content_realisations?.seo?.canonical
+					}
 				/>
 			</Head>
 
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={content_website.attributes.content_home}
+				h1={content_website?.attributes?.content_realisations?.seo?.h1}
 			/>
 			<div>
 				<Realisations
