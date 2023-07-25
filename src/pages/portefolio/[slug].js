@@ -17,31 +17,26 @@ import Cta from '@/components/Global/CTA'
 function Talent({ content_website, realisations }) {
 	let router = useRouter()
 
+	console.log(realisations)
 	return (
 		<>
 			<Head>
-				<title>
-					{content_website?.attributes?.content_realisations?.seo?.title}
-				</title>
+				<title>{realisations?.attributes?.seo_title}</title>
 				<meta
 					name="description"
-					content={
-						content_website?.attributes?.content_realisations?.seo?.description
-					}
+					content={realisations?.attributes?.seo_description}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={
-						content_website?.attributes?.content_realisations?.seo?.canonical
-					}
+					href={`${process.env.NEXT_PUBLIC_URL}/portefolio/${realisations?.attributes?.slug}`}
 				/>
 			</Head>
 
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={content_website?.attributes?.content_realisations?.seo?.h1}
+				h1={realisations?.attributes?.title}
 			/>
 			<div>
 				<div className={'relative'}>
@@ -168,9 +163,9 @@ export async function getStaticProps({ params }) {
 	const newDataRealisations = {
 		...data_realisations,
 		data: {
-			...data_realisations.data,
+			// ...data_realisations.data,
 			attributes: {
-				...data_realisations.data.attributes,
+				...data_realisations.data[0].attributes,
 				content: processedContentRealisations.toString(),
 			},
 		},

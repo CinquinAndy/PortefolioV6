@@ -234,7 +234,11 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
 				></div>
 			</nav>
-			<div className="relative flex h-[calc(100vh-80px)] w-screen items-center justify-center">
+			<div
+				className={`${
+					isHome ? 'h-[calc(100vh-80px)]' : 'mt-48 h-auto'
+				} relative flex h-[calc(100vh-80px)] w-screen items-center justify-center`}
+			>
 				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest md:text-8xl">
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
@@ -242,12 +246,16 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					<Image
 						width={450}
 						height={450}
-						src={'assets/icons/LogoCinquinAndy.svg'}
+						src={'/assets/icons/LogoCinquinAndy.svg'}
 						alt="Développeur Freelance - Logo"
 						className="mb-32 ml-16 h-112 w-112 -rotate-12 opacity-20 brightness-75"
 					/>
 				</div>
-				<div className="absolute bottom-0 right-0 mb-14 flex flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20">
+				<div
+					className={`${
+						isHome ? 'flex' : 'hidden'
+					} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20`}
+				>
 					<Link
 						className="text-slate-300 hover:text-slate-50"
 						href={socials?.facebook}
@@ -311,7 +319,11 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						</svg>
 					</Link>
 				</div>
-				<div className="absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20">
+				<div
+					className={`${
+						isHome ? 'flex' : 'hidden'
+					} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20`}
+				>
 					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-20 md:text-xl">
 						{content_website?.content_home?.title_vertical_left_bottom}
 					</h2>
