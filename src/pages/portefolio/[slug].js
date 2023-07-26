@@ -41,10 +41,11 @@ function Talent({ content_website, realisations }) {
 			/>
 			<div>
 				<div className={'relative'}>
-					<div
-						className={'relative mx-auto my-24 max-w-7xl px-4 md:my-48 md:px-0'}
-					>
+					<div className={'grid grid-cols-2 px-4 md:my-48 md:px-0'}>
 						<div className="mx-auto max-w-2xl">
+							<h2 className={'text-3xl'}>
+								{realisations?.attributes?.content?.title_content}
+							</h2>
 							<article>
 								<div className={'prose prose-invert my-8'}>
 									<Layout
@@ -56,6 +57,18 @@ function Talent({ content_website, realisations }) {
 									<span className="ml-3">{'Andy'}</span>
 								</h3>
 							</article>
+						</div>
+						<div>
+							<h2 className={'text-3xl'}>
+								{realisations?.attributes?.content?.title_technology}
+							</h2>
+							{/*	todo technology */}
+						</div>
+						<div>
+							<h2 className={'text-3xl'}>
+								{realisations?.attributes?.content?.title_galery}
+							</h2>
+							{/*	todo galery */}
 						</div>
 					</div>
 				</div>
