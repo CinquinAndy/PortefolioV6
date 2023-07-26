@@ -1,9 +1,7 @@
 import React from 'react'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
-import CTA from '@/components/Global/CTA'
 import Head from 'next/head'
-import Hero from '@/components/Global/Hero'
 import { remark } from 'remark'
 import html from 'remark-html'
 import { useRouter } from 'next/router'
@@ -17,7 +15,6 @@ import Cta from '@/components/Global/CTA'
 function Talent({ content_website, realisations }) {
 	let router = useRouter()
 
-	console.log(realisations)
 	return (
 		<>
 			<Head>
@@ -59,7 +56,7 @@ function Talent({ content_website, realisations }) {
 					</div>
 				</div>
 			</div>
-			<Cta />
+			<Cta content_website={content_website} />
 			<Footer content_website={content_website} />
 		</>
 	)
@@ -139,6 +136,11 @@ export async function getStaticProps({ params }) {
 		.use(html)
 		.process(data_content_website.data.attributes.content_footer.content)
 
+	// Convert Markdown to HTML
+	const processedContentCta = await remark()
+		.use(html)
+		.process(data_content_website.data.attributes.cta.content)
+
 	// replace the content_footer by the processed one
 
 	const newDataContentWebsite = {
@@ -150,6 +152,10 @@ export async function getStaticProps({ params }) {
 				content_footer: {
 					...data_content_website.data.attributes.content_footer,
 					content: processedContentFooter.toString(),
+				},
+				cta: {
+					...data_content_website.data.attributes.cta,
+					content: processedContentCta.toString(),
 				},
 			},
 		},

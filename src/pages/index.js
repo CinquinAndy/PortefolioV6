@@ -33,7 +33,7 @@ export default function Home({ content_website, services, realisations }) {
 					slice={3}
 					isHome={true}
 				/>
-				<Cta />
+				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
 		</>
@@ -96,6 +96,11 @@ export async function getStaticProps() {
 		.use(html)
 		.process(data_content_website.data.attributes.content_footer.content)
 
+	// Convert Markdown to HTML
+	const processedContentCta = await remark()
+		.use(html)
+		.process(data_content_website.data.attributes.cta.content)
+
 	// replace the content_footer by the processed one
 
 	const newDataContentWebsite = {
@@ -107,6 +112,10 @@ export async function getStaticProps() {
 				content_footer: {
 					...data_content_website.data.attributes.content_footer,
 					content: processedContentFooter.toString(),
+				},
+				cta: {
+					...data_content_website.data.attributes.cta,
+					content: processedContentCta.toString(),
 				},
 			},
 		},

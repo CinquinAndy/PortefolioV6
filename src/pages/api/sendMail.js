@@ -12,7 +12,7 @@ export default function handler(req, res) {
 	if (req.method === 'POST') {
 		mg.messages
 			.create(process.env.MAILGUN_DOMAIN, {
-				from: 'My-Makeup <contact@andy-cinquin.fr>',
+				from: 'Andy Cinquin Website <contact@andy-cinquin.fr>',
 				to: 'contact@andy-cinquin.fr',
 				subject: 'Nouveau message de contact',
 				text: `
