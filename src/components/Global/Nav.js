@@ -72,7 +72,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						: 'pointer-events-auto z-40 -translate-y-0 opacity-100'
 				} fixed flex h-screen w-screen transform transition-transform`}
 			>
-				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-2/5 md:border-r-40 md:p-20 md:pt-36">
+				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
 					{menu.map((item, index) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link
@@ -236,10 +236,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 			</nav>
 			<div
 				className={`${
-					isHome ? 'h-[calc(100vh-80px)]' : 'mt-48 h-auto'
+					isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'
 				} relative flex h-[calc(100vh-80px)] w-screen items-center justify-center`}
 			>
-				<h1 className="z-20 text-3xl font-semibold uppercase tracking-widest md:text-8xl">
+				<h1 className="z-20 px-20 text-center text-3xl font-semibold uppercase tracking-widest md:text-8xl">
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
 				<div className="absolute left-1/2 top-1/2 z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start">

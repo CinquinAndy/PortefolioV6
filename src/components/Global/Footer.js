@@ -18,7 +18,7 @@ function Footer({ content_website }) {
 
 	return (
 		<>
-			<footer className="mt-[100px] grid grid-cols-8 gap-5 p-4 xl:mt-[150px] xl:p-20">
+			<footer className="mt-[100px] grid grid-cols-8 gap-5 p-4 md:p-20 xl:mt-[150px]">
 				<div className="col-span-3 col-start-1 flex flex-col gap-5 text-xs xl:col-span-4 xl:col-start-2">
 					<Image
 						src={

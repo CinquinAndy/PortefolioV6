@@ -17,7 +17,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 	}
 	return (
 		<>
-			<section className="w-full p-4 xl:p-20">
+			<section className="w-full p-4 md:p-20">
 				{/*// <!--     Derniers projets -->*/}
 				{isHome && (
 					<div className="mt-[100px] flex justify-between">
