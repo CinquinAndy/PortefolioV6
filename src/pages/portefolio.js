@@ -4,8 +4,10 @@ import Nav from '@/components/Global/Nav'
 import Realisations from '@/components/Global/Realisations'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import { remark } from 'remark'
-import html from 'remark-html'
+import {
+	getContentWebsite,
+	getRealisations,
+} from '@/services/getContentWebsite'
 
 function Portefolio({ content_website, realisations }) {
 	return (
@@ -49,77 +51,19 @@ function Portefolio({ content_website, realisations }) {
 }
 
 export async function getStaticProps() {
-	const res_content_website = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/content-website?populate=deep`,
-		{
-			method: 'GET',
-			headers: {
-				// 	token
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				// 	bearer token
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-			},
-		}
-	)
+	const content_website = await getContentWebsite()
+	const realisations = await getRealisations()
 
-	const res_realisations = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep,2&sort=rank`,
-		{
-			method: 'GET',
-			headers: {
-				// 	token
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				// 	bearer token
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-			},
-		}
-	)
-
-	if (!res_content_website || !res_realisations) {
+	if (!content_website || !realisations) {
 		return {
 			notFound: true,
 		}
 	}
 
-	const data_content_website = await res_content_website.json()
-	const data_realisations = await res_realisations.json()
-
-	// Convert Markdown to HTML
-	const processedContentFooter = await remark()
-		.use(html)
-		.process(data_content_website.data.attributes.content_footer.content)
-
-	// Convert Markdown to HTML
-	const processedContentCta = await remark()
-		.use(html)
-		.process(data_content_website.data.attributes.cta.content)
-
-	// replace the content_footer by the processed one
-
-	const newDataContentWebsite = {
-		...data_content_website,
-		data: {
-			...data_content_website.data,
-			attributes: {
-				...data_content_website.data.attributes,
-				content_footer: {
-					...data_content_website.data.attributes.content_footer,
-					content: processedContentFooter.toString(),
-				},
-				cta: {
-					...data_content_website.data.attributes.cta,
-					content: processedContentCta.toString(),
-				},
-			},
-		},
-	}
-
 	return {
 		props: {
-			content_website: newDataContentWebsite.data,
-			realisations: data_realisations.data,
+			content_website: content_website.data,
+			realisations: realisations.data,
 		},
 		revalidate: 10,
 	}

@@ -2,11 +2,15 @@ import React from 'react'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
 import Head from 'next/head'
-import { remark } from 'remark'
-import html from 'remark-html'
 import { useRouter } from 'next/router'
 import { Layout } from '@/components/Global/Layout'
 import Cta from '@/components/Global/CTA'
+import {
+	getContentWebsite,
+	getRealisationBySlug,
+	getRealisationPaths,
+	processRealisationData,
+} from '@/services/getContentWebsite'
 
 /**
  * @param props
@@ -65,28 +69,8 @@ function Talent({ content_website, realisations }) {
 export default Talent
 
 export async function getStaticPaths() {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep,2&sort=rank`,
-		{
-			method: 'GET',
-			headers: {
-				// 	token
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-			},
-		}
-	).then(res => res.json())
+	const paths = await getRealisationPaths()
 
-	/**
-	 * format the data for getStaticPaths
-	 * @type {{params: {id: *}}[]}
-	 */
-	const paths = res?.data?.map(record => ({
-		params: {
-			slug: record.attributes.slug,
-		},
-	}))
 	return {
 		paths,
 		fallback: false,
@@ -94,93 +78,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const res_content_website = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/content-website?populate=deep`,
-		{
-			method: 'GET',
-			headers: {
-				// 	token
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				// 	bearer token
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-			},
-		}
-	)
+	const content_website = await getContentWebsite()
+	const realisations = await getRealisationBySlug(params.slug)
 
-	const res_realisations = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep,2&sort=rank&filters[slug][$eq]=${params.slug}`,
-		{
-			method: 'GET',
-			headers: {
-				// 	token
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				// 	bearer token
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-			},
-		}
-	)
-
-	if (!res_content_website || !res_realisations) {
+	if (!content_website || !realisations) {
 		return {
 			notFound: true,
 		}
 	}
 
-	const data_content_website = await res_content_website.json()
-	const data_realisations = await res_realisations.json()
-
-	// Convert Markdown to HTML
-	const processedContentFooter = await remark()
-		.use(html)
-		.process(data_content_website.data.attributes.content_footer.content)
-
-	// Convert Markdown to HTML
-	const processedContentCta = await remark()
-		.use(html)
-		.process(data_content_website.data.attributes.cta.content)
-
-	// replace the content_footer by the processed one
-
-	const newDataContentWebsite = {
-		...data_content_website,
-		data: {
-			...data_content_website.data,
-			attributes: {
-				...data_content_website.data.attributes,
-				content_footer: {
-					...data_content_website.data.attributes.content_footer,
-					content: processedContentFooter.toString(),
-				},
-				cta: {
-					...data_content_website.data.attributes.cta,
-					content: processedContentCta.toString(),
-				},
-			},
-		},
-	}
-
-	// Convert Markdown to HTML
-	const processedContentRealisations = await remark()
-		.use(html)
-		.process(data_realisations.data[0].attributes.content)
-
-	const newDataRealisations = {
-		...data_realisations,
-		data: {
-			// ...data_realisations.data,
-			attributes: {
-				...data_realisations.data[0].attributes,
-				content: processedContentRealisations.toString(),
-			},
-		},
-	}
+	const processedRealisations = await processRealisationData(realisations)
 
 	return {
 		props: {
-			content_website: newDataContentWebsite.data,
-			realisations: newDataRealisations.data,
+			content_website: content_website.data,
+			realisations: processedRealisations.data,
 		},
 		revalidate: 10,
 	}
