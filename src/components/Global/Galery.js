@@ -74,7 +74,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 															width={item?.attributes?.width}
 															height={item?.attributes?.height}
 															className={`${
-																isExpanded ? 'm-40' : ''
+																isExpanded ? 'm-4 lg:m-8 xl:m-10 2xl:m-40' : ''
 															} rounded-lg object-cover hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
 															sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
 														/>
