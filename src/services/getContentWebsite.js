@@ -12,8 +12,6 @@ export async function fetchAPI(path, options = {}) {
 		},
 	})
 
-	console.log(res)
-
 	if (!res) {
 		return { notFound: true }
 	}
