@@ -94,12 +94,20 @@ function Talent({ content_website, realisations }) {
 									/>
 								</button>
 							</div>
-							<Galery handleClick={handleClick} open={open} />
+							<Galery
+								handleClick={handleClick}
+								open={open}
+								galery={realisations?.attributes?.galery?.data}
+								title_galery={
+									content_website?.attributes?.content_realisations
+										?.title_galery
+								}
+							/>
 						</div>
 
 						<div className="mx-auto max-w-3xl md:pl-20">
 							<h2
-								className={'text-3xl'}
+								className={'text-lg font-black md:text-3xl [&>*]:font-black'}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
 										content_website?.attributes?.content_realisations
@@ -122,7 +130,7 @@ function Talent({ content_website, realisations }) {
 							}
 						>
 							<h2
-								className={'text-3xl'}
+								className={'text-lg font-black md:text-3xl [&>*]:font-black'}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
 										content_website?.attributes?.content_realisations

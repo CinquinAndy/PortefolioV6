@@ -33,13 +33,13 @@ export const replaceTitle = title => {
 	const regexAsterisk = /\*([^*]+)\*/g
 	title = title.replace(
 		regexAsterisk,
-		'<span class="text-indigo-500 font-display">$1</span>'
+		'<span class="text-indigo-400 font-display">$1</span>'
 	)
 
 	// Replace underscores with sky color
 	const regexUnderscore = /_([^_]+)_/g
 	return title.replace(
 		regexUnderscore,
-		'<span class="text-sky-500 font-display">$1</span>'
+		'<span class="text-sky-400 font-display">$1</span>'
 	)
 }
