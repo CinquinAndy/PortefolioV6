@@ -12,7 +12,9 @@ import {
 	processRealisationData,
 } from '@/services/getContentWebsite'
 import Galery from '@/components/Global/Galery'
-import Link from 'next/link'
+import { replaceTitle } from '@/services/utils'
+import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import Image from 'next/image'
 
 /**
  * @param props
@@ -26,6 +28,9 @@ function Talent({ content_website, realisations }) {
 		setOpen(!open)
 	}
 
+	{
+		console.log(realisations?.attributes?.technologies?.data[0].attributes)
+	}
 	return (
 		<>
 			<Head>
@@ -48,11 +53,58 @@ function Talent({ content_website, realisations }) {
 			/>
 			<div>
 				<div className={'relative'}>
-					<div className={'grid grid-cols-2 px-4 md:my-48 2xl:px-0'}>
+					<div
+						className={'grid grid-cols-2 gap-[100px] px-4 md:my-48 2xl:px-0'}
+					>
+						<div
+							onClick={handleClick}
+							className={
+								'shadow-innercustom relative col-span-2 mx-auto max-w-5xl cursor-pointer p-20'
+							}
+						>
+							<div className={'flex w-full  items-start gap-8'}>
+								<div className={'flex items-center gap-2'}>
+									<h2
+										className={'text-3xl font-black [&>*]:font-black'}
+										dangerouslySetInnerHTML={{
+											__html: replaceTitle(
+												content_website?.attributes?.content_realisations
+													?.title_galery
+											),
+										}}
+									/>
+									<div className={'flex h-full items-center'}>
+										<ChevronRightIcon className={'h-8 w-8'} />
+									</div>
+								</div>
+								<button
+									onClick={() => {
+										handleClick()
+									}}
+									className={
+										'flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+									}
+								>
+									{
+										content_website?.attributes?.content_realisations
+											?.btn_galery?.label
+									}
+									<CameraIcon className={'h-4 w-4'} />
+								</button>
+							</div>
+							<Galery handleClick={handleClick} open={open} />
+						</div>
+
 						<div className="mx-auto max-w-2xl">
-							<h2 className={'text-3xl'}>
-								{realisations?.attributes?.content?.title_content}
-							</h2>
+							<h2
+								className={'text-3xl'}
+								dangerouslySetInnerHTML={{
+									__html: replaceTitle(
+										content_website?.attributes?.content_realisations
+											?.title_content
+									),
+								}}
+							/>
 							<article>
 								<div className={'prose prose-invert my-8'}>
 									<Layout
@@ -65,28 +117,48 @@ function Talent({ content_website, realisations }) {
 								</h3>
 							</article>
 						</div>
-						<div>
-							<Galery handleClick={handleClick} open={open} />
-							<h2 className={'text-3xl'}>
-								{realisations?.attributes?.content?.title_technology}
-							</h2>
-							<button
-								onClick={() => {
-									handleClick()
+
+						<div className={'flex flex-col gap-10'}>
+							<h2
+								className={'text-3xl'}
+								dangerouslySetInnerHTML={{
+									__html: replaceTitle(
+										content_website?.attributes?.content_realisations
+											?.title_technology
+									),
 								}}
-								className={
-									'rounded bg-indigo-600 px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm'
-								}
-							>
-								Click
-							</button>
+							/>
+							<div className="grid grid-cols-4">
+								{/*<?php if (have_rows('technos')): ?>*/}
+								{/*<?php while (have_rows('technos')) : the_row(); ?>*/}
+								{/*<?php $img = get_sub_field('img') ?>*/}
+								<div className="relative flex items-center justify-center">
+									<Image
+										src="/assets/icons/3d.svg"
+										alt="icon-3d"
+										className="h-20 w-20"
+										width={80}
+										height={80}
+									/>
+
+									<Image
+										src={
+											realisations?.attributes?.technologies?.data[0].attributes
+												?.image?.data?.attributes?.url
+										}
+										className={
+											'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
+										}
+										alt={
+											realisations?.attributes?.technologies?.data[0].attributes
+												?.image?.data?.attributes?.alternativeText
+										}
+									/>
+								</div>
+								{/*<?php endwhile; ?>*/}
+								{/*<?php endif; ?>*/}
+							</div>
 							{/*	todo technology */}
-						</div>
-						<div>
-							<h2 className={'text-3xl'}>
-								{realisations?.attributes?.content?.title_galery}
-							</h2>
-							{/*	todo galery */}
 						</div>
 					</div>
 				</div>

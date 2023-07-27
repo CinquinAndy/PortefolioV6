@@ -77,7 +77,7 @@ export async function getRealisations() {
 
 export async function getRealisationBySlug(slug) {
 	return fetchAPI(
-		`api/realisations?populate=deep,2&sort=rank&filters[slug][$eq]=${slug}`
+		`api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}`
 	)
 }
 
