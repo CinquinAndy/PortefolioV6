@@ -11,6 +11,8 @@ import {
 	getRealisationPaths,
 	processRealisationData,
 } from '@/services/getContentWebsite'
+import Galery from '@/components/Global/Galery'
+import Link from 'next/link'
 
 /**
  * @param props
@@ -18,6 +20,11 @@ import {
  */
 function Talent({ content_website, realisations }) {
 	let router = useRouter()
+	const [open, setOpen] = React.useState(false)
+
+	const handleClick = () => {
+		setOpen(!open)
+	}
 
 	return (
 		<>
@@ -41,7 +48,7 @@ function Talent({ content_website, realisations }) {
 			/>
 			<div>
 				<div className={'relative'}>
-					<div className={'grid grid-cols-2 px-4 md:my-48 md:px-0'}>
+					<div className={'grid grid-cols-2 px-4 md:my-48 2xl:px-0'}>
 						<div className="mx-auto max-w-2xl">
 							<h2 className={'text-3xl'}>
 								{realisations?.attributes?.content?.title_content}
@@ -59,9 +66,20 @@ function Talent({ content_website, realisations }) {
 							</article>
 						</div>
 						<div>
+							<Galery handleClick={handleClick} open={open} />
 							<h2 className={'text-3xl'}>
 								{realisations?.attributes?.content?.title_technology}
 							</h2>
+							<button
+								onClick={() => {
+									handleClick()
+								}}
+								className={
+									'rounded bg-indigo-600 px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm'
+								}
+							>
+								Click
+							</button>
 							{/*	todo technology */}
 						</div>
 						<div>
