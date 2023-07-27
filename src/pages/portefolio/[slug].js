@@ -27,10 +27,6 @@ function Talent({ content_website, realisations }) {
 	const handleClick = () => {
 		setOpen(!open)
 	}
-
-	{
-		console.log(realisations?.attributes?.technologies?.data[0].attributes)
-	}
 	return (
 		<>
 			<Head>
@@ -95,7 +91,7 @@ function Talent({ content_website, realisations }) {
 							<Galery handleClick={handleClick} open={open} />
 						</div>
 
-						<div className="mx-auto max-w-2xl">
+						<div className="mx-auto max-w-3xl pl-20">
 							<h2
 								className={'text-3xl'}
 								dangerouslySetInnerHTML={{
@@ -118,7 +114,11 @@ function Talent({ content_website, realisations }) {
 							</article>
 						</div>
 
-						<div className={'flex flex-col gap-10'}>
+						<div
+							className={
+								'flex w-full flex-col gap-8 pr-20 2xl:mx-auto 2xl:max-w-2xl'
+							}
+						>
 							<h2
 								className={'text-3xl'}
 								dangerouslySetInnerHTML={{
@@ -128,37 +128,41 @@ function Talent({ content_website, realisations }) {
 									),
 								}}
 							/>
-							<div className="grid grid-cols-4">
-								{/*<?php if (have_rows('technos')): ?>*/}
-								{/*<?php while (have_rows('technos')) : the_row(); ?>*/}
-								{/*<?php $img = get_sub_field('img') ?>*/}
-								<div className="relative flex items-center justify-center">
-									<Image
-										src="/assets/icons/3d.svg"
-										alt="icon-3d"
-										className="h-20 w-20"
-										width={80}
-										height={80}
-									/>
-
-									<Image
-										src={
-											realisations?.attributes?.technologies?.data[0].attributes
-												?.image?.data?.attributes?.url
-										}
-										className={
-											'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
-										}
-										alt={
-											realisations?.attributes?.technologies?.data[0].attributes
-												?.image?.data?.attributes?.alternativeText
-										}
-									/>
-								</div>
-								{/*<?php endwhile; ?>*/}
-								{/*<?php endif; ?>*/}
+							<div className="grid grid-cols-4 gap-8">
+								{/*map on realisations?.attributes?.technologies?.data*/}
+								{realisations?.attributes?.technologies?.data.map(
+									technology => {
+										return (
+											<div
+												key={technology?.attributes?.id}
+												className="relative flex items-center justify-center"
+											>
+												<Image
+													src="/assets/icons/3d.svg"
+													alt="icon-3d"
+													className="h-20 w-20"
+													width={80}
+													height={80}
+												/>
+												<Image
+													src={
+														technology?.attributes?.image?.data?.attributes?.url
+													}
+													className={
+														'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
+													}
+													alt={
+														technology?.attributes?.image?.data?.attributes
+															?.alternativeText
+													}
+													width={24}
+													height={24}
+												/>
+											</div>
+										)
+									}
+								)}
 							</div>
-							{/*	todo technology */}
 						</div>
 					</div>
 				</div>
