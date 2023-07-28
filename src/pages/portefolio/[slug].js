@@ -13,8 +13,13 @@ import {
 } from '@/services/getContentWebsite'
 import Galery from '@/components/Global/Galery'
 import { replaceTitle } from '@/services/utils'
-import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import {
+	CameraIcon,
+	ChevronRightIcon,
+	LinkIcon,
+} from '@heroicons/react/20/solid'
 import Image from 'next/image'
+import Link from 'next/link'
 
 /**
  * @param props
@@ -144,7 +149,7 @@ function Talent({ content_website, realisations }) {
 									technology => {
 										return (
 											<div
-												key={technology?.attributes?.id}
+												key={technology?.id}
 												className="relative flex items-center justify-center"
 											>
 												<Image
@@ -171,6 +176,42 @@ function Talent({ content_website, realisations }) {
 										)
 									}
 								)}
+								<div className={'col-span-3 flex flex-col gap-4 md:col-span-4'}>
+									<h2
+										className={
+											'text-lg font-black md:text-3xl [&>*]:font-black'
+										}
+										dangerouslySetInnerHTML={{
+											__html: replaceTitle(
+												content_website?.attributes?.content_realisations
+													?.title_links
+											),
+										}}
+									/>
+									<div className={'flex w-full gap-8'}>
+										{realisations?.attributes?.links?.map((link, index) => {
+											return (
+												<div key={index} className={'flex'}>
+													<Link
+														key={link?.id}
+														href={link?.url}
+														rel={'noopener noreferrer'}
+														className={
+															'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+														}
+													>
+														{link?.label}
+														<LinkIcon
+															className={
+																'absolute -right-2 -top-2 h-4 w-4 rotate-6'
+															}
+														/>
+													</Link>
+												</div>
+											)
+										})}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

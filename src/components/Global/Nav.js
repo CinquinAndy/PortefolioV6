@@ -237,9 +237,9 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 			<div
 				className={`${
 					isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'
-				} relative flex h-[calc(100vh-80px)] w-screen items-center justify-center`}
+				} relative flex w-screen items-center justify-center`}
 			>
-				<h1 className="z-20 px-20 text-center text-3xl font-semibold uppercase tracking-widest md:text-8xl">
+				<h1 className="z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-8xl">
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
 				<div className="absolute left-1/2 top-1/2 z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start">

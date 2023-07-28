@@ -5,7 +5,7 @@ import { XMarkIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
-function Galery({ open, handleClick, galery, title_galery }) {
+function Galery({ open, handleClick, galery, title_galery, links }) {
 	const [i, setI] = React.useState(0)
 	const [expandedItem, setExpandedItem] = React.useState(null)
 
@@ -61,7 +61,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 														key={index}
 														className={`col-span-12 cursor-pointer ${
 															isExpanded
-																? 'fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/90 p-20'
+																? 'fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/90 p-4 md:p-20'
 																: 'relative xl:col-span-4'
 														}`}
 														onClick={() => {
