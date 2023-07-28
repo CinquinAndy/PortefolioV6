@@ -75,9 +75,19 @@ export async function getRealisations() {
 	return await fetchAPI('api/realisations?populate=deep,2&sort=rank')
 }
 
+export async function getArticles() {
+	return await fetchAPI('api/articles?populate=deep,2&sort=rank')
+}
+
 export async function getRealisationBySlug(slug) {
 	return fetchAPI(
 		`api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}`
+	)
+}
+
+export async function getArticleBySlug(slug) {
+	return fetchAPI(
+		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}`
 	)
 }
 
