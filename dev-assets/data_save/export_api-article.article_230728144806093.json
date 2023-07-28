@@ -1,0 +1,222 @@
+{
+	"version": 2,
+	"data": {
+		"api::article.article": {
+			"1": {
+				"id": 1,
+				"title": "Les stacks techniques",
+				"content": "> ## Définition\n> \n> Dans cet article, je vais vous présenter les différents stacks techniques que j'utilise et que j'affectionne tout particulièrement pour chaque domaine d'expertises, tous les outils utilisés et leurs utilités.\n\n> ## Front - Pure front\n> \n> ~ TailwindCSS - (Librairie -CSS3-)\n> ~ NextJS - Frameworks Front-End\n> ~ TailwindUI - (Bibliothèque de composants pré-faits)\n> ~ HeadlessUI - (Bibliothèque de composants pré-faits)\n> ~ Sailboat UI - Modern UI component library for Tailwind CSS](https://sailboatui.com/) - (Bibliothèque de composants pré-faits)\n> \n> ~ Autres bibliothèques de composants : \n> [Xtend UI - Gallery - By Type Themes](https://xtendui.com/themes/gallery/#)\n> [Free Modern React Templates & Components Treact](https://treact.owaiskhan.me/) dispo dans `/3. Resources/Tech/treact-ui.zip`\n> Hover animation : [Snippets](https://snippets.alexandru.so/) \n> \n> ~ Ui a installé : \n> [Install RippleUI | TailwindCSS Components](https://www.ripple-ui.com/docs/get-started/installation)\n> [daisyUI — Tailwind CSS Components](https://daisyui.com/)\n\n> ## Front - Wordpress alternative\n> \n> ~ TailwindCSS - (Librairie CSS3)\n> ~ Wordpress - (CMS, je l'utilise pour le côté admin sympa à utiliser pour permettre des modifications rapides du côté du client)\n> ~ [ordplate - (Boilerplate qui change tout le fonctionnement interne de wordpress)\n> ~ ACF - (Plugin de créations de formulaires dans la page d'admin pour link des saisies admin & du code)\n> \n\n> ## Backend - API\n> \n> ~ Hasura - (Générateur d'API , GraphQL)\n> ~ PocketBase - (Backend en 3 click - Go)\n> ~ Strapi - (Backend en 3 click - JavaScript)\n> \n> \n\n> ## Serveurs\n> \n> ~ Docker - ( toutes les applications sont conteneurisées )\n> ~ Github CI CD - ( pour le build de l'app sur docker & l'envoi sur CapRover )\n> ~ VPS Contabo - ( installation debian dans un VPS )\n> ~ Cap Rover - ( PaaS - VPS Prod - PaaS & Others )\n> \n> \n\n> ## Stack de test \n> \n> ~ Jest - (Test unitaire)\n> ~ Cypress - (E2E testing & simulation comportement utilisateur)\n> ~ Percy - (E2E testing - Test de non-régression)\n> ~ Sorry-Cypress - (Parallélisation des tests)\n> \n> ~ Renovate Bot - (Mise à jour automatique)\n\n> ## Les outils & logiciels utilisés\n> \n> IntelliJ IDEA - ( IDE )\n> Git Kraken - ( git plus agréable à utiliser )\n> Syncthing - ( sync des fichiers, drive custom )\n> Obsidian - ( organisation & second brain )\n> \n\n",
+				"seo_title": "Découvrez les Stacks Techniques Préférés d'un Développeur Informatique Freelance",
+				"seo_description": "Découvrez dans cet article les différents stacks techniques que j'utilise et que j'apprécie particulièrement pour chaque domaine d'expertise.",
+				"slug": "stacks",
+				"excerpt": "Dans cet article, un développeur informatique freelance passionné vous présente ses stacks techniques préférés pour chaque domaine d'expertise. Explorez les bibliothèques de composants, les frameworks Front-End, les CMS, les générateurs d'API, les outils de test et bien plus encore, utilisés pour créer des applications performantes et des expériences utilisateur exceptionnelles.",
+				"createdAt": "2023-07-28T12:06:54.106Z",
+				"updatedAt": "2023-07-28T14:42:35.489Z",
+				"publishedAt": "2023-07-28T12:16:36.386Z",
+				"locale": "fr",
+				"subtitle": "Startup",
+				"type": "ARTICLE - Veille",
+				"rank": 0,
+				"image_presentation": 309,
+				"galery": null,
+				"links": [
+					67,
+					68
+				],
+				"localizations": [],
+				"createdBy": null,
+				"updatedBy": null
+			},
+			"2": {
+				"id": 2,
+				"title": "Les Fondamentaux du Web Design",
+				"content": "> ## Définition\n> \n> Dans le processus de création des sites web, le Web Design est aujourd'hui une spécialité à part entière. Branche récente de la famille du design, elle est devenue un passage obligé d'une conception Internet. Le webdesign doit donc organiser l'information dans les pages du site et adapter au mieux les contenus à ce support spécifique qu'est le Web. Le visiteur du site doit percevoir clairement l'information, l'assimiler aisément et instantanément.\n> \n> Dans cette page, nous allons passer par toutes les étapes nécessaires, à mon humble avis, pour devenir compétent rapidement dans le domaine du web design et avoir une vision à 360° sur tous les aspects importants du web design.\n\n> ## Liens et ressources liées\n> \n> **Le plan pour apprendre à faire une UI propre :** _L'idée principale serait de lire un article par point, et de bien prendre des notes sur ces informations, afin de capitaliser sur toutes ces informations._\n> \n> 1.  **Comprendre les principes de base du design d'interface utilisateur (UI) et de l'expérience utilisateur (UX)** → Lire _Refactoring UI_\n> 2.  **Connaître les principes de couleur et savoir comment les utiliser pour créer une identité visuelle cohérente** → [https://medium.com/free-code-camp/comprehensive-guide-for-color-usage-in-web-design-e2a9afce09fb](https://medium.com/free-code-camp/comprehensive-guide-for-color-usage-in-web-design-e2a9afce09fb)\n> 3.  **Comprendre les grilles et les systèmes de mise en page pour créer des designs cohérents et harmonieux** → [https://medium.com/design-with-figma/everything-you-need-to-know-as-a-ui-designer-about-spacing-layout-grids-2bc269e12321](https://medium.com/design-with-figma/everything-you-need-to-know-as-a-ui-designer-about-spacing-layout-grids-2bc269e12321)\n> 4.  **Comprendre l'importance de la hiérarchisation de l'information pour guider l'utilisateur à travers l'interface** → [https://manvisinghwal.medium.com/6-principles-of-visual-hierarchy-25b21b63ad62](https://manvisinghwal.medium.com/6-principles-of-visual-hierarchy-25b21b63ad62) → [https://medium.com/swlh/fundamentals-of-hierarchy-in-interface-design-ui-ba8e3017dceb](https://medium.com/swlh/fundamentals-of-hierarchy-in-interface-design-ui-ba8e3017dceb)\n> 5.  **Savoir utiliser les icônes et les images pour améliorer la compréhension et la navigation** → [https://medium.com/@desbenoit/icons-and-interfaces-bcc8e0257bc8](https://medium.com/@desbenoit/icons-and-interfaces-bcc8e0257bc8)\n> 6.  **Connaître les outils et les fonctionnalités de base de Figma, tels que les calques, les formes, les images et les styles**\n> 7.  **Connaître les fonctionnalités de collaboration et de partage de Figma pour faciliter le travail en équipe et les retours d'expérience utilisateur (UX)** → [https://www.figma.com/resources/learn-design/](https://www.figma.com/resources/learn-design/) → [https://www.youtube.com/watch?v=HZuk6Wkx\\_Eg](https://www.youtube.com/watch?v=HZuk6Wkx_Eg) : Figma tutorial for Beginners: Complete Website from Start to Finish → [https://www.youtube.com/watch?v=dXQ7IHkTiMM](https://www.youtube.com/watch?v=dXQ7IHkTiMM) : Figma For Beginners: Explore ideas (1/4) → [https://www.youtube.com/watch?v=3q3FV65ZrUs](https://www.youtube.com/watch?v=3q3FV65ZrUs) : Figma Tutorial - A Free UI Design/Prototyping Tool. It's awesome.\n> 8.  **Maîtriser l'utilisation de la typographie pour communiquer efficacement le contenu et hiérarchiser les informations** → [https://medium.com/eightshapes-llc/typography-in-design-systems-6ed771432f1e](https://medium.com/eightshapes-llc/typography-in-design-systems-6ed771432f1e) → [https://thelogocreative.medium.com/the-rules-of-typography-in-web-design-8fad6c3b5169](https://thelogocreative.medium.com/the-rules-of-typography-in-web-design-8fad6c3b5169) Vidéo intéressante sur la calligraphie : [https://www.youtube.com/watch?v=Mqtd9OizbhE](https://www.youtube.com/watch?v=Mqtd9OizbhE)\n> 9.  **Connaître les bonnes pratiques pour optimiser les performances et le temps de chargement des maquettes.** → [https://www.figma.com/best-practices/](https://www.figma.com/best-practices/) → [https://medium.com/@ajay.singh07/8-figma-best-practices-to-speed-up-your-productivity-d230accc1d25](https://medium.com/@ajay.singh07/8-figma-best-practices-to-speed-up-your-productivity-d230accc1d25)\n> \n> Tous les liens ci-dessus sont utiles pour avoir des inspirations et des informations complémentaires, un coup d'œil rapide est conseillé sur \"Law Of UX\" pour s'imprégner des différentes règles.\n> \n> Si possible, il serait top de jeter un œil sur les différentes règles sous-jacentes au design system de Google (actuellement Material 3) : [https://m3.material.io/](https://m3.material.io/)\n> \n> **(À savoir que [https://m3.material.io/foundations](https://m3.material.io/foundations) est littéralement une mine d'or d'information!)**\n> \n> ### Refactoring UI\n> \n> [Home | Laws of UX](https://lawsofux.com/)\n> \n> ### Général :\n> \n> -   [https://dribbble.com/](https://dribbble.com/)\n> -   [https://www.behance.net/](https://www.behance.net/)\n> -   [https://www.pinterest.fr/](https://www.pinterest.fr/)\n> -   [https://www.deviantart.com/](https://www.deviantart.com/)\n> les sites web / applications :\n> \n> -   [https://www.awwwards.com/](https://www.awwwards.com/)\n> -   [https://www.admiretheweb.com/](https://www.admiretheweb.com/)\n> -   [https://uijar.com/](https://uijar.com/)\n> -   [https://savee.it/](https://savee.it/)\n> -   [https://land-book.com/](https://land-book.com/)\n> -   [https://www.siteinspire.com/](https://www.siteinspire.com/)\n-   [https://godly.website/](https://godly.website/)\n-   [https://onepagelove.com/](https://onepagelove.com/)\n> \n> ### Orienté site web & landing page etc :\n> \n> -   [The Best Landing Page Design Inspiration, Templates and More | Landingfolio](https://www.landingfolio.com/)\n> -   [5476 Landing Page Design Inspiration - Lapa Ninja](https://www.lapa.ninja/)\n> -   [Land-book - website design inspiration gallery](https://land-book.com/)\n> -   [CSS Awards – Recognition for Web Designers & Developers](https://css-awards.com/)\n> -   [Showcase of the best Animation Websites - landing.love](https://www.landing.love/)\n> \n> ### Chaîne Youtube :\n> \n> -   [https://www.youtube.com/@DesignCourse](https://www.youtube.com/@DesignCourse) (il donne pas mal d'exemples) - EN\n> -   [https://www.youtube.com/@BastiUi](https://www.youtube.com/@BastiUi) - FR : [https://www.youtube.com/watch?v=Li1XYYqKTx4](https://www.youtube.com/watch?v=Li1XYYqKTx4)\n\n\n> ## Ma stack CSS :\n> \n> [Headless UI - Unstyled, fully accessible UI components](https://headlessui.com/) [Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.](https://tailwindcss.com/) [Tailwind CSS Templates - Tailwind UI](https://tailwindui.com/templates)\n\n___\n\n___\n\n___\n\n> ## Les ressources alternatives :\n> \n> Ressources lib : [Resource Cards - Selected free resources for designers](https://resourcecards.com/) \n> Bootstrap : [Bootstrap · The most popular HTML, CSS, and JS library in the world.](https://getbootstrap.com/) \n> _**Gradient**_ : [Mesh | Create beautiful mesh gradients](https://meshgradient.com/) \n> Color tester : [Happy Hues - Curated colors in context.](https://www.happyhues.co/palettes/2) \n> Animation Loader css : [Whirl: CSS loading animations with minimal effort!](https://whirl.netlify.app/)\n> All in one tool chrome : [All Online Tools in One Box | 10015 Tools](https://10015.io/) \n> Grid générateur : [CSS Grid Generator](https://cssgrid-generator.netlify.app/) \n> Bibliothèque d'icônes : Flaticon : [Vector Icons and Stickers - PNG, SVG, EPS, PSD and CSS](https://www.flaticon.com/) \n> Font awesome : [Font Awesome](https://fontawesome.com/) \n> Icon8 : [Free Icons, Clipart Illustrations, Photos, and Music](https://icons8.com/)\n\n> ## Les articles complémentaires intéressants\n> \n> [16 UI Design Rules to Keep in Mind](https://www.adhamdannaway.com/blog/ui-design/16-ui-design-rules?ref=web-design-weekly.com#1)",
+				"seo_title": "Guide complet du Web Design : Principes, Outils et Ressources",
+				"seo_description": "Découvrez les essentiels du Web Design, une spécialité incontournable dans la création de sites web.",
+				"slug": "webdesign",
+				"excerpt": "Découvrez les essentiels du Web Design, une spécialité incontournable dans la création de sites web. De la conception de l'interface utilisateur (UI) à l'expérience utilisateur (UX), explorez les principes de base du design, les systèmes de mise en page, la typographie, et les meilleures pratiques pour optimiser les performances et le chargement des maquettes. Trouvez également une sélection d'outils, de ressources et d'articles complémentaires pour améliorer vos compétences et vous inspirer dans vos projets de conception web.",
+				"createdAt": "2023-07-28T12:33:36.229Z",
+				"updatedAt": "2023-07-28T12:54:27.636Z",
+				"publishedAt": "2023-07-28T12:52:54.679Z",
+				"locale": "fr",
+				"subtitle": "Startup",
+				"type": "ARTICLE - Veille",
+				"rank": 0,
+				"image_presentation": 308,
+				"galery": null,
+				"links": [
+					69,
+					70
+				],
+				"localizations": [],
+				"createdBy": null,
+				"updatedBy": null
+			},
+			"3": {
+				"id": 3,
+				"title": "Installer un PaaS avec CapRover ",
+				"content": "> ## Base install\n> \n> [Contabo🥇Cloud VPS & Dedicated Servers for a Price You'll Love](https://contabo.com/en)\n> Cloud VPS S \n> Install débian\n> \n> *_**ssh root@142.242.222.142**_*\n> ```\n> apt install sudo -y\n> apt install ufw -y\n> apt install tmux -y\n> apt install git -y\n> apt install fail2ban -y\n> apt install vim -y\n> useradd Andy -m -s /bin/bash\n> usermod-aG sudo Andy \n> passwd Andy\n> ```\n> \n> // ajouter une clé ssh \n> ```\n> cd /home/Andy/ \n> mkdir .ssh \n> vim /home/Andy/.ssh/authorized_keys\n> ```\n> (mettre la clé ssh publique dedans)\n> \n> \n> ```\n> cd /home/Andy\n> chown Andy:CinquinAndy .ssh/ -R\n> chmod 755 -R .ssh/\n> chmod 600 .ssh/authorized_keys\n> ```\n> \n> ```\n> vim /etc/ssh/sshd_config \n> ```\n> \n> // changer : \n> // -> PubkeyAuthentification \n> // -> PasswordAuthentification\n> // -> PermitRootLogin \n> // -> AuthorizedKeysFile\n> ![Pasted image 20230728150606.png](https://minio.beta.andy-cinquin.fr:443/andycinquin/Pasted_image_20230728150606_31b7a0c2c1.png)\n\n\n>  ## Ufw\n> \n> ```\n> ufw allow 53  \n> ufw allow 443\n> ufw allow 22\n> ufw enable\n> ```\n\n> ## Cap Rover\n> \n> [Getting Started · CapRover](https://caprover.com/docs/get-started.html)\n> \n> Prerequis : \n> ```\n> sudo ufw allow 80,443,3000,996,7946,4789,2377/tcp; \n> sudo ufw allow 7946,4789,2377/udp;\n> ```\n> \n> follow : [Install Docker Engine on Debian | Docker Documentation](https://docs.docker.com/engine/install/debian/)\n> \n> Conf OVH: \n> ![Pasted image 20230728150527.png](https://minio.beta.andy-cinquin.fr:443/andycinquin/Pasted_image_20230728150527_39e848c6f5.png)\n> ```\n> sudo apt install curl\n> curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -\n> sudo apt install nodejs\n> \n> npm install -g caprover\n> caprover serversetup\n> ```\n\n> ## config captain\n> \n> ![screenconf.png](https://minio.beta.andy-cinquin.fr:443/andycinquin/screenconf_1c97b8c9fc.png)\n> \n> \n\n> ## Ajouter une application\n> \n> ~ Conteneriser son app\n> \n> docker build -t andycinquin/second-brain .\n> docker run -d -p 8000:8000 andycinquin/second-brain \n> \n> ~ push son app sur dockerhub\n> docker login\n> docker tag second-brain andycinquin/second-brain\n> docker push andycinquin/second-brain\n> \n> ~ créer les secrets sur github\n> APP_IMAGE\n> `docker.io/andycinquin/songflow-prod:latest`\n> APP_NAME \n> `songflow`\n> APP_TOKEN \n> `$token de caprover`\n> APP_URL \n> `captain.beta.andy-cinquin.fr`\n> \n> DOCKER_PASSWORD \n> `password de docker.io`\n> DOCKER_USERNAME\n> `username de docker.io`\n> \n> \n> ~ Debug : \n> docker ps\n> docker exec -it {numerodedocker} bash\n> tail -f /var/log/apache2/access.log -n 100\n\n",
+				"seo_title": "Guide d'Installation et Configuration pour un Serveur Cloud VPS avec CapRover",
+				"seo_description": "Découvrez les étapes détaillées pour installer et configurer un serveur Cloud VPS en utilisant CapRover. ",
+				"slug": "how-to-install-caprover-on-vps",
+				"excerpt": "Découvrez les étapes détaillées pour installer et configurer un serveur Cloud VPS en utilisant CapRover. Suivez les instructions pour l'installation de débian, la configuration de SSH, l'ajout d'une clé SSH publique, la mise en place de CapRover, et la gestion des applications Docker. Apprenez à utiliser Ufw pour gérer les règles de pare-feu et découvrez comment containeriser votre application, la pousser sur DockerHub et configurer les secrets sur GitHub. Suivez ce guide pas à pas pour déployer vos applications web en toute simplicité sur un serveur Cloud VPS.",
+				"createdAt": "2023-07-28T14:34:22.143Z",
+				"updatedAt": "2023-07-28T14:41:27.331Z",
+				"publishedAt": "2023-07-28T14:38:33.064Z",
+				"locale": "fr",
+				"subtitle": "Startup",
+				"type": "ARTICLE - Veille",
+				"rank": 2,
+				"image_presentation": 313,
+				"galery": null,
+				"links": [
+					71,
+					72
+				],
+				"localizations": [],
+				"createdBy": null,
+				"updatedBy": null
+			}
+		},
+		"plugin::upload.file": {
+			"308": {
+				"id": 308,
+				"name": "figma.png",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "figma_01257503ee",
+				"ext": ".png",
+				"mime": "image/png",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/figma_01257503ee.png",
+				"createdAt": "2023-07-28T12:52:26.725Z",
+				"updatedAt": "2023-07-28T12:52:26.725Z",
+				"createdBy": null,
+				"updatedBy": null
+			},
+			"309": {
+				"id": 309,
+				"name": "article_techstack.png",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "article_techstack_dd75571c00",
+				"ext": ".png",
+				"mime": "image/png",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/article_techstack_dd75571c00.png",
+				"createdAt": "2023-07-28T12:52:26.732Z",
+				"updatedAt": "2023-07-28T14:42:31.422Z",
+				"createdBy": null,
+				"updatedBy": null
+			},
+			"310": {
+				"id": 310,
+				"name": "Pasted image 20230728150527.png",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "Pasted_image_20230728150527_39e848c6f5",
+				"ext": ".png",
+				"mime": "image/png",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/Pasted_image_20230728150527_39e848c6f5.png",
+				"createdAt": "2023-07-28T13:36:58.911Z",
+				"updatedAt": "2023-07-28T13:36:58.911Z",
+				"createdBy": 1,
+				"updatedBy": 1
+			},
+			"311": {
+				"id": 311,
+				"name": "Pasted image 20230728150606.png",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "Pasted_image_20230728150606_31b7a0c2c1",
+				"ext": ".png",
+				"mime": "image/png",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/Pasted_image_20230728150606_31b7a0c2c1.png",
+				"createdAt": "2023-07-28T13:36:58.968Z",
+				"updatedAt": "2023-07-28T13:38:42.466Z",
+				"createdBy": 1,
+				"updatedBy": 1
+			},
+			"312": {
+				"id": 312,
+				"name": "screenconf.png",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "screenconf_1c97b8c9fc",
+				"ext": ".png",
+				"mime": "image/png",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/screenconf_1c97b8c9fc.png",
+				"createdAt": "2023-07-28T14:32:39.381Z",
+				"updatedAt": "2023-07-28T14:32:39.381Z",
+				"createdBy": 1,
+				"updatedBy": 1
+			},
+			"313": {
+				"id": 313,
+				"name": "rackofserver.png",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "rackofserver_4b396cacd1",
+				"ext": ".png",
+				"mime": "image/png",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/rackofserver_4b396cacd1.png",
+				"createdAt": "2023-07-28T14:41:10.031Z",
+				"updatedAt": "2023-07-28T14:41:10.031Z",
+				"createdBy": null,
+				"updatedBy": null
+			}
+		},
+		"link.link": {
+			"67": {
+				"id": 67,
+				"label": "Front end My-Makeup (exemple)",
+				"url": "https://github.com/For-Hives/my-makeup"
+			},
+			"68": {
+				"id": 68,
+				"label": "Back end My-Makeup (exemple)",
+				"url": "https://github.com/For-Hives/api-my-makeup"
+			},
+			"69": {
+				"id": 69,
+				"label": "Refactoring UI",
+				"url": "https://www.refactoringui.com/"
+			},
+			"70": {
+				"id": 70,
+				"label": "Exemple de maquette",
+				"url": "https://www.figma.com/file/ZxIj6Kc9QWGo2uBoudSWBA/ForMenu?type=design&node-id=48%3A324&mode=design&t=s4UK6A5XyZWx13oL-1"
+			},
+			"71": {
+				"id": 71,
+				"label": "Contabo (VPS)",
+				"url": "https://contabo.com/"
+			},
+			"72": {
+				"id": 72,
+				"label": "Ovh (DNS)",
+				"url": "https://www.ovh.com/"
+			}
+		},
+		"plugin::upload.folder": {
+			"4": {
+				"id": 4,
+				"name": "articles",
+				"pathId": 4,
+				"path": "/4",
+				"createdAt": "2023-07-28T12:45:22.806Z",
+				"updatedAt": "2023-07-28T12:45:22.806Z",
+				"parent": null,
+				"children": [],
+				"files": [
+					308,
+					309,
+					310,
+					311,
+					312,
+					313
+				],
+				"createdBy": null,
+				"updatedBy": null
+			}
+		}
+	}
+}

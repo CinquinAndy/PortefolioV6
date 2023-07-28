@@ -1,0 +1,468 @@
+{
+	"version": 2,
+	"data": {
+		"api::content-website.content-website": {
+			"1": {
+				"id": 1,
+				"createdAt": "2023-07-17T23:35:30.812Z",
+				"updatedAt": "2023-07-28T11:41:38.697Z",
+				"publishedAt": "2023-07-17T23:36:21.201Z",
+				"locale": "fr",
+				"socials": 1,
+				"menu": [
+					4,
+					2,
+					5,
+					3,
+					6
+				],
+				"contact": 1,
+				"content_home": 1,
+				"content_footer": 1,
+				"Sitemap": [
+					1,
+					3,
+					2,
+					4,
+					6,
+					5
+				],
+				"content_service": 1,
+				"content_realisations": 1,
+				"content_blog": 1,
+				"cta": 2,
+				"localizations": [
+					2
+				],
+				"createdBy": null,
+				"updatedBy": null
+			},
+			"2": {
+				"id": 2,
+				"createdAt": "2023-07-20T08:59:49.333Z",
+				"updatedAt": "2023-07-20T09:12:08.319Z",
+				"publishedAt": null,
+				"locale": "en",
+				"socials": 2,
+				"menu": [
+					8,
+					7,
+					11,
+					10,
+					9
+				],
+				"contact": 2,
+				"content_home": 2,
+				"content_footer": 2,
+				"Sitemap": [
+					11,
+					7,
+					9,
+					10,
+					12,
+					8
+				],
+				"content_service": null,
+				"content_realisations": null,
+				"content_blog": null,
+				"cta": null,
+				"localizations": [
+					1
+				],
+				"createdBy": null,
+				"updatedBy": null
+			}
+		},
+		"cta.cta": {
+			"2": {
+				"id": 2,
+				"title": "DÉVELOPPONS *ENSEMBLE* VOS PROJETS",
+				"content": "Une idée, un projet ? Je suis là pour répondre à vos demandes et vous accompagner.\n\n\nN’hésitez pas, je serais ravi d’échanger avec vous sur votre projet !",
+				"link": 65
+			}
+		},
+		"content-blog.content-blog": {
+			"1": {
+				"id": 1,
+				"seo": 3
+			}
+		},
+		"content-realisations.content-realisations": {
+			"1": {
+				"id": 1,
+				"title_galery": "Le projet en *image*",
+				"title_content": "Résumé du *projet*",
+				"title_technology": "Les *technologies* utilisées",
+				"title_links": "Les _sites_ et les *ressources* associées",
+				"seo": 2,
+				"btn_galery": 66
+			}
+		},
+		"content-service.content-service": {
+			"1": {
+				"id": 1,
+				"seo": 1
+			}
+		},
+		"sitemaps.sitemaps": {
+			"1": {
+				"id": 1,
+				"categorie": "sitemap",
+				"Link": 11
+			},
+			"2": {
+				"id": 2,
+				"categorie": "sitemap",
+				"Link": 13
+			},
+			"3": {
+				"id": 3,
+				"categorie": "sitemap",
+				"Link": 12
+			},
+			"4": {
+				"id": 4,
+				"categorie": "sitemap",
+				"Link": 14
+			},
+			"5": {
+				"id": 5,
+				"categorie": "legals",
+				"Link": 16
+			},
+			"6": {
+				"id": 6,
+				"categorie": "legals",
+				"Link": 15
+			},
+			"7": {
+				"id": 7,
+				"categorie": "sitemap",
+				"Link": 18
+			},
+			"8": {
+				"id": 8,
+				"categorie": "legals",
+				"Link": 22
+			},
+			"9": {
+				"id": 9,
+				"categorie": "sitemap",
+				"Link": 19
+			},
+			"10": {
+				"id": 10,
+				"categorie": "sitemap",
+				"Link": 20
+			},
+			"11": {
+				"id": 11,
+				"categorie": "sitemap",
+				"Link": 17
+			},
+			"12": {
+				"id": 12,
+				"categorie": "legals",
+				"Link": 21
+			}
+		},
+		"content-footer.content-footer": {
+			"1": {
+				"id": 1,
+				"content": "[contact@andy-cinquin.fr](mailto:contact@andy-cinquin.fr)\n\n\nEntrepreneur, et co-fondateur de : \n- [ForMenu.fr](https://formenu.fr), \n- [My-Makeup.fr](https://my-makeup.fr), \n- [Artriste.cc](https://artriste.cc)\n- [ForHives.fr](https://forhives.fr)\n\n\nDéveloppeur Freelance, Web, mobile, applicatif, UI/UX, référencement (SEO/SEA).\n\nCréation sur-mesure.\n\nOptimisation.\n\nCréation et développement de site web.\n",
+				"copyright": "Andy CINQUIN - Tous droits réservés - Siret : 880 505 276 00019 - NAF : 6201Z",
+				"title_sitemap": "SITEMAP",
+				"title_legals": "LÉGALES",
+				"image": 2
+			},
+			"2": {
+				"id": 2,
+				"content": "[contact@andy-cinquin.fr](mailto:contact@andy-cinquin.fr)\n\nEntrepreneur and co-founder of:\n\n-   [ForMenu.fr](https://formenu.fr),\n-   [My Makeup](https://my-makeup.fr),\n-   [Artriste.cc](https://artriste.cc)\n-   [ForHives.fr](https://forhives.fr)\n\nFreelance developer, Web, mobile, applications, UI/UX, SEO/SEA optimization.\nCustom creation.\nOptimization. \nWebsite creation and development.",
+				"copyright": "Andy CINQUIN - All rights reserved - Siret : 880 505 276 00019 - NAF : 6201Z",
+				"title_sitemap": null,
+				"title_legals": null,
+				"image": 2
+			}
+		},
+		"content-home.content-home": {
+			"1": {
+				"id": 1,
+				"title_home": "ANDY CINQUIN",
+				"title_service": "Mes différents *services* pour réaliser votre _projet._",
+				"title_blog": "Mes dernières *actualités* et _conseils._",
+				"title_realisation": "Mes derniers *projets* _réalisés_&nbsp;!",
+				"title_vertical_left_bottom": "‣ ANDY CINQUIN",
+				"link": [
+					63,
+					64
+				],
+				"seo": 4
+			},
+			"2": {
+				"id": 2,
+				"title_home": "ANDY CINQUIN",
+				"title_service": "My various *services* to accomplish your _project._",
+				"title_blog": "My latest *news* and _tips._",
+				"title_realisation": "My recent *projects* _completed !_",
+				"title_vertical_left_bottom": null,
+				"link": [],
+				"seo": null
+			}
+		},
+		"contact.contact": {
+			"1": {
+				"id": 1,
+				"address": "72 avenue camus, 44000 Nantes",
+				"email": "contact@andy-cinquin.fr",
+				"phone": "+33 6 21 58 26 84"
+			},
+			"2": {
+				"id": 2,
+				"address": "72 avenue camus, 44000 Nantes",
+				"email": "contact@andy-cinquin.fr",
+				"phone": "+33 6 21 58 26 84"
+			}
+		},
+		"menu.menu": {
+			"2": {
+				"id": 2,
+				"Link": 2
+			},
+			"3": {
+				"id": 3,
+				"Link": 4
+			},
+			"4": {
+				"id": 4,
+				"Link": 1
+			},
+			"5": {
+				"id": 5,
+				"Link": 3
+			},
+			"6": {
+				"id": 6,
+				"Link": 5
+			},
+			"7": {
+				"id": 7,
+				"Link": 7
+			},
+			"8": {
+				"id": 8,
+				"Link": 6
+			},
+			"9": {
+				"id": 9,
+				"Link": 10
+			},
+			"10": {
+				"id": 10,
+				"Link": 9
+			},
+			"11": {
+				"id": 11,
+				"Link": 8
+			}
+		},
+		"socials.socials": {
+			"1": {
+				"id": 1,
+				"linkedin": "https://www.linkedin.com/in/andy-cinquin/",
+				"facebook": "https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance",
+				"instagram": "https://www.instagram.com/cinquin.andy/",
+				"github": "https://github.com/CinquinAndy/",
+				"malt": "https://www.malt.fr/profile/andycinquin",
+				"email": "contact@andy-cinquin.fr"
+			},
+			"2": {
+				"id": 2,
+				"linkedin": "https://www.linkedin.com/in/andy-cinquin/",
+				"facebook": "https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance",
+				"instagram": "https://www.instagram.com/cinquin.andy/",
+				"github": "https://github.com/CinquinAndy/",
+				"malt": "https://www.malt.fr/profile/andycinquin",
+				"email": "contact@andy-cinquin.fr"
+			}
+		},
+		"link.link": {
+			"1": {
+				"id": 1,
+				"label": "andy cinquin",
+				"url": "/"
+			},
+			"2": {
+				"id": 2,
+				"label": "mes réalisations",
+				"url": "/portefolio"
+			},
+			"3": {
+				"id": 3,
+				"label": "blog",
+				"url": "/blog"
+			},
+			"4": {
+				"id": 4,
+				"label": "mes services",
+				"url": "/#services"
+			},
+			"5": {
+				"id": 5,
+				"label": "contactez moi",
+				"url": "/contact"
+			},
+			"6": {
+				"id": 6,
+				"label": "andy cinquin",
+				"url": "/"
+			},
+			"7": {
+				"id": 7,
+				"label": "my achievements",
+				"url": "/portefolio"
+			},
+			"8": {
+				"id": 8,
+				"label": "blog",
+				"url": "/blog"
+			},
+			"9": {
+				"id": 9,
+				"label": "my services",
+				"url": "/services"
+			},
+			"10": {
+				"id": 10,
+				"label": "contact me",
+				"url": "/contact"
+			},
+			"11": {
+				"id": 11,
+				"label": "Mes projets",
+				"url": "/portefolio"
+			},
+			"12": {
+				"id": 12,
+				"label": "Mes services",
+				"url": "/services"
+			},
+			"13": {
+				"id": 13,
+				"label": "Blog",
+				"url": "/blog"
+			},
+			"14": {
+				"id": 14,
+				"label": "Contact",
+				"url": "/contact"
+			},
+			"15": {
+				"id": 15,
+				"label": "Mentions légales",
+				"url": "/legal-notice"
+			},
+			"16": {
+				"id": 16,
+				"label": "Politique de confidentialité",
+				"url": "/legal-notice"
+			},
+			"17": {
+				"id": 17,
+				"label": "My achievements",
+				"url": "/portefolio"
+			},
+			"18": {
+				"id": 18,
+				"label": "Blog",
+				"url": "/blog"
+			},
+			"19": {
+				"id": 19,
+				"label": "My services",
+				"url": "/services"
+			},
+			"20": {
+				"id": 20,
+				"label": "Contact",
+				"url": "/contact"
+			},
+			"21": {
+				"id": 21,
+				"label": "Legal notice",
+				"url": "/legal-notice"
+			},
+			"22": {
+				"id": 22,
+				"label": "Privacy policies",
+				"url": "/legal-notice"
+			},
+			"63": {
+				"id": 63,
+				"label": "Me contacter",
+				"url": "/contact"
+			},
+			"64": {
+				"id": 64,
+				"label": "Mes réalisations",
+				"url": "/portefolio"
+			},
+			"65": {
+				"id": 65,
+				"label": "Me contacter",
+				"url": "/contact"
+			},
+			"66": {
+				"id": 66,
+				"label": "Voir la galerie",
+				"url": null
+			}
+		},
+		"seo.seo": {
+			"1": {
+				"id": 1,
+				"title": "Services | Développement web, UI/UX, SEO et plus",
+				"description": "Découvrez mes services complets et polyvalents, allant du développement web à la création d'interfaces utilisateur conviviales (UI/UX) en passant par l'optimisation pour les moteurs de recherche (SEO). ",
+				"h1": "Mes services",
+				"canonical": "https://andy-cinquin.fr/services"
+			},
+			"2": {
+				"id": 2,
+				"title": "Portfolio de Andy Cinquin | Développement web et applications innovantes",
+				"description": "Découvrez le portfolio de Andy Cinquin, développeur freelance et entrepreneur. Découvrez une gamme de projets de développement web et d'applications, alliant créativité, polyvalence et un sens aigu du détail. ",
+				"h1": "Mon portefolio",
+				"canonical": "https://andy-cinquin.fr/portefolio"
+			},
+			"3": {
+				"id": 3,
+				"title": "Blog de développement informatique | Andy Cinquin - Développeur Freelance & Entrepreneur",
+				"description": "Explorez les articles de blog du développeur informatique freelance, Andy Cinquin. Une ressource riche en informations sur les tendances de l'informatique, le développement back-end et front-end, et bien plus encore. ",
+				"h1": "Mes actualités",
+				"canonical": "https://andy-cinquin.fr/blog"
+			},
+			"4": {
+				"id": 4,
+				"title": "Andy Cinquin - Entrepreneur & Développeur Freelance",
+				"description": "Portefolio professionnel de Andy Cinquin, développeur informatique Freelance, Nantes et alentours. Développement sur-mesure, web, applicatifs",
+				"h1": "ANDY CINQUIN",
+				"canonical": "https://andy-cinquin.fr"
+			}
+		},
+		"plugin::upload.file": {
+			"2": {
+				"id": 2,
+				"name": "logov2.svg",
+				"alternativeText": null,
+				"caption": null,
+				"hash": "logov2_d388812ae4",
+				"ext": ".svg",
+				"mime": "image/svg+xml",
+				"url": "https://minio.beta.andy-cinquin.fr:443/andycinquin/logov2_d388812ae4.svg",
+				"createdAt": "2023-07-20T08:53:25.659Z",
+				"updatedAt": "2023-07-20T08:53:25.659Z",
+				"createdBy": null,
+				"updatedBy": null
+			}
+		},
+		"plugin::upload.folder": {}
+	}
+}
