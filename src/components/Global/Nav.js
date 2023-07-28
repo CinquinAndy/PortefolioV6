@@ -239,10 +239,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'
 				} relative flex w-screen items-center justify-center`}
 			>
-				<h1 className="z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-8xl">
+				<h1 className="z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl">
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
-				<div className="absolute left-1/2 top-1/2 z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start">
+				<div className="absolute left-1/2 top-[70%] z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start lg:top-1/2 2xl:top-[60%]">
 					<Image
 						width={450}
 						height={450}

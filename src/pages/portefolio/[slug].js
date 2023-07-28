@@ -56,7 +56,7 @@ function Talent({ content_website, realisations }) {
 				<div className={'relative'}>
 					<div
 						className={
-							'my-24 grid grid-cols-1 gap-[100px] px-4 md:my-48 md:grid-cols-2 2xl:px-0'
+							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:grid-cols-2 2xl:px-0'
 						}
 					>
 						<div

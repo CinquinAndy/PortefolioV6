@@ -13,6 +13,7 @@ import {
 } from '@/services/getContentWebsite'
 import { replaceTitle } from '@/services/utils'
 import { ChevronRightIcon, LinkIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link'
 
 /**
  * @param props
@@ -49,15 +50,19 @@ function Blog({ content_website, articles }) {
 				<div className={'relative'}>
 					<div
 						className={
-							'my-24 grid grid-cols-1 gap-[100px] px-4 md:my-48 2xl:px-0'
+							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:px-16 2xl:px-0'
 						}
 					>
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
 							}
 						>
-							<div className={'flex w-full items-start gap-4 md:gap-8'}>
+							<div
+								className={
+									'flex w-full items-center justify-evenly gap-4 md:gap-8'
+								}
+							>
 								<div className={'flex items-center gap-2'}>
 									<h2
 										className={
@@ -70,23 +75,29 @@ function Blog({ content_website, articles }) {
 											),
 										}}
 									/>
-									<div className={'hidden h-full items-center md:flex'}>
-										<ChevronRightIcon className={'h-6 w-6 md:h-8 md:w-8'} />
-									</div>
 								</div>
 								<div className={'flex flex-col gap-4'}>
-									<button
-										onClick={() => {
-											handleClick()
-										}}
-										className={
-											'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
-										}
-									>
-										<LinkIcon
-											className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'}
-										/>
-									</button>
+									{articles?.attributes?.links?.map((link, index) => {
+										return (
+											<div key={index} className={'flex'}>
+												<Link
+													key={link?.id}
+													href={link?.url}
+													rel={'noopener noreferrer'}
+													className={
+														'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+													}
+												>
+													{link?.label}
+													<LinkIcon
+														className={
+															'absolute -right-2 -top-2 h-4 w-4 rotate-6'
+														}
+													/>
+												</Link>
+											</div>
+										)
+									})}
 								</div>
 							</div>
 						</div>
