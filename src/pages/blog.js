@@ -1,45 +1,36 @@
 import React from 'react'
 import Head from 'next/head'
 import Nav from '@/components/Global/Nav'
-import Realisations from '@/components/Global/Realisations'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import {
-	getContentWebsite,
-	getRealisations,
-} from '@/services/getContentWebsite'
+import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
+import Articles from '@/components/Global/Articles'
 
 function Blog({ content_website, articles }) {
 	return (
 		<>
 			<Head>
-				<title>
-					{content_website?.attributes?.content_realisations?.seo?.title}
-				</title>
+				<title>{content_website?.attributes?.content_blog?.seo?.title}</title>
 				<meta
 					name="description"
-					content={
-						content_website?.attributes?.content_realisations?.seo?.description
-					}
+					content={content_website?.attributes?.content_blog?.seo?.description}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={
-						content_website?.attributes?.content_realisations?.seo?.canonical
-					}
+					href={content_website?.attributes?.content_blog?.seo?.canonical}
 				/>
 			</Head>
 
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={content_website?.attributes?.content_realisations?.seo?.h1}
+				h1={content_website?.attributes?.content_blog?.seo?.h1}
 			/>
 			<div>
-				<Realisations
+				<Articles
 					content_website={content_website}
-					realisations={realisations}
+					articles={articles}
 					slice={false}
 					isHome={true}
 				/>
@@ -52,9 +43,9 @@ function Blog({ content_website, articles }) {
 
 export async function getStaticProps() {
 	const content_website = await getContentWebsite()
-	const realisations = await getRealisations()
+	const articles = await getArticles()
 
-	if (!content_website || !realisations) {
+	if (!content_website || !articles) {
 		return {
 			notFound: true,
 		}
@@ -63,7 +54,7 @@ export async function getStaticProps() {
 	return {
 		props: {
 			content_website: content_website.data,
-			realisations: realisations.data,
+			articles: articles.data,
 		},
 		revalidate: 10,
 	}

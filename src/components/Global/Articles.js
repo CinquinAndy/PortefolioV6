@@ -3,22 +3,22 @@ import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
-function Realisations({ content_website, realisations, slice, isHome }) {
-	realisations = slice ? realisations.slice(0, slice) : realisations
+function Articles({ content_website, articles, slice, isHome }) {
+	articles = slice ? articles.slice(0, slice) : articles
 	const gridTemplateCustom = index => {
 		switch (index % 3) {
 			case 0:
-				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-10 2xl:col-start-1 2xl:col-end-6'
+				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-8 2xl:col-start-1 2xl:col-end-8'
 			case 1:
-				return 'col-start-1 col-end-13 md:col-start-4 md:col-end-13 2xl:col-start-5 2xl:col-end-13'
+				return 'col-start-1 col-end-13 md:col-start-6 md:col-end-13 2xl:col-start-7 2xl:col-end-13'
 			case 2:
-				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-2 2xl:col-end-12'
+				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-3 2xl:col-end-11'
 		}
 	}
 	return (
 		<>
 			<section className="w-full p-4 md:p-20">
-				{/*// <!--     Derniers projets -->*/}
+				{/*// <!--     Derniers articles -->*/}
 				{isHome && (
 					<div className="mt-[100px] flex justify-between">
 						<div className="w-1/2">
@@ -26,7 +26,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 								className="text-2xl normal-case leading-snug xl:text-5xl"
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
-										content_website?.attributes?.content_home?.title_realisation
+										content_website?.attributes?.content_home?.title_blog
 									),
 								}}
 							></h2>
@@ -49,17 +49,17 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 				)}
 				<div className="mt-10 flex w-full justify-center xl:mt-20">
 					<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
-						{realisations.map((realisation, index) => {
+						{articles.map((article, index) => {
 							return (
 								<Link
-									key={realisation?.id}
-									href={'/portefolio/' + realisation?.attributes?.slug}
+									key={article?.id}
+									href={'/blog/' + article?.attributes?.slug}
 									className={`${gridTemplateCustom(
 										index
 									)} relative flex aspect-[16/9] h-[50vh] w-full flex-col items-center justify-center p-10 sm:h-auto`}
 								>
 									<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
-										{realisation?.attributes?.title}
+										{article?.attributes?.title}
 									</h2>
 									<div
 										className={
@@ -69,10 +69,10 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
 											<Image
 												src={
-													realisation?.attributes?.image_presentation?.data
+													article?.attributes?.image_presentation?.data
 														?.attributes?.url
 												}
-												alt={realisation?.attributes?.title}
+												alt={article?.attributes?.title}
 												className="z-20 h-full w-full object-cover"
 												fill={true}
 												sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
@@ -80,7 +80,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 										</div>
 									</div>
 									<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
-										{realisation?.attributes?.subtitle}
+										{article?.attributes?.subtitle}
 									</h2>
 								</Link>
 							)
@@ -92,4 +92,4 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 	)
 }
 
-export default Realisations
+export default Articles
