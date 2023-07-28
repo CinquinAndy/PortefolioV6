@@ -176,7 +176,11 @@ function Talent({ content_website, realisations }) {
 										)
 									}
 								)}
-								<div className={'col-span-3 flex flex-col gap-4 md:col-span-4'}>
+								<div
+									className={
+										'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'
+									}
+								>
 									<h2
 										className={
 											'text-lg font-black md:text-3xl [&>*]:font-black'
