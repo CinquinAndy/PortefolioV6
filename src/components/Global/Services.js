@@ -6,7 +6,10 @@ import Image from 'next/image'
 function Services({ content_website, services }) {
 	return (
 		<>
-			<section className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px] ">
+			<section
+				className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]"
+				id={'services'}
+			>
 				<div className="flex justify-between">
 					<div className="w-2/3 xl:w-1/2">
 						<h2
