@@ -8,9 +8,9 @@ function Articles({ content_website, articles, slice, isHome }) {
 	const gridTemplateCustom = index => {
 		switch (index % 3) {
 			case 0:
-				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-8 2xl:col-start-1 2xl:col-end-8'
+				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-10 2xl:col-start-1 2xl:col-end-8'
 			case 1:
-				return 'col-start-1 col-end-13 md:col-start-6 md:col-end-13 2xl:col-start-7 2xl:col-end-13'
+				return 'col-start-1 col-end-13 md:col-start-3 md:col-end-13 2xl:col-start-7 2xl:col-end-13'
 			case 2:
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-3 2xl:col-end-11'
 		}

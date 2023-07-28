@@ -6,26 +6,19 @@ import { useRouter } from 'next/router'
 import { Layout } from '@/components/Global/Layout'
 import Cta from '@/components/Global/CTA'
 import {
+	getArticleBySlug,
+	getArticlePaths,
 	getContentWebsite,
-	getRealisationBySlug,
-	getRealisationPaths,
-	processRealisationData,
+	processArticleData,
 } from '@/services/getContentWebsite'
-import Galery from '@/components/Global/Galery'
 import { replaceTitle } from '@/services/utils'
-import {
-	CameraIcon,
-	ChevronRightIcon,
-	LinkIcon,
-} from '@heroicons/react/20/solid'
-import Image from 'next/image'
-import Link from 'next/link'
+import { ChevronRightIcon, LinkIcon } from '@heroicons/react/20/solid'
 
 /**
  * @param props
  * @constructor
  */
-function Talent({ content_website, realisations }) {
+function Blog({ content_website, articles }) {
 	let router = useRouter()
 	const [open, setOpen] = React.useState(false)
 
@@ -35,32 +28,31 @@ function Talent({ content_website, realisations }) {
 	return (
 		<>
 			<Head>
-				<title>{realisations?.attributes?.seo_title}</title>
+				<title>{articles?.attributes?.seo_title}</title>
 				<meta
 					name="description"
-					content={realisations?.attributes?.seo_description}
+					content={articles?.attributes?.seo_description}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={`${process.env.NEXT_PUBLIC_URL}/portefolio/${realisations?.attributes?.slug}`}
+					href={`${process.env.NEXT_PUBLIC_URL}/portefolio/${articles?.attributes?.slug}`}
 				/>
 			</Head>
 
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={realisations?.attributes?.title}
+				h1={articles?.attributes?.title}
 			/>
 			<div>
 				<div className={'relative'}>
 					<div
 						className={
-							'my-24 grid grid-cols-1 gap-[100px] px-4 md:my-48 md:grid-cols-2 2xl:px-0'
+							'my-24 grid grid-cols-1 gap-[100px] px-4 md:my-48 2xl:px-0'
 						}
 					>
 						<div
-							onClick={handleClick}
 							className={
 								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'
 							}
@@ -74,7 +66,7 @@ function Talent({ content_website, realisations }) {
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(
 												content_website?.attributes?.content_realisations
-													?.title_galery
+													?.title_links
 											),
 										}}
 									/>
@@ -82,141 +74,39 @@ function Talent({ content_website, realisations }) {
 										<ChevronRightIcon className={'h-6 w-6 md:h-8 md:w-8'} />
 									</div>
 								</div>
-								<button
-									onClick={() => {
-										handleClick()
-									}}
-									className={
-										'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
-									}
-								>
-									{
-										content_website?.attributes?.content_realisations
-											?.btn_galery?.label
-									}
-									<CameraIcon
-										className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'}
-									/>
-								</button>
+								<div className={'flex flex-col gap-4'}>
+									<button
+										onClick={() => {
+											handleClick()
+										}}
+										className={
+											'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+										}
+									>
+										<LinkIcon
+											className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'}
+										/>
+									</button>
+								</div>
 							</div>
-							<Galery
-								handleClick={handleClick}
-								open={open}
-								galery={realisations?.attributes?.galery?.data}
-								title_galery={
-									content_website?.attributes?.content_realisations
-										?.title_galery
-								}
-							/>
 						</div>
 
-						<div className="mx-auto max-w-3xl md:pl-20">
+						<div className="mx-auto max-w-7xl">
 							<h2
 								className={'text-lg font-black md:text-3xl [&>*]:font-black'}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
-										content_website?.attributes?.content_realisations
-											?.title_content
+										content_website?.attributes?.content_blog?.title_content
 									),
 								}}
 							/>
 							<article>
-								<div className={'prose prose-invert my-8'}>
-									<Layout
-										value={realisations?.attributes?.content.toString()}
-									/>
+								<div
+									className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
+								>
+									<Layout value={articles?.attributes?.content.toString()} />
 								</div>
 							</article>
-						</div>
-
-						<div
-							className={
-								'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'
-							}
-						>
-							<h2
-								className={'text-lg font-black md:text-3xl [&>*]:font-black'}
-								dangerouslySetInnerHTML={{
-									__html: replaceTitle(
-										content_website?.attributes?.content_realisations
-											?.title_technology
-									),
-								}}
-							/>
-							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
-								{/*map on realisations?.attributes?.technologies?.data*/}
-								{realisations?.attributes?.technologies?.data.map(
-									technology => {
-										return (
-											<div
-												key={technology?.id}
-												className="relative flex items-center justify-center"
-											>
-												<Image
-													src="/assets/icons/3d.svg"
-													alt="icon-3d"
-													width={80}
-													height={80}
-												/>
-												<Image
-													src={
-														technology?.attributes?.image?.data?.attributes?.url
-													}
-													className={
-														'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
-													}
-													alt={
-														technology?.attributes?.image?.data?.attributes
-															?.alternativeText
-													}
-													width={24}
-													height={24}
-												/>
-											</div>
-										)
-									}
-								)}
-								<div
-									className={
-										'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'
-									}
-								>
-									<h2
-										className={
-											'text-lg font-black md:text-3xl [&>*]:font-black'
-										}
-										dangerouslySetInnerHTML={{
-											__html: replaceTitle(
-												content_website?.attributes?.content_realisations
-													?.title_links
-											),
-										}}
-									/>
-									<div className={'flex w-full gap-8'}>
-										{realisations?.attributes?.links?.map((link, index) => {
-											return (
-												<div key={index} className={'flex'}>
-													<Link
-														key={link?.id}
-														href={link?.url}
-														rel={'noopener noreferrer'}
-														className={
-															'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
-														}
-													>
-														{link?.label}
-														<LinkIcon
-															className={
-																'absolute -right-2 -top-2 h-4 w-4 rotate-6'
-															}
-														/>
-													</Link>
-												</div>
-											)
-										})}
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -227,10 +117,10 @@ function Talent({ content_website, realisations }) {
 	)
 }
 
-export default Talent
+export default Blog
 
 export async function getStaticPaths() {
-	const paths = await getRealisationPaths()
+	const paths = await getArticlePaths()
 
 	return {
 		paths,
@@ -240,20 +130,20 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const content_website = await getContentWebsite()
-	const realisations = await getRealisationBySlug(params.slug)
+	const articles = await getArticleBySlug(params.slug)
 
-	if (!content_website || !realisations) {
+	if (!content_website || !articles) {
 		return {
 			notFound: true,
 		}
 	}
 
-	const processedRealisations = await processRealisationData(realisations)
+	const processedArticles = await processArticleData(articles)
 
 	return {
 		props: {
 			content_website: content_website.data,
-			realisations: processedRealisations.data,
+			articles: processedArticles.data,
 		},
 		revalidate: 10,
 	}
