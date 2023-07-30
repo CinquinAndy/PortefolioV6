@@ -242,7 +242,11 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				<h1 className="z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl">
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
-				<div className="absolute left-1/2 top-[70%] z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start lg:top-1/2 2xl:top-[60%]">
+				<div
+					className={`${
+						isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'
+					} absolute left-1/2  z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start `}
+				>
 					<Image
 						width={450}
 						height={450}
