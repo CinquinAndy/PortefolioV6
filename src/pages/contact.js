@@ -5,38 +5,35 @@ import Head from 'next/head'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import Link from 'next/link'
 import { toast } from 'react-toastify'
 import { getContentWebsite } from '@/services/getContentWebsite'
-import Cta from '@/components/Global/CTA'
 
 function Contact({ content_website }) {
+	const schema = z
+		.object({
+			name: z.string().nonempty({
+				message: content_website?.attributes?.content_contact?.error_name,
+			}),
+			email: z.string().nonempty({
+				message: content_website?.attributes?.content_contact?.error_email,
+			}),
+			phone: z.string().nonempty({
+				message: content_website?.attributes?.content_contact?.error_phone,
+			}),
+			company: z.string(),
+			content: z.string().nonempty({
+				message: content_website?.attributes?.content_contact?.error_content,
+			}),
+		})
+		.required()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		reset, // pour réinitialiser le formulaire
 	} = useForm({
-		resolver: zodResolver(
-			z
-				.object({
-					name: z.string().nonempty({
-						message: content_website?.attributes?.content_contact?.error_name,
-					}),
-					email: z.string().nonempty({
-						message: content_website?.attributes?.content_contact?.error_email,
-					}),
-					phone: z.string().email({
-						message: content_website?.attributes?.content_contact?.error_phone,
-					}),
-					company: z.string(),
-					content: z.string().nonempty({
-						message:
-							content_website?.attributes?.content_contact?.error_content,
-					}),
-				})
-				.required()
-		),
+		resolver: zodResolver(schema),
 	})
 
 	// Créez une nouvelle fonction pour gérer la soumission du formulaire
@@ -120,7 +117,7 @@ function Contact({ content_website }) {
 									{...register('name', {
 										required: true,
 									})}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 								/>
 								{errors.name && (
 									<p className={'mt-2 text-xs text-red-500/80'}>
@@ -144,7 +141,7 @@ function Contact({ content_website }) {
 									{...register('email', {
 										required: true,
 									})}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 								/>
 							</div>
 							{errors.email && (
@@ -168,7 +165,7 @@ function Contact({ content_website }) {
 									{...register('phone', {
 										required: true,
 									})}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 								/>
 							</div>
 							{errors.phone && (
@@ -192,7 +189,7 @@ function Contact({ content_website }) {
 									{...register('company', {
 										required: true,
 									})}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 								/>
 								{errors.company && (
 									<p className={'mt-2 text-xs text-red-500/80'}>
@@ -216,7 +213,7 @@ function Contact({ content_website }) {
 									{...register('content', {
 										required: true,
 									})}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 									defaultValue={''}
 								/>
 							</div>
@@ -227,7 +224,7 @@ function Contact({ content_website }) {
 							)}
 						</div>
 						<div className={'sm:col-span-2'}>
-							<p className="text-sm leading-6 text-gray-600">
+							<p className="text-sm leading-6 text-slate-300">
 								{
 									content_website?.attributes?.content_contact
 										?.informative_message
@@ -240,12 +237,10 @@ function Contact({ content_website }) {
 							type="submit"
 							className="block w-full rounded-md bg-indigo-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
 						>
-							{content_website?.attributes?.content_contact?.button_send}
+							{content_website?.attributes?.content_contact?.btn_send}
 						</button>
 					</div>
 				</form>
-
-				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
 		</>

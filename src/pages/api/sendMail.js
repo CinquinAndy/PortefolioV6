@@ -16,11 +16,11 @@ export default function handler(req, res) {
 				to: 'contact@andy-cinquin.fr',
 				subject: 'Nouveau message de contact',
 				text: `
-                Nom: ${req.body.last_name} \n
-                Prénom: ${req.body.first_name} \n
+                Nom: ${req.body.name} \n
                 Email: ${req.body.email} \n
-                Numéro de téléphone: ${req.body.phone_number} \n
-                Message: ${req.body.message}
+                Company: ${req.body.company} \n
+                Numéro de téléphone: ${req.body.phone} \n
+                Message: ${req.body.content}
             `,
 			})
 			.then(msg => {
