@@ -10,18 +10,6 @@ import { toast } from 'react-toastify'
 import { getContentWebsite } from '@/services/getContentWebsite'
 import Cta from '@/components/Global/CTA'
 
-const schema = z
-	.object({
-		first_name: z.string().nonempty({ message: 'Le prénom est requis' }),
-		last_name: z.string().nonempty({ message: 'Le nom est requis' }),
-		email: z.string().email({ message: "L'e-mail est invalide" }),
-		phone_number: z
-			.string()
-			.nonempty({ message: 'Le numéro de téléphone est requis' }),
-		message: z.string().nonempty({ message: 'Le message est requis' }),
-	})
-	.required()
-
 function Contact({ content_website }) {
 	const {
 		register,
@@ -29,7 +17,26 @@ function Contact({ content_website }) {
 		formState: { errors },
 		reset, // pour réinitialiser le formulaire
 	} = useForm({
-		resolver: zodResolver(schema),
+		resolver: zodResolver(
+			z
+				.object({
+					name: z.string().nonempty({
+						message: content_website?.attributes?.content_contact?.error_name,
+					}),
+					email: z.string().nonempty({
+						message: content_website?.attributes?.content_contact?.error_email,
+					}),
+					phone: z.string().email({
+						message: content_website?.attributes?.content_contact?.error_phone,
+					}),
+					company: z.string(),
+					content: z.string().nonempty({
+						message:
+							content_website?.attributes?.content_contact?.error_content,
+					}),
+				})
+				.required()
+		),
 	})
 
 	// Créez une nouvelle fonction pour gérer la soumission du formulaire
@@ -38,23 +45,33 @@ function Contact({ content_website }) {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				first_name: data.first_name,
-				last_name: data.last_name,
+				name: data.name,
 				email: data.email,
-				phone_number: data.phone_number,
-				message: data.message,
+				phone: data.phone,
+				company: data.company,
+				content: data.content,
 			}),
 		})
 
 		if (response.ok) {
 			reset()
-			toast('Le message a bien été envoyé !', {
-				toastId: 'toast-alert',
-			})
+			toast(
+				{
+					title: content_website?.attributes?.content_contact?.toast_success,
+				},
+				{
+					toastId: 'toast-alert',
+				}
+			)
 		} else {
-			toast("Une erreur s'est produite !", {
-				toastId: 'toast-alert',
-			})
+			toast(
+				{
+					title: content_website?.attributes?.content_contact?.toast_error,
+				},
+				{
+					toastId: 'toast-alert',
+				}
+			)
 		}
 	}
 
@@ -62,39 +79,27 @@ function Contact({ content_website }) {
 		<>
 			<Head>
 				<title>
-					{content_website?.attributes?.content_realisations?.seo?.title}
+					{content_website?.attributes?.content_contact?.seo?.title}
 				</title>
 				<meta
 					name="description"
 					content={
-						content_website?.attributes?.content_realisations?.seo?.description
+						content_website?.attributes?.content_contact?.seo?.description
 					}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={
-						content_website?.attributes?.content_realisations?.seo?.canonical
-					}
+					href={content_website?.attributes?.content_contact?.seo?.canonical}
 				/>
 			</Head>
 
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={content_website?.attributes?.content_realisations?.seo?.h1}
+				h1={content_website?.attributes?.content_contact?.seo?.h1}
 			/>
 			<div>
-				<div className="mx-auto mt-32 max-w-2xl px-4 text-center md:px-0">
-					<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-						Un message en particulier ?
-					</h2>
-					<p className="mt-2 text-lg leading-8 text-gray-600">
-						{
-							"Une demande particulière, un bug, une idée ? N'hésitez pas à nous contacter via le formulaire ci-dessous !"
-						}
-					</p>
-				</div>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
 					className="mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0"
@@ -102,58 +107,32 @@ function Contact({ content_website }) {
 					<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 						<div>
 							<label
-								htmlFor="first_name"
-								className="block text-sm font-semibold leading-6 text-gray-900"
+								htmlFor="name"
+								className="block text-sm font-semibold leading-6 text-slate-50"
 							>
-								Prénom
+								{content_website?.attributes?.content_contact?.title_name}
 							</label>
 							<div className="mt-2.5">
 								<input
 									type="text"
-									name="first_name"
-									id="first_name"
-									{...register('first_name', {
+									name="name"
+									id="name"
+									{...register('name', {
 										required: true,
 									})}
-									autoComplete="given-name"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
-								{errors.first_name && (
+								{errors.name && (
 									<p className={'mt-2 text-xs text-red-500/80'}>
-										{errors.first_name.message}
+										{errors.name.message}
 									</p>
 								)}
 							</div>
 						</div>
 						<div>
 							<label
-								htmlFor="last_name"
-								className="block text-sm font-semibold leading-6 text-gray-900"
-							>
-								Nom
-							</label>
-							<div className="mt-2.5">
-								<input
-									type="text"
-									name="last_name"
-									id="last_name"
-									{...register('last_name', {
-										required: true,
-									})}
-									autoComplete="family-name"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								/>
-							</div>
-							{errors.last_name && (
-								<p className={'mt-2 text-xs text-red-500/80'}>
-									{errors.last_name.message}
-								</p>
-							)}
-						</div>
-						<div className="sm:col-span-2">
-							<label
 								htmlFor="email"
-								className="block text-sm font-semibold leading-6 text-gray-900"
+								className="block text-sm font-semibold leading-6 text-slate-50"
 							>
 								Email
 							</label>
@@ -165,8 +144,7 @@ function Contact({ content_website }) {
 									{...register('email', {
 										required: true,
 									})}
-									autoComplete="email"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
 							{errors.email && (
@@ -175,65 +153,85 @@ function Contact({ content_website }) {
 								</p>
 							)}
 						</div>
-						<div className="sm:col-span-2">
+						<div>
 							<label
-								htmlFor="phone_number"
-								className="block text-sm font-semibold leading-6 text-gray-900"
+								htmlFor="phone"
+								className="block text-sm font-semibold leading-6 text-slate-50"
 							>
-								Numéro de téléphone
+								{content_website?.attributes?.content_contact?.title_phone}
 							</label>
 							<div className="relative mt-2.5">
 								<input
 									type="tel"
-									name="phone_number"
-									id="phone_number"
-									{...register('phone_number', {
+									name="phone"
+									id="phone"
+									{...register('phone', {
 										required: true,
 									})}
-									autoComplete="tel"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
-							{errors.phone_number && (
+							{errors.phone && (
 								<p className={'mt-2 text-xs text-red-500/80'}>
-									{errors.phone_number.message}
+									{errors.phone.message}
 								</p>
 							)}
 						</div>
+						<div>
+							<label
+								htmlFor="company"
+								className="block text-sm font-semibold leading-6 text-slate-50"
+							>
+								{content_website?.attributes?.content_contact?.title_company}
+							</label>
+							<div className="mt-2.5">
+								<input
+									type="text"
+									name="company"
+									id="company"
+									{...register('company', {
+										required: true,
+									})}
+									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								/>
+								{errors.company && (
+									<p className={'mt-2 text-xs text-red-500/80'}>
+										{errors.company.message}
+									</p>
+								)}
+							</div>
+						</div>
 						<div className="sm:col-span-2">
 							<label
-								htmlFor="message"
-								className="block text-sm font-semibold leading-6 text-gray-900"
+								htmlFor="content"
+								className="block text-sm font-semibold leading-6 text-slate-50"
 							>
-								Message
+								{content_website?.attributes?.content_contact?.title_content}
 							</label>
 							<div className="mt-2.5">
 								<textarea
-									name="message"
-									id="message"
+									name="content"
+									id="content"
 									rows={4}
-									{...register('message', {
+									{...register('content', {
 										required: true,
 									})}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									defaultValue={''}
 								/>
 							</div>
-							{errors.message && (
+							{errors.content && (
 								<p className={'mt-2 text-xs text-red-500/80'}>
-									{errors.message.message}
+									{errors.content.message}
 								</p>
 							)}
 						</div>
 						<div className={'sm:col-span-2'}>
 							<p className="text-sm leading-6 text-gray-600">
-								En envoyant votre message, vous acceptez notre{' '}
-								<Link
-									href="/politique-de-confidentialite"
-									className="font-semibold"
-								>
-									politique&nbsp;de&nbsp;confidentialité.
-								</Link>
+								{
+									content_website?.attributes?.content_contact
+										?.informative_message
+								}
 							</p>
 						</div>
 					</div>
@@ -242,7 +240,7 @@ function Contact({ content_website }) {
 							type="submit"
 							className="block w-full rounded-md bg-indigo-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
 						>
-							{"Envoyer l'email"}
+							{content_website?.attributes?.content_contact?.button_send}
 						</button>
 					</div>
 				</form>
