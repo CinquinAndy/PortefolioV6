@@ -14,6 +14,20 @@ const nextConfig = {
 		isrMemoryCacheSize: 0,
 		largePageDataBytes: 5000000,
 	},
+	i18n: {
+		locales: ['fr', 'en'],
+		defaultLocale: 'fr',
+		domains: [
+			{
+				domain: 'andy-cinquin.fr',
+				defaultLocale: 'fr',
+			},
+			{
+				domain: 'andy-cinquin.com',
+				defaultLocale: 'en',
+			},
+		],
+	},
 }
 
 module.exports = nextConfig
