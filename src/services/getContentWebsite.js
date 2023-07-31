@@ -66,9 +66,9 @@ export function updateNestedProperty(obj, path, newValue) {
  * Get content website
  * @returns {Promise<*>}
  */
-export async function getContentWebsite() {
+export async function getContentWebsite(locale) {
 	const data_content_website = await fetchAPI(
-		'api/content-website?populate=deep'
+		`api/content-website?populate=deep&locale=${locale}`
 	)
 
 	const processedContentFooter = await processMarkdown(
@@ -97,24 +97,28 @@ export async function getContentWebsite() {
  * Get services
  * @returns {Promise<{notFound: boolean}|*>}
  */
-export async function getServices() {
-	return await fetchAPI('api/services?populate=deep')
+export async function getServices(locale) {
+	return await fetchAPI(`api/services?populate=deep&locale=${locale}`)
 }
 
 /**
  * Get realisations
  * @returns {Promise<{notFound: boolean}|*>}
  */
-export async function getRealisations() {
-	return await fetchAPI('api/realisations?populate=deep,2&sort=rank')
+export async function getRealisations(locale) {
+	return await fetchAPI(
+		`api/realisations?populate=deep,2&sort=rank&locale=${locale}`
+	)
 }
 
 /**
  * Get articles
  * @returns {Promise<{notFound: boolean}|*>}
  */
-export async function getArticles() {
-	return await fetchAPI('api/articles?populate=deep,2&sort=rank')
+export async function getArticles(locale) {
+	return await fetchAPI(
+		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
+	)
 }
 
 /**
@@ -122,9 +126,9 @@ export async function getArticles() {
  * @param slug
  * @returns {Promise<{notFound: boolean}|*>}
  */
-export async function getRealisationBySlug(slug) {
+export async function getRealisationBySlug(slug, locale) {
 	return fetchAPI(
-		`api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}`
+		`api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
 	)
 }
 
@@ -133,9 +137,9 @@ export async function getRealisationBySlug(slug) {
  * @param slug
  * @returns {Promise<{notFound: boolean}|*>}
  */
-export async function getArticleBySlug(slug) {
+export async function getArticleBySlug(slug, locale) {
 	return fetchAPI(
-		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}`
+		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
 	)
 }
 
@@ -185,8 +189,8 @@ export async function processArticleData(articleData) {
  * Get realisation paths
  * @returns {Promise<*|*[]>}
  */
-export async function getRealisationPaths() {
-	const data = await getRealisations()
+export async function getRealisationPaths(locale) {
+	const data = await getRealisations(locale)
 
 	return (
 		data?.data?.map(record => ({
@@ -201,8 +205,8 @@ export async function getRealisationPaths() {
  * Get article paths
  * @returns {Promise<*|*[]>}
  */
-export async function getArticlePaths() {
-	const data = await getArticles()
+export async function getArticlePaths(locale) {
+	const data = await getArticles(locale)
 
 	return (
 		data?.data?.map(record => ({
