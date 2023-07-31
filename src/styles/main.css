@@ -11,8 +11,15 @@
     font-weight: 400;
     color: #fff;
 }
+
 .layout-custom *{
     list-style: inside;
+}
+
+.Toastify__toast-body *{
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 400;
+    color: #000;
 }
 
 body {

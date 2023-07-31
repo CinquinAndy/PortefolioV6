@@ -245,7 +245,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				<div
 					className={`${
 						isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'
-					} absolute left-1/2  z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start `}
+					} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
 				>
 					<Image
 						width={450}

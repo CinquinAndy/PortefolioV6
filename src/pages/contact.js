@@ -51,24 +51,16 @@ function Contact({ content_website }) {
 		})
 
 		if (response.ok) {
+			toast(content_website?.attributes?.content_contact?.toast_success, {
+				type: 'success',
+				icon: '✅',
+			})
 			reset()
-			toast(
-				{
-					title: content_website?.attributes?.content_contact?.toast_success,
-				},
-				{
-					toastId: 'toast-alert',
-				}
-			)
 		} else {
-			toast(
-				{
-					title: content_website?.attributes?.content_contact?.toast_error,
-				},
-				{
-					toastId: 'toast-alert',
-				}
-			)
+			toast(content_website?.attributes?.content_contact?.toast_error, {
+				type: 'error',
+				icon: '⛔',
+			})
 		}
 	}
 
@@ -99,7 +91,7 @@ function Contact({ content_website }) {
 			<div>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
-					className="mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0"
+					className="z-50 mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0"
 				>
 					<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 						<div>
