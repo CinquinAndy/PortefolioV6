@@ -130,8 +130,8 @@ function Blog({ content_website, articles }) {
 
 export default Blog
 
-export async function getStaticPaths() {
-	const paths = await getArticlePaths()
+export async function getStaticPaths({ locale }) {
+	const paths = await getArticlePaths(locale)
 
 	return {
 		paths,
@@ -139,9 +139,9 @@ export async function getStaticPaths() {
 	}
 }
 
-export async function getStaticProps({ params }) {
-	const content_website = await getContentWebsite()
-	const articles = await getArticleBySlug(params.slug)
+export async function getStaticProps({ params, locale }) {
+	const content_website = await getContentWebsite(locale)
+	const articles = await getArticleBySlug(params.slug, locale)
 
 	if (!content_website || !articles) {
 		return {

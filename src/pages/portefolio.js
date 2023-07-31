@@ -50,9 +50,9 @@ function Portefolio({ content_website, realisations }) {
 	)
 }
 
-export async function getStaticProps() {
-	const content_website = await getContentWebsite()
-	const realisations = await getRealisations()
+export async function getStaticProps({ locale }) {
+	const content_website = await getContentWebsite(locale)
+	const realisations = await getRealisations(locale)
 
 	if (!content_website || !realisations) {
 		return {

@@ -239,8 +239,8 @@ function Contact({ content_website }) {
 	)
 }
 
-export async function getStaticProps() {
-	const content_website = await getContentWebsite()
+export async function getStaticProps({ locale }) {
+	const content_website = await getContentWebsite(locale)
 
 	if (!content_website) {
 		return {

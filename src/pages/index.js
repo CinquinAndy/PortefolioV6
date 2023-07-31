@@ -44,9 +44,9 @@ export default function Home({ content_website, services, realisations }) {
 }
 
 export async function getStaticProps({ locale }) {
-	const content_website = await getContentWebsite()
-	const services = await getServices()
-	const realisations = await getRealisations()
+	const content_website = await getContentWebsite(locale)
+	const services = await getServices(locale)
+	const realisations = await getRealisations(locale)
 
 	if (!content_website || !services || !realisations) {
 		return {

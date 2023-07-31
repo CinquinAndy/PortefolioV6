@@ -229,8 +229,8 @@ function Talent({ content_website, realisations }) {
 
 export default Talent
 
-export async function getStaticPaths() {
-	const paths = await getRealisationPaths()
+export async function getStaticPaths({ locale }) {
+	const paths = await getRealisationPaths(locale)
 
 	return {
 		paths,
@@ -238,9 +238,9 @@ export async function getStaticPaths() {
 	}
 }
 
-export async function getStaticProps({ params }) {
-	const content_website = await getContentWebsite()
-	const realisations = await getRealisationBySlug(params.slug)
+export async function getStaticProps({ params, locale }) {
+	const content_website = await getContentWebsite(locale)
+	const realisations = await getRealisationBySlug(params.slug, locale)
 
 	if (!content_website || !realisations) {
 		return {

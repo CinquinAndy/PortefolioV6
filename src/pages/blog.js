@@ -41,9 +41,9 @@ function Blog({ content_website, articles }) {
 	)
 }
 
-export async function getStaticProps() {
-	const content_website = await getContentWebsite()
-	const articles = await getArticles()
+export async function getStaticProps({ locale }) {
+	const content_website = await getContentWebsite(locale)
+	const articles = await getArticles(locale)
 
 	if (!content_website || !articles) {
 		return {
