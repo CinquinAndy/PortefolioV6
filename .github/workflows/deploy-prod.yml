@@ -1,0 +1,58 @@
+name: Build and Deploy on prod
+
+env:
+  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+  NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+  NEXT_PUBLIC_URL_ALT: ${{ secrets.NEXT_PUBLIC_URL }}
+  NEXT_PUBLIC_API_TOKEN: ${{ secrets.NEXT_PUBLIC_API_TOKEN }}
+  MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+  MAILGUN_API_URL: ${{ secrets.MAILGUN_API_URL }}
+  MAILGUN_PUBLIC_KEY: ${{ secrets.MAILGUN_PUBLIC_KEY }}
+  MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          node-version: 20.x
+      - name: Install dependencies in production
+        run: npm ci --ignore-scripts
+      - name: Cache next.js build
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: .next/
+          key: ${{ runner.os }}-next-build-${{ hashFiles('src/','public/','next*','package*','jsconfig.json') }}
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Build the app
+        continue-on-error: true
+        run: npm run build
+      - name: List files
+        run: ls -la
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.APP_IMAGE }}
+          build-args:
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_URL }}
+            NEXT_PUBLIC_URL_ALT=${{ secrets.NEXT_PUBLIC_URL_ALT }}
+      - name: Deploy on cap rover
+        run: docker run caprover/cli-caprover:latest caprover deploy --caproverUrl "${{ secrets.APP_URL }}" --appToken "${{ secrets.APP_TOKEN }}" --caproverApp "${{ secrets.APP_NAME }}" --imageName "${{ secrets.APP_IMAGE }}"

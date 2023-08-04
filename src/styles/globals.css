@@ -1,0 +1,52 @@
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+
+/*!*:root {*!*/
+/*!*	--swiper-theme-color: #312e81 !important;*!*/
+/*!*}*!*/
+
+/** {*/
+/*	box-sizing: border-box;*/
+/*	padding: 0;*/
+/*	margin: 0;*/
+/*	border-color: #fff;*/
+/*}*/
+
+/*html {*/
+/*	padding-right: 0 !important;*/
+/*	overflow-y: visible !important;*/
+/*}*/
+/*html,*/
+/*body {*/
+/*	max-width: 100vw;*/
+/*	overflow-x: hidden;*/
+/*}*/
+
+/*a {*/
+/*	color: inherit;*/
+/*	text-decoration: none;*/
+/*}*/
+
+/*@media screen and (min-width: 768px) {*/
+/*	::-webkit-scrollbar {*/
+/*		-webkit-appearance: none;*/
+/*		width: 7px;*/
+/*	}*/
+/*}*/
+
+/*@media screen and (min-width: 768px) {*/
+/*	::-webkit-scrollbar-thumb {*/
+/*		border-radius: 2rem;*/
+/*		background-color: #19191e4d;*/
+/*		-webkit-box-shadow: 0 0 1px hsl(0deg 0% 100% / 50%);*/
+/*	}*/
+/*}*/
+
+/*!* Custom Tailwindcss components *!*/
+/*@layer components {*/
+/*	!*	Custom Button *!*/
+/*	!*.btn-primary {*!*/
+/*	!*	@apply rounded-lg border-2 border-indigo-900 bg-indigo-900 px-4 py-2 text-sm font-bold leading-6 text-white;*!*/
+/*	!*}*!*/
+/*}*/
