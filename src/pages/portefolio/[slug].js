@@ -4,7 +4,7 @@ import Footer from '@/components/Global/Footer'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Layout } from '@/components/Global/Layout'
-import Cta from '@/components/Global/CTA'
+import Cta from '@/components/Global/Cta'
 import {
 	getContentWebsite,
 	getRealisationBySlug,

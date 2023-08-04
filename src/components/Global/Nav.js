@@ -14,9 +14,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 
 	const switchLangage = () => {
 		router.push({ pathname, query }, asPath, {
-			locale: locale === 'FR' ? 'EN' : 'FR',
+			locale: locale === 'fr' ? 'en' : 'fr',
 		})
 	}
+
 	return (
 		<>
 			<header
@@ -222,21 +223,23 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						</div>
 					</div>
 					<div></div>
-					<div className="flex flex-col text-xs text-slate-300">
+					<div className="flex flex-col gap-2 text-xs text-slate-300">
 						<p className="font-body normal-case">
 							{content_website?.contact?.address}
 						</p>
 						<Link
-							className="mt-2 font-body normal-case"
+							className="font-body normal-case"
 							href={`tel:${(content_website?.contact?.phone ?? '')
 								.toString()
 								.replace(/\s+/g, '')}`}
 						>
 							{content_website?.contact?.phone}
 						</Link>
-						<Link className="font-body normal-case" href={switchLangage}>
-							{content_website?.contact?.langage}
-						</Link>
+						<div>
+							<button className="font-body normal-case" onClick={switchLangage}>
+								{content_website?.contact?.langage}
+							</button>
+						</div>
 					</div>
 					<div className="block md:hidden"></div>
 				</div>

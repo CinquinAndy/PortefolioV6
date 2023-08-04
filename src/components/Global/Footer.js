@@ -27,7 +27,7 @@ function Footer({ content_website }) {
 						}
 						alt={
 							content_website?.attributes?.content_footer?.image?.data
-								?.attributes?.alternativeText
+								?.attributes?.alternativeText || 'logo'
 						}
 						className="h-6 w-6"
 						height={24}

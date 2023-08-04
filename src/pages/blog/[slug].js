@@ -4,7 +4,7 @@ import Footer from '@/components/Global/Footer'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Layout } from '@/components/Global/Layout'
-import Cta from '@/components/Global/CTA'
+import Cta from '@/components/Global/Cta'
 import {
 	getArticleBySlug,
 	getArticlePaths,
@@ -12,7 +12,7 @@ import {
 	processArticleData,
 } from '@/services/getContentWebsite'
 import { replaceTitle } from '@/services/utils'
-import { ChevronRightIcon, LinkIcon } from '@heroicons/react/20/solid'
+import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 
 /**
