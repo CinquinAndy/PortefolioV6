@@ -6,12 +6,19 @@ import Services from '@/components/Global/Services'
 import Cta from '@/components/Global/Cta'
 import Realisations from '@/components/Global/Realisations'
 import {
+	getArticles,
 	getContentWebsite,
 	getRealisations,
 	getServices,
 } from '@/services/getContentWebsite'
+import Articles from '@/components/Global/Articles'
 
-export default function Home({ content_website, services, realisations }) {
+export default function Home({
+	content_website,
+	services,
+	realisations,
+	articles,
+}) {
 	return (
 		<>
 			<Head>
@@ -36,6 +43,12 @@ export default function Home({ content_website, services, realisations }) {
 					slice={3}
 					isHome={true}
 				/>
+				<Articles
+					content_website={content_website}
+					articles={articles}
+					slice={3}
+					isHome={true}
+				></Articles>
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
@@ -47,8 +60,9 @@ export async function getStaticProps({ locale }) {
 	const content_website = await getContentWebsite(locale)
 	const services = await getServices(locale)
 	const realisations = await getRealisations(locale)
+	const articles = await getArticles(locale)
 
-	if (!content_website || !services || !realisations) {
+	if (!content_website || !services || !realisations || !articles) {
 		return {
 			notFound: true,
 		}
@@ -59,6 +73,7 @@ export async function getStaticProps({ locale }) {
 			content_website: content_website.data,
 			services: services.data,
 			realisations: realisations.data,
+			articles: articles.data,
 		},
 		revalidate: 10,
 	}

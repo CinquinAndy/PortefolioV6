@@ -1,13 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
+	const router = useRouter()
+	const { pathname, asPath, query, locale } = router
 
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
+
+	const switchLangage = () => {
+		router.push({ pathname, query }, asPath, {
+			locale: locale === 'FR' ? 'EN' : 'FR',
+		})
+	}
 	return (
 		<>
 			<header
@@ -224,6 +233,9 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 								.replace(/\s+/g, '')}`}
 						>
 							{content_website?.contact?.phone}
+						</Link>
+						<Link className="font-body normal-case" href={switchLangage}>
+							{content_website?.contact?.langage}
 						</Link>
 					</div>
 					<div className="block md:hidden"></div>
