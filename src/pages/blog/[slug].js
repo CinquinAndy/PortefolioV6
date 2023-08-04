@@ -21,6 +21,8 @@ import Link from 'next/link'
  */
 function Blog({ content_website, articles }) {
 	let router = useRouter()
+	const { locale } = router
+
 	const [open, setOpen] = React.useState(false)
 
 	const handleClick = () => {
@@ -37,7 +39,11 @@ function Blog({ content_website, articles }) {
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={`${process.env.NEXT_PUBLIC_URL}/portefolio/${articles?.attributes?.slug}`}
+					href={`${
+						locale === 'fr'
+							? process.env.NEXT_PUBLIC_URL_ALT
+							: process.env.NEXT_PUBLIC_URL
+					}/portefolio/${articles?.attributes?.slug}`}
 				/>
 			</Head>
 
@@ -135,7 +141,7 @@ export async function getStaticPaths({ locale }) {
 
 	return {
 		paths,
-		fallback: false,
+		fallback: 'blocking',
 	}
 }
 

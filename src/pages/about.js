@@ -3,29 +3,33 @@ import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
 import React from 'react'
 import Cta from '@/components/Global/Cta'
-import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
+import {
+	getAbout,
+	getCgu,
+	getContentWebsite,
+} from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
 
-export default function Cgu({ content_website, cgu }) {
+export default function Cgu({ content_website, about }) {
 	return (
 		<>
 			<Head>
-				<title>{content_website?.attributes?.content_cgu?.seo?.title}</title>
+				<title>{content_website?.attributes?.content_about?.seo?.title}</title>
 				<meta
 					name="description"
-					content={content_website?.attributes?.content_cgu?.seo?.description}
+					content={content_website?.attributes?.content_about?.seo?.description}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={content_website?.attributes?.content_cgu?.seo?.canonical}
+					href={content_website?.attributes?.content_about?.seo?.canonical}
 				/>
 			</Head>
 
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={content_website?.attributes?.content_cgu?.seo?.h1}
+				h1={content_website?.attributes?.content_about?.seo?.h1}
 			/>
 			<div>
 				<div className={'relative'}>
@@ -33,7 +37,7 @@ export default function Cgu({ content_website, cgu }) {
 						<div className="max-7-3xl mx-auto md:pl-20">
 							<article>
 								<div className={'prose prose-invert my-8'}>
-									<Layout value={cgu?.attributes?.content.toString()} />
+									<Layout value={about?.attributes?.content.toString()} />
 								</div>
 							</article>
 						</div>
@@ -50,9 +54,9 @@ export default function Cgu({ content_website, cgu }) {
 
 export async function getStaticProps({ locale }) {
 	const content_website = await getContentWebsite(locale)
-	const cgu = await getCgu(locale)
+	const about = await getAbout(locale)
 
-	if (!content_website || !cgu) {
+	if (!content_website || !about) {
 		return {
 			notFound: true,
 		}
@@ -61,7 +65,7 @@ export async function getStaticProps({ locale }) {
 	return {
 		props: {
 			content_website: content_website.data,
-			cgu: cgu.data,
+			about: about.data,
 		},
 		revalidate: 10,
 	}

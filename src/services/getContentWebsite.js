@@ -89,6 +89,38 @@ export async function getContentWebsite(locale) {
 	)
 }
 
+/**
+ * Get cgu page
+ * @param locale
+ * @returns {Promise<*>}
+ */
+export async function getCgu(locale) {
+	const data_cgu = await fetchAPI(`api/cgu?populate=deep&locale=${locale}`)
+
+	const processedCgu = await processMarkdown(data_cgu.data.attributes.content)
+
+	return updateNestedProperty(data_cgu, 'data.attributes.content', processedCgu)
+}
+
+/**
+ * Get about page
+ * @param locale
+ * @returns {Promise<*>}
+ */
+export async function getAbout(locale) {
+	const data_about = await fetchAPI(`api/about?populate=deep&locale=${locale}`)
+
+	const processedAbout = await processMarkdown(
+		data_about.data.attributes.content
+	)
+
+	return updateNestedProperty(
+		data_about,
+		'data.attributes.content',
+		processedAbout
+	)
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
