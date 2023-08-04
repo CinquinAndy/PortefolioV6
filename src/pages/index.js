@@ -25,7 +25,7 @@ export default function Home({
 				<title>{content_website?.attributes?.content_home?.seo?.title}</title>
 				<meta
 					name="description"
-					content={content_website?.attributes?.content_home?.seo.description}
+					content={content_website?.attributes?.content_home?.seo?.description}
 				/>
 				{/*	seo tag canonical link */}
 				<link
