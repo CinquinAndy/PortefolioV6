@@ -3,7 +3,7 @@ import Script from 'next/script'
 
 export default function Document() {
 	return (
-		<Html lang="fr">
+		<Html>
 			<Head>
 				<link rel="icon" href="/favicon.webp" />
 				<Script

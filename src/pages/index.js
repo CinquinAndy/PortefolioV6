@@ -22,15 +22,15 @@ export default function Home({
 	return (
 		<>
 			<Head>
-				<title>{content_website?.attributes?.content_home?.seo_title}</title>
+				<title>{content_website?.attributes?.content_home?.seo?.title}</title>
 				<meta
 					name="description"
-					content={content_website?.attributes?.content_home?.seo_description}
+					content={content_website?.attributes?.content_home?.seo.description}
 				/>
 				{/*	seo tag canonical link */}
 				<link
 					rel="canonical"
-					href={content_website?.attributes?.content_home?.seo_canonical}
+					href={content_website?.attributes?.content_home?.seo?.canonical}
 				/>
 			</Head>
 
