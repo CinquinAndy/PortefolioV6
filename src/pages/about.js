@@ -9,8 +9,11 @@ import {
 	getContentWebsite,
 } from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
+import { useRouter } from 'next/router'
 
 export default function Cgu({ content_website, about }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
@@ -23,6 +26,11 @@ export default function Cgu({ content_website, about }) {
 				<link
 					rel="canonical"
 					href={content_website?.attributes?.content_about?.seo?.canonical}
+				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_about?.seo?.canonical}
+					hrefLang={locale}
 				/>
 			</Head>
 

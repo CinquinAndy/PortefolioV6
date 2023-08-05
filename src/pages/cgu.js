@@ -5,8 +5,11 @@ import React from 'react'
 import Cta from '@/components/Global/Cta'
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
+import { useRouter } from 'next/router'
 
 export default function Cgu({ content_website, cgu }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
