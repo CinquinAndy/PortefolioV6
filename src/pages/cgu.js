@@ -23,6 +23,11 @@ export default function Cgu({ content_website, cgu }) {
 					rel="canonical"
 					href={content_website?.attributes?.content_cgu?.seo?.canonical}
 				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_cgu?.seo?.canonical}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav

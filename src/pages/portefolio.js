@@ -32,6 +32,13 @@ function Portefolio({ content_website, realisations }) {
 						content_website?.attributes?.content_realisations?.seo?.canonical
 					}
 				/>
+				<link
+					rel="alternate"
+					href={
+						content_website?.attributes?.content_realisations?.seo?.canonical
+					}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav

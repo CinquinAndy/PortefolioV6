@@ -23,6 +23,11 @@ function Blog({ content_website, articles }) {
 					rel="canonical"
 					href={content_website?.attributes?.content_blog?.seo?.canonical}
 				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_blog?.seo?.canonical}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav

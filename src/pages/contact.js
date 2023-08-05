@@ -85,6 +85,11 @@ function Contact({ content_website }) {
 					rel="canonical"
 					href={content_website?.attributes?.content_contact?.seo?.canonical}
 				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_contact?.seo?.canonical}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav

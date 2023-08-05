@@ -22,6 +22,11 @@ function Custom404({ content_website }) {
 					rel="canonical"
 					href={content_website?.attributes?.content_notfound?.seo?.canonical}
 				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_notfound?.seo?.canonical}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<div className="">

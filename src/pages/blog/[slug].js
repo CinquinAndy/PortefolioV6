@@ -45,6 +45,15 @@ function Blog({ content_website, articles }) {
 							: process.env.NEXT_PUBLIC_URL
 					}/portefolio/${articles?.attributes?.slug}`}
 				/>
+				<link
+					rel="alternate"
+					href={`${
+						locale === 'fr'
+							? process.env.NEXT_PUBLIC_URL_ALT
+							: process.env.NEXT_PUBLIC_URL
+					}/portefolio/${articles?.attributes?.slug}`}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav

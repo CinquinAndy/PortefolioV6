@@ -35,6 +35,11 @@ export default function Home({
 					rel="canonical"
 					href={content_website?.attributes?.content_home?.seo?.canonical}
 				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_home?.seo?.canonical}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav content_website={content_website} />
