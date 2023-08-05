@@ -17,6 +17,18 @@ const nextConfig = {
 	i18n: {
 		locales: ['fr', 'en'],
 		defaultLocale: 'fr',
+		domains: [
+			{
+				domain: 'andy-cinquin.fr',
+				defaultLocale: 'fr',
+				locales: ['fr', 'en'],
+			},
+			{
+				domain: 'andy-cinquin.com',
+				defaultLocale: 'en',
+				locales: ['en', 'fr'],
+			},
+		],
 	},
 }
 
