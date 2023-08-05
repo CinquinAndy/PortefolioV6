@@ -3,8 +3,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getContentWebsite } from '@/services/getContentWebsite'
+import { useRouter } from 'next/router'
 
 function Custom404({ content_website }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
@@ -29,9 +32,9 @@ function Custom404({ content_website }) {
 				/>
 			</Head>
 
-			<div className="">
-				<div className="flex flex-1 flex-col justify-center bg-white px-4 sm:px-6 md:py-12 md:pt-12 lg:flex-none lg:px-20 xl:px-24">
-					<div className="mx-auto w-full max-w-sm lg:w-96">
+			<div className="h-screen">
+				<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
+					<div className="">
 						<Link href={'/'}>
 							<Image
 								alt="Logo Andy Cinquin"
@@ -41,34 +44,22 @@ function Custom404({ content_website }) {
 							/>
 						</Link>
 						<div className={'mt-8'}>
-							<h1 className={'my-8 text-2xl font-semibold text-slate-900'}>
-								{content_website?.attributes?.content_notfound?.seo?.h1}
+							<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
+								{content_website?.attributes?.content_notfound?.seo?.h1 ??
+									'404 Not Found'}
 							</h1>
 							{/*todo here*/}
-							<p className={'text-slate-700'}>
+							<p className={'text-slate-300'}>
 								{/*todo here*/}
 								{`Oops ! La page que vous cherchez n'existe pas.`}
 							</p>
 
-							<Link href={'/'} className="btn-primary-large mt-8">
+							<Link href={'/'} className="mt-8 text-slate-50">
 								{/*todo here*/}
 								{`Retourner à l'accueil`}
 							</Link>
 						</div>
 					</div>
-				</div>
-				<div className="relative hidden w-full flex-1 lg:block lg:object-contain">
-					<div
-						className={
-							'absolute left-0 top-0 z-20 h-full w-full bg-gradient-to-r from-white via-transparent to-transparent'
-						}
-					></div>
-					<Image
-						alt={'background Andy Cinquin 404'}
-						fill
-						src="/assets/images/cat404.svg"
-						className={'z-10 transform object-cover'}
-					/>
 				</div>
 			</div>
 		</>
