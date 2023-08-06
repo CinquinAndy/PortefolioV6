@@ -4,6 +4,3 @@ Allow: /
 
 # Host
 Host: https://andy.cinquin.fr/
-
-# Sitemap
-Sitemap: https://andy.cinquin.fr/sitemap.xml
