@@ -7,9 +7,12 @@ WORKDIR /usr/app
 COPY ./.next ./.next
 COPY ./public ./public
 COPY ./package*.json .
+COPY ./src ./src
 COPY ./next* .
 
 RUN npm ci --omit=dev --ignore-scripts
+
+ENV NEXT_SHARP_PATH=./node_modules/sharp
 
 # Exposition du port 3000
 EXPOSE 3000
