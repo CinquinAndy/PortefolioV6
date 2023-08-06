@@ -182,7 +182,7 @@ function Talent({ content_website, realisations }) {
 													}
 													alt={
 														technology?.attributes?.image?.data?.attributes
-															?.alternativeText
+															?.alternativeText || 'Technology used'
 													}
 													width={24}
 													height={24}

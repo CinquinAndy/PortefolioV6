@@ -54,5 +54,7 @@ export function Layout({ className, value }) {
 		return child
 	})
 
-	return <div className={`${className} layout-custom`}>{replacedContent}</div>
+	return (
+		<div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
+	)
 }
