@@ -1,12 +1,10 @@
-import React from 'react'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
-function Galery({ open, handleClick, galery, title_galery, links }) {
-	const [i, setI] = React.useState(0)
+function Galery({ open, handleClick, galery, title_galery }) {
 	const [expandedItem, setExpandedItem] = React.useState(null)
 
 	return (
@@ -31,9 +29,9 @@ function Galery({ open, handleClick, galery, title_galery, links }) {
 										<div className="px-4 sm:px-6">
 											<div className="flex items-start justify-between">
 												<Dialog.Title>
-													<h2
+													<div
 														className={
-															'text-lg font-black md:text-3xl [&>*]:font-black'
+															'font-display text-lg font-black md:text-3xl [&>*]:font-black'
 														}
 														dangerouslySetInnerHTML={{
 															__html: replaceTitle(title_galery),
@@ -52,7 +50,11 @@ function Galery({ open, handleClick, galery, title_galery, links }) {
 												</div>
 											</div>
 										</div>
-										<div className="mx-6 mt-6 grid h-full grid-cols-12 gap-4 px-4 sm:px-6 md:gap-12 xl:grid-flow-row-dense xl:grid-rows-3">
+										<div
+											className={`mx-6 mt-6 grid h-full grid-cols-12 gap-4 px-4 sm:px-6 md:gap-12 xl:grid-flow-row-dense ${
+												galery.length < 9 ? 'xl:grid-rows-3' : ''
+											}`}
+										>
 											{/*	map on galery */}
 											{galery.map((item, index) => {
 												const isExpanded = index === expandedItem
@@ -70,7 +72,10 @@ function Galery({ open, handleClick, galery, title_galery, links }) {
 													>
 														<Image
 															src={item?.attributes?.url}
-															alt={item?.attributes?.alternativeText}
+															alt={
+																item?.attributes?.alternativeText ??
+																'Project Image'
+															}
 															width={item?.attributes?.width}
 															height={item?.attributes?.height}
 															className={`${

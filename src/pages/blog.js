@@ -5,8 +5,11 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import Articles from '@/components/Global/Articles'
+import { useRouter } from 'next/router'
 
 function Blog({ content_website, articles }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
@@ -19,6 +22,11 @@ function Blog({ content_website, articles }) {
 				<link
 					rel="canonical"
 					href={content_website?.attributes?.content_blog?.seo?.canonical}
+				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_blog?.seo?.canonical}
+					hrefLang={locale}
 				/>
 			</Head>
 

@@ -228,7 +228,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 							{content_website?.contact?.address}
 						</p>
 						<Link
-							className="font-body normal-case"
+							className="font-body normal-case underline"
 							href={`tel:${(content_website?.contact?.phone ?? '')
 								.toString()
 								.replace(/\s+/g, '')}`}
@@ -236,7 +236,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 							{content_website?.contact?.phone}
 						</Link>
 						<div>
-							<button className="font-body normal-case" onClick={switchLangage}>
+							<button
+								className="font-body normal-case underline"
+								onClick={switchLangage}
+							>
 								{content_website?.contact?.langage}
 							</button>
 						</div>

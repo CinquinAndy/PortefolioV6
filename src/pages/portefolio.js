@@ -8,8 +8,11 @@ import {
 	getContentWebsite,
 	getRealisations,
 } from '@/services/getContentWebsite'
+import { useRouter } from 'next/router'
 
 function Portefolio({ content_website, realisations }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
@@ -28,6 +31,13 @@ function Portefolio({ content_website, realisations }) {
 					href={
 						content_website?.attributes?.content_realisations?.seo?.canonical
 					}
+				/>
+				<link
+					rel="alternate"
+					href={
+						content_website?.attributes?.content_realisations?.seo?.canonical
+					}
+					hrefLang={locale}
 				/>
 			</Head>
 

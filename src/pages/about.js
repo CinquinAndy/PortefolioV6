@@ -9,8 +9,11 @@ import {
 	getContentWebsite,
 } from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
+import { useRouter } from 'next/router'
 
 export default function Cgu({ content_website, about }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
@@ -24,6 +27,11 @@ export default function Cgu({ content_website, about }) {
 					rel="canonical"
 					href={content_website?.attributes?.content_about?.seo?.canonical}
 				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_about?.seo?.canonical}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav
@@ -34,7 +42,7 @@ export default function Cgu({ content_website, about }) {
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 px-6 md:my-48 2xl:px-0'}>
-						<div className="max-7-3xl mx-auto md:pl-20">
+						<div className="mx-auto max-w-3xl">
 							<article>
 								<div className={'prose prose-invert my-8'}>
 									<Layout value={about?.attributes?.content.toString()} />

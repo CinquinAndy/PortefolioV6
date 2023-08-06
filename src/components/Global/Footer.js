@@ -18,8 +18,8 @@ function Footer({ content_website }) {
 
 	return (
 		<>
-			<footer className="mt-[100px] grid grid-cols-8 gap-5 p-4 md:p-20 xl:mt-[150px]">
-				<div className="col-span-3 col-start-1 flex flex-col gap-5 text-xs xl:col-span-4 xl:col-start-2">
+			<footer className="mt-[100px] grid grid-cols-8 gap-12 px-6 pt-6 md:gap-4 md:px-20 md:pt-20 xl:mt-[150px]">
+				<div className="col-span-8 col-start-1 flex flex-col gap-4 text-xs md:col-span-4 xl:col-span-4 xl:col-start-2">
 					<Image
 						src={
 							content_website?.attributes?.content_footer?.image?.data
@@ -41,7 +41,7 @@ function Footer({ content_website }) {
 					</div>
 				</div>
 
-				<div className="col-span-2 col-start-5 flex flex-col gap-10 xl:col-span-1">
+				<div className="col-span-4 flex flex-col gap-4 md:col-span-2 md:col-start-5 lg:gap-10 xl:col-span-1">
 					<h2 className="text-sm font-bold xl:text-xl xl:font-normal">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
@@ -49,7 +49,7 @@ function Footer({ content_website }) {
 						return (
 							<Link
 								key={index}
-								className="text-xs xl:text-sm"
+								className="text-xs underline xl:text-sm"
 								href={item?.Link?.url}
 							>
 								{item?.Link?.label}
@@ -57,7 +57,7 @@ function Footer({ content_website }) {
 						)
 					})}
 				</div>
-				<div className="col-span-2 col-start-7 flex flex-col gap-10 xl:col-span-1">
+				<div className="col-span-4 flex flex-col gap-4 md:col-span-2 md:col-start-7 lg:gap-10 xl:col-span-1">
 					<h2 className="text-sm font-bold xl:font-display xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
@@ -65,7 +65,7 @@ function Footer({ content_website }) {
 						return (
 							<Link
 								key={index}
-								className="text-xs xl:text-sm"
+								className="text-xs underline xl:text-sm"
 								href={item?.Link?.url}
 							>
 								{item?.Link?.label}
@@ -73,13 +73,9 @@ function Footer({ content_website }) {
 						)
 					})}
 				</div>
-				<div className="col-span-8 col-start-1 flex justify-between text-xs xl:col-span-6 xl:col-start-2 xl:mt-10">
-					<div className="mr-10 text-xs xl:m-0">
-						{/*©<?= date("Y") ?> - Andy CINQUIN - Tous droits réservés - Siret : 880 505 276 00019 - NAF :*/}
-						{/*6201Z*/}
-					</div>
-					<div className="flex gap-4">
-						<div className="flex items-center justify-evenly gap-4 xl:gap-10">
+				<div className="col-span-8 col-start-1 mt-10 flex justify-between text-xs xl:col-span-6 xl:col-start-2">
+					<div className="flex w-full justify-center gap-4">
+						<div className="flex items-center justify-evenly gap-8 xl:gap-10">
 							<Link
 								className="text-indigo-50 hover:text-slate-50"
 								href={socials?.facebook}
@@ -87,7 +83,7 @@ function Footer({ content_website }) {
 								target="_blank"
 							>
 								<svg
-									className="h-4 w-4 xl:h-8 xl:w-8"
+									className="h-6 w-6"
 									viewBox="0 0 24 24"
 									fill="currentColor"
 								>
@@ -101,7 +97,7 @@ function Footer({ content_website }) {
 								target="_blank"
 							>
 								<svg
-									className="h-4 w-4 xl:h-8 xl:w-8"
+									className="h-6 w-6"
 									viewBox="0 0 24 24"
 									fill="currentColor"
 								>
@@ -117,7 +113,7 @@ function Footer({ content_website }) {
 								target="_blank"
 							>
 								<svg
-									className="h-4 w-4 xl:h-8 xl:w-8"
+									className="h-6 w-6"
 									viewBox="0 0 24 24"
 									fill="currentColor"
 								>
@@ -133,7 +129,7 @@ function Footer({ content_website }) {
 								target="_blank"
 							>
 								<svg
-									className="h-4 w-4 xl:h-8 xl:w-8"
+									className="h-6 w-6"
 									viewBox="0 0 24 24"
 									fill="currentColor"
 								>
@@ -149,7 +145,7 @@ function Footer({ content_website }) {
 								target="_blank"
 							>
 								<svg
-									className="h-4 w-4 xl:h-8 xl:w-8"
+									className="h-6 w-6"
 									viewBox="0 0 1000 1000"
 									fill="currentColor"
 								>
@@ -181,7 +177,7 @@ function Footer({ content_website }) {
 					</div>
 				</div>
 			</footer>
-			<Signature />
+			<Signature content_website={content_website} />
 		</>
 	)
 }

@@ -7,8 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { getContentWebsite } from '@/services/getContentWebsite'
+import { useRouter } from 'next/router'
 
 function Contact({ content_website }) {
+	const router = useRouter()
+	const { locale } = router
+
 	const schema = z
 		.object({
 			name: z.string().nonempty({
@@ -80,6 +84,11 @@ function Contact({ content_website }) {
 				<link
 					rel="canonical"
 					href={content_website?.attributes?.content_contact?.seo?.canonical}
+				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_contact?.seo?.canonical}
+					hrefLang={locale}
 				/>
 			</Head>
 

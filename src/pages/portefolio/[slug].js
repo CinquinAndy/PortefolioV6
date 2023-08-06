@@ -51,6 +51,15 @@ function Talent({ content_website, realisations }) {
 							: process.env.NEXT_PUBLIC_URL
 					}/portefolio/${realisations?.attributes?.slug}`}
 				/>
+				<link
+					rel="alternate"
+					href={`${
+						locale === 'fr'
+							? process.env.NEXT_PUBLIC_URL_ALT
+							: process.env.NEXT_PUBLIC_URL
+					}/portefolio/${realisations?.attributes?.slug}`}
+					hrefLang={locale}
+				/>
 			</Head>
 
 			<Nav
@@ -173,7 +182,7 @@ function Talent({ content_website, realisations }) {
 													}
 													alt={
 														technology?.attributes?.image?.data?.attributes
-															?.alternativeText
+															?.alternativeText || 'Technology used'
 													}
 													width={24}
 													height={24}

@@ -15,8 +15,21 @@ const nextConfig = {
 		largePageDataBytes: 5000000,
 	},
 	i18n: {
+		localeDetection: false,
 		locales: ['fr', 'en'],
 		defaultLocale: 'fr',
+		domains: [
+			{
+				domain: 'andy-cinquin.fr',
+				defaultLocale: 'fr',
+				locales: ['fr'],
+			},
+			{
+				domain: 'andy-cinquin.com',
+				defaultLocale: 'en',
+				locales: ['en'],
+			},
+		],
 	},
 }
 

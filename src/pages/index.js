@@ -12,6 +12,7 @@ import {
 	getServices,
 } from '@/services/getContentWebsite'
 import Articles from '@/components/Global/Articles'
+import { useRouter } from 'next/router'
 
 export default function Home({
 	content_website,
@@ -19,6 +20,8 @@ export default function Home({
 	realisations,
 	articles,
 }) {
+	const router = useRouter()
+	const { locale } = router
 	return (
 		<>
 			<Head>
@@ -31,6 +34,11 @@ export default function Home({
 				<link
 					rel="canonical"
 					href={content_website?.attributes?.content_home?.seo?.canonical}
+				/>
+				<link
+					rel="alternate"
+					href={content_website?.attributes?.content_home?.seo?.canonical}
+					hrefLang={locale}
 				/>
 			</Head>
 

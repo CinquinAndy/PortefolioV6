@@ -78,14 +78,22 @@ export async function getContentWebsite(locale) {
 		data_content_website.data.attributes.cta.content
 	)
 
+	const processedContentSignature = await processMarkdown(
+		data_content_website.data.attributes.content_footer.content_signature
+	)
+
 	return updateNestedProperty(
 		updateNestedProperty(
-			data_content_website,
-			'data.attributes.content_footer.content',
-			processedContentFooter
+			updateNestedProperty(
+				data_content_website,
+				'data.attributes.content_footer.content',
+				processedContentFooter
+			),
+			'data.attributes.cta.content',
+			processedContentCta
 		),
-		'data.attributes.cta.content',
-		processedContentCta
+		'data.attributes.content_footer.content_signature',
+		processedContentSignature
 	)
 }
 
@@ -118,6 +126,22 @@ export async function getAbout(locale) {
 		data_about,
 		'data.attributes.content',
 		processedAbout
+	)
+}
+
+export async function getNotFound(locale) {
+	const data_not_found = await fetchAPI(
+		`api/not-found?populate=deep&locale=${locale}`
+	)
+
+	const processedNotFound = await processMarkdown(
+		data_not_found.data.attributes.content
+	)
+
+	return updateNestedProperty(
+		data_not_found,
+		'data.attributes.content',
+		processedNotFound
 	)
 }
 
@@ -156,6 +180,7 @@ export async function getArticles(locale) {
 /**
  * Get realisation by slug
  * @param slug
+ * @param locale
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getRealisationBySlug(slug, locale) {
@@ -167,6 +192,7 @@ export async function getRealisationBySlug(slug, locale) {
 /**
  * Get article by slug
  * @param slug
+ * @param locale
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticleBySlug(slug, locale) {
