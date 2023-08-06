@@ -69,8 +69,9 @@ export const getServerSideProps = async ({ res }) => {
 			)
 		})
 
+	let staticPathsAltCopy = JSON.parse(JSON.stringify(staticPaths))
 	// Separate static paths for the alternative URL
-	let staticPathsAlt = staticPaths.map(staticPath => {
+	let staticPathsAlt = staticPathsAltCopy.map(staticPath => {
 		return staticPath.replace(
 			`${process.env.NEXT_PUBLIC_URL}/`,
 			`${process.env.NEXT_PUBLIC_URL_ALT}/`
@@ -101,7 +102,10 @@ export const getServerSideProps = async ({ res }) => {
 		return `${process.env.NEXT_PUBLIC_URL}/blog/${record.attributes.slug}`
 	})
 
-	const pathsBlogAlt = resultBlog?.data?.map(record => {
+	// copy of the paths for the alternative URL
+	const resultBlogAlt = JSON.parse(JSON.stringify(resultBlog))
+
+	const pathsBlogAlt = resultBlogAlt?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${record.attributes.slug}`
 	})
 
@@ -123,7 +127,9 @@ export const getServerSideProps = async ({ res }) => {
 		return `${process.env.NEXT_PUBLIC_URL}/portefolio/${record.attributes.slug}`
 	})
 
-	const pathsPortefolioAlt = resultPortefolio?.data?.map(record => {
+	const resultPortefolioAlt = JSON.parse(JSON.stringify(resultPortefolio))
+
+	const pathsPortefolioAlt = resultPortefolioAlt?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${record.attributes.slug}`
 	})
 
