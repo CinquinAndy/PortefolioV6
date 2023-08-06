@@ -271,6 +271,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						src={'/assets/icons/LogoCinquinAndy.svg'}
 						alt="Développeur Freelance - Logo"
 						className="mb-32 ml-16 h-112 w-112 -rotate-12 opacity-20 brightness-75"
+						loading={'eager'}
 					/>
 				</div>
 				<div
