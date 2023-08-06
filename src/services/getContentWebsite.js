@@ -78,14 +78,22 @@ export async function getContentWebsite(locale) {
 		data_content_website.data.attributes.cta.content
 	)
 
+	const processedContentSignature = await processMarkdown(
+		data_content_website.data.attributes.content_footer.content_signature
+	)
+
 	return updateNestedProperty(
 		updateNestedProperty(
-			data_content_website,
-			'data.attributes.content_footer.content',
-			processedContentFooter
+			updateNestedProperty(
+				data_content_website,
+				'data.attributes.content_footer.content',
+				processedContentFooter
+			),
+			'data.attributes.cta.content',
+			processedContentCta
 		),
-		'data.attributes.cta.content',
-		processedContentCta
+		'data.attributes.content_footer.content_signature',
+		processedContentSignature
 	)
 }
 
