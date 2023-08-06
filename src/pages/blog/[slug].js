@@ -43,7 +43,7 @@ function Blog({ content_website, articles }) {
 						locale === 'fr'
 							? process.env.NEXT_PUBLIC_URL_ALT
 							: process.env.NEXT_PUBLIC_URL
-					}/portefolio/${articles?.attributes?.slug}`}
+					}/blog/${articles?.attributes?.slug}`}
 				/>
 				<link
 					rel="alternate"
@@ -51,7 +51,7 @@ function Blog({ content_website, articles }) {
 						locale === 'fr'
 							? process.env.NEXT_PUBLIC_URL_ALT
 							: process.env.NEXT_PUBLIC_URL
-					}/portefolio/${articles?.attributes?.slug}`}
+					}/blog/${articles?.attributes?.slug}`}
 					hrefLang={locale}
 				/>
 			</Head>
