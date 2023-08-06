@@ -1,4 +1,5 @@
-import { lstatSync, readdirSync } from 'fs'
+import React from 'react'
+import { readdirSync, lstatSync } from 'fs'
 import * as path from 'path'
 
 const Sitemap = () => {
@@ -30,6 +31,17 @@ export const getServerSideProps = async ({ res }) => {
 		return results
 	}
 
+	// Common function to filter and format paths for both URLs
+	function filterAndFormatPaths(staticPaths, baseUrl) {
+		return staticPaths.filter(item => {
+			return ![
+				`${baseUrl}/api/sendMail`,
+				`${baseUrl}/blog/[slug]`,
+				`${baseUrl}/portefolio/[slug]`,
+			].includes(item)
+		})
+	}
+
 	let files = getFilesFromDir('./src/pages')
 
 	let staticPaths = files
@@ -57,46 +69,19 @@ export const getServerSideProps = async ({ res }) => {
 			)
 		})
 
-	let staticPathsAlt = files
-		.filter(staticPagePath => {
-			let base = path.basename(staticPagePath)
-			return ![
-				'api',
-				'api/sendMail',
-				'_app.js',
-				'_document.js',
-				'404.js',
-				'sitemap.xml.js',
-				'index.js',
-			].includes(base)
-		})
-		.map(staticPagePath => {
-			let parsedPath = path.parse(staticPagePath)
-			let newPath = `${parsedPath.dir}/${parsedPath.name}`
-				.replace('src\\pages\\', '')
-				.replace('src\\pages', '')
-				.replace('src/pages', '')
-			return `${process.env.NEXT_PUBLIC_URL_ALT}/${newPath}`.replace(
-				`${process.env.NEXT_PUBLIC_URL_ALT}//`,
-				`${process.env.NEXT_PUBLIC_URL_ALT}/`
-			)
-		})
-
-	staticPaths = staticPaths.filter(item => {
-		return !(
-			item === `${process.env.NEXT_PUBLIC_URL}/api/sendMail` ||
-			item === `${process.env.NEXT_PUBLIC_URL}/blog/[slug]` ||
-			item === `${process.env.NEXT_PUBLIC_URL}/portefolio/[slug]`
+	// Separate static paths for the alternative URL
+	let staticPathsAlt = staticPaths.map(staticPath => {
+		return staticPath.replace(
+			`${process.env.NEXT_PUBLIC_URL}/`,
+			`${process.env.NEXT_PUBLIC_URL_ALT}/`
 		)
 	})
 
-	staticPathsAlt = staticPathsAlt.filter(item => {
-		return !(
-			item === `${process.env.NEXT_PUBLIC_URL_ALT}/api/sendMail` ||
-			item === `${process.env.NEXT_PUBLIC_URL_ALT}/blog/[slug]` ||
-			item === `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/[slug]`
-		)
-	})
+	staticPaths = filterAndFormatPaths(staticPaths, process.env.NEXT_PUBLIC_URL)
+	staticPathsAlt = filterAndFormatPaths(
+		staticPathsAlt,
+		process.env.NEXT_PUBLIC_URL_ALT
+	)
 
 	// get all article for dynamic paths
 	const resultBlog = await fetch(
