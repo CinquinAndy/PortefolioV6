@@ -60,7 +60,7 @@ function Custom404({ content_website, notfound }) {
 
 							<Link
 								href={notfound?.attributes?.link?.url}
-								className="mt-8 text-slate-50"
+								className="mt-8 text-slate-50 underline"
 							>
 								{notfound?.attributes?.link?.label}
 							</Link>
