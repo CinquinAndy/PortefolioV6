@@ -50,7 +50,11 @@ function Galery({ open, handleClick, galery, title_galery }) {
 												</div>
 											</div>
 										</div>
-										<div className="mx-6 mt-6 grid h-full grid-cols-12 gap-4 px-4 sm:px-6 md:gap-12 xl:grid-flow-row-dense">
+										<div
+											className={`mx-6 mt-6 grid h-full grid-cols-12 gap-4 px-4 sm:px-6 md:gap-12 xl:grid-flow-row-dense ${
+												galery.length < 9 ? 'xl:grid-rows-3' : ''
+											}`}
+										>
 											{/*	map on galery */}
 											{galery.map((item, index) => {
 												const isExpanded = index === expandedItem
