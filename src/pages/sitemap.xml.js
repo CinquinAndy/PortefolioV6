@@ -120,11 +120,11 @@ export const getServerSideProps = async ({ res }) => {
 	).then(res => res.json())
 
 	const pathsPortefolio = resultPortefolio?.data?.map(record => {
-		return `${process.env.NEXT_PUBLIC_URL}/realisation/${record.attributes.slug}`
+		return `${process.env.NEXT_PUBLIC_URL}/portefolio/${record.attributes.slug}`
 	})
 
 	const pathsPortefolioAlt = resultPortefolio?.data?.map(record => {
-		return `${process.env.NEXT_PUBLIC_URL_ALT}/realisation/${record.attributes.slug}`
+		return `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${record.attributes.slug}`
 	})
 
 	const allPaths = [
