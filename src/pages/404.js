@@ -2,10 +2,12 @@ import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getContentWebsite } from '@/services/getContentWebsite'
+import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 import { useRouter } from 'next/router'
+import { Layout } from '@/components/Global/Layout'
+import Footer from '@/components/Global/Footer'
 
-function Custom404({ content_website }) {
+function Custom404({ content_website, notfound }) {
 	const router = useRouter()
 	const { locale } = router
 	return (
@@ -48,28 +50,34 @@ function Custom404({ content_website }) {
 								{content_website?.attributes?.content_notfound?.seo?.h1 ??
 									'404 Not Found'}
 							</h1>
-							{/*todo here*/}
-							<p className={'text-slate-300'}>
-								{/*todo here*/}
-								{`Oops ! La page que vous cherchez n'existe pas.`}
-							</p>
+							<div className="mx-auto max-w-3xl">
+								<article>
+									<div className={'prose prose-invert my-8'}>
+										<Layout value={notfound?.attributes?.content.toString()} />
+									</div>
+								</article>
+							</div>
 
-							<Link href={'/'} className="mt-8 text-slate-50">
-								{/*todo here*/}
-								{`Retourner à l'accueil`}
+							<Link
+								href={notfound?.attributes?.link?.url}
+								className="mt-8 text-slate-50"
+							>
+								{notfound?.attributes?.link?.label}
 							</Link>
 						</div>
 					</div>
 				</div>
 			</div>
+			<Footer content_website={content_website} />
 		</>
 	)
 }
 
 export async function getStaticProps({ locale }) {
 	const content_website = await getContentWebsite(locale)
+	const notfound = await getNotFound(locale)
 
-	if (!content_website) {
+	if (!content_website || !notfound) {
 		return {
 			notFound: true,
 		}
@@ -78,6 +86,7 @@ export async function getStaticProps({ locale }) {
 	return {
 		props: {
 			content_website: content_website.data,
+			notfound: notfound.data,
 		},
 		revalidate: 10,
 	}

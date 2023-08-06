@@ -121,6 +121,22 @@ export async function getAbout(locale) {
 	)
 }
 
+export async function getNotFound(locale) {
+	const data_not_found = await fetchAPI(
+		`api/not-found?populate=deep&locale=${locale}`
+	)
+
+	const processedNotFound = await processMarkdown(
+		data_not_found.data.attributes.content
+	)
+
+	return updateNestedProperty(
+		data_not_found,
+		'data.attributes.content',
+		processedNotFound
+	)
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,6 +172,7 @@ export async function getArticles(locale) {
 /**
  * Get realisation by slug
  * @param slug
+ * @param locale
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getRealisationBySlug(slug, locale) {
@@ -167,6 +184,7 @@ export async function getRealisationBySlug(slug, locale) {
 /**
  * Get article by slug
  * @param slug
+ * @param locale
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticleBySlug(slug, locale) {

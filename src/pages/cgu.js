@@ -38,7 +38,7 @@ export default function Cgu({ content_website, cgu }) {
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 px-6 md:my-48 2xl:px-0'}>
-						<div className="max-7-3xl mx-auto md:pl-20">
+						<div className="mx-auto max-w-3xl">
 							<article>
 								<div className={'prose prose-invert my-8'}>
 									<Layout value={cgu?.attributes?.content.toString()} />

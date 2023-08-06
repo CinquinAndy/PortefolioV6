@@ -74,11 +74,7 @@ function Footer({ content_website }) {
 					})}
 				</div>
 				<div className="col-span-8 col-start-1 flex justify-between text-xs xl:col-span-6 xl:col-start-2 xl:mt-10">
-					<div className="mr-10 text-xs xl:m-0">
-						{/*©<?= date("Y") ?> - Andy CINQUIN - Tous droits réservés - Siret : 880 505 276 00019 - NAF :*/}
-						{/*6201Z*/}
-					</div>
-					<div className="flex gap-4">
+					<div className="mt-10 flex w-full justify-center gap-4">
 						<div className="flex items-center justify-evenly gap-4 xl:gap-10">
 							<Link
 								className="text-indigo-50 hover:text-slate-50"
