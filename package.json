@@ -21,7 +21,7 @@
 		"@headlessui/react": "1.7.17",
 		"@heroicons/react": "2.0.18",
 		"@hookform/resolvers": "^3.1.1",
-		"@tailwindcss/typography": "0.5.9",
+		"@tailwindcss/typography": "0.5.10",
 		"eslint": "8.48.0",
 		"eslint-config-next": "13.4.19",
 		"form-data": "4.0.0",
