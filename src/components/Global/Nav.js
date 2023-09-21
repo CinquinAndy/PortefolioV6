@@ -51,7 +51,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				</div>
 				<Link href="/" className="h-8 w-8 md:h-10 md:w-10">
 					<Image
-						src="https://andy-cinquin.fr/assets/icons/logov2.svg"
+						src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
 						alt="Logo Cinquin Andy Signature"
 						width={35}
 						height={35}
@@ -268,7 +268,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					<Image
 						width={450}
 						height={450}
-						src={'https://andy-cinquin.fr/assets/icons/LogoCinquinAndy.svg'}
+						src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/LogoCinquinAndy.svg`}
 						alt="Développeur Freelance - Logo"
 						className="mb-32 ml-16 h-112 w-112 -rotate-12 opacity-20 brightness-75"
 						loading={'eager'}

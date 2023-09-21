@@ -42,7 +42,7 @@ function Custom404({ content_website, notfound }) {
 								alt="Logo Andy Cinquin"
 								width={50}
 								height={50}
-								src="https://andy-cinquin.fr/assets/icons/logov2.svg"
+								src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
 							/>
 						</Link>
 						<div className={'mt-8'}>
