@@ -9,6 +9,7 @@ COPY ./public ./public
 COPY ./package*.json .
 COPY ./src ./src
 COPY ./next* .
+COPY ./next.config.js .
 
 RUN npm ci --omit=dev --ignore-scripts
 
