@@ -5,7 +5,7 @@ export default function Document() {
 	return (
 		<Html>
 			<Head>
-				<link rel="icon" href="/favicon.webp" />
+				<link rel="icon" href={`${process.env.NEXT_PUBLIC_URL}/favicon.webp`} />
 				<Script
 					strategy={'afterInteractive'}
 					src="https://www.googletagmanager.com/gtag/js?id=UA-150969790-2"
