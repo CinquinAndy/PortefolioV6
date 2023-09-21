@@ -168,7 +168,7 @@ function Talent({ content_website, realisations }) {
 												className="relative flex items-center justify-center"
 											>
 												<Image
-													src="/assets/icons/3d.svg"
+													src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/3d.svg`}
 													alt="icon-3d"
 													width={80}
 													height={80}
