@@ -7,6 +7,10 @@ const nextConfig = {
 				protocol: 'https',
 				hostname: '**.andy-cinquin.fr',
 			},
+			{
+				protocol: 'https',
+				hostname: '**.andy-cinquin.com',
+			},
 		],
 	},
 	experimental: {
@@ -20,12 +24,12 @@ const nextConfig = {
 		defaultLocale: 'fr',
 		domains: [
 			{
-				domain: 'andy-cinquin.fr',
+				domain: '**.andy-cinquin.fr',
 				defaultLocale: 'fr',
 				locales: ['fr'],
 			},
 			{
-				domain: 'andy-cinquin.com',
+				domain: '**.andy-cinquin.com',
 				defaultLocale: 'en',
 				locales: ['en'],
 			},
