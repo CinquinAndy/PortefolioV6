@@ -20,12 +20,22 @@ const nextConfig = {
 		defaultLocale: 'fr',
 		domains: [
 			{
-				domain: '**.andy-cinquin.fr',
+				domain: 'andy-cinquin.fr',
 				defaultLocale: 'fr',
 				locales: ['fr'],
 			},
 			{
-				domain: '**.andy-cinquin.com',
+				domain: 'www.andy-cinquin.fr',
+				defaultLocale: 'fr',
+				locales: ['fr'],
+			},
+			{
+				domain: 'andy-cinquin.com',
+				defaultLocale: 'en',
+				locales: ['en'],
+			},
+			{
+				domain: 'www.andy-cinquin.com',
 				defaultLocale: 'en',
 				locales: ['en'],
 			},
