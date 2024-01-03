@@ -4,7 +4,7 @@
 
 ![img.png](img.png)
 
-> **(api github project : https://github.com/CinquinAndy/PortefolioV6)**
+> **(api github project : https://github.com/CinquinAndy/API-PortefolioV6**
 
 ## How to run ??
 
