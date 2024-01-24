@@ -45,15 +45,15 @@ export default function Home({
 
             <Nav content_website={content_website}/>
 
-            <div className={"w-screen h-screen absolute top-0 left-0 -z-10"}>
-                <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center">
-                    <div className="video-background relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0">
+            <div className={"w-screen h-screen absolute top-0 left-0 -z-10 mask"}>
+                <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center mask">
+                    <div className="video-background relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0 mask">
                         <Image
                             src={'/assets/images/bg_opti.webp'}
                             alt={'bg_opti'}
                             className={
                                 'absolute left-0 top-0 blur-md  ' +
-                                'mix-difference -z-10 block bg-slate-900 object-cover opacity-75  '
+                                'mix-difference -z-10 block bg-slate-900 object-cover opacity-75 mask  '
                             }
                             quality={10}
                             fill={true}
@@ -63,7 +63,7 @@ export default function Home({
                         <iframe
                             title="video"
                             className={
-                                'absolute left-0 top-0 h-full w-full object-cover object-center ' +
+                                'absolute left-0 top-0 h-full w-full object-cover object-center mask ' +
                                 'mix-difference animate-video -z-10 block bg-slate-900 object-cover opacity-75'
                             }
                             id="topHeroVideo"
@@ -79,7 +79,7 @@ export default function Home({
                 </div>
             </div>
 
-            <div>
+            <div className={"relative"}>
                 <Services content_website={content_website} services={services}/>
                 <Realisations
                     content_website={content_website}
