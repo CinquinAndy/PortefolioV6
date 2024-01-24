@@ -62,14 +62,14 @@ export default function NotFound() {
 					<div className="h-screen">
 						<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 							<div>
-								<Link href={'/'}>
-									<Image
-										alt="Logo Andy Cinquin"
-										width={50}
-										height={50}
-										src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
-									/>
-								</Link>
+								{/*<Link href={'/'}>*/}
+								{/*	<Image*/}
+								{/*		alt="Logo Andy Cinquin"*/}
+								{/*		width={50}*/}
+								{/*		height={50}*/}
+								{/*		src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}*/}
+								{/*	/>*/}
+								{/*</Link>*/}
 								<div className={'mt-8'}>
 									<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
 										{content_website?.attributes?.content_notfound?.seo?.h1 ??
@@ -78,24 +78,24 @@ export default function NotFound() {
 									<div className="mx-auto max-w-3xl">
 										<article>
 											<div className={'prose prose-invert my-8'}>
-												<Layout
-													value={notFound?.attributes?.content.toString()}
-												/>
+												{/*<Layout*/}
+												{/*	value={notFound?.attributes?.content.toString()}*/}
+												{/*/>*/}
 											</div>
 										</article>
 									</div>
 
-									<Link
-										href={notFound?.attributes?.link?.url ?? '/'}
-										className="mt-8 text-slate-50 underline"
-									>
-										{notFound?.attributes?.link?.label}
-									</Link>
+									{/*<Link*/}
+									{/*	href={notFound?.attributes?.link?.url ?? '/'}*/}
+									{/*	className="mt-8 text-slate-50 underline"*/}
+									{/*>*/}
+									{/*	{notFound?.attributes?.link?.label}*/}
+									{/*</Link>*/}
 								</div>
 							</div>
 						</div>
 					</div>
-					<Footer content_website={content_website} />
+					{/*<Footer content_website={content_website} />*/}
 				</>
 			)}
 		</>
