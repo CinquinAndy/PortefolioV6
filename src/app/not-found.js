@@ -41,24 +41,27 @@ export default function NotFound() {
 	// const { locale } = router
 	// const locale = getLocale()
 	const [content_website, setContent_website] = useState(null)
-	const [notfound, setNotFound] = useState(null)
+	const [notFound, setNotFound] = useState(null)
 
 	// const content_website =  getContentWebsite(locale)
 	// const notfound =  getNotFound(locale)
 	useEffect(() => {
 		console.log('useEffect')
-		setContent_website(getContentWebsite('en'))
-		console.log('content_website', content_website)
-		setNotFound(getNotFound('en'))
+		getContentWebsite('en').then(data => {
+			setContent_website(data)
+		})
+		getNotFound('en').then(data => {
+			setNotFound(data)
+		})
 	}, [])
 
 	return (
 		<>
-			{content_website && notfound && (
+			{content_website && notFound && (
 				<>
 					<div className="h-screen">
 						<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
-							<div className="">
+							<div>
 								<Link href={'/'}>
 									<Image
 										alt="Logo Andy Cinquin"
@@ -75,24 +78,24 @@ export default function NotFound() {
 									<div className="mx-auto max-w-3xl">
 										<article>
 											<div className={'prose prose-invert my-8'}>
-												{/*<Layout*/}
-												{/*	value={notfound?.attributes?.content.toString()}*/}
-												{/*/>*/}
+												<Layout
+													value={notFound?.attributes?.content.toString()}
+												/>
 											</div>
 										</article>
 									</div>
 
-									{/*<Link*/}
-									{/*	href={notfound?.attributes?.link?.url}*/}
-									{/*	className="mt-8 text-slate-50 underline"*/}
-									{/*>*/}
-									{/*	{notfound?.attributes?.link?.label}*/}
-									{/*</Link>*/}
+									<Link
+										href={notFound?.attributes?.link?.url ?? '/'}
+										className="mt-8 text-slate-50 underline"
+									>
+										{notFound?.attributes?.link?.label}
+									</Link>
 								</div>
 							</div>
 						</div>
 					</div>
-					{/*<Footer content_website={content_website} />*/}
+					<Footer content_website={content_website} />
 				</>
 			)}
 		</>
