@@ -28,6 +28,7 @@ const noto_serif = Noto_Serif({
 
 export async function generateMetadata() {
 	const locale = getLocale()
+	console.log('locale', locale)
 	// fetch data
 	const content_website = await getContentWebsite(locale)
 
