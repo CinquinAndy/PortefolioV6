@@ -1,11 +1,13 @@
-import { GoogleAnalytics } from '@next/third-parties/google'
 import { getLocale } from 'next-intl/server'
 import '@/styles/btn.css'
 import '@/styles/carroussel.css'
 import '@/styles/distorsions.css'
 import '@/styles/main.css'
 import '@/styles/nav.css'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import 'react-toastify/dist/ReactToastify.css'
+import { notFound } from 'next/navigation'
+import { NextIntlClientProvider } from 'next-intl'
 
 import { Be_Vietnam_Pro, Noto_Serif } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
@@ -26,8 +28,12 @@ const noto_serif = Noto_Serif({
 	style: ['normal', 'italic'],
 })
 
-export async function generateMetadata() {
-	const locale = getLocale()
+//function to generate the routes for all the locales
+export async function generateStaticParams() {
+	return ['en', 'fr'].map(locale => ({ locale }))
+}
+
+export async function generateMetadata({ params: { locale } }) {
 	console.log('locale', locale)
 	// fetch data
 	const content_website = await getContentWebsite(locale)
@@ -53,17 +59,19 @@ export async function generateMetadata() {
 	}
 }
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ children, params: { locale } }) {
 	return (
 		<html className={`${be_vietnam_pro.variable} ${noto_serif.variable}`}>
-			<GoogleAnalytics gaId="UA-150969790-2" />
-			<ToastContainer />
-			{/*<NextScript/>*/}
-			<body
-				className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
-			>
-				{children}
-			</body>
+			<NextIntlClientProvider locale={locale}>
+				<GoogleAnalytics gaId="UA-150969790-2" />
+				<ToastContainer />
+				{/*<NextScript/>*/}
+				<body
+					className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
+				>
+					{children}
+				</body>
+			</NextIntlClientProvider>
 		</html>
 	)
 }
