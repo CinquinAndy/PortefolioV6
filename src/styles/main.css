@@ -106,8 +106,8 @@ a:focus, a:hover, button:focus, button:hover {
 }
 
 .mask{
-    -webkit-mask-image: url(https://minio.beta.andy-cinquin.fr:443/andycinquin/bg_transition_black_b5db44d270.webp);
-    mask-image: url(https://minio.beta.andy-cinquin.fr:443/andycinquin/bg_transition_black_b5db44d270.webp);
+    -webkit-mask-image: url(/assets/images/bg_transition_black.webp);
+    mask-image: url(/assets/images/bg_transition_black.webp);
     -webkit-mask-position: center center;
     mask-position: center center;
     -webkit-mask-repeat: no-repeat;
