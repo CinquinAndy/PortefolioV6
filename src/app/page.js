@@ -22,6 +22,10 @@ export default function Home({
                              }) {
     const router = useRouter()
     const { locale } = router
+    const content_website = await getContentWebsite(locale)
+    const services = await getServices(locale)
+    const realisations = await getRealisations(locale)
+    const articles = await getArticles(locale)
     return (
         <>
             <Head>
@@ -62,27 +66,4 @@ export default function Home({
             <Footer content_website={content_website} />
         </>
     )
-}
-
-export async function getStaticProps({ locale }) {
-    const content_website = await getContentWebsite(locale)
-    const services = await getServices(locale)
-    const realisations = await getRealisations(locale)
-    const articles = await getArticles(locale)
-
-    if (!content_website || !services || !realisations || !articles) {
-        return {
-            notFound: true,
-        }
-    }
-
-    return {
-        props: {
-            content_website: content_website.data,
-            services: services.data,
-            realisations: realisations.data,
-            articles: articles.data,
-        },
-        revalidate: 10,
-    }
 }
