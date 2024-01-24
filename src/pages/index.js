@@ -50,7 +50,7 @@ export default function Home({
                     <div className="video-background relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0">
                         <Image
                             src={'/assets/images/bg_opti.webp'}
-                            alt={''}
+                            alt={'bg_opti'}
                             className={
                                 'absolute left-0 top-0 blur-md  ' +
                                 'mix-difference -z-10 block bg-slate-900 object-cover opacity-75  '
