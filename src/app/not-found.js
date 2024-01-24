@@ -1,4 +1,4 @@
-'use client' // Error components must be Client Components
+'use client'
 
 import Image from 'next/image'
 import { router } from 'next/client'
@@ -37,7 +37,7 @@ export default async function NotFound() {
 	const notfound = await getNotFound(locale)
 
 	return (
-		<html className={'overflow-hidden'}>
+		<html className={'overflow-hidden'} lang={'en'}>
 			<body>
 				<main className="relative isolate z-30 min-h-screen">
 					{/* darken */}
