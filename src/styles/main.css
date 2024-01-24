@@ -110,6 +110,12 @@ a:focus, a:hover, button:focus, button:hover {
     overflow: hidden;
     width: 100vw;
     height: 100vh;
+    -webkit-mask-image: url(http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask-image/mask-image.png);
+    mask-image: url(http://tympanus.net/codrops-playground/assets/images/cssref/properties/mask-image/mask-image.png);
+    -webkit-mask-position: center center;
+    mask-position: center center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .video-background iframe {
