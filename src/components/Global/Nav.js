@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -247,10 +248,11 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					<div className="block md:hidden"></div>
 				</div>
 				<div
+					role="button"
 					id="nav-right"
 					onClick={() => setOpen(!open)}
 					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
-				></div>
+				/>
 			</nav>
 			<div
 				className={`${

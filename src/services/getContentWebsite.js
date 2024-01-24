@@ -1,4 +1,4 @@
-import {remark} from 'remark'
+import { remark } from 'remark'
 import html from 'remark-html'
 
 /**
@@ -8,24 +8,24 @@ import html from 'remark-html'
  * @returns {Promise<{notFound: boolean}|any>}
  */
 export async function fetchAPI(path, options = {}) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-            ...options,
-        },
-        next: {
-            revalidate: 60
-        }
-    })
+	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+			Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+			...options,
+		},
+		next: {
+			revalidate: 60,
+		},
+	})
 
-    if (!res) {
-        return {notFound: true}
-    }
+	if (!res) {
+		return { notFound: true }
+	}
 
-    return await res.json()
+	return await res.json()
 }
 
 /**
@@ -34,8 +34,8 @@ export async function fetchAPI(path, options = {}) {
  * @returns {Promise<string>}
  */
 export async function processMarkdown(markdownContent) {
-    const result = await remark().use(html).process(markdownContent)
-    return result.toString()
+	const result = await remark().use(html).process(markdownContent)
+	return result.toString()
 }
 
 /**
@@ -46,23 +46,23 @@ export async function processMarkdown(markdownContent) {
  * @returns {*}
  */
 export function updateNestedProperty(obj, path, newValue) {
-    // Convertir le chemin en tableau de clés
-    const keys = Array.isArray(path) ? path : path.split('.')
+	// Convertir le chemin en tableau de clés
+	const keys = Array.isArray(path) ? path : path.split('.')
 
-    // Cloner l'objet
-    let newObj = {...obj}
+	// Cloner l'objet
+	let newObj = { ...obj }
 
-    // Pointer vers l'objet à modifier
-    let pointer = newObj
-    for (let i = 0; i < keys.length - 1; i++) {
-        pointer[keys[i]] = {...pointer[keys[i]]}
-        pointer = pointer[keys[i]]
-    }
+	// Pointer vers l'objet à modifier
+	let pointer = newObj
+	for (let i = 0; i < keys.length - 1; i++) {
+		pointer[keys[i]] = { ...pointer[keys[i]] }
+		pointer = pointer[keys[i]]
+	}
 
-    // Mettre à jour la propriété
-    pointer[keys[keys.length - 1]] = newValue
+	// Mettre à jour la propriété
+	pointer[keys[keys.length - 1]] = newValue
 
-    return newObj
+	return newObj
 }
 
 /**
@@ -70,34 +70,34 @@ export function updateNestedProperty(obj, path, newValue) {
  * @returns {Promise<*>}
  */
 export async function getContentWebsite(locale) {
-    const data_content_website = await fetchAPI(
-        `api/content-website?populate=deep&locale=${locale}`
-    )
+	const data_content_website = await fetchAPI(
+		`api/content-website?populate=deep&locale=${locale}`
+	)
 
-    const processedContentFooter = await processMarkdown(
-        data_content_website.data.attributes.content_footer.content
-    )
-    const processedContentCta = await processMarkdown(
-        data_content_website.data.attributes.cta.content
-    )
+	const processedContentFooter = await processMarkdown(
+		data_content_website?.data?.attributes?.content_footer?.content
+	)
+	const processedContentCta = await processMarkdown(
+		data_content_website?.data?.attributes?.cta?.content
+	)
 
-    const processedContentSignature = await processMarkdown(
-        data_content_website.data.attributes.content_footer.content_signature
-    )
+	const processedContentSignature = await processMarkdown(
+		data_content_website?.data?.attributes?.content_footer?.content_signature
+	)
 
-    return updateNestedProperty(
-        updateNestedProperty(
-            updateNestedProperty(
-                data_content_website,
-                'data.attributes.content_footer.content',
-                processedContentFooter
-            ),
-            'data.attributes.cta.content',
-            processedContentCta
-        ),
-        'data.attributes.content_footer.content_signature',
-        processedContentSignature
-    )
+	return updateNestedProperty(
+		updateNestedProperty(
+			updateNestedProperty(
+				data_content_website,
+				'data.attributes.content_footer.content',
+				processedContentFooter
+			),
+			'data.attributes.cta.content',
+			processedContentCta
+		),
+		'data.attributes.content_footer.content_signature',
+		processedContentSignature
+	)
 }
 
 /**
@@ -106,11 +106,11 @@ export async function getContentWebsite(locale) {
  * @returns {Promise<*>}
  */
 export async function getCgu(locale) {
-    const data_cgu = await fetchAPI(`api/cgu?populate=deep&locale=${locale}`)
+	const data_cgu = await fetchAPI(`api/cgu?populate=deep&locale=${locale}`)
 
-    const processedCgu = await processMarkdown(data_cgu.data.attributes.content)
+	const processedCgu = await processMarkdown(data_cgu.data.attributes.content)
 
-    return updateNestedProperty(data_cgu, 'data.attributes.content', processedCgu)
+	return updateNestedProperty(data_cgu, 'data.attributes.content', processedCgu)
 }
 
 /**
@@ -119,33 +119,33 @@ export async function getCgu(locale) {
  * @returns {Promise<*>}
  */
 export async function getAbout(locale) {
-    const data_about = await fetchAPI(`api/about?populate=deep&locale=${locale}`)
+	const data_about = await fetchAPI(`api/about?populate=deep&locale=${locale}`)
 
-    const processedAbout = await processMarkdown(
-        data_about.data.attributes.content
-    )
+	const processedAbout = await processMarkdown(
+		data_about.data.attributes.content
+	)
 
-    return updateNestedProperty(
-        data_about,
-        'data.attributes.content',
-        processedAbout
-    )
+	return updateNestedProperty(
+		data_about,
+		'data.attributes.content',
+		processedAbout
+	)
 }
 
 export async function getNotFound(locale) {
-    const data_not_found = await fetchAPI(
-        `api/not-found?populate=deep&locale=${locale}`
-    )
+	const data_not_found = await fetchAPI(
+		`api/not-found?populate=deep&locale=${locale}`
+	)
 
-    const processedNotFound = await processMarkdown(
-        data_not_found.data.attributes.content
-    )
+	const processedNotFound = await processMarkdown(
+		data_not_found.data.attributes.content
+	)
 
-    return updateNestedProperty(
-        data_not_found,
-        'data.attributes.content',
-        processedNotFound
-    )
+	return updateNestedProperty(
+		data_not_found,
+		'data.attributes.content',
+		processedNotFound
+	)
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,7 +157,7 @@ export async function getNotFound(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getServices(locale) {
-    return await fetchAPI(`api/services?populate=deep&locale=${locale}`)
+	return await fetchAPI(`api/services?populate=deep&locale=${locale}`)
 }
 
 /**
@@ -165,9 +165,9 @@ export async function getServices(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getRealisations(locale) {
-    return await fetchAPI(
-        `api/realisations?populate=deep,2&sort=rank&locale=${locale}`
-    )
+	return await fetchAPI(
+		`api/realisations?populate=deep,2&sort=rank&locale=${locale}`
+	)
 }
 
 /**
@@ -175,9 +175,9 @@ export async function getRealisations(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticles(locale) {
-    return await fetchAPI(
-        `api/articles?populate=deep,2&sort=rank&locale=${locale}`
-    )
+	return await fetchAPI(
+		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
+	)
 }
 
 /**
@@ -187,9 +187,9 @@ export async function getArticles(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getRealisationBySlug(slug, locale) {
-    return fetchAPI(
-        `api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
-    )
+	return fetchAPI(
+		`api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
+	)
 }
 
 /**
@@ -199,9 +199,9 @@ export async function getRealisationBySlug(slug, locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticleBySlug(slug, locale) {
-    return fetchAPI(
-        `api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
-    )
+	return fetchAPI(
+		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
+	)
 }
 
 /**
@@ -210,19 +210,19 @@ export async function getArticleBySlug(slug, locale) {
  * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
 export async function processRealisationData(realisationData) {
-    const processedContentRealisations = await processMarkdown(
-        realisationData.data[0].attributes.content
-    )
-    return {
-        ...realisationData,
-        data: {
-            // ...realisationData.data,
-            attributes: {
-                ...realisationData.data[0].attributes,
-                content: processedContentRealisations.toString(),
-            },
-        },
-    }
+	const processedContentRealisations = await processMarkdown(
+		realisationData.data[0].attributes.content
+	)
+	return {
+		...realisationData,
+		data: {
+			// ...realisationData.data,
+			attributes: {
+				...realisationData.data[0].attributes,
+				content: processedContentRealisations.toString(),
+			},
+		},
+	}
 }
 
 /**
@@ -231,19 +231,19 @@ export async function processRealisationData(realisationData) {
  * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
 export async function processArticleData(articleData) {
-    const processedContentArticles = await processMarkdown(
-        articleData.data[0].attributes.content
-    )
-    return {
-        ...articleData,
-        data: {
-            // ...articleData.data,
-            attributes: {
-                ...articleData.data[0].attributes,
-                content: processedContentArticles.toString(),
-            },
-        },
-    }
+	const processedContentArticles = await processMarkdown(
+		articleData.data[0].attributes.content
+	)
+	return {
+		...articleData,
+		data: {
+			// ...articleData.data,
+			attributes: {
+				...articleData.data[0].attributes,
+				content: processedContentArticles.toString(),
+			},
+		},
+	}
 }
 
 /**
@@ -251,15 +251,15 @@ export async function processArticleData(articleData) {
  * @returns {Promise<*|*[]>}
  */
 export async function getRealisationPaths(locale) {
-    const data = await getRealisations(locale)
+	const data = await getRealisations(locale)
 
-    return (
-        data?.data?.map(record => ({
-            params: {
-                slug: record.attributes.slug,
-            },
-        })) || []
-    )
+	return (
+		data?.data?.map(record => ({
+			params: {
+				slug: record.attributes.slug,
+			},
+		})) || []
+	)
 }
 
 /**
@@ -267,13 +267,13 @@ export async function getRealisationPaths(locale) {
  * @returns {Promise<*|*[]>}
  */
 export async function getArticlePaths(locale) {
-    const data = await getArticles(locale)
+	const data = await getArticles(locale)
 
-    return (
-        data?.data?.map(record => ({
-            params: {
-                slug: record.attributes.slug,
-            },
-        })) || []
-    )
+	return (
+		data?.data?.map(record => ({
+			params: {
+				slug: record.attributes.slug,
+			},
+		})) || []
+	)
 }
