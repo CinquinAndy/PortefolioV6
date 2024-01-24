@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
-import React from 'react'
+import React, {Suspense} from 'react'
 import Services from '@/components/Global/Services'
 import Cta from '@/components/Global/Cta'
 import Realisations from '@/components/Global/Realisations'
@@ -45,24 +45,40 @@ export default function Home({
 
             <Nav content_website={content_website}/>
 
-            <div className={"-z-10 flex absolute top-0 left-0 w-screen h-screen"}>
-                <div className={"relative transform -translate-y-[80px]"}>
-                    <iframe
-                        className={
-                            `absolute left-0 top-0 w-screen min-h-screen object-cover object-left-top mix-difference 
-						-z-10 block`
-                        }
-                        title={'video_background'}
-                        src="https://player.vimeo.com/video/905713566?background=1"
-                        width="1920"
-                        height="1080"
-                        frameBorder="0"
-                        allow="autoplay"
-                        data-ready="true"
-                        allowFullScreen
-                    />
+            <div className={"w-screen h-screen absolute top-0 left-0 -z-10"}>
+                <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center">
+                    <div className="video-background relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0">
+                        <Image
+                            src={'/assets/images/bg_opti.webp'}
+                            alt={''}
+                            className={
+                                'absolute left-0 top-0 blur-md  ' +
+                                'mix-difference -z-10 block bg-slate-900 object-cover opacity-75  '
+                            }
+                            quality={10}
+                            fill={true}
+                            loading="eager"
+                        />
+
+                        <iframe
+                            title="video"
+                            className={
+                                'absolute left-0 top-0 h-full w-full object-cover object-center ' +
+                                'mix-difference animate-video -z-10 block bg-slate-900 object-cover opacity-75'
+                            }
+                            id="topHeroVideo"
+                            src="https://player.vimeo.com/video/905713566?background=1"
+                            width="1920"
+                            height="1080"
+                            frameBorder="0"
+                            allow="autoplay"
+                            data-ready="true"
+                            allowFullScreen
+                        />
+                    </div>
                 </div>
             </div>
+
             <div>
                 <Services content_website={content_website} services={services}/>
                 <Realisations
