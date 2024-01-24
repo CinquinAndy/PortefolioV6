@@ -16,7 +16,6 @@ import Articles from '@/components/Global/Articles'
 export async function generateMetadata({ locale }) {
 	// fetch data
 	const content_website = await getContentWebsite(locale)
-	console.log('locale', locale)
 
 	return {
 		title:
@@ -42,8 +41,6 @@ export async function generateMetadata({ locale }) {
 }
 
 export default async function Page({ locale }) {
-	console.log('locale', locale)
-
 	const content_website = await getContentWebsite(locale)
 	const services = await getServices(locale)
 	const realisations = await getRealisations(locale)

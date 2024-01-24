@@ -1,4 +1,5 @@
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { getLocale } from 'next-intl/server'
 import '@/styles/btn.css'
 import '@/styles/carroussel.css'
 import '@/styles/distorsions.css'
@@ -25,10 +26,10 @@ const noto_serif = Noto_Serif({
 	style: ['normal', 'italic'],
 })
 
-export async function generateMetadata({ locale }) {
+export async function generateMetadata() {
+	const locale = getLocale()
 	// fetch data
 	const content_website = await getContentWebsite(locale)
-	console.log('locale', locale)
 
 	return {
 		title:
@@ -53,17 +54,15 @@ export async function generateMetadata({ locale }) {
 
 export default async function RootLayout({ children }) {
 	return (
-		<>
-			<html className={`${be_vietnam_pro.variable} ${noto_serif.variable}`}>
-				<GoogleAnalytics gaId="UA-150969790-2" />
-				<ToastContainer />
-				{/*<NextScript/>*/}
-				<body
-					className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
-				>
-					{children}
-				</body>
-			</html>
-		</>
+		<html className={`${be_vietnam_pro.variable} ${noto_serif.variable}`}>
+			<GoogleAnalytics gaId="UA-150969790-2" />
+			<ToastContainer />
+			{/*<NextScript/>*/}
+			<body
+				className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
+			>
+				{children}
+			</body>
+		</html>
 	)
 }

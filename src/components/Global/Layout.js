@@ -38,6 +38,9 @@ export function Layout({ className, value }) {
 	}
 
 	// Convert the elements to a new array with updated children prop
+	if (!replacedContent || replacedContent.length === 0) {
+		return null
+	}
 	replacedContent = replacedContent.map(child => {
 		if (React.isValidElement(child) && Array.isArray(child.props.children)) {
 			const updatedChildren = child.props.children.map((textChild, index) => {
