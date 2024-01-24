@@ -2,80 +2,98 @@
 
 import Image from 'next/image'
 import { router } from 'next/client'
+import Footer from '@/components/Global/Footer'
+import Link from 'next/link'
+import { Layout } from '@/components/Global/Layout'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
+import { useEffect, useState } from 'react'
+import { getLocale } from 'next-intl/server'
+// import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
+//
+// export async function generateMetadata({ locale }) {
+// 	// fetch data
+// 	const content_website = await getContentWebsite(locale)
+//
+// 	return {
+// 		title:
+// 			content_website?.attributes?.content_notfound?.seo?.title ||
+// 			'Andy Cinquin - Entrepreneur & Développeur Freelance',
+// 		description:
+// 			content_website?.attributes?.content_notfound?.seo?.description ||
+// 			'Portefolio professionnel de Andy Cinquin, développeur informatique Freelance, Nantes et alentours. Développement sur-mesure, web, applicatifs',
+// 		metadataBase: new URL(
+// 			content_website?.attributes?.content_notfound?.seo?.canonical
+// 		),
+// 		alternates: {
+// 			canonical: '/',
+// 			languages: {
+// 				'fr-FR': '/',
+// 				'en-US': 'https://andy-cinquin.com',
+// 			},
+// 		},
+// 		icons: {
+// 			icon: `${process.env.NEXT_PUBLIC_URL}/favicon.webp`,
+// 		},
+// 	}
+// }
 
-export async function generateMetadata({ locale }) {
-	// fetch data
-	const content_website = await getContentWebsite(locale)
+export default function NotFound() {
+	// const { locale } = router
+	// const locale = getLocale()
+	const [content_website, setContent_website] = useState(null)
+	const [notfound, setNotFound] = useState(null)
 
-	return {
-		title:
-			content_website?.attributes?.content_notfound?.seo?.title ||
-			'Andy Cinquin - Entrepreneur & Développeur Freelance',
-		description:
-			content_website?.attributes?.content_notfound?.seo?.description ||
-			'Portefolio professionnel de Andy Cinquin, développeur informatique Freelance, Nantes et alentours. Développement sur-mesure, web, applicatifs',
-		metadataBase: new URL(
-			content_website?.attributes?.content_notfound?.seo?.canonical
-		),
-		alternates: {
-			canonical: '/',
-			languages: {
-				'fr-FR': '/',
-				'en-US': 'https://andy-cinquin.com',
-			},
-		},
-		icons: {
-			icon: `${process.env.NEXT_PUBLIC_URL}/favicon.webp`,
-		},
-	}
-}
-
-export default async function NotFound() {
-	const { locale } = router
-	const content_website = await getContentWebsite(locale)
-	const notfound = await getNotFound(locale)
+	// const content_website =  getContentWebsite(locale)
+	// const notfound =  getNotFound(locale)
+	useEffect(() => {
+		console.log('useEffect')
+		setContent_website(getContentWebsite('en'))
+		setNotFound(getNotFound('en'))
+	}, [])
 
 	return (
-		<html className={'overflow-hidden'} lang={'en'}>
-			<body>
-				<main className="relative isolate z-30 min-h-screen">
-					{/* darken */}
-					<div
-						className={'absolute left-0 top-0 -z-10 h-full w-full bg-black'}
-					/>
-					<Image
-						src="/error_background.png"
-						alt="error"
-						fill={true}
-						sizes={'75vw'}
-						quality={75}
-						className="absolute inset-0 -z-10 h-full w-full object-cover object-left opacity-50"
-					/>
-					<div className="z-30 mx-auto max-w-7xl px-6 py-32 text-center sm:py-40 lg:px-8">
-						<p className="text-base font-semibold italic leading-8 text-white">
-							404 not found
-						</p>
-						<h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-							Vous êtes perdu ?
-						</h1>
-						<p className="mt-4 text-base text-white shadow-lg sm:mt-6">
-							{`Désolé, la page que vous cherchez n'existe pas.`}
-						</p>
-						<div className="mt-10 flex justify-center">
-							<a
-								className="text-sm font-semibold leading-7 text-white"
-								href={'/'}
-							>
-								<span aria-hidden="true" className={'text-white'}>
-									&larr;
-								</span>{' '}
-								{`Revenir à l'accueil`}
-							</a>
+		<>
+			{content_website && notfound && (
+				<>
+					<div className="h-screen">
+						<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
+							<div className="">
+								<Link href={'/'}>
+									<Image
+										alt="Logo Andy Cinquin"
+										width={50}
+										height={50}
+										src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
+									/>
+								</Link>
+								<div className={'mt-8'}>
+									<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
+										{content_website?.attributes?.content_notfound?.seo?.h1 ??
+											'404 Not Found'}
+									</h1>
+									<div className="mx-auto max-w-3xl">
+										<article>
+											<div className={'prose prose-invert my-8'}>
+												<Layout
+													value={notfound?.attributes?.content.toString()}
+												/>
+											</div>
+										</article>
+									</div>
+
+									<Link
+										href={notfound?.attributes?.link?.url}
+										className="mt-8 text-slate-50 underline"
+									>
+										{notfound?.attributes?.link?.label}
+									</Link>
+								</div>
+							</div>
 						</div>
 					</div>
-				</main>
-			</body>
-		</html>
+					<Footer content_website={content_website} />
+				</>
+			)}
+		</>
 	)
 }

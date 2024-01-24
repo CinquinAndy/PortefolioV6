@@ -70,6 +70,8 @@ export function updateNestedProperty(obj, path, newValue) {
  * @returns {Promise<*>}
  */
 export async function getContentWebsite(locale) {
+	console.log('locale', locale)
+	console.log('locale', `api/content-website?populate=deep&locale=${locale}`)
 	const data_content_website = await fetchAPI(
 		`api/content-website?populate=deep&locale=${locale}`
 	)
