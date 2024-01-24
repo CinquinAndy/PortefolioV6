@@ -30,7 +30,6 @@ export default function Document() {
 					rel="stylesheet"
 				/>
 			</Head>
-			{/* if the page is 404 then, set overflow to hidden */}
 			<body
 				className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
 			>
