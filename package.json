@@ -18,6 +18,7 @@
 		]
 	},
 	"dependencies": {
+		"@formatjs/intl-localematcher": "^0.5.4",
 		"@headlessui/react": "1.7.18",
 		"@heroicons/react": "2.1.1",
 		"@hookform/resolvers": "3.3.4",
@@ -29,6 +30,7 @@
 		"html-react-parser": "5.1.1",
 		"lodash": "4.17.21",
 		"mailgun.js": "10.0.0",
+		"negotiator": "^0.6.3",
 		"next": "14.1.0",
 		"next-intl": "^3.5.1",
 		"prettier-plugin-tailwindcss": "0.5.11",
