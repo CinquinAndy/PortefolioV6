@@ -25,10 +25,30 @@ const noto_serif = Noto_Serif({
     style: ['normal', 'italic'],
 })
 
-export default function App({
-                                Component,
-                                pageProps: {session, ...pageProps},
-                            }) {
+export async function generateMetadata() {
+    // fetch data
+    const content_website = await getAllContentWebsite()
+
+    return {
+        title:
+            content_website?.metadata_title ||
+            'Andy Cinquin - Entrepreneur & Développeur Freelance',
+        description:
+            content_website?.metadata_description ||
+            "Portefolio professionnel de Andy Cinquin, développeur informatique Freelance, Nantes et alentours. Développement sur-mesure, web, applicatifs",
+        metadataBase: new URL(`https://andy-cinquin.fr`),
+        alternates: {
+            canonical: '/',
+            languages: {
+                'fr-FR': '/',
+                'en-US': 'https://andy-cinquin.com',
+            },
+        },
+    }
+}
+
+
+export default async function RootLayout({ children }) {
     return (
         <>
             <Head>
