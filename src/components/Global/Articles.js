@@ -4,7 +4,11 @@ import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
 function Articles({ content_website, articles, slice, isHome }) {
-	articles = slice ? articles.slice(0, slice) : articles
+	if (articles && articles.length > 0) {
+		articles = slice ? articles.slice(0, slice) : articles
+	} else {
+		articles = []
+	}
 	const gridTemplateCustom = index => {
 		switch (index % 3) {
 			case 0:
