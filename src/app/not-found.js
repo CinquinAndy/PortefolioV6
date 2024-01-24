@@ -48,6 +48,7 @@ export default function NotFound() {
 	useEffect(() => {
 		console.log('useEffect')
 		setContent_website(getContentWebsite('en'))
+		console.log('content_website', content_website)
 		setNotFound(getNotFound('en'))
 	}, [])
 
@@ -74,24 +75,24 @@ export default function NotFound() {
 									<div className="mx-auto max-w-3xl">
 										<article>
 											<div className={'prose prose-invert my-8'}>
-												<Layout
-													value={notfound?.attributes?.content.toString()}
-												/>
+												{/*<Layout*/}
+												{/*	value={notfound?.attributes?.content.toString()}*/}
+												{/*/>*/}
 											</div>
 										</article>
 									</div>
 
-									<Link
-										href={notfound?.attributes?.link?.url}
-										className="mt-8 text-slate-50 underline"
-									>
-										{notfound?.attributes?.link?.label}
-									</Link>
+									{/*<Link*/}
+									{/*	href={notfound?.attributes?.link?.url}*/}
+									{/*	className="mt-8 text-slate-50 underline"*/}
+									{/*>*/}
+									{/*	{notfound?.attributes?.link?.label}*/}
+									{/*</Link>*/}
 								</div>
 							</div>
 						</div>
 					</div>
-					<Footer content_website={content_website} />
+					{/*<Footer content_website={content_website} />*/}
 				</>
 			)}
 		</>
