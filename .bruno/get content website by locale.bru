@@ -1,0 +1,16 @@
+meta {
+  name: get content website by locale
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://api.andy-cinquin.fr/api/content-website?populate=deep&locale=en
+  body: none
+  auth: none
+}
+
+query {
+  populate: deep
+  locale: en
+}
