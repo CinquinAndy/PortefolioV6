@@ -597,10 +597,9 @@ a:focus, a:hover, button:focus, button:hover {
 }
 
 /** custom image hover wahou **/
-
 .custom-image-hover {
-    -webkit-mask: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
-    mask: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
+    -webkit-mask: url(/assets/images/sprite.png);
+    mask: url(/assets/images/sprite.png);
     -webkit-mask-size: 7100% 100%;
     mask-size: 7100% 100%;
     -webkit-animation: ani2 0.7s steps(70) forwards;

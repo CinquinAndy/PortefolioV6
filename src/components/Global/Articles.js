@@ -80,6 +80,11 @@ function Articles({ content_website, articles, slice, isHome }) {
 											fill={true}
 											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
 										/>
+										<div
+											className={
+												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
+											}
+										/>
 									</div>
 								</div>
 								<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
