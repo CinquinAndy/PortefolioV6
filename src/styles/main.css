@@ -7,7 +7,7 @@
     list-style: none;
     text-decoration: none;
     transition: opacity, z-index, color ease-in-out .3s;
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: var(--font-be-vietnam-pro), sans-serif;
     font-weight: 400;
     color: #fff;
 }
@@ -22,7 +22,7 @@
 }
 
 .Toastify__toast-body * {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: var(--font-be-vietnam-pro), sans-serif;
     font-weight: 400;
     color: #000;
 }
@@ -68,7 +68,7 @@ nav a {
 }
 
 h1, h1 *, h2, h3, h4, h5, h6, nav * {
-    font-family: 'Noto Serif Display', serif;
+    font-family: var(--font-noto-serif-display), serif;
     font-weight: 400;
     font-style: normal;
     text-transform: uppercase
