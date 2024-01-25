@@ -49,7 +49,7 @@ function Footer({ content_website }) {
 						return (
 							<Link
 								key={index}
-								className="text-xs underline xl:text-sm"
+								className="underline_custom text-xs xl:text-sm"
 								href={item?.Link?.url}
 							>
 								{item?.Link?.label}
@@ -65,7 +65,7 @@ function Footer({ content_website }) {
 						return (
 							<Link
 								key={index}
-								className="text-xs underline xl:text-sm"
+								className="underline_custom text-xs xl:text-sm"
 								href={item?.Link?.url}
 							>
 								{item?.Link?.label}
