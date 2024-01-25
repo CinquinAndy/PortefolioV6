@@ -1,3 +1,6 @@
+import { GoogleAnalytics } from '@next/third-parties/google'
+import {ToastContainer} from "react-toastify";
+
 export async function generateStaticParams() {
     return [{lang: 'en'}, {lang: 'fr'}]
 }
@@ -5,8 +8,9 @@ export async function generateStaticParams() {
 export default function RootLayout({children, params}) {
     console.log("inside server", params.lang);
     return (
-        <html lang={`en`}>
-        {/*<ToastContainer/>*/}
+        <html lang={`${params.lang}`}>
+        <ToastContainer/>
+        <GoogleAnalytics gaId="UA-150969790-2" />
             <body>{params.lang} -- {children}</body>
         </html>
     )
@@ -46,31 +50,31 @@ export default function RootLayout({children, params}) {
 //                 />
 //             </Head>
 //             {/* if the page is 404 then, set overflow to hidden */}
-//             <body
-//                 // className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
-//                 className={`relative text-slate-50`}
-//             >
-//             <div className="gradient-bg">
-//                 <svg xmlns="http://www.w3.org/2000/svg" className={"gradient_svg"}>
-//                     <defs>
-//                         <filter id="goo">
-//                             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
-//                             <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo"/>
-//                             <feBlend in="SourceGraphic" in2="goo"/>
-//                         </filter>
-//                     </defs>
-//                 </svg>
-//                 <div className="gradients-container">
-//                     <div className="g1"></div>
-//                     <div className="g2"></div>
-//                     <div className="g3"></div>
-//                     <div className="g4"></div>
-//                     <div className="g5"></div>
-//                 </div>
-//             </div>
-//             <Main/>
-//             <NextScript/>
-//             </body>
-//         </Html>
-//     )
-// }
+            <body
+                // className={`relative bg-gradient-to-b from-indigo-1100 to-sky-1100 text-slate-50`}
+                className={`relative text-slate-50`}
+            >
+            <div className="gradient-bg">
+                <svg xmlns="http://www.w3.org/2000/svg" className={"gradient_svg"}>
+                    <defs>
+                        <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo"/>
+                            <feBlend in="SourceGraphic" in2="goo"/>
+                        </filter>
+                    </defs>
+                </svg>
+                <div className="gradients-container">
+                    <div className="g1"></div>
+                    <div className="g2"></div>
+                    <div className="g3"></div>
+                    <div className="g4"></div>
+                    <div className="g5"></div>
+                </div>
+            </div>
+            <Main/>
+            <NextScript/>
+            </body>
+        </Html>
+    )
+}
