@@ -57,18 +57,12 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 							<Link
 								key={realisation?.id}
 								href={'/portefolio/' + realisation?.attributes?.slug}
-								className={`${gridTemplateCustom(
-									index
-								)} relative flex aspect-[16/9] h-[50vh] w-full flex-col items-center justify-center p-10 sm:h-auto`}
+								className={`${gridTemplateCustom(index)} relative flex aspect-[16/9] h-[50vh] w-full flex-col items-center justify-center p-10 sm:h-auto`}
 							>
 								<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{realisation?.attributes?.title}
 								</h2>
-								<div
-									className={
-										'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'
-									}
-								>
+								<div className={'h-full w-full'}>
 									<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
 										<Image
 											src={
@@ -76,9 +70,14 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 													?.attributes?.url
 											}
 											alt={realisation?.attributes?.title}
-											className="z-20 h-full w-full object-cover"
+											className="mas z-20 h-full w-full object-cover"
 											fill={true}
 											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+										/>
+										<div
+											className={
+												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-50 backdrop-grayscale'
+											}
 										/>
 									</div>
 								</div>
