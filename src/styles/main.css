@@ -201,7 +201,7 @@ a:focus, a:hover, button:focus, button:hover {
     height: 100vh;
     position: fixed;
     overflow: hidden;
-    background: -o-linear-gradient(50deg, var(--color-bg1), var(--color-bg2));
+    background: -webkit-linear-gradient(50deg, var(--color-bg1), var(--color-bg2));
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
     top: 0;
     left: 0;
@@ -221,7 +221,7 @@ a:focus, a:hover, button:focus, button:hover {
 
     .g1 {
         position: absolute;
-        background: -o-radial-gradient(center, circle, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+        background: -webkit-radial-gradient(center circle, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
         background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
@@ -232,8 +232,6 @@ a:focus, a:hover, button:focus, button:hover {
 
         -webkit-transform-origin: center center;
 
-        -ms-transform-origin: center center;
-
         transform-origin: center center;
         -webkit-animation: moveVertical 30s ease infinite;
         animation: moveVertical 30s ease infinite;
@@ -243,7 +241,7 @@ a:focus, a:hover, button:focus, button:hover {
 
     .g2 {
         position: absolute;
-        background: -o-radial-gradient(center, circle, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+        background: -webkit-radial-gradient(center circle, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
         background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
@@ -254,9 +252,8 @@ a:focus, a:hover, button:focus, button:hover {
 
         -webkit-transform-origin: calc(50% - 400px);
 
-        -ms-transform-origin: calc(50% - 400px);
-
         transform-origin: calc(50% - 400px);
+        -webkit-animation: moveInCircle 20s reverse infinite;
         animation: moveInCircle 20s reverse infinite;
 
         opacity: 1;
@@ -264,7 +261,7 @@ a:focus, a:hover, button:focus, button:hover {
 
     .g3 {
         position: absolute;
-        background: -o-radial-gradient(center, circle, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+        background: -webkit-radial-gradient(center circle, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
         background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
@@ -275,8 +272,6 @@ a:focus, a:hover, button:focus, button:hover {
 
         -webkit-transform-origin: calc(50% + 400px);
 
-        -ms-transform-origin: calc(50% + 400px);
-
         transform-origin: calc(50% + 400px);
         -webkit-animation: moveInCircle 40s linear infinite;
         animation: moveInCircle 40s linear infinite;
@@ -286,7 +281,7 @@ a:focus, a:hover, button:focus, button:hover {
 
     .g4 {
         position: absolute;
-        background: -o-radial-gradient(center, circle, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+        background: -webkit-radial-gradient(center circle, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
         background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
@@ -297,8 +292,6 @@ a:focus, a:hover, button:focus, button:hover {
 
         -webkit-transform-origin: calc(50% - 200px);
 
-        -ms-transform-origin: calc(50% - 200px);
-
         transform-origin: calc(50% - 200px);
         -webkit-animation: moveHorizontal 40s ease infinite;
         animation: moveHorizontal 40s ease infinite;
@@ -308,7 +301,7 @@ a:focus, a:hover, button:focus, button:hover {
 
     .g5 {
         position: absolute;
-        background: -o-radial-gradient(center, circle, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+        background: -webkit-radial-gradient(center circle, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
         background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
@@ -318,8 +311,6 @@ a:focus, a:hover, button:focus, button:hover {
         left: calc(50% - var(--circle-size));
 
         -webkit-transform-origin: calc(50% - 800px) calc(50% + 200px);
-
-        -ms-transform-origin: calc(50% - 800px) calc(50% + 200px);
 
         transform-origin: calc(50% - 800px) calc(50% + 200px);
         -webkit-animation: moveInCircle 20s ease infinite;
