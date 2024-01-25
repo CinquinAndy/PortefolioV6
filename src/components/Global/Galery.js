@@ -64,7 +64,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 														className={`col-span-12 cursor-pointer ${
 															isExpanded
 																? 'fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/90 p-4 md:p-20'
-																: 'relative xl:col-span-4'
+																: 'relative p-4 xl:col-span-4'
 														}`}
 														onClick={() => {
 															setExpandedItem(isExpanded ? null : index)
@@ -79,7 +79,9 @@ function Galery({ open, handleClick, galery, title_galery }) {
 															width={item?.attributes?.width}
 															height={item?.attributes?.height}
 															className={`${
-																isExpanded ? 'm-4 lg:m-8 xl:m-10 2xl:m-40' : ''
+																isExpanded
+																	? 'm-4 lg:m-8 xl:m-10 2xl:m-40'
+																	: 'p-4'
 															} rounded-lg object-cover hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
 															sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
 														/>
