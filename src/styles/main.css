@@ -356,18 +356,17 @@ a:focus, a:hover, button:focus, button:hover {
     position: relative;
     transition: 0.4s ease-out;
 }
-/* cyan */
-/* purple */
-.button-purple {
+/* sky */
+.button-sky {
     display: flex;
     text-decoration: none;
     color: inherit;
     position: relative;
-    box-shadow: inset 0 0 0 0px #fff, inset -4px -4px 0 6px rgb(79,70,229);
-    background-color: rgb(79,70,229);
+    box-shadow: inset 0 0 0 0px #fff, inset -4px -4px 0 6px rgb(2,132,199);
+    background-color: rgb(2,132,199);
     cursor: pointer;
 }
-.button-purple:before {
+.button-sky:before {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -380,13 +379,13 @@ a:focus, a:hover, button:focus, button:hover {
     transform: scaleY(0);
     transition: 0.4s ease-out;
 }
-.button-purple:hover .button-purple-title {
-    color: rgb(79,70,229);
+.button-sky:hover .button-sky-title {
+    color: rgb(2,132,199);
 }
-.button-purple:hover:before {
+.button-sky:hover:before {
     transform: scaleY(1);
 }
-.button-purple-title {
+.button-sky-title {
     position: relative;
     transition: 0.4s ease-out;
 }
