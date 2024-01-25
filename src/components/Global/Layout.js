@@ -16,7 +16,7 @@ const options = {
 			if (name === 'a') {
 				const { href } = attribs
 				return (
-					<Link href={href} className={'underline'}>
+					<Link href={href} className={'underline_custom'}>
 						{domToReact(domNode.children, options)}
 					</Link>
 				)
