@@ -23,11 +23,11 @@ function Services({ content_website, services }) {
 				<div className="flex w-1/2 items-end justify-end">
 					<Link
 						href={content_website?.attributes?.content_home?.link[0]?.url}
-						className="post rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+						className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 					>
-						<h2 className={'post-title'}>
+						<span className={'button-purple-title'}>
 							{content_website?.attributes?.content_home?.link[0]?.label}
-						</h2>
+						</span>
 					</Link>
 				</div>
 			</div>
