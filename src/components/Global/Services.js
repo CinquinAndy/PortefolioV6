@@ -54,7 +54,7 @@ function Services({ content_website, services }) {
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(service?.attributes?.title),
 										}}
-									></h2>
+									/>
 								</header>
 								<article
 									className="text-xs xl:text-sm [&>*]:font-body"
