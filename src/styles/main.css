@@ -579,3 +579,12 @@ a:focus, a:hover, button:focus, button:hover {
     -webkit-animation: jello-horizontal 0.9s both;
     animation: jello-horizontal 0.9s both;
 }
+
+/** custom-button-icons **/
+.custom-button-icons:hover *{
+    transition: all 0.3s ease-in-out;
+}
+.custom-button-icons:hover *{
+    -webkit-animation: jello-horizontal 0.9s both;
+    animation: jello-horizontal 0.9s both;
+}
