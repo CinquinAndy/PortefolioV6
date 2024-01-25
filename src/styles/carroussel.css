@@ -39,6 +39,7 @@
     border: 2px solid rgba(255, 255, 255, 0.3);
     transform: translate(10px, 10px);
     pointer-events: none;
+    transition: transform 0.3s ease-in-out;
 }
 
 .shadow-innercustom:before {
@@ -51,5 +52,32 @@
     z-index: 31;
     border: 2px solid rgba(255, 255, 255, 0.3);
     transform: translate(-10px, -10px);
+    pointer-events: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.shadow-innercustom:hover:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: 31;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transform: translate(-10px, -10px);
+    pointer-events: none;
+}
+
+.shadow-innercustom:hover:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: 31;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transform: translate(10px, 10px);
     pointer-events: none;
 }
