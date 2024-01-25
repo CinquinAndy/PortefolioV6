@@ -165,7 +165,7 @@ function Talent({ content_website, realisations }) {
 										return (
 											<div
 												key={technology?.id}
-												className="relative flex items-center justify-center"
+												className="custom-button-icons-3d relative flex items-center justify-center"
 											>
 												<Image
 													src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/3d.svg`}

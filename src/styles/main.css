@@ -588,3 +588,9 @@ a:focus, a:hover, button:focus, button:hover {
     -webkit-animation: jello-horizontal 0.9s both;
     animation: jello-horizontal 0.9s both;
 }
+
+/** custom-button-icons-3d **/
+.custom-button-icons-3d:hover > :first-child{
+    -webkit-animation: jello-horizontal 0.9s both;
+    animation: jello-horizontal 0.9s both;
+}
