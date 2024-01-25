@@ -227,7 +227,7 @@ a:focus, a:hover, button:focus, button:hover {
         background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
-        width: calc(var(--circle-size)*0.65);
+        width: calc(var(--circle-size) * 0.65);
         height: var(--circle-size);
         top: calc(50% - var(--circle-size) / 3);
         left: calc(50% - var(--circle-size) / 3);
@@ -247,7 +247,7 @@ a:focus, a:hover, button:focus, button:hover {
         background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
-        width: calc(var(--circle-size)*0.65);
+        width: calc(var(--circle-size) * 0.65);
         height: var(--circle-size);
         top: calc(50% - var(--circle-size) / 3);
         left: calc(50% - var(--circle-size) / 3);
@@ -267,7 +267,7 @@ a:focus, a:hover, button:focus, button:hover {
         background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
-        width: calc(var(--circle-size)*0.65);
+        width: calc(var(--circle-size) * 0.65);
         height: var(--circle-size);
         top: calc(50% - var(--circle-size) / 3 + 200px);
         left: calc(50% - var(--circle-size) / 3 - 500px);
@@ -287,7 +287,7 @@ a:focus, a:hover, button:focus, button:hover {
         background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
         mix-blend-mode: var(--blending);
 
-        width: calc(var(--circle-size)*0.65);
+        width: calc(var(--circle-size) * 0.65);
         height: var(--circle-size);
         top: calc(50% - var(--circle-size) / 3);
         left: calc(50% - var(--circle-size) / 3);
@@ -329,10 +329,11 @@ a:focus, a:hover, button:focus, button:hover {
     text-decoration: none;
     color: inherit;
     position: relative;
-    box-shadow: inset 0 0 0 0px #fff, inset -4px -4px 0 6px rgb(79,70,229);
-    background-color: rgb(79,70,229);
+    box-shadow: inset 0 0 0 0px #fff, inset -4px -4px 0 6px rgb(79, 70, 229);
+    background-color: rgb(79, 70, 229);
     cursor: pointer;
 }
+
 .button-purple:before {
     position: absolute;
     left: 0;
@@ -346,26 +347,31 @@ a:focus, a:hover, button:focus, button:hover {
     transform: scaleY(0);
     transition: 0.4s ease-out;
 }
+
 .button-purple:hover .button-purple-title {
-    color: rgb(79,70,229);
+    color: rgb(79, 70, 229);
 }
+
 .button-purple:hover:before {
     transform: scaleY(1);
 }
+
 .button-purple-title {
     position: relative;
     transition: 0.4s ease-out;
 }
+
 /* sky */
 .button-sky {
     display: flex;
     text-decoration: none;
     color: inherit;
     position: relative;
-    box-shadow: inset 0 0 0 0px #fff, inset -4px -4px 0 6px rgb(2,132,199);
-    background-color: rgb(2,132,199);
+    box-shadow: inset 0 0 0 0px #fff, inset -4px -4px 0 6px rgb(2, 132, 199);
+    background-color: rgb(2, 132, 199);
     cursor: pointer;
 }
+
 .button-sky:before {
     position: absolute;
     left: 0;
@@ -379,12 +385,15 @@ a:focus, a:hover, button:focus, button:hover {
     transform: scaleY(0);
     transition: 0.4s ease-out;
 }
+
 .button-sky:hover .button-sky-title {
-    color: rgb(2,132,199);
+    color: rgb(2, 132, 199);
 }
+
 .button-sky:hover:before {
     transform: scaleY(1);
 }
+
 .button-sky-title {
     position: relative;
     transition: 0.4s ease-out;
@@ -395,7 +404,6 @@ a:focus, a:hover, button:focus, button:hover {
     height: 100vh;
     width: 100vw;
 }
-
 
 
 .patterns svg text {
@@ -411,15 +419,15 @@ a:focus, a:hover, button:focus, button:hover {
 @keyframes textAnimate {
     0% {
         stroke-dasharray: 0 50%;
-        stroke-dashoffset:  20%;
-        fill:#fff
+        stroke-dashoffset: 20%;
+        fill: #fff
 
     }
 
     100% {
         stroke-dasharray: 50% 0;
         stroke-dashoffstet: -20%;
-        fill: hsla(189, 68%, 75%,0%)
+        fill: hsla(189, 68%, 75%, 0%)
     }
 
 }
@@ -450,3 +458,124 @@ a:focus, a:hover, button:focus, button:hover {
     overflow: hidden;
 }
 
+/*** icon animation ***/
+.slider-nav-item:before {
+    position: absolute;
+    content: "";
+    height: calc(100% + 16px);
+    width: calc(100% + 16px);
+    top: -8px;
+    left: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    animation: 1.5s linear 0s normal none infinite focuse;
+    pointer-events: none;
+}
+
+.slider-nav-item:hover svg{
+    -webkit-animation: jello-horizontal 0.9s both;
+    animation: jello-horizontal 0.9s both;
+    position: relative;
+}
+
+@keyframes focuse {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes slide {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 40px 0;
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * animation jello-horizontal
+ * ----------------------------------------
+ */
+@-webkit-keyframes jello-horizontal {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes jello-horizontal {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.jello-horizontal {
+    -webkit-animation: jello-horizontal 0.9s both;
+    animation: jello-horizontal 0.9s both;
+}
+
+::selection {
+    background: #312e81;
+    color: #fff;
+}
