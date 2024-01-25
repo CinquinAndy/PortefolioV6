@@ -9,18 +9,19 @@ import Footer from "@/components/Global/Footer";
 
 export async function generateMetadata({params}) {
     // fetch data
-    const content_website = await getContentWebsite(params.lang)
+    let content_website = await getContentWebsite(params.lang)
+    content_website = content_website?.data;
 
     return {
         title:
-            content_website?.data?.attributes?.content_home?.seo?.title ||
+            content_website?.attributes?.content_home?.seo?.title ||
             'Andy Cinquin - Freelance Entrepreneur & Developer',
         description:
-            content_website?.data?.attributes?.content_home?.seo?.description ||
+            content_website?.attributes?.content_home?.seo?.description ||
             "Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications",
         metadataBase: new URL(`https://andy-cinquin.fr`),
         alternates: {
-            canonical: content_website?.data?.attributes?.content_home?.seo?.canonical || '/',
+            canonical: content_website?.attributes?.content_home?.seo?.canonical || '/',
             languages: {
                 'fr-FR': '/',
                 'en-US': 'https://andy-cinquin.com',
@@ -30,13 +31,17 @@ export async function generateMetadata({params}) {
 }
 
 export default async function Page({params}) {
-    const content_website = await getContentWebsite(params.lang)
-    const services = await getServices(params.lang)
-    const realisations = await getRealisations(params.lang)
-    const articles = await getArticles(params.lang)
+    let content_website = await getContentWebsite(params.lang)
+    content_website = content_website?.data;
+    let services = await getServices(params.lang)
+    services = services?.data;
+    let realisations = await getRealisations(params.lang)
+    realisations = realisations?.data;
+    let articles = await getArticles(params.lang)
+    articles = articles?.data;
 
     return <>
-        <Nav content_website={content_website.data}/>
+        <Nav content_website={content_website}/>
 
         <div className={"w-screen h-screen absolute top-0 left-0 -z-10 mask"}>
             <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center mask">
@@ -73,21 +78,21 @@ export default async function Page({params}) {
         </div>
 
         <div className={"relative"}>
-            <Services content_website={content_website.data} services={services.data}/>
+            <Services content_website={content_website} services={services}/>
             <Realisations
-                content_website={content_website.data}
-                realisations={realisations.data}
+                content_website={content_website}
+                realisations={realisations}
                 slice={3}
                 isHome={true}
             />
             <Articles
-                content_website={content_website.data}
-                articles={articles.data}
+                content_website={content_website}
+                articles={articles}
                 slice={3}
                 isHome={true}
             ></Articles>
-            <Cta content_website={content_website.data}/>
+            <Cta content_website={content_website}/>
         </div>
-        <Footer content_website={content_website.data}/>
+        <Footer content_website={content_website}/>
     </>
 }

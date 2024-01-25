@@ -1,9 +1,5 @@
-import {getAbout, getArticles, getContentWebsite, getRealisations, getServices} from "@/services/getContentWebsite";
+import {getAbout, getContentWebsite} from "@/services/getContentWebsite";
 import Nav from "@/components/Global/Nav";
-import Image from "next/image";
-import Services from "@/components/Global/Services";
-import Realisations from "@/components/Global/Realisations";
-import Articles from "@/components/Global/Articles";
 import Cta from "@/components/Global/Cta";
 import Footer from "@/components/Global/Footer";
 import {Layout} from "@/components/Global/Layout";
