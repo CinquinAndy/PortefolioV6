@@ -1,5 +1,3 @@
-const withTM = require('next-transpile-modules')(['special-card'])
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,

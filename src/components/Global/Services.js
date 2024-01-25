@@ -61,7 +61,7 @@ function Services({ content_website, services }) {
 									dangerouslySetInnerHTML={{
 										__html: replaceTitle(service?.attributes?.content),
 									}}
-								></article>
+								/>
 							</section>
 						)
 					})}
