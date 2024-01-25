@@ -1,19 +1,6 @@
-'use client';
-// import {Metadata} from 'next'
-// import {getLocale} from "next-intl/server";
-// import {ToastContainer} from "react-toastify";
-
-
-// export async function generateStaticParams() {
-//     return [{lang: 'en-US'}, {lang: 'fr'}]
-// }
-
-// export async function generateMetadata({children, params}) {
-//     return {
-//         title: '...',
-//     }
-// }
-
+export async function generateStaticParams() {
+    return [{lang: 'en'}, {lang: 'fr'}]
+}
 
 export default function RootLayout({children, params}) {
     console.log("inside server", params.lang);
