@@ -12,6 +12,11 @@
     color: #fff;
 }
 
+::selection {
+    background: #312e81;
+    color: #fff;
+}
+
 .layout-custom * {
     list-style: inside;
 }
@@ -472,7 +477,7 @@ a:focus, a:hover, button:focus, button:hover {
     pointer-events: none;
 }
 
-.slider-nav-item:hover svg{
+.slider-nav-item:hover svg {
     -webkit-animation: jello-horizontal 0.9s both;
     animation: jello-horizontal 0.9s both;
     position: relative;
@@ -573,9 +578,4 @@ a:focus, a:hover, button:focus, button:hover {
 .jello-horizontal {
     -webkit-animation: jello-horizontal 0.9s both;
     animation: jello-horizontal 0.9s both;
-}
-
-::selection {
-    background: #312e81;
-    color: #fff;
 }
