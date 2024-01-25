@@ -76,7 +76,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 										/>
 										<div
 											className={
-												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-25 backdrop-grayscale'
+												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
 											}
 										/>
 									</div>
