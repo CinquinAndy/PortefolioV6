@@ -252,17 +252,48 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					<div className="block md:hidden"></div>
 				</div>
 				<div
+					role={'button'}
 					id="nav-right"
 					onClick={() => setOpen(!open)}
 					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
-				></div>
+				/>
 			</nav>
 			<div
 				className={`${
 					isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'
 				} relative flex w-screen items-center justify-center`}
 			>
-				<h1 className="z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl">
+				{isHome && (
+					<div className="patterns px-20">
+						<svg width="100%" height="100%">
+							<defs>
+								<pattern
+									id="polka-dots"
+									x="0"
+									y="0"
+									width="100"
+									height="100"
+									patternUnits="userSpaceOnUse"
+								>
+									<circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
+								</pattern>
+							</defs>
+							<text
+								x="50%"
+								y="60%"
+								textAnchor="middle"
+								className={
+									'text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl'
+								}
+							>
+								{content_website?.content_home?.title_home}
+							</text>
+						</svg>
+					</div>
+				)}
+				<h1
+					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl`}
+				>
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
 				{!isHome && (
