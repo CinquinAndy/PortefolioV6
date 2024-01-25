@@ -10,10 +10,10 @@ import {ToastContainer} from "react-toastify";
 import {Noto_Serif_Display, Be_Vietnam_Pro} from 'next/font/google'
 
 
-const noto_serif_display = Noto_Serif_Display({subsets: ['latin'], variable: '--font-be-vietnam-pro'})
+const noto_serif_display = Noto_Serif_Display({subsets: ['latin'], variable: '--font-noto-serif-display'})
 const be_vietnam_pro = Be_Vietnam_Pro({
         weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-        variable: '--font-noto-serif-display',
+        variable: '--font-be-vietnam-pro',
         style: ['italic', 'normal'],
         subsets: ['latin']
     }
