@@ -264,7 +264,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				} relative flex w-screen items-center justify-center`}
 			>
 				{isHome && (
-					<div className="patterns px-20">
+					<div className="patterns translate-y-[-70px] transform px-20">
 						<svg width="100%" height="100%">
 							<defs>
 								<pattern
