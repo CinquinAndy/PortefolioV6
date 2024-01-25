@@ -25,9 +25,11 @@ function Cta({ content_website }) {
 					<div className="flex items-center justify-center">
 						<Link
 							href={content_website?.attributes?.cta?.link?.url}
-							className="rounded bg-indigo-600 px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+							className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 						>
-							{content_website?.attributes?.cta?.link?.label}
+							<span className={'button-purple-title'}>
+								{content_website?.attributes?.cta?.link?.label}
+							</span>
 						</Link>
 					</div>
 				</div>

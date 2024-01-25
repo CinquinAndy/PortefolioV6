@@ -102,7 +102,7 @@ function Talent({ content_website, realisations }) {
 										handleClick()
 									}}
 									className={
-										'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+										'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
 									}
 								>
 									{
@@ -165,7 +165,7 @@ function Talent({ content_website, realisations }) {
 										return (
 											<div
 												key={technology?.id}
-												className="relative flex items-center justify-center"
+												className="custom-button-icons-3d relative flex items-center justify-center"
 											>
 												<Image
 													src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/3d.svg`}
@@ -216,7 +216,7 @@ function Talent({ content_website, realisations }) {
 														href={link?.url}
 														rel={'noopener noreferrer'}
 														className={
-															'relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+															'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
 														}
 													>
 														{link?.label}
