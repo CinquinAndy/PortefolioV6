@@ -10,6 +10,9 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { Layout } from '@/components/Global/Layout'
 import Articles from '@/components/Global/Articles'
+import {replaceTitle} from "@/services/utils";
+import {LinkIcon} from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 export async function generateMetadata({ params }) {
 	// fetch data
@@ -61,17 +64,85 @@ export default async function Page({ params }) {
 			<Nav
 				content_website={content_website}
 				isHome={false}
-				h1={content_website?.attributes?.content_blog?.seo?.h1}
+				h1={articles?.attributes?.title}
 			/>
 			<div>
-				<Articles
-					content_website={content_website}
-					articles={articles}
-					slice={false}
-					isHome={true}
-				/>
-				<Cta content_website={content_website} />
+				<div className={'relative'}>
+					<div
+						className={
+							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:px-16 2xl:px-0'
+						}
+					>
+						<div
+							className={
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
+							}
+						>
+							<div
+								className={
+									'flex w-full items-center justify-evenly gap-4 md:gap-8'
+								}
+							>
+								<div className={'flex items-center gap-2'}>
+									<h2
+										className={
+											'text-md font-black md:text-3xl [&>*]:font-black'
+										}
+										dangerouslySetInnerHTML={{
+											__html: replaceTitle(
+												content_website?.attributes?.content_realisations
+													?.title_links
+											),
+										}}
+									/>
+								</div>
+								<div className={'flex flex-col gap-4'}>
+									{article?.attributes?.links?.map((link, index) => {
+										return (
+											<div key={index} className={'flex'}>
+												<Link
+													key={link?.id}
+													href={link?.url}
+													rel={'noopener noreferrer'}
+													className={
+														'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+													}
+												>
+													{link?.label}
+													<LinkIcon
+														className={
+															'absolute -right-2 -top-2 h-4 w-4 rotate-6'
+														}
+													/>
+												</Link>
+											</div>
+										)
+									})}
+								</div>
+							</div>
+						</div>
+
+						<div className="mx-auto max-w-7xl">
+							<h2
+								className={'text-lg font-black md:text-3xl [&>*]:font-black'}
+								dangerouslySetInnerHTML={{
+									__html: replaceTitle(
+										content_website?.attributes?.content_blog?.title_content
+									),
+								}}
+							/>
+							<article>
+								<div
+									className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
+								>
+									<Layout value={article?.attributes?.content.toString()} />
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
 			</div>
+			<Cta content_website={content_website} />
 			<Footer content_website={content_website} />
 		</>
 	)
