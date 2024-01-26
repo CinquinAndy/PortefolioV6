@@ -48,7 +48,7 @@ export function GalerySection({ content_website, processedRealisation }) {
 			<Galery
 				handleClick={handleClick}
 				open={open}
-				galery={realisations?.attributes?.galery?.data}
+				galery={processedRealisation?.attributes?.galery?.data}
 				title_galery={
 					content_website?.attributes?.content_realisations?.title_galery
 				}
