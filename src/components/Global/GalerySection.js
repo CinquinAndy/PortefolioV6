@@ -2,6 +2,7 @@
 import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 import { useState } from 'react'
+import Galery from '@/components/Global/Galery'
 
 export function GalerySection({ content_website, processedRealisation }) {
 	const [open, setOpen] = useState(false)
