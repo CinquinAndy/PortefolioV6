@@ -1,9 +1,18 @@
+'use client'
 import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
+import { useState } from 'react'
 
 export function GalerySection({ content_website, processedRealisation }) {
+	const [open, setOpen] = useState(false)
+
+	const handleClick = () => {
+		setOpen(!open)
+	}
+
 	return (
 		<div
+			role={'button'}
 			onClick={handleClick}
 			className={
 				'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'
