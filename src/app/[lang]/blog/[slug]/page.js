@@ -1,7 +1,5 @@
 import {
 	getArticleBySlug,
-	getArticles,
-	getCgu,
 	getContentWebsite,
 	processArticleData,
 } from '@/services/getContentWebsite'
@@ -9,7 +7,6 @@ import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { Layout } from '@/components/Global/Layout'
-import Articles from '@/components/Global/Articles'
 import { replaceTitle } from '@/services/utils'
 import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
@@ -47,12 +44,6 @@ export default async function Page({ params }) {
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
-
-	const [open, setOpen] = useState(false)
-
-	const handleClick = () => {
-		setOpen(!open)
-	}
 
 	return (
 		<>
