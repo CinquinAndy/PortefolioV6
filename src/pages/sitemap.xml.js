@@ -219,7 +219,11 @@ export const getServerSideProps = async ({ res }) => {
 
 	// Filter and format paths for URLs
 	let staticPaths = dirs.map(staticPagePath => {
-		let newPath = staticPagePath.replace('app/', '').replace(/\\/g, '/')
+		console.log(staticPagePath)
+		let newPath = staticPagePath
+			.replace('src\\app\\[lang]\\', '')
+			.replace(/\\/g, '/')
+		console.log(newPath)
 		return `${process.env.NEXT_PUBLIC_URL}/${newPath}`
 	})
 
@@ -228,8 +232,9 @@ export const getServerSideProps = async ({ res }) => {
 		return ![
 			`${process.env.NEXT_PUBLIC_URL}/api/sendMail`,
 			`${process.env.NEXT_PUBLIC_URL}/blog/[slug]`,
+			`${process.env.NEXT_PUBLIC_URL}/blog/[slug]`,
 			`${process.env.NEXT_PUBLIC_URL}/portefolio/[slug]`,
-			`${process.env.NEXT_PUBLIC_URL}/page`, // Exclude the root page.js
+			`${process.env.NEXT_PUBLIC_URL}/src/app/[lang]`, // Exclude the root page.js
 		].includes(item)
 	})
 
