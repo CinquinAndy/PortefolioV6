@@ -132,6 +132,8 @@ a:focus, a:hover, button:focus, button:hover {
     mask-position: center center;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-size: cover;
 }
 
 .video-background {
