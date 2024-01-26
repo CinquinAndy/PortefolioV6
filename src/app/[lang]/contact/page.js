@@ -1,10 +1,7 @@
 import { getContentWebsite } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
-import { toast } from 'react-toastify'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ContactForm } from '@/app/[lang]/contact/contactForm'
+import { ContactForm } from '@/components/Global/ContactForm'
 
 export async function generateMetadata({ params }) {
 	// fetch data
