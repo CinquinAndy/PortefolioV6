@@ -1,39 +1,41 @@
-import React from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
-import { useRouter } from 'next/router'
 import { Layout } from '@/components/Global/Layout'
 import Footer from '@/components/Global/Footer'
+import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 
-function Custom404({ content_website, notfound }) {
-	const router = useRouter()
-	const { locale } = router
+export async function generateMetadata() {
+	// fetch data
+	let content_website = await getContentWebsite('en')
+	content_website = content_website?.data
+
+	return {
+		title:
+			content_website?.attributes?.content_notfound?.seo?.title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		description:
+			content_website?.attributes?.content_notfound?.seo?.description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		metadataBase: new URL(`https://andy-cinquin.fr`),
+		alternates: {
+			canonical:
+				content_website?.attributes?.content_notfound?.seo?.canonical || '/',
+			languages: {
+				'fr-FR': '/',
+				'en-US': 'https://andy-cinquin.com',
+			},
+		},
+	}
+}
+
+export default async function NotFound() {
+	let content_website = await getContentWebsite('en')
+	content_website = content_website?.data
+	let notfound = await getNotFound('en')
+	notfound = notfound?.data
+
 	return (
 		<>
-			<Head>
-				<title>
-					{content_website?.attributes?.content_notfound?.seo?.title}
-				</title>
-				<meta
-					name="description"
-					content={
-						content_website?.attributes?.content_notfound?.seo?.description
-					}
-				/>
-				{/*	seo tag canonical link */}
-				<link
-					rel="canonical"
-					href={content_website?.attributes?.content_notfound?.seo?.canonical}
-				/>
-				<link
-					rel="alternate"
-					href={content_website?.attributes?.content_notfound?.seo?.canonical}
-					hrefLang={locale}
-				/>
-			</Head>
-
 			<div className="h-screen">
 				<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 					<div className="">
@@ -72,24 +74,3 @@ function Custom404({ content_website, notfound }) {
 		</>
 	)
 }
-
-export async function getStaticProps({ locale }) {
-	const content_website = await getContentWebsite(locale)
-	const notfound = await getNotFound(locale)
-
-	if (!content_website || !notfound) {
-		return {
-			notFound: true,
-		}
-	}
-
-	return {
-		props: {
-			content_website: content_website.data,
-			notfound: notfound.data,
-		},
-		revalidate: 10,
-	}
-}
-
-export default Custom404
