@@ -202,6 +202,19 @@ export const getServerSideProps = async ({ res }) => {
 		return results
 	}
 
+	// Function to filter and format paths
+	function filterAndFormatPaths(paths, baseUrl) {
+		return paths.filter(path => {
+			// Exclude specific paths
+			return ![
+				`${baseUrl}/api/sendMail`,
+				`${baseUrl}/blog/[slug]`,
+				`${baseUrl}/portefolio/[slug]`,
+				`${baseUrl}/page`, // Exclude the root page.js
+			].includes(path)
+		})
+	}
+
 	let dirs = getDirsFromDir('./src/app')
 
 	// Filter and format paths for URLs
