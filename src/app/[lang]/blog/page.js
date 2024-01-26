@@ -1,4 +1,8 @@
-import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
+import {
+	getArticles,
+	getCgu,
+	getContentWebsite,
+} from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
@@ -31,8 +35,8 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
 	let content_website = await getContentWebsite(params.lang)
 	content_website = content_website?.data
-	let cgu = await getCgu(params.lang)
-	cgu = cgu?.data
+	let articles = await getArticles(params.lang)
+	articles = articles?.data
 
 	return (
 		<>
