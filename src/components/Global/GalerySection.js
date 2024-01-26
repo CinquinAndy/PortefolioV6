@@ -1,3 +1,4 @@
+import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 
 export function GalerySection({ content_website, processedRealisation }) {

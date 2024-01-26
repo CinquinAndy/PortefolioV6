@@ -11,6 +11,7 @@ import { replaceTitle } from '@/services/utils'
 import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { GalerySection } from '@/components/Global/GalerySection'
+import Image from 'next/image'
 
 export async function generateMetadata({ params }) {
 	// fetch data
