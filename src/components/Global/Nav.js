@@ -2,19 +2,21 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
-	const pathname = usePathname()
 	const router = useRouter()
+	const { pathname, asPath, query, locale } = router
 
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
 
 	const switchLangage = () => {
-		router.replace(pathname, { locale: router.locale === 'fr' ? 'en' : 'fr' })
+		router.push({ pathname, query }, asPath, {
+			locale: locale === 'fr' ? 'en' : 'fr',
+		})
 	}
 
 	return (
