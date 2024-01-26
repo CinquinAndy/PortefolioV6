@@ -418,7 +418,6 @@ a:focus, a:hover, button:focus, button:hover {
     stroke-width: 1.5;
 
     animation: textAnimate 5s infinite alternate;
-
 }
 
 @keyframes textAnimate {

@@ -260,7 +260,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center`}
 			>
 				{isHome && (
-					<div className="patterns translate-y-[-70px] transform px-20">
+					<div className="patterns translate-y-[-140px] transform md:px-20">
 						<svg width="100%" height="100%">
 							<defs>
 								<pattern
