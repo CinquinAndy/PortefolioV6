@@ -14,11 +14,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const socials = content_website.socials
 
 	const switchLangage = () => {
-		router.replace(
-			pathname,
-			{ locale: router.locale === 'fr' ? 'en' : 'fr' },
-			{ shallow: true }
-		)
+		router.replace(pathname, { locale: router.locale === 'fr' ? 'en' : 'fr' })
 	}
 
 	return (
