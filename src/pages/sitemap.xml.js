@@ -219,11 +219,9 @@ export const getServerSideProps = async ({ res }) => {
 
 	// Filter and format paths for URLs
 	let staticPaths = dirs.map(staticPagePath => {
-		console.log(staticPagePath)
 		let newPath = staticPagePath
 			.replace('src\\app\\[lang]\\', '')
 			.replace(/\\/g, '/')
-		console.log(newPath)
 		return `${process.env.NEXT_PUBLIC_URL}/${newPath}`
 	})
 
