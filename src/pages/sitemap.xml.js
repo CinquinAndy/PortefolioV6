@@ -238,6 +238,9 @@ export const getServerSideProps = async ({ res }) => {
 		].includes(item)
 	})
 
+	// add root path
+	staticPaths.unshift(`${process.env.NEXT_PUBLIC_URL}/`)
+
 	// Fetching blog and portfolio paths from the API and creating full URLs
 	let staticPathsAltCopy = JSON.parse(JSON.stringify(staticPaths))
 	// Separate static paths for the alternative URL
