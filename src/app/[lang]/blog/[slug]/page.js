@@ -10,9 +10,9 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { Layout } from '@/components/Global/Layout'
 import Articles from '@/components/Global/Articles'
-import {replaceTitle} from "@/services/utils";
-import {LinkIcon} from "@heroicons/react/20/solid";
-import Link from "next/link";
+import { replaceTitle } from '@/services/utils'
+import { LinkIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link'
 
 export async function generateMetadata({ params }) {
 	// fetch data
@@ -32,16 +32,8 @@ export async function generateMetadata({ params }) {
 		alternates: {
 			canonical: processedArticle?.attributes?.seo_canonical || '/',
 			languages: {
-				'en-US': `${
-					params.locale === 'fr'
-						? process.env.NEXT_PUBLIC_URL_ALT
-						: process.env.NEXT_PUBLIC_URL
-				}/blog/${processedArticle?.attributes?.slug}`,
-				'fr-FR': `${
-					params.locale === 'fr'
-						? process.env.NEXT_PUBLIC_URL_ALT
-						: process.env.NEXT_PUBLIC_URL
-				}/blog/${processedArticle?.attributes?.slug}`,
+				'en-US': `${params.locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
+				'fr-FR': `${params.locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
 			},
 		},
 	}
@@ -138,7 +130,9 @@ export default async function Page({ params }) {
 								<div
 									className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
 								>
-									<Layout value={processedArticle?.attributes?.content.toString()} />
+									<Layout
+										value={processedArticle?.attributes?.content.toString()}
+									/>
 								</div>
 							</article>
 						</div>
