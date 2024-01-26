@@ -2,27 +2,29 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
+	const pathname = usePathname()
 	const router = useRouter()
-	const { asPath, query } = router
 
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
 
 	const switchLangage = () => {
-		router.push(query, asPath)
+		router.replace(
+			pathname,
+			{ locale: router.locale === 'fr' ? 'en' : 'fr' },
+			{ shallow: true }
+		)
 	}
 
 	return (
 		<>
 			<header
-				className={`${
-					!open ? 'sticky' : 'fixed'
-				} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
+				className={`${!open ? 'sticky' : 'fixed'} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
 			>
 				<div>
 					<button
@@ -80,11 +82,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 			</header>
 			<nav
 				id="nav-block"
-				className={`${
-					!open
-						? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0'
-						: 'pointer-events-auto z-40 -translate-y-0 opacity-100'
-				} fixed flex h-screen w-screen transform transition-transform`}
+				className={`${!open ? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0' : 'pointer-events-auto z-40 -translate-y-0 opacity-100'} fixed flex h-screen w-screen transform transition-transform`}
 			>
 				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
 					{menu.map((item, index) => {
@@ -258,9 +256,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				/>
 			</nav>
 			<div
-				className={`${
-					isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'
-				} relative flex w-screen items-center justify-center`}
+				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center`}
 			>
 				{isHome && (
 					<div className="patterns translate-y-[-70px] transform px-20">
@@ -297,9 +293,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				</h1>
 				{!isHome && (
 					<div
-						className={`${
-							isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'
-						} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
+						className={`${isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
 					>
 						<Image
 							width={450}
@@ -312,9 +306,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					</div>
 				)}
 				<div
-					className={`${
-						isHome ? 'flex' : 'hidden'
-					} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20`}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20`}
 				>
 					<div className={'relative p-3'}>
 						<Link
@@ -388,9 +380,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					</div>
 				</div>
 				<div
-					className={`${
-						isHome ? 'flex' : 'hidden'
-					} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
 				>
 					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-75 md:text-xl">
 						{content_website?.content_home?.title_vertical_left_bottom}
