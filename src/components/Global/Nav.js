@@ -390,11 +390,17 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 					<h2 className={'origin-bottom-left -rotate-90'}>
 						<TypeAnimation
 							sequence={[
-								content_website?.content_home?.title_vertical_left_bottom,
+								content_website?.content_home?.title_vertical_left_1,
 								1000, // Waits 1s
-								content_website?.content_home?.title_vertical_left_bottom,
+								content_website?.content_home?.title_vertical_left_2,
 								2000, // Waits 2s
-								content_website?.content_home?.title_vertical_left_bottom,
+								content_website?.content_home?.title_vertical_left_3,
+								3000, // Waits 3s
+								content_website?.content_home?.title_vertical_left_4,
+								4000, // Waits 4s
+								content_website?.content_home?.title_vertical_left_5,
+								5000, // Waits 5s
+								content_website?.content_home?.title_vertical_left_6,
 							]}
 							wrapper="span"
 							cursor={true}
