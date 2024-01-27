@@ -387,20 +387,23 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 					{/*<h2 className="origin-bottom-left  font-body text-sm tracking-wider opacity-75 md:text-xl">*/}
 					{/*	{content_website?.content_home?.title_vertical_left_bottom}*/}
 					{/*</h2>*/}
-					<h2 className={'origin-bottom-left -rotate-90'}>
+					<h2 className={'sr-only'}>
+						{`‣ ${content_website?.content_home?.title_vertical_left_1} / ${content_website?.content_home?.title_vertical_left_2} / ${content_website?.content_home?.title_vertical_left_3} / ${content_website?.content_home?.title_vertical_left_4} / ${content_website?.content_home?.title_vertical_left_5} / ${content_website?.content_home?.title_vertical_left_6}`}
+					</h2>
+					<div className={'origin-bottom-left -rotate-90 uppercase'}>
 						<TypeAnimation
 							sequence={[
-								content_website?.content_home?.title_vertical_left_1,
+								`‣ ${content_website?.content_home?.title_vertical_left_1}`,
 								1000, // Waits 1s
-								content_website?.content_home?.title_vertical_left_2,
+								`‣ ${content_website?.content_home?.title_vertical_left_2}`,
 								2000, // Waits 2s
-								content_website?.content_home?.title_vertical_left_3,
-								3000, // Waits 3s
-								content_website?.content_home?.title_vertical_left_4,
-								4000, // Waits 4s
-								content_website?.content_home?.title_vertical_left_5,
-								5000, // Waits 5s
-								content_website?.content_home?.title_vertical_left_6,
+								`‣ ${content_website?.content_home?.title_vertical_left_3}`,
+								1000, // Waits 1s
+								`‣ ${content_website?.content_home?.title_vertical_left_4}`,
+								2000, // Waits 2s
+								`‣ ${content_website?.content_home?.title_vertical_left_5}`,
+								1000, // Waits 1s
+								`‣ ${content_website?.content_home?.title_vertical_left_6}`,
 							]}
 							wrapper="span"
 							cursor={true}
@@ -416,7 +419,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 								},
 							}}
 						/>
-					</h2>
+					</div>
 				</div>
 			</div>
 		</>
