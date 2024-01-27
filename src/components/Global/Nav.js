@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { TypeAnimation } from 'react-type-animation'
 
 function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 	const [open, setOpen] = useState(false)
@@ -383,9 +384,33 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 				<div
 					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
 				>
-					{/*<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-75 md:text-xl">*/}
+					{/*<h2 className="origin-bottom-left  font-body text-sm tracking-wider opacity-75 md:text-xl">*/}
 					{/*	{content_website?.content_home?.title_vertical_left_bottom}*/}
 					{/*</h2>*/}
+					<h2 className={'origin-bottom-left -rotate-90'}>
+						<TypeAnimation
+							sequence={[
+								content_website?.content_home?.title_vertical_left_bottom,
+								1000, // Waits 1s
+								content_website?.content_home?.title_vertical_left_bottom,
+								2000, // Waits 2s
+								content_website?.content_home?.title_vertical_left_bottom,
+							]}
+							wrapper="span"
+							cursor={true}
+							repeat={Infinity}
+							style={{
+								fontSize: '0.875rem',
+								lineHeight: '1.25rem',
+								letterSpacing: '0.05em',
+								opacity: 0.75,
+								'@media (min-width: 768px)': {
+									fontSize: '1.25rem',
+									lineHeight: '1.75rem',
+								},
+							}}
+						/>
+					</h2>
 				</div>
 			</div>
 		</>
