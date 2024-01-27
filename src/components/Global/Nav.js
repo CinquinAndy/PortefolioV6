@@ -383,9 +383,9 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 				<div
 					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
 				>
-					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-75 md:text-xl">
-						{content_website?.content_home?.title_vertical_left_bottom}
-					</h2>
+					{/*<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-75 md:text-xl">*/}
+					{/*	{content_website?.content_home?.title_vertical_left_bottom}*/}
+					{/*</h2>*/}
 				</div>
 			</div>
 		</>
