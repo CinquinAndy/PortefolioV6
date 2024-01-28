@@ -43,7 +43,11 @@ export default async function Page({ params }) {
 			/>
 			<div>
 				<div className={'relative'}>
-					<div className={'my-24 grid grid-cols-2 px-6 md:my-48 2xl:px-0'}>
+					<div
+						className={
+							'my-24 grid grid-cols-1 px-6 md:my-48 md:grid-cols-2 2xl:px-0'
+						}
+					>
 						<div className={'flex w-full justify-center'}>
 							<HoloComponent />
 						</div>

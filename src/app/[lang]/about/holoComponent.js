@@ -3,7 +3,7 @@ import { HoloCard } from 'special-card'
 
 export function HoloComponent() {
 	return (
-		<div className="relative flex w-full justify-center overflow-hidden rounded-lg p-8">
+		<div className="relative flex w-full justify-center overflow-hidden rounded-lg p-4 md:p-8">
 			<HoloCard
 				height={500}
 				width={300}
