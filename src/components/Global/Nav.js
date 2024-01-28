@@ -413,7 +413,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 								lineHeight: '1.25rem',
 								letterSpacing: '0.05em',
 								opacity: 0.75,
-								'@media (min-width: 768px)': {
+								'@media (minWidth: 768px)': {
 									fontSize: '1.25rem',
 									lineHeight: '1.75rem',
 								},
