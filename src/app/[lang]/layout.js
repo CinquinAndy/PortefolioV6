@@ -1,4 +1,3 @@
-import AOS from 'aos'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import { Noto_Serif_Display, Be_Vietnam_Pro } from 'next/font/google'
