@@ -24,7 +24,7 @@ export function middleware(request) {
 	) {
 		return i18nRouter(request, {
 			locales: ['en', 'fr'],
-			defaultLocale: 'en',
+			defaultLocale: 'fr',
 			serverSetCookie: 'if-empty',
 		})
 	} else if (
@@ -33,7 +33,7 @@ export function middleware(request) {
 	) {
 		return i18nRouter(request, {
 			locales: ['en', 'fr'],
-			defaultLocale: 'fr',
+			defaultLocale: 'en',
 			serverSetCookie: 'if-empty',
 		})
 	}
