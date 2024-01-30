@@ -36,7 +36,8 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params, locales, locale }) {
+	console.log(params, locale, locales)
 	let content_website = await getContentWebsite(params.lang)
 	content_website = content_website?.data
 	let services = await getServices(params.lang)
