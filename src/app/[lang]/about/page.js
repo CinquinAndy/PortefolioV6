@@ -49,7 +49,7 @@ export default async function Page({ params }) {
 						}
 					>
 						<div className={'flex w-full justify-center'}>
-							<HoloComponent />
+							<HoloComponent lang={params.lang}/>
 						</div>
 						<div className="">
 							<article>
