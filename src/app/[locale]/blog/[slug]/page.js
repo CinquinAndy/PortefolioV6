@@ -72,7 +72,7 @@ export default async function Page({ params }) {
 								<div className={'flex items-center gap-2'}>
 									<h2
 										className={
-											'text-md font-black md:text-3xl [&>*]:font-black'
+											'text-md [&>*]:text-md font-black md:text-3xl [&>*]:font-black md:[&>*]:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(
@@ -110,7 +110,9 @@ export default async function Page({ params }) {
 
 						<div className="mx-auto max-w-7xl">
 							<h2
-								className={'text-lg font-black md:text-3xl [&>*]:font-black'}
+								className={
+									'text-lg font-black md:text-3xl [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
 										content_website?.attributes?.content_blog?.title_content

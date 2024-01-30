@@ -8,7 +8,6 @@
     text-decoration: none;
     transition: opacity, z-index, color ease-in-out .3s;
     font-family: var(--font-be-vietnam-pro), sans-serif;
-    font-weight: 400;
     color: #fff;
 }
 

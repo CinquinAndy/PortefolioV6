@@ -9,7 +9,7 @@ function Cta({ content_website }) {
 				<div>
 					<div className="flex w-full items-center justify-center">
 						<h2
-							className="text-center text-xl font-bold xl:text-3xl"
+							className="text-center text-xl font-bold xl:text-3xl [&>*]:text-xl [&>*]:font-bold xl:[&>*]:text-3xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(content_website?.attributes?.cta?.title),
 							}}
