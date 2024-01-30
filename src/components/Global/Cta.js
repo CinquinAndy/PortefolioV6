@@ -1,4 +1,3 @@
-import React from 'react'
 import { Layout } from '@/components/Global/Layout'
 import { replaceTitle } from '@/services/utils'
 import Link from 'next/link'
@@ -10,7 +9,7 @@ function Cta({ content_website }) {
 				<div>
 					<div className="flex w-full items-center justify-center">
 						<h2
-							className="text-center text-xl font-bold xl:text-3xl"
+							className="text-center !font-display text-xl font-bold xl:text-3xl [&>*]:!font-display [&>*]:text-xl [&>*]:font-bold xl:[&>*]:text-3xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(content_website?.attributes?.cta?.title),
 							}}

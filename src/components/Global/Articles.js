@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
@@ -22,7 +21,7 @@ function Articles({ content_website, articles, slice, isHome }) {
 				<div className="mt-[100px] flex justify-between">
 					<div className="w-1/2">
 						<h2
-							className="text-2xl normal-case leading-snug xl:text-5xl"
+							className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(
 									content_website?.attributes?.content_home?.title_blog

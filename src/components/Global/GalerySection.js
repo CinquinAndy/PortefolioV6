@@ -12,8 +12,8 @@ export function GalerySection({ content_website, processedRealisation }) {
 	}
 
 	return (
-		<div
-			role={'button'}
+		<input
+			type={'button'}
 			onClick={handleClick}
 			className={
 				'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'
@@ -22,7 +22,9 @@ export function GalerySection({ content_website, processedRealisation }) {
 			<div className={'flex w-full items-start gap-4 md:gap-8'}>
 				<div className={'flex items-center gap-2'}>
 					<h2
-						className={'text-md font-black md:text-3xl [&>*]:font-black'}
+						className={
+							'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display [&>*]:font-black md:[&>*]:text-3xl'
+						}
 						dangerouslySetInnerHTML={{
 							__html: replaceTitle(
 								content_website?.attributes?.content_realisations?.title_galery
@@ -53,6 +55,6 @@ export function GalerySection({ content_website, processedRealisation }) {
 					content_website?.attributes?.content_realisations?.title_galery
 				}
 			/>
-		</div>
+		</input>
 	)
 }

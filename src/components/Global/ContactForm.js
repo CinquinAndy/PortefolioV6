@@ -7,17 +7,17 @@ import { toast } from 'react-toastify'
 export function ContactForm({ content_website }) {
 	const schema = z
 		.object({
-			name: z.string().nonempty({
+			name: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_name,
 			}),
-			email: z.string().nonempty({
+			email: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_email,
 			}),
-			phone: z.string().nonempty({
+			phone: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_phone,
 			}),
 			company: z.string(),
-			content: z.string().nonempty({
+			content: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_content,
 			}),
 		})
