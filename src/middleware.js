@@ -1,3 +1,5 @@
+import { i18nRouter } from 'next-i18n-router'
+
 export function middleware(request) {
 	const { host } = request.nextUrl
 
@@ -13,10 +15,14 @@ export function middleware(request) {
 	// Définir la locale dans les headers de la requête
 	request.headers.set('accept-language', newLocale)
 
-	// Utilisez le rendu conditionnel dans vos composants/pages pour afficher le contenu en fonction de la locale
-	// Pas de redirection nécessaire
+	return i18nRouter(request, {
+		locales: ['en', 'fr'],
+		defaultLocale: 'en',
+		serverSetCookie: 'if-empty',
+	})
 }
 
+// applies this middleware only to files in the app directory
 export const config = {
 	matcher: '/((?!api|static|.*\\..*|_next).*)',
 }
