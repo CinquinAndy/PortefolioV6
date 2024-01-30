@@ -2,6 +2,7 @@ import { i18nRouter } from 'next-i18n-router'
 
 export function middleware(request) {
 	const { host } = request.nextUrl
+	console.log('request', request)
 
 	console.log('host', host)
 	let newLocale
