@@ -38,8 +38,11 @@ export const replaceTitle = title => {
 
 	// Replace underscores with sky color
 	const regexUnderscore = /_([^_]+)_/g
-	return title.replace(
+	title = title.replace(
 		regexUnderscore,
 		'<span class="text-sky-400 font-display">$1</span>'
 	)
+	// encapsulate the title in a span
+	title = `<span class="font-display">${title}</span>`
+	return title
 }

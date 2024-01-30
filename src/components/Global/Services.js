@@ -12,13 +12,13 @@ function Services({ content_website, services }) {
 			<div className="flex justify-between">
 				<div className="w-2/3 xl:w-1/2">
 					<h2
-						className="text-2xl normal-case leading-snug xl:text-5xl"
+						className="inline-block text-2xl normal-case leading-snug xl:text-5xl [&>*]:text-2xl xl:[&>*]:text-5xl"
 						dangerouslySetInnerHTML={{
 							__html: replaceTitle(
 								content_website?.attributes?.content_home?.title_service
 							),
 						}}
-					></h2>
+					/>
 				</div>
 				<div className="flex w-1/2 items-end justify-end">
 					<Link
