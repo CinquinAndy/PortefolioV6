@@ -1,4 +1,3 @@
-import React from 'react'
 import { Layout } from '@/components/Global/Layout'
 import { replaceTitle } from '@/services/utils'
 import Link from 'next/link'

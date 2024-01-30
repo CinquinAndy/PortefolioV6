@@ -6,7 +6,7 @@ import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
-import { Noto_Serif_Display, Be_Vietnam_Pro } from 'next/font/google'
+import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],

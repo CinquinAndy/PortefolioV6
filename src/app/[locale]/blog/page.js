@@ -1,12 +1,7 @@
-import {
-	getArticles,
-	getCgu,
-	getContentWebsite,
-} from '@/services/getContentWebsite'
+import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import { Layout } from '@/components/Global/Layout'
 import Articles from '@/components/Global/Articles'
 
 export async function generateMetadata({ params }) {

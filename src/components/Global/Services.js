@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'

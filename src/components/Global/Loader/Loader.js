@@ -1,13 +1,10 @@
-import React from 'react'
 import LoaderAnimation from '@/components/Global/Loader/LoaderAnimation'
 
-function Loader(props) {
+function Loader() {
 	return (
-		<>
-			<div className={'z-50 flex h-full w-full items-center justify-center '}>
-				<LoaderAnimation />
-			</div>
-		</>
+		<div className={'z-50 flex h-full w-full items-center justify-center '}>
+			<LoaderAnimation />
+		</div>
 	)
 }
 
