@@ -1,6 +1,6 @@
 const i18nConfig = {
-	locales: ['en-US', 'fr'],
-	defaultLocale: 'en-US',
+	locales: ['en', 'fr'],
+	defaultLocale: 'fr',
 	localeDetection: true,
 	domains: [
 		{
@@ -9,7 +9,7 @@ const i18nConfig = {
 		},
 		{
 			domain: 'andy-cinquin.com',
-			defaultLocale: 'en-US',
+			defaultLocale: 'en',
 		},
 	],
 }
