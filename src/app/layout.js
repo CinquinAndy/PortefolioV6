@@ -4,9 +4,11 @@ import '@/styles/distorsions.css'
 import '@/styles/main.css'
 import '@/styles/nav.css'
 import 'react-toastify/dist/ReactToastify.css'
-import i18nConfig from '/i18nConfig'
 
 export function generateStaticParams() {
+	const i18nConfig = {
+		locales: ['fr', 'en'],
+	}
 	return i18nConfig.locales.map(locale => ({ locale }))
 }
 
