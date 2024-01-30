@@ -40,6 +40,13 @@ export function middleware(request) {
 			defaultLocale: 'en',
 			serverSetCookie: 'always',
 		})
+	} else {
+		console.log('en', request.headers.get('x-forwarded-host'))
+		return i18nRouter(request, {
+			locales: ['en', 'fr'],
+			defaultLocale: 'en',
+			serverSetCookie: 'always',
+		})
 	}
 }
 
