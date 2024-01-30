@@ -26,6 +26,10 @@
     color: #000;
 }
 
+blockquote {
+    border-left: #fff !important;
+}
+
 body {
     box-sizing: border-box;
     display: inline-block;

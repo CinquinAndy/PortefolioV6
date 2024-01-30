@@ -21,7 +21,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 				<div className="mt-[100px] flex justify-between">
 					<div className="w-1/2">
 						<h2
-							className="text-2xl normal-case leading-snug xl:text-5xl [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+							className="font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(
 									content_website?.attributes?.content_home?.title_realisation

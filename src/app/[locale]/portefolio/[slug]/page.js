@@ -69,7 +69,7 @@ export default async function Page({ params }) {
 						<div className="mx-auto max-w-3xl md:pl-20">
 							<h2
 								className={
-									'text-lg font-black md:text-3xl [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									'font-display text-lg font-black md:text-3xl [&>*]:font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
@@ -94,7 +94,7 @@ export default async function Page({ params }) {
 						>
 							<h2
 								className={
-									'text-lg font-black md:text-3xl [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									'font-display text-lg font-black md:text-3xl [&>*]:font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
@@ -143,7 +143,7 @@ export default async function Page({ params }) {
 								>
 									<h2
 										className={
-											'text-lg font-black md:text-3xl [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+											'font-display text-lg font-black md:text-3xl [&>*]:font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(

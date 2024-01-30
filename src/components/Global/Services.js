@@ -11,7 +11,7 @@ function Services({ content_website, services }) {
 			<div className="flex justify-between">
 				<div className="w-2/3 xl:w-1/2">
 					<h2
-						className="inline-block text-2xl normal-case leading-snug xl:text-5xl [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+						className="inline-block font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 						dangerouslySetInnerHTML={{
 							__html: replaceTitle(
 								content_website?.attributes?.content_home?.title_service
@@ -49,7 +49,7 @@ function Services({ content_website, services }) {
 								</div>
 								<header className="flex w-full items-center justify-center py-8 xl:py-6">
 									<h2
-										className="text-lg normal-case xl:text-xl [&>*]:text-lg [&>*]:normal-case xl:[&>*]:text-xl"
+										className="font-display text-lg normal-case xl:text-xl [&>*]:font-display [&>*]:text-lg [&>*]:normal-case xl:[&>*]:text-xl"
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(service?.attributes?.title),
 										}}

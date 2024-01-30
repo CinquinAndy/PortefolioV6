@@ -111,7 +111,7 @@ export default async function Page({ params }) {
 						<div className="mx-auto max-w-7xl">
 							<h2
 								className={
-									'text-lg font-black md:text-3xl [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									'font-display text-lg font-black md:text-3xl [&>*]:font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(
