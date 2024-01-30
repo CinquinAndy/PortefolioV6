@@ -1,7 +1,7 @@
 const i18nConfig = {
 	locales: ['en', 'fr'],
 	defaultLocale: 'en',
-	localeDetection: true,
+	localeDetection: false,
 	domains: [
 		{
 			domain: 'andy-cinquin.fr',
