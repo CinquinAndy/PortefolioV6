@@ -28,7 +28,7 @@ export function middleware(request) {
 		return i18nRouter(request, {
 			locales: ['en', 'fr'],
 			defaultLocale: 'fr',
-			serverSetCookie: 'if-empty',
+			serverSetCookie: 'always',
 		})
 	} else if (
 		request.headers.get('x-forwarded-host') ===
@@ -38,7 +38,14 @@ export function middleware(request) {
 		return i18nRouter(request, {
 			locales: ['en', 'fr'],
 			defaultLocale: 'en',
-			serverSetCookie: 'if-empty',
+			serverSetCookie: 'always',
+		})
+	} else {
+		console.log('en', request.headers.get('x-forwarded-host'))
+		return i18nRouter(request, {
+			locales: ['en', 'fr'],
+			defaultLocale: 'en',
+			serverSetCookie: 'always',
 		})
 	}
 }
