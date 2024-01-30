@@ -1,25 +1,35 @@
 export function middleware(request) {
 	const locales = ['en', 'fr']
-	const { pathname } = request.nextUrl
+	const { pathname, host } = request.nextUrl
 	let newLocale = ''
+
+	// Determine the locale based on the domain
+	if (host === process.env.NEXT_PUBLIC_URL) {
+		newLocale = 'fr'
+	} else if (host === process.env.NEXT_PUBLIC_URL_ALT) {
+		newLocale = 'en'
+	} else {
+		newLocale = 'en' // Default locale for other domains
+	}
 
 	// Check if the path contains a locale
 	const pathnameHasLocale = locales.some(locale => {
 		if (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`) {
-			newLocale = locale
 			return true
 		}
 		return false
 	})
 
+	// Redirect to [domain]/[locale] if it's the root
+	if (!pathnameHasLocale && pathname === '/') {
+		request.nextUrl.pathname = `/${newLocale}`
+		return Response.redirect(request.nextUrl)
+	}
+
+	// Remove the locale segment from the URL if it exists
 	if (pathnameHasLocale) {
-		// Remove the locale segment from the URL
 		request.nextUrl.pathname = pathname.replace(`/${newLocale}`, '')
-
-		// Redefine the request headers for the new language
 		request.headers.set('accept-language', newLocale)
-
-		// Redirect to the new URL without the locale segment
 		return Response.redirect(request.nextUrl)
 	}
 
