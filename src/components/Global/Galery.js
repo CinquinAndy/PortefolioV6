@@ -31,7 +31,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 												<Dialog.Title>
 													<div
 														className={
-															'font-display text-lg font-black md:text-3xl [&>*]:font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+															'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 														}
 														dangerouslySetInnerHTML={{
 															__html: replaceTitle(title_galery),

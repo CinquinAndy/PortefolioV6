@@ -70,11 +70,9 @@ nav a {
     text-decoration: none
 }
 
-h1, h1 *, h2, h3, h4, h5, h6, nav * {
+h1, h1 *, h2, h2 *, h3, h4, h5, h6, nav * {
     font-family: var(--font-noto-serif-display), serif;
-    font-weight: 400;
-    font-style: normal;
-    text-transform: uppercase
+    font-weight: initial;
 }
 
 a:focus, a:hover, button:focus, button:hover {
