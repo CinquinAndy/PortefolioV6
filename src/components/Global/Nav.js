@@ -1,29 +1,43 @@
-import React, { useEffect, useRef, useState } from 'react'
+'use client'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { TypeAnimation } from 'react-type-animation'
 
-function Nav({ content_website, selectedMenu, h1, isHome = true }) {
+function CardElement({ title, description, children }) {
+	return (
+		<>
+			<h1>{title}</h1>
+			<div>zaza</div>
+			<div>{description}</div>
+			{children}
+		</>
+	)
+}
+
+function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 	const [open, setOpen] = useState(false)
 	const router = useRouter()
-	const { pathname, asPath, query, locale } = router
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
 
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
 
 	const switchLangage = () => {
-		router.push({ pathname, query }, asPath, {
-			locale: locale === 'fr' ? 'en' : 'fr',
-		})
+		if (pathname) {
+			router.push(locale === 'fr' ? `${pathname}` : `/fr${pathname}`)
+		} else {
+			router.push(locale === 'fr' ? `/` : `/fr`)
+		}
 	}
 
 	return (
 		<>
 			<header
-				className={`${
-					!open ? 'sticky' : 'fixed'
-				} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
+				className={`${!open ? 'sticky' : 'fixed'} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
 			>
 				<div>
 					<button
@@ -81,11 +95,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 			</header>
 			<nav
 				id="nav-block"
-				className={`${
-					!open
-						? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0'
-						: 'pointer-events-auto z-40 -translate-y-0 opacity-100'
-				} fixed flex h-screen w-screen transform transition-transform`}
+				className={`${!open ? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0' : 'pointer-events-auto z-40 -translate-y-0 opacity-100'} fixed flex h-screen w-screen transform transition-transform`}
 			>
 				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
 					{menu.map((item, index) => {
@@ -259,12 +269,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				/>
 			</nav>
 			<div
-				className={`${
-					isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'
-				} relative flex w-screen items-center justify-center`}
+				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center`}
 			>
 				{isHome && (
-					<div className="patterns translate-y-[-70px] transform px-20">
+					<div className="patterns translate-y-[-140px] transform md:px-20">
 						<svg width="100%" height="100%">
 							<defs>
 								<pattern
@@ -298,9 +306,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				</h1>
 				{!isHome && (
 					<div
-						className={`${
-							isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'
-						} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
+						className={`${isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
 					>
 						<Image
 							width={450}
@@ -313,9 +319,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					</div>
 				)}
 				<div
-					className={`${
-						isHome ? 'flex' : 'hidden'
-					} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20`}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20`}
 				>
 					<div className={'relative p-3'}>
 						<Link
@@ -389,13 +393,44 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					</div>
 				</div>
 				<div
-					className={`${
-						isHome ? 'flex' : 'hidden'
-					} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
 				>
-					<h2 className="origin-bottom-left -rotate-90 font-body text-sm tracking-wider opacity-75 md:text-xl">
-						{content_website?.content_home?.title_vertical_left_bottom}
+					{/*<h2 className="origin-bottom-left  font-body text-sm tracking-wider opacity-75 md:text-xl">*/}
+					{/*	{content_website?.content_home?.title_vertical_left_bottom}*/}
+					{/*</h2>*/}
+					<h2 className={'sr-only'}>
+						{`‣ ${content_website?.content_home?.title_vertical_left_1} / ${content_website?.content_home?.title_vertical_left_2} / ${content_website?.content_home?.title_vertical_left_3} / ${content_website?.content_home?.title_vertical_left_4} / ${content_website?.content_home?.title_vertical_left_5} / ${content_website?.content_home?.title_vertical_left_6}`}
 					</h2>
+					<div className={'origin-bottom-left -rotate-90 uppercase'}>
+						<TypeAnimation
+							sequence={[
+								`‣ ${content_website?.content_home?.title_vertical_left_1}`,
+								1000, // Waits 1s
+								`‣ ${content_website?.content_home?.title_vertical_left_2}`,
+								2000, // Waits 2s
+								`‣ ${content_website?.content_home?.title_vertical_left_3}`,
+								1000, // Waits 1s
+								`‣ ${content_website?.content_home?.title_vertical_left_4}`,
+								2000, // Waits 2s
+								`‣ ${content_website?.content_home?.title_vertical_left_5}`,
+								1000, // Waits 1s
+								`‣ ${content_website?.content_home?.title_vertical_left_6}`,
+							]}
+							wrapper="span"
+							cursor={true}
+							repeat={Infinity}
+							style={{
+								fontSize: '0.875rem',
+								lineHeight: '1.25rem',
+								letterSpacing: '0.05em',
+								opacity: 0.75,
+								'@media (minWidth: 768px)': {
+									fontSize: '1.25rem',
+									lineHeight: '1.75rem',
+								},
+							}}
+						/>
+					</div>
 				</div>
 			</div>
 		</>

@@ -9,21 +9,6 @@ const nextConfig = {
 			},
 		],
 	},
-	i18n: {
-		localeDetection: false,
-		locales: ['fr', 'en'],
-		defaultLocale: 'en',
-		domains: [
-			{
-				domain: 'andy-cinquin.fr',
-				defaultLocale: 'fr',
-			},
-			{
-				domain: 'andy-cinquin.com',
-				defaultLocale: 'en',
-			},
-		],
-	},
 	webpack: config => {
 		let modularizeImports = null
 		config.module.rules.some(rule =>
