@@ -1,4 +1,5 @@
 export const replaceTitle = title => {
+	console.log('title', title)
 	if (!title) return ''
 	// Replace asterisks with indigo color
 	const regexAsterisk = /\*([^*]+)\*/g

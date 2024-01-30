@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -7,11 +7,20 @@ import { TypeAnimation } from 'react-type-animation'
 
 function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
+	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
 
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
+
+	useEffect(() => {
+		setLinkToSwitchLanguage(
+			window.location.origin === process.env.NEXT_PUBLIC_URL
+				? `${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
+				: `${process.env.NEXT_PUBLIC_URL}/${pathname}`
+		)
+	}, [pathname])
 
 	return (
 		<>
@@ -231,11 +240,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						</Link>
 						<div>
 							<Link
-								href={
-									window.location.origin === process.env.NEXT_PUBLIC_URL
-										? `${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
-										: `${process.env.NEXT_PUBLIC_URL}/${pathname}`
-								}
+								href={linkToSwitchLanguage}
 								className="font-body normal-case underline"
 							>
 								{content_website?.contact?.langage}
