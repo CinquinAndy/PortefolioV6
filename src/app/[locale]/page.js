@@ -14,7 +14,7 @@ import Footer from '@/components/Global/Footer'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
 
 	return {
@@ -37,13 +37,13 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let services = await getServices(params.lang)
+	let services = await getServices(params.locale)
 	services = services?.data
-	let realisations = await getRealisations(params.lang)
+	let realisations = await getRealisations(params.locale)
 	realisations = realisations?.data
-	let articles = await getArticles(params.lang)
+	let articles = await getArticles(params.locale)
 	articles = articles?.data
 
 	return (

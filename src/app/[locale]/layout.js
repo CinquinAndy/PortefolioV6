@@ -1,6 +1,7 @@
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
-import { Noto_Serif_Display, Be_Vietnam_Pro } from 'next/font/google'
+import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
+import { dir } from 'i18next'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
@@ -15,7 +16,7 @@ const be_vietnam_pro = Be_Vietnam_Pro({
 
 export default function RootLayout({ children, params }) {
 	return (
-		<html lang={`${params.lang}`}>
+		<html lang={params.locale} dir={dir(params.locale)}>
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>

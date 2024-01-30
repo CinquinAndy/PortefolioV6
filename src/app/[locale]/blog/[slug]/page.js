@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	let article = await getArticleBySlug(params.slug, params.lang)
+	let article = await getArticleBySlug(params.slug, params.locale)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
@@ -38,9 +38,9 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
 	// fetch data
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let article = await getArticleBySlug(params.slug, params.lang)
+	let article = await getArticleBySlug(params.slug, params.locale)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
