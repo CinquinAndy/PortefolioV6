@@ -3,6 +3,7 @@ import { i18nRouter } from 'next-i18n-router'
 export function middleware(request) {
 	const { host } = request.nextUrl
 
+	console.log('host', host)
 	let newLocale
 	if (host === process.env.NEXT_PUBLIC_URL) {
 		newLocale = 'fr'
