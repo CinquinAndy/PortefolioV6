@@ -1,6 +1,7 @@
 import { i18nRouter } from 'next-i18n-router'
 
 export function middleware(request) {
+	console.log('middleware', request.headers)
 	let newLocale
 	if (
 		request.headers.get('x-forwarded-host') ===
@@ -16,12 +17,14 @@ export function middleware(request) {
 		newLocale = 'en'
 	}
 
+	console.log('newLocale', newLocale)
 	request.headers.set('accept-language', newLocale)
 
 	if (
 		request.headers.get('x-forwarded-host') ===
 		process.env.NEXT_PUBLIC_URL.replace('https://', '')
 	) {
+		console.log('fr', request.headers.get('x-forwarded-host'))
 		return i18nRouter(request, {
 			locales: ['en', 'fr'],
 			defaultLocale: 'fr',
@@ -31,6 +34,7 @@ export function middleware(request) {
 		request.headers.get('x-forwarded-host') ===
 		process.env.NEXT_PUBLIC_URL_ALT.replace('https://', '')
 	) {
+		console.log('en', request.headers.get('x-forwarded-host'))
 		return i18nRouter(request, {
 			locales: ['en', 'fr'],
 			defaultLocale: 'en',
