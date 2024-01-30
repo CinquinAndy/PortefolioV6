@@ -9,7 +9,7 @@ import Realisations from '@/components/Global/Realisations'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	const content_website = await getContentWebsite(params.lang)
+	const content_website = await getContentWebsite(params.locale)
 
 	return {
 		title:
@@ -33,9 +33,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let realisations = await getRealisations(params.lang)
+	let realisations = await getRealisations(params.locale)
 	realisations = realisations?.data
 
 	return (

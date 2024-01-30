@@ -11,7 +11,7 @@ import Articles from '@/components/Global/Articles'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	const content_website = await getContentWebsite(params.lang)
+	const content_website = await getContentWebsite(params.locale)
 
 	return {
 		title:
@@ -33,9 +33,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let articles = await getArticles(params.lang)
+	let articles = await getArticles(params.locale)
 	articles = articles?.data
 
 	return (

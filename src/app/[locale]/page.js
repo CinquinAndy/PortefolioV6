@@ -14,7 +14,7 @@ import Footer from '@/components/Global/Footer'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
 
 	return {
@@ -36,15 +36,15 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export default async function Page({ params, locales, locale }) {
-	console.log(params, locale, locales)
-	let content_website = await getContentWebsite(params.lang)
+export default async function Page({ params: { locale } }) {
+	console.log('locale in page', locale)
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let services = await getServices(params.lang)
+	let services = await getServices(locale)
 	services = services?.data
-	let realisations = await getRealisations(params.lang)
+	let realisations = await getRealisations(locale)
 	realisations = realisations?.data
-	let articles = await getArticles(params.lang)
+	let articles = await getArticles(locale)
 	articles = articles?.data
 
 	return (

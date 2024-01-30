@@ -15,7 +15,7 @@ import Image from 'next/image'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	let realisation = await getRealisationBySlug(params.slug, params.lang)
+	let realisation = await getRealisationBySlug(params.slug, params.locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data
@@ -40,9 +40,9 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
 	// fetch data
-	let content_website = await getContentWebsite(params.lang)
+	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let realisation = await getRealisationBySlug(params.slug, params.lang)
+	let realisation = await getRealisationBySlug(params.slug, params.locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data
