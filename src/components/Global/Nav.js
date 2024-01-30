@@ -28,9 +28,17 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 
 	const switchLangage = () => {
 		if (pathname) {
-			router.push(locale === 'fr' ? `${pathname}` : `/fr${pathname}`)
+			router.push(
+				locale === 'fr'
+					? `${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
+					: `${process.env.NEXT_PUBLIC_URL}/${pathname}`
+			)
 		} else {
-			router.push(locale === 'fr' ? `/` : `/fr`)
+			router.push(
+				locale === 'fr'
+					? `${process.env.NEXT_PUBLIC_URL_ALT}`
+					: `${process.env.NEXT_PUBLIC_URL}`
+			)
 		}
 	}
 
