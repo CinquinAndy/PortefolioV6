@@ -1,11 +1,6 @@
 import { i18nRouter } from 'next-i18n-router'
 
 export function middleware(request) {
-	const { host } = request.nextUrl
-	console.log('request', request.headers.get('x-forwarded-host'))
-	console.log('request.headers', request.headers)
-
-	console.log('host', host)
 	let newLocale
 	if (
 		request.headers.get('x-forwarded-host') ===
@@ -23,11 +18,25 @@ export function middleware(request) {
 
 	request.headers.set('accept-language', newLocale)
 
-	return i18nRouter(request, {
-		locales: ['en', 'fr'],
-		defaultLocale: 'en',
-		serverSetCookie: 'if-empty',
-	})
+	if (
+		request.headers.get('x-forwarded-host') ===
+		process.env.NEXT_PUBLIC_URL.replace('https://', '')
+	) {
+		return i18nRouter(request, {
+			locales: ['en', 'fr'],
+			defaultLocale: 'en',
+			serverSetCookie: 'if-empty',
+		})
+	} else if (
+		request.headers.get('x-forwarded-host') ===
+		process.env.NEXT_PUBLIC_URL_ALT.replace('https://', '')
+	) {
+		return i18nRouter(request, {
+			locales: ['en', 'fr'],
+			defaultLocale: 'fr',
+			serverSetCookie: 'if-empty',
+		})
+	}
 }
 
 // applies this middleware only to files in the app directory
