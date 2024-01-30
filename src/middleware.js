@@ -2,13 +2,16 @@ import { i18nRouter } from 'next-i18n-router'
 
 export function middleware(request) {
 	const { host } = request.nextUrl
-	console.log('request', request)
+	console.log('request', request.headers.get('x-forwarded-host'))
+	console.log('request.headers', request.headers)
 
 	console.log('host', host)
 	let newLocale
-	if (host === process.env.NEXT_PUBLIC_URL) {
+	if (request.headers.get('x-forwarded-host') === process.env.NEXT_PUBLIC_URL) {
 		newLocale = 'fr'
-	} else if (host === process.env.NEXT_PUBLIC_URL_ALT) {
+	} else if (
+		request.headers.get('x-forwarded-host') === process.env.NEXT_PUBLIC_URL_ALT
+	) {
 		newLocale = 'en'
 	} else {
 		newLocale = 'en' // Locale par défaut pour les autres domaines
