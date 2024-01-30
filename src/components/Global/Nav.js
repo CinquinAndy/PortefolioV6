@@ -2,39 +2,16 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { TypeAnimation } from 'react-type-animation'
 
-function CardElement({ title, description, children }) {
-	return (
-		<>
-			<h1>{title}</h1>
-			<div>zaza</div>
-			<div>{description}</div>
-			{children}
-		</>
-	)
-}
-
-function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
+function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
-	const router = useRouter()
 	const pathname = usePathname()
-	const searchParams = useSearchParams()
 
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
-
-	const switchLangage = () => {
-		if (pathname) {
-			router.push(
-				window.location.origin === process.env.NEXT_PUBLIC_URL
-					? `${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
-					: `${process.env.NEXT_PUBLIC_URL}/${pathname}`
-			)
-		}
-	}
 
 	return (
 		<>
@@ -253,19 +230,24 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 							{content_website?.contact?.phone}
 						</Link>
 						<div>
-							<button
+							<Link
+								href={
+									window.location.origin === process.env.NEXT_PUBLIC_URL
+										? `${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
+										: `${process.env.NEXT_PUBLIC_URL}/${pathname}`
+								}
 								className="font-body normal-case underline"
-								onClick={switchLangage}
 							>
 								{content_website?.contact?.langage}
-							</button>
+							</Link>
 						</div>
 					</div>
 					<div className="block md:hidden"></div>
 				</div>
-				<div
-					role={'button'}
+				<input
+					type={'button'}
 					id="nav-right"
+					aria-label="Close Menu"
 					onClick={() => setOpen(!open)}
 					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
 				/>
@@ -397,9 +379,6 @@ function Nav({ content_website, selectedMenu, h1, isHome = true, locale }) {
 				<div
 					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
 				>
-					{/*<h2 className="origin-bottom-left  font-body text-sm tracking-wider opacity-75 md:text-xl">*/}
-					{/*	{content_website?.content_home?.title_vertical_left_bottom}*/}
-					{/*</h2>*/}
 					<h2 className={'sr-only'}>
 						{`‣ ${content_website?.content_home?.title_vertical_left_1} / ${content_website?.content_home?.title_vertical_left_2} / ${content_website?.content_home?.title_vertical_left_3} / ${content_website?.content_home?.title_vertical_left_4} / ${content_website?.content_home?.title_vertical_left_5} / ${content_website?.content_home?.title_vertical_left_6}`}
 					</h2>
