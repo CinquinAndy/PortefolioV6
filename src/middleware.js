@@ -7,17 +7,20 @@ export function middleware(request) {
 
 	console.log('host', host)
 	let newLocale
-	if (request.headers.get('x-forwarded-host') === process.env.NEXT_PUBLIC_URL) {
+	if (
+		request.headers.get('x-forwarded-host') ===
+		process.env.NEXT_PUBLIC_URL.replace('https://', '')
+	) {
 		newLocale = 'fr'
 	} else if (
-		request.headers.get('x-forwarded-host') === process.env.NEXT_PUBLIC_URL_ALT
+		request.headers.get('x-forwarded-host') ===
+		process.env.NEXT_PUBLIC_URL_ALT.replace('https://', '')
 	) {
 		newLocale = 'en'
 	} else {
-		newLocale = 'en' // Locale par défaut pour les autres domaines
+		newLocale = 'en'
 	}
 
-	// Définir la locale dans les headers de la requête
 	request.headers.set('accept-language', newLocale)
 
 	return i18nRouter(request, {
