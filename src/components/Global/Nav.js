@@ -16,19 +16,19 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 
 	useEffect(() => {
 		setLinkToSwitchLanguage(
-			window.location.origin === process.env.NEXT_PUBLIC_URL
-				? `${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
-				: `${process.env.NEXT_PUBLIC_URL}/${pathname}`
+			window.location.origin === 'https://andy-cinquin.fr'
+				? `https://andy-cinquin.com${pathname}`
+				: `https://andy-cinquin.fr${pathname}`
 		)
 		console.log('window.location.origin', window.location.origin)
 		console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL)
 		console.log(
 			'process.env.NEXT_PUBLIC_URL_ALT/path',
-			`${process.env.NEXT_PUBLIC_URL_ALT}/${pathname}`
+			`${process.env.NEXT_PUBLIC_URL_ALT}${pathname}`
 		)
 		console.log(
 			'process.env.NEXT_PUBLIC_URL/path',
-			`${process.env.NEXT_PUBLIC_URL}/${pathname}`
+			`${process.env.NEXT_PUBLIC_URL}${pathname}`
 		)
 	}, [pathname])
 
