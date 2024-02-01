@@ -54,24 +54,24 @@ html {
     scroll-behavior: smooth;
 }
 
-/*body::after {*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    content: '';*/
-/*    z-index: -11;*/
-/*    width: 100vw;*/
-/*    height: 100vh;*/
-/*    background-image: url(/assets/images/background3d.webp);*/
-/*    background-position: center center;*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: cover;*/
-/*    opacity: 10%;*/
-/*    user-select: none;*/
-/*    pointer-events: none;*/
-/*    padding: 0;*/
-/*    margin: 0;*/
-/*}*/
+body::after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: '';
+    z-index: -11;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/assets/images/background3d.webp);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 10%;
+    user-select: none;
+    pointer-events: none;
+    padding: 0;
+    margin: 0;
+}
 
 nav a {
     text-decoration: none;
