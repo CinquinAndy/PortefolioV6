@@ -17,7 +17,6 @@ export function GradientBackground() {
 				connection.effectiveType.includes('slow-4g')
 			) {
 				// disable animations for 2G connection
-				console.log('enable animations')
 				setEnableAnimations(true)
 			}
 		}
