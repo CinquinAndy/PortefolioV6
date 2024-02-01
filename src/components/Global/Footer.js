@@ -41,7 +41,7 @@ function Footer({ content_website }) {
 				</div>
 
 				<div className="col-span-4 flex flex-col gap-4 md:col-span-2 md:col-start-5 lg:gap-10 xl:col-span-1">
-					<h2 className="text-sm font-bold xl:text-xl xl:font-normal">
+					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
 					{sitemap?.map((item, index) => {
@@ -57,7 +57,7 @@ function Footer({ content_website }) {
 					})}
 				</div>
 				<div className="col-span-4 flex flex-col gap-4 md:col-span-2 md:col-start-7 lg:gap-10 xl:col-span-1">
-					<h2 className="text-sm font-bold xl:font-display xl:text-xl">
+					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
 					{legals?.map((item, index) => {
