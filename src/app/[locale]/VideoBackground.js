@@ -23,9 +23,7 @@ export function VideoBackground() {
 		}
 
 		// disable animations for devices with 4 cores or less
-		if (
-			!(navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
-		) {
+		if (!(navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4)) {
 			// disable animations for devices with 4 cores or less
 			setEnableHeavyContent(true)
 		}

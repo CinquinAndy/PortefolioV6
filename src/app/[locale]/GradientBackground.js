@@ -17,14 +17,13 @@ export function GradientBackground() {
 				connection.effectiveType.includes('slow-4g')
 			) {
 				// disable animations for 2G connection
+				console.log('enable animations')
 				setEnableAnimations(true)
 			}
 		}
 
 		// disable animations for devices with 4 cores or less
-		if (
-			!(navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 8)
-		) {
+		if (!(navigator.hardwareConcurrency && navigator.hardwareConcurrency < 8)) {
 			// disable animations for devices with 4 cores or less
 			setEnableAnimations(true)
 		}

@@ -56,7 +56,7 @@ export default async function NotFound() {
 			>
 				<ToastContainer />
 				<GoogleAnalytics gaId="UA-150969790-2" />
-				<div className="gradient-bg">
+				<div className="disable-gradients gradient-bg">
 					<svg xmlns="http://www.w3.org/2000/svg" className={'gradient_svg'}>
 						<defs>
 							<filter id="goo">
