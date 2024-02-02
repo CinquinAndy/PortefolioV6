@@ -59,7 +59,7 @@ export default async function NotFound() {
 			>
 				<ToastContainer />
 				<GoogleAnalytics gaId="UA-150969790-2" />
-				<GradientBackground />
+				<LowGradientBackground />
 				<LottieAnimation />
 
 				<div className="h-screen">
