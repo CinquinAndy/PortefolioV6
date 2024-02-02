@@ -5,12 +5,12 @@ import {
 	getServices,
 } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
-import Image from 'next/image'
 import Services from '@/components/Global/Services'
 import Realisations from '@/components/Global/Realisations'
 import Articles from '@/components/Global/Articles'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
+import { VideoBackground } from '../../components/Global/VideoBackground'
 
 export async function generateMetadata({ params }) {
 	// fetch data
@@ -52,38 +52,8 @@ export default async function Page({ params }) {
 
 			<div className={'mask absolute left-0 top-0 -z-10 h-screen w-screen'}>
 				<div className="mask absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center">
-					<div className="video-background mask relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0">
-						<Image
-							src={'/assets/images/bg_opti.webp'}
-							alt={'bg_opti'}
-							className={
-								'absolute left-0 top-0 blur-md  ' +
-								'mix-difference mask -z-10 block bg-slate-900 object-cover opacity-75  '
-							}
-							quality={10}
-							fill={true}
-							loading="eager"
-						/>
-
-						<video
-							width="1920"
-							height="1080"
-							muted
-							autoPlay={true}
-							playsInline={true}
-							preload={'auto'}
-							loop
-							title="video"
-							className={
-								'mask absolute left-0 top-0 h-full w-full object-cover object-center ' +
-								'mix-difference animate-video -z-10 block bg-slate-900 object-cover opacity-75'
-							}
-							id="topHeroVideo"
-						>
-							<source src="/assets/video_background.mp4" type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
-					</div>
+					<VideoBackground />
+					{/*<Background />*/}
 				</div>
 			</div>
 

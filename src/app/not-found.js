@@ -2,11 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Layout } from '@/components/Global/Layout'
 import Footer from '@/components/Global/Footer'
+import { LottieAnimation } from '@/components/Global/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
+import { GradientBackground } from '@/components/Global/GradientBackground'
+import { LowGradientBackground } from '@/components/Global/LowGradientBackground'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
@@ -56,33 +59,9 @@ export default async function NotFound() {
 			>
 				<ToastContainer />
 				<GoogleAnalytics gaId="UA-150969790-2" />
-				<div className="gradient-bg">
-					<svg xmlns="http://www.w3.org/2000/svg" className={'gradient_svg'}>
-						<defs>
-							<filter id="goo">
-								<feGaussianBlur
-									in="SourceGraphic"
-									stdDeviation="10"
-									result="blur"
-								/>
-								<feColorMatrix
-									in="blur"
-									mode="matrix"
-									values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
-									result="goo"
-								/>
-								<feBlend in="SourceGraphic" in2="goo" />
-							</filter>
-						</defs>
-					</svg>
-					<div className="gradients-container">
-						<div className="g1"></div>
-						<div className="g2"></div>
-						<div className="g3"></div>
-						<div className="g4"></div>
-						<div className="g5"></div>
-					</div>
-				</div>
+				<LowGradientBackground />
+				<LottieAnimation />
+
 				<div className="h-screen">
 					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 						<div className="">
