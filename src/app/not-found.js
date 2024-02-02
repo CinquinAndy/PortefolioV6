@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Layout } from '@/components/Global/Layout'
 import Footer from '@/components/Global/Footer'
+import { LottieAnimation } from '@/components/Global/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -56,7 +57,7 @@ export default async function NotFound() {
 			>
 				<ToastContainer />
 				<GoogleAnalytics gaId="UA-150969790-2" />
-				<div className="disable-gradients gradient-bg">
+				{/* <div className="disable-gradients gradient-bg">
 					<svg xmlns="http://www.w3.org/2000/svg" className={'gradient_svg'}>
 						<defs>
 							<filter id="goo">
@@ -82,7 +83,9 @@ export default async function NotFound() {
 						<div className="g4"></div>
 						<div className="g5"></div>
 					</div>
-				</div>
+				</div> */}
+
+				<LottieAnimation />
 				<div className="h-screen">
 					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 						<div className="">

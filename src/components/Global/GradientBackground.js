@@ -22,14 +22,16 @@ export function GradientBackground() {
 		}
 
 		// disable animations for devices with 4 cores or less
-		if (!(navigator.hardwareConcurrency && navigator.hardwareConcurrency < 8)) {
+		if (
+			!(navigator.hardwareConcurrency && navigator.hardwareConcurrency < 8)
+		) {
 			// disable animations for devices with 4 cores or less
 			setEnableAnimations(true)
 		}
 	}, [])
 	return (
 		<div
-			className={`gradient-bg ${!enableAnimations ? 'disable-gradients' : ''}`}
+			className={`gradient-bg disable-gradients ${enableAnimations ? 'disable-gradients' : ''}`}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" className={'gradient_svg'}>
 				<defs>

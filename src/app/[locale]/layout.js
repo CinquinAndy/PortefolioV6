@@ -2,7 +2,8 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { dir } from 'i18next'
-import { GradientBackground } from './GradientBackground'
+import { GradientBackground } from '../../components/Global/GradientBackground'
+import { LottieAnimation } from '../../components/Global/LottieAnimation'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
@@ -23,7 +24,8 @@ export default function RootLayout({ children, params }) {
 			>
 				<ToastContainer />
 				<GoogleAnalytics gaId="UA-150969790-2" />
-				<GradientBackground />
+				<LottieAnimation />
+				{/* <GradientBackground /> */}
 				{children}
 			</body>
 		</html>
