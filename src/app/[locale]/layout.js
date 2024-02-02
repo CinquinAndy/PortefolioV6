@@ -25,7 +25,7 @@ export default function RootLayout({ children, params }) {
 				<ToastContainer />
 				<GoogleAnalytics gaId="UA-150969790-2" />
 				<LottieAnimation />
-				{/* <GradientBackground /> */}
+				<GradientBackground />
 				{children}
 			</body>
 		</html>
