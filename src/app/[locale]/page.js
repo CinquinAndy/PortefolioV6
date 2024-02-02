@@ -10,7 +10,7 @@ import Realisations from '@/components/Global/Realisations'
 import Articles from '@/components/Global/Articles'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import { VideoBackground } from '../../components/Global/VideoBackground'
+import { VideoBackground } from '../../components/Global/Animations/VideoBackground'
 
 export async function generateMetadata({ params }) {
 	// fetch data

@@ -2,9 +2,9 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { dir } from 'i18next'
-import { GradientBackground } from '../../components/Global/GradientBackground'
-import { LottieAnimation } from '../../components/Global/LottieAnimation'
-import { LowGradientBackground } from '@/components/Global/LowGradientBackground'
+import { GradientBackground } from '../../components/Global/Animations/GradientBackground'
+import { LottieAnimation } from '../../components/Global/Animations/LottieAnimation'
+import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],

@@ -3,7 +3,7 @@ import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { Layout } from '@/components/Global/Layout'
-import { HoloComponent } from '@/components/Global/HoloComponent'
+import { HoloComponent } from '@/components/Global/Animations/HoloComponent'
 
 export async function generateMetadata({ params }) {
 	// fetch data
