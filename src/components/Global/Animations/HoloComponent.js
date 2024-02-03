@@ -15,8 +15,8 @@ export function HoloComponent({ lang }) {
 			</div>
 			<div className="relative hidden w-full justify-center overflow-hidden rounded-lg p-4 sm:flex md:p-8 lg:hidden">
 				<HoloCard
-					height={845 * 0.5}
-					width={561 * 0.5}
+					height={845 * 0.6}
+					width={561 * 0.6}
 					radius={20}
 					imageSrc={'/assets/card_holo/holo_fr.webp'}
 					imageShineSrc="/assets/card_holo/illusion.webp"
@@ -45,8 +45,8 @@ export function HoloComponent({ lang }) {
 			</div>
 			<div className="relative hidden w-full justify-center overflow-hidden rounded-lg p-4 sm:flex md:p-8 lg:hidden">
 				<HoloCard
-					height={845 * 0.5}
-					width={561 * 0.5}
+					height={845 * 0.6}
+					width={561 * 0.6}
 					radius={20}
 					imageSrc={'/assets/card_holo/holo.webp'}
 					imageShineSrc="/assets/card_holo/illusion.webp"
