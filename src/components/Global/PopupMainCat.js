@@ -1,9 +1,10 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function PopupMainCat({ content_website }) {
 	const leftEyeRef = useRef(null)
 	const rightEyeRef = useRef(null)
+	const [isClicked, setIsClicked] = useState(false)
 
 	function mapEyePosition(mouseXPercentage, mouseYPercentage) {
 		const eyePositionLimits = {
@@ -48,18 +49,19 @@ export function PopupMainCat({ content_website }) {
 
 	return (
 		<div
-			className={
-				'custom-popup user-select-none pointer-events-none fixed right-0 z-50 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10'
-			}
+			onClick={() => {
+				setIsClicked(!isClicked)
+			}}
+			className={`custom-popup fixed right-0 z-50 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
 		>
 			<div
 				className={
 					'relative mx-3 flex h-full w-full items-center justify-start rounded-lg border-2 border-white bg-indigo-1100 px-3 py-2 shadow-lg transition-all duration-300 sm:px-6 sm:py-3 lg:mx-0'
 				}
 			>
-				<div className={'absolute -top-16 left-0 -z-10'}>
+				<div className={'absolute -top-20 left-4 -z-10'}>
 					<svg
-						className={'h-[75px] w-[75px]'}
+						className={'h-[90px] w-[90px]'}
 						xmlns="http://www.w3.org/2000/svg"
 						data-name="Calque 1"
 						viewBox="0 0 1149.23 1103.4"
