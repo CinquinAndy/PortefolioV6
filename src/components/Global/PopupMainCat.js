@@ -4,7 +4,7 @@ export function PopupMainCat(props) {
 	return (
 		<div
 			className={
-				'custom-popup user-select-none pointer-events-none fixed bottom-0 right-0 z-50 mb-8 mr-10 flex cursor-pointer items-center justify-center'
+				'custom-popup user-select-none pointer-events-none fixed right-0 z-50 mr-10 flex cursor-pointer items-center justify-center'
 			}
 		>
 			<div

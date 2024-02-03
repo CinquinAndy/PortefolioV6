@@ -78,3 +78,17 @@
     border-radius: 0.5rem;
     z-index: 1;
 }
+
+.custom-popup {
+    animation: popFromBottom 1s forwards;
+    animation-delay: 3s;
+}
+
+@keyframes popFromBottom {
+    0% {
+        bottom: -3.5rem;
+    }
+    100% {
+        bottom: 1rem;
+    }
+}
