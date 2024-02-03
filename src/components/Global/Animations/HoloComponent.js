@@ -17,16 +17,16 @@ export function HoloComponent({ lang }) {
 				<HoloCard
 					height={845 * 0.5}
 					width={561 * 0.5}
-					radius={30}
+					radius={20}
 					imageSrc={'/assets/card_holo/holo_fr.webp'}
 					imageShineSrc="/assets/card_holo/illusion.webp"
 				/>
 			</div>
 			<div className="relative flex w-full justify-center overflow-hidden rounded-lg p-4 sm:hidden md:p-8 lg:hidden">
 				<HoloCard
-					height={845 * 0.3}
-					width={561 * 0.3}
-					radius={30}
+					height={845 * 0.5}
+					width={561 * 0.5}
+					radius={10}
 					imageSrc={'/assets/card_holo/holo_fr.webp'}
 					imageShineSrc="/assets/card_holo/illusion.webp"
 				/>
@@ -47,16 +47,16 @@ export function HoloComponent({ lang }) {
 				<HoloCard
 					height={845 * 0.5}
 					width={561 * 0.5}
-					radius={30}
+					radius={20}
 					imageSrc={'/assets/card_holo/holo.webp'}
 					imageShineSrc="/assets/card_holo/illusion.webp"
 				/>
 			</div>
 			<div className="relative flex w-full justify-center overflow-hidden rounded-lg p-4 sm:hidden md:p-8 lg:hidden">
 				<HoloCard
-					height={845 * 0.3}
-					width={561 * 0.3}
-					radius={30}
+					height={845 * 0.5}
+					width={561 * 0.5}
+					radius={10}
 					imageSrc={'/assets/card_holo/holo.webp'}
 					imageShineSrc="/assets/card_holo/illusion.webp"
 				/>
