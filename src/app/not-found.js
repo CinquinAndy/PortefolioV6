@@ -2,14 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Layout } from '@/components/Global/Layout'
 import Footer from '@/components/Global/Footer'
-import { LottieAnimation } from '@/components/Global/LottieAnimation'
+import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
-import { GradientBackground } from '@/components/Global/GradientBackground'
-import { LowGradientBackground } from '@/components/Global/LowGradientBackground'
+import { GradientBackground } from '@/components/Global/Animations/GradientBackground'
+import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
