@@ -1,11 +1,12 @@
-import { Fragment } from 'react'
+'use client'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 
 function Galery({ open, handleClick, galery, title_galery }) {
-	const [expandedItem, setExpandedItem] = React.useState(null)
+	const [expandedItem, setExpandedItem] = useState(null)
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -59,7 +60,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 											{galery.map((item, index) => {
 												const isExpanded = index === expandedItem
 												return (
-													<input
+													<button
 														type={'button'}
 														key={index}
 														className={`col-span-12 cursor-pointer ${
@@ -86,7 +87,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 															} rounded-lg object-cover hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
 															sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
 														/>
-													</input>
+													</button>
 												)
 											})}
 										</div>
