@@ -26,7 +26,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 								leaveTo="translate-x-full"
 							>
 								<Dialog.Panel className="pointer-events-auto relative h-screen w-screen">
-									<div className="to-cyan-1100 flex h-full flex-col overflow-y-scroll border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 py-6 text-slate-50 shadow-xl md:border-l-40">
+									<div className="flex h-full flex-col overflow-y-scroll border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 py-6 text-slate-50 shadow-xl md:border-l-40">
 										<div className="px-4 sm:px-6">
 											<div className="flex items-start justify-between">
 												<Dialog.Title>
