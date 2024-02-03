@@ -45,3 +45,36 @@
     stroke-dashoffset: -134;
     stroke-width: 6;
 }
+
+
+/*** custom popup ***/
+.custom-popup > div:first-child::before {
+    content: "";
+    position: absolute;
+    right: -26px;
+    top: 15px;
+    width: 0;
+    border-top: 15px solid transparent;
+    border-left: 20px solid #0D0C3C;
+    border-right: 20px solid transparent;
+    border-bottom: 15px solid transparent;
+    transform: scale(0.5);
+    border-radius: 0.5rem;
+    z-index: 10;
+}
+
+/*** custom popup ***/
+.custom-popup > div:first-child::after {
+    content: "";
+    position: absolute;
+    right: -30px;
+    top: 15px;
+    width: 0;
+    border-top: 15px solid transparent;
+    border-left: 20px solid #fff;
+    border-right: 20px solid transparent;
+    border-bottom: 15px solid transparent;
+    transform: scale(0.5);
+    border-radius: 0.5rem;
+    z-index: 1;
+}
