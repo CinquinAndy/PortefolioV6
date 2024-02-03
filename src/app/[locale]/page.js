@@ -55,7 +55,6 @@ export default async function Page({ params }) {
 			<div className={'mask absolute left-0 top-0 -z-10 h-screen w-screen'}>
 				<div className="mask absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center">
 					<VideoBackground />
-					{/*<Background />*/}
 				</div>
 			</div>
 
