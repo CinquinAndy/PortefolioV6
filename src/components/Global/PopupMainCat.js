@@ -116,7 +116,15 @@ export function PopupMainCat({ content_website }) {
 								strokeWidth: 0,
 							}}
 						/>
-						<g ref={rightEyeRef} id="right-eye" data-name="right">
+						<g
+							ref={rightEyeRef}
+							id="right-eye"
+							data-name="right"
+							style={{
+								// translate(${translateX}%, ${translateY}%)
+								transform: `translate(-1.7083333333333335%, -5.6496350364963503%)`,
+							}}
+						>
 							<ellipse
 								cx={735.23}
 								cy={508.27}
@@ -170,7 +178,15 @@ export function PopupMainCat({ content_website }) {
 								strokeWidth: 0,
 							}}
 						/>
-						<g ref={leftEyeRef} id={'left-eye'} data-name="left eye">
+						<g
+							ref={leftEyeRef}
+							id={'left-eye'}
+							data-name="left eye"
+							style={{
+								// translate(${translateX}%, ${translateY}%)
+								transform: `translate(-1.7083333333333335%, -5.6496350364963503%)`,
+							}}
+						>
 							<ellipse
 								cx={420.34}
 								cy={585.25}
