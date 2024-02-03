@@ -97,6 +97,16 @@
     animation: none;
 }
 
+/* on mobile */
+@media (max-width: 768px) {
+    .custom-popup {
+        bottom: -6rem;
+    }
+    .custom-popup:hover {
+        animation: none;
+    }
+}
+
 @keyframes vibration {
     0% {
         transform: translateY(0);
