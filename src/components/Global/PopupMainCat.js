@@ -1,19 +1,17 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function PopupMainCat({ content_website }) {
-	console.log('content_website', content_website)
 	const leftEyeRef = useRef(null)
 	const rightEyeRef = useRef(null)
+	const [isClicked, setIsClicked] = useState(false)
 
 	function mapEyePosition(mouseXPercentage, mouseYPercentage) {
-		// Définition des limites pour la translation des yeux
 		const eyePositionLimits = {
 			x: { min: -2.7083333333333335, max: 4.635416666666667 },
 			y: { min: -5.109489051094891, max: 3.6496350364963503 },
 		}
 
-		// Calcul de la translation des yeux basée sur la position de la souris
 		const translateX =
 			eyePositionLimits.x.min +
 			((eyePositionLimits.x.max - eyePositionLimits.x.min) * mouseXPercentage) /
@@ -30,13 +28,11 @@ export function PopupMainCat({ content_website }) {
 		const mouseXPercentage = (e.clientX / window.innerWidth) * 100
 		const mouseYPercentage = (e.clientY / window.innerHeight) * 100
 
-		// Utilisation de la fonction mapEyePosition pour obtenir les translations
 		const { translateX, translateY } = mapEyePosition(
 			mouseXPercentage,
 			mouseYPercentage
 		)
 
-		// Application de la translation aux éléments des yeux
 		;[leftEyeRef, rightEyeRef].forEach(eyeRef => {
 			if (eyeRef.current) {
 				eyeRef.current.style.transform = `translate(${translateX}%, ${translateY}%)`
@@ -53,18 +49,19 @@ export function PopupMainCat({ content_website }) {
 
 	return (
 		<div
-			className={
-				'custom-popup user-select-none pointer-events-none fixed right-0 z-50 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10'
-			}
+			onClick={() => {
+				setIsClicked(!isClicked)
+			}}
+			className={`custom-popup fixed right-0 z-30 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
 		>
 			<div
 				className={
 					'relative mx-3 flex h-full w-full items-center justify-start rounded-lg border-2 border-white bg-indigo-1100 px-3 py-2 shadow-lg transition-all duration-300 sm:px-6 sm:py-3 lg:mx-0'
 				}
 			>
-				<div className={'absolute -top-16 left-0 -z-10'}>
+				<div className={'absolute -top-20 left-4 -z-10'}>
 					<svg
-						className={'h-[75px] w-[75px]'}
+						className={'h-[90px] w-[90px]'}
 						xmlns="http://www.w3.org/2000/svg"
 						data-name="Calque 1"
 						viewBox="0 0 1149.23 1103.4"

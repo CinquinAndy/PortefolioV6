@@ -63,10 +63,6 @@ body::after {
 	z-index: -11;
 	width: 100vw;
 	height: 100vh;
-	background-image: url(/assets/images/background3d.webp);
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
 	opacity: 10%;
 	user-select: none;
 	pointer-events: none;
@@ -619,19 +615,23 @@ button:hover {
 }
 
 /* sky */
-.button-sky {
+.button-cyan {
 	display: flex;
 	text-decoration: none;
 	color: inherit;
 	position: relative;
+	/*box-shadow:*/
+	/*	inset 0 0 0 0px #fff,*/
+	/*	inset -4px -4px 0 6px rgb(2, 132, 199);*/
+	/*background-color: rgb(2, 132, 199);*/
 	box-shadow:
 		inset 0 0 0 0px #fff,
-		inset -4px -4px 0 6px rgb(2, 132, 199);
-	background-color: rgb(2, 132, 199);
+		inset -4px -4px 0 6px rgb(8, 145, 178);
+	background-color: rgb(8, 145, 178);
 	cursor: pointer;
 }
 
-.button-sky:before {
+.button-cyan:before {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -645,15 +645,16 @@ button:hover {
 	transition: 0.4s ease-out;
 }
 
-.button-sky:hover .button-sky-title {
-	color: rgb(2, 132, 199);
+.button-cyan:hover .button-cyan-title {
+	/*color: rgb(2, 132, 199);*/
+	color: rgb(8, 145, 178);
 }
 
-.button-sky:hover:before {
+.button-cyan:hover:before {
 	transform: scaleY(1);
 }
 
-.button-sky-title {
+.button-cyan-title {
 	position: relative;
 	transition: 0.4s ease-out;
 }
@@ -717,6 +718,12 @@ button:hover {
 
 /*** icon animation ***/
 .slider-nav-item:before {
+	pointer-events: none;
+}
+
+.slider-nav-item:hover:before {
+	-webkit-animation: 1.5s linear 0s normal none infinite focuse;
+	animation: 1.5s linear 0s normal none infinite focuse;
 	position: absolute;
 	content: '';
 	height: calc(100% + 16px);
@@ -725,27 +732,19 @@ button:hover {
 	left: -8px;
 	border-radius: 50%;
 	border: 1px solid rgba(255, 255, 255, 0.35);
-	animation: 1.5s linear 0s normal none infinite focuse;
-	pointer-events: none;
-}
-
-.slider-nav-item:hover svg {
-	-webkit-animation: jello-horizontal 0.9s both;
-	animation: jello-horizontal 0.9s both;
-	position: relative;
 }
 
 @keyframes focuse {
 	0% {
-		transform: scale(0.8);
+		transform: scale(1.1);
 		opacity: 1;
 	}
 	75% {
-		transform: scale(1.2);
+		transform: scale(1.5);
 		opacity: 0;
 	}
 	100% {
-		transform: scale(1.2);
+		transform: scale(1.5);
 		opacity: 0;
 	}
 }

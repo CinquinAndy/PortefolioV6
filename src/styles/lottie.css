@@ -32,3 +32,9 @@
     -o-transform: translateX(50%) translateY(-150%);
 }
 
+/* on mobile */
+@media (max-width: 768px) {
+    .lottie-1 .lf-player-container, .lottie-2 .lf-player-container {
+        display: none;
+    }
+}

@@ -51,35 +51,35 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						</svg>
 					</button>
 				</div>
-				{!open && (
-					<>
-						<Link href="/" className="h-8 w-8 md:h-10 md:w-10">
-							<Image
-								src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
-								alt="Logo Cinquin Andy Signature"
-								width={35}
-								height={35}
-							/>
-						</Link>
 
-						<Link
-							href={'/contact'}
-							className="button-animated smoke hidden font-body text-sm md:block"
-						>
-							<h2>
-								<div>
-									<span>C</span>
-									<span>O</span>
-									<span>N</span>
-									<span>T</span>
-									<span>A</span>
-									<span>C</span>
-									<span>T</span>
-								</div>
-							</h2>
-						</Link>
-					</>
-				)}
+				<Link
+					href="/"
+					className={`h-8 w-8 md:h-10 md:w-10 ${open ? 'pointer-events-none opacity-0' : ''}`}
+				>
+					<Image
+						src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
+						alt="Logo Cinquin Andy Signature"
+						width={35}
+						height={35}
+					/>
+				</Link>
+
+				<Link
+					href={'/contact'}
+					className={`button-animated smoke hidden font-body text-sm md:block ${open ? 'pointer-events-none opacity-0' : ''}`}
+				>
+					<h2>
+						<div>
+							<span>C</span>
+							<span>O</span>
+							<span>N</span>
+							<span>T</span>
+							<span>A</span>
+							<span>C</span>
+							<span>T</span>
+						</div>
+					</h2>
+				</Link>
 			</header>
 			<nav
 				id="nav-block"
@@ -258,7 +258,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				/>
 			</nav>
 			<div
-				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center`}
+				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center ${open ? 'pointer-events-none mt-10 pt-[40px] md:pt-[80px]' : ''}`}
 			>
 				{isHome && (
 					<div className="patterns translate-y-[-140px] transform md:px-20">
@@ -308,7 +308,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					</div>
 				)}
 				<div
-					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20`}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''}`}
 				>
 					<div className={'relative p-3'}>
 						<Link
@@ -382,7 +382,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					</div>
 				</div>
 				<div
-					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 `}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''} `}
 				>
 					<h2 className={'sr-only'}>
 						{`‣ ${content_website?.content_home?.title_vertical_left_1} / ${content_website?.content_home?.title_vertical_left_2} / ${content_website?.content_home?.title_vertical_left_3} / ${content_website?.content_home?.title_vertical_left_4} / ${content_website?.content_home?.title_vertical_left_5} / ${content_website?.content_home?.title_vertical_left_6}`}

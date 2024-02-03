@@ -40,9 +40,9 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 						</Link>
 						<Link
 							href={content_website?.attributes?.content_home?.link[1]?.url}
-							className="button-sky rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+							className="button-cyan rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 						>
-							<span className={'button-sky-title'}>
+							<span className={'button-cyan-title'}>
 								{content_website?.attributes?.content_home?.link[1]?.label}
 							</span>
 						</Link>
@@ -80,7 +80,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 										/>
 									</div>
 								</div>
-								<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-sky-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+								<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 									{realisation?.attributes?.subtitle}
 								</h2>
 							</Link>

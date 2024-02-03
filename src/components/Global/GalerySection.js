@@ -12,8 +12,7 @@ export function GalerySection({ content_website, processedRealisation }) {
 	}
 
 	return (
-		<input
-			type={'button'}
+		<div
 			onClick={handleClick}
 			className={
 				'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'
@@ -55,6 +54,6 @@ export function GalerySection({ content_website, processedRealisation }) {
 					content_website?.attributes?.content_realisations?.title_galery
 				}
 			/>
-		</input>
+		</div>
 	)
 }

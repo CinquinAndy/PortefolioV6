@@ -49,14 +49,14 @@ function Services({ content_website, services }) {
 								</div>
 								<header className="flex w-full items-center justify-center py-8 xl:py-6">
 									<h2
-										className="!font-display text-lg normal-case xl:text-xl [&>*]:!font-display [&>*]:text-lg [&>*]:normal-case xl:[&>*]:text-xl"
+										className="text-center !font-display text-lg normal-case xl:text-xl [&>*]:!font-display [&>*]:text-lg [&>*]:normal-case xl:[&>*]:text-xl"
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(service?.attributes?.title),
 										}}
 									/>
 								</header>
 								<article
-									className="text-xs xl:text-sm [&>*]:!font-body [&>*]:text-xs xl:[&>*]:!font-body xl:[&>*]:text-sm"
+									className="text-center text-xs xl:text-sm [&>*]:!font-body [&>*]:text-xs xl:[&>*]:!font-body xl:[&>*]:text-sm"
 									dangerouslySetInnerHTML={{
 										__html: replaceTitle(service?.attributes?.content),
 									}}
