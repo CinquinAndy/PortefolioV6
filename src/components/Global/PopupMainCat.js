@@ -4,12 +4,12 @@ export function PopupMainCat(props) {
 	return (
 		<div
 			className={
-				'custom-popup user-select-none pointer-events-none fixed right-0 z-50 mr-10 flex cursor-pointer items-center justify-center'
+				'custom-popup user-select-none pointer-events-none fixed right-0 z-50 mr-10 flex cursor-pointer items-center justify-start'
 			}
 		>
 			<div
 				className={
-					'relative flex h-full w-full items-center justify-center rounded-lg border-2 border-white bg-indigo-1100 px-8 py-2 text-lg font-semibold text-slate-50 shadow-lg transition-all duration-300'
+					'relative flex h-full w-full items-center justify-start rounded-lg border-2 border-white bg-indigo-1100 px-6 py-2 shadow-lg transition-all duration-300'
 				}
 			>
 				<Image
@@ -19,9 +19,9 @@ export function PopupMainCat(props) {
 					alt={'Cute cat saying hello'}
 					className={'absolute bottom-[30px] left-0 -z-10'}
 				/>
-				<div className={'h-full w-full text-center'}>
+				<div className={'text-md w- h-full font-medium text-white'}>
 					{props?.content_website?.attributes?.content_home?.popup_main_cat ||
-						'Hello there!'}
+						'Hello there !'}
 				</div>
 			</div>
 		</div>
