@@ -82,6 +82,7 @@
 .custom-popup {
     animation: popFromBottom 1s forwards;
     animation-delay: 3s;
+    bottom: -3.5rem;
 }
 
 @keyframes popFromBottom {
