@@ -2,18 +2,15 @@
 import { useEffect, useRef } from 'react'
 
 export function PopupMainCat({ content_website }) {
-	console.log('content_website', content_website)
 	const leftEyeRef = useRef(null)
 	const rightEyeRef = useRef(null)
 
 	function mapEyePosition(mouseXPercentage, mouseYPercentage) {
-		// Définition des limites pour la translation des yeux
 		const eyePositionLimits = {
 			x: { min: -2.7083333333333335, max: 4.635416666666667 },
 			y: { min: -5.109489051094891, max: 3.6496350364963503 },
 		}
 
-		// Calcul de la translation des yeux basée sur la position de la souris
 		const translateX =
 			eyePositionLimits.x.min +
 			((eyePositionLimits.x.max - eyePositionLimits.x.min) * mouseXPercentage) /
@@ -30,13 +27,11 @@ export function PopupMainCat({ content_website }) {
 		const mouseXPercentage = (e.clientX / window.innerWidth) * 100
 		const mouseYPercentage = (e.clientY / window.innerHeight) * 100
 
-		// Utilisation de la fonction mapEyePosition pour obtenir les translations
 		const { translateX, translateY } = mapEyePosition(
 			mouseXPercentage,
 			mouseYPercentage
 		)
 
-		// Application de la translation aux éléments des yeux
 		;[leftEyeRef, rightEyeRef].forEach(eyeRef => {
 			if (eyeRef.current) {
 				eyeRef.current.style.transform = `translate(${translateX}%, ${translateY}%)`
