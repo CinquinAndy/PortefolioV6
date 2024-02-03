@@ -20,8 +20,7 @@ export function PopupMainCat(props) {
 					className={'absolute bottom-[30px] left-0 -z-10'}
 				/>
 				<div className={'text-md w- h-full font-medium text-white'}>
-					{props?.content_website?.attributes?.content_home?.popup_main_cat ||
-						'Hello there !'}
+					{props?.content_website?.attributes?.content_popup || 'Hello there !'}
 				</div>
 			</div>
 		</div>
