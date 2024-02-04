@@ -88,9 +88,7 @@ nav * {
 }
 
 a:focus,
-a:hover,
-button:focus,
-button:hover {
+a:hover {
 	filter: saturate(120%) brightness(120%);
 	transition: all ease-in-out 0.2s;
 }
