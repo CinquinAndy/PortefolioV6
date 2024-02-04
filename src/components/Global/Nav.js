@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { TypeAnimation } from 'react-type-animation'
+import { toast, ToastContainer } from 'react-toastify'
 
 function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	const [open, setOpen] = useState(false)
@@ -21,6 +22,51 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 				: `https://andy-cinquin.fr${pathname}`
 		)
 	}, [pathname])
+
+	useEffect(() => {
+		// if isn't home, return and stop the function
+		if (!isHome) return
+
+		const userLang = navigator?.language || navigator?.userLanguage
+		const currentDomain = window.location.origin
+
+		const shouldShowPopup =
+			(userLang?.startsWith('fr') && !currentDomain?.includes('.fr')) ||
+			(userLang?.startsWith('en') && !currentDomain?.includes('.com'))
+
+		// if the user's language is the same as the current domain, return and stop the function
+		if (!shouldShowPopup) return
+		const message = currentDomain?.includes('.fr')
+			? 'Ce site est également disponible en anglais. Voulez-vous changer de langue ? '
+			: 'This site is also available in French. Do you want to switch languages ? '
+
+		const switchLanguageToast = () =>
+			toast.info(
+				<div>
+					{message}
+					<br />
+					<Link
+						className={'text-sm text-indigo-1100 underline'}
+						href={linkToSwitchLanguage}
+					>
+						→ {linkToSwitchLanguage}
+					</Link>
+				</div>,
+				{
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+				}
+			)
+
+		const timer = setTimeout(() => {
+			switchLanguageToast()
+		}, 3000)
+
+		return () => clearTimeout(timer)
+	}, [pathname, linkToSwitchLanguage])
 
 	return (
 		<>

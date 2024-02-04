@@ -52,7 +52,7 @@ export function PopupMainCat({ content_website }) {
 			onClick={() => {
 				setIsClicked(!isClicked)
 			}}
-			className={`custom-popup fixed right-0 z-30 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
+			className={`custom-popup fixed right-0 z-40 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
 		>
 			<div
 				className={
