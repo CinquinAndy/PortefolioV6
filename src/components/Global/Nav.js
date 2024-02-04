@@ -27,16 +27,16 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 		// if isn't home, return and stop the function
 		if (!isHome) return
 
-		const userLang = navigator.language || navigator.userLanguage
+		const userLang = navigator?.language || navigator?.userLanguage
 		const currentDomain = window.location.origin
 
 		const shouldShowPopup =
-			(userLang.startsWith('fr') && !currentDomain.includes('.fr')) ||
-			(userLang.startsWith('en') && !currentDomain.includes('.com'))
+			(userLang?.startsWith('fr') && !currentDomain?.includes('.fr')) ||
+			(userLang?.startsWith('en') && !currentDomain?.includes('.com'))
 
 		// if the user's language is the same as the current domain, return and stop the function
 		if (!shouldShowPopup) return
-		const message = currentDomain.includes('.fr')
+		const message = currentDomain?.includes('.fr')
 			? 'Ce site est également disponible en anglais. Voulez-vous changer de langue ? '
 			: 'This site is also available in French. Do you want to switch languages ? '
 
@@ -58,7 +58,6 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					closeOnClick: true,
 					pauseOnHover: true,
 					draggable: true,
-					progress: undefined,
 				}
 			)
 
