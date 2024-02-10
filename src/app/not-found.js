@@ -4,11 +4,7 @@ import { Layout } from '@/components/Global/Layout'
 import Footer from '@/components/Global/Footer'
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
-
-import { GoogleAnalytics } from '@next/third-parties/google'
-import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
-import { GradientBackground } from '@/components/Global/Animations/GradientBackground'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 const noto_serif_display = Noto_Serif_Display({
@@ -57,8 +53,6 @@ export default async function NotFound() {
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
-				<ToastContainer />
-				<GoogleAnalytics gaId="UA-150969790-2" />
 				<LowGradientBackground />
 				<LottieAnimation />
 
