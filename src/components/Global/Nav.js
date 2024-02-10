@@ -36,19 +36,30 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 
 		// if the user's language is the same as the current domain, return and stop the function
 		if (!shouldShowPopup) return
-		const message = currentDomain?.includes('.fr')
-			? 'Ce site est également disponible en anglais. Voulez-vous changer de langue ? '
-			: 'This site is also available in French. Do you want to switch languages ? '
+		const isFr = currentDomain?.includes('.fr')
 
 		const switchLanguageToast = () =>
-			toast.info(
-				<div>
-					{message}
-					<br />
+			toast(
+				<div className={'!text-white'}>
 					<Link
-						className={'text-sm text-indigo-1100 underline'}
+						className={'flex items-center gap-2 text-sm !text-white underline'}
 						href={linkToSwitchLanguage}
 					>
+						{isFr ? (
+							<Image
+								src={'/assets/icons/enflag.svg'}
+								width={15}
+								height={15}
+								alt={'en flag'}
+							/>
+						) : (
+							<Image
+								src={'/assets/icons/frflag.svg'}
+								width={15}
+								height={15}
+								alt={'fr flag'}
+							/>
+						)}{' '}
 						→ {linkToSwitchLanguage}
 					</Link>
 				</div>,
@@ -57,7 +68,8 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 					hideProgressBar: false,
 					closeOnClick: true,
 					pauseOnHover: true,
-					draggable: true,
+					draggable: false,
+					theme: 'dark',
 				}
 			)
 

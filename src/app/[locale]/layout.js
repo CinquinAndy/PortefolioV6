@@ -23,7 +23,7 @@ export default function RootLayout({ children, params }) {
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
-				<ToastContainer />
+				<ToastContainer closeOnClick />
 				<GoogleAnalytics gaId="UA-150969790-2" />
 				<LowGradientBackground />
 				<LottieAnimation />
