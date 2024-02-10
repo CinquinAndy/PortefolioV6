@@ -52,9 +52,9 @@ function Galery({ open, handleClick, galery, title_galery }) {
 											</div>
 										</div>
 										<div
-											className={`mx-6 mt-6 grid h-full grid-cols-12 gap-4 px-4 sm:px-6 md:gap-12 xl:grid-flow-row-dense ${
-												galery.length < 9 ? 'xl:grid-rows-3' : ''
-											}`}
+											className={
+												'columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>img:not(:first-child)]:mt-8'
+											}
 										>
 											{/*	map on galery */}
 											{galery.map((item, index) => {
@@ -63,10 +63,10 @@ function Galery({ open, handleClick, galery, title_galery }) {
 													<button
 														type={'button'}
 														key={index}
-														className={`col-span-12 cursor-pointer ${
+														className={`cursor-pointer ${
 															isExpanded
-																? 'fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/90 p-4 md:p-20'
-																: 'relative p-4 xl:col-span-4'
+																? 'absolute left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black px-2'
+																: 'relative'
 														}`}
 														onClick={() => {
 															setExpandedItem(isExpanded ? null : index)
@@ -82,9 +82,9 @@ function Galery({ open, handleClick, galery, title_galery }) {
 															height={item?.attributes?.height}
 															className={`${
 																isExpanded
-																	? 'm-4 lg:m-8 xl:m-10 2xl:m-40'
-																	: 'p-4'
-															} rounded-lg object-cover hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
+																	? 'p-2 lg:m-8 xl:m-10 2xl:m-40'
+																	: 'rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent'
+															} `}
 															sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
 														/>
 													</button>
