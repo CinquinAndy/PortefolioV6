@@ -37,20 +37,30 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 		// if the user's language is the same as the current domain, return and stop the function
 		if (!shouldShowPopup) return
 		const isFr = currentDomain?.includes('.fr')
-		const message = isFr
-			? 'Ce site est également disponible en anglais. Voulez-vous changer de langue? '
-			: 'This site is also available in French. Do you want to switch languages? '
 
 		const switchLanguageToast = () =>
 			toast(
 				<div className={'!text-white'}>
-					{message}
-					<br />
 					<Link
-						className={'text-sm !text-white underline'}
+						className={'flex items-center gap-2 text-sm !text-white underline'}
 						href={linkToSwitchLanguage}
 					>
-						→ {isFr ? '' : ''} {linkToSwitchLanguage}
+						{isFr ? (
+							<Image
+								src={'/assets/icons/enflag.svg'}
+								width={15}
+								height={15}
+								alt={'en flag'}
+							/>
+						) : (
+							<Image
+								src={'/assets/icons/frflag.svg'}
+								width={15}
+								height={15}
+								alt={'fr flag'}
+							/>
+						)}{' '}
+						→ {linkToSwitchLanguage}
 					</Link>
 				</div>,
 				{

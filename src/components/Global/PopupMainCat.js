@@ -52,14 +52,14 @@ export function PopupMainCat({ content_website }) {
 			onClick={() => {
 				setIsClicked(!isClicked)
 			}}
-			className={`custom-popup fixed right-0 z-40 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
+			className={`custom-popup fixed right-0 z-[35] flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
 		>
 			<div
 				className={
 					'relative mx-3 flex h-full w-full items-center justify-start rounded-lg border-2 border-white bg-indigo-1100 px-3 py-2 shadow-lg transition-all duration-300 sm:px-6 sm:py-3 lg:mx-0'
 				}
 			>
-				<div className={'absolute -top-20 left-4 -z-10'}>
+				<div className={'absolute -top-20 right-16 -z-10 sm:left-4'}>
 					<svg
 						className={'h-[90px] w-[90px]'}
 						xmlns="http://www.w3.org/2000/svg"
