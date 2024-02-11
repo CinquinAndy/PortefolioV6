@@ -124,6 +124,11 @@ a:hover {
 	--color-interactive: 99, 102, 241;
 	--circle-size: 80%;
 	--blending: hard-light;
+	/*--color1: rgb(29, 78, 216);*/
+	/*--color2: rgb(162, 28, 175);*/
+	/*--color3: rgb(34, 211, 238);*/
+	/*--color4: rgb(220, 38, 38);*/
+	/*--color5: rgb(217, 119, 6);*/
 }
 
 @media (min-aspect-ratio: 16/9) {
