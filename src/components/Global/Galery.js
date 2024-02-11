@@ -1,13 +1,16 @@
 'use client'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ImageLoad } from '@/app/[locale]/portefolio/[slug]/[image]/imageLoad'
 
 function Galery({ open, handleClick, galery, title_galery }) {
-	const [expandedItem, setExpandedItem] = useState(null)
-
+	// pathname
+	const pathname = usePathname()
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog as="div" className="relative z-50" onClose={handleClick}>
@@ -58,21 +61,14 @@ function Galery({ open, handleClick, galery, title_galery }) {
 										>
 											{/*	map on galery */}
 											{galery.map((item, index) => {
-												const isExpanded = index === expandedItem
 												return (
-													<button
+													<Link
 														type={'button'}
 														key={index}
-														className={`cursor-pointer ${
-															isExpanded
-																? 'absolute left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black px-2'
-																: 'relative'
-														}`}
-														onClick={() => {
-															setExpandedItem(isExpanded ? null : index)
-														}}
+														className={`cursor-pointer`}
+														href={pathname + '/' + index}
 													>
-														<Image
+														<ImageLoad
 															src={item?.attributes?.url}
 															alt={
 																item?.attributes?.alternativeText ??
@@ -80,14 +76,9 @@ function Galery({ open, handleClick, galery, title_galery }) {
 															}
 															width={item?.attributes?.width}
 															height={item?.attributes?.height}
-															className={`${
-																isExpanded
-																	? 'p-2 lg:m-8 xl:m-10 2xl:m-40'
-																	: 'rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent'
-															} `}
-															sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+															className={`rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
 														/>
-													</button>
+													</Link>
 												)
 											})}
 										</div>
