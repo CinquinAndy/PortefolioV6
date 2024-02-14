@@ -11,9 +11,9 @@ COPY ./src ./src
 COPY ./next* .
 COPY ./next.config.js .
 
-RUN npm ci --omit=dev --ignore-scripts
-
 ENV NEXT_SHARP_PATH=./node_modules/sharp
+
+RUN npm ci --omit=dev --ignore-scripts
 
 # Exposition du port 3000
 EXPOSE 3000
