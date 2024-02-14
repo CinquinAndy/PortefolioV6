@@ -18,7 +18,7 @@ const options = {
 							width={1000}
 							height={1000}
 							quality={85}
-							className={`max-h-[700px] object-contain`}
+							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 						/>
 					</div>
 				)
