@@ -4,6 +4,14 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { Layout } from '@/components/Global/Layout'
 import { HoloComponent } from '@/components/Global/Animations/HoloComponent'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	// Map each locale to a params object expected by Next.js
+	return localesConstant.map(locale => ({
+		params: { locale },
+	}))
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data
