@@ -12,6 +12,14 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { VideoBackground } from '../../components/Global/Animations/VideoBackground'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	// Map each locale to a params object expected by Next.js
+	return localesConstant.map(locale => ({
+		params: { locale },
+	}))
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data
