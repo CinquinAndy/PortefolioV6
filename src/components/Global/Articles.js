@@ -39,11 +39,11 @@ function Articles({ content_website, articles, slice, isHome }) {
 							</span>
 						</Link>
 						<Link
-							href={content_website?.attributes?.content_home?.link[1]?.url}
+							href={content_website?.attributes?.content_home?.link[2]?.url}
 							className="button-cyan rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 						>
 							<span className={'button-cyan-title'}>
-								{content_website?.attributes?.content_home?.link[1]?.label}
+								{content_website?.attributes?.content_home?.link[2]?.label}
 							</span>
 						</Link>
 					</div>
