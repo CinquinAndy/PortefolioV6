@@ -9,6 +9,7 @@ import html from 'remark-html'
  */
 export async function fetchAPI(path, options = {}) {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
+		next: { revalidate: 60 },
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
