@@ -9,8 +9,19 @@ const options = {
 			const { name, attribs } = domNode
 
 			if (name === 'img') {
-				const { src, alt, width, height } = attribs
-				return <Image src={src} alt={alt} width={500} height={500} />
+				const { src, alt } = attribs
+				return (
+					<div className={'flex w-full items-center justify-center'}>
+						<Image
+							src={src}
+							alt={alt}
+							width={1000}
+							height={1000}
+							quality={85}
+							className={`max-h-[700px] object-contain`}
+						/>
+					</div>
+				)
 			}
 
 			if (name === 'a') {

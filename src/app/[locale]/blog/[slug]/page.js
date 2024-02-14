@@ -13,8 +13,11 @@ import Link from 'next/link'
 
 export async function generateMetadata({ params }) {
 	// fetch data
+	// console.log('slug', params.slug)
 	let article = await getArticleBySlug(params.slug, params.locale)
+	// console.log('article', article)
 
+	// console.log('generate metadata', article, params)
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
 
