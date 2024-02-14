@@ -1,9 +1,36 @@
 import {
 	getRealisationBySlug,
+	getRealisations,
 	processRealisationData,
 } from '@/services/getContentWebsite'
-import { BackButton } from '@/app/[locale]/portefolio/[slug]/[image]/backButton'
-import { ImageLoad } from '@/app/[locale]/portefolio/[slug]/[image]/imageLoad'
+import { BackButtonComponent } from '@/components/Global/BackButton.component'
+import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	let paths = []
+
+	for (const locale of localesConstant) {
+		// Assuming these are your locales
+		const realisations = await getRealisations(locale) // Fetch realisations for each locale
+
+		for (const realisation of realisations.data) {
+			const images = realisation.attributes.galery.data // Assuming this is where images are stored
+
+			for (const [index, image] of images.entries()) {
+				paths.push({
+					params: {
+						slug: realisation.attributes.slug,
+						image: String(index),
+						locale,
+					}, // Use index as a placeholder for image
+				})
+			}
+		}
+	}
+
+	return paths
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data
@@ -48,9 +75,9 @@ export default async function Page({ params }) {
 				className={'relative flex h-full w-full items-center justify-center'}
 			>
 				<div className={'absolute left-0 top-0 m-8'}>
-					<BackButton />
+					<BackButtonComponent />
 				</div>
-				<ImageLoad
+				<ImageLoadComponent
 					className={'rounded-lg p-2 sm:p-4 md:p-8 lg:p-32'}
 					src={image?.attributes?.url}
 					alt={image?.attributes?.alternativeText ?? 'Project Image'}
