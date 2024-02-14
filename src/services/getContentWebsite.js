@@ -173,6 +173,7 @@ export async function getRealisations(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticles(locale) {
+	// console.log('locale', locale)
 	return await fetchAPI(
 		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
 	)
@@ -197,6 +198,10 @@ export async function getRealisationBySlug(slug, locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticleBySlug(slug, locale) {
+	// console.log(
+	// 	'article by slug',
+	// 	`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
+	// )
 	return fetchAPI(
 		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
 	)
@@ -229,6 +234,10 @@ export async function processRealisationData(realisationData) {
  * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
 export async function processArticleData(articleData) {
+	// console.log(articleData.data[0])
+	if (!articleData.data[0]?.attributes) {
+		return {}
+	}
 	const processedContentArticles = await processMarkdown(
 		articleData.data[0].attributes.content
 	)
