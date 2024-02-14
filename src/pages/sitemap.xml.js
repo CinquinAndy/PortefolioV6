@@ -104,7 +104,7 @@ export const getServerSideProps = async ({ res }) => {
 	const resultBlogAlt = JSON.parse(JSON.stringify(resultBlog))
 
 	const pathsBlogAlt = resultBlogAlt?.data?.map(record => {
-		return `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${record.attributes.slug}`
+		return `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${record.attributes.localizations?.data[0]?.attributes?.slug}`
 	})
 
 	// get all article for dynamic paths
@@ -128,7 +128,7 @@ export const getServerSideProps = async ({ res }) => {
 	const resultPortefolioAlt = JSON.parse(JSON.stringify(resultPortefolio))
 
 	const pathsPortefolioAlt = resultPortefolioAlt?.data?.map(record => {
-		return `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${record.attributes.slug}`
+		return `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${record.attributes.localizations?.data[0]?.attributes?.slug}`
 	})
 
 	const allPaths = [
