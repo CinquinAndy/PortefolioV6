@@ -1,4 +1,5 @@
 import {
+	getArticleBySlug,
 	getContentWebsite,
 	getRealisationBySlug,
 	processRealisationData,
@@ -16,23 +17,33 @@ import Image from 'next/image'
 export async function generateMetadata({ params }) {
 	// fetch data
 	let realisation = await getRealisationBySlug(params.slug, params.locale)
+	realisation = realisation?.data[0]
 
-	let processedRealisation = await processRealisationData(realisation)
-	processedRealisation = processedRealisation?.data
+	// conditional slug, make en and fr slugs available
+	let slug = ''
+	let slugAlternate = ''
+	if (params.locale === 'fr') {
+		slug = realisation?.attributes?.slug
+		slugAlternate =
+			realisation?.attributes?.localizations?.data[0]?.attributes?.slug
+	} else {
+		slugAlternate = realisation?.attributes?.slug
+		slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
+	}
 
 	return {
 		title:
-			processedRealisation?.attributes?.seo_title ||
+			realisation?.attributes?.seo_title ||
 			'Andy Cinquin - Freelance Entrepreneur & Developer',
 		description:
-			processedRealisation?.attributes?.seo_description ||
+			realisation?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		alternates: {
-			canonical: processedRealisation?.attributes?.seo_canonical || '/',
+			canonical: realisation?.attributes?.seo_canonical || '/',
 			languages: {
-				'en-US': `${params.locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
-				'fr-FR': `${params.locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${slug}`,
 			},
 		},
 	}
