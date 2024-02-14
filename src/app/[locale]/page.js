@@ -30,8 +30,8 @@ export async function generateMetadata({ params }) {
 			canonical:
 				content_website?.attributes?.content_home?.seo?.canonical || '/',
 			languages: {
-				'fr-FR': '/',
-				'en-US': 'https://andy-cinquin.com',
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}`,
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
 			},
 		},
 	}
