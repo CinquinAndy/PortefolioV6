@@ -6,6 +6,12 @@ const Sitemap = () => {
 }
 
 export const getServerSideProps = async ({ res }) => {
+	console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL)
+	console.log(
+		'process.env.NEXT_PUBLIC_API_URL',
+		process.env.NEXT_PUBLIC_API_URL
+	)
+
 	// Function to get directories from a directory recursively
 	function getDirsFromDir(startPath) {
 		let results = []
@@ -47,8 +53,8 @@ export const getServerSideProps = async ({ res }) => {
 	// Filter and format paths for URLs
 	let staticPaths = dirs.map(staticPagePath => {
 		let newPath = staticPagePath
-			.replace('src\\app\\[locale]\\', '')
-			.replace(/\\/g, '/')
+			.replace(`src${path.sep}app${path.sep}[locale]${path.sep}`, '') // Utilisation de path.sep pour la portabilité
+			.replace(new RegExp(`\\${path.sep}`, 'g'), '/') // Remplacement de tous les séparateurs de chemin par des slashs
 		return `${process.env.NEXT_PUBLIC_URL}/${newPath}`
 	})
 	console.log('staticPaths', staticPaths)
