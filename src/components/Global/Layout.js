@@ -10,6 +10,7 @@ const options = {
 
 			if (name === 'img') {
 				const { src, alt, width, height } = attribs
+				// console.log(attribs)
 				return <Image src={src} alt={alt} width={500} height={500} />
 			}
 
