@@ -1,6 +1,7 @@
 import {
 	getArticleById,
 	getArticleBySlug,
+	getArticles,
 	getContentWebsite,
 	processArticleData,
 } from '@/services/getContentWebsite'
@@ -11,6 +12,24 @@ import { Layout } from '@/components/Global/Layout'
 import { replaceTitle } from '@/services/utils'
 import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	let paths = []
+
+	for (const locale of localesConstant) {
+		const articles = await getArticles(locale) // Use your service to fetch articles
+
+		// Map over each article to create a path object for it
+		const localePaths = articles.data.map(article => ({
+			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
+		}))
+
+		paths = paths.concat(localePaths)
+	}
+
+	return paths
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data
