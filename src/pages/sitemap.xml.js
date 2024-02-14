@@ -57,7 +57,6 @@ export const getServerSideProps = async ({ res }) => {
 			.replace(new RegExp(`\\${path.sep}`, 'g'), '/') // Remplacement de tous les séparateurs de chemin par des slashs
 		return `${process.env.NEXT_PUBLIC_URL}/${newPath}`
 	})
-	console.log('staticPaths', staticPaths)
 
 	// Filter out unwanted paths
 	staticPaths = staticPaths.filter(item => {
@@ -89,8 +88,6 @@ export const getServerSideProps = async ({ res }) => {
 		staticPathsAlt,
 		process.env.NEXT_PUBLIC_URL_ALT
 	)
-	console.log('staticPaths', staticPaths)
-	console.log('staticPathsAlt', staticPathsAlt)
 
 	// get all article for dynamic paths
 	const resultBlog = await fetch(
@@ -105,21 +102,17 @@ export const getServerSideProps = async ({ res }) => {
 			},
 		}
 	).then(res => res.json())
-	console.log('resultBlog', resultBlog)
 
 	const pathsBlog = resultBlog?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL}/blog/${record.attributes.slug}`
 	})
-	console.log('pathsBlog', pathsBlog)
 
 	// copy of the paths for the alternative URL
 	const resultBlogAlt = JSON.parse(JSON.stringify(resultBlog))
-	console.log('resultBlogAlt', resultBlogAlt)
 
 	const pathsBlogAlt = resultBlogAlt?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${record.attributes.localizations?.data[0]?.attributes?.slug}`
 	})
-	console.log('pathsBlogAlt', pathsBlogAlt)
 
 	// get all article for dynamic paths
 	const resultPortefolio = await fetch(
@@ -134,20 +127,16 @@ export const getServerSideProps = async ({ res }) => {
 			},
 		}
 	).then(res => res.json())
-	console.log('resultPortefolio', resultPortefolio)
 
 	const pathsPortefolio = resultPortefolio?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL}/portefolio/${record.attributes.slug}`
 	})
-	console.log('pathsPortefolio', pathsPortefolio)
 
 	const resultPortefolioAlt = JSON.parse(JSON.stringify(resultPortefolio))
-	console.log('resultPortefolioAlt', resultPortefolioAlt)
 
 	const pathsPortefolioAlt = resultPortefolioAlt?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${record.attributes.localizations?.data[0]?.attributes?.slug}`
 	})
-	console.log('pathsPortefolioAlt', pathsPortefolioAlt)
 
 	const allPaths = [
 		...staticPaths,
@@ -157,7 +146,6 @@ export const getServerSideProps = async ({ res }) => {
 		...pathsBlogAlt,
 		...pathsPortefolioAlt,
 	]
-	console.log('allPaths', allPaths)
 
 	// Generate the sitemap
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
