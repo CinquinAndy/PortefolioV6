@@ -8,8 +8,8 @@ const Sitemap = () => {
 export const getServerSideProps = async ({ res }) => {
 	console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL)
 	console.log(
-		'process.env.NEXT_PUBLIC_API_URL',
-		process.env.NEXT_PUBLIC_API_URL
+		'process.env.NEXT_PUBLIC_URL_ALT',
+		process.env.NEXT_PUBLIC_URL_ALT
 	)
 
 	// Function to get directories from a directory recursively
