@@ -1,7 +1,7 @@
 import {
-	getArticleBySlug,
 	getContentWebsite,
 	getRealisationBySlug,
+	getRealisations,
 	processRealisationData,
 } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
@@ -13,6 +13,24 @@ import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { GalerySection } from '@/components/Global/GalerySection'
 import Image from 'next/image'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	let paths = []
+
+	for (const locale of localesConstant) {
+		const realisations = await getRealisations(locale) // Use your service to fetch realisations
+
+		// Map over each article to create a path object for it
+		const localePaths = realisations.data.map(article => ({
+			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
+		}))
+
+		paths = paths.concat(localePaths)
+	}
+
+	return paths
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data

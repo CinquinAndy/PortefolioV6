@@ -2,6 +2,14 @@ import { getContentWebsite } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Footer from '@/components/Global/Footer'
 import { ContactForm } from '@/components/Global/ContactForm'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	// Map each locale to a params object expected by Next.js
+	return localesConstant.map(locale => ({
+		params: { locale },
+	}))
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data

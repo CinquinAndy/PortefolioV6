@@ -6,6 +6,14 @@ import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Realisations from '@/components/Global/Realisations'
+import { localesConstant } from '@/services/localesConstant'
+
+export async function generateStaticParams() {
+	// Map each locale to a params object expected by Next.js
+	return localesConstant.map(locale => ({
+		params: { locale },
+	}))
+}
 
 export async function generateMetadata({ params }) {
 	// fetch data

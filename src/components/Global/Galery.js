@@ -6,7 +6,7 @@ import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ImageLoad } from '@/app/[locale]/portefolio/[slug]/[image]/imageLoad'
+import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
 
 function Galery({ open, handleClick, galery, title_galery }) {
 	// pathname
@@ -68,7 +68,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 														className={`cursor-pointer`}
 														href={pathname + '/' + index}
 													>
-														<ImageLoad
+														<ImageLoadComponent
 															src={item?.attributes?.url}
 															alt={
 																item?.attributes?.alternativeText ??
