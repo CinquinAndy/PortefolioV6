@@ -47,7 +47,7 @@ export const getServerSideProps = async ({ res }) => {
 	// Filter and format paths for URLs
 	let staticPaths = dirs.map(staticPagePath => {
 		let newPath = staticPagePath
-			.replace('src\\app\\[lang]\\', '')
+			.replace('src\\app\\[locale]\\', '')
 			.replace(/\\/g, '/')
 		return `${process.env.NEXT_PUBLIC_URL}/${newPath}`
 	})
@@ -59,7 +59,8 @@ export const getServerSideProps = async ({ res }) => {
 			`${process.env.NEXT_PUBLIC_URL}/blog/[slug]`,
 			`${process.env.NEXT_PUBLIC_URL}/blog/[slug]`,
 			`${process.env.NEXT_PUBLIC_URL}/portefolio/[slug]`,
-			`${process.env.NEXT_PUBLIC_URL}/src/app/[lang]`, // Exclude the root page.js
+			`${process.env.NEXT_PUBLIC_URL}/portefolio/[slug]/[image]`,
+			`${process.env.NEXT_PUBLIC_URL}/src/app/[locale]`, // Exclude the root page.js
 		].includes(item)
 	})
 
@@ -84,7 +85,7 @@ export const getServerSideProps = async ({ res }) => {
 
 	// get all article for dynamic paths
 	const resultBlog = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/articles`,
+		`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=deep`,
 		{
 			method: 'GET',
 			headers: {
@@ -109,7 +110,7 @@ export const getServerSideProps = async ({ res }) => {
 
 	// get all article for dynamic paths
 	const resultPortefolio = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations`,
+		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`,
 		{
 			method: 'GET',
 			headers: {
