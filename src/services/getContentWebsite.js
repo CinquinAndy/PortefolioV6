@@ -198,13 +198,19 @@ export async function getRealisationBySlug(slug, locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticleBySlug(slug, locale) {
-	// console.log(
-	// 	'article by slug',
-	// 	`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
-	// )
 	return fetchAPI(
 		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
 	)
+}
+
+/**
+ * get article by id and locale
+ * @param id
+ * @param locale
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getArticleById(id, locale) {
+	return fetchAPI(`api/articles/${id}/populate=deep&locale=${locale}`)
 }
 
 /**

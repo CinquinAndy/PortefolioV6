@@ -1,4 +1,5 @@
 import {
+	getArticleById,
 	getArticleBySlug,
 	getContentWebsite,
 	processArticleData,
@@ -13,27 +14,34 @@ import Link from 'next/link'
 
 export async function generateMetadata({ params }) {
 	// fetch data
-	// console.log('slug', params.slug)
 	let article = await getArticleBySlug(params.slug, params.locale)
-	// console.log('article', article)
+	article = article?.data[0]
 
-	// console.log('generate metadata', article, params)
-	let processedArticle = await processArticleData(article)
-	processedArticle = processedArticle?.data
+	// conditional slug, make en and fr slugs available
+	let slug = ''
+	let slugAlternate = ''
+	if (params.locale === 'fr') {
+		slug = article?.attributes?.slug
+		slugAlternate =
+			article?.attributes?.localizations?.data[0]?.attributes?.slug
+	} else {
+		slugAlternate = article?.attributes?.slug
+		slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
+	}
 
 	return {
 		title:
-			processedArticle?.attributes?.seo_title ||
+			article?.attributes?.seo_title ||
 			'Andy Cinquin - Freelance Entrepreneur & Developer',
 		description:
-			processedArticle?.attributes?.seo_description ||
+			article?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		alternates: {
-			canonical: processedArticle?.attributes?.seo_canonical || '/',
+			canonical: article?.attributes?.seo_canonical || '/',
 			languages: {
-				'en-US': `${params.locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
-				'fr-FR': `${params.locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
 			},
 		},
 	}
