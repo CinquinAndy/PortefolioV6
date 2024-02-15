@@ -30,7 +30,7 @@
 		"html-react-parser": "5.1.5",
 		"i18next": "23.8.2",
 		"lodash": "4.17.21",
-		"mailgun.js": "10.1.0",
+		"mailgun.js": "10.2.0",
 		"next": "14.1.0",
 		"next-i18n-router": "5.3.1",
 		"next-transpile-modules": "10.0.1",
