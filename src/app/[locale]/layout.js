@@ -5,6 +5,8 @@ import { dir } from 'i18next'
 import { GradientBackground } from '../../components/Global/Animations/GradientBackground'
 import { LottieAnimation } from '../../components/Global/Animations/LottieAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
+import Head from 'next/head'
+import Script from 'next/script'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
@@ -20,6 +22,15 @@ const be_vietnam_pro = Be_Vietnam_Pro({
 export default function RootLayout({ children, params }) {
 	return (
 		<html lang={params.locale} dir={dir(params.locale)}>
+			<Head>
+				<script
+					async
+					defer
+					src="https://umami.wadefade.fr/script.js"
+					data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
+					data-domains="andy-cinquin.fr,andy-cinquin.com"
+				/>
+			</Head>
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
