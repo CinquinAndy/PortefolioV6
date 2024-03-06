@@ -22,14 +22,12 @@ const be_vietnam_pro = Be_Vietnam_Pro({
 export default function RootLayout({ children, params }) {
 	return (
 		<html lang={params.locale} dir={dir(params.locale)}>
-			<Head>
-				<Script
-					async
-					src="https://umami.wadefade.fr/script.js"
-					strategy={'afterInteractive'}
-					data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
-				/>
-			</Head>
+			<Script
+				async
+				src="https://umami.wadefade.fr/script.js"
+				strategy={'afterInteractive'}
+				data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
+			/>
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
