@@ -45,7 +45,7 @@
 		"remark-parse": "11.0.0",
 		"sharp": "0.33.2",
 		"special-card": "2.1.1",
-		"typescript": "5.3.3",
+		"typescript": "5.4.2",
 		"zod": "3.22.4"
 	},
 	"devDependencies": {
