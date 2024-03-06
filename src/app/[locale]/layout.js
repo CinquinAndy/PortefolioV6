@@ -23,12 +23,11 @@ export default function RootLayout({ children, params }) {
 	return (
 		<html lang={params.locale} dir={dir(params.locale)}>
 			<Head>
-				<script
+				<Script
 					async
-					defer
 					src="https://umami.wadefade.fr/script.js"
+					strategy={'afterInteractive'}
 					data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
-					data-domains="andy-cinquin.fr,andy-cinquin.com"
 				/>
 			</Head>
 			<body
