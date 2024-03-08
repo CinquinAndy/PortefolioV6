@@ -87,8 +87,52 @@ function Nav({
 		return () => clearTimeout(timer)
 	}, [pathname, linkToSwitchLanguage])
 
+	useEffect(() => {
+		const cursor = document.querySelector('.cursor')
+
+		const changeCursorColor = color => {
+			cursor.style.backgroundColor = color
+		}
+
+		document
+			.querySelectorAll('a, button, .cursor-pointer, .Toastify')
+			.forEach(element => {
+				element.addEventListener('mouseenter', () => {
+					cursor.classList.add('hover')
+					changeCursorColor('#000')
+				})
+				element.addEventListener('mouseleave', () => {
+					cursor.classList.remove('hover')
+					changeCursorColor('#fff')
+				})
+			})
+
+		document.addEventListener('click', () => {
+			cursor.classList.add('expand')
+			changeCursorColor('#000')
+
+			setTimeout(() => {
+				cursor.classList.remove('expand')
+				changeCursorColor('#fff')
+			}, 500)
+		})
+
+		let lastX = 0
+		let lastY = 0
+
+		document.addEventListener('mousemove', e => {
+			lastX = e.clientX
+			lastY = e.clientY
+			requestAnimationFrame(() => {
+				cursor.style.left = `${lastX}px`
+				cursor.style.top = `${lastY}px`
+			})
+		})
+	}, [])
+
 	return (
 		<>
+			<span className="cursor"></span>
 			<header
 				className={`${!open ? 'sticky' : 'fixed'} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
 			>

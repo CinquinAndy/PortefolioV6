@@ -34,8 +34,8 @@ blockquote {
 
 body {
     box-sizing: border-box;
-    --sb-track-color: #0f0f5d;
-    --sb-thumb-color: #ffffff;
+    --sb-track-color: #000;
+    --sb-thumb-color: #fff;
     --sb-size: 10px;
     display: inline-block;
     width: 100vw;
@@ -49,7 +49,9 @@ body {
     );
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
     background-size: cover;
+    cursor: none;
 }
+
 
 body::-webkit-scrollbar {
     width: var(--sb-size)
@@ -64,6 +66,29 @@ body::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 1px;
 
+}
+
+*:hover {
+    cursor: none !important;
+}
+
+.cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    top: var(--y, 0);
+    left: var(--x, 0);
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    transition: transform 0.2s ease-out, background-color 0.2s ease;
+}
+
+.cursor.expand, .cursor.hover {
+    transform: translate(-50%, -50%) scale(2);
 }
 
 @supports not selector(::-webkit-scrollbar) {
