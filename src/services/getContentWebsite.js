@@ -241,18 +241,18 @@ export async function processRealisationData(realisationData) {
  */
 export async function processArticleData(articleData) {
 	// console.log(articleData.data[0])
-	if (!articleData.data[0]?.attributes) {
+	if (!articleData.attributes) {
 		return {}
 	}
 	const processedContentArticles = await processMarkdown(
-		articleData.data[0].attributes.content
+		articleData.attributes.content
 	)
 	return {
 		...articleData,
 		data: {
 			// ...articleData.data,
 			attributes: {
-				...articleData.data[0].attributes,
+				...articleData.attributes,
 				content: processedContentArticles.toString(),
 			},
 		},

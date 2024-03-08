@@ -53,7 +53,7 @@ export default async function NotFound() {
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
-				<LowGradientBackground />
+				{/*<LowGradientBackground />*/}
 				<LottieAnimation />
 
 				<div className="h-screen">

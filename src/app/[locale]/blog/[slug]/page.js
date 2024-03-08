@@ -1,5 +1,4 @@
 import {
-	getArticleById,
 	getArticleBySlug,
 	getArticles,
 	getContentWebsite,
@@ -32,8 +31,7 @@ export async function generateStaticParams() {
 	return paths
 }
 
-export async function generateMetadata({ params }) {
-	// fetch data
+async function getSlugs(params) {
 	let article = await getArticleBySlug(params.slug, params.locale)
 	article = article?.data[0]
 
@@ -48,6 +46,11 @@ export async function generateMetadata({ params }) {
 		slugAlternate = article?.attributes?.slug
 		slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
 	}
+
+	return { article, slug, slugAlternate }
+}
+export async function generateMetadata({ params }) {
+	let { article, slug, slugAlternate } = await getSlugs(params)
 
 	return {
 		title:
@@ -71,10 +74,13 @@ export default async function Page({ params }) {
 	// fetch data
 	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let article = await getArticleBySlug(params.slug, params.locale)
+	let { article, slug, slugAlternate } = await getSlugs(params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
+
+	console.log('slug', slug)
+	console.log('slugAlternate', slugAlternate)
 
 	return (
 		<>
@@ -112,6 +118,8 @@ export default async function Page({ params }) {
 				content_website={content_website}
 				isHome={false}
 				h1={processedArticle?.attributes?.title}
+				enRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slugAlternate}
+				frRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slug}
 			/>
 			<div>
 				<div className={'relative'}>

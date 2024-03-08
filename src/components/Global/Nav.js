@@ -6,7 +6,14 @@ import { usePathname } from 'next/navigation'
 import { TypeAnimation } from 'react-type-animation'
 import { toast, ToastContainer } from 'react-toastify'
 
-function Nav({ content_website, selectedMenu, h1, isHome = true }) {
+function Nav({
+	content_website,
+	selectedMenu,
+	h1,
+	isHome = true,
+	frRedirect,
+	enRedirect,
+}) {
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
@@ -18,10 +25,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	useEffect(() => {
 		setLinkToSwitchLanguage(
 			window.location.origin === 'https://andy-cinquin.fr'
-				? `https://andy-cinquin.com${pathname}`
-				: `https://andy-cinquin.fr${pathname}`
+				? enRedirect || `https://andy-cinquin.com${pathname}`
+				: frRedirect || `https://andy-cinquin.fr${pathname}`
 		)
-	}, [pathname])
+	}, [enRedirect, frRedirect, pathname])
 
 	useEffect(() => {
 		// if isn't home, return and stop the function
