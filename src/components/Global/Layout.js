@@ -24,6 +24,10 @@ const options = {
 				)
 			}
 
+			if (name === 'p') {
+				return <div>{domToReact(domNode.children, options)}</div>
+			}
+
 			if (name === 'a') {
 				const { href } = attribs
 				return (
