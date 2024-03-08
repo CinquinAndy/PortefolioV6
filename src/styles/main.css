@@ -13,6 +13,39 @@
     color: #fff;
 }
 
+:root {
+    --cursor-before-bg-color: #fff;
+}
+
+.cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 50%;
+    top: var(--y, 0);
+    left: var(--x, 0);
+    transform: translate(-50%, -50%);
+    mix-blend-mode: multiply;
+    z-index: 999999;
+    pointer-events: none;
+    transition: transform 0.2s ease-out, background-color 0.2s ease;
+}
+.cursor::before {
+    content: '';
+    position: fixed;
+    width: 38px;
+    height: 38px;
+    background-color: var(--cursor-before-bg-color);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: transform 0.2s ease-out, background-color 0.2s ease;
+}
+
 ::selection {
     background: #312e81;
     color: #fff;
@@ -49,7 +82,6 @@ body {
     );
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
     background-size: cover;
-    cursor: none;
 }
 
 
@@ -68,26 +100,13 @@ body::-webkit-scrollbar-thumb {
 
 }
 
-*:hover {
-    cursor: none !important;
+/* retrieve the cursor css in "nav.js" file, because, we need to load it dynamicly & move it from the js */
+
+.cursor.hover {
+    transform: translate(-50%, -50%) scale(1.4);
 }
 
-.cursor {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    border-radius: 50%;
-    top: var(--y, 0);
-    left: var(--x, 0);
-    transform: translate(-50%, -50%);
-    z-index: 999999;
-    mix-blend-mode: soft-light;
-    pointer-events: none;
-    transition: transform 0.2s ease-out, background-color 0.2s ease;
-}
-
-.cursor.expand, .cursor.hover {
+.cursor.expand{
     transform: translate(-50%, -50%) scale(2);
 }
 
