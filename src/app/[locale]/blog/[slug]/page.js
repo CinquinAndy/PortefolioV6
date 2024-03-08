@@ -13,6 +13,7 @@ import { replaceTitle } from '@/services/utils'
 import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { localesConstant } from '@/services/localesConstant'
+import Script from 'next/script'
 
 export async function generateStaticParams() {
 	let paths = []
@@ -77,6 +78,36 @@ export default async function Page({ params }) {
 
 	return (
 		<>
+			<Script
+				id={'json-ld'}
+				type={'application/ld+json'}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						'@context': 'https://schema.org',
+						'@type': 'Article',
+						headline: processedArticle?.attributes?.title,
+						datePublished: processedArticle?.attributes?.createdAt,
+						dateModified: processedArticle?.attributes?.updatedAt,
+						mainEntityOfPage: {
+							'@type': 'WebPage',
+							'@id': `${process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
+						},
+						author: {
+							'@type': 'Person',
+							name: 'Andy Cinquin',
+						},
+						publisher: {
+							'@type': 'Organization',
+							name: 'Andy Cinquin',
+							logo: {
+								'@type': 'ImageObject',
+								url: `${process.env.NEXT_PUBLIC_URL}/favicon.ico`,
+							},
+						},
+					}),
+				}}
+			/>
+
 			<Nav
 				content_website={content_website}
 				isHome={false}
@@ -153,9 +184,44 @@ export default async function Page({ params }) {
 								<div
 									className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
 								>
+									<h2>{processedArticle?.attributes?.title}</h2>
+									<div className={'italic opacity-90'}>
+										{params.locale === 'fr' ? 'Publié le ' : 'Posted on '}
+										{
+											// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
+											// processedArticle?.attributes?.createdAt
+											params.locale === 'fr'
+												? new Date(
+														processedArticle?.attributes?.createdAt
+													).toLocaleDateString('fr-FR', {
+														year: 'numeric',
+														month: 'long',
+														day: 'numeric',
+													})
+												: new Date(
+														processedArticle?.attributes?.createdAt
+													).toLocaleDateString('en-US', {
+														year: 'numeric',
+														month: 'long',
+														day: 'numeric',
+													})
+										}
+										&nbsp;-&nbsp;
+										{params.locale === 'fr'
+											? ' par Andy Cinquin'
+											: ' by Andy Cinquin'}
+									</div>
 									<Layout
 										value={processedArticle?.attributes?.content.toString()}
 									/>
+									<br />
+									<hr />
+									<br />
+									<div className={'flex flex-col gap-4'}>
+										{
+											"En vous remerciant de votre visite, n'hésitez pas à me contacter pour toute demande de renseignements, devis ou proposition de collaboration. Je me ferai un plaisir de vous répondre dans les plus brefs délais."
+										}
+									</div>
 								</div>
 							</article>
 						</div>
