@@ -49,6 +49,7 @@ async function getSlugs(params) {
 
 	return { article, slug, slugAlternate }
 }
+
 export async function generateMetadata({ params }) {
 	let { article, slug, slugAlternate } = await getSlugs(params)
 
@@ -78,9 +79,6 @@ export default async function Page({ params }) {
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
-
-	console.log('slug', slug)
-	console.log('slugAlternate', slugAlternate)
 
 	return (
 		<>
@@ -125,7 +123,7 @@ export default async function Page({ params }) {
 				<div className={'relative'}>
 					<div
 						className={
-							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:px-16 2xl:px-0'
+							'my-24 mb-12 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:mb-12 md:px-16 2xl:px-0'
 						}
 					>
 						<div
@@ -226,9 +224,30 @@ export default async function Page({ params }) {
 									<hr />
 									<br />
 									<div className={'flex flex-col gap-4'}>
-										{
-											"En vous remerciant de votre visite, n'hésitez pas à me contacter pour toute demande de renseignements, devis ou proposition de collaboration. Je me ferai un plaisir de vous répondre dans les plus brefs délais."
-										}
+										{params.locale === 'fr' ? (
+											<>
+												<div>
+													{`En vous remerciant de votre visite, n'hésitez pas à me
+														contacter pour toute demande de renseignements, devis ou
+														proposition de collaboration. Je me ferai un plaisir de
+														vous répondre dans les plus brefs délais.`}
+												</div>
+												<div>
+													{`Vous avez aimé cet article ? N'hésitez pas à le partager !`}
+												</div>
+											</>
+										) : (
+											<>
+												<div>
+													{`Thank you for your visit, feel free to contact me for
+												any information, quote or collaboration proposal. I will
+												be happy to answer you as soon as possible.`}
+												</div>
+												<div>
+													{`Did you like this article? Feel free to share it!`}
+												</div>
+											</>
+										)}
 									</div>
 								</div>
 							</article>

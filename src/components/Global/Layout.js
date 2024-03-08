@@ -25,7 +25,9 @@ const options = {
 			}
 
 			if (name === 'p') {
-				return <div>{domToReact(domNode.children, options)}</div>
+				return (
+					<div className={'my-5'}>{domToReact(domNode.children, options)}</div>
+				)
 			}
 
 			if (name === 'a') {
