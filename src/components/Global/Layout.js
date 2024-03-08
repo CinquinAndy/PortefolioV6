@@ -31,6 +31,13 @@ const options = {
 			}
 
 			if (name === 'a') {
+				if (attribs.href.includes('.mp4')) {
+					return (
+						<video muted controls className={'w-full'}>
+							<source src={attribs.href} type="video/mp4" />
+						</video>
+					)
+				}
 				const { href } = attribs
 				return (
 					<Link href={href} className={'underline'}>
