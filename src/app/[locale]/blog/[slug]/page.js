@@ -13,6 +13,7 @@ import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { localesConstant } from '@/services/localesConstant'
 import Script from 'next/script'
+import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
 
 export async function generateStaticParams() {
 	let paths = []
@@ -123,7 +124,7 @@ export default async function Page({ params }) {
 				<div className={'relative'}>
 					<div
 						className={
-							'my-24 mb-12 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:mb-12 md:px-16 2xl:px-0'
+							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:mb-12 md:px-16 2xl:px-0'
 						}
 					>
 						<div
@@ -174,84 +175,85 @@ export default async function Page({ params }) {
 								</div>
 							</div>
 						</div>
-
-						<div className="mx-auto max-w-7xl">
-							<h2
-								className={
-									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
-								}
-								dangerouslySetInnerHTML={{
-									__html: replaceTitle(
-										content_website?.attributes?.content_blog?.title_content
-									),
-								}}
-							/>
-							<article>
-								<div
-									className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
-								>
-									<h2>{processedArticle?.attributes?.title}</h2>
-									<div className={'italic opacity-90'}>
-										{params.locale === 'fr' ? 'Publié le ' : 'Posted on '}
-										{
-											// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
-											// processedArticle?.attributes?.createdAt
-											params.locale === 'fr'
-												? new Date(
-														processedArticle?.attributes?.createdAt
-													).toLocaleDateString('fr-FR', {
-														year: 'numeric',
-														month: 'long',
-														day: 'numeric',
-													})
-												: new Date(
-														processedArticle?.attributes?.createdAt
-													).toLocaleDateString('en-US', {
-														year: 'numeric',
-														month: 'long',
-														day: 'numeric',
-													})
-										}
-										&nbsp;-&nbsp;
-										{params.locale === 'fr'
-											? ' par Andy Cinquin'
-											: ' by Andy Cinquin'}
-									</div>
-									<Layout
-										value={processedArticle?.attributes?.content.toString()}
-									/>
-									<br />
-									<hr />
-									<br />
-									<div className={'flex flex-col gap-4'}>
-										{params.locale === 'fr' ? (
-											<>
-												<div>
-													{`En vous remerciant de votre visite, n'hésitez pas à me
+						<TracingBeam className={'flex w-full justify-center'}>
+							<div className="mx-auto max-w-7xl">
+								<h2
+									className={
+										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									}
+									dangerouslySetInnerHTML={{
+										__html: replaceTitle(
+											content_website?.attributes?.content_blog?.title_content
+										),
+									}}
+								/>
+								<article>
+									<div
+										className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
+									>
+										<h2>{processedArticle?.attributes?.title}</h2>
+										<div className={'italic opacity-90'}>
+											{params.locale === 'fr' ? 'Publié le ' : 'Posted on '}
+											{
+												// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
+												// processedArticle?.attributes?.createdAt
+												params.locale === 'fr'
+													? new Date(
+															processedArticle?.attributes?.createdAt
+														).toLocaleDateString('fr-FR', {
+															year: 'numeric',
+															month: 'long',
+															day: 'numeric',
+														})
+													: new Date(
+															processedArticle?.attributes?.createdAt
+														).toLocaleDateString('en-US', {
+															year: 'numeric',
+															month: 'long',
+															day: 'numeric',
+														})
+											}
+											&nbsp;-&nbsp;
+											{params.locale === 'fr'
+												? ' par Andy Cinquin'
+												: ' by Andy Cinquin'}
+										</div>
+										<Layout
+											value={processedArticle?.attributes?.content.toString()}
+										/>
+										<br />
+										<hr />
+										<br />
+										<div className={'flex flex-col gap-4'}>
+											{params.locale === 'fr' ? (
+												<>
+													<div>
+														{`En vous remerciant de votre visite, n'hésitez pas à me
 														contacter pour toute demande de renseignements, devis ou
 														proposition de collaboration. Je me ferai un plaisir de
 														vous répondre dans les plus brefs délais.`}
-												</div>
-												<div>
-													{`Vous avez aimé cet article ? N'hésitez pas à le partager !`}
-												</div>
-											</>
-										) : (
-											<>
-												<div>
-													{`Thank you for your visit, feel free to contact me for
+													</div>
+													<div>
+														{`Vous avez aimé cet article ? N'hésitez pas à le partager !`}
+													</div>
+												</>
+											) : (
+												<>
+													<div>
+														{`Thank you for your visit, feel free to contact me for
 												any information, quote or collaboration proposal. I will
 												be happy to answer you as soon as possible.`}
-												</div>
-												<div>
-													{`Did you like this article? Feel free to share it!`}
-												</div>
-											</>
-										)}
+													</div>
+													<div>
+														{`Did you like this article? Feel free to share it!`}
+													</div>
+												</>
+											)}
+										</div>
 									</div>
-								</div>
-							</article>
-						</div>
+								</article>
+							</div>
+						</TracingBeam>
 					</div>
 				</div>
 			</div>
