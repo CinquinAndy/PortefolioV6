@@ -30,6 +30,10 @@ const options = {
 				)
 			}
 
+			if (name === 'hr') {
+				return <hr className={'border-white/50'} />
+			}
+
 			if (name === 'a') {
 				if (attribs.href.includes('.mp4')) {
 					return (
