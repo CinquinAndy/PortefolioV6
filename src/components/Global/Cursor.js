@@ -98,42 +98,66 @@ const Cursor = () => {
 	const [cursorVisible, setCursorVisible] = useState(true)
 	const [cursorEnlarged, setCursorEnlarged] = useState(false)
 	const [position, setPosition] = useState({ x: 0, y: 0 })
+	const [velocity, setVelocity] = useState({ x: 0, y: 0 })
+	const [outlinePosition, setOutlinePosition] = useState({ x: 0, y: 0 })
+
+	const acceleration = 0.1 // Control the acceleration rate
+	const damping = 0.1 // Control the damping to slow down the cursor
 
 	useEffect(() => {
 		const updateCursor = e => {
 			setPosition({ x: e.clientX, y: e.clientY })
 		}
 
-		const toggleCursorVisibility = isVisible => setCursorVisible(isVisible)
-		const toggleCursorSize = isEnlarged => setCursorEnlarged(isEnlarged)
-
 		window.addEventListener('mousemove', updateCursor)
-		window.addEventListener('mouseenter', () => toggleCursorVisibility(true))
-		window.addEventListener('mouseleave', () => toggleCursorVisibility(false))
-		window.addEventListener('mousedown', () => toggleCursorSize(true))
-		window.addEventListener('mouseup', () => toggleCursorSize(false))
+		window.addEventListener('mouseenter', () => setCursorVisible(true))
+		window.addEventListener('mouseleave', () => setCursorVisible(false))
+		window.addEventListener('mousedown', () => setCursorEnlarged(true))
+		window.addEventListener('mouseup', () => setCursorEnlarged(false))
 
 		document
 			.querySelectorAll(
 				'a, button, .cursor-pointer, .custom-button-icons, .Toastify'
 			)
 			.forEach(el => {
-				el.addEventListener('mouseenter', () => toggleCursorSize(true))
-				el.addEventListener('mouseleave', () => toggleCursorSize(false))
+				el.addEventListener('mouseenter', () => setCursorEnlarged(true))
+				el.addEventListener('mouseleave', () => setCursorEnlarged(false))
 			})
+
+		const animate = () => {
+			const dx = position.x - outlinePosition.x
+			const dy = position.y - outlinePosition.y
+
+			const updatedVelocity = {
+				x: velocity.x + dx * acceleration,
+				y: velocity.y + dy * acceleration,
+			}
+
+			const updatedPosition = {
+				x: outlinePosition.x + updatedVelocity.x,
+				y: outlinePosition.y + updatedVelocity.y,
+			}
+
+			setVelocity({
+				x: updatedVelocity.x * damping,
+				y: updatedVelocity.y * damping,
+			})
+
+			setOutlinePosition(updatedPosition)
+
+			requestAnimationFrame(animate)
+		}
+
+		animate()
 
 		return () => {
 			window.removeEventListener('mousemove', updateCursor)
-			window.removeEventListener('mouseenter', () =>
-				toggleCursorVisibility(true)
-			)
-			window.removeEventListener('mouseleave', () =>
-				toggleCursorVisibility(false)
-			)
-			window.removeEventListener('mousedown', () => toggleCursorSize(true))
-			window.removeEventListener('mouseup', () => toggleCursorSize(false))
+			window.removeEventListener('mouseenter', () => setCursorVisible(true))
+			window.removeEventListener('mouseleave', () => setCursorVisible(false))
+			window.removeEventListener('mousedown', () => setCursorEnlarged(true))
+			window.removeEventListener('mouseup', () => setCursorEnlarged(false))
 		}
-	}, [])
+	}, [position, velocity, outlinePosition])
 
 	return (
 		<>
@@ -143,7 +167,10 @@ const Cursor = () => {
 			></div>
 			<div
 				className={`pointer-events-none fixed z-50 h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white/10 transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-150' : 'scale-100'}`}
-				style={{ left: `${position.x}px`, top: `${position.y}px` }}
+				style={{
+					left: `${outlinePosition.x}px`,
+					top: `${outlinePosition.y}px`,
+				}}
 			></div>
 		</>
 	)
