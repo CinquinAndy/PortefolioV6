@@ -1,5 +1,5 @@
 'use client'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { usePathname, useRouter } from 'next/navigation'
 import { HomeIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'

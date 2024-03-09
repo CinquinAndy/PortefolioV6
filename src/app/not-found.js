@@ -5,7 +5,6 @@ import Footer from '@/components/Global/Footer'
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
-import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
