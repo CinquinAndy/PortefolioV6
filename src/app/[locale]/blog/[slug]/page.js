@@ -175,8 +175,8 @@ export default async function Page({ params }) {
 								</div>
 							</div>
 						</div>
-						<TracingBeam className={'flex w-full justify-center'}>
-							<div className="mx-auto max-w-7xl">
+						<div className={'flex w-full justify-center'}>
+							<TracingBeam className="mx-auto max-w-7xl">
 								<h2
 									className={
 										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
@@ -252,8 +252,8 @@ export default async function Page({ params }) {
 										</div>
 									</div>
 								</article>
-							</div>
-						</TracingBeam>
+							</TracingBeam>
+						</div>
 					</div>
 				</div>
 			</div>
