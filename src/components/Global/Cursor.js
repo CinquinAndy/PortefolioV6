@@ -6,14 +6,54 @@ function Cursor() {
 		const style = document.createElement('style')
 		style.innerHTML = `
 			body {
-			  cursor: none;
+			  	cursor: none;
 			}
+			
 			*:hover {
-			  cursor: none !important;
+			  	cursor: none !important;
 			}
 			
+			:root {
+    			--cursor-before-bg-color: #fff;
+			}
+
+			.cursor {
+				position: fixed;
+				width: 30px;
+				height: 30px;
+				/*border from the circle*/
+				background: rgba(0,0,0,0.7);
+				border-radius: 50%;
+				top: var(--y, 0);
+				left: var(--x, 0);
+				transform: translate(-50%, -50%);
+				mix-blend-mode: multiply;
+				z-index: 999999;
+				pointer-events: none;
+				transition: transform 0.2s ease-out, background-color 0.2s ease;
+			}
 			
+			.cursor::before {
+				content: '';
+				position: fixed;
+				width: 27px;
+				height: 27px;
+				background-color: var(--cursor-before-bg-color);
+				border-radius: 50%;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				pointer-events: none;
+				transition: transform 0.2s ease-out, background-color 0.2s ease;
+			}
 			
+			.cursor.hover {
+				transform: translate(-50%, -50%) scale(1.4);
+			}
+			
+			.cursor.expand{
+				transform: translate(-50%, -50%) scale(1.4);
+			}
 		  `
 		document.head.appendChild(style)
 		const cursor = document.querySelector('.cursor')
@@ -26,7 +66,7 @@ function Cursor() {
 		}
 
 		const changeCursorBorderColor = color => {
-			cursor.style.borderColor = color
+			cursor.style.backgroundColor = color
 		}
 
 		document
@@ -36,25 +76,25 @@ function Cursor() {
 			.forEach(element => {
 				element.addEventListener('mouseenter', () => {
 					cursor.classList.add('hover')
-					changeCursorColor('#181818')
-					changeCursorBorderColor('#fff')
+					changeCursorColor('#919191')
+					changeCursorBorderColor('rgba(0, 0, 0, 0.8)')
 				})
 				element.addEventListener('mouseleave', () => {
 					cursor.classList.remove('hover')
 					changeCursorColor('#ccc')
-					changeCursorBorderColor('#000')
+					changeCursorBorderColor('rgba(0,0,0,0.7)')
 				})
 			})
 
 		document.addEventListener('click', () => {
 			cursor.classList.add('expand')
-			changeCursorColor('#181818')
-			changeCursorBorderColor('#fff')
+			changeCursorColor('#919191')
+			changeCursorBorderColor('rgba(0, 0, 0, 0.8)')
 
 			setTimeout(() => {
 				cursor.classList.remove('expand')
 				changeCursorColor('#ccc')
-				changeCursorBorderColor('#000')
+				changeCursorBorderColor('rgba(0,0,0,0.7)')
 			}, 500)
 		})
 
@@ -65,8 +105,8 @@ function Cursor() {
 			setTimeout(() => {
 				if (isMouseDown) {
 					cursor.classList.add('expand')
-					changeCursorColor('#181818')
-					changeCursorBorderColor('#fff')
+					changeCursorColor('#919191')
+					changeCursorBorderColor('rgba(0, 0, 0, 0.8)')
 				}
 			}, 100)
 		})
@@ -75,7 +115,7 @@ function Cursor() {
 			isMouseDown = false
 			cursor.classList.remove('expand')
 			changeCursorColor('#ccc')
-			changeCursorBorderColor('#000')
+			changeCursorBorderColor('rgba(0,0,0,0.7)')
 		})
 
 		let lastX = 0
