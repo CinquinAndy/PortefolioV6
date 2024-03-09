@@ -2,6 +2,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { usePathname, useRouter } from 'next/navigation'
 import { HomeIcon } from '@heroicons/react/16/solid'
+import Link from 'next/link'
 
 export function NavigationArticle() {
 	const router = useRouter() // useRouter hook to get the router object
@@ -18,45 +19,35 @@ export function NavigationArticle() {
 	})
 
 	return (
-		<div className={'mx-auto max-w-7xl p-4'}>
-			<div className={'flex items-center justify-between'}>
-				<button
-					onClick={() => router.back()} // Use Next.js router to go back
-					className={
-						'flex cursor-pointer items-center justify-center rounded-xl border border-white bg-white/5 p-2 backdrop-blur-sm'
-					}
-				>
-					<ChevronLeftIcon className="h-8 w-8 text-white" />
-				</button>
+		<div className={'mx-auto max-w-5xl lg:p-4'}>
+			<div className={'flex items-center justify-start gap-8'}>
 				<nav className="flex" aria-label="Breadcrumb">
-					<ol role="list" className="flex items-center space-x-4">
+					<ol className="flex items-center lg:space-x-4">
 						<li>
 							<div>
-								<a href="/" className="text-gray-400 hover:text-gray-500">
-									{' '}
-									{/* Adjust the home link */}
+								<Link href="/" className="custom-button-icons text-gray-50 ">
 									<HomeIcon
 										className="h-5 w-5 flex-shrink-0"
 										aria-hidden="true"
 									/>
 									<span className="sr-only">Home</span>
-								</a>
+								</Link>
 							</div>
 						</li>
 						{breadcrumbLinks.map((link, index) => (
 							<li key={index}>
 								<div className="flex items-center">
 									<ChevronRightIcon
-										className="h-5 w-5 flex-shrink-0 text-gray-400"
+										className="h-5 w-5 flex-shrink-0 text-gray-50"
 										aria-hidden="true"
 									/>
-									<a
+									<Link
 										href={link.href}
-										className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+										className="ml-4 text-sm font-bold text-gray-50 hover:underline lg:text-lg"
 										aria-current={link.current ? 'page' : undefined}
 									>
 										{link.name}
-									</a>
+									</Link>
 								</div>
 							</li>
 						))}
