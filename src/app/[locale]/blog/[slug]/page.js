@@ -218,6 +218,28 @@ export default async function Page({ params }) {
 												? ' par Andy Cinquin'
 												: ' by Andy Cinquin'}
 										</div>
+										<h4 className={'my-2 flex flex-wrap gap-2'}>
+											{processedArticle?.attributes?.tags?.map((tag, index) => {
+												if (tag?.name)
+													return (
+														<span
+															key={index}
+															className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200"
+														>
+															<svg
+																className="h-1.5 w-1.5 fill-indigo-500"
+																viewBox="0 0 6 6"
+																aria-hidden="true"
+															>
+																<circle cx="3" cy="3" r="3" />
+															</svg>
+															{/* make the name capitilize */}
+															{tag?.name.charAt(0).toUpperCase() +
+																tag?.name.slice(1)}
+														</span>
+													)
+											})}
+										</h4>
 										<Layout
 											value={processedArticle?.attributes?.content.toString()}
 										/>
