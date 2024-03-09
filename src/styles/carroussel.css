@@ -1,29 +1,3 @@
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-640px * 4));
-    }
-}
-
-@keyframes scroll_rea {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-640px * 3));
-    }
-}
-
-.animate-scrolling {
-    animation: scroll 40s linear infinite;
-}
-
-.animate-scrolling-rea {
-    animation: scroll_rea 30s linear infinite;
-}
-
 .shadow-custom {
     box-shadow: inset 0 0 35px 10px #1b1f4c;
 }

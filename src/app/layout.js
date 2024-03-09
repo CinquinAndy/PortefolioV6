@@ -1,6 +1,5 @@
 import '@/styles/btn.css'
 import '@/styles/carroussel.css'
-import '@/styles/distorsions.css'
 import '@/styles/main.css'
 import '@/styles/lottie.css'
 import '@/styles/nav.css'

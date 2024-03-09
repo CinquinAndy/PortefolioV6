@@ -4,9 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { TypeAnimation } from 'react-type-animation'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
-function Nav({ content_website, selectedMenu, h1, isHome = true }) {
+function Nav({
+	content_website,
+	selectedMenu,
+	h1,
+	isHome = true,
+	frRedirect,
+	enRedirect,
+}) {
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
@@ -18,10 +25,10 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 	useEffect(() => {
 		setLinkToSwitchLanguage(
 			window.location.origin === 'https://andy-cinquin.fr'
-				? `https://andy-cinquin.com${pathname}`
-				: `https://andy-cinquin.fr${pathname}`
+				? enRedirect || `https://andy-cinquin.com${pathname}`
+				: frRedirect || `https://andy-cinquin.fr${pathname}`
 		)
-	}, [pathname])
+	}, [enRedirect, frRedirect, pathname])
 
 	useEffect(() => {
 		// if isn't home, return and stop the function
@@ -75,7 +82,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 
 		const timer = setTimeout(() => {
 			switchLanguageToast()
-		}, 3000)
+		}, 7000)
 
 		return () => clearTimeout(timer)
 	}, [pathname, linkToSwitchLanguage])
@@ -168,7 +175,7 @@ function Nav({ content_website, selectedMenu, h1, isHome = true }) {
 						) : (
 							<Link
 								key={index}
-								className="hover:text-indigo-400"
+								className="underline_custom hover:text-indigo-400"
 								href={item?.Link?.url}
 								rel="noopener"
 							>

@@ -24,7 +24,24 @@ const options = {
 				)
 			}
 
+			if (name === 'p') {
+				return (
+					<div className={'my-5'}>{domToReact(domNode.children, options)}</div>
+				)
+			}
+
+			if (name === 'hr') {
+				return <hr className={'border-white/50'} />
+			}
+
 			if (name === 'a') {
+				if (attribs.href.includes('.mp4')) {
+					return (
+						<video muted controls className={'w-full'}>
+							<source src={attribs.href} type="video/mp4" />
+						</video>
+					)
+				}
 				const { href } = attribs
 				return (
 					<Link href={href} className={'underline'}>

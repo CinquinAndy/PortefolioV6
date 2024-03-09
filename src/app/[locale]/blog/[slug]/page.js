@@ -1,5 +1,4 @@
 import {
-	getArticleById,
 	getArticleBySlug,
 	getArticles,
 	getContentWebsite,
@@ -13,6 +12,10 @@ import { replaceTitle } from '@/services/utils'
 import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { localesConstant } from '@/services/localesConstant'
+import Script from 'next/script'
+import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
+import ArrowUp from '@/components/Global/ArrowUp'
+import { NavigationArticle } from '@/app/[locale]/blog/[slug]/navigationArticle'
 
 export async function generateStaticParams() {
 	let paths = []
@@ -31,8 +34,7 @@ export async function generateStaticParams() {
 	return paths
 }
 
-export async function generateMetadata({ params }) {
-	// fetch data
+async function getSlugs(params) {
 	let article = await getArticleBySlug(params.slug, params.locale)
 	article = article?.data[0]
 
@@ -47,6 +49,12 @@ export async function generateMetadata({ params }) {
 		slugAlternate = article?.attributes?.slug
 		slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
 	}
+
+	return { article, slug, slugAlternate }
+}
+
+export async function generateMetadata({ params }) {
+	let { article, slug, slugAlternate } = await getSlugs(params)
 
 	return {
 		title:
@@ -70,25 +78,64 @@ export default async function Page({ params }) {
 	// fetch data
 	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let article = await getArticleBySlug(params.slug, params.locale)
+	let { article, slug, slugAlternate } = await getSlugs(params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
 
 	return (
 		<>
+			<Script
+				id={'json-ld'}
+				type={'application/ld+json'}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						'@context': 'https://schema.org',
+						'@type': 'Article',
+						headline: processedArticle?.attributes?.title,
+						datePublished: processedArticle?.attributes?.createdAt,
+						dateModified: processedArticle?.attributes?.updatedAt,
+						mainEntityOfPage: {
+							'@type': 'WebPage',
+							'@id': `${process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
+						},
+						author: {
+							'@type': 'Person',
+							name: 'Andy Cinquin',
+						},
+						publisher: {
+							'@type': 'Organization',
+							name: 'Andy Cinquin',
+							logo: {
+								'@type': 'ImageObject',
+								url: `${process.env.NEXT_PUBLIC_URL}/favicon.ico`,
+							},
+						},
+					}),
+				}}
+			/>
+
+			<ArrowUp />
+
 			<Nav
 				content_website={content_website}
 				isHome={false}
 				h1={processedArticle?.attributes?.title}
+				enRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slugAlternate}
+				frRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slug}
 			/>
+
 			<div>
 				<div className={'relative'}>
 					<div
 						className={
-							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:px-16 2xl:px-0'
+							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:mb-12 md:px-16 2xl:px-0'
 						}
 					>
+						<div>
+							<NavigationArticle />
+						</div>
+
 						<div
 							className={
 								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
@@ -137,27 +184,106 @@ export default async function Page({ params }) {
 								</div>
 							</div>
 						</div>
-
-						<div className="mx-auto max-w-7xl">
-							<h2
-								className={
-									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
-								}
-								dangerouslySetInnerHTML={{
-									__html: replaceTitle(
-										content_website?.attributes?.content_blog?.title_content
-									),
-								}}
-							/>
-							<article>
-								<div
-									className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
-								>
-									<Layout
-										value={processedArticle?.attributes?.content.toString()}
-									/>
-								</div>
-							</article>
+						<div className={'flex w-full justify-center'}>
+							<TracingBeam className="mx-auto max-w-7xl">
+								<h2
+									className={
+										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									}
+									dangerouslySetInnerHTML={{
+										__html: replaceTitle(
+											content_website?.attributes?.content_blog?.title_content
+										),
+									}}
+								/>
+								<article>
+									<div
+										className={'prose prose-invert my-8 [&>*]:!decoration-auto'}
+									>
+										<h2>{processedArticle?.attributes?.title}</h2>
+										<div className={'italic opacity-90'}>
+											{params.locale === 'fr' ? 'Publié le ' : 'Posted on '}
+											{
+												// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
+												// processedArticle?.attributes?.createdAt
+												params.locale === 'fr'
+													? new Date(
+															processedArticle?.attributes?.createdAt
+														).toLocaleDateString('fr-FR', {
+															year: 'numeric',
+															month: 'long',
+															day: 'numeric',
+														})
+													: new Date(
+															processedArticle?.attributes?.createdAt
+														).toLocaleDateString('en-US', {
+															year: 'numeric',
+															month: 'long',
+															day: 'numeric',
+														})
+											}
+											&nbsp;-&nbsp;
+											{params.locale === 'fr'
+												? ' par Andy Cinquin'
+												: ' by Andy Cinquin'}
+										</div>
+										<h4 className={'my-2 flex flex-wrap gap-2'}>
+											{processedArticle?.attributes?.tags?.map((tag, index) => {
+												if (tag?.name)
+													return (
+														<span
+															key={index}
+															className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200"
+														>
+															<svg
+																className="h-1.5 w-1.5 fill-indigo-500"
+																viewBox="0 0 6 6"
+																aria-hidden="true"
+															>
+																<circle cx="3" cy="3" r="3" />
+															</svg>
+															{/* make the name capitilize */}
+															{tag?.name.charAt(0).toUpperCase() +
+																tag?.name.slice(1)}
+														</span>
+													)
+											})}
+										</h4>
+										<Layout
+											value={processedArticle?.attributes?.content.toString()}
+										/>
+										<br />
+										<hr />
+										<br />
+										<div className={'flex flex-col gap-4'}>
+											{params.locale === 'fr' ? (
+												<>
+													<div>
+														{`En vous remerciant de votre visite, n'hésitez pas à me
+														contacter pour toute demande de renseignements, devis ou
+														proposition de collaboration. Je me ferai un plaisir de
+														vous répondre dans les plus brefs délais.`}
+													</div>
+													<div>
+														{`Vous avez aimé cet article ? N'hésitez pas à le partager !`}
+													</div>
+												</>
+											) : (
+												<>
+													<div>
+														{`Thank you for your visit, feel free to contact me for
+												any information, quote or collaboration proposal. I will
+												be happy to answer you as soon as possible.`}
+													</div>
+													<div>
+														{`Did you like this article? Feel free to share it!`}
+													</div>
+												</>
+											)}
+										</div>
+									</div>
+								</article>
+							</TracingBeam>
 						</div>
 					</div>
 				</div>

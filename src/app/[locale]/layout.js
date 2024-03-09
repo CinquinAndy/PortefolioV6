@@ -2,11 +2,10 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { dir } from 'i18next'
-import { GradientBackground } from '../../components/Global/Animations/GradientBackground'
 import { LottieAnimation } from '../../components/Global/Animations/LottieAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
-import Head from 'next/head'
 import Script from 'next/script'
+import Cursor from '@/components/Global/Cursor'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
@@ -28,9 +27,11 @@ export default function RootLayout({ children, params }) {
 				strategy={'afterInteractive'}
 				data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
 			/>
+
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
+				<Cursor />
 				<ToastContainer closeOnClick />
 				<GoogleAnalytics gaId="UA-150969790-2" />
 				<LowGradientBackground />
