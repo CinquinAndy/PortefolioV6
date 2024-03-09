@@ -1,10 +1,10 @@
 'use client'
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { TypeAnimation } from 'react-type-animation'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 function Nav({
 	content_website,
