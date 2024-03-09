@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { localesConstant } from '@/services/localesConstant'
 import Script from 'next/script'
 import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
+import ArrowUp from '@/components/Global/ArrowUp'
 
 export async function generateStaticParams() {
 	let paths = []
@@ -113,6 +114,8 @@ export default async function Page({ params }) {
 				}}
 			/>
 
+			<ArrowUp />
+
 			<Nav
 				content_website={content_website}
 				isHome={false}
@@ -120,6 +123,7 @@ export default async function Page({ params }) {
 				enRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slugAlternate}
 				frRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slug}
 			/>
+
 			<div>
 				<div className={'relative'}>
 					<div
