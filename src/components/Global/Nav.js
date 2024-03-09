@@ -82,7 +82,7 @@ function Nav({
 
 		const timer = setTimeout(() => {
 			switchLanguageToast()
-		}, 3000)
+		}, 7000)
 
 		return () => clearTimeout(timer)
 	}, [pathname, linkToSwitchLanguage])
