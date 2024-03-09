@@ -175,7 +175,7 @@ function Nav({
 						) : (
 							<Link
 								key={index}
-								className="hover:text-indigo-400"
+								className="underline_custom hover:text-indigo-400"
 								href={item?.Link?.url}
 								rel="noopener"
 							>

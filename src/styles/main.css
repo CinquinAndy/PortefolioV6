@@ -229,7 +229,8 @@ a:hover {
 }
 
 .animate-video {
-    animation: video-in 4s ease-in forwards;
+    animation: video-in 7s ease-in forwards;
+    animation-delay: 7s;
 }
 
 @keyframes video-in {
