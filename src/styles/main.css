@@ -69,9 +69,6 @@ body::-webkit-scrollbar-thumb {
 
 }
 
-
-
-
 @supports not selector(::-webkit-scrollbar) {
     body {
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
@@ -751,4 +748,57 @@ a:hover {
         -webkit-mask-position: 0 0;
         mask-position: 0 0;
     }
+}
+
+/*********************** Loader animation ***********************/
+.loader-circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    margin-left: -60px;
+    margin-top: -60px;
+}
+
+.loader-line-mask {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+    overflow: hidden;
+    transform-origin: 60px 60px;
+    -webkit-mask-image: -webkit-linear-gradient(top, #000000, rgba(0, 0, 0, 0));
+    animation: rotate 1.2s infinite linear;
+}
+
+.loader-line-mask .loader-line {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.body-loader{
+    background: -webkit-linear-gradient(
+            50deg,
+            var(--color-bg1),
+            var(--color-bg2)
+    );
+    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+    background-size: cover;
 }
