@@ -15,6 +15,7 @@ import { localesConstant } from '@/services/localesConstant'
 import Script from 'next/script'
 import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
 import ArrowUp from '@/components/Global/ArrowUp'
+import { NavigationArticle } from '@/app/[locale]/blog/[slug]/navigationArticle'
 
 export async function generateStaticParams() {
 	let paths = []
@@ -131,6 +132,10 @@ export default async function Page({ params }) {
 							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:mb-12 md:px-16 2xl:px-0'
 						}
 					>
+						<div>
+							<NavigationArticle />
+						</div>
+
 						<div
 							className={
 								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'

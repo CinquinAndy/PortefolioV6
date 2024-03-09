@@ -1,7 +1,7 @@
 'use client'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 
-export function ArrowLeft() {
+export function NavigationArticle() {
 	return (
 		<div className={'mx-auto max-w-5xl'}>
 			<div className={'flex w-full justify-start'}>
