@@ -2,9 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 const Cursor = () => {
-	const [isDesktop, setIsDesktop] = useState(
-		typeof window !== 'undefined' ? window.innerWidth > 1024 : false
-	)
+	const [isDesktop, setIsDesktop] = useState(false)
 	const [cursorVisible, setCursorVisible] = useState(true)
 	const [cursorEnlarged, setCursorEnlarged] = useState(false)
 	const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -17,14 +15,14 @@ const Cursor = () => {
 	const damping = 0.815 // Adjust the damping for a smoother slowdown
 
 	useEffect(() => {
+		setIsDesktop(window.innerWidth > 1024)
+
 		const handleResize = () => {
 			setIsDesktop(window.innerWidth > 1024)
 		}
 
-		if (typeof window !== 'undefined') {
-			window.addEventListener('resize', handleResize)
-			return () => window.removeEventListener('resize', handleResize)
-		}
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
 	}, [])
 
 	useEffect(() => {
@@ -55,7 +53,7 @@ const Cursor = () => {
 			window.removeEventListener('mousedown', () => setCursorEnlarged(true))
 			window.removeEventListener('mouseup', () => setCursorEnlarged(false))
 		}
-	}, [])
+	}, [isDesktop])
 
 	const animate = time => {
 		if (!isDesktop) return
@@ -84,7 +82,7 @@ const Cursor = () => {
 		if (!isDesktop) return
 		requestRef.current = requestAnimationFrame(animate)
 		return () => cancelAnimationFrame(requestRef.current)
-	}, [animate])
+	}, [animate, isDesktop])
 
 	return (
 		<>
