@@ -14,53 +14,35 @@
 }
 
 /* !!!!!!!!!!!!!! retrieve the cursor css in "nav.js" file, because, we need to load it dynamicly & move it from the js */
-* {
-    cursor: none !important;
-}
-.cursor-dot, .cursor-dot-outline {
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
-}
-.cursor-dot-outline {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.7);
-    /*mix-blend-mode: difference;*/
-}
+/* media query to activate the custom cursor only on screen largeur than 1024px*/
+@media (min-width: 1024px) {
+    * {
+        cursor: none !important;
+    }
 
-/*.cursor {*/
-/*    position: fixed;*/
-/*    width: 30px;*/
-/*    height: 30px;*/
-/*    background: #fff;*/
-/*    border-radius: 50%;*/
-/*    top: var(--y, 0);*/
-/*    left: var(--x, 0);*/
-/*    transform: translate(-50%, -50%);*/
-/*    mix-blend-mode: difference;*/
-/*    z-index: 999999;*/
-/*    pointer-events: none;*/
-/*    transition: transform 0.2s ease-out, background-color 0.2s ease;*/
-/*}*/
+    .cursor-dot, .cursor-dot-outline {
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
 
-/*.cursor.hover {*/
-/*    transform: translate(-50%, -50%) scale(1.4);*/
-/*}*/
+    .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #fff;
+    }
 
-/*.cursor.expand{*/
-/*    transform: translate(-50%, -50%) scale(1.4);*/
-/*}*/
+    .cursor-dot-outline {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+}
 
 ::selection {
     background: #312e81;
@@ -182,11 +164,6 @@ a:hover {
     --color-interactive: 99, 102, 241;
     --circle-size: 80%;
     --blending: hard-light;
-    /*--color1: rgb(29, 78, 216);*/
-    /*--color2: rgb(162, 28, 175);*/
-    /*--color3: rgb(34, 211, 238);*/
-    /*--color4: rgb(220, 38, 38);*/
-    /*--color5: rgb(217, 119, 6);*/
 }
 
 @media (min-aspect-ratio: 16/9) {
@@ -229,8 +206,8 @@ a:hover {
 }
 
 .animate-video {
-    animation: video-in 7s ease-in forwards;
-    animation-delay: 7s;
+    animation: video-in 5s ease-in forwards;
+    animation-delay: 3s;
 }
 
 @keyframes video-in {
