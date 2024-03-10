@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 const Cursor = () => {
+	const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024)
 	const [cursorVisible, setCursorVisible] = useState(true)
 	const [cursorEnlarged, setCursorEnlarged] = useState(false)
 	const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -14,6 +15,17 @@ const Cursor = () => {
 	const damping = 0.815 // Adjust the damping for a smoother slowdown
 
 	useEffect(() => {
+		const handleResize = () => {
+			setIsDesktop(window.innerWidth > 1024)
+		}
+
+		window.addEventListener('resize', handleResize)
+
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
+
+	useEffect(() => {
+		if (!isDesktop) return
 		const updateCursor = e => {
 			setPosition({ x: e.clientX, y: e.clientY })
 		}
@@ -43,6 +55,7 @@ const Cursor = () => {
 	}, [])
 
 	const animate = time => {
+		if (!isDesktop) return
 		if (previousTimeRef.current != undefined) {
 			const deltaTime = time - previousTimeRef.current
 
@@ -65,23 +78,28 @@ const Cursor = () => {
 	}
 
 	useEffect(() => {
+		if (!isDesktop) return
 		requestRef.current = requestAnimationFrame(animate)
 		return () => cancelAnimationFrame(requestRef.current)
 	}, [animate])
 
 	return (
 		<>
-			<div
-				className={`pointer-events-none fixed z-[99999] h-2 w-2 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-90' : 'scale-100'}`}
-				style={{ left: `${position.x}px`, top: `${position.y}px` }}
-			></div>
-			<div
-				className={`pointer-events-none fixed z-[99999] h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white/90 mix-blend-difference transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-[175%]' : 'scale-100'}`}
-				style={{
-					left: `${outlinePosition.x}px`,
-					top: `${outlinePosition.y}px`,
-				}}
-			></div>
+			{isDesktop && (
+				<>
+					<div
+						className={`pointer-events-none fixed z-[99999] h-2 w-2 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-90' : 'scale-100'}`}
+						style={{ left: `${position.x}px`, top: `${position.y}px` }}
+					></div>
+					<div
+						className={`pointer-events-none fixed z-[99999] h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white/90 mix-blend-difference transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-[175%]' : 'scale-100'}`}
+						style={{
+							left: `${outlinePosition.x}px`,
+							top: `${outlinePosition.y}px`,
+						}}
+					></div>
+				</>
+			)}
 		</>
 	)
 }
