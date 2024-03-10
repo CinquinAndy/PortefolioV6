@@ -5,6 +5,19 @@ const {
 /** @type {import("tailwindcss").Config} */
 module.exports = {
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
+	safelist: [
+		'fill-indigo-500',
+		'fill-sky-500',
+		'fill-lime-500',
+		'fill-rose-500',
+		'fill-amber-500',
+		'fill-emerald-500',
+		'fill-cyan-500',
+		'fill-violet-500',
+		'fill-fuchsia-500',
+		'fill-orange-500',
+		'fill-teal-500',
+	],
 	theme: {
 		fontFamily: {
 			body: ['"Be Vietnam Pro"', 'sans-serif'],

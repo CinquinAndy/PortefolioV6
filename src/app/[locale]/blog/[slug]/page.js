@@ -83,6 +83,29 @@ export default async function Page({ params }) {
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
 
+	const colors = [
+		'indigo',
+		'sky',
+		'lime',
+		'rose',
+		'amber',
+		'emerald',
+		'cyan',
+		'violet',
+		'fuchsia',
+		'orange',
+		'teal',
+	]
+
+	const getColorIndex = name => {
+		let hash = 0
+		for (let i = 0; i < name.length; i++) {
+			hash = name.charCodeAt(i) + ((hash << 5) - hash)
+			hash = hash & hash
+		}
+		return Math.abs(hash)
+	}
+
 	return (
 		<>
 			<Script
@@ -229,14 +252,17 @@ export default async function Page({ params }) {
 										</div>
 										<h4 className={'my-2 flex flex-wrap gap-2'}>
 											{processedArticle?.attributes?.tags?.map((tag, index) => {
-												if (tag?.name)
+												if (tag?.name) {
+													const colorIndex =
+														getColorIndex(tag.name) % colors.length
+													const color = colors[colorIndex]
 													return (
 														<span
 															key={index}
-															className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200"
+															className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-[0.6rem] font-medium text-gray-900 ring-1 ring-inset ring-gray-200 md:px-2 md:text-xs"
 														>
 															<svg
-																className="h-1.5 w-1.5 fill-indigo-500"
+																className={`h-1.5 w-1.5 fill-${color}-500`}
 																viewBox="0 0 6 6"
 																aria-hidden="true"
 															>
@@ -247,6 +273,7 @@ export default async function Page({ params }) {
 																tag?.name.slice(1)}
 														</span>
 													)
+												}
 											})}
 										</h4>
 										<Layout
