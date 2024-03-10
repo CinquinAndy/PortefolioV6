@@ -14,31 +14,34 @@
 }
 
 /* !!!!!!!!!!!!!! retrieve the cursor css in "nav.js" file, because, we need to load it dynamicly & move it from the js */
-* {
-    cursor: none !important;
-}
+/* media query to activate the custom cursor only on screen largeur than 1024px*/
+@media (min-width: 1024px) {
+    * {
+        cursor: none !important;
+    }
 
-.cursor-dot, .cursor-dot-outline {
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
+    .cursor-dot, .cursor-dot-outline {
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
 
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
-}
+    .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #fff;
+    }
 
-.cursor-dot-outline {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.7);
+    .cursor-dot-outline {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
 }
 
 ::selection {
