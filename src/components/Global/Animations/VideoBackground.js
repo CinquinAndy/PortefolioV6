@@ -12,24 +12,38 @@ export function VideoBackground() {
 				fill={true}
 				loading="eager"
 			/>
-			<video
-				width="1920"
-				height="1080"
-				muted
-				autoPlay={true}
-				playsInline={true}
-				preload={'auto'}
-				loop
+			{/*<video*/}
+			{/*	width="1920"*/}
+			{/*	height="1080"*/}
+			{/*	muted*/}
+			{/*	autoPlay={true}*/}
+			{/*	playsInline={true}*/}
+			{/*	preload={'auto'}*/}
+			{/*	loop*/}
+			{/*	title="video"*/}
+			{/*	className={*/}
+			{/*		'mask absolute left-0 top-0 h-full w-full object-cover object-center ' +*/}
+			{/*		'mix-difference animate-video -z-10 block bg-slate-900 object-cover opacity-75'*/}
+			{/*	}*/}
+			{/*	id="topHeroVideo"*/}
+			{/*>*/}
+			{/*	<source src="/assets/video_background.mp4" type="video/mp4" />*/}
+			{/*	Your browser does not support the video tag.*/}
+			{/*</video>*/}
+			<iframe
 				title="video"
 				className={
 					'mask absolute left-0 top-0 h-full w-full object-cover object-center ' +
 					'mix-difference animate-video -z-10 block bg-slate-900 object-cover opacity-75'
 				}
 				id="topHeroVideo"
-			>
-				<source src="/assets/video_background.mp4" type="video/mp4" />
-				Your browser does not support the video tag.
-			</video>
+				src="https://player.vimeo.com/video/921761467?background=1"
+				width="1920"
+				height="1080"
+				allow="autoplay"
+				data-ready="true"
+				allowFullScreen
+			></iframe>
 		</div>
 	)
 }
