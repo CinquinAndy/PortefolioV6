@@ -2,7 +2,9 @@
 import { useEffect, useRef, useState } from 'react'
 
 const Cursor = () => {
-	const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024)
+	const [isDesktop, setIsDesktop] = useState(
+		typeof window !== 'undefined' ? window.innerWidth > 1024 : false
+	)
 	const [cursorVisible, setCursorVisible] = useState(true)
 	const [cursorEnlarged, setCursorEnlarged] = useState(false)
 	const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -19,9 +21,10 @@ const Cursor = () => {
 			setIsDesktop(window.innerWidth > 1024)
 		}
 
-		window.addEventListener('resize', handleResize)
-
-		return () => window.removeEventListener('resize', handleResize)
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', handleResize)
+			return () => window.removeEventListener('resize', handleResize)
+		}
 	}, [])
 
 	useEffect(() => {

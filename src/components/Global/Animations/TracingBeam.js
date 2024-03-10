@@ -4,7 +4,9 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { cn } from '@/utils/cn'
 
 export const TracingBeam = ({ children, className }) => {
-	const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024)
+	const [isDesktop, setIsDesktop] = useState(
+		typeof window !== 'undefined' ? window.innerWidth > 1024 : false
+	)
 
 	const ref = useRef(null)
 	const { scrollYProgress } = useScroll({
@@ -16,14 +18,14 @@ export const TracingBeam = ({ children, className }) => {
 	const [svgHeight, setSvgHeight] = useState(0)
 
 	useEffect(() => {
-		if (!isDesktop) return
 		const handleResize = () => {
 			setIsDesktop(window.innerWidth > 1024)
 		}
 
-		window.addEventListener('resize', handleResize)
-
-		return () => window.removeEventListener('resize', handleResize)
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', handleResize)
+			return () => window.removeEventListener('resize', handleResize)
+		}
 	}, [])
 
 	useEffect(() => {
