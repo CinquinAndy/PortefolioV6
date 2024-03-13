@@ -78,6 +78,9 @@ const options = {
 }
 
 export function Layout({ className, value }) {
+	if (!value) {
+		return null
+	}
 	const parsedContent = parse(value, options)
 	// if replaced content contains '{actualYear}' replace it with the current year
 	let replacedContent = domToReact(parsedContent, options)
