@@ -221,9 +221,7 @@ export async function getArticleById(id, locale) {
  */
 export async function processRealisationData(realisationData) {
 	if (!realisationData) {
-		return {
-			notFound: true,
-		}
+		redirect('/404')
 	}
 
 	const processedContentRealisations = await processMarkdown(
@@ -248,9 +246,7 @@ export async function processRealisationData(realisationData) {
  * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
 export async function processArticleData(articleData) {
-	console.log('articleData', articleData)
 	if (!articleData) {
-		console.log('articleData not found', articleData)
 		redirect('/404')
 	}
 
