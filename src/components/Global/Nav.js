@@ -24,7 +24,8 @@ function Nav({
 
 	useEffect(() => {
 		setLinkToSwitchLanguage(
-			window.location.origin === 'https://andy-cinquin.fr'
+			// check the location, if it start by https://andy-cinquin.fr, redirect to .com, else redirect to .fr
+			window.location.origin.includes('.fr')
 				? enRedirect || `https://andy-cinquin.com${pathname}`
 				: frRedirect || `https://andy-cinquin.fr${pathname}`
 		)

@@ -174,7 +174,6 @@ export async function getRealisations(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticles(locale) {
-	// console.log('locale', locale)
 	return await fetchAPI(
 		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
 	)
