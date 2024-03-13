@@ -8,6 +8,19 @@ const options = {
 		if (domNode?.type === 'tag') {
 			const { name, attribs } = domNode
 
+			if (name === 'p') {
+				const content = domNode.children[0]?.data || ''
+				if (isMarkdownTable(content)) {
+					return markdownTableToHtml(content)
+				} else {
+					return (
+						<div className={'my-5'}>
+							{domToReact(domNode.children, options)}
+						</div>
+					)
+				}
+			}
+
 			if (name === 'img') {
 				const { src, alt } = attribs
 				return (
@@ -21,12 +34,6 @@ const options = {
 							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 						/>
 					</div>
-				)
-			}
-
-			if (name === 'p') {
-				return (
-					<div className={'my-5'}>{domToReact(domNode.children, options)}</div>
 				)
 			}
 
@@ -84,5 +91,42 @@ export function Layout({ className, value }) {
 
 	return (
 		<div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
+	)
+}
+
+function isMarkdownTable(content) {
+	const lines = content.split('\n')
+	return (
+		lines.length > 2 &&
+		lines[1]
+			.trim()
+			.split('|')
+			.some(part => part.trim().startsWith('---'))
+	)
+}
+
+function markdownTableToHtml(markdown) {
+	const rows = markdown.split('\n').filter(row => row.trim())
+	const tableRows = rows
+		.map((row, index) => {
+			const rowData = row.split('|').filter(cell => cell.trim())
+			if (index === 0) {
+				return `<tr>${rowData.map(header => `<th className="font-black">${header.trim()}</th>`).join('')}</tr>`
+			} else if (index === 1) {
+				return ''
+			} else {
+				return `<tr>${rowData.map(cell => `<td className="">${cell.trim()}</td>`).join('')}</tr>`
+			}
+		})
+		.join('')
+
+	return React.createElement(
+		'table',
+		{ className: 'markdown-table *:border-white border-white' },
+		React.createElement(
+			'tbody',
+			{ className: '*:border-white' },
+			parse(tableRows)
+		)
 	)
 }
