@@ -1,3 +1,4 @@
+import hljs from 'highlight.js'
 import parse, { domToReact } from 'html-react-parser'
 import Image from 'next/image'
 import React from 'react'
@@ -6,7 +7,7 @@ import Link from 'next/link'
 const options = {
 	replace: domNode => {
 		if (domNode?.type === 'tag') {
-			const { name, attribs } = domNode
+			const { name, attribs, children } = domNode
 
 			if (name === 'p') {
 				const content = domNode.children[0]?.data || ''
@@ -19,6 +20,20 @@ const options = {
 						</div>
 					)
 				}
+			}
+
+			// Specific processing for code blocks
+			if (name === 'pre' && children.length && children[0].name === 'code') {
+				// Ensure the code content is plain text for parsing
+				const codeContent = children[0].children[0]?.data || ''
+				// Use highlight.js for code highlighting
+				const highlightedContent = hljs.highlightAuto(codeContent).value
+
+				return (
+					<pre className={'code overflow-x-auto rounded-md p-5 text-white'}>
+						<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
+					</pre>
+				)
 			}
 
 			if (name === 'img') {
