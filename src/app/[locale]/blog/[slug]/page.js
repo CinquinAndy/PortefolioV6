@@ -16,6 +16,7 @@ import Script from 'next/script'
 import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
 import ArrowUp from '@/components/Global/ArrowUp'
 import { NavigationArticle } from '@/app/[locale]/blog/[slug]/navigationArticle'
+import { redirect } from 'next/navigation'
 
 export async function generateStaticParams() {
 	let paths = []
