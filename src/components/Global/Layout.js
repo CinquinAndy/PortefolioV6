@@ -111,22 +111,30 @@ function markdownTableToHtml(markdown) {
 		.map((row, index) => {
 			const rowData = row.split('|').filter(cell => cell.trim())
 			if (index === 0) {
-				return `<tr>${rowData.map(header => `<th className="font-black">${header.trim()}</th>`).join('')}</tr>`
+				return `<tr>${rowData.map(header => `<th className="font-black px-3 py-3 text-left">${header.trim()}</th>`).join('')}</tr>`
 			} else if (index === 1) {
 				return ''
 			} else {
-				return `<tr>${rowData.map(cell => `<td className="">${cell.trim()}</td>`).join('')}</tr>`
+				return `<tr>${rowData.map(cell => `<td className="px-3 text-left">${cell.trim()}</td>`).join('')}</tr>`
 			}
 		})
 		.join('')
 
 	return React.createElement(
-		'table',
-		{ className: 'markdown-table *:border-white border-white' },
+		'div',
+		{
+			className: 'bg-black/50 rounded-lg',
+		},
 		React.createElement(
-			'tbody',
-			{ className: '*:border-white' },
-			parse(tableRows)
+			'table',
+			{
+				className: 'min-w-full *:border-white/50 border-white/50',
+			},
+			React.createElement(
+				'tbody',
+				{ className: '*:border-white/50' },
+				parse(tableRows)
+			)
 		)
 	)
 }
