@@ -1,5 +1,6 @@
 import { remark } from 'remark'
 import html from 'remark-html'
+import { redirect } from 'next/navigation'
 
 /**
  * Fetch data from API
@@ -173,7 +174,6 @@ export async function getRealisations(locale) {
  * @returns {Promise<{notFound: boolean}|*>}
  */
 export async function getArticles(locale) {
-	// console.log('locale', locale)
 	return await fetchAPI(
 		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
 	)
@@ -219,9 +219,14 @@ export async function getArticleById(id, locale) {
  * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
 export async function processRealisationData(realisationData) {
+	if (!realisationData) {
+		redirect('/404')
+	}
+
 	const processedContentRealisations = await processMarkdown(
 		realisationData.data[0].attributes.content
 	)
+
 	return {
 		...realisationData,
 		data: {
@@ -240,13 +245,14 @@ export async function processRealisationData(realisationData) {
  * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
 export async function processArticleData(articleData) {
-	// console.log(articleData.data[0])
-	if (!articleData.attributes) {
-		return {}
+	if (!articleData) {
+		redirect('/404')
 	}
+
 	const processedContentArticles = await processMarkdown(
 		articleData.attributes.content
 	)
+
 	return {
 		...articleData,
 		data: {

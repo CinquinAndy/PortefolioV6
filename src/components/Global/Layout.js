@@ -1,3 +1,4 @@
+import hljs from 'highlight.js'
 import parse, { domToReact } from 'html-react-parser'
 import Image from 'next/image'
 import React from 'react'
@@ -6,7 +7,34 @@ import Link from 'next/link'
 const options = {
 	replace: domNode => {
 		if (domNode?.type === 'tag') {
-			const { name, attribs } = domNode
+			const { name, attribs, children } = domNode
+
+			if (name === 'p') {
+				const content = domNode.children[0]?.data || ''
+				if (isMarkdownTable(content)) {
+					return markdownTableToHtml(content)
+				} else {
+					return (
+						<div className={'my-5'}>
+							{domToReact(domNode.children, options)}
+						</div>
+					)
+				}
+			}
+
+			// Specific processing for code blocks
+			if (name === 'pre' && children.length && children[0].name === 'code') {
+				// Ensure the code content is plain text for parsing
+				const codeContent = children[0].children[0]?.data || ''
+				// Use highlight.js for code highlighting
+				const highlightedContent = hljs.highlightAuto(codeContent).value
+
+				return (
+					<pre className={'code overflow-x-auto rounded-md p-5 text-white'}>
+						<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
+					</pre>
+				)
+			}
 
 			if (name === 'img') {
 				const { src, alt } = attribs
@@ -21,12 +49,6 @@ const options = {
 							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 						/>
 					</div>
-				)
-			}
-
-			if (name === 'p') {
-				return (
-					<div className={'my-5'}>{domToReact(domNode.children, options)}</div>
 				)
 			}
 
@@ -56,6 +78,9 @@ const options = {
 }
 
 export function Layout({ className, value }) {
+	if (!value) {
+		return null
+	}
 	const parsedContent = parse(value, options)
 	// if replaced content contains '{actualYear}' replace it with the current year
 	let replacedContent = domToReact(parsedContent, options)
@@ -84,5 +109,50 @@ export function Layout({ className, value }) {
 
 	return (
 		<div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
+	)
+}
+
+function isMarkdownTable(content) {
+	const lines = content.split('\n')
+	return (
+		lines.length > 2 &&
+		lines[1]
+			.trim()
+			.split('|')
+			.some(part => part.trim().startsWith('---'))
+	)
+}
+
+function markdownTableToHtml(markdown) {
+	const rows = markdown.split('\n').filter(row => row.trim())
+	const tableRows = rows
+		.map((row, index) => {
+			const rowData = row.split('|').filter(cell => cell.trim())
+			if (index === 0) {
+				return `<tr>${rowData.map(header => `<th className="font-black px-3 py-3 text-left">${header.trim()}</th>`).join('')}</tr>`
+			} else if (index === 1) {
+				return ''
+			} else {
+				return `<tr>${rowData.map(cell => `<td className="px-3 text-left">${cell.trim()}</td>`).join('')}</tr>`
+			}
+		})
+		.join('')
+
+	return React.createElement(
+		'div',
+		{
+			className: 'bg-black/50 rounded-lg',
+		},
+		React.createElement(
+			'table',
+			{
+				className: 'min-w-full *:border-white/50 border-white/50',
+			},
+			React.createElement(
+				'tbody',
+				{ className: '*:border-white/50' },
+				parse(tableRows)
+			)
+		)
 	)
 }
