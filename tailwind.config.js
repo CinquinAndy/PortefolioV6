@@ -17,6 +17,8 @@ module.exports = {
 		'fill-fuchsia-500',
 		'fill-orange-500',
 		'fill-teal-500',
+		'*:border-white',
+		'border-white',
 	],
 	theme: {
 		fontFamily: {
