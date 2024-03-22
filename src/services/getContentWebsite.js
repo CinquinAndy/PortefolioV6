@@ -173,9 +173,14 @@ export async function getRealisations(locale) {
  * Get articles
  * @returns {Promise<{notFound: boolean}|*>}
  */
-export async function getArticles(locale) {
+// export async function getArticles(locale) {
+// 	return await fetchAPI(
+// 		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
+// 	)
+// }
+export async function getArticles(locale, page = 1, pageSize = 10) {
 	return await fetchAPI(
-		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
+		`api/articles?populate=deep,2&sort=rank&locale=${locale}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
 	)
 }
 
