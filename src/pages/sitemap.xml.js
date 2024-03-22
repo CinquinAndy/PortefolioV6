@@ -100,22 +100,20 @@ export const getServerSideProps = async ({ res }) => {
 
 		// Generate pagination paths for blog
 		const totalArticles = resultBlog.data.length
-		const articlesPerPage = 10
+		const articlesPerPage = 5
 		const totalPages = Math.ceil(totalArticles / articlesPerPage)
 
-		for (let i = 2; i <= totalPages; i++) {
+		for (let i = 1; i <= totalPages; i++) {
 			pathsBlogPagination.push(`${process.env.NEXT_PUBLIC_URL}/blog?page=${i}`)
 		}
 
 		// copy of the paths for the alternative URL
-		const resultBlogAlt = JSON.parse(JSON.stringify(resultBlog))
-
-		pathsBlogAlt = resultBlogAlt.data.map(record => {
+		pathsBlogAlt = resultBlog.data.map(record => {
 			return `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${record.attributes.localizations?.data[0]?.attributes?.slug}`
 		})
 
 		// Generate pagination paths for blog (alternative URL)
-		for (let i = 2; i <= totalPages; i++) {
+		for (let i = 1; i <= totalPages; i++) {
 			pathsBlogPaginationAlt.push(
 				`${process.env.NEXT_PUBLIC_URL_ALT}/blog?page=${i}`
 			)
@@ -124,25 +122,14 @@ export const getServerSideProps = async ({ res }) => {
 
 	// get all article for dynamic paths
 	const resultPortefolio = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`,
-		{
-			method: 'GET',
-			headers: {
-				// 	token
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-			},
-		}
+		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`
 	).then(res => res.json())
 
 	const pathsPortefolio = resultPortefolio?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL}/portefolio/${record.attributes.slug}`
 	})
 
-	const resultPortefolioAlt = JSON.parse(JSON.stringify(resultPortefolio))
-
-	const pathsPortefolioAlt = resultPortefolioAlt?.data?.map(record => {
+	const pathsPortefolioAlt = resultPortefolio?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${record.attributes.localizations?.data[0]?.attributes?.slug}`
 	})
 
