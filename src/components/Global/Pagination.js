@@ -11,7 +11,7 @@ export default function Pagination({ currentPage, totalPages }) {
 	const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
 	return (
-		<nav className="mx-auto flex w-full max-w-[calc(100vw-160px)] items-center justify-between border-t border-t-white/15 p-4 pt-0 md:pb-20">
+		<nav className="mx-auto mt-10 flex w-full max-w-7xl items-center justify-between border-t border-t-white/15 p-4 pt-0 md:mt-0 md:max-w-[calc(100vw-160px)] md:pb-20">
 			<div className="-mt-px flex w-0 flex-1">
 				{currentPage > 1 && (
 					<Link
