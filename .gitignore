@@ -46,3 +46,13 @@ cypress/screenshots/
 cypress.env.json
 
 yarn.lock
+
+# for export
+#.bruno
+#.husky
+#.next
+#.unlighthouse
+#dev-assets
+#public
+#package-lock.json
+#node_modules

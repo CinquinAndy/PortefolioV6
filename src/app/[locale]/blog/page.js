@@ -4,6 +4,7 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Articles from '@/components/Global/Articles'
 import { localesConstant } from '@/services/localesConstant'
+import Pagination from '@/components/Global/Pagination'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -35,11 +36,20 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params, searchParams }) {
 	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let articles = await getArticles(params.locale)
-	articles = articles?.data
+
+	const page = searchParams.page ? parseInt(searchParams.page) : 1
+	const pageSize = 2
+
+	let articlesResponse = await getArticles(params.locale, page, pageSize)
+	let articles = articlesResponse?.data
+
+	const totalArticles = articlesResponse?.meta?.pagination?.total
+	const totalPages = Math.ceil(totalArticles / pageSize)
+
+	const currentPage = Number(searchParams.page) || 1
 
 	return (
 		<>
@@ -54,6 +64,11 @@ export default async function Page({ params }) {
 					articles={articles}
 					slice={false}
 					isHome={true}
+				/>
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					baseUrl={`/${params.locale}/blog`}
 				/>
 				<Cta content_website={content_website} />
 			</div>
