@@ -63,7 +63,7 @@ export default async function Page({ params, searchParams }) {
 					content_website={content_website}
 					articles={articles}
 					slice={false}
-					isHome={true}
+					isHome={false}
 				/>
 				<Pagination
 					currentPage={currentPage}

@@ -58,7 +58,7 @@ export default async function Page({ params }) {
 					content_website={content_website}
 					realisations={realisations}
 					slice={false}
-					isHome={true}
+					isHome={false}
 				/>
 				<Cta content_website={content_website} />
 			</div>
