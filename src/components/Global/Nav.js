@@ -385,7 +385,7 @@ function Nav({
 				>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.facebook}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
@@ -401,7 +401,7 @@ function Nav({
 					</div>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.instagram}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
@@ -419,7 +419,7 @@ function Nav({
 					</div>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.linkedin}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
@@ -437,7 +437,7 @@ function Nav({
 					</div>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.github}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
