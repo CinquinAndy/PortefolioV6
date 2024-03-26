@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { TypeAnimation } from 'react-type-animation'
 import { toast } from 'react-toastify'
+import { GradientBackgroundWithoutAnimation } from '@/components/Global/Animations/GradientBackgroundWithoutAnimation'
+import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 function Nav({
 	content_website,
@@ -90,6 +92,11 @@ function Nav({
 
 	return (
 		<>
+			{isHome ? (
+				<LowGradientBackground />
+			) : (
+				<GradientBackgroundWithoutAnimation />
+			)}
 			<header
 				className={`${!open ? 'sticky' : 'fixed'} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
 			>
@@ -151,7 +158,7 @@ function Nav({
 				id="nav-block"
 				className={`${!open ? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0' : 'pointer-events-auto z-40 -translate-y-0 opacity-100'} fixed flex h-screen w-screen transform transition-transform`}
 			>
-				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-12 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
+				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
 					{menu.map((item, index) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link
@@ -169,7 +176,7 @@ function Nav({
 										opacity=".9"
 									/>
 								</svg>
-								<h2 className="text-xl font-semibold uppercase md:text-3xl">
+								<h2 className="text-xl font-semibold uppercase lg:text-3xl">
 									{menu?.Link?.label}
 								</h2>
 							</Link>
@@ -180,14 +187,14 @@ function Nav({
 								href={item?.Link?.url}
 								rel="noopener"
 							>
-								<h2 className="text-xl font-semibold uppercase md:text-3xl">
+								<h2 className="text-xl font-semibold uppercase lg:text-3xl">
 									{item?.Link?.label}
 								</h2>
 							</Link>
 						)
 					})}
 					<div>
-						<hr className="mb-20 w-32 border opacity-75 md:mb-10 md:w-10" />
+						<hr className="mb-16 w-32 border opacity-75 lg:mb-10 lg:w-10" />
 						<div className="flex">
 							<div className="flex items-center justify-evenly gap-10">
 								<Link
@@ -197,7 +204,7 @@ function Nav({
 									target="_blank"
 								>
 									<svg
-										className="h-5 w-5 md:h-7 md:w-7"
+										className="h-5 w-5 lg:h-7 lg:w-7"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -211,7 +218,7 @@ function Nav({
 									target="_blank"
 								>
 									<svg
-										className="h-5 w-5 md:h-7 md:w-7"
+										className="h-5 w-5 lg:h-7 lg:w-7"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -227,7 +234,7 @@ function Nav({
 									target="_blank"
 								>
 									<svg
-										className="h-5 w-5 md:h-7 md:w-7"
+										className="h-5 w-5 lg:h-7 lg:w-7"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -243,7 +250,7 @@ function Nav({
 									target="_blank"
 								>
 									<svg
-										className="h-5 w-5 md:h-7 md:w-7"
+										className="h-5 w-5 lg:h-7 lg:w-7"
 										viewBox="0 0 24 24"
 										fill="currentColor"
 									>
@@ -260,7 +267,7 @@ function Nav({
 									target="_blank"
 								>
 									<svg
-										className="h-5 w-5 md:h-7 md:w-7"
+										className="h-5 w-5 lg:h-7 lg:w-7"
 										viewBox="0 0 1000 1000"
 										fill="currentColor"
 									>
@@ -313,21 +320,21 @@ function Nav({
 							</Link>
 						</div>
 					</div>
-					<div className="block md:hidden"></div>
+					<div className="block lg:hidden"></div>
 				</div>
 				<input
 					type={'button'}
 					id="nav-right"
 					aria-label="Close Menu"
 					onClick={() => setOpen(!open)}
-					className="hidden h-full w-3/5 bg-black bg-opacity-90 md:block"
+					className="hidden h-full w-3/5 bg-black bg-opacity-90 lg:block"
 				/>
 			</nav>
 			<div
-				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center ${open ? 'pointer-events-none mt-10 pt-[40px] md:pt-[80px]' : ''}`}
+				className={`${isHome ? 'h-[calc(100vh-80px)]' : 'h-auto pt-[30vh] 2xl:pt-[40vh]'} relative flex w-screen items-center justify-center ${open ? 'pointer-events-none mt-10 pt-[40px] lg:pt-[80px]' : ''}`}
 			>
 				{isHome && (
-					<div className="patterns translate-y-[-140px] transform md:px-20">
+					<div className="patterns translate-y-[-140px] transform lg:px-20">
 						<svg width="100%" height="100%">
 							<defs>
 								<pattern
@@ -346,7 +353,7 @@ function Nav({
 								y="60%"
 								textAnchor="middle"
 								className={
-									'text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl'
+									'text-2xl font-semibold uppercase tracking-widest lg:text-5xl lg:text-8xl'
 								}
 							>
 								{content_website?.content_home?.title_home}
@@ -355,7 +362,7 @@ function Nav({
 					</div>
 				)}
 				<h1
-					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest md:text-5xl lg:text-8xl`}
+					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest lg:text-5xl lg:text-8xl`}
 				>
 					{isHome ? content_website?.content_home?.title_home : h1}
 				</h1>
@@ -374,17 +381,17 @@ function Nav({
 					</div>
 				)}
 				<div
-					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 md:mb-0 md:gap-10 md:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''}`}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 lg:mb-0 lg:gap-10 lg:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''}`}
 				>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.facebook}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
 							<svg
-								className="h-5 w-5 md:h-7 md:w-7"
+								className="h-5 w-5 lg:h-7 lg:w-7"
 								viewBox="0 0 24 24"
 								fill="currentColor"
 							>
@@ -394,13 +401,13 @@ function Nav({
 					</div>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.instagram}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
 							<svg
-								className="h-5 w-5 md:h-7 md:w-7"
+								className="h-5 w-5 lg:h-7 lg:w-7"
 								viewBox="0 0 24 24"
 								fill="currentColor"
 							>
@@ -412,13 +419,13 @@ function Nav({
 					</div>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.linkedin}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
 							<svg
-								className="h-5 w-5 md:h-7 md:w-7"
+								className="h-5 w-5 lg:h-7 lg:w-7"
 								viewBox="0 0 24 24"
 								fill="currentColor"
 							>
@@ -430,13 +437,13 @@ function Nav({
 					</div>
 					<div className={'relative p-3'}>
 						<Link
-							className="slider-nav-item text-slate-300 hover:text-slate-50"
+							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
 							href={socials?.github}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
 							<svg
-								className="h-5 w-5 md:h-7 md:w-7"
+								className="h-5 w-5 lg:h-7 lg:w-7"
 								viewBox="0 0 24 24"
 								fill="currentColor"
 							>
@@ -448,7 +455,7 @@ function Nav({
 					</div>
 				</div>
 				<div
-					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 md:mb-0 md:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''} `}
+					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 lg:mb-0 lg:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''} `}
 				>
 					<h2 className={'sr-only'}>
 						{`‣ ${content_website?.content_home?.title_vertical_left_1} / ${content_website?.content_home?.title_vertical_left_2} / ${content_website?.content_home?.title_vertical_left_3} / ${content_website?.content_home?.title_vertical_left_4} / ${content_website?.content_home?.title_vertical_left_5} / ${content_website?.content_home?.title_vertical_left_6}`}

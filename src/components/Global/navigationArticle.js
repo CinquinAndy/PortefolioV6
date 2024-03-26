@@ -25,7 +25,10 @@ export function NavigationArticle() {
 					<ol className="flex items-center lg:space-x-4">
 						<li>
 							<div>
-								<Link href="/" className="custom-button-icons text-gray-50 ">
+								<Link
+									href="/public"
+									className="custom-button-icons text-gray-50 "
+								>
 									<HomeIcon
 										className="h-5 w-5 flex-shrink-0"
 										aria-hidden="true"

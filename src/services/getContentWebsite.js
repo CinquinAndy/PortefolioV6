@@ -178,7 +178,7 @@ export async function getRealisations(locale) {
 // 		`api/articles?populate=deep,2&sort=rank&locale=${locale}`
 // 	)
 // }
-export async function getArticles(locale, page = 1, pageSize = 10) {
+export async function getArticles(locale, page = 1, pageSize = 5) {
 	return await fetchAPI(
 		`api/articles?populate=deep,2&sort=rank&locale=${locale}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
 	)
