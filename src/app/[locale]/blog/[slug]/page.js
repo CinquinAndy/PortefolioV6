@@ -15,8 +15,7 @@ import { localesConstant } from '@/services/localesConstant'
 import Script from 'next/script'
 import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
 import ArrowUp from '@/components/Global/ArrowUp'
-import { NavigationArticle } from '@/app/[locale]/blog/[slug]/navigationArticle'
-import { redirect } from 'next/navigation'
+import { NavigationArticle } from '@/components/Global/navigationArticle'
 
 export async function generateStaticParams() {
 	let paths = []
@@ -251,7 +250,7 @@ export default async function Page({ params }) {
 												? ' par Andy Cinquin'
 												: ' by Andy Cinquin'}
 										</div>
-										<h4 className={'my-2 flex flex-wrap gap-2'}>
+										<h4 className={'my-2 mb-16 flex flex-wrap gap-2'}>
 											{processedArticle?.attributes?.tags?.map((tag, index) => {
 												if (tag?.name) {
 													const colorIndex =
