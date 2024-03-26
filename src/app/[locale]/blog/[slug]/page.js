@@ -208,7 +208,7 @@ export default async function Page({ params }) {
 							</div>
 						</div>
 						<div className={'flex w-full justify-center'}>
-							<TracingBeam className="mx-auto max-w-7xl">
+							<section className="mx-auto max-w-7xl">
 								<h2
 									className={
 										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
@@ -310,7 +310,7 @@ export default async function Page({ params }) {
 										</div>
 									</div>
 								</article>
-							</TracingBeam>
+							</section>
 						</div>
 					</div>
 				</div>

@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { dir } from 'i18next'
 import { LottieAnimation } from '../../components/Global/Animations/LottieAnimation'
-import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import Script from 'next/script'
 
 const noto_serif_display = Noto_Serif_Display({
@@ -31,10 +30,10 @@ export default function RootLayout({ children, params }) {
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
 				{/*<Cursor />*/}
+				<LottieAnimation />
+
 				<ToastContainer closeOnClick />
 				<GoogleAnalytics gaId="UA-150969790-2" />
-				<LowGradientBackground />
-				<LottieAnimation />
 				{children}
 			</body>
 		</html>

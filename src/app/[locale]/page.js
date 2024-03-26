@@ -14,6 +14,8 @@ import { VideoBackground } from '../../components/Global/Animations/VideoBackgro
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
 import { localesConstant } from '@/services/localesConstant'
 import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
+import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
+import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
