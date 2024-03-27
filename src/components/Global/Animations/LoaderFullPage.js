@@ -10,10 +10,10 @@ function LoaderFullPage({ params }) {
 	useEffect(() => {
 		setTimeout(() => {
 			setLoading(false)
-		}, 5000)
+		}, 3000)
 		setTimeout(() => {
 			setHide(true)
-		}, 107000)
+		}, 5000)
 	}, [])
 	return (
 		<>
