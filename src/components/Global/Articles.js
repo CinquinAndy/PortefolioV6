@@ -74,7 +74,10 @@ function Articles({ content_website, articles, slice, isHome }) {
 												article?.attributes?.image_presentation?.data
 													?.attributes?.url
 											}
-											alt={article?.attributes?.title}
+											alt={
+												article?.attributes?.image_presentation?.data
+													?.attributes?.alternativeText
+											}
 											className="z-20 h-full w-full object-cover"
 											fill={true}
 											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"

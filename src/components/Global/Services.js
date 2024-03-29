@@ -41,7 +41,10 @@ function Services({ content_website, services }) {
 								<div className="relative flex w-full items-center justify-center ">
 									<Image
 										src={service?.attributes?.image?.data?.attributes?.url}
-										alt={service?.attributes?.title}
+										alt={
+											service?.attributes?.image?.data?.attributes
+												?.alternativeText
+										}
 										className="h-[50px] w-[50px] xl:h-[75px] xl:w-[75px]"
 										width={50}
 										height={50}
