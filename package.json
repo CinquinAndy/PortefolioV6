@@ -49,7 +49,7 @@
 		"sharp": "0.33.3",
 		"special-card": "2.1.3",
 		"tailwind-merge": "^2.2.1",
-		"typescript": "5.4.3",
+		"typescript": "5.4.4",
 		"zod": "3.22.4"
 	},
 	"devDependencies": {
