@@ -58,10 +58,9 @@ function Articles({ content_website, articles, slice, isHome }) {
 								href={'/blog/' + article?.attributes?.slug}
 								className={`${gridTemplateCustom(
 									index
-								)} relative flex aspect-[16/9] h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-auto`}
+								)} relative flex aspect-[16/9] h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
 							>
-								{/*<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">*/}
-								<h2 className="z-30 w-full pb-8 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
+								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{article?.attributes?.title}
 								</h2>
 								<div
@@ -90,8 +89,7 @@ function Articles({ content_website, articles, slice, isHome }) {
 										/>
 									</div>
 								</div>
-								{/*<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">*/}
-								<h2 className="z-30 w-full pt-8 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+								<h2 className="z-30 w-full pt-6 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 									{article?.attributes?.subtitle}
 								</h2>
 							</Link>
