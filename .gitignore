@@ -46,6 +46,7 @@ cypress/screenshots/
 cypress.env.json
 
 yarn.lock
+bun.lockb
 
 # for export
 #.bruno
