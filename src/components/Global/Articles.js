@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
+import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
+import { ArticleSkeleton } from '@/components/Global/SkeletonsFallback/ArticleSkeleton'
 
 function Articles({ content_website, articles, slice, isHome }) {
 	articles = slice ? articles.slice(0, slice) : articles
@@ -14,6 +16,7 @@ function Articles({ content_website, articles, slice, isHome }) {
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-3 2xl:col-end-11'
 		}
 	}
+
 	return (
 		<section className="w-full p-4 md:p-20">
 			{/*// <!--     Derniers articles -->*/}
@@ -63,31 +66,44 @@ function Articles({ content_website, articles, slice, isHome }) {
 								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{article?.attributes?.title}
 								</h2>
-								<div
-									className={
-										'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'
-									}
-								>
-									<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
-										<Image
-											src={
-												article?.attributes?.image_presentation?.data
-													?.attributes?.url
-											}
-											alt={
-												article?.attributes?.image_presentation?.data
-													?.attributes?.alternativeText
-											}
-											className="z-20 h-full w-full object-cover"
-											fill={true}
-											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
-										/>
-										<div
-											className={
-												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
-											}
-										/>
-									</div>
+								<div className="h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]">
+									{/*<ComponentLoadComponent FallBack={ArticleSkeleton}>*/}
+									{/*	<Image*/}
+									{/*		src={*/}
+									{/*			article?.attributes?.image_presentation?.data*/}
+									{/*				?.attributes?.url*/}
+									{/*		}*/}
+									{/*		alt={*/}
+									{/*			article?.attributes?.image_presentation?.data*/}
+									{/*				?.attributes?.alternativeText*/}
+									{/*		}*/}
+									{/*		className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90"*/}
+									{/*		fill={true}*/}
+									{/*		sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"*/}
+									{/*	/>*/}
+									{/*</ComponentLoadComponent>*/}
+									<ComponentLoadComponent FallBack={ArticleSkeleton}>
+										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
+											<Image
+												src={
+													article?.attributes?.image_presentation?.data
+														?.attributes?.url
+												}
+												alt={
+													article?.attributes?.image_presentation?.data
+														?.attributes?.alternativeText
+												}
+												className="z-20 h-full w-full object-cover"
+												fill={true}
+												sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+											/>
+											<div
+												className={
+													'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
+												}
+											/>
+										</div>
+									</ComponentLoadComponent>
 								</div>
 								<h2 className="z-30 w-full pt-6 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 									{article?.attributes?.subtitle}
