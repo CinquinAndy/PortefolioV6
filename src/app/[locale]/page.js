@@ -10,12 +10,9 @@ import Realisations from '@/components/Global/Realisations'
 import Articles from '@/components/Global/Articles'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import { VideoBackground } from '../../components/Global/Animations/VideoBackground'
+import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
 import { localesConstant } from '@/services/localesConstant'
-import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
-import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
-import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -60,7 +57,7 @@ export default async function Page({ params }) {
 
 	return (
 		<>
-			<LoaderFullPage params={params} />
+			{/*<LoaderFullPage params={params} />*/}
 			<Nav content_website={content_website} />
 			<PopupMainCat content_website={content_website} />
 
