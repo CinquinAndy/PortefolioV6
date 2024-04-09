@@ -8,12 +8,12 @@ function LoaderFullPage({ params }) {
 	const [loading, setLoading] = useState(true)
 	const [hide, setHide] = useState(false)
 	useEffect(() => {
-		setTimeout(() => {
-			setLoading(false)
-		}, 0)
-		setTimeout(() => {
-			setHide(true)
-		}, 1000)
+		// setTimeout(() => {
+		// 	setLoading(false)
+		// }, 0)
+		// setTimeout(() => {
+		// 	setHide(true)
+		// }, 1000)
 	}, [])
 	return (
 		<>
