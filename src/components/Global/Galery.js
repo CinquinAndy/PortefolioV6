@@ -5,7 +5,9 @@ import { XMarkIcon } from '@heroicons/react/20/solid'
 import { replaceTitle } from '@/services/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
+import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/GaleryItemSkeleton'
+import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
+import Image from 'next/image'
 
 function Galery({ open, handleClick, galery, title_galery }) {
 	// pathname
@@ -53,33 +55,29 @@ function Galery({ open, handleClick, galery, title_galery }) {
 												</div>
 											</div>
 										</div>
-										<div
-											className={
-												'columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>img:not(:first-child)]:mt-8'
-											}
-										>
-											{/*	map on galery */}
-											{galery.map((item, index) => {
-												return (
-													<Link
-														type={'button'}
-														key={index}
-														className={`cursor-pointer hover:filter-none`}
-														href={pathname + '/' + index}
-													>
-														<ImageLoadComponent
-															src={item?.attributes?.url}
-															alt={
-																item?.attributes?.alternativeText ??
-																'Project Image'
-															}
-															width={item?.attributes?.width}
-															height={item?.attributes?.height}
-															className={`m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
-														/>
-													</Link>
-												)
-											})}
+										<div className="columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>div:not(:first-child)]:mt-8">
+											{galery.map((item, index) => (
+												<Link
+													type="button"
+													key={index}
+													className="cursor-pointer hover:filter-none"
+													href={pathname + '/' + index}
+												>
+													<ComponentLoadComponent FallBack={GaleryItemSkeleton}>
+														<div className="m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent">
+															<Image
+																src={item?.attributes?.url}
+																alt={
+																	item?.attributes?.alternativeText ??
+																	'Project Image'
+																}
+																width={item?.attributes?.width}
+																height={item?.attributes?.height}
+															/>
+														</div>
+													</ComponentLoadComponent>
+												</Link>
+											))}
 										</div>
 									</div>
 								</Dialog.Panel>
