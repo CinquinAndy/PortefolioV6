@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
+import { ArticleSkeleton } from '@/components/Global/SkeletonsFallback/ArticleSkeleton'
+import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 
 function Realisations({ content_website, realisations, slice, isHome }) {
 	realisations = slice ? realisations.slice(0, slice) : realisations
@@ -61,27 +63,33 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 								<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{realisation?.attributes?.title}
 								</h2>
-								<div className={'h-full w-full'}>
-									<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
-										<Image
-											src={
-												realisation?.attributes?.image_presentation?.data
-													?.attributes?.url
-											}
-											alt={
-												realisation?.attributes?.image_presentation?.data
-													?.attributes?.alternativeText
-											}
-											className="z-20 h-full w-full object-cover"
-											fill={true}
-											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
-										/>
-										<div
-											className={
-												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
-											}
-										/>
-									</div>
+								<div
+									className={
+										'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'
+									}
+								>
+									<ComponentLoadComponent FallBack={ArticleSkeleton}>
+										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
+											<Image
+												src={
+													realisation?.attributes?.image_presentation?.data
+														?.attributes?.url
+												}
+												alt={
+													realisation?.attributes?.image_presentation?.data
+														?.attributes?.alternativeText
+												}
+												className="z-20 h-full w-full object-cover"
+												fill={true}
+												sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+											/>
+											<div
+												className={
+													'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
+												}
+											/>
+										</div>
+									</ComponentLoadComponent>
 								</div>
 								<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 									{realisation?.attributes?.subtitle}

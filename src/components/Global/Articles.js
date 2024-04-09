@@ -67,21 +67,6 @@ function Articles({ content_website, articles, slice, isHome }) {
 									{article?.attributes?.title}
 								</h2>
 								<div className="h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]">
-									{/*<ComponentLoadComponent FallBack={ArticleSkeleton}>*/}
-									{/*	<Image*/}
-									{/*		src={*/}
-									{/*			article?.attributes?.image_presentation?.data*/}
-									{/*				?.attributes?.url*/}
-									{/*		}*/}
-									{/*		alt={*/}
-									{/*			article?.attributes?.image_presentation?.data*/}
-									{/*				?.attributes?.alternativeText*/}
-									{/*		}*/}
-									{/*		className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90"*/}
-									{/*		fill={true}*/}
-									{/*		sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"*/}
-									{/*	/>*/}
-									{/*</ComponentLoadComponent>*/}
 									<ComponentLoadComponent FallBack={ArticleSkeleton}>
 										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
 											<Image
