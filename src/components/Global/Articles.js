@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
-import { ArticleSkeleton } from '@/components/Global/SkeletonsFallback/ArticleSkeleton'
+import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
 
 function Articles({ content_website, articles, slice, isHome }) {
 	articles = slice ? articles.slice(0, slice) : articles
@@ -67,7 +67,7 @@ function Articles({ content_website, articles, slice, isHome }) {
 									{article?.attributes?.title}
 								</h2>
 								<div className="h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]">
-									<ComponentLoadComponent FallBack={ArticleSkeleton}>
+									<ComponentLoadComponent FallBack={ArticleRealisationSkeleton}>
 										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
 											<Image
 												src={
