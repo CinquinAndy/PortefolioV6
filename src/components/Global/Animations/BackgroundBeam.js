@@ -1,39 +1,8 @@
 'use client'
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { cn } from '@/utils/cn'
-import { forwardRef, memo, useEffect } from 'react'
 
-const AnimatedLinearGradient = motion(
-	forwardRef((props, ref) => {
-		const Animation = useAnimation()
-
-		useEffect(() => {
-			Animation.start({
-				x1: ['0%', '100%'],
-				x2: ['0%', '95%'],
-				y1: ['0%', '100%'],
-				y2: ['0%', `${93 + Math.random() * 8}%`],
-				transition: {
-					duration: Math.random() * 10 + 10,
-					ease: 'easeOut',
-					repeat: Infinity,
-					delay: Math.random() * 0.1,
-				},
-			})
-		}, [Animation])
-
-		return (
-			<linearGradient ref={ref} {...props}>
-				<stop stopColor="#18CCFC" stopOpacity="0"></stop>
-				<stop stopColor="#18CCFC"></stop>
-				<stop offset="32.5%" stopColor="#6344F5"></stop>
-				<stop offset="100%" stopColor="#AE48FF" stopOpacity="0"></stop>
-			</linearGradient>
-		)
-	})
-)
-
-export const BackgroundBeams = memo(({ className }) => {
+export const BackgroundBeams = ({ className }) => {
 	const paths = [
 		'M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875',
 		'M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867',
@@ -94,7 +63,7 @@ export const BackgroundBeams = memo(({ className }) => {
 			)}
 		>
 			<svg
-				className="pointer-events-none absolute z-0 h-full w-full"
+				className="pointer-events-none absolute z-0 h-full w-full "
 				width="100%"
 				height="100%"
 				viewBox="0 0 696 316"
@@ -126,14 +95,35 @@ export const BackgroundBeams = memo(({ className }) => {
 						(path, index) =>
 							path &&
 							index && (
-								<AnimatedLinearGradient
+								<motion.linearGradient
 									id={`linearGradient-${index}`}
-									x1="0%"
+									x1="100%"
 									x2="100%"
-									y1="0%"
+									y1="100%"
 									y2="100%"
 									key={`gradient-${index}`}
-								/>
+									animate={{
+										x1: ['0%', '100%'],
+										x2: ['0%', '95%'],
+										y1: ['0%', '100%'],
+										y2: ['0%', `${93 + Math.random() * 8}%`],
+									}}
+									transition={{
+										duration: Math.random() * 10 + 10,
+										ease: 'easeOut',
+										repeat: Infinity,
+										delay: Math.random() * 0.1,
+									}}
+								>
+									<stop stopColor="#18CCFC" stopOpacity="0"></stop>
+									<stop stopColor="#18CCFC"></stop>
+									<stop offset="32.5%" stopColor="#6344F5"></stop>
+									<stop
+										offset="100%"
+										stopColor="#AE48FF"
+										stopOpacity="0"
+									></stop>
+								</motion.linearGradient>
 							)
 					)}
 
@@ -153,6 +143,6 @@ export const BackgroundBeams = memo(({ className }) => {
 			</svg>
 		</div>
 	)
-})
+}
 
 BackgroundBeams.displayName = 'BackgroundBeams'
