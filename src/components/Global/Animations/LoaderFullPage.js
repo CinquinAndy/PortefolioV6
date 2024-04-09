@@ -1,5 +1,4 @@
 'use client'
-import { BackgroundBeams } from '@/components/Global/Animations/BackgroundBeam'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -8,12 +7,12 @@ function LoaderFullPage({ params }) {
 	const [loading, setLoading] = useState(true)
 	const [hide, setHide] = useState(false)
 	useEffect(() => {
-		// setTimeout(() => {
-		// 	setLoading(false)
-		// }, 0)
-		// setTimeout(() => {
-		// 	setHide(true)
-		// }, 1000)
+		setTimeout(() => {
+			setLoading(false)
+		}, 0)
+		setTimeout(() => {
+			setHide(true)
+		}, 1000)
 	}, [])
 	return (
 		<>
@@ -57,7 +56,6 @@ function LoaderFullPage({ params }) {
 							</h3>
 						)}
 					</div>
-					<BackgroundBeams />
 				</div>
 			)}
 		</>
