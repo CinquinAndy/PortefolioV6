@@ -64,7 +64,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 													<Link
 														type={'button'}
 														key={index}
-														className={`cursor-pointer`}
+														className={`cursor-pointer hover:filter-none`}
 														href={pathname + '/' + index}
 													>
 														<ImageLoadComponent
@@ -75,7 +75,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 															}
 															width={item?.attributes?.width}
 															height={item?.attributes?.height}
-															className={`rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
+															className={`m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent`}
 														/>
 													</Link>
 												)
