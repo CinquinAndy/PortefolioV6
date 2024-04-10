@@ -13,7 +13,6 @@ import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { localesConstant } from '@/services/localesConstant'
 import Script from 'next/script'
-import { TracingBeam } from '@/components/Global/Animations/TracingBeam'
 import ArrowUp from '@/components/Global/ArrowUp'
 import { NavigationArticle } from '@/components/Global/navigationArticle'
 

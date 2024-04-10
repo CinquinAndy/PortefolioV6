@@ -1,5 +1,4 @@
 'use client'
-import { BackgroundBeams } from '@/components/Global/Animations/BackgroundBeam'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -57,7 +56,6 @@ function LoaderFullPage({ params }) {
 							</h3>
 						)}
 					</div>
-					<BackgroundBeams />
 				</div>
 			)}
 		</>
