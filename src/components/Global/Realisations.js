@@ -58,9 +58,9 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 							<Link
 								key={realisation?.id}
 								href={'/portefolio/' + realisation?.attributes?.slug}
-								className={`${gridTemplateCustom(index)} relative flex aspect-[16/9] h-[50vh] w-full flex-col items-center justify-center p-4 sm:h-auto md:p-10`}
+								className={`${gridTemplateCustom(index)} relative flex aspect-[16/9] h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
 							>
-								<h2 className="absolute left-0 top-0 z-30 mt-4 w-2/3 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
+								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{realisation?.attributes?.title}
 								</h2>
 								<div
@@ -91,7 +91,7 @@ function Realisations({ content_website, realisations, slice, isHome }) {
 										</div>
 									</ComponentLoadComponent>
 								</div>
-								<h2 className="absolute bottom-0 left-0 z-30 mt-4 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+								<h2 className="z-30 w-full pt-6 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 									{realisation?.attributes?.subtitle}
 								</h2>
 							</Link>
