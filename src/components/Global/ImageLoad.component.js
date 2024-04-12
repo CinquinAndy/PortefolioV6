@@ -26,7 +26,7 @@ export function ImageLoadComponent({ className, src, alt, width, height }) {
 				width={width}
 				height={height}
 				className={`${loaded ? 'block' : '!pointer-events-none fixed -z-10 opacity-0'} ${className}`}
-				quality={75}
+				quality={85}
 				onLoad={() => setLoaded(true)}
 			/>
 		</>
