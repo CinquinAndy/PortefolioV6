@@ -30,7 +30,11 @@ const options = {
 				const highlightedContent = hljs.highlightAuto(codeContent).value
 
 				return (
-					<pre className={'code overflow-x-auto rounded-md p-5 text-white'}>
+					<pre
+						className={
+							'code max-w-[calc(100vw-2.5rem-10px)] overflow-x-auto rounded-md p-5 text-white'
+						}
+					>
 						<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
 					</pre>
 				)
