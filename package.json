@@ -24,6 +24,8 @@
 		"@lottiefiles/react-lottie-player": "3.5.3",
 		"@next/third-parties": "14.2.3",
 		"@tailwindcss/typography": "0.5.12",
+		"@vercel/analytics": "^1.2.2",
+		"@vercel/speed-insights": "^1.0.10",
 		"clsx": "2.1.1",
 		"eslint": "8.57.0",
 		"eslint-config-next": "14.2.3",

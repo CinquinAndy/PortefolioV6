@@ -5,6 +5,8 @@ import '@/styles/lottie.css'
 import '@/styles/nav.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'highlight.js/styles/atom-one-dark-reasonable.min.css'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export function generateStaticParams() {
 	const i18nConfig = {
@@ -14,5 +16,11 @@ export function generateStaticParams() {
 }
 
 export default function RootLayout({ children }) {
-	return <>{children}</>
+	return (
+		<>
+			<Analytics />
+			<SpeedInsights />
+			{children}
+		</>
+	)
 }
