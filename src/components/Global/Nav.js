@@ -376,7 +376,7 @@ function Nav({
 							src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/LogoCinquinAndy.svg`}
 							alt="Développeur Freelance - Logo"
 							className="mb-32 ml-16 h-112 w-112 -rotate-12 opacity-20 brightness-75"
-							loading={'eager'}
+							loading={'lazy'}
 						/>
 					</div>
 				)}
