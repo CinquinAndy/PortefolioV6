@@ -25,6 +25,13 @@ module.exports = {
 			body: ['"Be Vietnam Pro"', 'sans-serif'],
 			display: ['"Noto Serif Display"', 'serif'],
 		},
+		screens: {
+			sm: { raw: '(min-width: 640px) and (min-height: 575px)' },
+			md: { raw: '(min-width: 768px) and (min-height: 650px)' },
+			lg: { raw: '(min-width: 1024px) and (min-height: 650px)' },
+			xl: { raw: '(min-width: 1280px) and (min-height: 650px)' },
+			'2xl': { raw: '(min-width: 1536px) and (min-height: 650px)' },
+		},
 		extend: {
 			colors: {
 				sky: {
@@ -63,22 +70,6 @@ module.exports = {
 				28: '28deg',
 				30: '30deg',
 				32: '32deg',
-			},
-			screens: {
-				sm: { raw: '(min-width: 640px and min-height: 575px)' },
-				// => @media (min-width: 640px) { ... }
-
-				md: { raw: '(min-width: 768px and min-height: 650px)' },
-				// => @media (min-width: 768px) { ... }
-
-				lg: { raw: '(min-width: 1024px and min-height: 650px)' },
-				// => @media (min-width: 1024px) { ... }
-
-				xl: { raw: '(min-width: 1280px and min-height: 650px)' },
-				// => @media (min-width: 1280px) { ... }
-
-				'2xl': { raw: '(min-width: 1536px and min-height: 650px)' },
-				// => @media (min-width: 1536px) { ... }
 			},
 		},
 	},
