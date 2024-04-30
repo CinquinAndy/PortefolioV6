@@ -4,6 +4,7 @@ import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { dir } from 'i18next'
 import { LottieAnimation } from '../../components/Global/Animations/LottieAnimation'
 import Script from 'next/script'
+import Head from 'next/head'
 
 const noto_serif_display = Noto_Serif_Display({
 	subsets: ['latin'],
@@ -19,6 +20,38 @@ const be_vietnam_pro = Be_Vietnam_Pro({
 export default function RootLayout({ children, params }) {
 	return (
 		<html lang={params.locale} dir={dir(params.locale)}>
+			<Head>
+				{/* Google Analytics */}
+				<link
+					rel="preconnect"
+					href="https://www.google-analytics.com"
+					crossOrigin="anonymous"
+				/>
+				<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+				<link
+					rel="preconnect"
+					href="https://region1.google-analytics.com"
+					crossOrigin="anonymous"
+				/>
+				<link rel="dns-prefetch" href="https://region1.google-analytics.com" />
+
+				{/* wadefade.fr */}
+				<link
+					rel="preconnect"
+					href="https://umami.wadefade.fr"
+					crossOrigin="anonymous"
+				/>
+				<link rel="dns-prefetch" href="https://umami.wadefade.fr" />
+
+				{/* Cloudinary */}
+				<link
+					rel="preconnect"
+					href="https://res.cloudinary.com"
+					crossOrigin="anonymous"
+				/>
+				<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+			</Head>
+
 			<Script
 				async
 				src="https://umami.wadefade.fr/script.js"
