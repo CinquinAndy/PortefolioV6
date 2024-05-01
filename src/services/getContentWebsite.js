@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation'
  */
 export async function fetchAPI(path, options = {}) {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
-		next: { revalidate: 60 },
+		next: { revalidate: false },
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
