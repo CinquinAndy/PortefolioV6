@@ -37,7 +37,7 @@
 		"lodash": "4.17.21",
 		"mailgun.js": "10.2.1",
 		"next": "14.2.3",
-		"next-i18n-router": "5.4.2",
+		"next-i18n-router": "5.4.3",
 		"next-transpile-modules": "10.0.1",
 		"prettier-plugin-tailwindcss": "0.5.14",
 		"react": "18.3.1",
