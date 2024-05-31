@@ -22,11 +22,30 @@ export const getServerSideProps = async ({ res }) => {
 	)
 
 	// Fetch dynamic paths for blog posts and portfolio items via the Vercel API
-	const resBlog = await fetch(`${baseUrl}/api/getBlogPaths`)
-	const blogPaths = await resBlog.json()
+	let blogPaths = []
+	let portfolioPaths = []
 
-	const resPortfolio = await fetch(`${baseUrl}/api/getPortfolioPaths`)
-	const portfolioPaths = await resPortfolio.json()
+	try {
+		const resBlog = await fetch(`${baseUrl}/api/getBlogPaths`)
+		if (resBlog.ok) {
+			blogPaths = await resBlog.json()
+		} else {
+			console.error('Failed to fetch blog paths:', resBlog.statusText)
+		}
+	} catch (error) {
+		console.error('Error fetching blog paths:', error)
+	}
+
+	try {
+		const resPortfolio = await fetch(`${baseUrl}/api/getPortfolioPaths`)
+		if (resPortfolio.ok) {
+			portfolioPaths = await resPortfolio.json()
+		} else {
+			console.error('Failed to fetch portfolio paths:', resPortfolio.statusText)
+		}
+	} catch (error) {
+		console.error('Error fetching portfolio paths:', error)
+	}
 
 	const allPaths = [
 		...staticPaths,
@@ -39,8 +58,8 @@ export const getServerSideProps = async ({ res }) => {
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       ${allPaths
-		.map(url => {
-			return `
+				.map(url => {
+					return `
             <url>
               <loc>${url}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
@@ -48,8 +67,8 @@ export const getServerSideProps = async ({ res }) => {
               <priority>1.0</priority>
             </url>
           `
-		})
-		.join('')}
+				})
+				.join('')}
     </urlset>`
 
 	res.setHeader('Content-Type', 'text/xml')
