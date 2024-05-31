@@ -9,8 +9,7 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "precommit": "lint-staged",
-    "prepare": "husky install",
-    "sitemap": "node generateSitemap.js"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.js": [
