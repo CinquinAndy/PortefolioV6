@@ -161,9 +161,8 @@ export const getServerSideProps = async ({ res }) => {
 			.join('')}
 	  </urlset>`
 
-	res.setHeader('Content-Type', 'text/xml')
-	res.write(sitemap)
-	res.end()
+	writeFileSync('sitemap.xml', sitemap)
+	console.log('Xml file generated')
 
 	return {
 		props: {},
