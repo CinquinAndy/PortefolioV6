@@ -33,7 +33,7 @@
     "framer-motion": "^11.0.8",
     "fs": "^0.0.1-security",
     "highlight.js": "^11.9.0",
-    "html-react-parser": "5.1.11",
+    "html-react-parser": "5.1.12",
     "i18next": "23.12.1",
     "lodash": "4.17.21",
     "mailgun.js": "10.2.3",
