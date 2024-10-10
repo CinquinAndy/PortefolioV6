@@ -29,7 +29,7 @@
     "clsx": "2.1.1",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.15",
-    "form-data": "4.0.0",
+    "form-data": "4.0.1",
     "framer-motion": "^11.0.8",
     "fs": "^0.0.1-security",
     "highlight.js": "^11.9.0",
