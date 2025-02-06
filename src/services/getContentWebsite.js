@@ -69,34 +69,69 @@ export function updateNestedProperty(obj, path, newValue) {
  * @returns {Promise<*>}
  */
 export async function getContentWebsite(locale) {
-	const data_content_website = await fetchAPI(
-		`api/content-website?populate=deep&locale=${locale}`
-	)
+	try {
+		const data_content_website = await fetchAPI(
+			`api/content-website?populate=deep&locale=${locale}`
+		)
 
-	const processedContentFooter = await processMarkdown(
-		data_content_website.data.attributes.content_footer.content
-	)
-	const processedContentCta = await processMarkdown(
-		data_content_website.data.attributes.cta.content
-	)
+		// Early return if no data
+		if (!data_content_website?.data?.attributes) {
+			console.warn('No content website data found')
+			return {
+				data: {
+					attributes: {
+						menu: [],
+						socials: {},
+						content_footer: { content: '' },
+						cta: { content: '' },
+						contact: {},
+						content_blog: { seo: {} },
+					},
+				},
+			}
+		}
 
-	const processedContentSignature = await processMarkdown(
-		data_content_website.data.attributes.content_footer.content_signature
-	)
+		const processedContentFooter = await processMarkdown(
+			data_content_website.data.attributes.content_footer?.content || ''
+		)
 
-	return updateNestedProperty(
-		updateNestedProperty(
+		const processedContentCta = await processMarkdown(
+			data_content_website.data.attributes.cta?.content || ''
+		)
+
+		const processedContentSignature = await processMarkdown(
+			data_content_website.data.attributes.content_footer?.content_signature ||
+				''
+		)
+
+		return updateNestedProperty(
 			updateNestedProperty(
-				data_content_website,
-				'data.attributes.content_footer.content',
-				processedContentFooter
+				updateNestedProperty(
+					data_content_website,
+					'data.attributes.content_footer.content',
+					processedContentFooter
+				),
+				'data.attributes.cta.content',
+				processedContentCta
 			),
-			'data.attributes.cta.content',
-			processedContentCta
-		),
-		'data.attributes.content_footer.content_signature',
-		processedContentSignature
-	)
+			'data.attributes.content_footer.content_signature',
+			processedContentSignature
+		)
+	} catch (error) {
+		console.error('Error in getContentWebsite:', error)
+		return {
+			data: {
+				attributes: {
+					menu: [],
+					socials: {},
+					content_footer: { content: '' },
+					cta: { content: '' },
+					contact: {},
+					content_blog: { seo: {} },
+				},
+			},
+		}
+	}
 }
 
 /**

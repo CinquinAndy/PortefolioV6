@@ -20,6 +20,7 @@ function Nav({
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
 
+	console.log(content_website)
 	content_website = content_website.attributes
 	const menu = content_website.menu
 	const socials = content_website.socials
