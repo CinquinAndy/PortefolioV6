@@ -1,20 +1,19 @@
-import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
+import {getArticles, getContentWebsite} from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import Articles from '@/components/Global/Articles'
-import { localesConstant } from '@/services/localesConstant'
+import {localesConstant} from '@/services/localesConstant'
 import Pagination from '@/components/Global/Pagination'
+import {CardMasonry} from "@/app/[locale]/blog/cardMasonry";
+import {TagFilters} from "@/app/[locale]/blog/tagFilters";
 
 export async function generateStaticParams() {
-	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
 }
 
 export async function generateMetadata({ params }) {
-	// fetch data
 	const content_website = await getContentWebsite(params.locale)
 
 	return {
@@ -35,44 +34,57 @@ export async function generateMetadata({ params }) {
 		},
 	}
 }
-
 export default async function Page({ params, searchParams }) {
-	let content_website = await getContentWebsite(params.locale)
-	content_website = content_website?.data
+    // Add error handling for content_website
+    let content_website = await getContentWebsite(params.locale)
+    content_website = content_website?.data || {}  // Provide default empty object
 
-	const page = searchParams.page ? parseInt(searchParams.page) : 1
-	const pageSize = 5
+    // Add error handling for articles
+    const page = searchParams.page ? Number.parseInt(searchParams.page) : 1
+    const pageSize = 12 // Increased for better masonry layout
 
-	let articlesResponse = await getArticles(params.locale, page, pageSize)
-	let articles = articlesResponse?.data
+    const articlesResponse = await getArticles(params.locale, page, pageSize)
+    const articles = articlesResponse?.data || [] // Provide default empty array
 
-	const totalArticles = articlesResponse?.meta?.pagination?.total
-	const totalPages = Math.ceil(totalArticles / pageSize)
+    const totalArticles = articlesResponse?.meta?.pagination?.total || 0
+    const totalPages = Math.ceil(totalArticles / pageSize)
+    const currentPage = Number(searchParams.page) || 1
 
-	const currentPage = Number(searchParams.page) || 1
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-blue-900">
+            <Nav
+                content_website={content_website}
+                isHome={false}
+                h1={content_website?.attributes?.content_blog?.seo?.h1}
+            />
+            <main className="container mx-auto px-4 py-8">
+                {/* Add filters/categories section */}
+                <div className="mb-8">
+                    <TagFilters articles={articles} />
+                </div>
 
-	return (
-		<>
-			<Nav
-				content_website={content_website}
-				isHome={false}
-				h1={content_website?.attributes?.content_blog?.seo?.h1}
-			/>
-			<div>
-				<Articles
-					content_website={content_website}
-					articles={articles}
-					slice={false}
-					isHome={false}
-				/>
-				<Pagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					baseUrl={`/${params.locale}/blog`}
-				/>
-				<Cta content_website={content_website} />
-			</div>
-			<Footer content_website={content_website} />
-		</>
-	)
+                {articles.length > 0 ? (
+                    <CardMasonry articles={articles} params={params} />
+                ) : (
+                    <div className="text-center text-white py-12">
+                        <p>No articles found</p>
+                    </div>
+                )}
+
+                <div className="mt-8">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        baseUrl={`/${params.locale}/blog`}
+                    />
+                </div>
+
+                <div className="mt-16">
+                    <Cta content_website={content_website} />
+                </div>
+            </main>
+            <Footer content_website={content_website} />
+        </div>
+    )
 }
+

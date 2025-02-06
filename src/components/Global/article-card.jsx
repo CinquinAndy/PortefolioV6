@@ -9,7 +9,7 @@ export function ArticleCard({ article, locale }) {
 				<div className="relative aspect-video">
 					<Image
 						src={
-							article.attributes.cover?.data?.attributes?.url ||
+							article.attributes.data?.attributes?.url ||
 							'/placeholder.svg'
 						}
 						alt={article.attributes.title}
