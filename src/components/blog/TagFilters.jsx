@@ -1,6 +1,5 @@
 'use client'
 
-// New component for tag filtering
 import { useState } from 'react'
 
 export function TagFilters({ articles }) {

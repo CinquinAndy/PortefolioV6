@@ -74,23 +74,6 @@ export async function getContentWebsite(locale) {
 			`api/content-website?populate=deep&locale=${locale}`
 		)
 
-		// Early return if no data
-		if (!data_content_website?.data?.attributes) {
-			console.warn('No content website data found')
-			return {
-				data: {
-					attributes: {
-						menu: [],
-						socials: {},
-						content_footer: { content: '' },
-						cta: { content: '' },
-						contact: {},
-						content_blog: { seo: {} },
-					},
-				},
-			}
-		}
-
 		const processedContentFooter = await processMarkdown(
 			data_content_website.data.attributes.content_footer?.content || ''
 		)
@@ -119,18 +102,6 @@ export async function getContentWebsite(locale) {
 		)
 	} catch (error) {
 		console.error('Error in getContentWebsite:', error)
-		return {
-			data: {
-				attributes: {
-					menu: [],
-					socials: {},
-					content_footer: { content: '' },
-					cta: { content: '' },
-					contact: {},
-					content_blog: { seo: {} },
-				},
-			},
-		}
 	}
 }
 

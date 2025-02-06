@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { ArticleCard } from '@/components/blog/article-card'
-import { MasonryGrid } from '@/components/blog/masonry-grid'
+import { ArticleCard } from '@/components/blog/ArticleCard'
+import { MasonryGrid } from '@/components/blog/MasonryGrid'
 
 export function CardMasonry({ articles, params }) {
 	const [sortBy, setSortBy] = useState('date') // You can add sorting options

@@ -16,7 +16,6 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-	// fetch data
 	const content_website = await getContentWebsite(params.locale)
 
 	return {

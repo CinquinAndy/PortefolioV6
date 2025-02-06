@@ -6,7 +6,6 @@ import { Layout } from '@/components/Global/Layout'
 import { localesConstant } from '@/services/localesConstant'
 
 export async function generateStaticParams() {
-	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
