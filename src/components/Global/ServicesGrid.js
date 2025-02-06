@@ -4,8 +4,11 @@ import { clsx } from 'clsx'
 import Link from 'next/link'
 
 import { motion } from 'framer-motion'
+import { replaceTitle } from '@/services/utils'
+import Image from 'next/image'
 
-export function ServicesGrid() {
+export function ServicesGrid({ content_website, services }) {
+	console.log('ServicesGrid', { content_website, services })
 	return (
 		<section
 			className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]"
@@ -13,25 +16,43 @@ export function ServicesGrid() {
 		>
 			{/* Header Section */}
 			<div className="mb-16 flex justify-between">
-				<h2 className="max-w-3xl font-display text-4xl">
-					Crafting Digital Experiences That Matter
-				</h2>
+				<h2
+					className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+					dangerouslySetInnerHTML={{
+						__html: replaceTitle(
+							content_website?.attributes?.content_home?.title_service
+						),
+					}}
+				></h2>
 				<Link
-					href={'/contact'}
+					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
 					className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 				>
-					<span className={'button-purple-title'}>Let's work together !</span>
+					<span className={'button-purple-title'}>
+						{content_website?.attributes?.content_home?.link[3]?.label ||
+							'Voir tout'}
+					</span>
 				</Link>
 			</div>
 
 			{/* Bento Grid */}
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
 				<BentoCard
-					eyebrow="Full-Stack Developer"
-					title="Building the Future of Web"
-					description="Specialized in Next.js & React, turning complex ideas into elegant solutions."
+					eyebrow={services[0]?.attributes?.eyebrow}
+					title={services[0]?.attributes?.title}
+					description={services[0]?.attributes?.description}
 					graphic={
-						<div className="h-80 bg-[url(/assets/bento/bento_1.png)] bg-cover bg-center bg-no-repeat" />
+						<div className="relative h-80 w-full">
+							<Image
+								src={
+									services[0]?.attributes?.image || '/assets/bento/bento_1.png'
+								}
+								alt={services[0]?.attributes?.title || 'Service illustration'}
+								fill
+								className="object-cover object-center"
+								priority
+							/>
+						</div>
 					}
 					fade={['bottom']}
 					className="lg:col-span-2"
