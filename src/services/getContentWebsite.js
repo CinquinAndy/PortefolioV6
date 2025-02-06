@@ -170,6 +170,15 @@ export async function getRealisations(locale) {
 }
 
 /**
+ * Get services grid
+ * @param locale
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getServicesGrid(locale) {
+	return await fetchAPI(`api/service-grids?populate=deep&locale=${locale}`)
+}
+
+/**
  * Get articles
  * @returns {Promise<{notFound: boolean}|*>}
  */
