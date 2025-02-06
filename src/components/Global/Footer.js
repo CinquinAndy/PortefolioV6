@@ -5,11 +5,11 @@ import { Layout } from '@/components/Global/Layout'
 
 function Footer({ content_website }) {
 	// Sitemap
-	const sitemap = content_website?.attributes?.Sitemap.filter(
+	const sitemap = content_website?.attributes?.Sitemap?.filter(
 		item => item?.categorie === 'sitemap'
 	)
 	// Mentions légales
-	const legals = content_website?.attributes?.Sitemap.filter(
+	const legals = content_website?.attributes?.Sitemap?.filter(
 		item => item?.categorie === 'legals'
 	)
 	// Socials
@@ -49,7 +49,7 @@ function Footer({ content_website }) {
 							<Link
 								key={index}
 								className="underline_custom text-xs xl:text-sm"
-								href={item?.Link?.url}
+								href={item?.Link?.url || '/'}
 							>
 								{item?.Link?.label}
 							</Link>
@@ -65,7 +65,7 @@ function Footer({ content_website }) {
 							<Link
 								key={index}
 								className="underline_custom text-xs xl:text-sm"
-								href={item?.Link?.url}
+								href={item?.Link?.url || '/'}
 							>
 								{item?.Link?.label}
 							</Link>
@@ -78,7 +78,7 @@ function Footer({ content_website }) {
 							<div className={'relative p-3'}>
 								<Link
 									className="slider-nav-item text-indigo-50 hover:text-slate-50"
-									href={socials?.facebook}
+									href={socials?.facebook || '/'}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>

@@ -20,7 +20,7 @@ function Nav({
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
 
-	console.log(content_website)
+	// console.log(content_website)
 	content_website = content_website.attributes || content_website
 	const menu = content_website.menu
 	const socials = content_website.socials
@@ -160,7 +160,7 @@ function Nav({
 				className={`${!open ? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0' : 'pointer-events-auto z-40 -translate-y-0 opacity-100'} fixed flex h-screen w-screen transform transition-transform`}
 			>
 				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
-					{menu.map((item, index) => {
+					{menu && menu.map((item, index) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link
 								className="relative text-indigo-400"

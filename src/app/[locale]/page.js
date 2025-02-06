@@ -23,8 +23,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+	const { locale } = await params
 	// fetch data
-	let content_website = await getContentWebsite(params.locale)
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
 
 	return {
@@ -47,13 +48,14 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let services = await getServicesGrid(params.locale)
+	let services = await getServicesGrid(locale)
 	services = services?.data
-	let realisations = await getRealisations(params.locale)
+	let realisations = await getRealisations(locale)
 	realisations = realisations?.data
-	let articles = await getArticles(params.locale)
+	let articles = await getArticles(locale)
 	articles = articles?.data
 
 	return (
@@ -67,7 +69,7 @@ export default async function Page({ params }) {
 					<VideoBackground />
 				</div>
 			</div>
-
+			
 			<div className={'relative'}>
 				<ServicesGrid content_website={content_website} services={services} />
 				<Realisations

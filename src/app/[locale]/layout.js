@@ -50,26 +50,27 @@ export const metadata = {
 	],
 }
 
-export default function RootLayout({ children, params }) {
+export default async function RootLayout({children, params}) {
+	const {locale} = await params
 	return (
-		<html lang={params.locale} dir={dir(params.locale)}>
-			<Script
-				async
-				src="https://umami.wadefade.fr/script.js"
-				strategy={'afterInteractive'}
-				data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
-			/>
+		<html lang={locale} dir={dir(locale)}>
+		<Script
+			async
+			src="https://umami.wadefade.fr/script.js"
+			strategy={'afterInteractive'}
+			data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
+		/>
 
-			<body
-				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
-			>
-				{/*<Cursor />*/}
-				<LottieAnimation />
+		<body
+			className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
+		>
+		{/*<Cursor />*/}
+		<LottieAnimation/>
 
-				<ToastContainer closeOnClick />
-				<GoogleAnalytics gaId="UA-150969790-2" />
-				{children}
-			</body>
+		<ToastContainer closeOnClick />
+		<GoogleAnalytics gaId="UA-150969790-2"/>
+		{children}
+		</body>
 		</html>
 	)
 }

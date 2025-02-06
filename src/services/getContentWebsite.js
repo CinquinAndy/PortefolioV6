@@ -75,15 +75,15 @@ export async function getContentWebsite(locale) {
 		)
 
 		const processedContentFooter = await processMarkdown(
-			data_content_website.data.attributes.content_footer?.content || ''
+			data_content_website.data?.attributes?.content_footer?.content || ''
 		)
 
 		const processedContentCta = await processMarkdown(
-			data_content_website.data.attributes.cta?.content || ''
+			data_content_website.data?.attributes?.cta?.content || ''
 		)
 
 		const processedContentSignature = await processMarkdown(
-			data_content_website.data.attributes.content_footer?.content_signature ||
+			data_content_website.data?.attributes?.content_footer?.content_signature ||
 				''
 		)
 

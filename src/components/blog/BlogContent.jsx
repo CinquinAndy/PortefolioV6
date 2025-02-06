@@ -26,7 +26,7 @@ export function BlogContent({ articles, content_website, params, pagination }) {
     }, [articles, searchQuery, selectedType])
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 max-w-[80vw] mx-auto px-6">
             {/* Barre de recherche */}
             <BlogSearch
                 value={searchQuery}
@@ -54,7 +54,7 @@ export function BlogContent({ articles, content_website, params, pagination }) {
                 />
             ) : (
                 <div className="text-center text-white py-12">
-                    <p>No articles found</p>
+                    <div>No articles found</div>
                 </div>
             )}
 

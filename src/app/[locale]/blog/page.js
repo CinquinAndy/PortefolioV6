@@ -1,18 +1,22 @@
-import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
+import {getArticles, getContentWebsite} from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import { localesConstant } from '@/services/localesConstant'
-import { BlogContent } from '@/components/blog/BlogContent'
+import {localesConstant} from '@/services/localesConstant'
+import Pagination from '@/components/Global/Pagination'
+import {BlogContent} from "@/components/blog/BlogContent";
 
 export async function generateStaticParams() {
+	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
 }
 
 export async function generateMetadata({ params }) {
-	const content_website = await getContentWebsite(params.locale)
+	const {locale} = await params
+	// fetch data
+	const content_website = await getContentWebsite(locale)
 
 	return {
 		title:
@@ -33,20 +37,22 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-// page.js
 export default async function Page({ params, searchParams }) {
-	let content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	const { page } = await searchParams
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	//
-	// const page = searchParams.page ? parseInt(searchParams.page) : 1
-	// const pageSize = 24
 
-	let articlesResponse = await getArticles(params.locale)
+	const pageParams = page ? parseInt(page) : 1
+	const pageSize = 24
+
+	let articlesResponse = await getArticles(locale, pageParams, pageSize)
 	let articles = articlesResponse?.data
 
-	// const totalArticles = articlesResponse?.meta?.pagination?.total
-	// const totalPages = Math.ceil(totalArticles / pageSize)
-	// const currentPage = searchParams.page ? Number(searchParams.page) : 1
+	const totalArticles = articlesResponse?.meta?.pagination?.total
+	const totalPages = Math.ceil(totalArticles / pageSize)
+
+	const currentPage = Number(page) || 1
 
 	return (
 		<>
@@ -55,19 +61,19 @@ export default async function Page({ params, searchParams }) {
 				isHome={false}
 				h1={content_website?.attributes?.content_blog?.seo?.h1}
 			/>
-
 			<div>
 				<BlogContent
 					content_website={content_website}
 					articles={articles}
 					params={params}
-					pagination={{
-						baseUrl: `/${params.locale}/blog`,
-					}}
+				/>
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					baseUrl={`/${locale}/blog`}
 				/>
 				<Cta content_website={content_website} />
 			</div>
-
 			<Footer content_website={content_website} />
 		</>
 	)
