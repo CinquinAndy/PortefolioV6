@@ -13,6 +13,7 @@ import Footer from '@/components/Global/Footer'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
 import { localesConstant } from '@/services/localesConstant'
+import { ServicesGrid } from '@/components/Global/ServicesGrid'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -68,7 +69,7 @@ export default async function Page({ params }) {
 			</div>
 
 			<div className={'relative'}>
-				<Services content_website={content_website} services={services} />
+				<ServicesGrid content_website={content_website} services={services} />
 				<Realisations
 					content_website={content_website}
 					realisations={realisations}
