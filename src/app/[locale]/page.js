@@ -3,9 +3,9 @@ import {
 	getContentWebsite,
 	getRealisations,
 	getServices,
+	getServicesGrid,
 } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
-import Services from '@/components/Global/Services'
 import Realisations from '@/components/Global/Realisations'
 import Articles from '@/components/Global/Articles'
 import Cta from '@/components/Global/Cta'
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
 	let content_website = await getContentWebsite(params.locale)
 	content_website = content_website?.data
-	let services = await getServices(params.locale)
+	let services = await getServicesGrid(params.locale)
 	services = services?.data
 	let realisations = await getRealisations(params.locale)
 	realisations = realisations?.data
