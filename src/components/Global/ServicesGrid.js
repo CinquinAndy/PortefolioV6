@@ -2,13 +2,11 @@
 
 import { clsx } from 'clsx'
 import Link from 'next/link'
-
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { replaceTitle } from '@/services/utils'
-import Image from 'next/image'
 
 export function ServicesGrid({ content_website, services }) {
-	console.log('ServicesGrid', { content_website, services })
 	return (
 		<section
 			className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]"
@@ -23,89 +21,57 @@ export function ServicesGrid({ content_website, services }) {
 							content_website?.attributes?.content_home?.title_service
 						),
 					}}
-				></h2>
+				/>
+				{/* See All Projects Button */}
 				<Link
 					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
 					className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 				>
 					<span className={'button-purple-title'}>
 						{content_website?.attributes?.content_home?.link[3]?.label ||
-							'Voir tout'}
+							'See all'}
 					</span>
 				</Link>
 			</div>
 
-			{/* Bento Grid */}
+			{/* Bento Grid Layout */}
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
-				<BentoCard
-					eyebrow={services[0]?.attributes?.eyebrow}
-					title={services[0]?.attributes?.title}
-					description={services[0]?.attributes?.description}
-					graphic={
-						<div className="relative h-80 w-full">
-							<Image
-								src={
-									services[0]?.attributes?.image || '/assets/bento/bento_1.png'
-								}
-								alt={services[0]?.attributes?.title || 'Service illustration'}
-								fill
-								className="object-cover object-center"
-								priority
-							/>
-						</div>
-					}
-					fade={['bottom']}
-					className="lg:col-span-2"
-				/>
-
-				<BentoCard
-					eyebrow="Experience"
-					title="6+ Years of Impact"
-					description="From Wildlife Studios to successful startups, delivering premium solutions that drive business growth."
-					graphic={
-						<div className="h-80 bg-[url(/assets/bento/bento_2.png)] bg-cover bg-center bg-no-repeat" />
-					}
-					fade={['bottom']}
-					className="lg:col-span-2"
-				/>
-
-				<BentoCard
-					eyebrow="Open Source"
-					title="Community Builder"
-					description="Active contributor to npm packages, GitHub projects, Obsidian plugins, Wordpress plugins, Strapi plugins and more."
-					fade={['bottom']}
-					graphic={
-						<div className="h-80 bg-[url(/assets/bento/bento_3.png)] bg-cover bg-center bg-no-repeat" />
-					}
-					className="lg:col-span-2"
-				/>
-
-				<BentoCard
-					eyebrow="Startup Creator"
-					title="Turning Ideas Into Reality"
-					description="Co-founded ForVoyez, ForMenu, and My-Makeup."
-					fade={['bottom']}
-					graphic={
-						<div className="h-80 bg-[url(/assets/bento/bento_4.png)] bg-cover bg-center bg-no-repeat" />
-					}
-					className="lg:col-span-3"
-				/>
-
-				<BentoCard
-					eyebrow="Let's Connect"
-					title="Ready to Build?"
-					description="Looking for a developer who can take your project to the next level?"
-					fade={['bottom']}
-					graphic={
-						<div className="h-80 bg-[url(/assets/bento/bento_5.png)] bg-cover bg-center bg-no-repeat" />
-					}
-					className="lg:col-span-3"
-				/>
+				{services.map((service, index) => (
+					<BentoCard
+						key={service.id}
+						eyebrow={service.attributes.eyebrow}
+						title={service.attributes.title}
+						description={service.attributes.description}
+						graphic={
+							<div className="relative h-80 w-full">
+								<Image
+									src={
+										service.attributes.image ||
+										`/assets/bento/bento_${index + 1}.png`
+									}
+									alt={service.attributes.title || 'Service illustration'}
+									fill
+									className="object-cover object-center"
+									priority
+								/>
+							</div>
+						}
+						fade={['bottom']}
+						className={clsx(
+							// Last two items span 3 columns
+							index >= services.length - 2 ? 'lg:col-span-3' : 'lg:col-span-2',
+							// Rounded corners for first and last items
+							index === 0 && 'lg:rounded-tl-4xl',
+							index === services.length - 1 && 'lg:rounded-br-4xl'
+						)}
+					/>
+				))}
 			</div>
 		</section>
 	)
 }
 
+// BentoCard Component with hover animation
 function BentoCard({
 	eyebrow,
 	title,
@@ -128,14 +94,16 @@ function BentoCard({
 				className
 			)}
 		>
-			{/* Graphic/Image Content */}
+			{/* Image Container */}
 			<div className="relative">
 				{graphic}
+				{/* Gradient Overlay */}
 				{fade.includes('bottom') && (
 					<div className="absolute inset-0 bg-gradient-to-t from-slate-1000 to-transparent" />
 				)}
 			</div>
 
+			{/* Content */}
 			<div className="relative z-10 p-8">
 				<span className="text-sm font-medium text-purple-400">{eyebrow}</span>
 				<h3 className="mt-3 font-display text-xl text-white">{title}</h3>
