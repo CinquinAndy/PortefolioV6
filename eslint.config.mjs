@@ -6,7 +6,6 @@ import queryPlugin from '@tanstack/eslint-plugin-query'
 import perfectionist from 'eslint-plugin-perfectionist'
 import nextPlugin from '@next/eslint-plugin-next'
 import promisePlugin from 'eslint-plugin-promise'
-import wokePlugin from 'eslint-plugin-woke' // import tsParser from '@typescript-eslint/parser'
 import * as espree from 'espree'
 
 export default [
@@ -77,10 +76,7 @@ export default [
 					order: 'desc',
 				},
 			],
-
 			'promise/always-return': 'off',
-
-			'woke/all': 'warn',
 		},
 		languageOptions: {
 			parserOptions: {
@@ -94,7 +90,6 @@ export default [
 			'no-only-tests': noOnlyTestsPlugin,
 			'react-hooks': reactHooksPlugin,
 			'@next/next': nextPlugin,
-			woke: wokePlugin,
 		},
 		files: ['**/*.{js,jsx,mjs,cjs}'],
 	},
