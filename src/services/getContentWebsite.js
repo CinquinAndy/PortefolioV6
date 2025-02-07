@@ -16,7 +16,7 @@ export async function fetchAPI(path, options = {}) {
 			Accept: 'application/json',
 			...options,
 		},
-		next: { revalidate: false },
+		next: { revalidate: 86400 },
 		method: 'GET',
 	})
 
