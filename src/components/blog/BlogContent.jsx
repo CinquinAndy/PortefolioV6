@@ -1,19 +1,17 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import {useMemo, useState} from 'react';
 import Fuse from 'fuse.js';
-import { BlogSearch } from './BlogSearch';
-import { TagFilters } from './TagFilters';
-import { MasonryGrid } from './MasonryGrid';
-import { ArticleCard } from '@/components/blog/ArticleCard';
-import Pagination from '@/components/Global/Pagination';
+import {BlogSearch} from './BlogSearch';
+import {TagFilters} from './TagFilters';
+import {MasonryGrid} from './MasonryGrid';
+import {Pagination} from '@/components/Global/Pagination';
+import {ArticleCard} from "@/components/blog/ArticleCard";
 
 export function BlogContent({ articles, content_website, params, pagination }) {
-    // State for search query and selected category
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedType, setSelectedType] = useState('all');
 
-    // Configure Fuse.js for fuzzy search
     const fuse = useMemo(() => new Fuse(articles, {
         keys: [
             'attributes.title',
@@ -27,7 +25,6 @@ export function BlogContent({ articles, content_website, params, pagination }) {
         threshold: 0.3,
     }), [articles]);
 
-    // Filter articles based on search query and category
     const filteredArticles = useMemo(() => {
         let results = articles;
 
@@ -42,13 +39,8 @@ export function BlogContent({ articles, content_website, params, pagination }) {
 
     return (
         <div className="space-y-8 max-w-[80vw] mx-auto px-6">
-            {/* Search Bar */}
             <BlogSearch value={searchQuery} onChange={setSearchQuery} />
-
-            {/* Tag Filters */}
             <TagFilters articles={articles} selectedType={selectedType} onTypeChange={setSelectedType} />
-
-            {/* Masonry Grid */}
             {filteredArticles.length > 0 ? (
                 <MasonryGrid
                     items={filteredArticles}
@@ -61,8 +53,6 @@ export function BlogContent({ articles, content_website, params, pagination }) {
                     <div>No articles found</div>
                 </div>
             )}
-
-            {/* Pagination */}
             <div className="mt-8">
                 <Pagination {...pagination} />
             </div>

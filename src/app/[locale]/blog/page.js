@@ -3,7 +3,7 @@ import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import {localesConstant} from '@/services/localesConstant'
-import Pagination from '@/components/Global/Pagination'
+import {Pagination} from '@/components/Global/Pagination'
 import {BlogContent} from "@/components/blog/BlogContent";
 
 export async function generateStaticParams() {

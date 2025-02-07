@@ -6,7 +6,7 @@ import {
 	ArrowLongRightIcon,
 } from '@heroicons/react/20/solid'
 
-export default function Pagination({ currentPage, totalPages }) {
+export function Pagination({ currentPage, totalPages }) {
 	const pathname = usePathname()
 	const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
