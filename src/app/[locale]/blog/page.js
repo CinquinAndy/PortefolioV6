@@ -65,7 +65,7 @@ export default async function Page({ params, searchParams }) {
 				<BlogContent
 					content_website={content_website}
 					articles={articles}
-					params={params}
+					locale={locale}
 				/>
 				<Pagination
 					currentPage={currentPage}

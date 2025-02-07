@@ -6,21 +6,12 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 import { useRef } from 'react'
-import { useScroll, useTransform, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 
-export function ArticleCard({ article }) {
+export function ArticleCard({ article, locale }) {
 	// Reference to the card element for scroll animations
 	const ref = useRef(null)
-
-	// Use framer-motion's scroll hook to track the scroll progress
-	const { scrollYProgress } = useScroll({
-		target: ref,
-		offset: ['start end', 'end start'],
-	})
-
-	// Create a y-axis transform based on scroll progress
-	const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
 
 	return (
 		<motion.div

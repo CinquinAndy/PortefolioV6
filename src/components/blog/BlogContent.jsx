@@ -7,7 +7,7 @@ import { MasonryGrid } from './MasonryGrid'
 import { Pagination } from '@/components/Global/Pagination'
 import { ArticleCard } from '@/components/blog/ArticleCard'
 
-export function BlogContent({ articles, content_website, params, pagination }) {
+export function BlogContent({ articles, content_website, pagination, locale }) {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [selectedType, setSelectedType] = useState('all')
 
@@ -44,7 +44,7 @@ export function BlogContent({ articles, content_website, params, pagination }) {
 
 	return (
 		<div className="mx-auto max-w-[80vw] space-y-8 px-6">
-			<BlogSearch value={searchQuery} onChange={setSearchQuery} />
+			<BlogSearch value={searchQuery} onChange={setSearchQuery} locale={locale} />
 			{filteredArticles.length > 0 ? (
 				<MasonryGrid
 					items={filteredArticles}
@@ -52,7 +52,7 @@ export function BlogContent({ articles, content_website, params, pagination }) {
 						<ArticleCard
 							article={article}
 							content_website={content_website}
-							locale={params.locale}
+							locale={locale}
 						/>
 					)}
 				/>
