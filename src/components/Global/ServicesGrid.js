@@ -15,7 +15,7 @@ export function ServicesGrid({ content_website, services }) {
 			{/* Header Section */}
 			<div className="mb-16 flex justify-between">
 				<h2
-					className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+					className="!font-display text-2xl normal-case leading-snug sm:text-2xl xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 					dangerouslySetInnerHTML={{
 						__html: replaceTitle(
 							content_website?.attributes?.content_home?.title_service
@@ -25,9 +25,9 @@ export function ServicesGrid({ content_website, services }) {
 				{/* See All Projects Button */}
 				<Link
 					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
-					className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+					className="button-purple items-center justify-center rounded px-2 py-3 text-xs md:px-6 md:py-3 xl:px-10 xl:py-4 xl:text-sm"
 				>
-					<span className={'button-purple-title'}>
+					<span className={'button-purple-title text-center'}>
 						{content_website?.attributes?.content_home?.link[3]?.label ||
 							'See all'}
 					</span>

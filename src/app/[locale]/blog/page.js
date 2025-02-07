@@ -48,7 +48,6 @@ export default async function Page({ params, searchParams }) {
 
 	let articlesResponse = await getArticles(locale, pageParams, pageSize)
 	let articles = articlesResponse?.data
-	console.log(articlesResponse)
 
 	const totalArticles = articlesResponse?.meta?.pagination?.total
 	const totalPages = Math.ceil(totalArticles / pageSize)
