@@ -35,7 +35,7 @@ export function Pagination({ currentPage, totalPages }) {
 						className={`inline-flex items-center border-t-2 px-4 pt-4 text-lg font-extrabold ${
 							currentPage === page
 								? 'border-indigo-500 text-indigo-500 underline hover:border-indigo-300 hover:text-indigo-50'
-								: 'border-transparent text-slate-200  hover:border-slate-50 hover:text-slate-50'
+								: 'border-transparent text-slate-200 hover:border-slate-50 hover:text-slate-50'
 						}`}
 						aria-current={currentPage === page ? 'page' : undefined}
 					>

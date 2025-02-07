@@ -1,128 +1,127 @@
 .menu {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    padding: 0;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	padding: 0;
 }
 
 .line {
-    fill: none;
-    stroke-width: 6;
-    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+	fill: none;
+	stroke-width: 6;
+	transition:
+		stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+		stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .line1 {
-    stroke-dasharray: 60 207;
-    stroke-width: 6;
+	stroke-dasharray: 60 207;
+	stroke-width: 6;
 }
 
 .line2 {
-    stroke-dasharray: 60 60;
-    stroke-width: 6;
+	stroke-dasharray: 60 60;
+	stroke-width: 6;
 }
 
 .line3 {
-    stroke-dasharray: 60 207;
-    stroke-width: 6;
+	stroke-dasharray: 60 207;
+	stroke-width: 6;
 }
 
 .opened .line1 {
-    stroke-dasharray: 90 207;
-    stroke-dashoffset: -134;
-    stroke-width: 6;
+	stroke-dasharray: 90 207;
+	stroke-dashoffset: -134;
+	stroke-width: 6;
 }
 
 .opened .line2 {
-    stroke-dasharray: 1 60;
-    stroke-dashoffset: -30;
-    stroke-width: 6;
+	stroke-dasharray: 1 60;
+	stroke-dashoffset: -30;
+	stroke-width: 6;
 }
 
 .opened .line3 {
-    stroke-dasharray: 90 207;
-    stroke-dashoffset: -134;
-    stroke-width: 6;
+	stroke-dasharray: 90 207;
+	stroke-dashoffset: -134;
+	stroke-width: 6;
 }
-
 
 /*** custom popup ***/
 .custom-popup > div:first-child::before {
-    content: "";
-    position: absolute;
-    right: -26px;
-    top: 15px;
-    width: 0;
-    border-top: 15px solid transparent;
-    border-left: 20px solid #0D0C3C;
-    border-right: 20px solid transparent;
-    border-bottom: 15px solid transparent;
-    transform: scale(0.5);
-    border-radius: 0.5rem;
-    z-index: 10;
+	content: '';
+	position: absolute;
+	right: -26px;
+	top: 15px;
+	width: 0;
+	border-top: 15px solid transparent;
+	border-left: 20px solid #0d0c3c;
+	border-right: 20px solid transparent;
+	border-bottom: 15px solid transparent;
+	transform: scale(0.5);
+	border-radius: 0.5rem;
+	z-index: 10;
 }
 
 /*** custom popup ***/
 .custom-popup > div:first-child::after {
-    content: "";
-    position: absolute;
-    right: -30px;
-    top: 15px;
-    width: 0;
-    border-top: 15px solid transparent;
-    border-left: 20px solid #fff;
-    border-right: 20px solid transparent;
-    border-bottom: 15px solid transparent;
-    transform: scale(0.5);
-    border-radius: 0.5rem;
-    z-index: 1;
+	content: '';
+	position: absolute;
+	right: -30px;
+	top: 15px;
+	width: 0;
+	border-top: 15px solid transparent;
+	border-left: 20px solid #fff;
+	border-right: 20px solid transparent;
+	border-bottom: 15px solid transparent;
+	transform: scale(0.5);
+	border-radius: 0.5rem;
+	z-index: 1;
 }
 
 .custom-popup {
-    /*animation: popFromBottom 10s forwards;*/
-    bottom: -3.5rem;
-    transition: bottom 0.5s ease-in-out;
+	/*animation: popFromBottom 10s forwards;*/
+	bottom: -3.5rem;
+	transition: bottom 0.5s ease-in-out;
 }
 
 .custom-popup.open {
-    bottom: 1rem;
+	bottom: 1rem;
 }
 
 .custom-popup:hover {
-    animation: vibration 0.1s infinite;
+	animation: vibration 0.1s infinite;
 }
 
 .custom-popup.open:hover {
-    animation: none;
+	animation: none;
 }
 
 /* on mobile */
 @media (max-width: 768px) {
-    .custom-popup {
-        bottom: -6rem;
-    }
+	.custom-popup {
+		bottom: -6rem;
+	}
 
-    .custom-popup:hover {
-        animation: none;
-    }
+	.custom-popup:hover {
+		animation: none;
+	}
 }
 
 @keyframes vibration {
-    0% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateX(-0.1rem);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateX(0.1rem);
-    }
-    100% {
-        transform: translateY(0);
-    }
-
+	0% {
+		transform: translateY(0);
+	}
+	25% {
+		transform: translateX(-0.1rem);
+	}
+	50% {
+		transform: translateY(0);
+	}
+	75% {
+		transform: translateX(0.1rem);
+	}
+	100% {
+		transform: translateY(0);
+	}
 }

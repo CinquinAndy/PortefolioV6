@@ -46,7 +46,7 @@ function Galery({ open, handleClick, galery, title_galery }) {
 												<div className="ml-3 flex h-7 items-center">
 													<button
 														type="button"
-														className="rounded-md text-slate-100 hover:text-slate-200 "
+														className="rounded-md text-slate-100 hover:text-slate-200"
 														onClick={handleClick}
 													>
 														<span className="sr-only">Close panel</span>

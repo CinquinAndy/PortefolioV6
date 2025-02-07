@@ -20,9 +20,7 @@ function LoaderFullPage({ params }) {
 				<div className="hidden" />
 			) : (
 				<div
-					className={`${loading === false ? 'pointer-events-none opacity-0' : 'opacity-100'} body-loader 
-			fixed left-0 top-0 z-[999] flex h-dvh w-dvw flex-col items-center justify-between 
-			gap-20 antialiased transition-opacity duration-1000`}
+					className={`${loading === false ? 'pointer-events-none opacity-0' : 'opacity-100'} body-loader fixed left-0 top-0 z-[999] flex h-dvh w-dvw flex-col items-center justify-between gap-20 antialiased transition-opacity duration-1000`}
 				>
 					<div></div>
 					<div className="mx-auto max-w-2xl p-4">

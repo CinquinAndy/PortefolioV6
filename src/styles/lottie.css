@@ -1,40 +1,42 @@
-.lottie-1 .lf-player-container, .lottie-2 .lf-player-container {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    bottom: 100vh;
-    left: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 0;
-    opacity: 0.15;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-    user-select: none;
+.lottie-1 .lf-player-container,
+.lottie-2 .lf-player-container {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	bottom: 100vh;
+	left: 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0 !important;
+	padding: 0 !important;
+	z-index: 0;
+	opacity: 0.15;
+	mix-blend-mode: overlay;
+	pointer-events: none;
+	user-select: none;
 }
 
 .lottie-1 .lf-player-container {
-    transform: translateX(-50%) translateY(50%);
-    -webkit-transform: translateX(-50%) translateY(50%);
-    -moz-transform: translateX(-50%) translateY(50%);
-    -ms-transform: translateX(-50%) translateY(50%);
-    -o-transform: translateX(-50%) translateY(50%);
+	transform: translateX(-50%) translateY(50%);
+	-webkit-transform: translateX(-50%) translateY(50%);
+	-moz-transform: translateX(-50%) translateY(50%);
+	-ms-transform: translateX(-50%) translateY(50%);
+	-o-transform: translateX(-50%) translateY(50%);
 }
 
 .lottie-2 .lf-player-container {
-    transform: translateX(50%) translateY(-150%);
-    -webkit-transform: translateX(50%) translateY(-150%);
-    -moz-transform: translateX(50%) translateY(-150%);
-    -ms-transform: translateX(50%) translateY(-150%);
-    -o-transform: translateX(50%) translateY(-150%);
+	transform: translateX(50%) translateY(-150%);
+	-webkit-transform: translateX(50%) translateY(-150%);
+	-moz-transform: translateX(50%) translateY(-150%);
+	-ms-transform: translateX(50%) translateY(-150%);
+	-o-transform: translateX(50%) translateY(-150%);
 }
 
 /* on mobile */
 @media (max-width: 768px) {
-    .lottie-1 .lf-player-container, .lottie-2 .lf-player-container {
-        display: none;
-    }
+	.lottie-1 .lf-player-container,
+	.lottie-2 .lf-player-container {
+		display: none;
+	}
 }

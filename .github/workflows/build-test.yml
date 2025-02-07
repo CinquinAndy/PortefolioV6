@@ -46,7 +46,6 @@ jobs:
           context: .
           push: false
           tags: ${{ secrets.APP_IMAGE }}
-          build-args:
-            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+          build-args: NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_URL }}
             NEXT_PUBLIC_URL_ALT=${{ secrets.NEXT_PUBLIC_URL_ALT }}

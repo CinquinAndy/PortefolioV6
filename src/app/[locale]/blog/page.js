@@ -1,10 +1,10 @@
-import {getArticles, getContentWebsite} from '@/services/getContentWebsite'
+import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import {localesConstant} from '@/services/localesConstant'
-import {Pagination} from '@/components/Global/Pagination'
-import {BlogContent} from "@/components/blog/BlogContent";
+import { localesConstant } from '@/services/localesConstant'
+import { Pagination } from '@/components/Global/Pagination'
+import { BlogContent } from '@/components/blog/BlogContent'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-	const {locale} = await params
+	const { locale } = await params
 	// fetch data
 	const content_website = await getContentWebsite(locale)
 
@@ -44,7 +44,7 @@ export default async function Page({ params, searchParams }) {
 	content_website = content_website?.data
 
 	const pageParams = page ? parseInt(page) : 1
-	const pageSize = 24
+	const pageSize = 48
 
 	let articlesResponse = await getArticles(locale, pageParams, pageSize)
 	let articles = articlesResponse?.data

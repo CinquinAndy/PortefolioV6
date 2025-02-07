@@ -27,7 +27,7 @@ export function NavigationArticle() {
 							<div>
 								<Link
 									href="/public"
-									className="custom-button-icons text-gray-50 "
+									className="custom-button-icons text-gray-50"
 								>
 									<HomeIcon
 										className="h-5 w-5 flex-shrink-0"

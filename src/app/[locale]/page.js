@@ -69,7 +69,7 @@ export default async function Page({ params }) {
 					<VideoBackground />
 				</div>
 			</div>
-			
+
 			<div className={'relative'}>
 				<ServicesGrid content_website={content_website} services={services} />
 				<Realisations
