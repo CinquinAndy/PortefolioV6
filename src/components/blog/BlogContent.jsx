@@ -1,55 +1,59 @@
-'use client'
+'use client';
 
-import { useState, useMemo } from 'react'
-import { MasonryGrid } from "./MasonryGrid"
-import { BlogSearch } from "./BlogSearch"
-import { TagFilters } from "./TagFilters"
-import Pagination from '@/components/Global/Pagination'
-import {ArticleCard} from "@/components/blog/ArticleCard";
+import { useState, useMemo } from 'react';
+import Fuse from 'fuse.js';
+import { BlogSearch } from './BlogSearch';
+import { TagFilters } from './TagFilters';
+import { MasonryGrid } from './MasonryGrid';
+import { ArticleCard } from '@/components/blog/ArticleCard';
+import Pagination from '@/components/Global/Pagination';
 
 export function BlogContent({ articles, content_website, params, pagination }) {
-    const [searchQuery, setSearchQuery] = useState('')
-    const [selectedType, setSelectedType] = useState('all')
+    // State for search query and selected category
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedType, setSelectedType] = useState('all');
 
+    // Configure Fuse.js for fuzzy search
+    const fuse = useMemo(() => new Fuse(articles, {
+        keys: [
+            'attributes.title',
+            'attributes.subtitle',
+            'attributes.description',
+            {
+                name: 'attributes.tags.name',
+                getFn: article => article.attributes.tags.map(tag => tag.name).join(' ')
+            }
+        ],
+        threshold: 0.3,
+    }), [articles]);
+
+    // Filter articles based on search query and category
     const filteredArticles = useMemo(() => {
-        return articles.filter(article => {
-            const matchesSearch = article.attributes.title.toLowerCase()
-                .includes(searchQuery.toLowerCase()) ||
-                article.attributes.subtitle.toLowerCase()
-                    .includes(searchQuery.toLowerCase())
+        let results = articles;
 
-            const matchesType = selectedType === 'all' ||
-                article.attributes.type === selectedType
+        if (searchQuery) {
+            results = fuse.search(searchQuery).map(result => result.item);
+        }
 
-            return matchesSearch && matchesType
-        })
-    }, [articles, searchQuery, selectedType])
+        return results.filter(article =>
+            selectedType === 'all' || article.attributes.type === selectedType
+        );
+    }, [searchQuery, selectedType, fuse]);
 
     return (
         <div className="space-y-8 max-w-[80vw] mx-auto px-6">
-            {/* Barre de recherche */}
-            <BlogSearch
-                value={searchQuery}
-                onChange={setSearchQuery}
-            />
+            {/* Search Bar */}
+            <BlogSearch value={searchQuery} onChange={setSearchQuery} />
 
-            {/* Filtres par tags */}
-            <TagFilters
-                articles={articles}
-                selectedType={selectedType}
-                onTypeChange={setSelectedType}
-            />
+            {/* Tag Filters */}
+            <TagFilters articles={articles} selectedType={selectedType} onTypeChange={setSelectedType} />
 
-            {/* Grid d'articles */}
+            {/* Masonry Grid */}
             {filteredArticles.length > 0 ? (
                 <MasonryGrid
                     items={filteredArticles}
                     renderItem={(article) => (
-                        <ArticleCard
-                            article={article}
-                            content_website={content_website}
-                            locale={params.locale}
-                        />
+                        <ArticleCard article={article} content_website={content_website} locale={params.locale} />
                     )}
                 />
             ) : (
@@ -63,5 +67,5 @@ export function BlogContent({ articles, content_website, params, pagination }) {
                 <Pagination {...pagination} />
             </div>
         </div>
-    )
+    );
 }
