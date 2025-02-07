@@ -45,6 +45,12 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				andy_purple: {
+					500: '#6c00a2',
+				},
+				andy_blue: {
+					500: '#001152',
+				},
 				sky: {
 					1000: '#042C44',
 					1100: '#011623',
