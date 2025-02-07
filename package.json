@@ -1,6 +1,6 @@
 {
 	"name": "portefolio_andy_cinquin",
-	"version": "8.0.0",
+	"version": "8.5.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
