@@ -1,8 +1,4 @@
-import '@/styles/btn.css'
-import '@/styles/carroussel.css'
 import '@/styles/main.css'
-import '@/styles/lottie.css'
-import '@/styles/nav.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'highlight.js/styles/atom-one-dark-reasonable.min.css'
 import { Analytics } from '@vercel/analytics/react'
