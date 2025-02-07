@@ -1,13 +1,14 @@
-import hljs from 'highlight.js'
 import parse, { domToReact } from 'html-react-parser'
-import Image from 'next/image'
 import React from 'react'
+
+import hljs from 'highlight.js'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const options = {
 	replace: domNode => {
 		if (domNode?.type === 'tag') {
-			const { name, attribs, children } = domNode
+			const { children, attribs, name } = domNode
 
 			if (name === 'p') {
 				const content = domNode.children[0]?.data || ''
@@ -45,12 +46,12 @@ const options = {
 				return (
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
-							src={src}
 							alt={alt}
-							width={1000}
+							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 							height={1000}
 							quality={85}
-							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
+							src={src}
+							width={1000}
 						/>
 					</div>
 				)
@@ -63,14 +64,14 @@ const options = {
 			if (name === 'a') {
 				if (attribs.href.includes('.mp4')) {
 					return (
-						<video muted controls className={'w-full'}>
+						<video className={'w-full'} controls muted>
 							<source src={attribs.href} type="video/mp4" />
 						</video>
 					)
 				}
 				const { href } = attribs
 				return (
-					<Link href={href} className={'underline'}>
+					<Link className={'underline'} href={href}>
 						{domToReact(domNode.children, options)}
 					</Link>
 				)

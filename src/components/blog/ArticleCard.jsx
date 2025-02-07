@@ -1,4 +1,8 @@
+import { useRef } from 'react'
+
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+
 import {
 	Card,
 	CardContent,
@@ -6,8 +10,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import { useRef } from 'react'
-import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 
 const getArticleUrl = (locale, slug) => {
@@ -23,13 +25,13 @@ export function ArticleCard({ article, locale }) {
 	const articleUrl = getArticleUrl(locale, article.attributes.slug)
 
 	return (
-		<Link href={articleUrl} className="block">
+		<Link className="block" href={articleUrl}>
 			<motion.div
-				ref={ref}
-				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.3 }}
 				className="group"
+				initial={{ opacity: 0, y: 20 }}
+				ref={ref}
+				transition={{ duration: 0.3 }}
 			>
 				<Card className="relative overflow-hidden border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10">
 					{/* Animated background image container */}
@@ -53,8 +55,8 @@ export function ArticleCard({ article, locale }) {
 									{article.attributes.createdAt}
 								</time>
 								<Badge
-									variant="outline"
 									className="border-white/20 bg-white/10 text-white"
+									variant="outline"
 								>
 									{article.attributes.type}
 								</Badge>
@@ -73,9 +75,9 @@ export function ArticleCard({ article, locale }) {
 						<div className="flex flex-wrap gap-2">
 							{article.attributes.tags?.slice(0, 5).map(tag => (
 								<Badge
+									className="border-purple-500/30 bg-purple-500/20 text-white"
 									key={tag.id}
 									variant="secondary"
-									className="border-purple-500/30 bg-purple-500/20 text-white"
 								>
 									{tag.name}
 								</Badge>

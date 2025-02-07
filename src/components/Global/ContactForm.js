@@ -1,14 +1,15 @@
 'use client'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 export function ContactForm({ content_website }) {
 	const schema = z
 		.object({
-			name: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_name,
+			content: z.string().min(1, {
+				message: content_website?.attributes?.content_contact?.error_content,
 			}),
 			email: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_email,
@@ -16,17 +17,17 @@ export function ContactForm({ content_website }) {
 			phone: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_phone,
 			}),
-			company: z.string(),
-			content: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_content,
+			name: z.string().min(1, {
+				message: content_website?.attributes?.content_contact?.error_name,
 			}),
+			company: z.string(),
 		})
 		.required()
 
 	const {
-		register,
-		handleSubmit,
 		formState: { errors },
+		handleSubmit,
+		register,
 		reset, // pour réinitialiser le formulaire
 	} = useForm({
 		resolver: zodResolver(schema),
@@ -35,15 +36,15 @@ export function ContactForm({ content_website }) {
 	// Créez une nouvelle fonction pour gérer la soumission du formulaire
 	const onSubmit = async data => {
 		const response = await fetch('/api/sendMail', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				name: data.name,
-				email: data.email,
-				phone: data.phone,
 				company: data.company,
 				content: data.content,
+				email: data.email,
+				phone: data.phone,
+				name: data.name,
 			}),
+			headers: { 'Content-Type': 'application/json' },
+			method: 'POST',
 		})
 
 		if (response.ok) {
@@ -63,22 +64,22 @@ export function ContactForm({ content_website }) {
 	return (
 		<div>
 			<form
-				onSubmit={handleSubmit(onSubmit)}
 				className="z-50 mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0"
+				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 					<div>
 						<label
-							htmlFor="name"
 							className="block text-sm font-semibold leading-6 text-slate-50"
+							htmlFor="name"
 						>
 							{content_website?.attributes?.content_contact?.title_name}
 						</label>
 						<div className="mt-2.5">
 							<input
-								type="text"
-								name="name"
 								id="name"
+								name="name"
+								type="text"
 								{...register('name', {
 									required: true,
 								})}
@@ -93,16 +94,16 @@ export function ContactForm({ content_website }) {
 					</div>
 					<div>
 						<label
-							htmlFor="email"
 							className="block text-sm font-semibold leading-6 text-slate-50"
+							htmlFor="email"
 						>
 							Email
 						</label>
 						<div className="mt-2.5">
 							<input
-								type="email"
-								name="email"
 								id="email"
+								name="email"
+								type="email"
 								{...register('email', {
 									required: true,
 								})}
@@ -117,16 +118,16 @@ export function ContactForm({ content_website }) {
 					</div>
 					<div>
 						<label
-							htmlFor="phone"
 							className="block text-sm font-semibold leading-6 text-slate-50"
+							htmlFor="phone"
 						>
 							{content_website?.attributes?.content_contact?.title_phone}
 						</label>
 						<div className="relative mt-2.5">
 							<input
-								type="tel"
-								name="phone"
 								id="phone"
+								name="phone"
+								type="tel"
 								{...register('phone', {
 									required: true,
 								})}
@@ -141,16 +142,16 @@ export function ContactForm({ content_website }) {
 					</div>
 					<div>
 						<label
-							htmlFor="company"
 							className="block text-sm font-semibold leading-6 text-slate-50"
+							htmlFor="company"
 						>
 							{content_website?.attributes?.content_contact?.title_company}
 						</label>
 						<div className="mt-2.5">
 							<input
-								type="text"
-								name="company"
 								id="company"
+								name="company"
+								type="text"
 								{...register('company', {
 									required: true,
 								})}
@@ -165,15 +166,15 @@ export function ContactForm({ content_website }) {
 					</div>
 					<div className="sm:col-span-2">
 						<label
-							htmlFor="content"
 							className="block text-sm font-semibold leading-6 text-slate-50"
+							htmlFor="content"
 						>
 							{content_website?.attributes?.content_contact?.title_content}
 						</label>
 						<div className="mt-2.5">
 							<textarea
-								name="content"
 								id="content"
+								name="content"
 								rows={4}
 								{...register('content', {
 									required: true,
@@ -199,8 +200,8 @@ export function ContactForm({ content_website }) {
 				</div>
 				<div className="mt-10">
 					<button
-						type="submit"
 						className="block w-full rounded-md bg-indigo-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
+						type="submit"
 					>
 						{content_website?.attributes?.content_contact?.btn_send}
 					</button>

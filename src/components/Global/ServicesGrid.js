@@ -1,9 +1,10 @@
 'use client'
 
-import { clsx } from 'clsx'
-import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
+import { clsx } from 'clsx'
+
 import { replaceTitle } from '@/services/utils'
 
 export function ServicesGrid({ content_website, services }) {
@@ -24,8 +25,8 @@ export function ServicesGrid({ content_website, services }) {
 				/>
 				{/* See All Projects Button */}
 				<Link
-					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
 					className="button-purple items-center justify-center rounded px-2 py-3 text-xs md:px-6 md:py-3 xl:px-10 xl:py-4 xl:text-sm"
+					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
 				>
 					<span className={'button-purple-title text-center'}>
 						{content_website?.attributes?.content_home?.link[3]?.label ||
@@ -38,25 +39,6 @@ export function ServicesGrid({ content_website, services }) {
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
 				{services.map((service, index) => (
 					<BentoCard
-						key={service.id}
-						eyebrow={service.attributes.eyebrow}
-						title={service.attributes.title}
-						description={service.attributes.description}
-						graphic={
-							<div className="relative h-80 w-full">
-								<Image
-									src={
-										service.attributes.image ||
-										`/assets/bento/bento_${index + 1}.png`
-									}
-									alt={service.attributes.title || 'Service illustration'}
-									fill
-									className="object-cover object-center"
-									priority
-								/>
-							</div>
-						}
-						fade={['bottom']}
 						className={clsx(
 							// Last two items span 3 columns
 							index >= services.length - 2 ? 'lg:col-span-3' : 'lg:col-span-2',
@@ -64,6 +46,25 @@ export function ServicesGrid({ content_website, services }) {
 							index === 0 && 'lg:rounded-tl-4xl',
 							index === services.length - 1 && 'lg:rounded-br-4xl'
 						)}
+						description={service.attributes.description}
+						eyebrow={service.attributes.eyebrow}
+						fade={['bottom']}
+						graphic={
+							<div className="relative h-80 w-full">
+								<Image
+									alt={service.attributes.title || 'Service illustration'}
+									className="object-cover object-center"
+									fill
+									priority
+									src={
+										service.attributes.image ||
+										`/assets/bento/bento_${index + 1}.png`
+									}
+								/>
+							</div>
+						}
+						key={service.id}
+						title={service.attributes.title}
 					/>
 				))}
 			</div>
@@ -73,26 +74,26 @@ export function ServicesGrid({ content_website, services }) {
 
 // BentoCard Component with hover animation
 function BentoCard({
-	eyebrow,
-	title,
 	description,
-	graphic,
 	fade = [],
 	className,
+	eyebrow,
+	graphic,
+	title,
 }) {
 	return (
 		<motion.div
-			initial="idle"
-			whileHover="hover"
-			variants={{
-				idle: { scale: 1 },
-				hover: { scale: 1.02 },
-			}}
 			className={clsx(
 				'group relative overflow-hidden rounded-2xl bg-slate-1000',
 				'transition-all duration-300 ease-out',
 				className
 			)}
+			initial="idle"
+			variants={{
+				hover: { scale: 1.02 },
+				idle: { scale: 1 },
+			}}
+			whileHover="hover"
 		>
 			{/* Image Container */}
 			<div className="relative">

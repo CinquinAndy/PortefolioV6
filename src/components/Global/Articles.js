@@ -1,10 +1,11 @@
-import Link from 'next/link'
-import { replaceTitle } from '@/services/utils'
 import Image from 'next/image'
-import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
-import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
+import Link from 'next/link'
 
-function Articles({ content_website, articles, slice, isHome }) {
+import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
+import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
+import { replaceTitle } from '@/services/utils'
+
+function Articles({ content_website, articles, isHome, slice }) {
 	articles = slice ? articles.slice(0, slice) : articles
 	const gridTemplateCustom = index => {
 		switch (index % 3) {
@@ -34,16 +35,16 @@ function Articles({ content_website, articles, slice, isHome }) {
 					</div>
 					<div className="flex w-1/2 flex-col items-end gap-4 xl:flex-row xl:justify-end">
 						<Link
-							href={content_website?.attributes?.content_home?.link[0]?.url}
 							className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+							href={content_website?.attributes?.content_home?.link[0]?.url}
 						>
 							<span className={'button-purple-title'}>
 								{content_website?.attributes?.content_home?.link[0]?.label}
 							</span>
 						</Link>
 						<Link
-							href={content_website?.attributes?.content_home?.link[2]?.url}
 							className="button-cyan rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+							href={content_website?.attributes?.content_home?.link[2]?.url}
 						>
 							<span className={'button-cyan-title'}>
 								{content_website?.attributes?.content_home?.link[2]?.label}
@@ -57,11 +58,11 @@ function Articles({ content_website, articles, slice, isHome }) {
 					{articles.map((article, index) => {
 						return (
 							<Link
-								key={article?.id}
-								href={'/blog/' + article?.attributes?.slug}
 								className={`${gridTemplateCustom(
 									index
 								)} relative flex aspect-[16/9] h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
+								href={'/blog/' + article?.attributes?.slug}
+								key={article?.id}
 							>
 								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{article?.attributes?.title}
@@ -70,10 +71,6 @@ function Articles({ content_website, articles, slice, isHome }) {
 									<ComponentLoadComponent FallBack={ArticleRealisationSkeleton}>
 										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
 											<Image
-												src={
-													article?.attributes?.image_presentation?.data
-														?.attributes?.url
-												}
 												alt={
 													article?.attributes?.image_presentation?.data
 														?.attributes?.alternativeText
@@ -81,6 +78,10 @@ function Articles({ content_website, articles, slice, isHome }) {
 												className="z-20 h-full w-full object-cover"
 												fill={true}
 												sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+												src={
+													article?.attributes?.image_presentation?.data
+														?.attributes?.url
+												}
 											/>
 											<div
 												className={

@@ -1107,7 +1107,6 @@ a:hover {
 	}
 }
 
-
 .lottie-1 .lf-player-container,
 .lottie-2 .lf-player-container {
 	width: 100vw;
@@ -1150,7 +1149,6 @@ a:hover {
 		display: none;
 	}
 }
-
 
 .button-animated {
 	--duration: 0.5s;
@@ -1251,7 +1249,6 @@ a:hover {
 	}
 }
 
-
 .shadow-custom {
 	box-shadow: inset 0 0 35px 10px #1b1f4c;
 }
@@ -1309,7 +1306,6 @@ a:hover {
 	transform: translate(10px, 10px);
 	pointer-events: none;
 }
-
 
 .menu {
 	background-color: transparent;

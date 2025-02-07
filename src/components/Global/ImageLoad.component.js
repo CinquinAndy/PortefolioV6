@@ -1,8 +1,9 @@
 'use client'
-import Image from 'next/image'
 import { useState } from 'react'
 
-export function ImageLoadComponent({ className, src, alt, width, height }) {
+import Image from 'next/image'
+
+export function ImageLoadComponent({ className, height, width, src, alt }) {
 	const [loaded, setLoaded] = useState(false)
 
 	return (
@@ -21,13 +22,13 @@ export function ImageLoadComponent({ className, src, alt, width, height }) {
 				</div>
 			)}
 			<Image
-				src={src}
 				alt={alt}
-				width={width}
-				height={height}
 				className={`${loaded ? 'block' : '!pointer-events-none fixed -z-10 rounded-2xl opacity-0'} ${className}`}
-				quality={85}
+				height={height}
 				onLoad={() => setLoaded(true)}
+				quality={85}
+				src={src}
+				width={width}
 			/>
 		</>
 	)

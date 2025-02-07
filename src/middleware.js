@@ -23,15 +23,15 @@ export function middleware(request) {
 		process.env.NEXT_PUBLIC_URL.replace('https://', '')
 	) {
 		return i18nRouter(request, {
+			serverSetCookie: 'always',
 			locales: ['en', 'fr'],
 			defaultLocale: 'fr',
-			serverSetCookie: 'always',
 		})
 	} else {
 		return i18nRouter(request, {
+			serverSetCookie: 'always',
 			locales: ['en', 'fr'],
 			defaultLocale: 'en',
-			serverSetCookie: 'always',
 		})
 	}
 }

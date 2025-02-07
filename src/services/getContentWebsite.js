@@ -1,6 +1,6 @@
+import { redirect } from 'next/navigation'
 import { remark } from 'remark'
 import html from 'remark-html'
-import { redirect } from 'next/navigation'
 
 /**
  * Fetch data from API
@@ -10,14 +10,14 @@ import { redirect } from 'next/navigation'
  */
 export async function fetchAPI(path, options = {}) {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
-		next: { revalidate: false },
-		method: 'GET',
 		headers: {
+			Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
-			Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
 			...options,
 		},
+		next: { revalidate: false },
+		method: 'GET',
 	})
 
 	if (!res) {
@@ -28,41 +28,88 @@ export async function fetchAPI(path, options = {}) {
 }
 
 /**
- * Process markdown content
- * @param markdownContent
- * @returns {Promise<string>}
+ * Get about page
+ * @param locale
+ * @returns {Promise<*>}
  */
-export async function processMarkdown(markdownContent) {
-	const result = await remark().use(html).process(markdownContent)
-	return result.toString()
+export async function getAbout(locale) {
+	const data_about = await fetchAPI(`api/about?populate=deep&locale=${locale}`)
+
+	const processedAbout = await processMarkdown(
+		data_about.data.attributes.content
+	)
+
+	return updateNestedProperty(
+		data_about,
+		'data.attributes.content',
+		processedAbout
+	)
 }
 
 /**
- * Update nested property
- * @param obj
- * @param path
- * @param newValue
- * @returns {*}
+ * get article by id and locale
+ * @param id
+ * @param locale
+ * @returns {Promise<{notFound: boolean}|*>}
  */
-export function updateNestedProperty(obj, path, newValue) {
-	// Convertir le chemin en tableau de clés
-	const keys = Array.isArray(path) ? path : path.split('.')
-
-	// Cloner l'objet
-	let newObj = { ...obj }
-
-	// Pointer vers l'objet à modifier
-	let pointer = newObj
-	for (let i = 0; i < keys.length - 1; i++) {
-		pointer[keys[i]] = { ...pointer[keys[i]] }
-		pointer = pointer[keys[i]]
-	}
-
-	// Mettre à jour la propriété
-	pointer[keys[keys.length - 1]] = newValue
-
-	return newObj
+export async function getArticleById(id, locale) {
+	return fetchAPI(`api/articles/${id}/populate=deep&locale=${locale}`)
 }
+
+/**
+ * Get article by slug
+ * @param slug
+ * @param locale
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getArticleBySlug(slug, locale) {
+	return fetchAPI(
+		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
+	)
+}
+
+/**
+ * Get article paths
+ * @returns {Promise<*|*[]>}
+ */
+export async function getArticlePaths(locale) {
+	const data = await getArticles(locale)
+
+	return (
+		data?.data?.map(record => ({
+			params: {
+				slug: record.attributes.slug,
+			},
+		})) || []
+	)
+}
+
+/**
+ * Get articles
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getArticles(locale, page = 1, pageSize = 5) {
+	return await fetchAPI(
+		`api/articles?populate=deep,2&sort=rank&locale=${locale}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+	)
+}
+
+/**
+ * Get cgu page
+ * @param locale
+ * @returns {Promise<*>}
+ */
+export async function getCgu(locale) {
+	const data_cgu = await fetchAPI(`api/cgu?populate=deep&locale=${locale}`)
+
+	const processedCgu = await processMarkdown(data_cgu.data.attributes.content)
+
+	return updateNestedProperty(data_cgu, 'data.attributes.content', processedCgu)
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /**
  * Get content website
@@ -105,38 +152,6 @@ export async function getContentWebsite(locale) {
 	}
 }
 
-/**
- * Get cgu page
- * @param locale
- * @returns {Promise<*>}
- */
-export async function getCgu(locale) {
-	const data_cgu = await fetchAPI(`api/cgu?populate=deep&locale=${locale}`)
-
-	const processedCgu = await processMarkdown(data_cgu.data.attributes.content)
-
-	return updateNestedProperty(data_cgu, 'data.attributes.content', processedCgu)
-}
-
-/**
- * Get about page
- * @param locale
- * @returns {Promise<*>}
- */
-export async function getAbout(locale) {
-	const data_about = await fetchAPI(`api/about?populate=deep&locale=${locale}`)
-
-	const processedAbout = await processMarkdown(
-		data_about.data.attributes.content
-	)
-
-	return updateNestedProperty(
-		data_about,
-		'data.attributes.content',
-		processedAbout
-	)
-}
-
 export async function getNotFound(locale) {
 	const data_not_found = await fetchAPI(
 		`api/not-found?populate=deep&locale=${locale}`
@@ -153,47 +168,6 @@ export async function getNotFound(locale) {
 	)
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-/**
- * Get services
- * @returns {Promise<{notFound: boolean}|*>}
- */
-export async function getServices(locale) {
-	return await fetchAPI(`api/services?populate=deep&locale=${locale}`)
-}
-
-/**
- * Get realisations
- * @returns {Promise<{notFound: boolean}|*>}
- */
-export async function getRealisations(locale) {
-	return await fetchAPI(
-		`api/realisations?populate=deep,2&sort=rank&locale=${locale}`
-	)
-}
-
-/**
- * Get services grid
- * @param locale
- * @returns {Promise<{notFound: boolean}|*>}
- */
-export async function getServicesGrid(locale) {
-	return await fetchAPI(`api/service-grids?populate=deep&locale=${locale}`)
-}
-
-/**
- * Get articles
- * @returns {Promise<{notFound: boolean}|*>}
- */
-export async function getArticles(locale, page = 1, pageSize = 5) {
-	return await fetchAPI(
-		`api/articles?populate=deep,2&sort=rank&locale=${locale}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
-	)
-}
-
 /**
  * Get realisation by slug
  * @param slug
@@ -207,51 +181,46 @@ export async function getRealisationBySlug(slug, locale) {
 }
 
 /**
- * Get article by slug
- * @param slug
- * @param locale
- * @returns {Promise<{notFound: boolean}|*>}
+ * Get realisation paths
+ * @returns {Promise<*|*[]>}
  */
-export async function getArticleBySlug(slug, locale) {
-	return fetchAPI(
-		`api/articles?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
-	)
-}
+export async function getRealisationPaths(locale) {
+	const data = await getRealisations(locale)
 
-/**
- * get article by id and locale
- * @param id
- * @param locale
- * @returns {Promise<{notFound: boolean}|*>}
- */
-export async function getArticleById(id, locale) {
-	return fetchAPI(`api/articles/${id}/populate=deep&locale=${locale}`)
-}
-
-/**
- * Get article by slug
- * @param realisationData
- * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
- */
-export async function processRealisationData(realisationData) {
-	if (!realisationData) {
-		redirect('/404')
-	}
-
-	const processedContentRealisations = await processMarkdown(
-		realisationData.data[0].attributes.content
-	)
-
-	return {
-		...realisationData,
-		data: {
-			// ...realisationData.data,
-			attributes: {
-				...realisationData.data[0].attributes,
-				content: processedContentRealisations.toString(),
+	return (
+		data?.data?.map(record => ({
+			params: {
+				slug: record.attributes.slug,
 			},
-		},
-	}
+		})) || []
+	)
+}
+
+/**
+ * Get realisations
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getRealisations(locale) {
+	return await fetchAPI(
+		`api/realisations?populate=deep,2&sort=rank&locale=${locale}`
+	)
+}
+
+/**
+ * Get services
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getServices(locale) {
+	return await fetchAPI(`api/services?populate=deep&locale=${locale}`)
+}
+
+/**
+ * Get services grid
+ * @param locale
+ * @returns {Promise<{notFound: boolean}|*>}
+ */
+export async function getServicesGrid(locale) {
+	return await fetchAPI(`api/service-grids?populate=deep&locale=${locale}`)
 }
 
 /**
@@ -281,33 +250,64 @@ export async function processArticleData(articleData) {
 }
 
 /**
- * Get realisation paths
- * @returns {Promise<*|*[]>}
+ * Process markdown content
+ * @param markdownContent
+ * @returns {Promise<string>}
  */
-export async function getRealisationPaths(locale) {
-	const data = await getRealisations(locale)
-
-	return (
-		data?.data?.map(record => ({
-			params: {
-				slug: record.attributes.slug,
-			},
-		})) || []
-	)
+export async function processMarkdown(markdownContent) {
+	const result = await remark().use(html).process(markdownContent)
+	return result.toString()
 }
 
 /**
- * Get article paths
- * @returns {Promise<*|*[]>}
+ * Get article by slug
+ * @param realisationData
+ * @returns {Promise<*&{data: {attributes: (*&{content: string})}}>}
  */
-export async function getArticlePaths(locale) {
-	const data = await getArticles(locale)
+export async function processRealisationData(realisationData) {
+	if (!realisationData) {
+		redirect('/404')
+	}
 
-	return (
-		data?.data?.map(record => ({
-			params: {
-				slug: record.attributes.slug,
-			},
-		})) || []
+	const processedContentRealisations = await processMarkdown(
+		realisationData.data[0].attributes.content
 	)
+
+	return {
+		...realisationData,
+		data: {
+			// ...realisationData.data,
+			attributes: {
+				...realisationData.data[0].attributes,
+				content: processedContentRealisations.toString(),
+			},
+		},
+	}
+}
+
+/**
+ * Update nested property
+ * @param obj
+ * @param path
+ * @param newValue
+ * @returns {*}
+ */
+export function updateNestedProperty(obj, path, newValue) {
+	// Convertir le chemin en tableau de clés
+	const keys = Array.isArray(path) ? path : path.split('.')
+
+	// Cloner l'objet
+	let newObj = { ...obj }
+
+	// Pointer vers l'objet à modifier
+	let pointer = newObj
+	for (let i = 0; i < keys.length - 1; i++) {
+		pointer[keys[i]] = { ...pointer[keys[i]] }
+		pointer = pointer[keys[i]]
+	}
+
+	// Mettre à jour la propriété
+	pointer[keys[keys.length - 1]] = newValue
+
+	return newObj
 }
