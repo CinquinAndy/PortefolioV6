@@ -44,10 +44,11 @@ export default async function Page({ params, searchParams }) {
 	content_website = content_website?.data
 
 	const pageParams = page ? parseInt(page) : 1
-	const pageSize = 48
+	const pageSize = 12
 
 	let articlesResponse = await getArticles(locale, pageParams, pageSize)
 	let articles = articlesResponse?.data
+	console.log(articlesResponse)
 
 	const totalArticles = articlesResponse?.meta?.pagination?.total
 	const totalPages = Math.ceil(totalArticles / pageSize)
@@ -67,7 +68,7 @@ export default async function Page({ params, searchParams }) {
 					articles={articles}
 					locale={locale}
 				/>
-				{articles.length > pageSize && (
+				{articlesResponse.meta.pagination.total > pageSize && (
 					<Pagination
 						currentPage={currentPage}
 						totalPages={totalPages}

@@ -4,10 +4,19 @@ import { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 import { BlogSearch } from './BlogSearch'
 import { MasonryGrid } from './MasonryGrid'
-import { Pagination } from '@/components/Global/Pagination'
-import { ArticleCard } from '@/components/blog/ArticleCard'
+import { ArticleCard } from './ArticleCard'
 
-export function BlogContent({ articles, content_website, pagination, locale }) {
+// Utility function to determine initial columns
+function getInitialColumns() {
+	if (typeof window === 'undefined') return 3 // Default value for server-side
+	const width = window.innerWidth
+	if (width < 640) return 1
+	if (width < 1024) return 2
+	if (width < 1536) return 3
+	return 4
+}
+
+export function BlogContent({ articles, locale }) {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [selectedType, setSelectedType] = useState('all')
 
@@ -40,10 +49,10 @@ export function BlogContent({ articles, content_website, pagination, locale }) {
 			article =>
 				selectedType === 'all' || article.attributes.type === selectedType
 		)
-	}, [searchQuery, selectedType, fuse])
+	}, [searchQuery, selectedType, articles, fuse])
 
 	return (
-		<div className="mx-auto max-w-[80vw] space-y-8 px-6">
+		<div className="mx-auto max-w-[80vw] space-y-8 px-6 pb-12">
 			<BlogSearch
 				value={searchQuery}
 				onChange={setSearchQuery}
@@ -53,12 +62,10 @@ export function BlogContent({ articles, content_website, pagination, locale }) {
 				<MasonryGrid
 					items={filteredArticles}
 					renderItem={article => (
-						<ArticleCard
-							article={article}
-							content_website={content_website}
-							locale={locale}
-						/>
+						<ArticleCard article={article} locale={locale} />
 					)}
+					initialColumns={getInitialColumns()}
+					locale={locale}
 				/>
 			) : (
 				<div className="py-12 text-center text-white">
