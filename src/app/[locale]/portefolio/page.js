@@ -16,7 +16,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-	const content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	const content_website = await getContentWebsite(locale)
 
 	return {
 		title:
@@ -40,9 +41,10 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let realisations = await getRealisations(params.locale)
+	let realisations = await getRealisations(locale)
 	realisations = realisations?.data
 
 	return (

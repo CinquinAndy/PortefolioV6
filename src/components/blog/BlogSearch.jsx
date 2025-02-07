@@ -39,7 +39,7 @@ export function BlogSearch({ value, onChange, locale }) {
 			variants={containerVariants}
 			initial="hidden"
 			animate="visible"
-			className="mx-auto mt-8 w-full max-w-7xl"
+			className="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8"
 		>
 			<div className="relative flex">
 				<motion.input
@@ -52,7 +52,7 @@ export function BlogSearch({ value, onChange, locale }) {
 				/>
 				<motion.div
 					variants={elementVariants}
-					className="absolute right-3 top-0 flex h-full items-center justify-center"
+					className="absolute right-3 top-0 flex h-full items-center justify-center opacity-90"
 				>
 					<Command className="text-white/80 transition-colors duration-200 group-focus-within:text-white" />
 				</motion.div>

@@ -34,22 +34,23 @@ export async function generateStaticParams() {
 }
 
 async function getSlugs(params) {
-	let article = await getArticleBySlug(params.slug, params.locale)
+	const { locale, slug } = await params
+	let article = await getArticleBySlug(slug, locale)
 	article = article?.data[0]
 
 	// conditional slug, make en and fr slugs available
-	let slug = ''
+	let _slug = ''
 	let slugAlternate = ''
-	if (params.locale === 'fr') {
-		slug = article?.attributes?.slug
+	if (locale === 'fr') {
+		_slug = article?.attributes?.slug
 		slugAlternate =
 			article?.attributes?.localizations?.data[0]?.attributes?.slug
 	} else {
 		slugAlternate = article?.attributes?.slug
-		slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
+		_slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
 	}
 
-	return { article, slug, slugAlternate }
+	return { article, slug: _slug, slugAlternate }
 }
 
 export async function generateMetadata({ params }) {
@@ -74,10 +75,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
+	const { locale } = await params
 	// fetch data
-	let content_website = await getContentWebsite(params.locale)
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let { article, slug, slugAlternate } = await getSlugs(params)
+	let { article, slug, slugAlternate } = await getSlugs(await params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
@@ -224,11 +226,12 @@ export default async function Page({ params }) {
 									>
 										<h2>{processedArticle?.attributes?.title}</h2>
 										<div className={'italic opacity-90'}>
-											{params.locale === 'fr' ? 'Publié le ' : 'Posted on '}
+											{locale === 'fr' ? 'Publié le ' : 'Posted on '}
+											&nbsp;-&nbsp;
 											{
 												// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
 												// processedArticle?.attributes?.createdAt
-												params.locale === 'fr'
+												locale === 'fr'
 													? new Date(
 															processedArticle?.attributes?.createdAt
 														).toLocaleDateString('fr-FR', {
@@ -244,8 +247,7 @@ export default async function Page({ params }) {
 															day: 'numeric',
 														})
 											}
-											&nbsp;-&nbsp;
-											{params.locale === 'fr'
+											{locale === 'fr'
 												? ' par Andy Cinquin'
 												: ' by Andy Cinquin'}
 										</div>
@@ -282,7 +284,7 @@ export default async function Page({ params }) {
 										<hr />
 										<br />
 										<div className={'flex flex-col gap-4'}>
-											{params.locale === 'fr' ? (
+											{locale === 'fr' ? (
 												<>
 													<div>
 														{`En vous remerciant de votre visite, n'hésitez pas à me

@@ -6,9 +6,8 @@ import { BlogSearch } from './BlogSearch'
 import { MasonryGrid } from './MasonryGrid'
 import { ArticleCard } from './ArticleCard'
 
-// Utility function to determine initial columns
 function getInitialColumns() {
-	if (typeof window === 'undefined') return 3 // Default value for server-side
+	if (typeof window === 'undefined') return 3
 	const width = window.innerWidth
 	if (width < 640) return 1
 	if (width < 1024) return 2
@@ -52,26 +51,34 @@ export function BlogContent({ articles, locale }) {
 	}, [searchQuery, selectedType, articles, fuse])
 
 	return (
-		<div className="mx-auto max-w-[80vw] space-y-8 px-6 pb-12">
-			<BlogSearch
-				value={searchQuery}
-				onChange={setSearchQuery}
-				locale={locale}
-			/>
-			{filteredArticles.length > 0 ? (
-				<MasonryGrid
-					items={filteredArticles}
-					renderItem={article => (
-						<ArticleCard article={article} locale={locale} />
+		<section className="relative w-full">
+			<div className="mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="relative space-y-8 py-12 md:py-16 lg:py-20">
+					<BlogSearch
+						value={searchQuery}
+						onChange={setSearchQuery}
+						locale={locale}
+					/>
+					{filteredArticles.length > 0 ? (
+						<div className="mx-auto max-w-[90rem]">
+							<MasonryGrid
+								items={filteredArticles}
+								renderItem={article => (
+									<ArticleCard article={article} locale={locale} />
+								)}
+								initialColumns={getInitialColumns()}
+								locale={locale}
+							/>
+						</div>
+					) : (
+						<div className="py-12 text-center text-white">
+							<div>
+								{locale === 'fr' ? 'Aucun article trouvé' : 'No articles found'}
+							</div>
+						</div>
 					)}
-					initialColumns={getInitialColumns()}
-					locale={locale}
-				/>
-			) : (
-				<div className="py-12 text-center text-white">
-					<div>No articles found</div>
 				</div>
-			)}
-		</div>
+			</div>
+		</section>
 	)
 }
