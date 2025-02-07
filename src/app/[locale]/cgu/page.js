@@ -1,15 +1,9 @@
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
+import { localesConstant } from '@/services/localesConstant'
+import { Layout } from '@/components/Global/Layout'
+import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
-import Footer from '@/components/Global/Footer'
-import { Layout } from '@/components/Global/Layout'
-import { localesConstant } from '@/services/localesConstant'
-
-export async function generateStaticParams() {
-	return localesConstant.map(locale => ({
-		params: { locale },
-	}))
-}
 
 export async function generateMetadata({ params }) {
 	const { locale } = await params
@@ -17,22 +11,28 @@ export async function generateMetadata({ params }) {
 	const content_website = await getContentWebsite(locale)
 
 	return {
-		title:
-			content_website?.data?.attributes?.content_cgu?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
-		description:
-			content_website?.data?.attributes?.content_cgu?.seo?.description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		metadataBase: new URL(`https://andy-cinquin.com`),
 		alternates: {
-			canonical:
-				content_website?.data?.attributes?.content_cgu?.seo?.canonical || '/',
 			languages: {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/cgu`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/cgu`,
 			},
+			canonical:
+				content_website?.data?.attributes?.content_cgu?.seo?.canonical || '/',
 		},
+		description:
+			content_website?.data?.attributes?.content_cgu?.seo?.description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		title:
+			content_website?.data?.attributes?.content_cgu?.seo?.title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
 	}
+}
+
+export async function generateStaticParams() {
+	return localesConstant.map(locale => ({
+		params: { locale },
+	}))
 }
 
 export default async function Page({ params }) {
@@ -46,8 +46,8 @@ export default async function Page({ params }) {
 		<>
 			<Nav
 				content_website={content_website}
-				isHome={false}
 				h1={content_website?.attributes?.content_cgu?.seo?.h1}
+				isHome={false}
 			/>
 			<div>
 				<div className={'relative'}>

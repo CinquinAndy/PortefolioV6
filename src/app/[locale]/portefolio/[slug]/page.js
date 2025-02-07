@@ -1,36 +1,21 @@
+import { LinkIcon } from '@heroicons/react/20/solid'
+
+import Image from 'next/image'
+import Link from 'next/link'
+
 import {
 	getContentWebsite,
 	getRealisationBySlug,
 	getRealisations,
 	processRealisationData,
 } from '@/services/getContentWebsite'
+import { GalerySection } from '@/components/Global/GalerySection'
+import { localesConstant } from '@/services/localesConstant'
+import { Layout } from '@/components/Global/Layout'
+import Footer from '@/components/Global/Footer'
+import { replaceTitle } from '@/services/utils'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
-import Footer from '@/components/Global/Footer'
-import { Layout } from '@/components/Global/Layout'
-import { replaceTitle } from '@/services/utils'
-import { LinkIcon } from '@heroicons/react/20/solid'
-import Link from 'next/link'
-import { GalerySection } from '@/components/Global/GalerySection'
-import Image from 'next/image'
-import { localesConstant } from '@/services/localesConstant'
-
-export async function generateStaticParams() {
-	let paths = []
-
-	for (const locale of localesConstant) {
-		const realisations = await getRealisations(locale) // Use your service to fetch realisations
-
-		// Map over each article to create a path object for it
-		const localePaths = realisations.data.map(article => ({
-			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
-		}))
-
-		paths = paths.concat(localePaths)
-	}
-
-	return paths
-}
 
 export async function generateMetadata({ params }) {
 	const { locale, slug } = await params
@@ -51,21 +36,38 @@ export async function generateMetadata({ params }) {
 	}
 
 	return {
-		title:
-			realisation?.attributes?.seo_title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
-		description:
-			realisation?.attributes?.seo_description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		metadataBase: new URL(`https://andy-cinquin.com`),
 		alternates: {
-			canonical: realisation?.attributes?.seo_canonical || '/',
 			languages: {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${slug}`,
 			},
+			canonical: realisation?.attributes?.seo_canonical || '/',
 		},
+		description:
+			realisation?.attributes?.seo_description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		title:
+			realisation?.attributes?.seo_title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
 	}
+}
+
+export async function generateStaticParams() {
+	let paths = []
+
+	for (const locale of localesConstant) {
+		const realisations = await getRealisations(locale) // Use your service to fetch realisations
+
+		// Map over each article to create a path object for it
+		const localePaths = realisations.data.map(article => ({
+			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
+		}))
+
+		paths = paths.concat(localePaths)
+	}
+
+	return paths
 }
 
 export default async function Page({ params }) {
@@ -82,8 +84,8 @@ export default async function Page({ params }) {
 		<>
 			<Nav
 				content_website={content_website}
-				isHome={false}
 				h1={processedRealisation?.attributes?.title}
+				isHome={false}
 			/>
 			<div>
 				<div className={'relative'}>
@@ -140,28 +142,28 @@ export default async function Page({ params }) {
 									technology => {
 										return (
 											<div
-												key={technology?.id}
 												className="custom-button-icons-3d relative flex items-center justify-center"
+												key={technology?.id}
 											>
 												<Image
-													src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/3d.svg`}
 													alt="icon-3d"
-													width={80}
 													height={80}
+													src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/3d.svg`}
+													width={80}
 												/>
 												<Image
-													src={
-														technology?.attributes?.image?.data?.attributes?.url
-													}
-													className={
-														'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
-													}
 													alt={
 														technology?.attributes?.image?.data?.attributes
 															?.alternativeText || 'Technology used'
 													}
-													width={24}
+													className={
+														'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
+													}
 													height={24}
+													src={
+														technology?.attributes?.image?.data?.attributes?.url
+													}
+													width={24}
 												/>
 											</div>
 										)
@@ -187,14 +189,14 @@ export default async function Page({ params }) {
 										{processedRealisation?.attributes?.links?.map(
 											(link, index) => {
 												return (
-													<div key={index} className={'flex'}>
+													<div className={'flex'} key={index}>
 														<Link
-															key={link?.id}
-															href={link?.url}
-															rel={'noopener noreferrer'}
 															className={
 																'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
 															}
+															href={link?.url}
+															key={link?.id}
+															rel={'noopener noreferrer'}
 														>
 															{link?.label}
 															<LinkIcon

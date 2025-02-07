@@ -1,6 +1,6 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from 'react'
 
 function ArrowUp() {
 	// State to manage whether the button is shown or not
@@ -27,14 +27,14 @@ function ArrowUp() {
 
 	return (
 		<button
-			onClick={() => {
-				// Scroll to the top of the page smoothly when button is clicked
-				window.scrollTo({ top: 0, behavior: 'smooth' })
-			}}
 			className={
 				'fixed bottom-0 right-0 z-50 m-4 flex cursor-pointer items-center justify-center rounded-xl border border-white bg-white/5 p-2 transition-opacity ' +
 				`backdrop-blur-sm lg:m-8 ${showButton ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`
 			}
+			onClick={() => {
+				// Scroll to the top of the page smoothly when button is clicked
+				window.scrollTo({ behavior: 'smooth', top: 0 })
+			}}
 		>
 			<ChevronUpIcon className="h-8 w-8 text-white" />
 		</button>

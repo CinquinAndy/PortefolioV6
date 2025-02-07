@@ -1,19 +1,21 @@
 'use client'
-import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
-import { replaceTitle } from '@/services/utils'
-import Link from 'next/link'
+import { Fragment } from 'react'
+
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/GaleryItemSkeleton'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
-import Image from 'next/image'
+import { replaceTitle } from '@/services/utils'
 
-function Galery({ open, handleClick, galery, title_galery }) {
+function Galery({ title_galery, handleClick, galery, open }) {
 	// pathname
 	const pathname = usePathname()
 	return (
-		<Transition.Root show={open} as={Fragment}>
+		<Transition.Root as={Fragment} show={open}>
 			<Dialog as="div" className="relative z-50" onClose={handleClick}>
 				<div className="fixed inset-0" />
 
@@ -45,12 +47,12 @@ function Galery({ open, handleClick, galery, title_galery }) {
 												</Dialog.Title>
 												<div className="ml-3 flex h-7 items-center">
 													<button
-														type="button"
 														className="rounded-md text-slate-100 hover:text-slate-200"
 														onClick={handleClick}
+														type="button"
 													>
 														<span className="sr-only">Close panel</span>
-														<XMarkIcon className="h-6 w-6" aria-hidden="true" />
+														<XMarkIcon aria-hidden="true" className="h-6 w-6" />
 													</button>
 												</div>
 											</div>
@@ -58,21 +60,21 @@ function Galery({ open, handleClick, galery, title_galery }) {
 										<div className="columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>div:not(:first-child)]:mt-8">
 											{galery.map((item, index) => (
 												<Link
-													type="button"
-													key={index}
 													className="cursor-pointer hover:filter-none"
 													href={pathname + '/' + index}
+													key={index}
+													type="button"
 												>
 													<ComponentLoadComponent FallBack={GaleryItemSkeleton}>
 														<div className="m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent">
 															<Image
-																src={item?.attributes?.url}
 																alt={
 																	item?.attributes?.alternativeText ??
 																	'Project Image'
 																}
-																width={item?.attributes?.width}
 																height={item?.attributes?.height}
+																src={item?.attributes?.url}
+																width={item?.attributes?.width}
 															/>
 														</div>
 													</ComponentLoadComponent>

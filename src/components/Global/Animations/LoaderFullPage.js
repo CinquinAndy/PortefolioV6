@@ -1,6 +1,7 @@
 'use client'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
+
+import Image from 'next/image'
 
 function LoaderFullPage({ locale }) {
 	// on load page
@@ -32,10 +33,10 @@ function LoaderFullPage({ locale }) {
 						className={'z-10 flex h-full w-full items-center justify-center'}
 					>
 						<Image
+							alt={'icon'}
+							height={50}
 							src={'assets/icons/logov2.svg'}
 							width={50}
-							height={50}
-							alt={'icon'}
 						/>
 					</span>
 				</div>

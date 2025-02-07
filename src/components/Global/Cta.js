@@ -1,6 +1,7 @@
+import Link from 'next/link'
+
 import { Layout } from '@/components/Global/Layout'
 import { replaceTitle } from '@/services/utils'
-import Link from 'next/link'
 
 function Cta({ content_website }) {
 	return (
@@ -23,8 +24,8 @@ function Cta({ content_website }) {
 					</div>
 					<div className="flex items-center justify-center">
 						<Link
-							href={content_website?.attributes?.cta?.link?.url}
 							className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+							href={content_website?.attributes?.cta?.link?.url}
 						>
 							<span className={'button-purple-title'}>
 								{content_website?.attributes?.cta?.link?.label}

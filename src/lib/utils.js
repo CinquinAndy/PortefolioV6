@@ -1,5 +1,5 @@
-import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { clsx } from 'clsx'
 
 export function cn(...inputs) {
 	return twMerge(clsx(inputs))
@@ -7,8 +7,8 @@ export function cn(...inputs) {
 
 export function formatDate(dateString) {
 	return new Intl.DateTimeFormat('en-US', {
+		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
-		year: 'numeric',
 	}).format(new Date(dateString))
 }

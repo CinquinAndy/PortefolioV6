@@ -1,13 +1,14 @@
-import Link from 'next/link'
+import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import Image from 'next/image'
-import { Layout } from '@/components/Global/Layout'
+import Link from 'next/link'
+
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
-import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
+import { Layout } from '@/components/Global/Layout'
 
 const noto_serif_display = Noto_Serif_Display({
-	subsets: ['latin'],
 	variable: '--font-noto-serif-display',
+	subsets: ['latin'],
 })
 const be_vietnam_pro = Be_Vietnam_Pro({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -22,21 +23,21 @@ export async function generateMetadata() {
 	content_website = content_website?.data
 
 	return {
-		title:
-			content_website?.attributes?.content_notfound?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
-		description:
-			content_website?.attributes?.content_notfound?.seo?.description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		metadataBase: new URL(`https://andy-cinquin.fr`),
 		alternates: {
-			canonical:
-				content_website?.attributes?.content_notfound?.seo?.canonical || '/',
 			languages: {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
 			},
+			canonical:
+				content_website?.attributes?.content_notfound?.seo?.canonical || '/',
 		},
+		description:
+			content_website?.attributes?.content_notfound?.seo?.description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		title:
+			content_website?.attributes?.content_notfound?.seo?.title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.fr`),
 	}
 }
 
@@ -47,7 +48,7 @@ export default async function NotFound() {
 	notfound = notfound?.data
 
 	return (
-		<html lang={`en`} className={'overflow-y-hidden'}>
+		<html className={'overflow-y-hidden'} lang={`en`}>
 			<body
 				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
 			>
@@ -62,9 +63,9 @@ export default async function NotFound() {
 							<Link href={'/'}>
 								<Image
 									alt="Logo Andy Cinquin"
-									width={50}
 									height={50}
 									src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
+									width={50}
 								/>
 							</Link>
 							<div className={'mt-8'}>
@@ -83,8 +84,8 @@ export default async function NotFound() {
 								</div>
 
 								<Link
-									href={notfound?.attributes?.link?.url}
 									className="mt-8 text-slate-50 underline"
+									href={notfound?.attributes?.link?.url}
 								>
 									{notfound?.attributes?.link?.label}
 								</Link>

@@ -1,8 +1,10 @@
-import '@/styles/main.css'
-import 'react-toastify/dist/ReactToastify.css'
-import 'highlight.js/styles/atom-one-dark-reasonable.min.css'
 import { Analytics } from '@vercel/analytics/react'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { SpeedInsights } from '@vercel/speed-insights/next'
+
+import '@/styles/main.css'
+import 'highlight.js/styles/atom-one-dark-reasonable.min.css'
 
 export function generateStaticParams() {
 	const i18nConfig = {

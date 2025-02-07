@@ -1,12 +1,13 @@
 'use client'
 
 import { useLayoutEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+
+import { AnimatePresence, motion } from 'framer-motion'
 
 const BREAKPOINTS = {
-	sm: 640,
 	lg: 1024,
 	xl: 1536,
+	sm: 640,
 }
 
 // Date formatting utilities
@@ -18,16 +19,16 @@ const formatDate = (dateString, locale) => {
 		if (locale === 'fr') {
 			return new Intl.DateTimeFormat('fr-FR', {
 				year: 'numeric',
-				month: 'long',
 				day: 'numeric',
+				month: 'long',
 			}).format(date)
 		}
 
 		// Default to English
 		return new Intl.DateTimeFormat('en-US', {
 			year: 'numeric',
-			month: 'long',
 			day: 'numeric',
+			month: 'long',
 		}).format(date)
 	} catch (error) {
 		console.error('Error formatting date:', error)
@@ -36,10 +37,10 @@ const formatDate = (dateString, locale) => {
 }
 
 export function MasonryGrid({
-	items,
-	renderItem,
 	initialColumns = 3,
 	locale = 'en',
+	renderItem,
+	items,
 }) {
 	const [columns, setColumns] = useState(initialColumns)
 	const [isClient, setIsClient] = useState(false)
@@ -88,23 +89,23 @@ export function MasonryGrid({
 		<div className="flex w-full gap-6">
 			{itemsByColumn.map((columnItems, columnIndex) => (
 				<div
+					className="flex flex-col gap-6"
 					key={columnIndex}
 					style={{ width: columnWidth }}
-					className="flex flex-col gap-6"
 				>
 					<AnimatePresence mode="popLayout">
 						{columnItems.map((item, index) => (
 							<motion.div
+								animate={{ opacity: 1, y: 0 }}
+								className="transform will-change-transform"
+								exit={{ opacity: 0, y: -20 }}
+								initial={isClient ? { opacity: 0, y: 20 } : false}
 								key={item.id}
 								layout
-								initial={isClient ? { opacity: 0, y: 20 } : false}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -20 }}
 								transition={{
-									duration: 0.3,
 									delay: index * 0.05,
+									duration: 0.3,
 								}}
-								className="transform will-change-transform"
 							>
 								{renderItemWithFormattedDate(item, index)}
 							</motion.div>

@@ -5,23 +5,16 @@ import {
 	getServices,
 	getServicesGrid,
 } from '@/services/getContentWebsite'
-import Nav from '@/components/Global/Nav'
+import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
+import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
+import { PopupMainCat } from '@/components/Global/PopupMainCat'
+import { ServicesGrid } from '@/components/Global/ServicesGrid'
+import { localesConstant } from '@/services/localesConstant'
 import Realisations from '@/components/Global/Realisations'
 import Articles from '@/components/Global/Articles'
-import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
-import { PopupMainCat } from '@/components/Global/PopupMainCat'
-import { localesConstant } from '@/services/localesConstant'
-import { ServicesGrid } from '@/components/Global/ServicesGrid'
-import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
-
-export async function generateStaticParams() {
-	// Map each locale to a params object expected by Next.js
-	return localesConstant.map(locale => ({
-		params: { locale },
-	}))
-}
+import Nav from '@/components/Global/Nav'
+import Cta from '@/components/Global/Cta'
 
 export async function generateMetadata({ params }) {
 	const { locale } = await params
@@ -30,22 +23,29 @@ export async function generateMetadata({ params }) {
 	content_website = content_website?.data
 
 	return {
-		title:
-			content_website?.attributes?.content_home?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
 		description:
 			content_website?.attributes?.content_home?.seo?.description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		metadataBase: new URL(`https://andy-cinquin.fr`),
 		alternates: {
-			canonical:
-				content_website?.attributes?.content_home?.seo?.canonical || '/',
 			languages: {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
 			},
+			canonical:
+				content_website?.attributes?.content_home?.seo?.canonical || '/',
 		},
+		title:
+			content_website?.attributes?.content_home?.seo?.title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.fr`),
 	}
+}
+
+export async function generateStaticParams() {
+	// Map each locale to a params object expected by Next.js
+	return localesConstant.map(locale => ({
+		params: { locale },
+	}))
 }
 
 export default async function Page({ params }) {
@@ -75,15 +75,15 @@ export default async function Page({ params }) {
 				<ServicesGrid content_website={content_website} services={services} />
 				<Realisations
 					content_website={content_website}
+					isHome={true}
 					realisations={realisations}
 					slice={3}
-					isHome={true}
 				/>
 				<Articles
-					content_website={content_website}
 					articles={articles}
-					slice={3}
+					content_website={content_website}
 					isHome={true}
+					slice={3}
 				/>
 				<Cta content_website={content_website} />
 			</div>

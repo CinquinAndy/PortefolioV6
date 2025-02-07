@@ -4,11 +4,39 @@ import {
 	getRealisations,
 	processRealisationData,
 } from '@/services/getContentWebsite'
+import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
 import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
 import { localesConstant } from '@/services/localesConstant'
 import Nav from '@/components/Global/Nav'
-import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
+
+export async function generateMetadata({ params }) {
+	const { locale, slug } = await params
+	let content_website = await getContentWebsite(locale)
+
+	// fetch data
+	let realisation = await getRealisationBySlug(slug, locale)
+
+	let processedRealisation = await processRealisationData(realisation)
+	processedRealisation = processedRealisation?.data
+
+	return {
+		alternates: {
+			languages: {
+				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
+				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
+			},
+			canonical: processedRealisation?.attributes?.seo_canonical || '/',
+		},
+		description:
+			processedRealisation?.attributes?.seo_description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		title:
+			processedRealisation?.attributes?.seo_title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
+	}
+}
 
 export async function generateStaticParams() {
 	let paths = []
@@ -35,39 +63,8 @@ export async function generateStaticParams() {
 	return paths
 }
 
-export async function generateMetadata({ params }) {
-	const { locale, slug } = await params
-	let content_website = await getContentWebsite(locale)
-
-	// fetch data
-	let realisation = await getRealisationBySlug(slug, locale)
-
-	let processedRealisation = await processRealisationData(realisation)
-	processedRealisation = processedRealisation?.data
-
-	return {
-		title:
-			processedRealisation?.attributes?.seo_title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
-		description:
-			processedRealisation?.attributes?.seo_description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		metadataBase: new URL(`https://andy-cinquin.com`),
-		alternates: {
-			canonical: processedRealisation?.attributes?.seo_canonical || '/',
-			languages: {
-				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
-				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
-			},
-		},
-	}
-}
-
 export default async function Page({ params }) {
-	const { locale, slug, image } = await params
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
-	console.log('params', await params)
+	const { locale, image, slug } = await params
 	let realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)
@@ -91,11 +88,11 @@ export default async function Page({ params }) {
 						<BackButtonComponent />
 					</div>
 					<ImageLoadComponent
-						className={'rounded-xl p-2 sm:p-4 md:p-8 lg:p-32'}
-						src={_image?.attributes?.url}
 						alt={_image?.attributes?.alternativeText ?? 'Project Image'}
-						width={_image?.attributes?.width}
+						className={'rounded-xl p-2 sm:p-4 md:p-8 lg:p-32'}
 						height={_image?.attributes?.height}
+						src={_image?.attributes?.url}
+						width={_image?.attributes?.width}
 					/>
 				</div>
 			</div>

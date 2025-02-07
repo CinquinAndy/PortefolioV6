@@ -1,20 +1,43 @@
+import { LinkIcon } from '@heroicons/react/20/solid'
+
+import Script from 'next/script'
+import Link from 'next/link'
+
 import {
 	getArticleBySlug,
 	getArticles,
 	getContentWebsite,
 	processArticleData,
 } from '@/services/getContentWebsite'
+import { NavigationArticle } from '@/components/Global/navigationArticle'
+import { localesConstant } from '@/services/localesConstant'
+import { Layout } from '@/components/Global/Layout'
+import ArrowUp from '@/components/Global/ArrowUp'
+import Footer from '@/components/Global/Footer'
+import { replaceTitle } from '@/services/utils'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
-import Footer from '@/components/Global/Footer'
-import { Layout } from '@/components/Global/Layout'
-import { replaceTitle } from '@/services/utils'
-import { LinkIcon } from '@heroicons/react/20/solid'
-import Link from 'next/link'
-import { localesConstant } from '@/services/localesConstant'
-import Script from 'next/script'
-import ArrowUp from '@/components/Global/ArrowUp'
-import { NavigationArticle } from '@/components/Global/navigationArticle'
+
+export async function generateMetadata({ params }) {
+	let { slugAlternate, article, slug } = await getSlugs(params)
+
+	return {
+		alternates: {
+			languages: {
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
+			},
+			canonical: article?.attributes?.seo_canonical || '/',
+		},
+		description:
+			article?.attributes?.seo_description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		title:
+			article?.attributes?.seo_title ||
+			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
+	}
+}
 
 export async function generateStaticParams() {
 	let paths = []
@@ -33,53 +56,12 @@ export async function generateStaticParams() {
 	return paths
 }
 
-async function getSlugs(params) {
-	const { locale, slug } = await params
-	let article = await getArticleBySlug(slug, locale)
-	article = article?.data[0]
-
-	// conditional slug, make en and fr slugs available
-	let _slug = ''
-	let slugAlternate = ''
-	if (locale === 'fr') {
-		_slug = article?.attributes?.slug
-		slugAlternate =
-			article?.attributes?.localizations?.data[0]?.attributes?.slug
-	} else {
-		slugAlternate = article?.attributes?.slug
-		_slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
-	}
-
-	return { article, slug: _slug, slugAlternate }
-}
-
-export async function generateMetadata({ params }) {
-	let { article, slug, slugAlternate } = await getSlugs(params)
-
-	return {
-		title:
-			article?.attributes?.seo_title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
-		description:
-			article?.attributes?.seo_description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		metadataBase: new URL(`https://andy-cinquin.com`),
-		alternates: {
-			canonical: article?.attributes?.seo_canonical || '/',
-			languages: {
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
-			},
-		},
-	}
-}
-
 export default async function Page({ params }) {
 	const { locale } = await params
 	// fetch data
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let { article, slug, slugAlternate } = await getSlugs(await params)
+	let { slugAlternate, article, slug } = await getSlugs(await params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
@@ -110,43 +92,43 @@ export default async function Page({ params }) {
 	return (
 		<>
 			<Script
-				id={'json-ld'}
-				type={'application/ld+json'}
 				dangerouslySetInnerHTML={{
 					__html: JSON.stringify({
-						'@context': 'https://schema.org',
-						'@type': 'Article',
-						headline: processedArticle?.attributes?.title,
-						datePublished: processedArticle?.attributes?.createdAt,
-						dateModified: processedArticle?.attributes?.updatedAt,
-						mainEntityOfPage: {
-							'@type': 'WebPage',
-							'@id': `${process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
-						},
-						author: {
-							'@type': 'Person',
-							name: 'Andy Cinquin',
-						},
 						publisher: {
+							logo: {
+								url: `${process.env.NEXT_PUBLIC_URL}/favicon.ico`,
+								'@type': 'ImageObject',
+							},
 							'@type': 'Organization',
 							name: 'Andy Cinquin',
-							logo: {
-								'@type': 'ImageObject',
-								url: `${process.env.NEXT_PUBLIC_URL}/favicon.ico`,
-							},
 						},
+						mainEntityOfPage: {
+							'@id': `${process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
+							'@type': 'WebPage',
+						},
+						author: {
+							name: 'Andy Cinquin',
+							'@type': 'Person',
+						},
+						datePublished: processedArticle?.attributes?.createdAt,
+						dateModified: processedArticle?.attributes?.updatedAt,
+						headline: processedArticle?.attributes?.title,
+						'@context': 'https://schema.org',
+						'@type': 'Article',
 					}),
 				}}
+				id={'json-ld'}
+				type={'application/ld+json'}
 			/>
 
 			<ArrowUp />
 
 			<Nav
 				content_website={content_website}
-				isHome={false}
-				h1={processedArticle?.attributes?.title}
 				enRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slugAlternate}
 				frRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slug}
+				h1={processedArticle?.attributes?.title}
+				isHome={false}
 			/>
 
 			<div>
@@ -186,14 +168,14 @@ export default async function Page({ params }) {
 								<div className={'flex flex-col gap-4'}>
 									{processedArticle?.attributes?.links?.map((link, index) => {
 										return (
-											<div key={index} className={'flex'}>
+											<div className={'flex'} key={index}>
 												<Link
-													key={link?.id}
-													href={link?.url}
-													rel={'noopener noreferrer'}
 													className={
 														'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
 													}
+													href={link?.url}
+													key={link?.id}
+													rel={'noopener noreferrer'}
 												>
 													{link?.label}
 													<LinkIcon
@@ -236,15 +218,15 @@ export default async function Page({ params }) {
 															processedArticle?.attributes?.createdAt
 														).toLocaleDateString('fr-FR', {
 															year: 'numeric',
-															month: 'long',
 															day: 'numeric',
+															month: 'long',
 														})
 													: new Date(
 															processedArticle?.attributes?.createdAt
 														).toLocaleDateString('en-US', {
 															year: 'numeric',
-															month: 'long',
 															day: 'numeric',
+															month: 'long',
 														})
 											}
 											{locale === 'fr'
@@ -259,13 +241,13 @@ export default async function Page({ params }) {
 													const color = colors[colorIndex]
 													return (
 														<span
-															key={index}
 															className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-[0.6rem] font-medium text-gray-900 ring-1 ring-inset ring-gray-200 md:px-2 md:text-xs"
+															key={index}
 														>
 															<svg
+																aria-hidden="true"
 																className={`h-1.5 w-1.5 fill-${color}-500`}
 																viewBox="0 0 6 6"
-																aria-hidden="true"
 															>
 																<circle cx="3" cy="3" r="3" />
 															</svg>
@@ -320,4 +302,24 @@ export default async function Page({ params }) {
 			<Footer content_website={content_website} />
 		</>
 	)
+}
+
+async function getSlugs(params) {
+	const { locale, slug } = await params
+	let article = await getArticleBySlug(slug, locale)
+	article = article?.data[0]
+
+	// conditional slug, make en and fr slugs available
+	let _slug = ''
+	let slugAlternate = ''
+	if (locale === 'fr') {
+		_slug = article?.attributes?.slug
+		slugAlternate =
+			article?.attributes?.localizations?.data[0]?.attributes?.slug
+	} else {
+		slugAlternate = article?.attributes?.slug
+		_slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
+	}
+
+	return { slugAlternate, slug: _slug, article }
 }
