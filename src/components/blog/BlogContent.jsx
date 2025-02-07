@@ -44,7 +44,11 @@ export function BlogContent({ articles, content_website, pagination, locale }) {
 
 	return (
 		<div className="mx-auto max-w-[80vw] space-y-8 px-6">
-			<BlogSearch value={searchQuery} onChange={setSearchQuery} locale={locale} />
+			<BlogSearch
+				value={searchQuery}
+				onChange={setSearchQuery}
+				locale={locale}
+			/>
 			{filteredArticles.length > 0 ? (
 				<MasonryGrid
 					items={filteredArticles}
@@ -61,9 +65,6 @@ export function BlogContent({ articles, content_website, pagination, locale }) {
 					<div>No articles found</div>
 				</div>
 			)}
-			<div className="mt-8">
-				<Pagination {...pagination} />
-			</div>
 		</div>
 	)
 }

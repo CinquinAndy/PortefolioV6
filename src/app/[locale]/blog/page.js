@@ -67,11 +67,13 @@ export default async function Page({ params, searchParams }) {
 					articles={articles}
 					locale={locale}
 				/>
-				<Pagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					baseUrl={`/${locale}/blog`}
-				/>
+				{articles.length > pageSize && (
+					<Pagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						baseUrl={`/${locale}/blog`}
+					/>
+				)}
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
