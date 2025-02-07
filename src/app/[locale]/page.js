@@ -3,9 +3,9 @@ import {
 	getContentWebsite,
 	getRealisations,
 	getServices,
+	getServicesGrid,
 } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
-import Services from '@/components/Global/Services'
 import Realisations from '@/components/Global/Realisations'
 import Articles from '@/components/Global/Articles'
 import Cta from '@/components/Global/Cta'
@@ -13,6 +13,8 @@ import Footer from '@/components/Global/Footer'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
 import { localesConstant } from '@/services/localesConstant'
+import { ServicesGrid } from '@/components/Global/ServicesGrid'
+import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -22,8 +24,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+	const { locale } = await params
 	// fetch data
-	let content_website = await getContentWebsite(params.locale)
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
 
 	return {
@@ -46,18 +49,19 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let services = await getServices(params.locale)
+	let services = await getServicesGrid(locale)
 	services = services?.data
-	let realisations = await getRealisations(params.locale)
+	let realisations = await getRealisations(locale)
 	realisations = realisations?.data
-	let articles = await getArticles(params.locale)
+	let articles = await getArticles(locale)
 	articles = articles?.data
 
 	return (
 		<>
-			{/*<LoaderFullPage params={params} />*/}
+			<LoaderFullPage locale={locale} />
 			<Nav content_website={content_website} />
 			<PopupMainCat content_website={content_website} />
 
@@ -68,7 +72,7 @@ export default async function Page({ params }) {
 			</div>
 
 			<div className={'relative'}>
-				<Services content_website={content_website} services={services} />
+				<ServicesGrid content_website={content_website} services={services} />
 				<Realisations
 					content_website={content_website}
 					realisations={realisations}

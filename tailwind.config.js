@@ -4,6 +4,7 @@ const {
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
+	darkMode: ['class'],
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
 	safelist: [
 		'fill-indigo-500',
@@ -22,18 +23,34 @@ module.exports = {
 	],
 	theme: {
 		fontFamily: {
-			body: ['"Be Vietnam Pro"', 'sans-serif'],
-			display: ['"Noto Serif Display"', 'serif'],
+			body: ['Be Vietnam Pro"', 'sans-serif'],
+			display: ['Noto Serif Display"', 'serif'],
 		},
 		screens: {
-			sm: { raw: '(min-width: 640px) and (min-height: 575px)' },
-			md: { raw: '(min-width: 768px) and (min-height: 650px)' },
-			lg: { raw: '(min-width: 1024px) and (min-height: 650px)' },
-			xl: { raw: '(min-width: 1280px) and (min-height: 650px)' },
-			'2xl': { raw: '(min-width: 1536px) and (min-height: 650px)' },
+			sm: {
+				raw: '(min-width: 640px) and (min-height: 575px)',
+			},
+			md: {
+				raw: '(min-width: 768px) and (min-height: 650px)',
+			},
+			lg: {
+				raw: '(min-width: 1024px) and (min-height: 650px)',
+			},
+			xl: {
+				raw: '(min-width: 1280px) and (min-height: 650px)',
+			},
+			'2xl': {
+				raw: '(min-width: 1536px) and (min-height: 650px)',
+			},
 		},
 		extend: {
 			colors: {
+				andy_purple: {
+					500: '#6c00a2',
+				},
+				andy_blue: {
+					500: '#001152',
+				},
 				sky: {
 					1000: '#042C44',
 					1100: '#011623',
@@ -49,6 +66,46 @@ module.exports = {
 				slate: {
 					1000: '#0D1321',
 					1100: '#090D16',
+				},
+				background: 'hsl(var(--background))',
+				foreground: 'hsl(var(--foreground))',
+				card: {
+					DEFAULT: 'hsl(var(--card))',
+					foreground: 'hsl(var(--card-foreground))',
+				},
+				popover: {
+					DEFAULT: 'hsl(var(--popover))',
+					foreground: 'hsl(var(--popover-foreground))',
+				},
+				primary: {
+					DEFAULT: 'hsl(var(--primary))',
+					foreground: 'hsl(var(--primary-foreground))',
+				},
+				secondary: {
+					DEFAULT: 'hsl(var(--secondary))',
+					foreground: 'hsl(var(--secondary-foreground))',
+				},
+				muted: {
+					DEFAULT: 'hsl(var(--muted))',
+					foreground: 'hsl(var(--muted-foreground))',
+				},
+				accent: {
+					DEFAULT: 'hsl(var(--accent))',
+					foreground: 'hsl(var(--accent-foreground))',
+				},
+				destructive: {
+					DEFAULT: 'hsl(var(--destructive))',
+					foreground: 'hsl(var(--destructive-foreground))',
+				},
+				border: 'hsl(var(--border))',
+				input: 'hsl(var(--input))',
+				ring: 'hsl(var(--ring))',
+				chart: {
+					1: 'hsl(var(--chart-1))',
+					2: 'hsl(var(--chart-2))',
+					3: 'hsl(var(--chart-3))',
+					4: 'hsl(var(--chart-4))',
+					5: 'hsl(var(--chart-5))',
 				},
 			},
 			brightness: {
@@ -71,12 +128,18 @@ module.exports = {
 				30: '30deg',
 				32: '32deg',
 			},
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)',
+			},
 		},
 	},
 	plugins: [
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/typography'),
 		addVariablesForColors,
+		require('tailwindcss-animate'),
 	],
 }
 

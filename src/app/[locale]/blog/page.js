@@ -2,9 +2,9 @@ import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
-import Articles from '@/components/Global/Articles'
 import { localesConstant } from '@/services/localesConstant'
-import Pagination from '@/components/Global/Pagination'
+import { Pagination } from '@/components/Global/Pagination'
+import { BlogContent } from '@/components/blog/BlogContent'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -14,8 +14,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+	const { locale } = await params
 	// fetch data
-	const content_website = await getContentWebsite(params.locale)
+	const content_website = await getContentWebsite(locale)
 
 	return {
 		title:
@@ -37,19 +38,21 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params, searchParams }) {
-	let content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	const { page } = await searchParams
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
 
-	const page = searchParams.page ? parseInt(searchParams.page) : 1
-	const pageSize = 5
+	const pageParams = page ? parseInt(page) : 1
+	const pageSize = 12
 
-	let articlesResponse = await getArticles(params.locale, page, pageSize)
+	let articlesResponse = await getArticles(locale, pageParams, pageSize)
 	let articles = articlesResponse?.data
 
 	const totalArticles = articlesResponse?.meta?.pagination?.total
 	const totalPages = Math.ceil(totalArticles / pageSize)
 
-	const currentPage = Number(searchParams.page) || 1
+	const currentPage = Number(page) || 1
 
 	return (
 		<>
@@ -59,17 +62,18 @@ export default async function Page({ params, searchParams }) {
 				h1={content_website?.attributes?.content_blog?.seo?.h1}
 			/>
 			<div>
-				<Articles
+				<BlogContent
 					content_website={content_website}
 					articles={articles}
-					slice={false}
-					isHome={false}
+					locale={locale}
 				/>
-				<Pagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					baseUrl={`/${params.locale}/blog`}
-				/>
+				{articlesResponse.meta.pagination.total > pageSize && (
+					<Pagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						baseUrl={`/${locale}/blog`}
+					/>
+				)}
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

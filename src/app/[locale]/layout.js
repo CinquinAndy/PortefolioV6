@@ -50,9 +50,10 @@ export const metadata = {
 	],
 }
 
-export default function RootLayout({ children, params }) {
+export default async function RootLayout({ children, params }) {
+	const { locale } = await params
 	return (
-		<html lang={params.locale} dir={dir(params.locale)}>
+		<html lang={locale} dir={dir(locale)}>
 			<Script
 				async
 				src="https://umami.wadefade.fr/script.js"

@@ -12,9 +12,7 @@
 				"locale": "fr",
 				"rank": null,
 				"image": 302,
-				"localizations": [
-					8
-				],
+				"localizations": [8],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -28,9 +26,7 @@
 				"locale": "fr",
 				"rank": null,
 				"image": 303,
-				"localizations": [
-					9
-				],
+				"localizations": [9],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -44,9 +40,7 @@
 				"locale": "fr",
 				"rank": null,
 				"image": 306,
-				"localizations": [
-					10
-				],
+				"localizations": [10],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -60,9 +54,7 @@
 				"locale": "fr",
 				"rank": null,
 				"image": 304,
-				"localizations": [
-					11
-				],
+				"localizations": [11],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -118,9 +110,7 @@
 				"locale": "en",
 				"rank": null,
 				"image": 302,
-				"localizations": [
-					1
-				],
+				"localizations": [1],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -134,9 +124,7 @@
 				"locale": "en",
 				"rank": null,
 				"image": 303,
-				"localizations": [
-					2
-				],
+				"localizations": [2],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -150,9 +138,7 @@
 				"locale": "en",
 				"rank": null,
 				"image": 306,
-				"localizations": [
-					3
-				],
+				"localizations": [3],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -166,9 +152,7 @@
 				"locale": "en",
 				"rank": null,
 				"image": 304,
-				"localizations": [
-					4
-				],
+				"localizations": [4],
 				"createdBy": null,
 				"updatedBy": null
 			}
@@ -283,15 +267,7 @@
 				"updatedAt": "2023-07-31T22:49:08.288Z",
 				"parent": null,
 				"children": [],
-				"files": [
-					301,
-					302,
-					303,
-					304,
-					305,
-					306,
-					307
-				],
+				"files": [301, 302, 303, 304, 305, 306, 307],
 				"createdBy": null,
 				"updatedBy": null
 			}

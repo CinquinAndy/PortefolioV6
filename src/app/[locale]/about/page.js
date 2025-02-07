@@ -14,8 +14,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+	const { locale } = await params
 	// fetch data
-	const content_website = await getContentWebsite(params.locale)
+	const content_website = await getContentWebsite(locale)
 
 	return {
 		title:
@@ -37,9 +38,10 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-	let content_website = await getContentWebsite(params.locale)
+	const { locale } = await params
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let about = await getAbout(params.locale)
+	let about = await getAbout(locale)
 	about = about?.data
 
 	return (
@@ -57,7 +59,7 @@ export default async function Page({ params }) {
 						}
 					>
 						<div className={'flex w-full justify-center'}>
-							<HoloComponent lang={params.locale} />
+							<HoloComponent lang={locale} />
 						</div>
 						<div className="">
 							<article>

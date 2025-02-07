@@ -9,31 +9,16 @@
 				"publishedAt": "2023-07-17T23:36:21.201Z",
 				"locale": "fr",
 				"socials": 1,
-				"menu": [
-					4,
-					2,
-					5,
-					3,
-					6
-				],
+				"menu": [4, 2, 5, 3, 6],
 				"contact": 1,
 				"content_home": 1,
 				"content_footer": 1,
-				"Sitemap": [
-					1,
-					3,
-					2,
-					4,
-					6,
-					5
-				],
+				"Sitemap": [1, 3, 2, 4, 6, 5],
 				"content_service": 1,
 				"content_realisations": 1,
 				"content_blog": 1,
 				"cta": 2,
-				"localizations": [
-					2
-				],
+				"localizations": [2],
 				"createdBy": null,
 				"updatedBy": null
 			},
@@ -44,31 +29,16 @@
 				"publishedAt": null,
 				"locale": "en",
 				"socials": 2,
-				"menu": [
-					8,
-					7,
-					11,
-					10,
-					9
-				],
+				"menu": [8, 7, 11, 10, 9],
 				"contact": 2,
 				"content_home": 2,
 				"content_footer": 2,
-				"Sitemap": [
-					11,
-					7,
-					9,
-					10,
-					12,
-					8
-				],
+				"Sitemap": [11, 7, 9, 10, 12, 8],
 				"content_service": null,
 				"content_realisations": null,
 				"content_blog": null,
 				"cta": null,
-				"localizations": [
-					1
-				],
+				"localizations": [1],
 				"createdBy": null,
 				"updatedBy": null
 			}
@@ -192,10 +162,7 @@
 				"title_blog": "Mes dernières *actualités* et _conseils._",
 				"title_realisation": "Mes derniers *projets* _réalisés_&nbsp;!",
 				"title_vertical_left_bottom": "‣ ANDY CINQUIN",
-				"link": [
-					63,
-					64
-				],
+				"link": [63, 64],
 				"seo": 4
 			},
 			"2": {

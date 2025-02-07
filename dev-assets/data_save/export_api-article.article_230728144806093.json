@@ -19,10 +19,7 @@
 				"rank": 0,
 				"image_presentation": 309,
 				"galery": null,
-				"links": [
-					67,
-					68
-				],
+				"links": [67, 68],
 				"localizations": [],
 				"createdBy": null,
 				"updatedBy": null
@@ -44,10 +41,7 @@
 				"rank": 0,
 				"image_presentation": 308,
 				"galery": null,
-				"links": [
-					69,
-					70
-				],
+				"links": [69, 70],
 				"localizations": [],
 				"createdBy": null,
 				"updatedBy": null
@@ -69,10 +63,7 @@
 				"rank": 2,
 				"image_presentation": 313,
 				"galery": null,
-				"links": [
-					71,
-					72
-				],
+				"links": [71, 72],
 				"localizations": [],
 				"createdBy": null,
 				"updatedBy": null
@@ -206,14 +197,7 @@
 				"updatedAt": "2023-07-28T12:45:22.806Z",
 				"parent": null,
 				"children": [],
-				"files": [
-					308,
-					309,
-					310,
-					311,
-					312,
-					313
-				],
+				"files": [308, 309, 310, 311, 312, 313],
 				"createdBy": null,
 				"updatedBy": null
 			}

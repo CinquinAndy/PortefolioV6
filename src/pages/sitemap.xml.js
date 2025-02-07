@@ -27,10 +27,10 @@ export const getServerSideProps = async ({ res }) => {
 
 	try {
 		const resBlog = await fetch(`${baseUrl}/api/getBlogPaths`)
-		console.log('resBlog:', resBlog)
+		// console.log('resBlog:', resBlog)
 		if (resBlog.ok) {
 			blogPaths = await resBlog.json()
-			console.log('Blog paths:', blogPaths)
+			// console.log('Blog paths:', blogPaths)
 		} else {
 			console.error('Failed to fetch blog paths:', resBlog.statusText)
 		}
