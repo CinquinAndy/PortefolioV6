@@ -39,7 +39,7 @@ export function BlogSearch({ value, onChange, locale }) {
 			variants={containerVariants}
 			initial="hidden"
 			animate="visible"
-			className="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8"
+			className="mx-auto w-full max-w-5xl px-0 lg:px-8"
 		>
 			<div className="relative flex">
 				<motion.input
