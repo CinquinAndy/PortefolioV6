@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--video-width: 100vw;
+	--video-height: 100vh;
+
+	/*Gradient*/
+	--color-bg1: rgb(108, 0, 162);
+	--color-bg2: rgb(0, 17, 82);
+	--color1: 29, 78, 216;
+	--color2: 162, 28, 175;
+	--color3: 34, 211, 238;
+	--color4: 220, 38, 38;
+	--color5: 217, 119, 6;
+	--color-interactive: 99, 102, 241;
+	--circle-size: 80%;
+	--blending: hard-light;
+}
+
+@media (min-aspect-ratio: 16/9) {
+	:root {
+		--video-height: 56.25vw;
+	}
+}
+
+@media (max-aspect-ratio: 16/9) {
+	:root {
+		--video-width: 177.78vh;
+	}
+}
+
 * {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -86,7 +115,7 @@ body {
 	max-width: 100vw;
 	clear: both;
 	overflow-x: hidden;
-	background: -o-linear-gradient(50deg, var(--color-bg1), var(--color-bg2));
+	background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
 	background-size: cover;
 }
 
@@ -163,35 +192,6 @@ a:hover {
 }
 
 /*------------------ ------------------- Video --------------------------------------------------------------------------------------*/
-:root {
-	--video-width: 100vw;
-	--video-height: 100vh;
-
-	/*Gradient*/
-	--color-bg1: rgb(108, 0, 162);
-	--color-bg2: rgb(0, 17, 82);
-	--color1: 29, 78, 216;
-	--color2: 162, 28, 175;
-	--color3: 34, 211, 238;
-	--color4: 220, 38, 38;
-	--color5: 217, 119, 6;
-	--color-interactive: 99, 102, 241;
-	--circle-size: 80%;
-	--blending: hard-light;
-}
-
-@media (min-aspect-ratio: 16/9) {
-	:root {
-		--video-height: 56.25vw;
-	}
-}
-
-@media (max-aspect-ratio: 16/9) {
-	:root {
-		--video-width: 177.78vh;
-	}
-}
-
 .mask {
 	-webkit-mask-image: url(/assets/images/bg_transition_black.webp);
 	mask-image: url(/assets/images/bg_transition_black.webp);
@@ -1104,51 +1104,5 @@ a:hover {
 	}
 	body {
 		@apply bg-background text-foreground;
-	}
-}
-
-
-
-/* Lottie */
-.lottie-1 .lf-player-container,
-.lottie-2 .lf-player-container {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
-	bottom: 100vh;
-	left: 0;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	margin: 0 !important;
-	padding: 0 !important;
-	z-index: 0;
-	opacity: 0.15;
-	mix-blend-mode: overlay;
-	pointer-events: none;
-	user-select: none;
-}
-
-.lottie-1 .lf-player-container {
-	transform: translateX(-50%) translateY(50%);
-	-webkit-transform: translateX(-50%) translateY(50%);
-	-moz-transform: translateX(-50%) translateY(50%);
-	-ms-transform: translateX(-50%) translateY(50%);
-	-o-transform: translateX(-50%) translateY(50%);
-}
-
-.lottie-2 .lf-player-container {
-	transform: translateX(50%) translateY(-150%);
-	-webkit-transform: translateX(50%) translateY(-150%);
-	-moz-transform: translateX(50%) translateY(-150%);
-	-ms-transform: translateX(50%) translateY(-150%);
-	-o-transform: translateX(50%) translateY(-150%);
-}
-
-/* on mobile */
-@media (max-width: 768px) {
-	.lottie-1 .lf-player-container,
-	.lottie-2 .lf-player-container {
-		display: none;
 	}
 }
