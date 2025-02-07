@@ -14,6 +14,7 @@ import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
 import { localesConstant } from '@/services/localesConstant'
 import { ServicesGrid } from '@/components/Global/ServicesGrid'
+import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
 
 export async function generateStaticParams() {
 	// Map each locale to a params object expected by Next.js
@@ -60,7 +61,7 @@ export default async function Page({ params }) {
 
 	return (
 		<>
-			{/*<LoaderFullPage params={params} />*/}
+			<LoaderFullPage locale={locale} />
 			<Nav content_website={content_website} />
 			<PopupMainCat content_website={content_website} />
 

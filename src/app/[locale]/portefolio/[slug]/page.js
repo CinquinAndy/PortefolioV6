@@ -33,20 +33,21 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+	const { locale, slug } = await params
 	// fetch data
-	let realisation = await getRealisationBySlug(params.slug, params.locale)
+	let realisation = await getRealisationBySlug(slug, locale)
 	realisation = realisation?.data[0]
 
 	// conditional slug, make en and fr slugs available
-	let slug = ''
+	let _slug = ''
 	let slugAlternate = ''
-	if (params.locale === 'fr') {
-		slug = realisation?.attributes?.slug
+	if (locale === 'fr') {
+		_slug = realisation?.attributes?.slug
 		slugAlternate =
 			realisation?.attributes?.localizations?.data[0]?.attributes?.slug
 	} else {
 		slugAlternate = realisation?.attributes?.slug
-		slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
+		_slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
 	}
 
 	return {
@@ -68,10 +69,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
+	const { locale, slug } = await params
 	// fetch data
-	let content_website = await getContentWebsite(params.locale)
+	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let realisation = await getRealisationBySlug(params.slug, params.locale)
+	let realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data
