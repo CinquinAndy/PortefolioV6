@@ -8,11 +8,9 @@ import { LowGradientBackground } from '@/components/Global/Animations/LowGradien
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
 import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
 import { localesConstant } from '@/services/localesConstant'
-import Nav from '@/components/Global/Nav'
 
 export async function generateMetadata({ params }) {
 	const { locale, slug } = await params
-	let content_website = await getContentWebsite(locale)
 
 	// fetch data
 	let realisation = await getRealisationBySlug(slug, locale)

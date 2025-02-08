@@ -125,8 +125,8 @@ export default async function Page({ params }) {
 
 			<Nav
 				content_website={content_website}
-				enRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slugAlternate}
-				frRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slug}
+				enRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slugAlternate}
+				frRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slug}
 				h1={processedArticle?.attributes?.title}
 				isHome={false}
 			/>
@@ -265,30 +265,45 @@ export default async function Page({ params }) {
 										<br />
 										<hr />
 										<br />
-										<div className={'flex flex-col gap-4'}>
+										<div className={'mt-8 flex flex-col gap-4'}>
 											{locale === 'fr' ? (
-												<>
-													<div>
-														{`En vous remerciant de votre visite, n'hésitez pas à me
-														contacter pour toute demande de renseignements, devis ou
-														proposition de collaboration. Je me ferai un plaisir de
-														vous répondre dans les plus brefs délais.`}
-													</div>
-													<div>
-														{`Vous avez aimé cet article ? N'hésitez pas à le partager !`}
-													</div>
-												</>
+												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+													<p className="mb-3">
+														🚀 Merci d'avoir lu jusqu'ici !
+														<br />
+														Si cet article vous a plu, partagez-le autour de
+														vous.
+													</p>
+													<p className="text-indigo-400">
+														💡 Une idée en tête ?{' '}
+														<Link
+															className="text-indigo-300 underline hover:text-indigo-200"
+															href="/contact"
+														>
+															Discutons-en !
+														</Link>
+														☕
+													</p>
+												</div>
 											) : (
-												<>
-													<div>
-														{`Thank you for your visit, feel free to contact me for
-												any information, quote or collaboration proposal. I will
-												be happy to answer you as soon as possible.`}
-													</div>
-													<div>
-														{`Did you like this article? Feel free to share it!`}
-													</div>
-												</>
+												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+													<p className="mb-3">
+														🚀 Thanks for reading!
+														<br />
+														If you enjoyed this article, feel free to share it
+														around.
+													</p>
+													<p className="text-indigo-400">
+														💡 Got an idea?{' '}
+														<Link
+															className="text-indigo-300 underline hover:text-indigo-200"
+															href="/contact"
+														>
+															Let's talk !
+														</Link>
+														☕
+													</p>
+												</div>
 											)}
 										</div>
 									</div>
