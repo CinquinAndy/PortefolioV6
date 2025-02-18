@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Définition du répertoire de travail
 WORKDIR /usr/app
