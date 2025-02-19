@@ -43,7 +43,7 @@
 		"eslint-plugin-react-hooks": "5.1.0",
 		"espree": "10.3.0",
 		"form-data": "4.0.2",
-		"framer-motion": "12.4.4",
+		"framer-motion": "12.4.5",
 		"fuse.js": "7.1.0",
 		"highlight.js": "11.11.1",
 		"html-react-parser": "5.2.2",
