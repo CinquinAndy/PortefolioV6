@@ -18,7 +18,7 @@
 		]
 	},
 	"dependencies": {
-		"@eslint/eslintrc": "3.2.0",
+		"@eslint/eslintrc": "3.3.0",
 		"@eslint/js": "9.20.0",
 		"@headlessui/react": "2.2.0",
 		"@heroicons/react": "2.2.0",
