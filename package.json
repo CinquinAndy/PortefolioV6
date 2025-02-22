@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@eslint/eslintrc": "3.3.0",
-		"@eslint/js": "9.20.0",
+		"@eslint/js": "9.21.0",
 		"@headlessui/react": "2.2.0",
 		"@heroicons/react": "2.2.0",
 		"@hookform/resolvers": "3.10.0",
@@ -33,7 +33,7 @@
 		"@vercel/speed-insights": "1.2.0",
 		"class-variance-authority": "0.7.1",
 		"clsx": "2.1.1",
-		"eslint": "9.20.1",
+		"eslint": "9.21.0",
 		"eslint-config-next": "15.1.7",
 		"eslint-plugin-no-only-tests": "3.3.0",
 		"eslint-plugin-perfectionist": "4.9.0",
