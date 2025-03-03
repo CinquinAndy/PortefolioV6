@@ -18,6 +18,9 @@ import { replaceTitle } from '@/services/utils'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 
+// revalidate every 12 hours
+export const revalidate = 43200 // 12 hours
+
 export async function generateMetadata({ params }) {
 	let { slugAlternate, article, slug } = await getSlugs(params)
 

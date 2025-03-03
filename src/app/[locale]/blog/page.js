@@ -6,6 +6,9 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 
+// revalidate every 12 hours
+export const revalidate = 43200 // 12 hours
+
 export async function generateMetadata({ params }) {
 	const { locale } = await params
 	// fetch data
