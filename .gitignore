@@ -49,11 +49,11 @@ yarn.lock
 bun.lockb
 
 # for export
-#.bruno
-#.husky
-#.next
-#.unlighthouse
-#dev-assets
-#public
-#package-lock.json
-#node_modules
+# .bruno
+# .husky
+# .next
+# .unlighthouse
+# dev-assets
+# public
+# package-lock.json
+# node_modules

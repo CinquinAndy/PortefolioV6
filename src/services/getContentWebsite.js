@@ -176,7 +176,7 @@ export async function getNotFound(locale) {
  */
 export async function getRealisationBySlug(slug, locale) {
 	return fetchAPI(
-		`api/realisations?populate=deep,3&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
+		`api/realisations?populate=deep,4&sort=rank&filters[slug][$eq]=${slug}&locale=${locale}`
 	)
 }
 

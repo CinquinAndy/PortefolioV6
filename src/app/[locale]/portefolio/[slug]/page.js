@@ -9,6 +9,7 @@ import {
 	getRealisations,
 	processRealisationData,
 } from '@/services/getContentWebsite'
+import { TechnologyDisplay } from '@/components/Global/TechnologyDisplay'
 import { GalerySection } from '@/components/Global/GalerySection'
 import { localesConstant } from '@/services/localesConstant'
 import { Layout } from '@/components/Global/Layout'
@@ -141,37 +142,14 @@ export default async function Page({ params }) {
 							/>
 							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
-								{processedRealisation?.attributes?.technologies?.data.map(
-									technology => {
-										return (
-											<div
-												className="custom-button-icons-3d relative flex items-center justify-center"
-												key={technology?.id}
-											>
-												<Image
-													alt="icon-3d"
-													height={80}
-													src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/3d.svg`}
-													width={80}
-												/>
-												<Image
-													alt={
-														technology?.attributes?.image?.data?.attributes
-															?.alternativeText || 'Technology used'
-													}
-													className={
-														'absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 skew-y-30 transform'
-													}
-													height={24}
-													src={
-														technology?.attributes?.image?.data?.attributes?.url
-													}
-													width={24}
-												/>
-											</div>
-										)
-									}
-								)}
+								{processedRealisation?.attributes?.techno?.map(technology => {
+									return (
+										<TechnologyDisplay
+											key={technology.id}
+											technology={technology}
+										/>
+									)
+								})}
 								<div
 									className={
 										'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'

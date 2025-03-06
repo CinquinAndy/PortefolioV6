@@ -1,25 +1,43 @@
 'use client'
-import { Player } from '@lottiefiles/react-lottie-player'
+import { useEffect, useState } from 'react'
+
+import dynamic from 'next/dynamic'
+
+// Dynamically import the Player component with SSR disabled
+const LottiePlayer = dynamic(
+	() => import('@lottiefiles/react-lottie-player').then(mod => mod.Player),
+	{ ssr: false } // This is critical - prevents any server-side rendering
+)
 
 export function LottieAnimation() {
+	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+		setIsLoading(false)
+	}, [])
+
 	return (
-		<div className={'container-lottie'}>
-			<div className={'lottie-1'}>
-				<Player
-					autoplay
-					loop
-					src="/assets/background_animation/Animation - 1706890285931.json"
-					style={{ height: '1080px', width: '1920px' }}
-				/>
-			</div>
-			<div className={'lottie-2'}>
-				<Player
-					autoplay
-					loop
-					src="/assets/background_animation/Animation - 1706890285931.json"
-					style={{ height: '1080px', width: '1920px' }}
-				/>
-			</div>
-		</div>
+		<>
+			{!isLoading && (
+				<div className={'container-lottie'}>
+					<div className={'lottie-1'}>
+						<LottiePlayer
+							autoplay
+							loop
+							src="/assets/background_animation/Animation - 1706890285931.json"
+							style={{ height: '1080px', width: '1920px' }}
+						/>
+					</div>
+					<div className={'lottie-2'}>
+						<LottiePlayer
+							autoplay
+							loop
+							src="/assets/background_animation/Animation - 1706890285931.json"
+							style={{ height: '1080px', width: '1920px' }}
+						/>
+					</div>
+				</div>
+			)}
+		</>
 	)
 }
