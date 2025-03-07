@@ -29,7 +29,7 @@
 		"@next/third-parties": "15.2.1",
 		"@radix-ui/react-slot": "1.1.2",
 		"@tailwindcss/typography": "0.5.16",
-		"@tanstack/eslint-plugin-query": "5.66.1",
+		"@tanstack/eslint-plugin-query": "5.67.2",
 		"@vercel/analytics": "1.5.0",
 		"@vercel/speed-insights": "1.2.0",
 		"class-variance-authority": "0.7.1",
