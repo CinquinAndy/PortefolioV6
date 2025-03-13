@@ -1,5 +1,4 @@
 import {
-	getContentWebsite,
 	getRealisationBySlug,
 	getRealisations,
 	processRealisationData,
@@ -46,14 +45,16 @@ export async function generateStaticParams() {
 		for (const realisation of realisations.data) {
 			const images = realisation.attributes.galery.data // Assuming this is where images are stored
 
-			for (const [index, image] of images.entries()) {
-				paths.push({
-					params: {
-						slug: realisation.attributes.slug,
-						image: String(index),
-						locale,
-					}, // Use index as a placeholder for image
-				})
+			if (images) {
+				for (const [index, image] of images.entries()) {
+					paths.push({
+						params: {
+							slug: realisation.attributes.slug,
+							image: String(index),
+							locale,
+						}, // Use index as a placeholder for image
+					})
+				}
 			}
 		}
 	}
