@@ -47,7 +47,7 @@ export default async function Page({ searchParams, params }) {
 	content_website = content_website?.data
 
 	const pageParams = page ? parseInt(page) : 1
-	const pageSize = 30
+	const pageSize = 50
 
 	let articlesResponse = await getArticles(locale, pageParams, pageSize)
 	let articles = articlesResponse?.data
