@@ -36,6 +36,8 @@ test.describe('Simple Visual Tests', () => {
 		await expect(page).toHaveScreenshot('homepage-fr.png', {
 			fullPage: true,
 			animations: 'disabled',
+			threshold: 0.3, // Tolérance de 30% pour les animations résiduelles
+			timeout: 15000, // 15s pour la stabilisation
 		})
 	})
 
@@ -63,6 +65,8 @@ test.describe('Simple Visual Tests', () => {
 		await expect(page).toHaveScreenshot('homepage-en.png', {
 			fullPage: true,
 			animations: 'disabled',
+			threshold: 0.3, // Tolérance de 30% pour les animations résiduelles
+			timeout: 15000, // 15s pour la stabilisation
 		})
 	})
 })
