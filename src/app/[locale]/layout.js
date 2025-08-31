@@ -68,7 +68,6 @@ export default async function RootLayout({ children, params }) {
 			>
 				{/*<Cursor />*/}
 				<LottieAnimation />
-
 				<ToastContainer closeOnClick />
 				<GoogleAnalytics gaId="UA-150969790-2" />
 				{children}
