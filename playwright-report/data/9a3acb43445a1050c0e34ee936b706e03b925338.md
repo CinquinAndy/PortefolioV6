@@ -1,0 +1,308 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - img
+    - generic:
+      - generic:
+        - generic:
+          - img
+  - region "Notifications Alt+T"
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - img "icon"
+    - generic:
+      - heading "Loading my universe..." [level=3]
+  - banner [ref=e6]:
+    - button "Main Menu" [ref=e8] [cursor=pointer]:
+      - img [ref=e9] [cursor=pointer]
+    - link "Logo Cinquin Andy Signature" [ref=e12] [cursor=pointer]:
+      - /url: /
+      - img "Logo Cinquin Andy Signature" [ref=e13] [cursor=pointer]
+    - link "C O N T A C T" [ref=e14] [cursor=pointer]:
+      - /url: /contact
+      - heading "C O N T A C T" [level=2] [ref=e15] [cursor=pointer]:
+        - generic [ref=e16] [cursor=pointer]:
+          - generic [ref=e17] [cursor=pointer]: C
+          - generic [ref=e18] [cursor=pointer]: O
+          - generic [ref=e19] [cursor=pointer]: "N"
+          - generic [ref=e20] [cursor=pointer]: T
+          - generic [ref=e21] [cursor=pointer]: A
+          - generic [ref=e22] [cursor=pointer]: C
+          - generic [ref=e23] [cursor=pointer]: T
+  - navigation:
+    - generic:
+      - link "andy cinquin":
+        - /url: /
+        - heading "andy cinquin" [level=2]
+      - link "portfolio":
+        - /url: /portefolio
+        - heading "portfolio" [level=2]
+      - link "blog":
+        - /url: /blog
+        - heading "blog" [level=2]
+      - link "about me":
+        - /url: /about
+        - heading "about me" [level=2]
+      - link "contact me":
+        - /url: /contact
+        - heading "contact me" [level=2]
+      - generic:
+        - separator
+        - generic:
+          - generic:
+            - link:
+              - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+              - img
+            - link:
+              - /url: https://www.instagram.com/cinquin.andy/
+              - img
+            - link:
+              - /url: https://www.linkedin.com/in/andy-cinquin/
+              - img
+            - link:
+              - /url: https://github.com/CinquinAndy/
+              - img
+            - link:
+              - /url: https://www.malt.fr/profile/andycinquin
+              - img
+      - generic:
+        - paragraph: 4 Impasse de la Marchaisière, 44115 Haute-Goulaine
+        - link "+33 6 21 58 26 84":
+          - /url: tel:+33621582684
+        - generic:
+          - link "→ aller à la version française":
+            - /url: https://andy-cinquin.fr/
+    - button "Close Menu"
+  - generic [ref=e24]:
+    - img [ref=e26]:
+      - generic [ref=e27]: ANDY CINQUIN
+    - heading "ANDY CINQUIN" [level=1] [ref=e28]
+    - generic [ref=e29]:
+      - link [ref=e31] [cursor=pointer]:
+        - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+        - img [ref=e32] [cursor=pointer]
+      - link [ref=e35] [cursor=pointer]:
+        - /url: https://www.instagram.com/cinquin.andy/
+        - img [ref=e36] [cursor=pointer]
+      - link [ref=e41] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/andy-cinquin/
+        - img [ref=e42] [cursor=pointer]
+      - link [ref=e47] [cursor=pointer]:
+        - /url: https://github.com/CinquinAndy/
+        - img [ref=e48] [cursor=pointer]
+    - generic [ref=e52]:
+      - heading "‣ Creative developer / FullStack developer / Front end developer / Freelance / Entrepreneur / UI/UX Designer" [level=2] [ref=e53]
+      - generic [ref=e55]: ‣ Freelance|
+  - generic [ref=e58]:
+    - img "bg_opti" [ref=e59]
+    - iframe [ref=e60]:
+      - generic [ref=f1e1]:
+        - heading "We couldn't verify the security of your connection." [level=1] [ref=f1e2]
+        - heading "Access to this content has been restricted. Contact your internet service provider for help." [level=2] [ref=f1e3]
+  - generic [ref=e61]:
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - heading "Turning your ideas into success." [level=2] [ref=e64]:
+          - generic [ref=e65]: Turning your
+          - generic [ref=e66]: ideas
+          - generic [ref=e67]: into
+          - generic [ref=e68]: success.
+        - link "Lets work together !" [ref=e69] [cursor=pointer]:
+          - /url: /contact
+          - generic [ref=e70] [cursor=pointer]: Lets work together !
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - img "Web enthusiast" [ref=e75]
+          - generic [ref=e77]:
+            - generic [ref=e78]: Full-Stack Developer
+            - heading "Web enthusiast" [level=3] [ref=e79]
+            - paragraph [ref=e80]: As a Next.js & React expert, I transform your most ambitious ideas into modern, intuitive web applications.
+        - generic [ref=e81]:
+          - img "Project Creator" [ref=e84]
+          - generic [ref=e86]:
+            - generic [ref=e87]: Contractor
+            - heading "Project Creator" [level=3] [ref=e88]
+            - paragraph [ref=e89]: I co-founded ForVoyez, ForMenu and My-Makeup. Startups that meet real needs.
+        - generic [ref=e90]:
+          - img "6+ years experience" [ref=e93]
+          - generic [ref=e95]:
+            - generic [ref=e96]: Experience
+            - heading "6+ years experience" [level=3] [ref=e97]
+            - paragraph [ref=e98]: From freelance, to startups, to agencies, via France and the United States. I work with you to create web experiences that make all the difference.
+        - generic [ref=e99]:
+          - img "Sharing & Innovation" [ref=e102]
+          - generic [ref=e104]:
+            - generic [ref=e105]: Open Source
+            - heading "Sharing & Innovation" [level=3] [ref=e106]
+            - paragraph [ref=e107]: I actively contribute to the dev community with npm packages and Strapi plugins that make developers' lives easier.
+        - generic [ref=e108]:
+          - img "A project in mind?" [ref=e111]
+          - generic [ref=e113]:
+            - generic [ref=e114]: Shall we have a chat?
+            - heading "A project in mind?" [level=3] [ref=e115]
+            - paragraph [ref=e116]: Want to create something unique? Let's talk about your project over coffee ☕️
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - heading "My latest projects realized!" [level=2] [ref=e120]:
+          - generic [ref=e121]: My latest
+          - generic [ref=e122]: projects
+          - generic [ref=e123]: realized
+          - generic [ref=e124]: "!"
+        - generic [ref=e125]:
+          - link "Contact me" [ref=e126] [cursor=pointer]:
+            - /url: /contact
+            - generic [ref=e127] [cursor=pointer]: Contact me
+          - link "My projects" [ref=e128] [cursor=pointer]:
+            - /url: /portefolio
+            - generic [ref=e129] [cursor=pointer]: My projects
+      - generic [ref=e131]:
+        - link "Beswib A sleek computer monitor in a bright, minimalistic workspace, showcasing the word 'TRANSFER' boldly. A runner is depicted in the background, emphasizing fitness and activity, alongside a stylish keyboard and a potted plant. C2C Marketplace with Next.js 15 and PayPal Partner integration" [ref=e132] [cursor=pointer]:
+          - /url: /portefolio/beswib
+          - heading "Beswib" [level=2] [ref=e133] [cursor=pointer]
+          - img "A sleek computer monitor in a bright, minimalistic workspace, showcasing the word 'TRANSFER' boldly. A runner is depicted in the background, emphasizing fitness and activity, alongside a stylish keyboard and a potted plant." [ref=e136] [cursor=pointer]
+          - heading "C2C Marketplace with Next.js 15 and PayPal Partner integration" [level=2] [ref=e138] [cursor=pointer]
+        - link "Neova Protocol Web3 A modern computer monitor displaying the website titled 'AI-Enhanced DePIN Transforming Cloud Computing', featuring colorful icons for data applications in a professional office environment. Complete refactoring of a Web3 ecosystem of 30+ services" [ref=e139] [cursor=pointer]:
+          - /url: /portefolio/neova-protocol
+          - heading "Neova Protocol Web3" [level=2] [ref=e140] [cursor=pointer]
+          - img "A modern computer monitor displaying the website titled 'AI-Enhanced DePIN Transforming Cloud Computing', featuring colorful icons for data applications in a professional office environment." [ref=e143] [cursor=pointer]
+          - heading "Complete refactoring of a Web3 ecosystem of 30+ services" [level=2] [ref=e145] [cursor=pointer]
+        - 'link "Forhives V2: A creative refresh Creation of an interactive experience inspired by the game ''Split Fiction''." [ref=e146] [cursor=pointer]':
+          - /url: /portefolio/forhives-v2
+          - 'heading "Forhives V2: A creative refresh" [level=2] [ref=e147] [cursor=pointer]'
+          - img [ref=e150] [cursor=pointer]
+          - heading "Creation of an interactive experience inspired by the game 'Split Fiction'." [level=2] [ref=e152] [cursor=pointer]
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - heading "My latest news and tips." [level=2] [ref=e156]:
+          - generic [ref=e157]: My latest
+          - generic [ref=e158]: news
+          - generic [ref=e159]: and
+          - generic [ref=e160]: tips
+          - generic [ref=e161]: .
+        - generic [ref=e162]:
+          - link "Contact me" [ref=e163] [cursor=pointer]:
+            - /url: /contact
+            - generic [ref=e164] [cursor=pointer]: Contact me
+          - link "My articles" [ref=e165] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=e166] [cursor=pointer]: My articles
+      - generic [ref=e168]:
+        - link "Google Gemini 2.5 Flash destroys the game A major advance in image generation" [ref=e169] [cursor=pointer]:
+          - /url: /blog/gemini-flash-image
+          - heading "Google Gemini 2.5 Flash destroys the game" [level=2] [ref=e170] [cursor=pointer]
+          - img [ref=e173] [cursor=pointer]
+          - heading "A major advance in image generation" [level=2] [ref=e175] [cursor=pointer]
+        - 'link "Tailwind CSS 4.0: Migration to OKLCH Understanding the transition to OKLCH" [ref=e176] [cursor=pointer]':
+          - /url: /blog/migration-oklch-tailwind-css-4-0
+          - 'heading "Tailwind CSS 4.0: Migration to OKLCH" [level=2] [ref=e177] [cursor=pointer]'
+          - img [ref=e180] [cursor=pointer]
+          - heading "Understanding the transition to OKLCH" [level=2] [ref=e182] [cursor=pointer]
+        - link "Midjourney Video to Seamless Loop using FFmpeg - Complete Automation Script Pasted image 20250619004116.png AI Video to Perfect Loop Conversion Pipeline" [ref=e183] [cursor=pointer]:
+          - /url: /blog/midjourney-video-to-seamless-loop-ffmpeg
+          - heading "Midjourney Video to Seamless Loop using FFmpeg - Complete Automation Script" [level=2] [ref=e184] [cursor=pointer]
+          - img "Pasted image 20250619004116.png" [ref=e187] [cursor=pointer]
+          - heading "AI Video to Perfect Loop Conversion Pipeline" [level=2] [ref=e189] [cursor=pointer]
+    - generic [ref=e192]:
+      - heading "DEVELOP YOUR PROJECTS TOGETHER" [level=2] [ref=e194]:
+        - generic [ref=e195]: DEVELOP YOUR PROJECTS
+        - generic [ref=e196]: TOGETHER
+      - generic [ref=e198]:
+        - generic [ref=e199]: An idea, a project? I'm here to answer your questions and help you.
+        - generic [ref=e200]: I'd be delighted to discuss your project with you!
+      - link "Contact me" [ref=e202] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e203] [cursor=pointer]: Contact me
+  - contentinfo [ref=e204]:
+    - generic [ref=e205]:
+      - img "Andy Cinquin Logo Signature Icon" [ref=e206]
+      - generic [ref=e208]:
+        - link "contact@andy-cinquin.fr" [ref=e210] [cursor=pointer]:
+          - /url: mailto:contact@andy-cinquin.fr
+        - generic [ref=e211]: "Entrepreneur and co-founder of :"
+        - list [ref=e212]:
+          - listitem [ref=e213]:
+            - link "Beswib" [ref=e214] [cursor=pointer]:
+              - /url: https://beswib.com
+            - text: ","
+          - listitem [ref=e215]:
+            - link "ForVoyez" [ref=e216] [cursor=pointer]:
+              - /url: https://forvoyez.com
+            - text: ","
+          - listitem [ref=e217]:
+            - link "ForHives.fr" [ref=e218] [cursor=pointer]:
+              - /url: https://forhives.fr
+            - text: ","
+          - listitem [ref=e219]:
+            - link "ForMenu.fr" [ref=e220] [cursor=pointer]:
+              - /url: https://formenu.fr
+            - text: ","
+          - listitem [ref=e221]:
+            - link "My-Makeup.fr" [ref=e222] [cursor=pointer]:
+              - /url: https://my-makeup.fr
+            - text: ","
+          - listitem [ref=e223]:
+            - link "Artriste.cc" [ref=e224] [cursor=pointer]:
+              - /url: https://artriste.cc
+            - text: ","
+        - generic [ref=e225]: Actually CTO at @(Neova)[https://neova.io]
+        - generic [ref=e226]: Freelance developer, Web, mobile, application, UI/UX, SEO/SEA.
+        - generic [ref=e227]: Custom design. Optimization. Website design and development.
+    - generic [ref=e228]:
+      - heading "SITEMAP" [level=2] [ref=e229]
+      - link "About me" [ref=e230] [cursor=pointer]:
+        - /url: /about
+      - link "My projects" [ref=e231] [cursor=pointer]:
+        - /url: /portefolio
+      - link "Blog" [ref=e232] [cursor=pointer]:
+        - /url: /blog
+      - link "Contact" [ref=e233] [cursor=pointer]:
+        - /url: /contact
+    - generic [ref=e234]:
+      - heading "LEGAL" [level=2] [ref=e235]
+      - link "Terms of use" [ref=e236] [cursor=pointer]:
+        - /url: /cgu
+      - link "Privacy policy" [ref=e237] [cursor=pointer]:
+        - /url: /cgu
+    - generic [ref=e240]:
+      - link [ref=e242] [cursor=pointer]:
+        - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+        - img [ref=e243] [cursor=pointer]
+      - link [ref=e246] [cursor=pointer]:
+        - /url: https://www.instagram.com/cinquin.andy/
+        - img [ref=e247] [cursor=pointer]
+      - link [ref=e252] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/andy-cinquin/
+        - img [ref=e253] [cursor=pointer]
+      - link [ref=e258] [cursor=pointer]:
+        - /url: https://github.com/CinquinAndy/
+        - img [ref=e259] [cursor=pointer]
+      - link [ref=e264] [cursor=pointer]:
+        - /url: https://www.malt.fr/profile/andycinquin
+        - img [ref=e265] [cursor=pointer]
+  - article [ref=e275]:
+    - generic [ref=e278]:
+      - text: © 2025 Andy Cinquin - All rights reserved - Developed & Designed with 🐝
+      - link "ForHives co-founders" [ref=e279] [cursor=pointer]:
+        - /url: https://forhives.fr/
+  - generic [ref=e284] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e285] [cursor=pointer]:
+      - img [ref=e286] [cursor=pointer]
+    - generic [ref=e289] [cursor=pointer]:
+      - button "Open issues overlay" [ref=e290] [cursor=pointer]:
+        - generic [ref=e291] [cursor=pointer]:
+          - generic [ref=e292] [cursor=pointer]: "3"
+          - generic [ref=e293] [cursor=pointer]: "4"
+        - generic [ref=e294] [cursor=pointer]:
+          - text: Issue
+          - generic [ref=e295] [cursor=pointer]: s
+      - button "Collapse issues badge" [ref=e296] [cursor=pointer]:
+        - img [ref=e297] [cursor=pointer]
+  - alert [ref=e299]
+```
