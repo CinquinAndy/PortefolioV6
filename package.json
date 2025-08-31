@@ -10,7 +10,11 @@
 		"lint:fix": "next lint --fix",
 		"prettier": "prettier --write .",
 		"precommit": "lint-staged",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"test:visual": "playwright test",
+		"test:visual:ui": "playwright test --ui",
+		"test:visual:headed": "playwright test --headed",
+		"test:visual:update": "playwright test --update-snapshots"
 	},
 	"lint-staged": {
 		"*.js": [
