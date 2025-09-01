@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { ContentWebsite, Realisation } from '@/types/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -9,13 +10,13 @@ import { replaceTitle } from '@/services/utils'
 
 interface RealisationsProps {
 	slice?: number
-	realisations?: any[] // TODO: Define proper type for realisations
+	realisations?: Realisation[]
 	isHome?: boolean
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): React.JSX.Element {
-	realisations = slice && realisations ? realisations.slice(0, slice) : realisations || []
+	realisations = slice && realisations ? realisations.slice(0, slice) : (realisations ?? [])
 	const gridTemplateCustom = (index: number): string => {
 		switch (index % 3) {
 			case 0:

@@ -96,6 +96,24 @@ export interface UpdateServiceRequest {
 	data: Partial<CreateServiceRequest['data']>
 }
 
+// Technology Request Types
+export interface CreateTechnologyRequest {
+	data: {
+		name: string
+		description?: string
+		icon?: number | string
+		color?: string
+		url?: string
+		category?: string
+		order?: number
+		locale: Locale
+	}
+}
+
+export interface UpdateTechnologyRequest {
+	data: Partial<CreateTechnologyRequest['data']>
+}
+
 // About Request Types
 export interface UpdateAboutRequest {
 	data: {

@@ -5,6 +5,8 @@ import type {
 	UpdateRealisationRequest,
 	CreateServiceRequest,
 	UpdateServiceRequest,
+	CreateTechnologyRequest,
+	UpdateTechnologyRequest,
 	UpdateAboutRequest,
 	UpdateCguRequest,
 	UpdateNotFoundRequest,
@@ -17,6 +19,7 @@ import type {
 	Article,
 	Realisation,
 	Service,
+	Technology,
 	About,
 	Cgu,
 	NotFound,
@@ -229,6 +232,16 @@ export const ServiceCRUD = {
 	delete: (id: number) => deleteEntity('api/services', id),
 	create: (data: CreateServiceRequest) => createEntity<CreateServiceRequest, Service>('api/services', data),
 	bulkDelete: (data: BulkDeleteRequest) => bulkDeleteEntities('api/services', data),
+}
+
+// Technology CRUD operations
+export const TechnologyCRUD = {
+	create: (data: CreateTechnologyRequest) =>
+		createEntity<CreateTechnologyRequest, Technology>('api/technologies', data),
+	update: (id: number, data: UpdateTechnologyRequest) =>
+		updateEntity<UpdateTechnologyRequest, Technology>('api/technologies', id, data),
+	delete: (id: number) => deleteEntity('api/technologies', id),
+	bulkDelete: (data: BulkDeleteRequest) => bulkDeleteEntities('api/technologies', data),
 }
 
 // Content Website operations

@@ -1,5 +1,4 @@
 import type { ContactFormData, ApiResponse } from '@/types/api-routes'
-import type { MailgunClientOptions } from 'mailgun.js/definitions'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { toast } from 'react-toastify'
@@ -10,7 +9,7 @@ import Mailgun from 'mailgun.js'
 const mailgun = new Mailgun(formData)
 const mg = mailgun.client({
 	username: 'api',
-	key: process.env.MAILGUN_API_KEY || '',
+	key: process.env.MAILGUN_API_KEY ?? '',
 })
 
 interface ContactRequest extends NextApiRequest {

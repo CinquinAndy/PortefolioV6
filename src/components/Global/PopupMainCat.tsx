@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState } from 'react'
 import React from 'react'
 
+import { ContentWebsite } from '@/types/strapi'
+
 interface PopupMainCatProps {
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 export function PopupMainCat({ content_website }: PopupMainCatProps): React.JSX.Element {
@@ -988,7 +990,7 @@ export function PopupMainCat({ content_website }: PopupMainCatProps): React.JSX.
 				</div>
 
 				<div className={'text-md w- h-full font-medium text-white'}>
-					{content_website?.attributes?.content_popup || 'Hello there !'}
+					{content_website?.attributes?.content_popup ?? 'Hello there !'}
 				</div>
 			</div>
 		</div>

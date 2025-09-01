@@ -4,6 +4,7 @@ import type {
 	Realisation,
 	ContentWebsite,
 	Service,
+	Technology,
 	About,
 	Cgu,
 	NotFound,
@@ -66,7 +67,7 @@ export async function getAbout(locale: Locale): Promise<StrapiResponse<About> | 
  * Get article by id and locale
  */
 export async function getArticleById(id: number, locale: Locale): Promise<StrapiResponse<Article> | NotFoundResponse> {
-	return fetchAPI<StrapiResponse<Article>>(`api/articles/${id}/populate=deep&locale=${locale}`)
+	return fetchAPI<StrapiResponse<Article>>(`api/articles/${id}?populate=deep&locale=${locale}`)
 }
 
 /**
@@ -391,6 +392,35 @@ export async function getRecentRealisations(
 ): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
 	return await fetchAPI<StrapiResponse<Realisation[]>>(
 		`api/realisations?populate=deep,2&sort=publishedAt:desc&locale=${locale}&pagination[pageSize]=${limit}`
+	)
+}
+
+/**
+ * Get technologies
+ */
+export async function getTechnologies(locale: Locale): Promise<StrapiResponse<Technology[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Technology[]>>(`api/technologies?populate=deep&sort=order&locale=${locale}`)
+}
+
+/**
+ * Get technology by id
+ */
+export async function getTechnologyById(
+	id: number,
+	locale: Locale
+): Promise<StrapiResponse<Technology> | NotFoundResponse> {
+	return fetchAPI<StrapiResponse<Technology>>(`api/technologies/${id}?populate=deep&locale=${locale}`)
+}
+
+/**
+ * Get technologies by category
+ */
+export async function getTechnologiesByCategory(
+	category: string,
+	locale: Locale
+): Promise<StrapiResponse<Technology[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Technology[]>>(
+		`api/technologies?populate=deep&sort=order&filters[category][$eq]=${category}&locale=${locale}`
 	)
 }
 

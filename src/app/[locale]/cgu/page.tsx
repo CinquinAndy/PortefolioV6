@@ -65,7 +65,7 @@ export default async function Page({ params }: PageProps) {
 						<div className="mx-auto max-w-3xl">
 							<article>
 								<div className={'prose prose-invert my-8'}>
-									<Layout value={cgu?.attributes?.content.toString()} />
+									<Layout value={cgu?.attributes?.content?.toString() ?? ''} />
 								</div>
 							</article>
 						</div>

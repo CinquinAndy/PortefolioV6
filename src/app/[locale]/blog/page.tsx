@@ -75,33 +75,30 @@ export default async function Page({ searchParams, params }: BlogPageProps) {
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
-	const pageParams = page ? parseInt(page) : 1
+	const pageParams = page != null ? parseInt(page) : 1
 	const pageSize = 50
 
 	const articlesResponse = await getArticles(locale as Locale, pageParams, pageSize)
 	const articles = getResponseData(articlesResponse)
 
-	const hasMeta = articlesResponse && typeof articlesResponse === 'object' && 'meta' in articlesResponse
-	const totalArticles = hasMeta ? articlesResponse.meta?.pagination?.total || 0 : 0
+	const hasMeta = articlesResponse != null && typeof articlesResponse === 'object' && 'meta' in articlesResponse
+	const totalArticles = hasMeta ? (articlesResponse.meta?.pagination?.total ?? 0) : 0
 	const totalPages = Math.ceil(totalArticles / pageSize)
 
 	const currentPage = Number(page) || 1
 
-	const contentWebsiteHasAttributes =
-		content_website && typeof content_website === 'object' && 'attributes' in content_website
-
 	return (
 		<>
-			<Nav
-				content_website={content_website}
-				h1={contentWebsiteHasAttributes ? content_website.attributes?.content_blog?.seo?.h1 : undefined}
-				isHome={false}
-			/>
+			{content_website && (
+				<Nav
+					content_website={content_website}
+					h1={content_website.attributes?.content_blog?.seo?.h1 ?? ''}
+					isHome={false}
+				/>
+			)}
 			<div>
-				<BlogContent articles={articles || []} content_website={content_website} locale={locale} />
-				{totalArticles > pageSize && (
-					<Pagination baseUrl={`/${locale}/blog`} currentPage={currentPage} totalPages={totalPages} />
-				)}
+				<BlogContent articles={articles ?? []} locale={locale} />
+				{totalArticles > pageSize && <Pagination currentPage={currentPage} totalPages={totalPages} />}
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

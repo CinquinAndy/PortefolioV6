@@ -167,6 +167,30 @@ export interface TechnologyComponent {
 	color?: string
 }
 
+export interface Technology {
+	id: number
+	attributes: {
+		name: string
+		description?: string
+		icon?: {
+			data: StrapiMedia
+		}
+		color?: string
+		url?: string
+		category?: string
+		order?: number
+		createdAt: string
+		updatedAt: string
+		publishedAt: string
+		createdBy?: StrapiRelation
+		updatedBy?: StrapiRelation
+		localizations?: {
+			data: Technology[]
+		}
+		locale: string
+	}
+}
+
 export interface Article {
 	id: number
 	attributes: {
@@ -246,37 +270,150 @@ export interface ButtonContent {
 	url?: string
 }
 
-export interface ContentAbout {
-	seo?: SeoContent
+export interface SocialsComponent {
+	github?: string
+	linkedin?: string
+	twitter?: string
+	email?: string
 }
 
-export interface ContentRealisations {
+export interface ContactComponent {
+	email?: string
+	phone?: string
+	address?: string
+	name?: string
+}
+
+export interface ContentHomeComponent {
+	title_principal?: string
+	title_secondary?: string
+	description?: string
+	btn_cta?: ButtonContent
+	vertical_nav?: Array<{
+		label?: string
+		href?: string
+	}>
+}
+
+export interface ContentServiceComponent {
+	seo?: SeoContent
+	title?: string
+	description?: string
+	content?: string
+}
+
+export interface ContentRealisationsComponent {
 	title_galery?: string
 	btn_galery?: ButtonContent
 	title_links?: string
+	title_content?: string
+	title_technology?: string
 }
 
-export interface ContentBlog {
+export interface ContentBlogComponent {
 	title_content?: string
 	seo?: SeoContent
+}
+
+export interface ContentContactComponent {
+	seo?: SeoContent
+	title?: string
+	form_labels?: {
+		name?: string
+		email?: string
+		subject?: string
+		message?: string
+		submit?: string
+	}
+	error_messages?: {
+		required?: string
+		invalid_email?: string
+		send_error?: string
+		success?: string
+	}
+}
+
+export interface ContentAboutComponent {
+	seo?: SeoContent
+	content?: string
+}
+
+export interface ContentCguComponent {
+	seo?: SeoContent
+	content?: string
+}
+
+export interface ContentNotFoundComponent {
+	seo?: SeoContent
+	title?: string
+	description?: string
+	btn_home?: ButtonContent
+}
+
+export interface ContentFooterComponent {
+	content?: string
+	content_signature?: string
+	image?: {
+		data: StrapiMedia
+	}
+	sitemap?: Array<{
+		label?: string
+		href?: string
+	}>
+	legal_links?: Array<{
+		label?: string
+		href?: string
+	}>
+}
+
+export interface CtaComponent {
+	content?: string
+	title?: string
+	btn_cta?: ButtonContent
 }
 
 export interface ContentWebsite {
 	id: number
 	attributes: {
-		content_footer?: {
-			content: string
-			content_signature: string
-		}
-		cta?: {
-			content: string
-		}
-		content_about?: ContentAbout
-		content_realisations?: ContentRealisations
-		content_blog?: ContentBlog
+		// Social media links
+		socials?: SocialsComponent
+		
+		// Navigation menu
+		menu?: Array<{
+			id: number
+			label: string
+			href: string
+		}>
+		
+		// Contact information
+		contact?: ContactComponent
+		
+		// Page-specific content
+		content_home?: ContentHomeComponent
+		content_footer?: ContentFooterComponent
+		content_service?: ContentServiceComponent
+		content_realisations?: ContentRealisationsComponent
+		content_blog?: ContentBlogComponent
+		content_contact?: ContentContactComponent
+		content_cgu?: ContentCguComponent
+		content_about?: ContentAboutComponent
+		content_notfound?: ContentNotFoundComponent
+		content_popup?: string
+		
+		// Site navigation structure
+		Sitemap?: Array<{
+			id: number
+			label: string
+			href: string
+		}>
+		
+		// Call-to-action component
+		cta?: CtaComponent
+		
+		// Standard Strapi fields
 		createdAt: string
 		updatedAt: string
-		publishedAt: string
+		publishedAt?: string
 		createdBy?: StrapiRelation
 		updatedBy?: StrapiRelation
 		localizations?: {
