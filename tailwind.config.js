@@ -18,10 +18,6 @@ module.exports = {
 				raw: '(min-width: 1536px) and (min-height: 650px)',
 			},
 		},
-		fontFamily: {
-			display: ['Noto Serif Display', 'serif'],
-			body: ['Be Vietnam Pro', 'sans-serif'],
-		},
 		extend: {
 			spacing: {
 				128: '32rem',

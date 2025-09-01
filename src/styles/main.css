@@ -1,8 +1,29 @@
 @import 'tailwindcss';
 
 @theme {
+	/* Font families using Next.js CSS Variables */
+	--font-family-display: var(--font-noto-serif-display), serif;
+	--font-family-body: var(--font-be-vietnam-pro), sans-serif;
+	
+	/* Custom andy colors */
 	--color-andy-purple-500: #6c00a2;
 	--color-andy-blue-500: #001152;
+	
+	/* Custom slate colors */
+	--color-slate-1100: #090D16;
+	--color-slate-1000: #0D1321;
+	
+	/* Custom sky colors */
+	--color-sky-1100: #011623;
+	--color-sky-1000: #042C44;
+	
+	/* Custom neutral colors */
+	--color-neutral-1100: #080808;
+	--color-neutral-1000: #0F0F0F;
+	
+	/* Custom indigo colors */
+	--color-indigo-1100: #0D0C3C;
+	--color-indigo-1000: #1E1C5E;
 }
 
 @layer utilities {
@@ -52,7 +73,7 @@
 			opacity,
 			z-index,
 			color ease-in-out 0.3s;
-		font-family: var(--font-be-vietnam-pro), sans-serif;
+		font-family: var(--font-family-body);
 		color: #fff;
 	}
 
@@ -99,7 +120,7 @@
 	}
 
 	.Toastify__toast-body * {
-		font-family: var(--font-be-vietnam-pro), sans-serif;
+		font-family: var(--font-family-body);
 		font-weight: 400;
 		color: #000;
 	}
@@ -182,7 +203,7 @@
 	h5,
 	h6,
 	nav * {
-		font-family: var(--font-noto-serif-display), serif;
+		font-family: var(--font-family-display);
 		font-weight: initial;
 	}
 
@@ -628,7 +649,7 @@
 	}
 
 	.patterns svg text {
-		font-family: 'Noto Serif Display', serif;
+		font-family: var(--font-family-display);
 		letter-spacing: 10px;
 		stroke: #a5f3fc;
 		stroke-width: 1.5;
