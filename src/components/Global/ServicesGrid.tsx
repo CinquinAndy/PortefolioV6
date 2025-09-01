@@ -57,7 +57,7 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 									className="object-cover object-center"
 									fill
 									priority
-									src={service.attributes.image?.data?.attributes?.url ?? `/assets/bento/bento_${index + 1}.png`}
+									src={service.attributes.graphic?.data?.attributes?.url ?? `/assets/bento/bento_${index + 1}.png`}
 								/>
 							</div>
 						}

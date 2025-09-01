@@ -1,4 +1,5 @@
 'use client'
+
 import { TypeAnimation } from 'react-type-animation'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -32,10 +33,6 @@ function Nav({
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
-
-	content_website = content_website?.attributes ?? content_website
-	const menu = content_website?.menu ?? []
-	const socials = content_website?.socials ?? []
 
 	useEffect(() => {
 		setLinkToSwitchLanguage(
@@ -148,7 +145,7 @@ function Nav({
 				id="nav-block"
 			>
 				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
-					{menu?.map((item: LinkComponent, index: number) => {
+					{content_website?.attributes.menu?.map((item: { id: number; Link: LinkComponent }, index: number) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link className="relative text-indigo-400" href={item?.Link?.url} rel="noopener">
 								<svg
@@ -161,7 +158,7 @@ function Nav({
 										opacity=".9"
 									/>
 								</svg>
-								<h2 className="text-xl font-semibold uppercase lg:text-3xl">{menu?.Link?.label}</h2>
+								<h2 className="text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
 							</Link>
 						) : (
 							<Link
@@ -180,7 +177,7 @@ function Nav({
 							<div className="flex items-center justify-evenly gap-10">
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
-									href={socials?.facebook}
+									href={content_website?.attributes.socials?.facebook as string}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -190,7 +187,7 @@ function Nav({
 								</Link>
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
-									href={socials?.instagram}
+									href={content_website?.attributes.socials?.instagram as string}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -202,7 +199,7 @@ function Nav({
 								</Link>
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
-									href={socials?.linkedin}
+									href={content_website?.attributes.socials?.linkedin as string}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -214,7 +211,7 @@ function Nav({
 								</Link>
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
-									href={socials?.github}
+									href={content_website?.attributes.socials?.github as string}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -227,7 +224,7 @@ function Nav({
 								{/*// <!--        Malt -->*/}
 								<Link
 									className="text-indigo-500 hover:text-slate-50"
-									href={socials?.malt}
+									href={content_website?.attributes.socials?.malt as string}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -260,17 +257,18 @@ function Nav({
 						</div>
 					</div>
 					<div></div>
+					{}
 					<div className="flex flex-col gap-2 text-xs text-slate-300">
-						<p className="font-body normal-case">{content_website?.contact?.address}</p>
+						<p className="font-body normal-case">{content_website?.attributes?.contact?.address}</p>
 						<Link
 							className="font-body normal-case underline"
-							href={`tel:${(content_website?.contact?.phone ?? '').toString().replace(/\s+/g, '')}`}
+							href={`tel:${(content_website?.attributes?.contact?.phone ?? '').toString().replace(/\s+/g, '')}`}
 						>
-							{content_website?.contact?.phone}
+							{content_website?.attributes?.contact?.phone}
 						</Link>
 						<div>
 							<Link className="font-body normal-case underline" href={linkToSwitchLanguage}>
-								{content_website?.contact?.langage}
+								{content_website?.attributes?.contact?.langage}
 							</Link>
 						</div>
 					</div>
@@ -301,7 +299,8 @@ function Nav({
 								x="50%"
 								y="60%"
 							>
-								{content_website?.content_home?.title_home}
+								{}
+								{content_website?.attributes?.content_home?.title_home}
 							</text>
 						</svg>
 					</div>
@@ -309,7 +308,8 @@ function Nav({
 				<h1
 					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest lg:text-5xl lg:text-8xl`}
 				>
-					{isHome ? content_website?.content_home?.title_home : h1}
+					{}
+					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
 				</h1>
 				{!isHome && (
 					<div
@@ -331,7 +331,7 @@ function Nav({
 					<div className={'relative p-3'}>
 						<Link
 							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
-							href={socials?.facebook}
+							href={content_website?.attributes.socials?.facebook as string}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
@@ -343,7 +343,7 @@ function Nav({
 					<div className={'relative p-3'}>
 						<Link
 							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
-							href={socials?.instagram}
+							href={content_website?.attributes.socials?.instagram as string}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
@@ -357,7 +357,7 @@ function Nav({
 					<div className={'relative p-3'}>
 						<Link
 							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
-							href={socials?.linkedin}
+							href={content_website?.attributes.socials?.linkedin as string}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
@@ -371,7 +371,7 @@ function Nav({
 					<div className={'relative p-3'}>
 						<Link
 							className="slider-nav-item relative flex h-7 w-7 items-center justify-center text-slate-300 hover:text-slate-50 lg:h-9 lg:w-9"
-							href={socials?.github}
+							href={content_website?.attributes.socials?.github as string}
 							rel="noopener nofollow noreferrer"
 							target="_blank"
 						>
@@ -386,25 +386,31 @@ function Nav({
 				<div
 					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 left-0 mb-12 flex items-center justify-center p-8 lg:mb-0 lg:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''} `}
 				>
+					{}
 					<h2 className={'sr-only'}>
-						{`‣ ${content_website?.content_home?.title_vertical_left_1} / ${content_website?.content_home?.title_vertical_left_2} / ${content_website?.content_home?.title_vertical_left_3} / ${content_website?.content_home?.title_vertical_left_4} / ${content_website?.content_home?.title_vertical_left_5} / ${content_website?.content_home?.title_vertical_left_6}`}
+						{`‣ ${content_website?.attributes?.content_home?.title_vertical_left_1} / ${content_website?.attributes?.content_home?.title_vertical_left_2} / ${content_website?.attributes?.content_home?.title_vertical_left_3} / ${content_website?.attributes?.content_home?.title_vertical_left_4} / ${content_website?.attributes?.content_home?.title_vertical_left_5} / ${content_website?.attributes?.content_home?.title_vertical_left_6}`}
 					</h2>
 					<div className={'origin-bottom-left -rotate-90 uppercase'}>
 						<TypeAnimation
 							cursor={true}
 							repeat={Infinity}
 							sequence={[
-								`‣ ${content_website?.content_home?.title_vertical_left_1}`,
+								`‣ ${content_website?.attributes?.content_home?.title_vertical_left_1}`,
 								1000, // Waits 1s
-								`‣ ${content_website?.content_home?.title_vertical_left_2}`,
+
+								`‣ ${content_website?.attributes?.content_home?.title_vertical_left_2}`,
 								2000, // Waits 2s
-								`‣ ${content_website?.content_home?.title_vertical_left_3}`,
+
+								`‣ ${content_website?.attributes?.content_home?.title_vertical_left_3}`,
 								1000, // Waits 1s
-								`‣ ${content_website?.content_home?.title_vertical_left_4}`,
+
+								`‣ ${content_website?.attributes?.content_home?.title_vertical_left_4}`,
 								2000, // Waits 2s
-								`‣ ${content_website?.content_home?.title_vertical_left_5}`,
+
+								`‣ ${content_website?.attributes?.content_home?.title_vertical_left_5}`,
 								1000, // Waits 1s
-								`‣ ${content_website?.content_home?.title_vertical_left_6}`,
+
+								`‣ ${content_website?.attributes?.content_home?.title_vertical_left_6}`,
 							]}
 							style={{
 								opacity: 0.75,

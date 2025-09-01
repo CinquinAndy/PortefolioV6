@@ -3,12 +3,14 @@ import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 import React from 'react'
 
+import { ContentWebsite } from '@/types/strapi'
+
 import { replaceTitle } from '@/services/utils'
 import Galery from '@/components/Global/Galery'
 
 interface GalerySectionProps {
-	processedRealisation?: any // TODO: Define proper type for processedRealisation
-	content_website?: any // TODO: Define proper type for content_website
+	processedRealisation?: ProcessedRealisation
+	content_website?: ContentWebsite
 }
 
 export function GalerySection({ processedRealisation, content_website }: GalerySectionProps): React.JSX.Element {

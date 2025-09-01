@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export function NavigationArticle(): React.JSX.Element {
 	const pathname = usePathname() // usePathname hook to get the current path
-	const pathSegments = (pathname || '').split('/').filter(Boolean) // Split the path into segments and remove any empty strings
+	const pathSegments = (pathname ?? '').split('/').filter(Boolean) // Split the path into segments and remove any empty strings
 
 	const breadcrumbLinks = pathSegments.map((segment, index) => {
 		const href = `/${pathSegments.slice(0, index + 1).join('/')}` // Create the href for the link

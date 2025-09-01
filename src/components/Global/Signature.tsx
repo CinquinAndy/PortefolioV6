@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { ContentWebsite } from '@/types/strapi'
+
 import { Layout } from '@/components/Global/Layout'
 
 interface SignatureProps {
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 export function Signature({ content_website }: SignatureProps): React.JSX.Element {
