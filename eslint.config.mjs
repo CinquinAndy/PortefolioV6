@@ -34,6 +34,8 @@ const baseRules = {
 
 // Configuration commune des règles perfectionist
 const perfectionistRules = {
+	// Désactiver la règle prettier/prettier pour éviter les conflits avec prettier-plugin-tailwindcss
+	'prettier/prettier': 'off',
 	'perfectionist/sort-objects': [
 		'warn',
 		{
@@ -41,6 +43,7 @@ const perfectionistRules = {
 			order: 'desc',
 		},
 	],
+	'perfectionist/sort-jsx-props': 'off',
 	'perfectionist/sort-jsx-props': 'off',
 	'perfectionist/sort-imports': [
 		'error',
