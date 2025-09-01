@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 
 	// fetch data
 	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
-	const processedRealisation = await processRealisationData(realisationResponse)
+	const realisations = getResponseData(realisationResponse)
+	const processedRealisation = realisations ? await processRealisationData({ data: realisations, meta: undefined } as any) : null
 
 	return {
 		title: processedRealisation?.data?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
@@ -30,8 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
-				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
-				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
+				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
+				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
 			},
 			canonical: processedRealisation?.data?.attributes?.seo_canonical ?? '/',
 		},
@@ -43,7 +44,7 @@ export async function generateStaticParams(): Promise<{ params: ImagePageParams 
 
 	for (const locale of localesConstant) {
 		// Assuming these are your locales
-		const realisationsResponse = await getRealisations(locale)
+		const realisationsResponse = await getRealisations(locale as Locale)
 		const realisations = getResponseData(realisationsResponse)
 
 		if (realisations) {
@@ -75,8 +76,9 @@ interface ImagePageProps {
 export default async function Page({ params }: ImagePageProps) {
 	const { slug, locale, image } = await params
 	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
+	const realisations = getResponseData(realisationResponse)
 
-	const processedRealisation = await processRealisationData(realisationResponse)
+	const processedRealisation = realisations ? await processRealisationData({ data: realisations, meta: undefined } as any) : null
 	const galery = processedRealisation?.data?.attributes?.galery?.data
 	const imageData = galery?.[parseInt(image)]
 
@@ -92,9 +94,9 @@ export default async function Page({ params }: ImagePageProps) {
 					<ImageLoadComponent
 						alt={imageData?.attributes?.alternativeText ?? 'Project Image'}
 						className={'rounded-xl p-2 sm:p-4 md:p-8 lg:p-32'}
-						height={imageData?.attributes?.height}
-						src={imageData?.attributes?.url}
-						width={imageData?.attributes?.width}
+						height={imageData?.attributes?.height ?? 800}
+						src={imageData?.attributes?.url ?? ''}
+						width={imageData?.attributes?.width ?? 1200}
 					/>
 				</div>
 			</div>

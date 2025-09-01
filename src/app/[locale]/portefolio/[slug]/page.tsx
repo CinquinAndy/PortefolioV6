@@ -68,12 +68,12 @@ export async function generateStaticParams(): Promise<{ params: RealisationSlugP
 	let paths: { params: RealisationSlugParams }[] = []
 
 	for (const locale of localesConstant) {
-		const realisationsResponse = await getRealisations(locale)
+		const realisationsResponse = await getRealisations(locale as Locale)
 		const realisations = getResponseData(realisationsResponse)
 
 		if (realisations) {
 			// Map over each realisation to create a path object for it
-			const localePaths = realisations.map(realisation => ({
+			const localePaths = realisations.map((realisation: any) => ({
 				params: { slug: realisation.attributes.slug, locale },
 			}))
 			paths = paths.concat(localePaths)
@@ -90,20 +90,19 @@ interface RealisationPageProps {
 export default async function Page({ params }: RealisationPageProps) {
 	const { slug, locale } = await params
 	// fetch data
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
-	const realisation = await getRealisationBySlug(slug, locale)
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 
-	let processedRealisation = await processRealisationData(realisation)
-	processedRealisation = processedRealisation?.data
+	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
+	const processedRealisation = await processRealisationData(realisationResponse)
 
 	return (
 		<>
-			<Nav content_website={content_website} h1={processedRealisation?.attributes?.title} isHome={false} />
+			<Nav content_website={content_website} h1={processedRealisation?.data?.attributes?.title} isHome={false} />
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:grid-cols-2 2xl:px-0'}>
-						<GalerySection content_website={content_website} processedRealisation={processedRealisation} />
+						<GalerySection content_website={content_website} processedRealisation={processedRealisation?.data} />
 
 						<div className="mx-auto max-w-3xl md:pl-20">
 							<h2
@@ -111,12 +110,12 @@ export default async function Page({ params }: RealisationPageProps) {
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
-									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_content),
+									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_content ?? ''),
 								}}
 							/>
 							<article>
 								<div className={'prose prose-invert my-8'}>
-									<Layout value={processedRealisation?.attributes?.content.toString()} />
+									<Layout value={processedRealisation?.data?.attributes?.content.toString()} />
 								</div>
 							</article>
 						</div>
@@ -127,12 +126,12 @@ export default async function Page({ params }: RealisationPageProps) {
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
-									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology),
+									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology ?? ''),
 								}}
 							/>
 							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
-								{processedRealisation?.attributes?.techno?.map(technology => {
+								{processedRealisation?.data?.attributes?.techno?.map((technology: any) => {
 									return <TechnologyDisplay key={technology.id} technology={technology} />
 								})}
 								<div className={'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'}>
@@ -141,11 +140,11 @@ export default async function Page({ params }: RealisationPageProps) {
 											'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
-											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links),
+											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links ?? ''),
 										}}
 									/>
 									<div className={'flex w-full gap-8'}>
-										{processedRealisation?.attributes?.links?.map((link, index) => {
+										{processedRealisation?.data?.attributes?.links?.map((link: any, index: number) => {
 											return (
 												<div className={'flex'} key={index}>
 													<Link

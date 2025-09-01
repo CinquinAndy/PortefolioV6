@@ -54,12 +54,12 @@ export async function generateStaticParams(): Promise<{ params: ArticleSlugParam
 	let paths: { params: ArticleSlugParams }[] = []
 
 	for (const locale of localesConstant) {
-		const articlesResponse = await getArticles(locale)
+		const articlesResponse = await getArticles(locale as Locale)
 		const articles = getResponseData(articlesResponse)
 
 		if (articles) {
 			// Map over each article to create a path object for it
-			const localePaths = articles.map(article => ({
+			const localePaths = articles.map((article: any) => ({
 				params: { slug: article.attributes.slug, locale },
 			}))
 			paths = paths.concat(localePaths)
@@ -199,12 +199,12 @@ export default async function Page({ params }: ArticlePageProps) {
 												// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
 												// processedArticle?.attributes?.createdAt
 												locale === 'fr'
-													? new Date(processedArticle?.attributes?.createdAt).toLocaleDateString('fr-FR', {
+													? new Date(processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt).toLocaleDateString('fr-FR', {
 															year: 'numeric',
 															month: 'long',
 															day: 'numeric',
 														})
-													: new Date(processedArticle?.attributes?.createdAt).toLocaleDateString('en-US', {
+													: new Date(processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt).toLocaleDateString('en-US', {
 															year: 'numeric',
 															month: 'long',
 															day: 'numeric',
@@ -213,7 +213,7 @@ export default async function Page({ params }: ArticlePageProps) {
 											{locale === 'fr' ? ' par Andy Cinquin' : ' by Andy Cinquin'}
 										</div>
 										<h4 className={'my-2 mb-16 flex flex-wrap gap-2'}>
-											{processedArticle?.attributes?.tags?.map((tag: any, index: number) => {
+											{(processedArticle?.data?.attributes?.tags || processedArticle?.attributes?.tags)?.map((tag: any, index: number) => {
 												if (tag?.name) {
 													const colorIndex = getColorIndex(tag.name) % colors.length
 													const color = colors[colorIndex]
