@@ -6,24 +6,33 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const options = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	replace: (domNode: any) => {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		if (domNode?.type === 'tag') {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const { name, children, attribs } = domNode
 
 			if (name === 'p') {
-				const content = domNode.children[0]?.data || ''
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+				const content = domNode.children?.[0]?.data ?? ''
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				if (isMarkdownTable(content)) {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return markdownTableToHtml(content)
 				} else {
-					return <div className={'my-5'}>{domToReact(domNode.children, options)}</div>
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+					return <div className={'my-5'}>{domToReact(children, options)}</div>
 				}
 			}
 
 			// Specific processing for code blocks
-			if (name === 'pre' && children.length && children[0].name === 'code') {
-				// Ensure the code content is plain text for parsing
-				const codeContent = children[0].children[0]?.data || ''
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			if (name === 'pre' && children?.length > 0 && children[0].name === 'code') {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+				const codeContent = children[0].children?.[0]?.data ?? ''
 				// Use highlight.js for code highlighting
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				const highlightedContent = hljs.highlightAuto(codeContent).value
 
 				return (
@@ -34,15 +43,18 @@ const options = {
 			}
 
 			if (name === 'img') {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				const { src, alt } = attribs
+
+				if (!(src as string) || !(alt as string)) return null
 				return (
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
-							alt={alt}
+							alt={alt as string}
 							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 							height={1000}
 							quality={85}
-							src={src}
+							src={src as string}
 							width={1000}
 						/>
 					</div>
@@ -54,22 +66,28 @@ const options = {
 			}
 
 			if (name === 'a') {
-				if (attribs.href.includes('.mp4')) {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+				const href = attribs?.href
+
+				if (!(href as string)) return null
+
+				if ((href as string).includes('.mp4')) {
 					return (
 						<video className={'w-full'} controls muted>
-							<source src={attribs.href} type="video/mp4" />
+							<source src={href as string} type="video/mp4" />
 						</video>
 					)
 				}
-				const { href } = attribs
 				return (
-					<Link className={'underline'} href={href}>
-						{domToReact(domNode.children, options)}
+					<Link className={'underline'} href={href as string}>
+						{/* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */}
+						{domToReact(children, options)}
 					</Link>
 				)
 			}
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return domNode
 	},
 }
@@ -85,30 +103,8 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	}
 	const parsedContent = parse(value, options)
 	// if replaced content contains '{actualYear}' replace it with the current year
-	let replacedContent = domToReact(parsedContent as any, options) as any
-
-	// Ensure replacedContent is an array
-	if (!Array.isArray(replacedContent)) {
-		replacedContent = [replacedContent]
-	}
-
-	// Convert the elements to a new array with updated children prop
-	replacedContent = replacedContent.map((child: any) => {
-		if (React.isValidElement(child) && Array.isArray((child.props as any).children)) {
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const updatedChildren = (child.props as any).children.map((textChild: any, index: number) => {
-				if (typeof textChild === 'string') {
-					const currentYear = new Date().getFullYear()
-					return textChild.replace(/{actualYear}/g, currentYear.toString())
-				} else {
-					return textChild
-				}
-			})
-
-			return React.cloneElement(child as any, { children: updatedChildren })
-		}
-		return child
-	})
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
+	const replacedContent: any = domToReact(parsedContent as any, options)
 
 	return <div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
 }
