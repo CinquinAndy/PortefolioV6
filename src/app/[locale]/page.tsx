@@ -21,20 +21,26 @@ interface PageParams {
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
-	// fetch data
+
+	// Fetch data
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
+	// Extract SEO data safely
+	const seoTitle = content_website?.attributes?.content_home?.seo?.title
+	const seoDescription = content_website?.attributes?.content_home?.seo?.description
+	const seoCanonical = content_website?.attributes?.content_home?.seo?.canonical
+
 	return {
-		title:
-			(content_website?.attributes?.content_home?.seo?.title,
-		description: content_website?.attributes?.content_home?.seo?.description,
+		title: seoTitle ?? '',
+		metadataBase: new URL(`https://andy-cinquin.fr`),
+		description: seoDescription ?? '',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}`,
 			},
-			canonical: hasAttributes ? (content_website.attributes?.content_home?.seo?.canonical ?? '/') : '/',
+			canonical: seoCanonical ?? '/',
 		},
 	}
 }
