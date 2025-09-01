@@ -3,23 +3,19 @@
 	"version": "8.5.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
+		"dev": "next dev --turbopack",
+		"build": "next build --turbopack",
 		"start": "next start",
-		"lint": "next lint",
-		"lint:fix": "next lint --fix",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"prettier": "prettier --write .",
 		"format": "prettier --write .",
+		"tsc": "tsc --noEmit",
+		"tsc:watch": "tsc --noEmit --watch",
 		"test:visual": "playwright test",
 		"test:visual:ui": "playwright test --ui",
 		"test:visual:headed": "playwright test --headed",
 		"test:visual:update": "playwright test --update-snapshots"
-	},
-	"lint-staged": {
-		"*.js": [
-			"prettier --write",
-			"git add"
-		]
 	},
 	"dependencies": {
 		"@eslint/eslintrc": "3.3.1",
@@ -40,6 +36,7 @@
 		"eslint": "9.34.0",
 		"eslint-config-next": "15.5.2",
 		"eslint-plugin-no-only-tests": "3.3.0",
+		"eslint-plugin-jsx-a11y": "6.10.2",
 		"eslint-plugin-perfectionist": "4.15.0",
 		"eslint-plugin-prettier": "5.5.4",
 		"eslint-plugin-promise": "7.2.1",
@@ -73,19 +70,26 @@
 		"special-card": "2.1.4",
 		"tailwind-merge": "3.3.1",
 		"tailwindcss-animate": "1.0.7",
-		"typescript": "5.9.2",
 		"zod": "3.24.2"
 	},
 	"devDependencies": {
 		"@playwright/test": "1.55.0",
+		"@eslint/eslintrc": "3.3.1",
 		"@tailwindcss/forms": "0.5.10",
+		"@tailwindcss/postcss": "4.1.12",
 		"@types/node": "24.3.0",
 		"@types/react": "19.1.12",
+		"@types/react-dom": "19.1.9",
+		"@typescript-eslint/eslint-plugin": "8.41.0",
+		"@typescript-eslint/parser": "8.41.0",
 		"autoprefixer": "10.4.21",
 		"eslint-config-prettier": "10.1.8",
-		"lint-staged": "15.5.0",
+		"eslint-config-next": "15.5.2",
+		"eslint-plugin-perfectionist": "4.15.0",
+		"jsdom": "26.1.0",
 		"postcss": "8.5.6",
 		"prettier": "3.6.2",
-		"tailwindcss": "3.4.17"
+		"tailwindcss": "3.4.17",
+		"typescript": "5.9.2"
 	}
 }

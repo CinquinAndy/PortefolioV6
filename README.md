@@ -1,18 +1,18 @@
 # Andy Cinquin 🐝
 
-#### _Hi ! I'm Andy, an Entrepreneur, Freelance Developer, Co-founder of ForHives, ForMenu & Artriste. CEO of My-Makeup._
+## _Hi ! I'm Andy, an Entrepreneur, Freelance Developer, Co-founder of ForHives, ForMenu & Artriste. CEO of My-Makeup._
 
 ![img_1.png](img_1.png)
 
-> **(api github project : https://github.com/CinquinAndy/API-PortefolioV6**
+> **(api github project : <https://github.com/CinquinAndy/API-PortefolioV6>**
 
 ## How to run ??
 
 > **(use pnpm // npm // yarn but don't push the lock file)**
 
-#### _dev_
+### _dev_
 
-```
+```bash
 git clone
 -> add .env file
 pnpm install
@@ -20,9 +20,9 @@ pnpm run dev
 pnpm run build
 ```
 
-#### _tests_
+### _tests_
 
-```
+```bash
 pnpm run cypress:run
 ```
 
