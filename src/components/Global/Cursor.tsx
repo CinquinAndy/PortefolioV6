@@ -29,7 +29,7 @@ const Cursor = (): React.JSX.Element => {
 
 	useEffect(() => {
 		if (!isDesktop) return
-		const updateCursor = e => {
+		const updateCursor = (e: MouseEvent) => {
 			setPosition({ y: e.clientY, x: e.clientX })
 		}
 
