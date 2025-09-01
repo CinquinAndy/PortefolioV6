@@ -1,9 +1,8 @@
-import { useRef } from 'react'
+import type { Article, Locale } from '@/types/strapi'
 
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-
-import type { Article, Locale } from '@/types/strapi'
 
 import { Badge } from '@/components/ui/badge'
 
@@ -13,7 +12,7 @@ interface ArticleCardProps {
 }
 
 const getArticleUrl = (locale: Locale, slug?: string): string => {
-	if (!slug || slug.length === 0) return `/${locale}/blog`
+	if (slug === undefined || slug === null || slug === '') return `/${locale}/blog`
 	return `/${locale}/blog/${slug}`
 }
 
