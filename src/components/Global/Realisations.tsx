@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import React from 'react'
+
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
@@ -14,8 +15,8 @@ interface RealisationsProps {
 }
 
 function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): React.JSX.Element {
-	realisations = slice ? realisations.slice(0, slice) : realisations
-	const gridTemplateCustom = index => {
+	realisations = slice && realisations ? realisations.slice(0, slice) : realisations || []
+	const gridTemplateCustom = (index: number): string => {
 		switch (index % 3) {
 			case 0:
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-10 2xl:col-start-1 2xl:col-end-6'
@@ -23,6 +24,8 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				return 'col-start-1 col-end-13 md:col-start-4 md:col-end-13 2xl:col-start-5 2xl:col-end-13'
 			case 2:
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-2 2xl:col-end-12'
+			default:
+				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-1 2xl:col-end-13'
 		}
 	}
 	return (
@@ -55,7 +58,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				</div>
 			)}
 			<div className="mt-10 flex w-full justify-center xl:mt-20">
-				<div className="grid w-full grid-cols-12 gap-[20px] xl:gap-[60px] md:gap-[40px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
+				<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
 					{realisations.map((realisation, index) => {
 						return (
 							<Link

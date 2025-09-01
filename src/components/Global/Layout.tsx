@@ -39,7 +39,7 @@ const options = {
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
 							alt={alt}
-							className={`max-h-[300px] object-contain xl:max-h-[650px] sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px]`}
+							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 							height={1000}
 							quality={85}
 							src={src}
@@ -99,13 +99,13 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 			const updatedChildren = (child.props as any).children.map((textChild: any, index: number) => {
 				if (typeof textChild === 'string') {
 					const currentYear = new Date().getFullYear()
-					return textChild.replace(/{actualYear}/g, currentYear)
+					return textChild.replace(/{actualYear}/g, currentYear.toString())
 				} else {
 					return textChild
 				}
 			})
 
-			return React.cloneElement(child, { children: updatedChildren })
+			return React.cloneElement(child as any, { children: updatedChildren })
 		}
 		return child
 	})
@@ -113,7 +113,7 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	return <div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
 }
 
-function isMarkdownTable(content) {
+function isMarkdownTable(content: string): boolean {
 	const lines = content.split('\n')
 	return (
 		lines.length > 2 &&
@@ -124,7 +124,7 @@ function isMarkdownTable(content) {
 	)
 }
 
-function markdownTableToHtml(markdown) {
+function markdownTableToHtml(markdown: string): React.JSX.Element {
 	const rows = markdown.split('\n').filter(row => row.trim())
 	const tableRows = rows
 		.map((row, index) => {

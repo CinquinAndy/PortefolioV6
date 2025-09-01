@@ -1,14 +1,14 @@
 'use client'
-import React from 'react'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { HomeIcon } from '@heroicons/react/16/solid'
+import React from 'react'
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 export function NavigationArticle(): React.JSX.Element {
 	const pathname = usePathname() // usePathname hook to get the current path
-	const pathSegments = pathname.split('/').filter(Boolean) // Split the path into segments and remove any empty strings
+	const pathSegments = (pathname || '').split('/').filter(Boolean) // Split the path into segments and remove any empty strings
 
 	const breadcrumbLinks = pathSegments.map((segment, index) => {
 		const href = `/${pathSegments.slice(0, index + 1).join('/')}` // Create the href for the link

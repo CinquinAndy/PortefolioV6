@@ -16,7 +16,6 @@
 **Tests de validation :**
 
 - ✅ Toutes les pages chargent (6/6)
--
 - ⚠️ Navigation (problème viewport mineur)
 
 ## 🎯 Utilisation pour la Migration

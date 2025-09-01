@@ -19,14 +19,14 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 			{/* Header Section */}
 			<div className="mb-16 flex justify-between">
 				<h2
-					className="!font-display text-2xl normal-case leading-snug xl:text-5xl sm:text-2xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+					className="!font-display text-2xl normal-case leading-snug sm:text-2xl xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 					dangerouslySetInnerHTML={{
 						__html: replaceTitle(content_website?.attributes?.content_home?.title_service),
 					}}
 				/>
 				{/* See All Projects Button */}
 				<Link
-					className="button-purple items-center justify-center rounded px-2 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm md:px-6 md:py-3"
+					className="button-purple items-center justify-center rounded px-2 py-3 text-xs md:px-6 md:py-3 xl:px-10 xl:py-4 xl:text-sm"
 					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
 				>
 					<span className={'button-purple-title text-center'}>
@@ -37,7 +37,7 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 
 			{/* Bento Grid Layout */}
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
-				{services.map((service, index) => (
+				{services?.map((service: any, index: number) => (
 					<BentoCard
 						className={clsx(
 							// Last two items span 3 columns
@@ -70,7 +70,16 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 }
 
 // BentoCard Component with hover animation
-function BentoCard({ title, graphic, fade = [], eyebrow, description, className }) {
+interface BentoCardProps {
+	title: string
+	graphic: React.ReactNode
+	fade?: string[]
+	eyebrow?: string
+	description?: string
+	className?: string
+}
+
+function BentoCard({ title, graphic, fade = [], eyebrow, description, className }: BentoCardProps): React.JSX.Element {
 	return (
 		<motion.div
 			className={clsx(

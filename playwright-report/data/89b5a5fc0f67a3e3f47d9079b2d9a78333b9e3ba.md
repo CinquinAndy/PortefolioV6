@@ -1,0 +1,763 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - img
+    - generic:
+      - generic:
+        - generic:
+          - img
+  - region "Notifications Alt+T"
+  - banner [ref=e4]:
+    - button "Main Menu" [ref=e6] [cursor=pointer]:
+      - img [ref=e7] [cursor=pointer]
+    - link "Logo Cinquin Andy Signature" [ref=e10] [cursor=pointer]:
+      - /url: /
+      - img "Logo Cinquin Andy Signature" [ref=e11] [cursor=pointer]
+    - link "C O N T A C T" [ref=e12] [cursor=pointer]:
+      - /url: /contact
+      - heading "C O N T A C T" [level=2] [ref=e13] [cursor=pointer]:
+        - generic [ref=e14] [cursor=pointer]:
+          - generic [ref=e15] [cursor=pointer]: C
+          - generic [ref=e16] [cursor=pointer]: O
+          - generic [ref=e17] [cursor=pointer]: "N"
+          - generic [ref=e18] [cursor=pointer]: T
+          - generic [ref=e19] [cursor=pointer]: A
+          - generic [ref=e20] [cursor=pointer]: C
+          - generic [ref=e21] [cursor=pointer]: T
+  - navigation:
+    - generic:
+      - link "andy cinquin":
+        - /url: /
+        - heading "andy cinquin" [level=2]
+      - link "mes réalisations":
+        - /url: /portefolio
+        - heading "mes réalisations" [level=2]
+      - link "blog":
+        - /url: /blog
+        - heading "blog" [level=2]
+      - link "à propos de moi":
+        - /url: /about
+        - heading "à propos de moi" [level=2]
+      - link "contactez moi":
+        - /url: /contact
+        - heading "contactez moi" [level=2]
+      - generic:
+        - separator
+        - generic:
+          - generic:
+            - link:
+              - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+              - img
+            - link:
+              - /url: https://www.instagram.com/cinquin.andy/
+              - img
+            - link:
+              - /url: https://www.linkedin.com/in/andy-cinquin/
+              - img
+            - link:
+              - /url: https://github.com/CinquinAndy/
+              - img
+            - link:
+              - /url: https://www.malt.fr/profile/andycinquin
+              - img
+      - generic:
+        - paragraph: 4 Impasse de la Marchaisière, 44115 Haute-Goulaine
+        - link "+33 6 21 58 26 84":
+          - /url: tel:+33621582684
+        - generic:
+          - link "→ go to english version":
+            - /url: https://andy-cinquin.fr/fr/blog
+    - button "Close Menu"
+  - generic [ref=e22]:
+    - heading "Mes actualités" [level=1] [ref=e23]
+    - img "Développeur Freelance - Logo" [ref=e25]
+    - text: "|"
+  - generic [ref=e26]:
+    - generic [ref=e29]:
+      - generic [ref=e31]:
+        - textbox "Rechercher des articles..." [ref=e32]
+        - img [ref=e34]
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - 'link "28 août 2025 Analyse technique Tailwind CSS 4.0 : Migration vers OKLCH Comprendre la transition vers OKLCH Tailwind CSS OKLCH HSL" [ref=e40] [cursor=pointer]':
+            - /url: /fr/blog/migration-oklch-tailwind-css-4-0
+            - generic [ref=e42] [cursor=pointer]:
+              - generic [ref=e47] [cursor=pointer]:
+                - generic [ref=e48] [cursor=pointer]:
+                  - time [ref=e49] [cursor=pointer]: 28 août 2025
+                  - generic [ref=e50] [cursor=pointer]: Analyse technique
+                - generic [ref=e51] [cursor=pointer]: "Tailwind CSS 4.0 : Migration vers OKLCH"
+                - generic [ref=e52] [cursor=pointer]: Comprendre la transition vers OKLCH
+              - generic [ref=e54] [cursor=pointer]:
+                - generic [ref=e55] [cursor=pointer]: Tailwind CSS
+                - generic [ref=e56] [cursor=pointer]: OKLCH
+                - generic [ref=e57] [cursor=pointer]: HSL
+          - link "13 avril 2025 Outil de visualisation Découverte de Mermaid.js pour la visualisation graphique Visualisation graphique simplifiée visualisation Mermaid.js graphique" [ref=e59] [cursor=pointer]:
+            - /url: /fr/blog/decouverte-mermaid-js
+            - generic [ref=e61] [cursor=pointer]:
+              - generic [ref=e66] [cursor=pointer]:
+                - generic [ref=e67] [cursor=pointer]:
+                  - time [ref=e68] [cursor=pointer]: 13 avril 2025
+                  - generic [ref=e69] [cursor=pointer]: Outil de visualisation
+                - generic [ref=e70] [cursor=pointer]: Découverte de Mermaid.js pour la visualisation graphique
+                - generic [ref=e71] [cursor=pointer]: Visualisation graphique simplifiée
+              - generic [ref=e73] [cursor=pointer]:
+                - generic [ref=e74] [cursor=pointer]: visualisation
+                - generic [ref=e75] [cursor=pointer]: Mermaid.js
+                - generic [ref=e76] [cursor=pointer]: graphique
+          - 'link "6 avril 2025 Technologie L''éditeur d''image de Midjourney : une révolution Modifier des images avec l''IA Midjourney IA Éditeur d''image" [ref=e78] [cursor=pointer]':
+            - /url: /fr/blog/editeur-image-midjourney
+            - generic [ref=e80] [cursor=pointer]:
+              - generic [ref=e85] [cursor=pointer]:
+                - generic [ref=e86] [cursor=pointer]:
+                  - time [ref=e87] [cursor=pointer]: 6 avril 2025
+                  - generic [ref=e88] [cursor=pointer]: Technologie
+                - generic [ref=e89] [cursor=pointer]: "L'éditeur d'image de Midjourney : une révolution"
+                - generic [ref=e90] [cursor=pointer]: Modifier des images avec l'IA
+              - generic [ref=e92] [cursor=pointer]:
+                - generic [ref=e93] [cursor=pointer]: Midjourney
+                - generic [ref=e94] [cursor=pointer]: IA
+                - generic [ref=e95] [cursor=pointer]: Éditeur d'image
+          - link "3 mars 2025 Guide Guide d'installation et de configuration de Flameshot Un outil de capture d'écran puissant pour Linux Flameshot Capture d'écran Linux" [ref=e97] [cursor=pointer]:
+            - /url: /fr/blog/installation-configuration-flameshot
+            - generic [ref=e99] [cursor=pointer]:
+              - generic [ref=e104] [cursor=pointer]:
+                - generic [ref=e105] [cursor=pointer]:
+                  - time [ref=e106] [cursor=pointer]: 3 mars 2025
+                  - generic [ref=e107] [cursor=pointer]: Guide
+                - generic [ref=e108] [cursor=pointer]: Guide d'installation et de configuration de Flameshot
+                - generic [ref=e109] [cursor=pointer]: Un outil de capture d'écran puissant pour Linux
+              - generic [ref=e111] [cursor=pointer]:
+                - generic [ref=e112] [cursor=pointer]: Flameshot
+                - generic [ref=e113] [cursor=pointer]: Capture d'écran
+                - generic [ref=e114] [cursor=pointer]: Linux
+          - link "12 février 2025 Guide technique Configuration de la VM Windows sur Fedora Un guide pratique pour les utilisateurs de Fedora VM Fedora Windows" [ref=e116] [cursor=pointer]:
+            - /url: /fr/blog/configuration-vm-windows-fedora
+            - generic [ref=e118] [cursor=pointer]:
+              - generic [ref=e123] [cursor=pointer]:
+                - generic [ref=e124] [cursor=pointer]:
+                  - time [ref=e125] [cursor=pointer]: 12 février 2025
+                  - generic [ref=e126] [cursor=pointer]: Guide technique
+                - generic [ref=e127] [cursor=pointer]: Configuration de la VM Windows sur Fedora
+                - generic [ref=e128] [cursor=pointer]: Un guide pratique pour les utilisateurs de Fedora
+              - generic [ref=e130] [cursor=pointer]:
+                - generic [ref=e131] [cursor=pointer]: VM
+                - generic [ref=e132] [cursor=pointer]: Fedora
+                - generic [ref=e133] [cursor=pointer]: Windows
+          - 'link "8 février 2025 Conseils (2/3) - Comment créer un produit : Guide étape par étape Un guide pour apprendre à entreprendre" [ref=e135] [cursor=pointer]':
+            - /url: /fr/blog/comment-creer-un-produit-2
+            - generic [ref=e142] [cursor=pointer]:
+              - generic [ref=e143] [cursor=pointer]:
+                - time [ref=e144] [cursor=pointer]: 8 février 2025
+                - generic [ref=e145] [cursor=pointer]: Conseils
+              - generic [ref=e146] [cursor=pointer]: "(2/3) - Comment créer un produit : Guide étape par étape"
+              - generic [ref=e147] [cursor=pointer]: Un guide pour apprendre à entreprendre
+          - 'link "6 février 2025 Conseils Automatisation du Déploiement WordPress Plugin : Git vers SVN Automatisation du déploiement de plugins WordPress svn wordpress git github actions" [ref=e150] [cursor=pointer]':
+            - /url: /fr/blog/automatisation-deploiement-wordpress-git-svn
+            - generic [ref=e152] [cursor=pointer]:
+              - generic [ref=e157] [cursor=pointer]:
+                - generic [ref=e158] [cursor=pointer]:
+                  - time [ref=e159] [cursor=pointer]: 6 février 2025
+                  - generic [ref=e160] [cursor=pointer]: Conseils
+                - generic [ref=e161] [cursor=pointer]: "Automatisation du Déploiement WordPress Plugin : Git vers SVN"
+                - generic [ref=e162] [cursor=pointer]: Automatisation du déploiement de plugins WordPress
+              - generic [ref=e164] [cursor=pointer]:
+                - generic [ref=e165] [cursor=pointer]: svn
+                - generic [ref=e166] [cursor=pointer]: wordpress
+                - generic [ref=e167] [cursor=pointer]: git
+                - generic [ref=e168] [cursor=pointer]: github actions
+          - 'link "3 septembre 2024 Tutoriel Mise en place d''un environnement de dev pour Plugin Wordpress: Guide étape par étape Guide étape par étape pour le développement du plugin Wordpress Développement de plugins ForVoyez Développement Web CapRover Coolify" [ref=e170] [cursor=pointer]':
+            - /url: /fr/blog/developpement-plugin-wordpress-guide-etapes
+            - generic [ref=e172] [cursor=pointer]:
+              - generic [ref=e177] [cursor=pointer]:
+                - generic [ref=e178] [cursor=pointer]:
+                  - time [ref=e179] [cursor=pointer]: 3 septembre 2024
+                  - generic [ref=e180] [cursor=pointer]: Tutoriel
+                - generic [ref=e181] [cursor=pointer]: "Mise en place d'un environnement de dev pour Plugin Wordpress: Guide étape par étape"
+                - generic [ref=e182] [cursor=pointer]: Guide étape par étape pour le développement du plugin Wordpress
+              - generic [ref=e184] [cursor=pointer]:
+                - generic [ref=e185] [cursor=pointer]: Développement de plugins
+                - generic [ref=e186] [cursor=pointer]: ForVoyez
+                - generic [ref=e187] [cursor=pointer]: Développement Web
+                - generic [ref=e188] [cursor=pointer]: CapRover
+                - generic [ref=e189] [cursor=pointer]: Coolify
+          - 'link "16 juin 2024 Informatif CMS Headless : Qu''est-ce que c''est et ses caractéristiques principales Simplifiez la gestion de contenu avec un CMS Headless CMS Headless Gestion de contenu Back-end Front-end Avantages" [ref=e191] [cursor=pointer]':
+            - /url: /fr/blog/cms-headless-qu-est-ce-que-ces-et-ses-caracteristiques-principales
+            - generic [ref=e193] [cursor=pointer]:
+              - generic [ref=e198] [cursor=pointer]:
+                - generic [ref=e199] [cursor=pointer]:
+                  - time [ref=e200] [cursor=pointer]: 16 juin 2024
+                  - generic [ref=e201] [cursor=pointer]: Informatif
+                - generic [ref=e202] [cursor=pointer]: "CMS Headless : Qu'est-ce que c'est et ses caractéristiques principales"
+                - generic [ref=e203] [cursor=pointer]: Simplifiez la gestion de contenu avec un CMS Headless
+              - generic [ref=e205] [cursor=pointer]:
+                - generic [ref=e206] [cursor=pointer]: CMS Headless
+                - generic [ref=e207] [cursor=pointer]: Gestion de contenu
+                - generic [ref=e208] [cursor=pointer]: Back-end
+                - generic [ref=e209] [cursor=pointer]: Front-end
+                - generic [ref=e210] [cursor=pointer]: Avantages
+          - link "27 mai 2024 Tutoriel Migration de fichiers de MinIO vers Cloudflare R2 via PostgreSQL Guide étape par étape pour migrer vos fichiers efficacement Migration MinIO Cloudflare R2 PostgreSQL Stockage de fichiers" [ref=e212] [cursor=pointer]:
+            - /url: /fr/blog/migration-fichiers-minio-cloudflare-postgresql
+            - generic [ref=e214] [cursor=pointer]:
+              - generic [ref=e219] [cursor=pointer]:
+                - generic [ref=e220] [cursor=pointer]:
+                  - time [ref=e221] [cursor=pointer]: 27 mai 2024
+                  - generic [ref=e222] [cursor=pointer]: Tutoriel
+                - generic [ref=e223] [cursor=pointer]: Migration de fichiers de MinIO vers Cloudflare R2 via PostgreSQL
+                - generic [ref=e224] [cursor=pointer]: Guide étape par étape pour migrer vos fichiers efficacement
+              - generic [ref=e226] [cursor=pointer]:
+                - generic [ref=e227] [cursor=pointer]: Migration
+                - generic [ref=e228] [cursor=pointer]: MinIO
+                - generic [ref=e229] [cursor=pointer]: Cloudflare R2
+                - generic [ref=e230] [cursor=pointer]: PostgreSQL
+                - generic [ref=e231] [cursor=pointer]: Stockage de fichiers
+          - link "11 avril 2024 Tutoriel Guide d'utilisation de mon plugin Strapi pour l'optimisation SEO des images Automatisation de l'ALT, Title, Caption sur les images d'une API Strapi SEO Plugin Strapi Optimisation d'images Referencement Visibilité en ligne" [ref=e233] [cursor=pointer]:
+            - /url: /fr/blog/guide-utilisation-plugin-strapi-optimisation-seo-images
+            - generic [ref=e235] [cursor=pointer]:
+              - generic [ref=e240] [cursor=pointer]:
+                - generic [ref=e241] [cursor=pointer]:
+                  - time [ref=e242] [cursor=pointer]: 11 avril 2024
+                  - generic [ref=e243] [cursor=pointer]: Tutoriel
+                - generic [ref=e244] [cursor=pointer]: Guide d'utilisation de mon plugin Strapi pour l'optimisation SEO des images
+                - generic [ref=e245] [cursor=pointer]: Automatisation de l'ALT, Title, Caption sur les images d'une API Strapi
+              - generic [ref=e247] [cursor=pointer]:
+                - generic [ref=e248] [cursor=pointer]: SEO
+                - generic [ref=e249] [cursor=pointer]: Plugin Strapi
+                - generic [ref=e250] [cursor=pointer]: Optimisation d'images
+                - generic [ref=e251] [cursor=pointer]: Referencement
+                - generic [ref=e252] [cursor=pointer]: Visibilité en ligne
+          - 'link "4 avril 2024 Tutoriel Guide: Plugin Obsidian pour exporter une note vers Strapi Configuration et utilisation du Plugin Export Obsidian vers Strapi Plugin Obsidian Strapi Export de notes Configuration pas à pas Obsidian" [ref=e254] [cursor=pointer]':
+            - /url: /fr/blog/plugin-obsidian-exporter-note-strapi
+            - generic [ref=e256] [cursor=pointer]:
+              - generic [ref=e261] [cursor=pointer]:
+                - generic [ref=e262] [cursor=pointer]:
+                  - time [ref=e263] [cursor=pointer]: 4 avril 2024
+                  - generic [ref=e264] [cursor=pointer]: Tutoriel
+                - generic [ref=e265] [cursor=pointer]: "Guide: Plugin Obsidian pour exporter une note vers Strapi"
+                - generic [ref=e266] [cursor=pointer]: Configuration et utilisation du Plugin Export Obsidian vers Strapi
+              - generic [ref=e268] [cursor=pointer]:
+                - generic [ref=e269] [cursor=pointer]: Plugin Obsidian
+                - generic [ref=e270] [cursor=pointer]: Strapi
+                - generic [ref=e271] [cursor=pointer]: Export de notes
+                - generic [ref=e272] [cursor=pointer]: Configuration pas à pas
+                - generic [ref=e273] [cursor=pointer]: Obsidian
+          - 'link "21 mars 2024 Article - Conseils Créer un Post LinkedIn Qui Claque : Les Astuces d''un Pro Conseils LinkedIn Réseaux sociaux Marketing digital Design Création de contenu" [ref=e275] [cursor=pointer]':
+            - /url: /fr/blog/astuces-pro-creer-post-linkedin-attrayant
+            - generic [ref=e277] [cursor=pointer]:
+              - generic [ref=e282] [cursor=pointer]:
+                - generic [ref=e283] [cursor=pointer]:
+                  - time [ref=e284] [cursor=pointer]: 21 mars 2024
+                  - generic [ref=e285] [cursor=pointer]: Article - Conseils
+                - generic [ref=e286] [cursor=pointer]: "Créer un Post LinkedIn Qui Claque : Les Astuces d'un Pro"
+                - generic [ref=e287] [cursor=pointer]: Conseils
+              - generic [ref=e289] [cursor=pointer]:
+                - generic [ref=e290] [cursor=pointer]: LinkedIn
+                - generic [ref=e291] [cursor=pointer]: Réseaux sociaux
+                - generic [ref=e292] [cursor=pointer]: Marketing digital
+                - generic [ref=e293] [cursor=pointer]: Design
+                - generic [ref=e294] [cursor=pointer]: Création de contenu
+          - link "14 février 2024 Article - Veille Faire une animation avec n'importe quelle image Startup animation motion design rive web after effect" [ref=e296] [cursor=pointer]:
+            - /url: /fr/blog/creer-animations-gratuites-pour-site-web-guide
+            - generic [ref=e298] [cursor=pointer]:
+              - generic [ref=e303] [cursor=pointer]:
+                - generic [ref=e304] [cursor=pointer]:
+                  - time [ref=e305] [cursor=pointer]: 14 février 2024
+                  - generic [ref=e306] [cursor=pointer]: Article - Veille
+                - generic [ref=e307] [cursor=pointer]: Faire une animation avec n'importe quelle image
+                - generic [ref=e308] [cursor=pointer]: Startup
+              - generic [ref=e310] [cursor=pointer]:
+                - generic [ref=e311] [cursor=pointer]: animation
+                - generic [ref=e312] [cursor=pointer]: motion design
+                - generic [ref=e313] [cursor=pointer]: rive
+                - generic [ref=e314] [cursor=pointer]: web
+                - generic [ref=e315] [cursor=pointer]: after effect
+        - generic [ref=e316]:
+          - link "28 août 2025 Veille Google Gémini 2.5 Flash détruit le game Une avancée majeure dans la génération d'image IA Google Veille" [ref=e318] [cursor=pointer]:
+            - /url: /fr/blog/gemini-flash-image
+            - generic [ref=e320] [cursor=pointer]:
+              - generic [ref=e325] [cursor=pointer]:
+                - generic [ref=e326] [cursor=pointer]:
+                  - time [ref=e327] [cursor=pointer]: 28 août 2025
+                  - generic [ref=e328] [cursor=pointer]: Veille
+                - generic [ref=e329] [cursor=pointer]: Google Gémini 2.5 Flash détruit le game
+                - generic [ref=e330] [cursor=pointer]: Une avancée majeure dans la génération d'image
+              - generic [ref=e332] [cursor=pointer]:
+                - generic [ref=e333] [cursor=pointer]: IA
+                - generic [ref=e334] [cursor=pointer]: Google
+                - generic [ref=e335] [cursor=pointer]: Veille
+          - link "6 avril 2025 Technologie Midjourney v7 - Les Nouveautés Essentielles Une nouvelle ère pour la création d'images Midjourney IA Création d'images" [ref=e337] [cursor=pointer]:
+            - /url: /fr/blog/midjourney-v7-mode-draft
+            - generic [ref=e339] [cursor=pointer]:
+              - generic [ref=e344] [cursor=pointer]:
+                - generic [ref=e345] [cursor=pointer]:
+                  - time [ref=e346] [cursor=pointer]: 6 avril 2025
+                  - generic [ref=e347] [cursor=pointer]: Technologie
+                - generic [ref=e348] [cursor=pointer]: Midjourney v7 - Les Nouveautés Essentielles
+                - generic [ref=e349] [cursor=pointer]: Une nouvelle ère pour la création d'images
+              - generic [ref=e351] [cursor=pointer]:
+                - generic [ref=e352] [cursor=pointer]: Midjourney
+                - generic [ref=e353] [cursor=pointer]: IA
+                - generic [ref=e354] [cursor=pointer]: Création d'images
+          - link "3 mars 2025 Technologie Midjourney et les IA génératives d'images Explorez les merveilles de l'IA générative Midjourney IA générative Technologie" [ref=e356] [cursor=pointer]:
+            - /url: /fr/blog/midjourney-ia-generative-images
+            - generic [ref=e358] [cursor=pointer]:
+              - generic [ref=e363] [cursor=pointer]:
+                - generic [ref=e364] [cursor=pointer]:
+                  - time [ref=e365] [cursor=pointer]: 3 mars 2025
+                  - generic [ref=e366] [cursor=pointer]: Technologie
+                - generic [ref=e367] [cursor=pointer]: Midjourney et les IA génératives d'images
+                - generic [ref=e368] [cursor=pointer]: Explorez les merveilles de l'IA générative
+              - generic [ref=e370] [cursor=pointer]:
+                - generic [ref=e371] [cursor=pointer]: Midjourney
+                - generic [ref=e372] [cursor=pointer]: IA générative
+                - generic [ref=e373] [cursor=pointer]: Technologie
+          - link "3 mars 2025 Guide Guide d'installation et de configuration de Postiz Un outil open-source pour la gestion des réseaux sociaux Postiz Réseaux sociaux Open-source" [ref=e375] [cursor=pointer]:
+            - /url: /fr/blog/installation-configuration-postiz
+            - generic [ref=e377] [cursor=pointer]:
+              - generic [ref=e382] [cursor=pointer]:
+                - generic [ref=e383] [cursor=pointer]:
+                  - time [ref=e384] [cursor=pointer]: 3 mars 2025
+                  - generic [ref=e385] [cursor=pointer]: Guide
+                - generic [ref=e386] [cursor=pointer]: Guide d'installation et de configuration de Postiz
+                - generic [ref=e387] [cursor=pointer]: Un outil open-source pour la gestion des réseaux sociaux
+              - generic [ref=e389] [cursor=pointer]:
+                - generic [ref=e390] [cursor=pointer]: Postiz
+                - generic [ref=e391] [cursor=pointer]: Réseaux sociaux
+                - generic [ref=e392] [cursor=pointer]: Open-source
+          - link "8 février 2025 Tutoriel Guide d'installation et de configuration d'un VPS pour Coolify Un guide étape par étape VPS Coolify Cloudflare" [ref=e394] [cursor=pointer]:
+            - /url: /fr/blog/installation-netcup-vps-coolify
+            - generic [ref=e396] [cursor=pointer]:
+              - generic [ref=e401] [cursor=pointer]:
+                - generic [ref=e402] [cursor=pointer]:
+                  - time [ref=e403] [cursor=pointer]: 8 février 2025
+                  - generic [ref=e404] [cursor=pointer]: Tutoriel
+                - generic [ref=e405] [cursor=pointer]: Guide d'installation et de configuration d'un VPS pour Coolify
+                - generic [ref=e406] [cursor=pointer]: Un guide étape par étape
+              - generic [ref=e408] [cursor=pointer]:
+                - generic [ref=e409] [cursor=pointer]: VPS
+                - generic [ref=e410] [cursor=pointer]: Coolify
+                - generic [ref=e411] [cursor=pointer]: Cloudflare
+          - 'link "8 février 2025 Conseils (1/3) - Comment créer un produit : Guide étape par étape Un guide pour apprendre à entreprendre entreprendre conseils mvp-to-prod" [ref=e413] [cursor=pointer]':
+            - /url: /fr/blog/comment-creer-un-produit-1
+            - generic [ref=e415] [cursor=pointer]:
+              - generic [ref=e420] [cursor=pointer]:
+                - generic [ref=e421] [cursor=pointer]:
+                  - time [ref=e422] [cursor=pointer]: 8 février 2025
+                  - generic [ref=e423] [cursor=pointer]: Conseils
+                - generic [ref=e424] [cursor=pointer]: "(1/3) - Comment créer un produit : Guide étape par étape"
+                - generic [ref=e425] [cursor=pointer]: Un guide pour apprendre à entreprendre
+              - generic [ref=e427] [cursor=pointer]:
+                - generic [ref=e428] [cursor=pointer]: entreprendre
+                - generic [ref=e429] [cursor=pointer]: conseils
+                - generic [ref=e430] [cursor=pointer]: mvp-to-prod
+          - link "17 novembre 2024 Conseils Créer une maquette de A à Z en 2h Un processus rapide pour des maquettes efficaces maquette design développement" [ref=e432] [cursor=pointer]:
+            - /url: /fr/blog/creer-une-maquette-en-2h
+            - generic [ref=e434] [cursor=pointer]:
+              - generic [ref=e439] [cursor=pointer]:
+                - generic [ref=e440] [cursor=pointer]:
+                  - time [ref=e441] [cursor=pointer]: 17 novembre 2024
+                  - generic [ref=e442] [cursor=pointer]: Conseils
+                - generic [ref=e443] [cursor=pointer]: Créer une maquette de A à Z en 2h
+                - generic [ref=e444] [cursor=pointer]: Un processus rapide pour des maquettes efficaces
+              - generic [ref=e446] [cursor=pointer]:
+                - generic [ref=e447] [cursor=pointer]: maquette
+                - generic [ref=e448] [cursor=pointer]: design
+                - generic [ref=e449] [cursor=pointer]: développement
+          - link "3 septembre 2024 Tutoriel Comment installer Syncthing sur un VPS - Guide étape par étape Guide pratique pour l'installation de Syncthing sur un VPS VPS Netcup Installation Serveur Hébergement Web Configuration Serveur" [ref=e451] [cursor=pointer]:
+            - /url: /fr/blog/comment-installer-syncthing-vps
+            - generic [ref=e453] [cursor=pointer]:
+              - generic [ref=e458] [cursor=pointer]:
+                - generic [ref=e459] [cursor=pointer]:
+                  - time [ref=e460] [cursor=pointer]: 3 septembre 2024
+                  - generic [ref=e461] [cursor=pointer]: Tutoriel
+                - generic [ref=e462] [cursor=pointer]: Comment installer Syncthing sur un VPS - Guide étape par étape
+                - generic [ref=e463] [cursor=pointer]: Guide pratique pour l'installation de Syncthing sur un VPS
+              - generic [ref=e465] [cursor=pointer]:
+                - generic [ref=e466] [cursor=pointer]: VPS
+                - generic [ref=e467] [cursor=pointer]: Netcup
+                - generic [ref=e468] [cursor=pointer]: Installation Serveur
+                - generic [ref=e469] [cursor=pointer]: Hébergement Web
+                - generic [ref=e470] [cursor=pointer]: Configuration Serveur
+          - link "16 juin 2024 Tutorial Gestion des Ressources Multimédias dans Obsidian Optimisez votre gestion des images et fichiers dans Obsidian Obsidian Ressources multimédias Plugin Obsidian Gestion d'images Traitement de fichiers" [ref=e472] [cursor=pointer]:
+            - /url: /fr/blog/gestion-ressources-multimedia-obsidian
+            - generic [ref=e474] [cursor=pointer]:
+              - generic [ref=e479] [cursor=pointer]:
+                - generic [ref=e480] [cursor=pointer]:
+                  - time [ref=e481] [cursor=pointer]: 16 juin 2024
+                  - generic [ref=e482] [cursor=pointer]: Tutorial
+                - generic [ref=e483] [cursor=pointer]: Gestion des Ressources Multimédias dans Obsidian
+                - generic [ref=e484] [cursor=pointer]: Optimisez votre gestion des images et fichiers dans Obsidian
+              - generic [ref=e486] [cursor=pointer]:
+                - generic [ref=e487] [cursor=pointer]: Obsidian
+                - generic [ref=e488] [cursor=pointer]: Ressources multimédias
+                - generic [ref=e489] [cursor=pointer]: Plugin Obsidian
+                - generic [ref=e490] [cursor=pointer]: Gestion d'images
+                - generic [ref=e491] [cursor=pointer]: Traitement de fichiers
+          - link "27 mai 2024 Tutoriel Comment synchroniser un bucket MinIO avec un bucket Cloudflare R2 en utilisant Rclone Guide pas à pas pour la synchronisation entre MinIO et Cloudflare R2 MinIO Cloudflare R2 Rclone Synchronisation Stockage d'objets" [ref=e493] [cursor=pointer]:
+            - /url: /fr/blog/synchroniser-bucket-minio-cloudflare-r2-rclone
+            - generic [ref=e495] [cursor=pointer]:
+              - generic [ref=e500] [cursor=pointer]:
+                - generic [ref=e501] [cursor=pointer]:
+                  - time [ref=e502] [cursor=pointer]: 27 mai 2024
+                  - generic [ref=e503] [cursor=pointer]: Tutoriel
+                - generic [ref=e504] [cursor=pointer]: Comment synchroniser un bucket MinIO avec un bucket Cloudflare R2 en utilisant Rclone
+                - generic [ref=e505] [cursor=pointer]: Guide pas à pas pour la synchronisation entre MinIO et Cloudflare R2
+              - generic [ref=e507] [cursor=pointer]:
+                - generic [ref=e508] [cursor=pointer]: MinIO
+                - generic [ref=e509] [cursor=pointer]: Cloudflare R2
+                - generic [ref=e510] [cursor=pointer]: Rclone
+                - generic [ref=e511] [cursor=pointer]: Synchronisation
+                - generic [ref=e512] [cursor=pointer]: Stockage d'objets
+          - link "11 avril 2024 Tutoriel Comment exporter le contenu de votre dépôt de code pour l'utiliser avec des LLM Utilisation de la librairie d'export d'un repository vers un LLM Exportation de code LLM Intégration avec LLM NPM package Repo to LLM" [ref=e514] [cursor=pointer]:
+            - /url: /fr/blog/comment-exporter-le-contenu-de-votre-repository-vers-un-llm
+            - generic [ref=e516] [cursor=pointer]:
+              - generic [ref=e521] [cursor=pointer]:
+                - generic [ref=e522] [cursor=pointer]:
+                  - time [ref=e523] [cursor=pointer]: 11 avril 2024
+                  - generic [ref=e524] [cursor=pointer]: Tutoriel
+                - generic [ref=e525] [cursor=pointer]: Comment exporter le contenu de votre dépôt de code pour l'utiliser avec des LLM
+                - generic [ref=e526] [cursor=pointer]: Utilisation de la librairie d'export d'un repository vers un LLM
+              - generic [ref=e528] [cursor=pointer]:
+                - generic [ref=e529] [cursor=pointer]: Exportation de code
+                - generic [ref=e530] [cursor=pointer]: LLM
+                - generic [ref=e531] [cursor=pointer]: Intégration avec LLM
+                - generic [ref=e532] [cursor=pointer]: NPM package
+                - generic [ref=e533] [cursor=pointer]: Repo to LLM
+          - 'link "3 avril 2024 Tutoriel Développer un Plugin pour Obsidian: Ressources Utiles et Conseils Optimisez votre utilisation d''Obsidian avec un plugin personnalisé Obsidian Plugin Développement Ressources Notes" [ref=e535] [cursor=pointer]':
+            - /url: /fr/blog/developper-plugin-obsidian-ressources-conseils
+            - generic [ref=e537] [cursor=pointer]:
+              - generic [ref=e542] [cursor=pointer]:
+                - generic [ref=e543] [cursor=pointer]:
+                  - time [ref=e544] [cursor=pointer]: 3 avril 2024
+                  - generic [ref=e545] [cursor=pointer]: Tutoriel
+                - generic [ref=e546] [cursor=pointer]: "Développer un Plugin pour Obsidian: Ressources Utiles et Conseils"
+                - generic [ref=e547] [cursor=pointer]: Optimisez votre utilisation d'Obsidian avec un plugin personnalisé
+              - generic [ref=e549] [cursor=pointer]:
+                - generic [ref=e550] [cursor=pointer]: Obsidian
+                - generic [ref=e551] [cursor=pointer]: Plugin
+                - generic [ref=e552] [cursor=pointer]: Développement
+                - generic [ref=e553] [cursor=pointer]: Ressources
+                - generic [ref=e554] [cursor=pointer]: Notes
+          - 'link "15 mars 2024 Article - Critique TypeScript: La Masturbation Intellectuelle du Dev Web ? Avis TypeScript vs JavaScript Développement web avancé Complexité du code Types statiques et dynamiques Sur-ingénierie dans le développement" [ref=e556] [cursor=pointer]':
+            - /url: /fr/blog/pourquoi-typescript-est-surcote
+            - generic [ref=e558] [cursor=pointer]:
+              - generic [ref=e563] [cursor=pointer]:
+                - generic [ref=e564] [cursor=pointer]:
+                  - time [ref=e565] [cursor=pointer]: 15 mars 2024
+                  - generic [ref=e566] [cursor=pointer]: Article - Critique
+                - generic [ref=e567] [cursor=pointer]: "TypeScript: La Masturbation Intellectuelle du Dev Web ?"
+                - generic [ref=e568] [cursor=pointer]: Avis
+              - generic [ref=e570] [cursor=pointer]:
+                - generic [ref=e571] [cursor=pointer]: TypeScript vs JavaScript
+                - generic [ref=e572] [cursor=pointer]: Développement web avancé
+                - generic [ref=e573] [cursor=pointer]: Complexité du code
+                - generic [ref=e574] [cursor=pointer]: Types statiques et dynamiques
+                - generic [ref=e575] [cursor=pointer]: Sur-ingénierie dans le développement
+          - link "28 juillet 2023 Article - Veille Les stacks techniques Startup Stacks techniques pour le développement web TailwindCSS pour le design moderne NextJS et les frameworks Front-End Utilisation de TailwindUI et HeadlessUI Bibliothèques de composants UI modernes" [ref=e577] [cursor=pointer]:
+            - /url: /fr/blog/stacks
+            - generic [ref=e579] [cursor=pointer]:
+              - generic [ref=e584] [cursor=pointer]:
+                - generic [ref=e585] [cursor=pointer]:
+                  - time [ref=e586] [cursor=pointer]: 28 juillet 2023
+                  - generic [ref=e587] [cursor=pointer]: Article - Veille
+                - generic [ref=e588] [cursor=pointer]: Les stacks techniques
+                - generic [ref=e589] [cursor=pointer]: Startup
+              - generic [ref=e591] [cursor=pointer]:
+                - generic [ref=e592] [cursor=pointer]: Stacks techniques pour le développement web
+                - generic [ref=e593] [cursor=pointer]: TailwindCSS pour le design moderne
+                - generic [ref=e594] [cursor=pointer]: NextJS et les frameworks Front-End
+                - generic [ref=e595] [cursor=pointer]: Utilisation de TailwindUI et HeadlessUI
+                - generic [ref=e596] [cursor=pointer]: Bibliothèques de composants UI modernes
+        - generic [ref=e597]:
+          - link "19 juin 2025 Tutoriel Vidéo Midjourney vers Seamless Loop en utilisant FFmpeg - Script d'automatisation complet Convertir des Vidéos Midjourney en Boucles Parfaites avec FFmpeg FFmpeg Animation WebP Traitement vidéo Automatisation Script Bash" [ref=e599] [cursor=pointer]:
+            - /url: /fr/blog/midjourney-video-to-seamless-loop-ffmpeg
+            - generic [ref=e601] [cursor=pointer]:
+              - generic [ref=e606] [cursor=pointer]:
+                - generic [ref=e607] [cursor=pointer]:
+                  - time [ref=e608] [cursor=pointer]: 19 juin 2025
+                  - generic [ref=e609] [cursor=pointer]: Tutoriel
+                - generic [ref=e610] [cursor=pointer]: Vidéo Midjourney vers Seamless Loop en utilisant FFmpeg - Script d'automatisation complet
+                - generic [ref=e611] [cursor=pointer]: Convertir des Vidéos Midjourney en Boucles Parfaites avec FFmpeg
+              - generic [ref=e613] [cursor=pointer]:
+                - generic [ref=e614] [cursor=pointer]: FFmpeg
+                - generic [ref=e615] [cursor=pointer]: Animation WebP
+                - generic [ref=e616] [cursor=pointer]: Traitement vidéo
+                - generic [ref=e617] [cursor=pointer]: Automatisation
+                - generic [ref=e618] [cursor=pointer]: Script Bash
+          - link "6 avril 2025 Conseils Prompt Engineering pour Midjourney Maîtriser l'art du prompt engineering prompt engineering Midjourney" [ref=e620] [cursor=pointer]:
+            - /url: /fr/blog/prompt-engineering-midjourney
+            - generic [ref=e622] [cursor=pointer]:
+              - generic [ref=e627] [cursor=pointer]:
+                - generic [ref=e628] [cursor=pointer]:
+                  - time [ref=e629] [cursor=pointer]: 6 avril 2025
+                  - generic [ref=e630] [cursor=pointer]: Conseils
+                - generic [ref=e631] [cursor=pointer]: Prompt Engineering pour Midjourney
+                - generic [ref=e632] [cursor=pointer]: Maîtriser l'art du prompt engineering
+              - generic [ref=e634] [cursor=pointer]:
+                - generic [ref=e635] [cursor=pointer]: prompt engineering
+                - generic [ref=e636] [cursor=pointer]: Midjourney
+          - link "2 avril 2025 Conseils Configuration des systèmes d'email marketing Optimisez votre délivrabilité d'emails Email Selfhosted" [ref=e638] [cursor=pointer]:
+            - /url: /fr/blog/configuration-email-marketing
+            - generic [ref=e640] [cursor=pointer]:
+              - generic [ref=e645] [cursor=pointer]:
+                - generic [ref=e646] [cursor=pointer]:
+                  - time [ref=e647] [cursor=pointer]: 2 avril 2025
+                  - generic [ref=e648] [cursor=pointer]: Conseils
+                - generic [ref=e649] [cursor=pointer]: Configuration des systèmes d'email marketing
+                - generic [ref=e650] [cursor=pointer]: Optimisez votre délivrabilité d'emails
+              - generic [ref=e652] [cursor=pointer]:
+                - generic [ref=e653] [cursor=pointer]: Email
+                - generic [ref=e654] [cursor=pointer]: Selfhosted
+          - link "23 février 2025 Conseils Optimisation de ma VM Windows pour Photoshop Améliorez la performance de votre environnement virtuel VM Fedora Windows" [ref=e656] [cursor=pointer]:
+            - /url: /fr/blog/optimisation-vm-windows-photoshop
+            - generic [ref=e658] [cursor=pointer]:
+              - generic [ref=e663] [cursor=pointer]:
+                - generic [ref=e664] [cursor=pointer]:
+                  - time [ref=e665] [cursor=pointer]: 23 février 2025
+                  - generic [ref=e666] [cursor=pointer]: Conseils
+                - generic [ref=e667] [cursor=pointer]: Optimisation de ma VM Windows pour Photoshop
+                - generic [ref=e668] [cursor=pointer]: Améliorez la performance de votre environnement virtuel
+              - generic [ref=e670] [cursor=pointer]:
+                - generic [ref=e671] [cursor=pointer]: VM
+                - generic [ref=e672] [cursor=pointer]: Fedora
+                - generic [ref=e673] [cursor=pointer]: Windows
+          - 'link "8 février 2025 Conseils (3/3) - Comment créer un produit : Guide étape par étape Un guide pour apprendre à entreprendre VPS Coolify Cloudflare Tuto Entrepreneur" [ref=e675] [cursor=pointer]':
+            - /url: /fr/blog/comment-creer-un-produit-3
+            - generic [ref=e677] [cursor=pointer]:
+              - generic [ref=e682] [cursor=pointer]:
+                - generic [ref=e683] [cursor=pointer]:
+                  - time [ref=e684] [cursor=pointer]: 8 février 2025
+                  - generic [ref=e685] [cursor=pointer]: Conseils
+                - generic [ref=e686] [cursor=pointer]: "(3/3) - Comment créer un produit : Guide étape par étape"
+                - generic [ref=e687] [cursor=pointer]: Un guide pour apprendre à entreprendre
+              - generic [ref=e689] [cursor=pointer]:
+                - generic [ref=e690] [cursor=pointer]: VPS
+                - generic [ref=e691] [cursor=pointer]: Coolify
+                - generic [ref=e692] [cursor=pointer]: Cloudflare
+                - generic [ref=e693] [cursor=pointer]: Tuto
+                - generic [ref=e694] [cursor=pointer]: Entrepreneur
+          - link "17 novembre 2024 Conseils Utiliser vos LLM favoris sans blocage Débloquez l'accès à vos LLM LLM ChatGPT API" [ref=e696] [cursor=pointer]:
+            - /url: /fr/blog/utiliser-llm-sans-blocage
+            - generic [ref=e698] [cursor=pointer]:
+              - generic [ref=e703] [cursor=pointer]:
+                - generic [ref=e704] [cursor=pointer]:
+                  - time [ref=e705] [cursor=pointer]: 17 novembre 2024
+                  - generic [ref=e706] [cursor=pointer]: Conseils
+                - generic [ref=e707] [cursor=pointer]: Utiliser vos LLM favoris sans blocage
+                - generic [ref=e708] [cursor=pointer]: Débloquez l'accès à vos LLM
+              - generic [ref=e710] [cursor=pointer]:
+                - generic [ref=e711] [cursor=pointer]: LLM
+                - generic [ref=e712] [cursor=pointer]: ChatGPT
+                - generic [ref=e713] [cursor=pointer]: API
+          - link "23 septembre 2024 Veille Les icones disponible dans Obsidian Voir toutes les icones disponible obsidian icons libs icons" [ref=e715] [cursor=pointer]:
+            - /url: /fr/blog/plugins-obsidian-icons
+            - generic [ref=e717] [cursor=pointer]:
+              - generic [ref=e722] [cursor=pointer]:
+                - generic [ref=e723] [cursor=pointer]:
+                  - time [ref=e724] [cursor=pointer]: 23 septembre 2024
+                  - generic [ref=e725] [cursor=pointer]: Veille
+                - generic [ref=e726] [cursor=pointer]: Les icones disponible dans Obsidian
+                - generic [ref=e727] [cursor=pointer]: Voir toutes les icones disponible
+              - generic [ref=e729] [cursor=pointer]:
+                - generic [ref=e730] [cursor=pointer]: obsidian icons
+                - generic [ref=e731] [cursor=pointer]: libs icons
+          - link "20 juin 2024 Conseils SEO Générer Automatiquement des Descriptions d'Images ALT pour un Meilleur Référencement et Accessibilité Optimisation des Descriptions d'Images ALT pour un Meilleur Référencement SEO Optimisation des images Accessibilité web Référencement naturel Méta description" [ref=e733] [cursor=pointer]:
+            - /url: /fr/blog/generer-descriptions-images-alt
+            - generic [ref=e735] [cursor=pointer]:
+              - generic [ref=e740] [cursor=pointer]:
+                - generic [ref=e741] [cursor=pointer]:
+                  - time [ref=e742] [cursor=pointer]: 20 juin 2024
+                  - generic [ref=e743] [cursor=pointer]: Conseils SEO
+                - generic [ref=e744] [cursor=pointer]: Générer Automatiquement des Descriptions d'Images ALT pour un Meilleur Référencement et Accessibilité
+                - generic [ref=e745] [cursor=pointer]: Optimisation des Descriptions d'Images ALT pour un Meilleur Référencement
+              - generic [ref=e747] [cursor=pointer]:
+                - generic [ref=e748] [cursor=pointer]: SEO
+                - generic [ref=e749] [cursor=pointer]: Optimisation des images
+                - generic [ref=e750] [cursor=pointer]: Accessibilité web
+                - generic [ref=e751] [cursor=pointer]: Référencement naturel
+                - generic [ref=e752] [cursor=pointer]: Méta description
+          - link "13 juin 2024 Guide Comment voir les icônes disponibles dans Obsidian Trouver et utiliser efficacement les icônes dans Obsidian Obsidian Lucide Plugins Icônes Tutoriel" [ref=e754] [cursor=pointer]:
+            - /url: /fr/blog/voir-les-icones-disponibles-obsidian
+            - generic [ref=e756] [cursor=pointer]:
+              - generic [ref=e761] [cursor=pointer]:
+                - generic [ref=e762] [cursor=pointer]:
+                  - time [ref=e763] [cursor=pointer]: 13 juin 2024
+                  - generic [ref=e764] [cursor=pointer]: Guide
+                - generic [ref=e765] [cursor=pointer]: Comment voir les icônes disponibles dans Obsidian
+                - generic [ref=e766] [cursor=pointer]: Trouver et utiliser efficacement les icônes dans Obsidian
+              - generic [ref=e768] [cursor=pointer]:
+                - generic [ref=e769] [cursor=pointer]: Obsidian
+                - generic [ref=e770] [cursor=pointer]: Lucide
+                - generic [ref=e771] [cursor=pointer]: Plugins
+                - generic [ref=e772] [cursor=pointer]: Icônes
+                - generic [ref=e773] [cursor=pointer]: Tutoriel
+          - link "27 mai 2024 Tutoriel Comment bloquer les nommages de branches sur Azure DevOps Comment garantir une organisation optimale dans Azure DevOps Azure DevOps Pipeline YAML Branches Organisation Convention de nommage" [ref=e775] [cursor=pointer]:
+            - /url: /fr/blog/comment-bloquer-les-nommages-de-branches-sur-azure-devops
+            - generic [ref=e777] [cursor=pointer]:
+              - generic [ref=e782] [cursor=pointer]:
+                - generic [ref=e783] [cursor=pointer]:
+                  - time [ref=e784] [cursor=pointer]: 27 mai 2024
+                  - generic [ref=e785] [cursor=pointer]: Tutoriel
+                - generic [ref=e786] [cursor=pointer]: Comment bloquer les nommages de branches sur Azure DevOps
+                - generic [ref=e787] [cursor=pointer]: Comment garantir une organisation optimale dans Azure DevOps
+              - generic [ref=e789] [cursor=pointer]:
+                - generic [ref=e790] [cursor=pointer]: Azure DevOps
+                - generic [ref=e791] [cursor=pointer]: Pipeline YAML
+                - generic [ref=e792] [cursor=pointer]: Branches
+                - generic [ref=e793] [cursor=pointer]: Organisation
+                - generic [ref=e794] [cursor=pointer]: Convention de nommage
+          - link "10 avril 2024 Article Développement d'un Plugin Strapi Tout ce que vous devez savoir sur le développement de mon plugin Strapi Strapi CMS Headless Développement Plugin Conseils Javascript" [ref=e796] [cursor=pointer]:
+            - /url: /fr/blog/developpement-plugin-strapi-guide-complet
+            - generic [ref=e798] [cursor=pointer]:
+              - generic [ref=e803] [cursor=pointer]:
+                - generic [ref=e804] [cursor=pointer]:
+                  - time [ref=e805] [cursor=pointer]: 10 avril 2024
+                  - generic [ref=e806] [cursor=pointer]: Article
+                - generic [ref=e807] [cursor=pointer]: Développement d'un Plugin Strapi
+                - generic [ref=e808] [cursor=pointer]: Tout ce que vous devez savoir sur le développement de mon plugin Strapi
+              - generic [ref=e810] [cursor=pointer]:
+                - generic [ref=e811] [cursor=pointer]: Strapi
+                - generic [ref=e812] [cursor=pointer]: CMS Headless
+                - generic [ref=e813] [cursor=pointer]: Développement Plugin
+                - generic [ref=e814] [cursor=pointer]: Conseils
+                - generic [ref=e815] [cursor=pointer]: Javascript
+          - 'link "26 mars 2024 Article L''agilité sans bullshit : la Rolls Royce du développement logiciel Introduction à l''agilité dans le développement logiciel Agilité Développement logiciel Manifeste Agile Collaboration Changement" [ref=e817] [cursor=pointer]':
+            - /url: /fr/blog/agilite-sans-bullshit-rolls-royce-developpement-logiciel
+            - generic [ref=e819] [cursor=pointer]:
+              - generic [ref=e824] [cursor=pointer]:
+                - generic [ref=e825] [cursor=pointer]:
+                  - time [ref=e826] [cursor=pointer]: 26 mars 2024
+                  - generic [ref=e827] [cursor=pointer]: Article
+                - generic [ref=e828] [cursor=pointer]: "L'agilité sans bullshit : la Rolls Royce du développement logiciel"
+                - generic [ref=e829] [cursor=pointer]: Introduction à l'agilité dans le développement logiciel
+              - generic [ref=e831] [cursor=pointer]:
+                - generic [ref=e832] [cursor=pointer]: Agilité
+                - generic [ref=e833] [cursor=pointer]: Développement logiciel
+                - generic [ref=e834] [cursor=pointer]: Manifeste Agile
+                - generic [ref=e835] [cursor=pointer]: Collaboration
+                - generic [ref=e836] [cursor=pointer]: Changement
+          - link "28 juillet 2023 Article - Veille Les Fondamentaux du Web Design Startup Principes de design web UI et UX design Identité visuelle et couleur Systèmes de grille en design Hiérarchisation de l'information" [ref=e838] [cursor=pointer]:
+            - /url: /fr/blog/webdesign
+            - generic [ref=e840] [cursor=pointer]:
+              - generic [ref=e845] [cursor=pointer]:
+                - generic [ref=e846] [cursor=pointer]:
+                  - time [ref=e847] [cursor=pointer]: 28 juillet 2023
+                  - generic [ref=e848] [cursor=pointer]: Article - Veille
+                - generic [ref=e849] [cursor=pointer]: Les Fondamentaux du Web Design
+                - generic [ref=e850] [cursor=pointer]: Startup
+              - generic [ref=e852] [cursor=pointer]:
+                - generic [ref=e853] [cursor=pointer]: Principes de design web
+                - generic [ref=e854] [cursor=pointer]: UI et UX design
+                - generic [ref=e855] [cursor=pointer]: Identité visuelle et couleur
+                - generic [ref=e856] [cursor=pointer]: Systèmes de grille en design
+                - generic [ref=e857] [cursor=pointer]: Hiérarchisation de l'information
+          - link "28 juillet 2023 Article - Veille Installer un PaaS avec CapRover Startup Installation de base VPS Sécurité avec UFW et Fail2Ban Configuration SSH Debian CapRover sur Contabo Docker et containerisation" [ref=e859] [cursor=pointer]:
+            - /url: /fr/blog/how-to-install-caprover-on-vps
+            - generic [ref=e861] [cursor=pointer]:
+              - generic [ref=e866] [cursor=pointer]:
+                - generic [ref=e867] [cursor=pointer]:
+                  - time [ref=e868] [cursor=pointer]: 28 juillet 2023
+                  - generic [ref=e869] [cursor=pointer]: Article - Veille
+                - generic [ref=e870] [cursor=pointer]: Installer un PaaS avec CapRover
+                - generic [ref=e871] [cursor=pointer]: Startup
+              - generic [ref=e873] [cursor=pointer]:
+                - generic [ref=e874] [cursor=pointer]: Installation de base VPS
+                - generic [ref=e875] [cursor=pointer]: Sécurité avec UFW et Fail2Ban
+                - generic [ref=e876] [cursor=pointer]: Configuration SSH Debian
+                - generic [ref=e877] [cursor=pointer]: CapRover sur Contabo
+                - generic [ref=e878] [cursor=pointer]: Docker et containerisation
+    - generic [ref=e881]:
+      - heading "DÉVELOPPONS ENSEMBLE VOS PROJETS" [level=2] [ref=e883]:
+        - generic [ref=e884]: DÉVELOPPONS
+        - generic [ref=e885]: ENSEMBLE
+        - generic [ref=e886]: VOS PROJETS
+      - generic [ref=e888]:
+        - generic [ref=e889]: Une idée, un projet ? Je suis là pour répondre à vos demandes et vous accompagner.
+        - generic [ref=e890]: N’hésitez pas, je serais ravi d’échanger avec vous sur votre projet !
+      - link "Me contacter" [ref=e892] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e893] [cursor=pointer]: Me contacter
+  - contentinfo [ref=e894]:
+    - generic [ref=e895]:
+      - img "Andy Cinquin Logo Signature Icon" [ref=e896]
+      - generic [ref=e898]:
+        - link "contact@andy-cinquin.fr" [ref=e900] [cursor=pointer]:
+          - /url: mailto:contact@andy-cinquin.fr
+        - generic [ref=e901]: "Entrepreneur, et co-fondateur de :"
+        - list [ref=e902]:
+          - listitem [ref=e903]:
+            - link "Beswib" [ref=e904] [cursor=pointer]:
+              - /url: https://beswib.com
+            - text: ","
+          - listitem [ref=e905]:
+            - link "ForVoyez" [ref=e906] [cursor=pointer]:
+              - /url: https://forvoyez.com
+            - text: ","
+          - listitem [ref=e907]:
+            - link "ForHives.fr" [ref=e908] [cursor=pointer]:
+              - /url: https://forhives.fr
+            - text: ","
+          - listitem [ref=e909]:
+            - link "ForMenu.fr" [ref=e910] [cursor=pointer]:
+              - /url: https://formenu.fr
+            - text: ","
+          - listitem [ref=e911]:
+            - link "My-Makeup.fr" [ref=e912] [cursor=pointer]:
+              - /url: https://my-makeup.fr
+            - text: ","
+          - listitem [ref=e913]:
+            - link "Artriste.cc" [ref=e914] [cursor=pointer]:
+              - /url: https://artriste.cc
+            - text: ","
+        - generic [ref=e915]:
+          - text: CTO de
+          - link "Neova" [ref=e916] [cursor=pointer]:
+            - /url: https://neova.io
+        - generic [ref=e917]: Développeur Freelance, Web, mobile, applicatif, UI/UX, référencement (SEO/SEA).
+        - generic [ref=e918]: Création sur-mesure. Optimisation. Création et développement de site web.
+    - generic [ref=e919]:
+      - heading "SITEMAP" [level=2] [ref=e920]
+      - link "À propos de moi" [ref=e921] [cursor=pointer]:
+        - /url: /about
+      - link "Mes projets" [ref=e922] [cursor=pointer]:
+        - /url: /portefolio
+      - link "Blog" [ref=e923] [cursor=pointer]:
+        - /url: /blog
+      - link "Contact" [ref=e924] [cursor=pointer]:
+        - /url: /contact
+    - generic [ref=e925]:
+      - heading "LÉGALES" [level=2] [ref=e926]
+      - link "Mentions légales" [ref=e927] [cursor=pointer]:
+        - /url: /cgu
+      - link "Politique de confidentialité" [ref=e928] [cursor=pointer]:
+        - /url: /cgu
+    - generic [ref=e931]:
+      - link [ref=e933] [cursor=pointer]:
+        - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+        - img [ref=e934] [cursor=pointer]
+      - link [ref=e937] [cursor=pointer]:
+        - /url: https://www.instagram.com/cinquin.andy/
+        - img [ref=e938] [cursor=pointer]
+      - link [ref=e943] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/andy-cinquin/
+        - img [ref=e944] [cursor=pointer]
+      - link [ref=e949] [cursor=pointer]:
+        - /url: https://github.com/CinquinAndy/
+        - img [ref=e950] [cursor=pointer]
+      - link [ref=e955] [cursor=pointer]:
+        - /url: https://www.malt.fr/profile/andycinquin
+        - img [ref=e956] [cursor=pointer]
+  - article [ref=e966]:
+    - generic [ref=e969]:
+      - text: © 2025 Andy Cinquin - Tous droits réservés - Developed & Designed with ❤️ 🐝
+      - link "ForHives co-founders" [ref=e970] [cursor=pointer]:
+        - /url: https://forhives.fr/
+  - button "Open Next.js Dev Tools" [ref=e976] [cursor=pointer]:
+    - img [ref=e977] [cursor=pointer]
+  - alert [ref=e980]
+```

@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { TechnologyIcon } from './TechnologyIcon'
 
-export const formatTechnologyName = name => {
+export const formatTechnologyName = (name: string): string => {
 	if (!name) return ''
 	// Replace 'dot' with '.' and capitalize first letter
 	return name.replace(/dot/i, '.').charAt(0).toUpperCase() + name.slice(1).replace(/dot/i, '.')
@@ -15,7 +15,7 @@ interface TechnologyDisplayProps {
 	technology?: any // TODO: Define proper type for technology
 }
 
-export function TechnologyDisplay({ technology }: TechnologyDisplayProps): React.JSX.Element {
+export function TechnologyDisplay({ technology }: TechnologyDisplayProps): React.JSX.Element | null {
 	if (!technology) return null
 
 	return (

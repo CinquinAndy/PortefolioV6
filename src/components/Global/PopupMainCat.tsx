@@ -1,13 +1,17 @@
 'use client'
-import React from 'react'
 import { useEffect, useRef, useState } from 'react'
+import React from 'react'
 
-export function PopupMainCat({ content_website }) {
-	const leftEyeRef = useRef(null)
-	const rightEyeRef = useRef(null)
+interface PopupMainCatProps {
+	content_website?: any // TODO: Define proper type for content_website
+}
+
+export function PopupMainCat({ content_website }: PopupMainCatProps): React.JSX.Element {
+	const leftEyeRef = useRef<SVGGElement | null>(null)
+	const rightEyeRef = useRef<SVGGElement | null>(null)
 	const [isClicked, setIsClicked] = useState(false)
 
-	function mapEyePosition(mouseXPercentage, mouseYPercentage) {
+	function mapEyePosition(mouseXPercentage: number, mouseYPercentage: number): { x: number; y: number } {
 		const eyePositionLimits = {
 			y: { min: -5.109489051094891, max: 3.6496350364963503 },
 			x: { min: -2.7083333333333335, max: 4.635416666666667 },
@@ -18,14 +22,14 @@ export function PopupMainCat({ content_website }) {
 		const translateY =
 			eyePositionLimits.y.min + ((eyePositionLimits.y.max - eyePositionLimits.y.min) * mouseYPercentage) / 100
 
-		return { translateY, translateX }
+		return { y: translateY, x: translateX }
 	}
 
-	const handleMouseMove = e => {
+	const handleMouseMove = (e: MouseEvent) => {
 		const mouseXPercentage = (e.clientX / window.innerWidth) * 100
 		const mouseYPercentage = (e.clientY / window.innerHeight) * 100
 
-		const { translateY, translateX } = mapEyePosition(mouseXPercentage, mouseYPercentage)
+		const { y: translateY, x: translateX } = mapEyePosition(mouseXPercentage, mouseYPercentage)
 
 		;[leftEyeRef, rightEyeRef].forEach(eyeRef => {
 			if (eyeRef.current) {
