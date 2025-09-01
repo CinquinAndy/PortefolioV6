@@ -45,7 +45,6 @@ export async function generateMetadata({ params }: { params: Promise<ArticleSlug
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
 			},
-			canonical: article?.attributes?.seo_canonical ?? '/',
 		},
 	}
 }
@@ -144,7 +143,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>

@@ -149,6 +149,26 @@ export interface StrapiImageFormat {
 	url: string
 }
 
+export interface UploadFile {
+	id: number
+	name: string
+	alternativeText?: string
+	caption?: string
+	width: number
+	height: number
+	formats?: number
+	hash: string
+	ext: string
+	mime: string
+	size: number
+	url: string
+	previewUrl?: string
+	provider: string
+	provider_metadata?: Record<string, unknown>
+	createdAt: string
+	updatedAt: string
+}
+
 export interface LinkComponent {
 	id: number
 	label: string
@@ -170,24 +190,15 @@ export interface TechnologyComponent {
 export interface Technology {
 	id: number
 	attributes: {
-		name: string
-		description?: string
-		icon?: {
+		label: string
+		image?: {
 			data: StrapiMedia
 		}
-		color?: string
-		url?: string
-		category?: string
-		order?: number
+		rank?: number
 		createdAt: string
 		updatedAt: string
-		publishedAt: string
 		createdBy?: StrapiRelation
 		updatedBy?: StrapiRelation
-		localizations?: {
-			data: Technology[]
-		}
-		locale: string
 	}
 }
 
@@ -198,7 +209,6 @@ export interface Article {
 		content: string
 		seo_title?: string
 		seo_description?: string
-		seo_canonical?: string
 		slug: string
 		excerpt?: string
 		image_presentation?: {
@@ -207,12 +217,18 @@ export interface Article {
 		galery?: {
 			data: StrapiMedia[]
 		}
-		links?: LinkComponent[]
+		links?: Array<{
+			id: number
+			label: string
+			url: string
+		}>
 		subtitle?: string
 		type?: string
 		rank?: number
-		featured?: boolean
-		tags?: TagComponent[]
+		tags?: Array<{
+			id: number
+			name: string
+		}>
 		createdAt: string
 		updatedAt: string
 		publishedAt: string
@@ -447,19 +463,17 @@ export interface ContentWebsite {
 export interface Service {
 	id: number
 	attributes: {
+		eyebrow?: string
 		title: string
 		description: string
-		icon?: string
-		eyebrow?: string
-		rank?: number
-		createdAt: string
-		updatedAt: string
-		publishedAt: string
-		createdBy?: StrapiRelation
-		updatedBy?: StrapiRelation
-		image?: {
+		graphic?: {
 			data: StrapiMedia
 		}
+		createdAt: string
+		updatedAt: string
+		publishedAt?: string
+		createdBy?: StrapiRelation
+		updatedBy?: StrapiRelation
 		localizations?: {
 			data: Service[]
 		}
