@@ -1,9 +1,4 @@
-import {
-	getArticles,
-	getContentWebsite,
-	getRealisations,
-	getServicesGrid,
-} from '@/services/getContentWebsite'
+import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'

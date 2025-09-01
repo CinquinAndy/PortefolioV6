@@ -14,8 +14,8 @@ function Footer({ content_website }) {
 
 	return (
 		<>
-			<footer className="mt-[100px] grid grid-cols-8 gap-12 px-6 pt-6 md:gap-4 md:px-20 md:pt-20 xl:mt-[150px]">
-				<div className="col-span-8 col-start-1 flex flex-col gap-4 text-xs md:col-span-4 xl:col-span-4 xl:col-start-2">
+			<footer className="mt-[100px] grid grid-cols-8 gap-12 px-6 pt-6 xl:mt-[150px] md:gap-4 md:px-20 md:pt-20">
+				<div className="col-span-8 col-start-1 flex flex-col gap-4 text-xs xl:col-span-4 xl:col-start-2 md:col-span-4">
 					<Image
 						alt={content_website?.attributes?.content_footer?.image?.data?.attributes?.alternativeText || 'logo'}
 						className="h-6 w-6"
@@ -31,7 +31,7 @@ function Footer({ content_website }) {
 					</div>
 				</div>
 
-				<div className="col-span-4 flex flex-col gap-4 md:col-span-2 md:col-start-5 lg:gap-10 xl:col-span-1">
+				<div className="col-span-4 flex flex-col gap-4 xl:col-span-1 md:col-span-2 md:col-start-5 lg:gap-10">
 					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
@@ -43,7 +43,7 @@ function Footer({ content_website }) {
 						)
 					})}
 				</div>
-				<div className="col-span-4 flex flex-col gap-4 md:col-span-2 md:col-start-7 lg:gap-10 xl:col-span-1">
+				<div className="col-span-4 flex flex-col gap-4 xl:col-span-1 md:col-span-2 md:col-start-7 lg:gap-10">
 					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>

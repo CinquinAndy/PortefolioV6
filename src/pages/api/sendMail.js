@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify'
+
 import formData from 'form-data'
 import Mailgun from 'mailgun.js'
 const mailgun = new Mailgun(formData)
@@ -22,10 +23,10 @@ export default function handler(req, res) {
 				subject: 'Nouveau message de contact',
 				from: 'Andy Cinquin Website <contact@andy-cinquin.fr>',
 			})
-			.then(msg => { // eslint-disable-line no-unused-vars
+			.then(msg => {
 				res.status(200).json({ success: true })
 			})
-			.catch(err => { // eslint-disable-line no-unused-vars
+			.catch(err => {
 				toast('Une erreur est survenue, veuillez réessayer plus tard', {
 					type: 'error',
 					toastId: 'toast-alert',

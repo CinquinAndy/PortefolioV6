@@ -48,7 +48,7 @@ function Articles({ slice, isHome, content_website, articles }) {
 				</div>
 			)}
 			<div className="mt-10 flex w-full justify-center xl:mt-20">
-				<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
+				<div className="grid w-full grid-cols-12 gap-[20px] xl:gap-[60px] md:gap-[40px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
 					{articles.map((article, index) => {
 						return (
 							<Link

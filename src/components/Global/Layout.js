@@ -39,7 +39,7 @@ const options = {
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
 							alt={alt}
-							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
+							className={`max-h-[300px] object-contain xl:max-h-[650px] sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px]`}
 							height={1000}
 							quality={85}
 							src={src}
@@ -90,7 +90,7 @@ export function Layout({ value, className }) {
 	// Convert the elements to a new array with updated children prop
 	replacedContent = replacedContent.map(child => {
 		if (React.isValidElement(child) && Array.isArray(child.props.children)) {
-			const updatedChildren = child.props.children.map((textChild, index) => { // eslint-disable-line no-unused-vars
+			const updatedChildren = child.props.children.map((textChild, index) => {
 				if (typeof textChild === 'string') {
 					const currentYear = new Date().getFullYear()
 					return textChild.replace(/{actualYear}/g, currentYear)

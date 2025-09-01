@@ -288,17 +288,21 @@ export async function processRealisationData(
 /**
  * Update nested property
  */
-export function updateNestedProperty<T extends Record<string, unknown>>(obj: T, path: string | string[], newValue: unknown): T {
+export function updateNestedProperty<T extends Record<string, unknown>>(
+	obj: T,
+	path: string | string[],
+	newValue: unknown
+): T {
 	const keys = Array.isArray(path) ? path : path.split('.')
 	const newObj = { ...obj }
 	let pointer: Record<string, unknown> = newObj
 
 	for (let i = 0; i < keys.length - 1; i++) {
 		const currentValue = pointer[keys[i]] as Record<string, unknown>
-		pointer[keys[i] as string] = { ...currentValue }
+		pointer[keys[i]] = { ...currentValue }
 		pointer = currentValue
 	}
 
-	pointer[keys[keys.length - 1] as string] = newValue
+	pointer[keys[keys.length - 1]] = newValue
 	return newObj
 }

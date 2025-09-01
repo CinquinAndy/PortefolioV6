@@ -113,7 +113,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(hasFooter).toBeGreaterThan(0)
 		expect(hasMainContent).toBeGreaterThan(5) // Au moins 5 éléments de contenu
 
-		console.info(`✅ Homepage FR: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
+		console.warn(`✅ Homepage FR: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
 	})
 
 	test('✅ Homepage EN - Content Focus', async ({ page }) => {
@@ -133,7 +133,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(hasFooter).toBeGreaterThan(0)
 		expect(hasMainContent).toBeGreaterThan(5)
 
-		console.info(`✅ Homepage EN: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
+		console.warn(`✅ Homepage EN: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
 	})
 
 	test('⚠️ Portfolio Page - Functional Test Only', async ({ page }) => {
@@ -163,7 +163,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 			expect(isClickable).toBeTruthy()
 		}
 
-		console.info(`✅ Portfolio: ${portfolioCards} projects found - functional test PASSED`)
+		console.warn(`✅ Portfolio: ${portfolioCards} projects found - functional test PASSED`)
 	})
 })
 
@@ -204,11 +204,11 @@ test.describe('🔍 Production Validation', () => {
 		expect(failedPages.length).toBe(0)
 
 		// Afficher le résumé
-		console.info('\n🎉 MIGRATION BASELINE SUMMARY:')
+		console.warn('\n🎉 MIGRATION BASELINE SUMMARY:')
 		results.forEach(r => {
-			console.info(`✅ ${r.name}: ${r.contentElements} elements`)
+			console.warn(`✅ ${r.name}: ${r.contentElements} elements`)
 		})
-		console.info(`\n📊 Status: ${results.length}/6 pages ready for migration`)
+		console.warn(`\n📊 Status: ${results.length}/6 pages ready for migration`)
 	})
 
 	test('✅ Navigation Links Present', async ({ page }) => {
@@ -233,7 +233,7 @@ test.describe('🔍 Production Validation', () => {
 		const totalLinks = Object.values(linksCount).reduce((a, b) => a + b, 0)
 		expect(totalLinks).toBeGreaterThanOrEqual(2)
 
-		console.info(`✅ Navigation: ${totalLinks} main links found`, linksCount)
+		console.warn(`✅ Navigation: ${totalLinks} main links found`, linksCount)
 	})
 })
 

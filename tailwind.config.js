@@ -1,4 +1,7 @@
-const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
+import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette'
+import typography from '@tailwindcss/typography'
+import animate from 'tailwindcss-animate'
+import forms from '@tailwindcss/forms'
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
@@ -131,12 +134,7 @@ module.exports = {
 		'*:border-white',
 		'border-white',
 	],
-	plugins: [
-		require('@tailwindcss/forms'),
-		require('@tailwindcss/typography'),
-		addVariablesForColors,
-		require('tailwindcss-animate'),
-	],
+	plugins: [forms, typography, addVariablesForColors, animate],
 	darkMode: ['class'],
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
 }
