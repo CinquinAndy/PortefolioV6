@@ -31,12 +31,9 @@ export async function generateMetadata({ params }) {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
 			},
-			canonical:
-				content_website?.attributes?.content_home?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_home?.seo?.canonical || '/',
 		},
-		title:
-			content_website?.attributes?.content_home?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: content_website?.attributes?.content_home?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.fr`),
 	}
 }
@@ -73,18 +70,8 @@ export default async function Page({ params }) {
 
 			<div className={'relative'}>
 				<ServicesGrid content_website={content_website} services={services} />
-				<Realisations
-					content_website={content_website}
-					isHome={true}
-					realisations={realisations}
-					slice={3}
-				/>
-				<Articles
-					articles={articles}
-					content_website={content_website}
-					isHome={true}
-					slice={3}
-				/>
+				<Realisations content_website={content_website} isHome={true} realisations={realisations} slice={3} />
+				<Articles articles={articles} content_website={content_website} isHome={true} slice={3} />
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

@@ -27,9 +27,7 @@ function Cta({ content_website }) {
 							className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
 							href={content_website?.attributes?.cta?.link?.url}
 						>
-							<span className={'button-purple-title'}>
-								{content_website?.attributes?.cta?.link?.label}
-							</span>
+							<span className={'button-purple-title'}>{content_website?.attributes?.cta?.link?.label}</span>
 						</Link>
 					</div>
 				</div>

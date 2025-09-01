@@ -29,27 +29,16 @@ function LoaderFullPage({ locale }) {
 					<div className="loader-line-mask">
 						<div className="loader-line" />
 					</div>
-					<span
-						className={'z-10 flex h-full w-full items-center justify-center'}
-					>
-						<Image
-							alt={'icon'}
-							height={50}
-							src={'assets/icons/logov2.svg'}
-							width={50}
-						/>
+					<span className={'z-10 flex h-full w-full items-center justify-center'}>
+						<Image alt={'icon'} height={50} src={'assets/icons/logov2.svg'} width={50} />
 					</span>
 				</div>
 			</div>
 			<div className={'pb-20'}>
 				{locale === 'fr' ? (
-					<h3 className="text-lg font-semibold text-slate-50">
-						Chargement de mon univers...
-					</h3>
+					<h3 className="text-lg font-semibold text-slate-50">Chargement de mon univers...</h3>
 				) : (
-					<h3 className="text-lg font-semibold text-slate-50">
-						Loading my universe...
-					</h3>
+					<h3 className="text-lg font-semibold text-slate-50">Loading my universe...</h3>
 				)}
 			</div>
 		</div>

@@ -15,11 +15,7 @@ const options = {
 				if (isMarkdownTable(content)) {
 					return markdownTableToHtml(content)
 				} else {
-					return (
-						<div className={'my-5'}>
-							{domToReact(domNode.children, options)}
-						</div>
-					)
+					return <div className={'my-5'}>{domToReact(domNode.children, options)}</div>
 				}
 			}
 
@@ -31,11 +27,7 @@ const options = {
 				const highlightedContent = hljs.highlightAuto(codeContent).value
 
 				return (
-					<pre
-						className={
-							'code max-w-[calc(100vw-2.5rem-10px)] overflow-x-auto rounded-md p-5 text-white'
-						}
-					>
+					<pre className={'code max-w-[calc(100vw-2.5rem-10px)] overflow-x-auto rounded-md p-5 text-white'}>
 						<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
 					</pre>
 				)
@@ -112,9 +104,7 @@ export function Layout({ className, value }) {
 		return child
 	})
 
-	return (
-		<div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
-	)
+	return <div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
 }
 
 function isMarkdownTable(content) {
@@ -153,11 +143,7 @@ function markdownTableToHtml(markdown) {
 			{
 				className: 'min-w-full *:border-white/50 border-white/50',
 			},
-			React.createElement(
-				'tbody',
-				{ className: '*:border-white/50' },
-				parse(tableRows)
-			)
+			React.createElement('tbody', { className: '*:border-white/50' }, parse(tableRows))
 		)
 	)
 }

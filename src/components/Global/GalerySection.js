@@ -14,9 +14,7 @@ export function GalerySection({ processedRealisation, content_website }) {
 
 	return (
 		<div
-			className={
-				'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'
-			}
+			className={'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'}
 			onClick={handleClick}
 		>
 			<div className={'flex w-full items-start gap-4 md:gap-8'}>
@@ -26,9 +24,7 @@ export function GalerySection({ processedRealisation, content_website }) {
 							'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display [&>*]:font-black md:[&>*]:text-3xl'
 						}
 						dangerouslySetInnerHTML={{
-							__html: replaceTitle(
-								content_website?.attributes?.content_realisations?.title_galery
-							),
+							__html: replaceTitle(content_website?.attributes?.content_realisations?.title_galery),
 						}}
 					/>
 					<div className={'hidden h-full items-center md:flex'}>
@@ -51,9 +47,7 @@ export function GalerySection({ processedRealisation, content_website }) {
 				galery={processedRealisation?.attributes?.galery?.data}
 				handleClick={handleClick}
 				open={open}
-				title_galery={
-					content_website?.attributes?.content_realisations?.title_galery
-				}
+				title_galery={content_website?.attributes?.content_realisations?.title_galery}
 			/>
 		</div>
 	)

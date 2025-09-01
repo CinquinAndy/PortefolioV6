@@ -36,12 +36,7 @@ const formatDate = (dateString, locale) => {
 	}
 }
 
-export function MasonryGrid({
-	initialColumns = 3,
-	locale = 'en',
-	renderItem,
-	items,
-}) {
+export function MasonryGrid({ initialColumns = 3, locale = 'en', renderItem, items }) {
 	const [columns, setColumns] = useState(initialColumns)
 	const [isClient, setIsClient] = useState(false)
 
@@ -88,11 +83,7 @@ export function MasonryGrid({
 	return (
 		<div className="flex w-full gap-6">
 			{itemsByColumn.map((columnItems, columnIndex) => (
-				<div
-					className="flex flex-col gap-6"
-					key={columnIndex}
-					style={{ width: columnWidth }}
-				>
+				<div className="flex flex-col gap-6" key={columnIndex} style={{ width: columnWidth }}>
 					<AnimatePresence mode="popLayout">
 						{columnItems.map((item, index) => (
 							<motion.div

@@ -37,14 +37,10 @@ const Cursor = () => {
 		window.addEventListener('mousedown', () => setCursorEnlarged(true))
 		window.addEventListener('mouseup', () => setCursorEnlarged(false))
 
-		document
-			.querySelectorAll(
-				'a, button, .cursor-pointer, .custom-button-icons, .Toastify'
-			)
-			.forEach(el => {
-				el.addEventListener('mouseenter', () => setCursorEnlarged(true))
-				el.addEventListener('mouseleave', () => setCursorEnlarged(false))
-			})
+		document.querySelectorAll('a, button, .cursor-pointer, .custom-button-icons, .Toastify').forEach(el => {
+			el.addEventListener('mouseenter', () => setCursorEnlarged(true))
+			el.addEventListener('mouseleave', () => setCursorEnlarged(false))
+		})
 
 		return () => {
 			window.removeEventListener('mousemove', updateCursor)

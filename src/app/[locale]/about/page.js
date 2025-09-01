@@ -17,8 +17,7 @@ export async function generateMetadata({ params }) {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/about`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/about`,
 			},
-			canonical:
-				content_website?.data?.attributes?.content_about?.seo?.canonical || '/',
+			canonical: content_website?.data?.attributes?.content_about?.seo?.canonical || '/',
 		},
 		description:
 			content_website?.data?.attributes?.content_about?.seo?.description ||
@@ -46,18 +45,10 @@ export default async function Page({ params }) {
 
 	return (
 		<>
-			<Nav
-				content_website={content_website}
-				h1={content_website?.attributes?.content_about?.seo?.h1}
-				isHome={false}
-			/>
+			<Nav content_website={content_website} h1={content_website?.attributes?.content_about?.seo?.h1} isHome={false} />
 			<div>
 				<div className={'relative'}>
-					<div
-						className={
-							'my-24 grid grid-cols-1 px-6 md:my-48 md:grid-cols-2 2xl:px-0'
-						}
-					>
+					<div className={'my-24 grid grid-cols-1 px-6 md:my-48 md:grid-cols-2 2xl:px-0'}>
 						<div className={'flex w-full justify-center'}>
 							<HoloComponent lang={locale} />
 						</div>

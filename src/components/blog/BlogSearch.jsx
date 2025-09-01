@@ -32,8 +32,7 @@ const elementVariants = {
 }
 
 export function BlogSearch({ onChange, locale, value }) {
-	const placeholder =
-		locale === 'en' ? 'Search articles...' : 'Rechercher des articles...'
+	const placeholder = locale === 'en' ? 'Search articles...' : 'Rechercher des articles...'
 
 	return (
 		<motion.div

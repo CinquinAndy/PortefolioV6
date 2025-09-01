@@ -68,10 +68,7 @@ function Galery({ title_galery, handleClick, galery, open }) {
 													<ComponentLoadComponent FallBack={GaleryItemSkeleton}>
 														<div className="m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent">
 															<Image
-																alt={
-																	item?.attributes?.alternativeText ??
-																	'Project Image'
-																}
+																alt={item?.attributes?.alternativeText ?? 'Project Image'}
 																height={item?.attributes?.height}
 																src={item?.attributes?.url}
 																width={item?.attributes?.width}

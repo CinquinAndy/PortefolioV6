@@ -16,15 +16,13 @@ export async function generateMetadata({ params }) {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/cgu`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/cgu`,
 			},
-			canonical:
-				content_website?.data?.attributes?.content_cgu?.seo?.canonical || '/',
+			canonical: content_website?.data?.attributes?.content_cgu?.seo?.canonical || '/',
 		},
 		description:
 			content_website?.data?.attributes?.content_cgu?.seo?.description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		title:
-			content_website?.data?.attributes?.content_cgu?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+			content_website?.data?.attributes?.content_cgu?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 	}
 }
@@ -44,11 +42,7 @@ export default async function Page({ params }) {
 
 	return (
 		<>
-			<Nav
-				content_website={content_website}
-				h1={content_website?.attributes?.content_cgu?.seo?.h1}
-				isHome={false}
-			/>
+			<Nav content_website={content_website} h1={content_website?.attributes?.content_cgu?.seo?.h1} isHome={false} />
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 px-6 md:my-48 2xl:px-0'}>

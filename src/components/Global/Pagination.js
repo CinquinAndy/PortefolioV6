@@ -1,8 +1,5 @@
 'use client'
-import {
-	ArrowLongLeftIcon,
-	ArrowLongRightIcon,
-} from '@heroicons/react/20/solid'
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -19,10 +16,7 @@ export function Pagination({ currentPage, totalPages }) {
 						className="inline-flex h-full items-center border-t-2 border-transparent pr-1 pt-6 text-sm font-medium text-slate-50 hover:border-slate-300 hover:text-white"
 						href={`${pathname}?page=${currentPage - 1}`}
 					>
-						<ArrowLongLeftIcon
-							aria-hidden="true"
-							className="mr-3 h-5 w-5 text-slate-50"
-						/>
+						<ArrowLongLeftIcon aria-hidden="true" className="mr-3 h-5 w-5 text-slate-50" />
 						Previous
 					</Link>
 				)}
@@ -52,10 +46,7 @@ export function Pagination({ currentPage, totalPages }) {
 						href={`${pathname}?page=${currentPage + 1}`}
 					>
 						Next
-						<ArrowLongRightIcon
-							aria-hidden="true"
-							className="ml-3 h-5 w-5 text-slate-400"
-						/>
+						<ArrowLongRightIcon aria-hidden="true" className="ml-3 h-5 w-5 text-slate-400" />
 					</Link>
 				)}
 			</div>

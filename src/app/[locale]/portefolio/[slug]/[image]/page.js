@@ -1,8 +1,4 @@
-import {
-	getRealisationBySlug,
-	getRealisations,
-	processRealisationData,
-} from '@/services/getContentWebsite'
+import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
 import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
@@ -28,9 +24,7 @@ export async function generateMetadata({ params }) {
 		description:
 			processedRealisation?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		title:
-			processedRealisation?.attributes?.seo_title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: processedRealisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 	}
 }
@@ -75,14 +69,8 @@ export default async function Page({ params }) {
 		<>
 			<LowGradientBackground />
 
-			<div
-				className={
-					'fixed left-0 top-0 z-50 flex h-full min-h-screen w-screen items-center justify-center'
-				}
-			>
-				<div
-					className={'relative flex h-full w-full items-center justify-center'}
-				>
+			<div className={'fixed left-0 top-0 z-50 flex h-full min-h-screen w-screen items-center justify-center'}>
+				<div className={'relative flex h-full w-full items-center justify-center'}>
 					<div className={'absolute left-0 top-0 m-8'}>
 						<BackButtonComponent />
 					</div>

@@ -9,18 +9,13 @@ import { replaceTitle } from '@/services/utils'
 
 export function ServicesGrid({ content_website, services }) {
 	return (
-		<section
-			className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]"
-			id="services"
-		>
+		<section className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]" id="services">
 			{/* Header Section */}
 			<div className="mb-16 flex justify-between">
 				<h2
 					className="!font-display text-2xl normal-case leading-snug sm:text-2xl xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 					dangerouslySetInnerHTML={{
-						__html: replaceTitle(
-							content_website?.attributes?.content_home?.title_service
-						),
+						__html: replaceTitle(content_website?.attributes?.content_home?.title_service),
 					}}
 				/>
 				{/* See All Projects Button */}
@@ -29,8 +24,7 @@ export function ServicesGrid({ content_website, services }) {
 					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
 				>
 					<span className={'button-purple-title text-center'}>
-						{content_website?.attributes?.content_home?.link[3]?.label ||
-							'See all'}
+						{content_website?.attributes?.content_home?.link[3]?.label || 'See all'}
 					</span>
 				</Link>
 			</div>
@@ -56,10 +50,7 @@ export function ServicesGrid({ content_website, services }) {
 									className="object-cover object-center"
 									fill
 									priority
-									src={
-										service.attributes.image ||
-										`/assets/bento/bento_${index + 1}.png`
-									}
+									src={service.attributes.image || `/assets/bento/bento_${index + 1}.png`}
 								/>
 							</div>
 						}
@@ -73,14 +64,7 @@ export function ServicesGrid({ content_website, services }) {
 }
 
 // BentoCard Component with hover animation
-function BentoCard({
-	description,
-	fade = [],
-	className,
-	eyebrow,
-	graphic,
-	title,
-}) {
+function BentoCard({ description, fade = [], className, eyebrow, graphic, title }) {
 	return (
 		<motion.div
 			className={clsx(

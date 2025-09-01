@@ -15,9 +15,7 @@ export async function generateMetadata({ params }) {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/contact`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/contact`,
 			},
-			canonical:
-				content_website?.data?.attributes?.content_contact?.seo?.canonical ||
-				'/',
+			canonical: content_website?.data?.attributes?.content_contact?.seo?.canonical || '/',
 		},
 		description:
 			content_website?.data?.attributes?.content_contact?.seo?.description ||

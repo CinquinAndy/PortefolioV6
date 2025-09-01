@@ -63,9 +63,7 @@ export default async function RootLayout({ children, params }) {
 				strategy={'afterInteractive'}
 			/>
 
-			<body
-				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
-			>
+			<body className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}>
 				{/*<Cursor />*/}
 				<LottieAnimation />
 				<ToastContainer closeOnClick />

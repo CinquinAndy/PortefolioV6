@@ -27,10 +27,7 @@ export function NavigationArticle() {
 						<li>
 							<div>
 								<Link className="custom-button-icons text-gray-50" href="/">
-									<HomeIcon
-										aria-hidden="true"
-										className="h-5 w-5 flex-shrink-0"
-									/>
+									<HomeIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0" />
 									<span className="sr-only">Home</span>
 								</Link>
 							</div>
@@ -38,10 +35,7 @@ export function NavigationArticle() {
 						{breadcrumbLinks.map((link, index) => (
 							<li key={index}>
 								<div className="flex items-center">
-									<ChevronRightIcon
-										aria-hidden="true"
-										className="h-5 w-5 flex-shrink-0 text-gray-50"
-									/>
+									<ChevronRightIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-50" />
 									<Link
 										aria-current={link.current ? 'page' : undefined}
 										className="ml-4 text-sm font-bold text-gray-50 hover:underline lg:text-lg"

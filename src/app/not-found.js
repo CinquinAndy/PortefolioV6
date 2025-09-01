@@ -28,15 +28,13 @@ export async function generateMetadata() {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
 			},
-			canonical:
-				content_website?.attributes?.content_notfound?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_notfound?.seo?.canonical || '/',
 		},
 		description:
 			content_website?.attributes?.content_notfound?.seo?.description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		title:
-			content_website?.attributes?.content_notfound?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+			content_website?.attributes?.content_notfound?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.fr`),
 	}
 }
@@ -49,9 +47,7 @@ export default async function NotFound() {
 
 	return (
 		<html className={'overflow-y-hidden'} lang={`en`}>
-			<body
-				className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}
-			>
+			<body className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}>
 				{/*<LowGradientBackground />*/}
 				<LottieAnimation />
 
@@ -70,23 +66,17 @@ export default async function NotFound() {
 							</Link>
 							<div className={'mt-8'}>
 								<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
-									{content_website?.attributes?.content_notfound?.seo?.h1 ??
-										'404 Not Found'}
+									{content_website?.attributes?.content_notfound?.seo?.h1 ?? '404 Not Found'}
 								</h1>
 								<div className="mx-auto max-w-3xl">
 									<article>
 										<div className={'prose prose-invert my-8'}>
-											<Layout
-												value={notfound?.attributes?.content.toString()}
-											/>
+											<Layout value={notfound?.attributes?.content.toString()} />
 										</div>
 									</article>
 								</div>
 
-								<Link
-									className="mt-8 text-slate-50 underline"
-									href={notfound?.attributes?.link?.url}
-								>
+								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url}>
 									{notfound?.attributes?.link?.label}
 								</Link>
 							</div>

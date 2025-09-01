@@ -1,7 +1,4 @@
-import {
-	getContentWebsite,
-	getRealisations,
-} from '@/services/getContentWebsite'
+import { getContentWebsite, getRealisations } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import Realisations from '@/components/Global/Realisations'
 import Footer from '@/components/Global/Footer'
@@ -21,13 +18,10 @@ export async function generateMetadata({ params }) {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio`,
 			},
-			canonical:
-				content_website?.data?.attributes?.content_realisations?.seo
-					?.canonical || '/',
+			canonical: content_website?.data?.attributes?.content_realisations?.seo?.canonical || '/',
 		},
 		description:
-			content_website?.data?.attributes?.content_realisations?.seo
-				?.description ||
+			content_website?.data?.attributes?.content_realisations?.seo?.description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		title:
 			content_website?.data?.attributes?.content_realisations?.seo?.title ||
@@ -58,12 +52,7 @@ export default async function Page({ params }) {
 				isHome={false}
 			/>
 			<div>
-				<Realisations
-					content_website={content_website}
-					isHome={false}
-					realisations={realisations}
-					slice={false}
-				/>
+				<Realisations content_website={content_website} isHome={false} realisations={realisations} slice={false} />
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

@@ -3,13 +3,7 @@ import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 const getArticleUrl = (locale, slug) => {
@@ -51,22 +45,15 @@ export function ArticleCard({ article, locale }) {
 						{/* Gradient overlay with blur for improved text readability */}
 						<div className="relative">
 							<div className="flex items-center justify-between text-sm">
-								<time className="text-white/90">
-									{article.attributes.createdAt}
-								</time>
-								<Badge
-									className="border-white/20 bg-white/10 text-white"
-									variant="outline"
-								>
+								<time className="text-white/90">{article.attributes.createdAt}</time>
+								<Badge className="border-white/20 bg-white/10 text-white" variant="outline">
 									{article.attributes.type}
 								</Badge>
 							</div>
 							<CardTitle className="mt-4 text-xl font-bold text-white transition-colors group-hover:text-purple-300">
 								{article.attributes.title}
 							</CardTitle>
-							<CardDescription className="text-white/80">
-								{article.attributes.subtitle}
-							</CardDescription>
+							<CardDescription className="text-white/80">{article.attributes.subtitle}</CardDescription>
 						</div>
 					</CardHeader>
 
@@ -74,11 +61,7 @@ export function ArticleCard({ article, locale }) {
 					<CardContent className="relative z-10">
 						<div className="flex flex-wrap gap-2">
 							{article.attributes.tags?.slice(0, 5).map(tag => (
-								<Badge
-									className="border-purple-500/30 bg-purple-500/20 text-white"
-									key={tag.id}
-									variant="secondary"
-								>
+								<Badge className="border-purple-500/30 bg-purple-500/20 text-white" key={tag.id} variant="secondary">
 									{tag.name}
 								</Badge>
 							))}

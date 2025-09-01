@@ -13,13 +13,9 @@ export function PopupMainCat({ content_website }) {
 		}
 
 		const translateX =
-			eyePositionLimits.x.min +
-			((eyePositionLimits.x.max - eyePositionLimits.x.min) * mouseXPercentage) /
-				100
+			eyePositionLimits.x.min + ((eyePositionLimits.x.max - eyePositionLimits.x.min) * mouseXPercentage) / 100
 		const translateY =
-			eyePositionLimits.y.min +
-			((eyePositionLimits.y.max - eyePositionLimits.y.min) * mouseYPercentage) /
-				100
+			eyePositionLimits.y.min + ((eyePositionLimits.y.max - eyePositionLimits.y.min) * mouseYPercentage) / 100
 
 		return { translateX, translateY }
 	}
@@ -28,10 +24,7 @@ export function PopupMainCat({ content_website }) {
 		const mouseXPercentage = (e.clientX / window.innerWidth) * 100
 		const mouseYPercentage = (e.clientY / window.innerHeight) * 100
 
-		const { translateX, translateY } = mapEyePosition(
-			mouseXPercentage,
-			mouseYPercentage
-		)
+		const { translateX, translateY } = mapEyePosition(mouseXPercentage, mouseYPercentage)
 
 		;[leftEyeRef, rightEyeRef].forEach(eyeRef => {
 			if (eyeRef.current) {

@@ -17,9 +17,7 @@ export const getServerSideProps = async ({ res }) => {
 		// Add more static paths if needed
 	]
 
-	const staticPathsAlt = staticPaths.map(path =>
-		path.replace(baseUrl, alternateBaseUrl)
-	)
+	const staticPathsAlt = staticPaths.map(path => path.replace(baseUrl, alternateBaseUrl))
 
 	// Fetch dynamic paths for blog posts and portfolio items via the Vercel API
 	let blogPaths = []
@@ -49,12 +47,7 @@ export const getServerSideProps = async ({ res }) => {
 		console.error('Error fetching portfolio paths:', error)
 	}
 
-	const allPaths = [
-		...staticPaths,
-		...blogPaths,
-		...portfolioPaths,
-		...staticPathsAlt,
-	]
+	const allPaths = [...staticPaths, ...blogPaths, ...portfolioPaths, ...staticPathsAlt]
 
 	// Generate the sitemap
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

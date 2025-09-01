@@ -20,8 +20,7 @@ export async function generateMetadata({ params }) {
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
 			},
-			canonical:
-				content_website?.data?.attributes?.content_blog?.seo?.canonical || '/',
+			canonical: content_website?.data?.attributes?.content_blog?.seo?.canonical || '/',
 		},
 		description:
 			content_website?.data?.attributes?.content_blog?.seo?.description ||
@@ -59,23 +58,11 @@ export default async function Page({ searchParams, params }) {
 
 	return (
 		<>
-			<Nav
-				content_website={content_website}
-				h1={content_website?.attributes?.content_blog?.seo?.h1}
-				isHome={false}
-			/>
+			<Nav content_website={content_website} h1={content_website?.attributes?.content_blog?.seo?.h1} isHome={false} />
 			<div>
-				<BlogContent
-					articles={articles}
-					content_website={content_website}
-					locale={locale}
-				/>
+				<BlogContent articles={articles} content_website={content_website} locale={locale} />
 				{articlesResponse.meta.pagination.total > pageSize && (
-					<Pagination
-						baseUrl={`/${locale}/blog`}
-						currentPage={currentPage}
-						totalPages={totalPages}
-					/>
+					<Pagination baseUrl={`/${locale}/blog`} currentPage={currentPage} totalPages={totalPages} />
 				)}
 				<Cta content_website={content_website} />
 			</div>

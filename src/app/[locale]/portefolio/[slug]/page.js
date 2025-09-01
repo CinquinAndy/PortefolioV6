@@ -32,8 +32,7 @@ export async function generateMetadata({ params }) {
 	let slugAlternate = ''
 	if (locale === 'fr') {
 		_slug = realisation?.attributes?.slug
-		slugAlternate =
-			realisation?.attributes?.localizations?.data[0]?.attributes?.slug
+		slugAlternate = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
 	} else {
 		slugAlternate = realisation?.attributes?.slug
 		_slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
@@ -50,9 +49,7 @@ export async function generateMetadata({ params }) {
 		description:
 			realisation?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		title:
-			realisation?.attributes?.seo_title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: realisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 	}
 }
@@ -86,22 +83,11 @@ export default async function Page({ params }) {
 
 	return (
 		<>
-			<Nav
-				content_website={content_website}
-				h1={processedRealisation?.attributes?.title}
-				isHome={false}
-			/>
+			<Nav content_website={content_website} h1={processedRealisation?.attributes?.title} isHome={false} />
 			<div>
 				<div className={'relative'}>
-					<div
-						className={
-							'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:grid-cols-2 2xl:px-0'
-						}
-					>
-						<GalerySection
-							content_website={content_website}
-							processedRealisation={processedRealisation}
-						/>
+					<div className={'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:grid-cols-2 2xl:px-0'}>
+						<GalerySection content_website={content_website} processedRealisation={processedRealisation} />
 
 						<div className="mx-auto max-w-3xl md:pl-20">
 							<h2
@@ -109,87 +95,57 @@ export default async function Page({ params }) {
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
-									__html: replaceTitle(
-										content_website?.attributes?.content_realisations
-											?.title_content
-									),
+									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_content),
 								}}
 							/>
 							<article>
 								<div className={'prose prose-invert my-8'}>
-									<Layout
-										value={processedRealisation?.attributes?.content.toString()}
-									/>
+									<Layout value={processedRealisation?.attributes?.content.toString()} />
 								</div>
 							</article>
 						</div>
 
-						<div
-							className={
-								'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'
-							}
-						>
+						<div className={'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'}>
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
-									__html: replaceTitle(
-										content_website?.attributes?.content_realisations
-											?.title_technology
-									),
+									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology),
 								}}
 							/>
 							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
 								{processedRealisation?.attributes?.techno?.map(technology => {
-									return (
-										<TechnologyDisplay
-											key={technology.id}
-											technology={technology}
-										/>
-									)
+									return <TechnologyDisplay key={technology.id} technology={technology} />
 								})}
-								<div
-									className={
-										'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'
-									}
-								>
+								<div className={'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'}>
 									<h2
 										className={
 											'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
-											__html: replaceTitle(
-												content_website?.attributes?.content_realisations
-													?.title_links
-											),
+											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links),
 										}}
 									/>
 									<div className={'flex w-full gap-8'}>
-										{processedRealisation?.attributes?.links?.map(
-											(link, index) => {
-												return (
-													<div className={'flex'} key={index}>
-														<Link
-															className={
-																'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
-															}
-															href={link?.url}
-															key={link?.id}
-															rel={'noopener noreferrer'}
-														>
-															{link?.label}
-															<LinkIcon
-																className={
-																	'absolute -right-2 -top-2 h-4 w-4 rotate-6'
-																}
-															/>
-														</Link>
-													</div>
-												)
-											}
-										)}
+										{processedRealisation?.attributes?.links?.map((link, index) => {
+											return (
+												<div className={'flex'} key={index}>
+													<Link
+														className={
+															'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
+														}
+														href={link?.url}
+														key={link?.id}
+														rel={'noopener noreferrer'}
+													>
+														{link?.label}
+														<LinkIcon className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'} />
+													</Link>
+												</div>
+											)
+										})}
 									</div>
 								</div>
 							</div>

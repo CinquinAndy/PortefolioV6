@@ -63,16 +63,10 @@ export function ContactForm({ content_website }) {
 
 	return (
 		<div>
-			<form
-				className="z-50 mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0"
-				onSubmit={handleSubmit(onSubmit)}
-			>
+			<form className="z-50 mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0" onSubmit={handleSubmit(onSubmit)}>
 				<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 					<div>
-						<label
-							className="block text-sm font-semibold leading-6 text-slate-50"
-							htmlFor="name"
-						>
+						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="name">
 							{content_website?.attributes?.content_contact?.title_name}
 						</label>
 						<div className="mt-2.5">
@@ -85,18 +79,11 @@ export function ContactForm({ content_website }) {
 								})}
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
-							{errors.name && (
-								<p className={'mt-2 text-xs text-red-500/80'}>
-									{errors.name.message}
-								</p>
-							)}
+							{errors.name && <p className={'mt-2 text-xs text-red-500/80'}>{errors.name.message}</p>}
 						</div>
 					</div>
 					<div>
-						<label
-							className="block text-sm font-semibold leading-6 text-slate-50"
-							htmlFor="email"
-						>
+						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="email">
 							Email
 						</label>
 						<div className="mt-2.5">
@@ -110,17 +97,10 @@ export function ContactForm({ content_website }) {
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
 						</div>
-						{errors.email && (
-							<p className={'mt-2 text-xs text-red-500/80'}>
-								{errors.email.message}
-							</p>
-						)}
+						{errors.email && <p className={'mt-2 text-xs text-red-500/80'}>{errors.email.message}</p>}
 					</div>
 					<div>
-						<label
-							className="block text-sm font-semibold leading-6 text-slate-50"
-							htmlFor="phone"
-						>
+						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="phone">
 							{content_website?.attributes?.content_contact?.title_phone}
 						</label>
 						<div className="relative mt-2.5">
@@ -134,17 +114,10 @@ export function ContactForm({ content_website }) {
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
 						</div>
-						{errors.phone && (
-							<p className={'mt-2 text-xs text-red-500/80'}>
-								{errors.phone.message}
-							</p>
-						)}
+						{errors.phone && <p className={'mt-2 text-xs text-red-500/80'}>{errors.phone.message}</p>}
 					</div>
 					<div>
-						<label
-							className="block text-sm font-semibold leading-6 text-slate-50"
-							htmlFor="company"
-						>
+						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="company">
 							{content_website?.attributes?.content_contact?.title_company}
 						</label>
 						<div className="mt-2.5">
@@ -157,18 +130,11 @@ export function ContactForm({ content_website }) {
 								})}
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
-							{errors.company && (
-								<p className={'mt-2 text-xs text-red-500/80'}>
-									{errors.company.message}
-								</p>
-							)}
+							{errors.company && <p className={'mt-2 text-xs text-red-500/80'}>{errors.company.message}</p>}
 						</div>
 					</div>
 					<div className="sm:col-span-2">
-						<label
-							className="block text-sm font-semibold leading-6 text-slate-50"
-							htmlFor="content"
-						>
+						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="content">
 							{content_website?.attributes?.content_contact?.title_content}
 						</label>
 						<div className="mt-2.5">
@@ -183,18 +149,11 @@ export function ContactForm({ content_website }) {
 								defaultValue={''}
 							/>
 						</div>
-						{errors.content && (
-							<p className={'mt-2 text-xs text-red-500/80'}>
-								{errors.content.message}
-							</p>
-						)}
+						{errors.content && <p className={'mt-2 text-xs text-red-500/80'}>{errors.content.message}</p>}
 					</div>
 					<div className={'sm:col-span-2'}>
 						<p className="text-sm leading-6 text-slate-300">
-							{
-								content_website?.attributes?.content_contact
-									?.informative_message
-							}
+							{content_website?.attributes?.content_contact?.informative_message}
 						</p>
 					</div>
 				</div>

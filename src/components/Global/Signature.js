@@ -6,9 +6,7 @@ export function Signature({ content_website }) {
 			<div className="mx-auto max-w-3xl">
 				<article>
 					<div className={'prose-xs prose-invert'}>
-						<Layout
-							value={content_website?.attributes?.content_footer?.content_signature?.toString()}
-						/>
+						<Layout value={content_website?.attributes?.content_footer?.content_signature?.toString()} />
 					</div>
 				</article>
 			</div>

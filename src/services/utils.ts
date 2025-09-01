@@ -1,9 +1,9 @@
-export const replaceTitle = title => {
+export const replaceTitle = (title: string): string => {
 	if (!title) return ''
 
 	// Regex to identify words with * or _, and other text segments
 	const regex = /(\*([^*]+)\*)|(_([^_]+)_)|([^*_]+)/g
-	let matches
+	let matches: RegExpExecArray | null
 	let newTitle = ''
 
 	while ((matches = regex.exec(title)) !== null) {
