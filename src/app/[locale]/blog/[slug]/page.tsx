@@ -286,7 +286,7 @@ async function getSlugs(params: Promise<ArticleSlugParams>): Promise<SlugsResult
 	const { slug, locale } = await params
 	const articleResponse = await getArticleBySlug(slug, locale as Locale)
 	const articles = getResponseData(articleResponse)
-	const article = articles?.[0]
+	const article = articles && articles.length > 0 ? articles[0] : null
 
 	// conditional slug, make en and fr slugs available
 	let _slug = ''
