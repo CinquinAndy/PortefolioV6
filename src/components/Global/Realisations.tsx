@@ -29,6 +29,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-1 2xl:col-end-13'
 		}
 	}
+
 	return (
 		<section className="w-full p-4 md:p-20">
 			{/*// <!-- Last projects -->*/}
@@ -61,7 +62,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				</div>
 			)}
 			<div className="mt-10 flex w-full justify-center xl:mt-20">
-				<div className="grid w-full grid-cols-12 gap-[20px] xl:gap-[60px] md:gap-[40px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
+				<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
 					{realisations.map((realisation, index) => {
 						return (
 							<Link

@@ -34,11 +34,12 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 		resolver: zodResolver(schema),
 	})
 
-	const reset = form.reset
-	const register = form.register
-	const handleSubmit = form.handleSubmit
-
-	const errors = form.formState.errors
+	const {
+		reset,
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = form
 
 	const onSubmit = async (data: { phone: string; name: string; email: string; content: string; company: string }) => {
 		const response = await fetch('/api/sendMail', {
