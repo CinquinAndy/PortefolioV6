@@ -1,4 +1,6 @@
 import { ToastContainer } from 'react-toastify'
+import type { ReactNode } from 'react'
+import type { Metadata } from 'next'
 
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -52,7 +54,12 @@ export const metadata = {
 	],
 }
 
-export default async function RootLayout({ params, children }) {
+interface LocaleLayoutProps {
+	children: ReactNode
+	params: Promise<{ locale: string }>
+}
+
+export default async function RootLayout({ params, children }: LocaleLayoutProps) {
 	const { locale } = await params
 	return (
 		<html dir={dir(locale)} lang={locale}>
