@@ -1,5 +1,5 @@
 'use client'
-import type { Technology } from '@/types/strapi'
+import type { Techno } from '@/types/strapi'
 
 import React from 'react'
 
@@ -14,7 +14,7 @@ export const formatTechnologyName = (name: string): string => {
 }
 
 interface TechnologyDisplayProps {
-	technology?: Technology
+	technology?: Techno
 }
 
 export function TechnologyDisplay({ technology }: TechnologyDisplayProps): React.JSX.Element | null {

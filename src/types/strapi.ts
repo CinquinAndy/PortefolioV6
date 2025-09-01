@@ -280,13 +280,7 @@ export interface Realisation {
 		subtitle?: string
 		type?: string
 		rank?: number
-		techno?: Array<{
-			id: number
-			name: string
-			icon?: {
-				data: StrapiMedia
-			}
-		}>
+		techno?: Techno[]
 		createdAt: string
 		updatedAt: string
 		publishedAt?: string
@@ -296,6 +290,14 @@ export interface Realisation {
 			data: Realisation[]
 		}
 		locale: string
+	}
+}
+
+export interface Techno {
+	id: number
+	name: string
+	icon?: {
+		data: StrapiMedia
 	}
 }
 

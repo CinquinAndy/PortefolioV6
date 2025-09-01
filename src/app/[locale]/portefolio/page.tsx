@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
+export function generateStaticParams(): { params: PageParams }[] {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
@@ -67,7 +67,7 @@ export default async function Page({ params }: PageProps) {
 				isHome={false}
 			/>
 			<div>
-				<Realisations content_website={content_website} isHome={false} realisations={realisations || []} slice={0} />
+				<Realisations content_website={content_website} isHome={false} realisations={realisations ?? []} slice={0} />
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

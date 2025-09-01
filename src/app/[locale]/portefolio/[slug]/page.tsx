@@ -1,4 +1,4 @@
-import type { Locale, Realisation, Technology } from '@/types/strapi'
+import type { Locale, Realisation, Techno, Technology } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
@@ -120,7 +120,7 @@ export default async function Page({ params }: RealisationPageProps) {
 							</article>
 						</div>
 
-						<div className={'flex w-full flex-col gap-6 xl:gap-8 md:pr-20 2xl:mx-auto 2xl:max-w-2xl'}>
+						<div className={'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'}>
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
@@ -129,9 +129,9 @@ export default async function Page({ params }: RealisationPageProps) {
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology ?? ''),
 								}}
 							/>
-							<div className="grid w-full grid-cols-3 gap-2 xl:gap-6 md:grid-cols-4 md:gap-4 2xl:gap-8">
+							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
-								{processedRealisation?.data?.attributes?.techno?.map((technology: Technology) => {
+								{processedRealisation?.data?.attributes?.techno?.map((technology: Techno) => {
 									return <TechnologyDisplay key={technology.id} technology={technology} />
 								})}
 								<div className={'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'}>
