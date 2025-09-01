@@ -60,15 +60,6 @@ export default async function NotFound() {
 	const notfound_response = await getNotFound('en' as const)
 	const notfound = getResponseData(notfound_response)
 
-	const hasContentWebsiteAttributes =
-		content_website && typeof content_website === 'object' && 'attributes' in content_website
-	const hasNotfoundAttributes = notfound && typeof notfound === 'object' && 'attributes' in notfound
-
-	const defaultTitle = '404 Not Found'
-	const defaultContent = ''
-	const defaultLinkUrl = '/'
-	const defaultLinkLabel = 'Go Home'
-
 	return (
 		<html className={'overflow-y-hidden'} lang={`en`}>
 			<body className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}>
@@ -78,7 +69,7 @@ export default async function NotFound() {
 				{/*<Cursor />*/}
 
 				<div className="h-dvh">
-					<div className="flex h-full items-center justify-center px-4 xl:px-24 sm:px-6 lg:px-20">
+					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 						<div className="">
 							<Link href={'/'}>
 								<Image
@@ -90,29 +81,18 @@ export default async function NotFound() {
 							</Link>
 							<div className={'mt-8'}>
 								<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
-									{hasContentWebsiteAttributes
-										? (content_website.attributes?.content_notfound?.seo?.h1 ?? defaultTitle)
-										: defaultTitle}
+									{content_website?.attributes?.content_notfound?.seo?.h1}
 								</h1>
 								<div className="mx-auto max-w-3xl">
 									<article>
 										<div className={'prose prose-invert my-8'}>
-											<Layout
-												value={
-													hasNotfoundAttributes
-														? (notfound.attributes?.content?.toString() ?? defaultContent)
-														: defaultContent
-												}
-											/>
+											<Layout value={notfound?.attributes?.content?.toString() ?? ''} />
 										</div>
 									</article>
 								</div>
 
-								<Link
-									className="mt-8 text-slate-50 underline"
-									href={hasNotfoundAttributes ? (notfound.attributes?.link?.url ?? defaultLinkUrl) : defaultLinkUrl}
-								>
-									{hasNotfoundAttributes ? (notfound.attributes?.link?.label ?? defaultLinkLabel) : defaultLinkLabel}
+								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url ?? '/'}>
+									{notfound?.attributes?.link?.label ?? 'Go Home'}
 								</Link>
 							</div>
 						</div>

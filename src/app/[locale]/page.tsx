@@ -25,17 +25,10 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
-	const hasAttributes = content_website && typeof content_website === 'object' && 'attributes' in content_website
-
 	return {
-		title: hasAttributes
-			? (content_website.attributes?.content_home?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer')
-			: 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.fr`),
-		description: hasAttributes
-			? (content_website.attributes?.content_home?.seo?.description ??
-				'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications')
-			: 'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		title:
+			(content_website?.attributes?.content_home?.seo?.title,
+		description: content_website?.attributes?.content_home?.seo?.description,
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
