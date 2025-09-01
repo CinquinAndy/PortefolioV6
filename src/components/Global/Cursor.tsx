@@ -1,6 +1,6 @@
 'use client'
-import React from 'react'
 import { useEffect, useRef, useState } from 'react'
+import React from 'react'
 
 const Cursor = (): React.JSX.Element => {
 	const [isDesktop, setIsDesktop] = useState(false)

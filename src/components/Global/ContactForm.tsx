@@ -1,7 +1,7 @@
 'use client'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -11,23 +11,21 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ content_website }: ContactFormProps): React.JSX.Element {
-	const schema = z
-		.object({
-			phone: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_phone,
-			}),
-			name: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_name,
-			}),
-			email: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_email,
-			}),
-			content: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_content,
-			}),
-			company: z.string(),
-		})
-		.required()
+	const schema = z.object({
+		phone: z.string().min(1, {
+			error: content_website?.attributes?.content_contact?.error_phone,
+		}),
+		name: z.string().min(1, {
+			error: content_website?.attributes?.content_contact?.error_name,
+		}),
+		email: z.email({
+			error: content_website?.attributes?.content_contact?.error_email,
+		}),
+		content: z.string().min(1, {
+			error: content_website?.attributes?.content_contact?.error_content,
+		}),
+		company: z.string(),
+	})
 
 	const {
 		reset, // pour réinitialiser le formulaire

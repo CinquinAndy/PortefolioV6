@@ -1,9 +1,11 @@
+import type { ContactFormData, ApiResponse } from '@/types/api-routes'
+import type { MailgunClientOptions } from 'mailgun.js/definitions'
 import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { toast } from 'react-toastify'
+
 import formData from 'form-data'
 import Mailgun from 'mailgun.js'
-import type { MailgunClientOptions } from 'mailgun.js/definitions'
-import type { ContactFormData, ApiResponse } from '@/types/api-routes'
 
 const mailgun = new Mailgun(formData)
 const mg = mailgun.client({
@@ -15,13 +17,10 @@ interface ContactRequest extends NextApiRequest {
 	body: ContactFormData
 }
 
-export default function handler(
-	req: ContactRequest,
-	res: NextApiResponse<ApiResponse>
-): void {
+export default function handler(req: ContactRequest, res: NextApiResponse<ApiResponse>): void {
 	if (req.method === 'POST') {
-		const { name, email, company, phone, content } = req.body
-		
+		const { phone, name, email, content, company } = req.body
+
 		if (!process.env.MAILGUN_DOMAIN) {
 			res.status(500).json({ success: false, message: 'Mailgun domain not configured' })
 			return
@@ -43,7 +42,7 @@ export default function handler(
 			.then(() => {
 				res.status(200).json({ success: true })
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error('Mailgun error:', error)
 				toast('An error occurred, please try again later', {
 					type: 'error',

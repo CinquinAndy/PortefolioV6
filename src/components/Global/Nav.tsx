@@ -1,8 +1,8 @@
 'use client'
-import React from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import React from 'react'
 
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'

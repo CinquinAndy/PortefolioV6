@@ -1,5 +1,6 @@
-import { Layout } from '@/components/Global/Layout'
 import React from 'react'
+
+import { Layout } from '@/components/Global/Layout'
 
 interface SignatureProps {
 	content_website?: any // TODO: Define proper type for content_website

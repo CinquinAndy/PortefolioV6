@@ -1,6 +1,6 @@
 'use client'
-import React from 'react'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
+import React from 'react'
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'

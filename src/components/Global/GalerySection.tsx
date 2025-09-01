@@ -1,7 +1,7 @@
 'use client'
-import React from 'react'
 import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
+import React from 'react'
 
 import { replaceTitle } from '@/services/utils'
 import Galery from '@/components/Global/Galery'
