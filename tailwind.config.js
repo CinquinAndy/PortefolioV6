@@ -25,7 +25,7 @@ module.exports = {
 		},
 		fontFamily: {
 			display: ['Noto Serif Display', 'serif'],
-			body: ['Be Vietnam Pro"', 'sans-serif'],
+			body: ['Be Vietnam Pro', 'sans-serif'],
 		},
 		extend: {
 			spacing: {
