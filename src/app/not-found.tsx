@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 		},
 	}
 
-	if (!content_website) {
+	if (!content_website || !('attributes' in content_website)) {
 		return defaultMetadata
 	}
 
@@ -59,6 +59,9 @@ export default async function NotFound() {
 
 	const notfound_response = await getNotFound('en' as const)
 	const notfound = getResponseData(notfound_response)
+
+	const hasContentWebsiteAttributes = content_website && 'attributes' in content_website
+	const hasNotfoundAttributes = notfound && 'attributes' in notfound
 
 	const defaultTitle = '404 Not Found'
 	const defaultContent = ''
@@ -86,7 +89,7 @@ export default async function NotFound() {
 							</Link>
 							<div className={'mt-8'}>
 								<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
-									{content_website?.attributes?.content_notfound?.seo?.h1 ?? defaultTitle}
+									{hasContentWebsiteAttributes ? content_website.attributes?.content_notfound?.seo?.h1 ?? defaultTitle : defaultTitle}
 								</h1>
 								<div className="mx-auto max-w-3xl">
 									<article>

@@ -144,7 +144,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>
