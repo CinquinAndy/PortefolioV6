@@ -440,11 +440,7 @@ export interface ContentWebsite {
 		content_popup?: string
 
 		// Site navigation structure
-		Sitemap?: Array<{
-			id: number
-			Link: LinkComponent
-			categorie?: string
-		}>
+		Sitemap: Sitemap[]
 
 		// Call-to-action component
 		cta?: CtaComponent
@@ -460,6 +456,12 @@ export interface ContentWebsite {
 		}
 		locale: string
 	}
+}
+
+export interface Sitemap {
+	id: number
+	Link: LinkComponent
+	categorie?: string
 }
 
 export interface Service {

@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any */
 
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -29,14 +30,15 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 		company: z.string(),
 	})
 
-	const {
-		reset,
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
+	const form = useForm({
 		resolver: zodResolver(schema),
 	})
+
+	const reset = form.reset
+	const register = form.register
+	const handleSubmit = form.handleSubmit
+
+	const errors = form.formState.errors
 
 	const onSubmit = async (data: { phone: string; name: string; email: string; content: string; company: string }) => {
 		const response = await fetch('/api/sendMail', {
@@ -52,20 +54,37 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 		})
 
 		if (response.ok) {
-			toast(content_website?.attributes?.content_contact?.toast_success, {
+			toast(String(content_website?.attributes?.content_contact?.toast_success), {
 				type: 'success',
 			})
 			reset()
 		} else {
-			toast(content_website?.attributes?.content_contact?.toast_error, {
+			toast(String(content_website?.attributes?.content_contact?.toast_error), {
 				type: 'error',
 			})
 		}
 	}
 
+	// Wrapper function to handle the async onSubmit
+	const handleFormSubmit = async (data: {
+		phone: string
+		name: string
+		email: string
+		content: string
+		company: string
+	}) => {
+		await onSubmit(data)
+	}
+
+	// Handle form submission
+	const handleSubmitForm = (e: React.FormEvent) => {
+		e.preventDefault()
+		void handleSubmit(handleFormSubmit)()
+	}
+
 	return (
 		<div>
-			<form className="z-50 mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0" onSubmit={handleSubmit(onSubmit)}>
+			<form className="z-50 mx-auto my-32 max-w-xl px-4 sm:mt-20 md:px-0" onSubmit={handleSubmitForm}>
 				<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 					<div>
 						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="name">
@@ -80,7 +99,9 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								})}
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
-							{errors.name && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.name.message)}</p>}
+							{Boolean((errors as any)?.name) && (
+								<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).name.message)}</p>
+							)}
 						</div>
 					</div>
 					<div>
@@ -97,7 +118,9 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
 						</div>
-						{errors.email && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.email.message)}</p>}
+						{Boolean((errors as any)?.email) && (
+							<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).email.message)}</p>
+						)}
 					</div>
 					<div>
 						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="phone">
@@ -113,7 +136,9 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
 						</div>
-						{errors.phone && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.phone.message)}</p>}
+						{Boolean((errors as any)?.phone) && (
+							<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).phone.message)}</p>
+						)}
 					</div>
 					<div>
 						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="company">
@@ -128,7 +153,9 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								})}
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
-							{errors.company && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.company.message)}</p>}
+							{Boolean((errors as any)?.company) && (
+								<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).company.message)}</p>
+							)}
 						</div>
 					</div>
 					<div className="sm:col-span-2">
@@ -146,7 +173,9 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								defaultValue={''}
 							/>
 						</div>
-						{errors.content && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.content.message)}</p>}
+						{Boolean((errors as any)?.content) && (
+							<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).content.message)}</p>
+						)}
 					</div>
 					<div className={'sm:col-span-2'}>
 						<p className="text-sm leading-6 text-slate-300">

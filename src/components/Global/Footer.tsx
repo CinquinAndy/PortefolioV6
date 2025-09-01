@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { ContentWebsite, Sitemap } from '@/types/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,14 +8,19 @@ import { Signature } from '@/components/Global/Signature'
 import { Layout } from '@/components/Global/Layout'
 
 interface FooterProps {
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 function Footer({ content_website }: FooterProps): React.JSX.Element {
-	// Sitemap
-	const sitemap = content_website?.attributes?.Sitemap?.filter((item: any) => item?.categorie === 'sitemap')
-	// Mentions légales
-	const legals = content_website?.attributes?.Sitemap?.filter((item: any) => item?.categorie === 'legals')
+	// Sitemap data from Strapi
+	const sitemapData = content_website?.attributes?.Sitemap
+
+	// Filter sitemap items by category
+	const sitemap = sitemapData?.filter((item: Sitemap) => item?.categorie === 'sitemap') ?? []
+
+	// Filter legal items by category
+	const legals = sitemapData?.filter((item: Sitemap) => item?.categorie === 'legals') ?? []
+
 	// Socials
 	const socials = content_website?.attributes?.socials
 
@@ -26,13 +32,13 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 						alt={content_website?.attributes?.content_footer?.image?.data?.attributes?.alternativeText ?? 'logo'}
 						className="h-6 w-6"
 						height={24}
-						src={content_website?.attributes?.content_footer?.image?.data?.attributes?.url}
+						src={content_website?.attributes?.content_footer?.image?.data?.attributes?.url ?? ''}
 						width={24}
 					/>
 					<div className="">
 						<Layout
 							className={'prose-xs flex flex-col gap-4'}
-							value={content_website?.attributes?.content_footer?.content.toString()}
+							value={content_website?.attributes?.content_footer?.content ?? ''}
 						/>
 					</div>
 				</div>
@@ -41,7 +47,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
-					{sitemap?.map((item: any, index: number) => {
+					{sitemap?.map((item: Sitemap, index: number) => {
 						return (
 							<Link className="underline_custom text-xs xl:text-sm" href={item?.Link?.url ?? '/'} key={index}>
 								{item?.Link?.label}
@@ -53,7 +59,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
-					{legals?.map((item: any, index: number) => {
+					{legals?.map((item: Sitemap, index: number) => {
 						return (
 							<Link className="underline_custom text-xs xl:text-sm" href={item?.Link?.url ?? '/'} key={index}>
 								{item?.Link?.label}
@@ -79,7 +85,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 							<div className={'relative p-3'}>
 								<Link
 									className="slider-nav-item text-indigo-50 hover:text-slate-50"
-									href={socials?.instagram}
+									href={socials?.instagram ?? '/'}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -93,7 +99,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 							<div className={'relative p-3'}>
 								<Link
 									className="slider-nav-item text-indigo-50 hover:text-slate-50"
-									href={socials?.linkedin}
+									href={socials?.linkedin ?? '/'}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -107,7 +113,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 							<div className={'relative p-3'}>
 								<Link
 									className="slider-nav-item text-indigo-50 hover:text-slate-50"
-									href={socials?.github}
+									href={socials?.github ?? '/'}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
@@ -121,7 +127,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 							<div className={'relative p-3'}>
 								<Link
 									className="slider-nav-item text-indigo-50 hover:text-slate-50"
-									href={socials?.malt}
+									href={socials?.malt ?? '/'}
 									rel="noopener nofollow noreferrer"
 									target="_blank"
 								>
