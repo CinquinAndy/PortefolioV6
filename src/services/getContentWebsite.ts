@@ -133,7 +133,7 @@ export async function getCgu(locale: Locale): Promise<StrapiResponse<Cgu> | NotF
  */
 export async function getContentWebsite(
 	locale: Locale
-): Promise<StrapiResponse<ContentWebsite> | NotFoundResponse | undefined> {
+): Promise<StrapiResponse<ContentWebsite> | NotFoundResponse> {
 	try {
 		const dataContentWebsite = await fetchAPI<StrapiResponse<ContentWebsite>>(
 			`api/content-website?populate=deep&locale=${locale}`
@@ -164,7 +164,7 @@ export async function getContentWebsite(
 		)
 	} catch (error) {
 		console.error('Error in getContentWebsite:', error)
-		return undefined
+		return { notFound: true }
 	}
 }
 

@@ -1,14 +1,12 @@
 import type { GetServerSideProps, NextPage } from 'next'
 
-interface SitemapProps {}
-
-const Sitemap: NextPage<SitemapProps> = () => {
+const Sitemap: NextPage = () => {
 	return null
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-	const baseUrl = process.env.NEXT_PUBLIC_URL || ''
-	const alternateBaseUrl = process.env.NEXT_PUBLIC_URL_ALT || ''
+	const baseUrl = process.env.NEXT_PUBLIC_URL ?? ''
+	const alternateBaseUrl = process.env.NEXT_PUBLIC_URL_ALT ?? ''
 
 	// Define static paths manually or generate them dynamically
 	const staticPaths: string[] = [
@@ -29,7 +27,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	try {
 		const resBlog = await fetch(`${baseUrl}/api/getBlogPaths`)
 		if (resBlog.ok) {
-			blogPaths = await resBlog.json()
+			const data = (await resBlog.json()) as string[]
+			blogPaths = data
 		} else {
 			console.error('Failed to fetch blog paths:', resBlog.statusText)
 		}
@@ -40,7 +39,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	try {
 		const resPortfolio = await fetch(`${baseUrl}/api/getPortfolioPaths`)
 		if (resPortfolio.ok) {
-			portfolioPaths = await resPortfolio.json()
+			const data = (await resPortfolio.json()) as string[]
+			portfolioPaths = data
 		} else {
 			console.error('Failed to fetch portfolio paths:', resPortfolio.statusText)
 		}

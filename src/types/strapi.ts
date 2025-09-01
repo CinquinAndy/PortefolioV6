@@ -186,6 +186,7 @@ export interface Article {
 		subtitle?: string
 		type?: string
 		rank?: number
+		featured?: boolean
 		tags?: TagComponent[]
 		createdAt: string
 		updatedAt: string
@@ -211,6 +212,7 @@ export interface Realisation {
 		subtitle?: string
 		type?: string
 		rank?: number
+		featured?: boolean
 		image?: {
 			data: StrapiMedia
 		}
