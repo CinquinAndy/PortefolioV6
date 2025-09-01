@@ -1,7 +1,9 @@
+import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
 
+import { getResponseData } from '@/types/strapi'
 import Script from 'next/script'
 import Link from 'next/link'
 
@@ -33,17 +35,17 @@ export async function generateMetadata({ params }: { params: Promise<ArticleSlug
 	const { slugAlternate, slug, article } = await getSlugs(params)
 
 	return {
-		title: article?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: article?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
-			article?.attributes?.seo_description ||
+			article?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
 			},
-			canonical: article?.attributes?.seo_canonical || '/',
+			canonical: article?.attributes?.seo_canonical ?? '/',
 		},
 	}
 }
@@ -52,14 +54,16 @@ export async function generateStaticParams(): Promise<{ params: ArticleSlugParam
 	let paths: { params: ArticleSlugParams }[] = []
 
 	for (const locale of localesConstant) {
-		const articles = await getArticles(locale) // Use your service to fetch articles
+		const articlesResponse = await getArticles(locale)
+		const articles = getResponseData(articlesResponse)
 
-		// Map over each article to create a path object for it
-		const localePaths = articles.data.map((article: any) => ({
-			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
-		}))
-
-		paths = paths.concat(localePaths)
+		if (articles) {
+			// Map over each article to create a path object for it
+			const localePaths = articles.map(article => ({
+				params: { slug: article.attributes.slug, locale },
+			}))
+			paths = paths.concat(localePaths)
+		}
 	}
 
 	return paths
@@ -72,12 +76,11 @@ interface ArticlePageProps {
 export default async function Page({ params }: ArticlePageProps) {
 	const { locale } = await params
 	// fetch data
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 	const { slugAlternate, slug, article } = await getSlugs(params)
 
-	let processedArticle = await processArticleData(article)
-	processedArticle = processedArticle?.data
+	const processedArticle = await processArticleData(article)
 
 	const colors = ['indigo', 'sky', 'lime', 'rose', 'amber', 'emerald', 'cyan', 'violet', 'fuchsia', 'orange', 'teal']
 
@@ -151,12 +154,12 @@ export default async function Page({ params }: ArticlePageProps) {
 											'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display [&>*]:font-black md:[&>*]:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
-											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links),
+											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links ?? ''),
 										}}
 									/>
 								</div>
 								<div className={'flex flex-col gap-4'}>
-									{processedArticle?.attributes?.links?.map((link, index) => {
+									{processedArticle?.attributes?.links?.map((link: any, index: number) => {
 										return (
 											<div className={'flex'} key={index}>
 												<Link
@@ -183,12 +186,12 @@ export default async function Page({ params }: ArticlePageProps) {
 										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 									}
 									dangerouslySetInnerHTML={{
-										__html: replaceTitle(content_website?.attributes?.content_blog?.title_content),
+										__html: replaceTitle(content_website?.attributes?.content_blog?.title_content ?? ''),
 									}}
 								/>
 								<article>
 									<div className={'prose prose-invert my-8 [&>*]:!decoration-auto'}>
-										<h2>{processedArticle?.attributes?.title}</h2>
+										<h2>{processedArticle?.data?.attributes?.title}</h2>
 										<div className={'italic opacity-90'}>
 											{locale === 'fr' ? 'Publié le ' : 'Posted on '}
 											&nbsp;-&nbsp;
@@ -210,7 +213,7 @@ export default async function Page({ params }: ArticlePageProps) {
 											{locale === 'fr' ? ' par Andy Cinquin' : ' by Andy Cinquin'}
 										</div>
 										<h4 className={'my-2 mb-16 flex flex-wrap gap-2'}>
-											{processedArticle?.attributes?.tags?.map((tag, index) => {
+											{processedArticle?.attributes?.tags?.map((tag: any, index: number) => {
 												if (tag?.name) {
 													const colorIndex = getColorIndex(tag.name) % colors.length
 													const color = colors[colorIndex]
@@ -281,18 +284,19 @@ export default async function Page({ params }: ArticlePageProps) {
 
 async function getSlugs(params: Promise<ArticleSlugParams>): Promise<SlugsResult> {
 	const { slug, locale } = await params
-	let article = await getArticleBySlug(slug, locale)
-	article = article?.data[0]
+	const articleResponse = await getArticleBySlug(slug, locale as Locale)
+	const articles = getResponseData(articleResponse)
+	const article = articles?.[0]
 
 	// conditional slug, make en and fr slugs available
 	let _slug = ''
 	let slugAlternate = ''
 	if (locale === 'fr') {
-		_slug = article?.attributes?.slug
-		slugAlternate = article?.attributes?.localizations?.data[0]?.attributes?.slug
+		_slug = article?.attributes?.slug ?? ''
+		slugAlternate = article?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	} else {
-		slugAlternate = article?.attributes?.slug
-		_slug = article?.attributes?.localizations?.data[0]?.attributes?.slug
+		slugAlternate = article?.attributes?.slug ?? ''
+		_slug = article?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	}
 
 	return { slugAlternate, slug: _slug, article }
