@@ -51,7 +51,7 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 															'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 														}
 														dangerouslySetInnerHTML={{
-															__html: replaceTitle(title_galery || ''),
+															__html: replaceTitle(title_galery ?? ''),
 														}}
 													/>
 												</Dialog.Title>
