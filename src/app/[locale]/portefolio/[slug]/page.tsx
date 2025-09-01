@@ -112,7 +112,7 @@ export default async function Page({ params }: RealisationPageProps) {
 						<div className="mx-auto max-w-3xl md:pl-20">
 							<h2
 								className={
-									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_content ?? ''),
@@ -128,7 +128,7 @@ export default async function Page({ params }: RealisationPageProps) {
 						<div className={'flex w-full flex-col gap-6 xl:gap-8 md:pr-20 2xl:mx-auto 2xl:max-w-2xl'}>
 							<h2
 								className={
-									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology ?? ''),
@@ -142,7 +142,7 @@ export default async function Page({ params }: RealisationPageProps) {
 								<div className={'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'}>
 									<h2
 										className={
-											'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+											'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links ?? ''),

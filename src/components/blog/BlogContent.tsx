@@ -53,7 +53,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 				<div className="relative space-y-8 py-12 md:py-16 lg:py-20">
 					<BlogSearch locale={locale} onChange={setSearchQuery} value={searchQuery} />
 					{filteredArticles.length > 0 ? (
-						<div className="mx-auto max-w-[90rem]">
+						<div className="mx-auto max-w-360">
 							<MasonryGrid
 								initialColumns={getInitialColumns()}
 								items={filteredArticles}

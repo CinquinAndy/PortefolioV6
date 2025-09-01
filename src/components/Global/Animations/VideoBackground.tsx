@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export function VideoBackground() {
 	return (
-		<div className="video-background mask relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0">
+		<div className="video-background mask relative clear-both m-0 h-screen w-screen max-w-screen overflow-x-hidden p-0">
 			<Image
 				alt={'bg_opti'}
 				className={`mix-difference mask absolute left-0 top-0 -z-10 block bg-slate-900 object-cover opacity-75 blur-md`}

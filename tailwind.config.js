@@ -88,12 +88,6 @@ module.exports = {
 				},
 				border: 'hsl(var(--border))',
 				background: 'hsl(var(--background))',
-				andy_purple: {
-					500: '#6c00a2',
-				},
-				andy_blue: {
-					500: '#001152',
-				},
 				accent: {
 					foreground: 'hsl(var(--accent-foreground))',
 					DEFAULT: 'hsl(var(--accent))',
@@ -128,45 +122,18 @@ module.exports = {
 		'fill-teal-500',
 		'*:border-white',
 		'border-white',
-		'from-andy_purple-500',
-		'to-andy_blue-500',
-		'bg-andy_purple-500',
-		'bg-andy_blue-500',
-		'text-andy_purple-500',
-		'text-andy_blue-500',
+		'from-andy-purple-500',
+		'to-andy-blue-500',
+		'bg-andy-purple-500',
+		'bg-andy-blue-500',
+		'text-andy-purple-500',
+		'text-andy-blue-500',
 	],
 	plugins: [
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/typography'),
 		require('tailwindcss-animate'),
-		addVariablesForColors,
 	],
 	darkMode: ['class'],
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
-}
-
-function addVariablesForColors({ addBase, theme }) {
-	let allColors = flattenColorPalette(theme('colors'))
-	let newVars = Object.fromEntries(
-		Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-	)
-
-	addBase({
-		':root': newVars,
-	})
-}
-
-function flattenColorPalette(colors) {
-	return Object.assign(
-		{},
-		...Object.entries(colors ?? {}).flatMap(([color, values]) =>
-			typeof values == 'object'
-				? Object.entries(flattenColorPalette(values)).map(([number, hex]) =>
-						({
-							[color + (number === 'DEFAULT' ? '' : `-${number}`)]: hex,
-						})
-				  )
-				: [{ [`${color}`]: values }]
-		)
-	)
 }

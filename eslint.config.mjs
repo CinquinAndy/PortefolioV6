@@ -106,6 +106,13 @@ const eslintConfig = [
 	...compat.extends('next/core-web-vitals', 'next/typescript'),
 	{
 		ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+	},
+	// Exception pour tailwind.config.js qui a besoin de require()
+	{
+		rules: {
+			'@typescript-eslint/no-require-imports': 'off',
+		},
+		files: ['tailwind.config.js'],
 	}, //	perfectionist.configs['recommended-natural'],
 	eslintPluginPrettierRecommended,
 	...queryPlugin.configs['flat/recommended'],

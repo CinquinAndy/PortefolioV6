@@ -157,7 +157,7 @@ export default async function Page({ params }: ArticlePageProps) {
 								<div className={'flex items-center gap-2'}>
 									<h2
 										className={
-											'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display [&>*]:font-black md:[&>*]:text-3xl'
+											'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display *:font-black md:*:text-3xl'
 										}
 										dangerouslySetInnerHTML={{
 											__html: replaceTitle(content_website?.attributes?.content_realisations?.title_links ?? ''),
@@ -189,13 +189,13 @@ export default async function Page({ params }: ArticlePageProps) {
 							<section className="mx-auto max-w-7xl">
 								<h2
 									className={
-										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
+										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
 									}
 								>
 									{locale === 'fr' ? "Contenu de l'article" : 'Article Content'}
 								</h2>
 								<article>
-									<div className={'prose prose-invert my-8 [&>*]:!decoration-auto'}>
+									<div className={'prose prose-invert my-8 *:decoration-auto!'}>
 										<h2>{processedArticle?.data?.attributes?.title}</h2>
 										<div className={'italic opacity-90'}>
 											{locale === 'fr' ? 'Publié le ' : 'Posted on '}
@@ -249,7 +249,7 @@ export default async function Page({ params }: ArticlePageProps) {
 										<br />
 										<div className={'mt-8 flex flex-col gap-4'}>
 											{locale === 'fr' ? (
-												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+												<div className="rounded-lg border border-gray-700 bg-linear-to-r from-gray-900 to-gray-800 p-6">
 													<p className="mb-3">
 														🚀 Merci d&apos;avoir lu jusqu&apos;ici !
 														<br />
@@ -264,7 +264,7 @@ export default async function Page({ params }: ArticlePageProps) {
 													</p>
 												</div>
 											) : (
-												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+												<div className="rounded-lg border border-gray-700 bg-linear-to-r from-gray-900 to-gray-800 p-6">
 													<p className="mb-3">
 														🚀 Thanks for reading!
 														<br />

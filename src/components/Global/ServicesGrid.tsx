@@ -20,7 +20,7 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 			{/* Header Section */}
 			<div className="mb-16 flex justify-between">
 				<h2
-					className="!font-display text-2xl normal-case leading-snug xl:text-5xl sm:text-2xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+					className="!font-display text-2xl normal-case leading-snug xl:text-5xl sm:text-2xl [&>*]:!font-display *:text-2xl *:normal-case xl:*:text-5xl"
 					dangerouslySetInnerHTML={{
 						__html: replaceTitle(content_website?.attributes?.content_home?.title_service ?? ''),
 					}}
@@ -100,7 +100,7 @@ function BentoCard({ title, graphic, fade = [], eyebrow, description, className 
 				{graphic}
 				{/* Gradient Overlay */}
 				{fade.includes('bottom') && (
-					<div className="absolute inset-0 bg-gradient-to-t from-slate-1000 to-transparent" />
+					<div className="absolute inset-0 bg-linear-to-t from-slate-1000 to-transparent" />
 				)}
 			</div>
 

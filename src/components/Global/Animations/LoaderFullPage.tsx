@@ -22,7 +22,7 @@ function LoaderFullPage({ locale }: LoaderFullPageProps): React.JSX.Element {
 	}, [])
 	return (
 		<div
-			className={`${loading === false || hide === true ? 'pointer-events-none opacity-0' : 'opacity-100'} body-loader fixed left-0 top-0 z-[999] flex h-dvh w-dvw flex-col items-center justify-between gap-20 bg-gradient-to-br from-andy_purple-500 to-andy_blue-500 antialiased transition-opacity duration-1000`}
+			className={`${loading === false || hide === true ? 'pointer-events-none opacity-0' : 'opacity-100'} body-loader fixed left-0 top-0 z-999 flex h-dvh w-dvw flex-col items-center justify-between gap-20 bg-gradient-to-br from-andy-purple-500 to-andy-blue-500 antialiased transition-opacity duration-1000`}
 		>
 			<div></div>
 			<div className="mx-auto max-w-2xl p-4">

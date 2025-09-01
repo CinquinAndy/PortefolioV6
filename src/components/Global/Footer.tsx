@@ -44,7 +44,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 				</div>
 
 				<div className="col-span-4 flex flex-col gap-4 xl:col-span-1 md:col-span-2 md:col-start-5 lg:gap-10">
-					<h2 className="font-display text-sm !font-bold xl:text-xl">
+					<h2 className="font-display text-sm font-bold! xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
 					{sitemap?.map((item: Sitemap, index: number) => {
@@ -56,7 +56,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					})}
 				</div>
 				<div className="col-span-4 flex flex-col gap-4 xl:col-span-1 md:col-span-2 md:col-start-7 lg:gap-10">
-					<h2 className="font-display text-sm !font-bold xl:text-xl">
+					<h2 className="font-display text-sm font-bold! xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
 					{legals?.map((item: Sitemap, index: number) => {

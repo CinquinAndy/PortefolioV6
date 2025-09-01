@@ -43,7 +43,7 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 								backgroundImage: `url(${article.attributes.image_presentation?.data?.attributes?.url ?? '/placeholder.svg'})`,
 							}}
 						/>
-						<div className="absolute inset-0 left-0 top-0 h-full w-full bg-gradient-to-b from-transparent via-black/80 to-black/95" />
+						<div className="absolute inset-0 left-0 top-0 h-full w-full bg-linear-to-b from-transparent via-black/80 to-black/95" />
 					</motion.div>
 
 					{/* Card Header with a gradient overlay behind the text */}

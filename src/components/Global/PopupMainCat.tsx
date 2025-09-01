@@ -49,7 +49,7 @@ export function PopupMainCat({ content_website }: PopupMainCatProps): React.JSX.
 
 	return (
 		<div
-			className={`custom-popup fixed right-0 z-[35] flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
+			className={`custom-popup fixed right-0 z-35 flex cursor-pointer items-center justify-start sm:mr-2 md:mr-10 ${isClicked ? 'open' : ''}`}
 			onClick={() => {
 				setIsClicked(!isClicked)
 			}}

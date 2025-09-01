@@ -91,11 +91,11 @@ const Cursor = (): React.JSX.Element => {
 			{isDesktop && (
 				<>
 					<div
-						className={`pointer-events-none fixed z-[99999] h-2 w-2 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-90' : 'scale-100'}`}
+						className={`pointer-events-none fixed z-99999 h-2 w-2 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-90' : 'scale-100'}`}
 						style={{ top: `${position.y}px`, left: `${position.x}px` }}
 					></div>
 					<div
-						className={`pointer-events-none fixed z-[99999] h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white/90 mix-blend-difference transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-[175%]' : 'scale-100'}`}
+						className={`pointer-events-none fixed z-99999 h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white/90 mix-blend-difference transition-transform duration-300 ease-in-out ${cursorEnlarged ? 'scale-[175%]' : 'scale-100'}`}
 						style={{
 							top: `${outlinePosition.y}px`,
 							left: `${outlinePosition.x}px`,

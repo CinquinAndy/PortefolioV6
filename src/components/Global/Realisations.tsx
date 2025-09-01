@@ -37,7 +37,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				<div className="mt-[100px] flex justify-between">
 					<div className="w-1/2">
 						<h2
-							className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+							className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display *:text-2xl *:normal-case xl:*:text-5xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(content_website?.attributes?.content_home?.title_realisation ?? ''),
 							}}
@@ -66,7 +66,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 					{realisations.map((realisation, index) => {
 						return (
 							<Link
-								className={`${gridTemplateCustom(index)} relative flex aspect-[16/9] h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
+								className={`${gridTemplateCustom(index)} relative flex aspect-video h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
 								href={'/portefolio/' + realisation?.attributes?.slug}
 								key={realisation?.id}
 							>

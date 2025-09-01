@@ -17,7 +17,7 @@ function Cta({ content_website }: CtaProps): React.JSX.Element {
 				<div>
 					<div className="flex w-full items-center justify-center">
 						<h2
-							className="text-center !font-display text-xl font-bold xl:text-3xl [&>*]:!font-display [&>*]:text-xl [&>*]:font-bold xl:[&>*]:text-3xl"
+							className="text-center !font-display text-xl font-bold xl:text-3xl [&>*]:!font-display *:text-xl *:font-bold xl:*:text-3xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(content_website?.attributes?.cta?.title ?? ''),
 							}}
