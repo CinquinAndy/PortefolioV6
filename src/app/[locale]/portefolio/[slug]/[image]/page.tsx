@@ -26,6 +26,14 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 		? await processRealisationData({ meta: undefined, data: realisations } as StrapiResponse<Realisation[]>)
 		: null
 
+	// Récupérer les slugs pour chaque langue
+	const currentSlug = processedRealisation?.data?.attributes?.slug ?? ''
+	const alternateSlug = processedRealisation?.data?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
+
+	// Déterminer les chemins pour chaque langue
+	const frPath = locale === 'fr' ? `/portefolio/${currentSlug}` : `/portefolio/${alternateSlug}`
+	const enPath = locale === 'fr' ? `/portefolio/${alternateSlug}` : `/portefolio/${currentSlug}`
+
 	return {
 		title: processedRealisation?.data?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: getMetadataBase(locale),
@@ -33,8 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 			processedRealisation?.data?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: getLanguageAlternates(`/portefolio/${processedRealisation?.data?.attributes?.slug}`),
-			canonical: getCanonicalUrl(locale, `/portefolio/${processedRealisation?.data?.attributes?.slug}`),
+			languages: getLanguageAlternates('', frPath, enPath),
+			canonical: getCanonicalUrl(locale, `/portefolio/${currentSlug}`),
 		},
 	}
 }

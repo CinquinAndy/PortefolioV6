@@ -34,10 +34,14 @@ interface SlugsResult {
 
 export async function generateMetadata({ params }: { params: Promise<ArticleSlugParams> }): Promise<Metadata> {
 	const resolvedParams = await params
-	const { slug, article } = await getSlugs(params)
+	const { slugAlternate, slug, article } = await getSlugs(params)
 	const { locale } = resolvedParams
 
 	const canonicalUrl = getCanonicalUrl(locale, `/blog/${slug}`)
+
+	// Déterminer les chemins pour chaque langue
+	const frPath = locale === 'fr' ? `/blog/${slug}` : `/blog/${slugAlternate}`
+	const enPath = locale === 'fr' ? `/blog/${slugAlternate}` : `/blog/${slug}`
 
 	return {
 		title: article?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
@@ -46,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<ArticleSlug
 			article?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: getLanguageAlternates(`/blog/${slug}`),
+			languages: getLanguageAlternates('', frPath, enPath),
 			canonical: canonicalUrl,
 		},
 	}
@@ -146,7 +150,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>
