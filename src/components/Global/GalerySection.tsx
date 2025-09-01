@@ -1,16 +1,15 @@
 'use client'
+
 import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 import React from 'react'
-
-import { ContentWebsite } from '@/types/strapi'
 
 import { replaceTitle } from '@/services/utils'
 import Galery from '@/components/Global/Galery'
 
 interface GalerySectionProps {
-	processedRealisation?: ProcessedRealisation
-	content_website?: ContentWebsite
+	processedRealisation?: any // TODO: Define proper type for processedRealisation
+	content_website?: any // TODO: Define proper type for content_website
 }
 
 export function GalerySection({ processedRealisation, content_website }: GalerySectionProps): React.JSX.Element {
@@ -51,6 +50,7 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 					<CameraIcon className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'} />
 				</button>
 			</div>
+			{}
 			<Galery
 				galery={processedRealisation?.attributes?.galery?.data}
 				handleClick={handleClick}

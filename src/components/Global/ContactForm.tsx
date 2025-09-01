@@ -1,34 +1,36 @@
 'use client'
+
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ContentWebsite } from '@/types/strapi'
 import { z } from 'zod'
 
 interface ContactFormProps {
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 export function ContactForm({ content_website }: ContactFormProps): React.JSX.Element {
 	const schema = z.object({
 		phone: z.string().min(1, {
-			error: content_website?.attributes?.content_contact?.error_phone,
+			message: content_website?.attributes?.content_contact?.error_phone,
 		}),
 		name: z.string().min(1, {
-			error: content_website?.attributes?.content_contact?.error_name,
+			message: content_website?.attributes?.content_contact?.error_name,
 		}),
-		email: z.email({
-			error: content_website?.attributes?.content_contact?.error_email,
+		email: z.string().email({
+			message: content_website?.attributes?.content_contact?.error_email,
 		}),
 		content: z.string().min(1, {
-			error: content_website?.attributes?.content_contact?.error_content,
+			message: content_website?.attributes?.content_contact?.error_content,
 		}),
 		company: z.string(),
 	})
 
 	const {
-		reset, // pour réinitialiser le formulaire
+		reset,
 		register,
 		handleSubmit,
 		formState: { errors },
@@ -36,8 +38,7 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 		resolver: zodResolver(schema),
 	})
 
-	// Créez une nouvelle fonction pour gérer la soumission du formulaire
-	const onSubmit = async (data: any) => {
+	const onSubmit = async (data: { phone: string; name: string; email: string; content: string; company: string }) => {
 		const response = await fetch('/api/sendMail', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
