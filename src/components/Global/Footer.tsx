@@ -11,9 +11,9 @@ interface FooterProps {
 
 function Footer({ content_website }: FooterProps): React.JSX.Element {
 	// Sitemap
-	const sitemap = content_website?.attributes?.Sitemap?.filter(item => item?.categorie === 'sitemap')
+	const sitemap = content_website?.attributes?.Sitemap?.filter((item: any) => item?.categorie === 'sitemap')
 	// Mentions légales
-	const legals = content_website?.attributes?.Sitemap?.filter(item => item?.categorie === 'legals')
+	const legals = content_website?.attributes?.Sitemap?.filter((item: any) => item?.categorie === 'legals')
 	// Socials
 	const socials = content_website?.attributes?.socials
 
@@ -40,7 +40,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
-					{sitemap?.map((item, index) => {
+					{sitemap?.map((item: any, index: number) => {
 						return (
 							<Link className="underline_custom text-xs xl:text-sm" href={item?.Link?.url || '/'} key={index}>
 								{item?.Link?.label}
@@ -52,7 +52,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					<h2 className="font-display text-sm !font-bold xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
-					{legals?.map((item, index) => {
+					{legals?.map((item: any, index: number) => {
 						return (
 							<Link className="underline_custom text-xs xl:text-sm" href={item?.Link?.url || '/'} key={index}>
 								{item?.Link?.label}

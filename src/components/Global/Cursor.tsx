@@ -53,7 +53,7 @@ const Cursor = (): React.JSX.Element => {
 		}
 	}, [isDesktop])
 
-	const animate = time => {
+	const animate = (time: number) => {
 		if (!isDesktop) return
 		if (previousTimeRef.current != undefined) {
 			const deltaTime = time - previousTimeRef.current
@@ -79,7 +79,11 @@ const Cursor = (): React.JSX.Element => {
 	useEffect(() => {
 		if (!isDesktop) return
 		requestRef.current = requestAnimationFrame(animate)
-		return () => cancelAnimationFrame(requestRef.current)
+		return () => {
+			if (requestRef.current !== null) {
+				cancelAnimationFrame(requestRef.current)
+			}
+		}
 	}, [animate, isDesktop])
 
 	return (
