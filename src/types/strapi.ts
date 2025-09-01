@@ -160,6 +160,13 @@ export interface TagComponent {
 	name: string
 }
 
+export interface TechnologyComponent {
+	id: number
+	name: string
+	icon?: string
+	color?: string
+}
+
 export interface Article {
 	id: number
 	attributes: {
@@ -210,9 +217,7 @@ export interface Realisation {
 		galery?: {
 			data: StrapiMedia[]
 		}
-		technologies?: {
-			data: StrapiEntity[]
-		}
+		technologies?: TechnologyComponent[]
 		links?: LinkComponent[]
 		tags?: TagComponent[]
 		createdAt: string
@@ -227,6 +232,28 @@ export interface Realisation {
 	}
 }
 
+export interface SeoContent {
+	title?: string
+	description?: string
+	canonical?: string
+	h1?: string
+}
+
+export interface ButtonContent {
+	label?: string
+	url?: string
+}
+
+export interface ContentAbout {
+	seo?: SeoContent
+}
+
+export interface ContentRealisations {
+	title_galery?: string
+	btn_galery?: ButtonContent
+	title_links?: string
+}
+
 export interface ContentWebsite {
 	id: number
 	attributes: {
@@ -237,6 +264,8 @@ export interface ContentWebsite {
 		cta?: {
 			content: string
 		}
+		content_about?: ContentAbout
+		content_realisations?: ContentRealisations
 		createdAt: string
 		updatedAt: string
 		publishedAt: string

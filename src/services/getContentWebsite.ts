@@ -288,16 +288,128 @@ export async function processRealisationData(
 /**
  * Update nested property
  */
-export function updateNestedProperty<T extends Record<string, any>>(obj: T, path: string | string[], newValue: any): T {
+/**
+ * Get all articles (without pagination)
+ */
+export async function getAllArticles(locale: Locale): Promise<StrapiResponse<Article[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Article[]>>(
+		`api/articles?populate=deep,2&sort=rank&locale=${locale}&pagination[pageSize]=100`
+	)
+}
+
+/**
+ * Get all realisations (without pagination)
+ */
+export async function getAllRealisations(locale: Locale): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Realisation[]>>(
+		`api/realisations?populate=deep,2&sort=rank&locale=${locale}&pagination[pageSize]=100`
+	)
+}
+
+/**
+ * Get featured articles
+ */
+export async function getFeaturedArticles(locale: Locale): Promise<StrapiResponse<Article[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Article[]>>(
+		`api/articles?populate=deep,2&sort=rank&filters[featured][$eq]=true&locale=${locale}`
+	)
+}
+
+/**
+ * Get featured realisations
+ */
+export async function getFeaturedRealisations(locale: Locale): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Realisation[]>>(
+		`api/realisations?populate=deep,2&sort=rank&filters[featured][$eq]=true&locale=${locale}`
+	)
+}
+
+/**
+ * Get articles by tag
+ */
+export async function getArticlesByTag(
+	tag: string,
+	locale: Locale
+): Promise<StrapiResponse<Article[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Article[]>>(
+		`api/articles?populate=deep,2&sort=rank&filters[tags][name][$eq]=${tag}&locale=${locale}`
+	)
+}
+
+/**
+ * Get realisations by technology
+ */
+export async function getRealisationsByTechnology(
+	technology: string,
+	locale: Locale
+): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Realisation[]>>(
+		`api/realisations?populate=deep,2&sort=rank&filters[technologies][name][$eq]=${technology}&locale=${locale}`
+	)
+}
+
+/**
+ * Search content (articles and realisations)
+ */
+export async function searchContent(
+	query: string,
+	locale: Locale
+): Promise<{
+	articles: StrapiResponse<Article[]> | NotFoundResponse
+	realisations: StrapiResponse<Realisation[]> | NotFoundResponse
+}> {
+	const [articles, realisations] = await Promise.all([
+		fetchAPI<StrapiResponse<Article[]>>(
+			`api/articles?populate=deep,2&sort=rank&filters[$or][0][title][$containsi]=${query}&filters[$or][1][content][$containsi]=${query}&locale=${locale}`
+		),
+		fetchAPI<StrapiResponse<Realisation[]>>(
+			`api/realisations?populate=deep,2&sort=rank&filters[$or][0][title][$containsi]=${query}&filters[$or][1][content][$containsi]=${query}&locale=${locale}`
+		),
+	])
+
+	return { articles, realisations }
+}
+
+/**
+ * Get recent articles
+ */
+export async function getRecentArticles(
+	limit: number = 5,
+	locale: Locale
+): Promise<StrapiResponse<Article[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Article[]>>(
+		`api/articles?populate=deep,2&sort=publishedAt:desc&locale=${locale}&pagination[pageSize]=${limit}`
+	)
+}
+
+/**
+ * Get recent realisations
+ */
+export async function getRecentRealisations(
+	limit: number = 5,
+	locale: Locale
+): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Realisation[]>>(
+		`api/realisations?populate=deep,2&sort=publishedAt:desc&locale=${locale}&pagination[pageSize]=${limit}`
+	)
+}
+
+export function updateNestedProperty<T>(obj: T, path: string | string[], newValue: unknown): T {
 	const keys = Array.isArray(path) ? path : path.split('.')
-	const newObj = { ...obj }
-	let pointer: any = newObj
+	const newObj = { ...obj } as Record<string, unknown>
+	let pointer: Record<string, unknown> = newObj
 
 	for (let i = 0; i < keys.length - 1; i++) {
-		pointer[keys[i]] = { ...pointer[keys[i]] }
-		pointer = pointer[keys[i]]
+		const key = keys[i]
+		const currentValue = pointer[key]
+		if (currentValue != null && typeof currentValue === 'object') {
+			pointer[key] = { ...(currentValue as Record<string, unknown>) }
+		} else {
+			pointer[key] = {}
+		}
+		pointer = pointer[key] as Record<string, unknown>
 	}
 
 	pointer[keys[keys.length - 1]] = newValue
-	return newObj
+	return newObj as T
 }

@@ -1,4 +1,6 @@
 'use client'
+import type { StrapiMedia } from '@/types/strapi'
+
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment } from 'react'
@@ -11,7 +13,6 @@ import Link from 'next/link'
 import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/GaleryItemSkeleton'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
-import type { StrapiMedia } from '@/types/strapi'
 
 interface GaleryProps {
 	title_galery?: string
