@@ -39,7 +39,7 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 	})
 
 	// Créez une nouvelle fonction pour gérer la soumission du formulaire
-	const onSubmit = async data => {
+	const onSubmit = async (data: any) => {
 		const response = await fetch('/api/sendMail', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -55,13 +55,11 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 		if (response.ok) {
 			toast(content_website?.attributes?.content_contact?.toast_success, {
 				type: 'success',
-				icon: '✅',
 			})
 			reset()
 		} else {
 			toast(content_website?.attributes?.content_contact?.toast_error, {
 				type: 'error',
-				icon: '⛔',
 			})
 		}
 	}

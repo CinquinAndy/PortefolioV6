@@ -6,9 +6,16 @@ import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallbac
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
 
-function Articles({ slice, isHome, content_website, articles }) {
-	articles = slice ? articles.slice(0, slice) : articles
-	const gridTemplateCustom = index => {
+interface ArticlesProps {
+	slice?: number
+	isHome?: boolean
+	content_website?: any // TODO: Define proper type for content_website
+	articles?: any[] // TODO: Define proper type for articles
+}
+
+function Articles({ slice, isHome, content_website, articles }: ArticlesProps): React.JSX.Element {
+	articles = slice && articles ? articles.slice(0, slice) : articles || []
+	const gridTemplateCustom = (index: number): string => {
 		switch (index % 3) {
 			case 0:
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-10 2xl:col-start-1 2xl:col-end-8'
@@ -16,6 +23,8 @@ function Articles({ slice, isHome, content_website, articles }) {
 				return 'col-start-1 col-end-13 md:col-start-3 md:col-end-13 2xl:col-start-7 2xl:col-end-13'
 			case 2:
 				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-3 2xl:col-end-11'
+			default:
+				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-1 2xl:col-end-13'
 		}
 	}
 
