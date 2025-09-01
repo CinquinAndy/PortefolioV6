@@ -4,26 +4,49 @@
 	/* Font families using Next.js CSS Variables */
 	--font-family-display: var(--font-noto-serif-display), serif;
 	--font-family-body: var(--font-be-vietnam-pro), sans-serif;
-	
+
 	/* Custom andy colors */
 	--color-andy-purple-500: #6c00a2;
 	--color-andy-blue-500: #001152;
-	
+
 	/* Custom slate colors */
-	--color-slate-1100: #090D16;
-	--color-slate-1000: #0D1321;
-	
+	--color-slate-1100: #090d16;
+	--color-slate-1000: #0d1321;
+	--color-slate-50: #f8fafc;
+
 	/* Custom sky colors */
 	--color-sky-1100: #011623;
-	--color-sky-1000: #042C44;
-	
+	--color-sky-1000: #042c44;
+
 	/* Custom neutral colors */
 	--color-neutral-1100: #080808;
-	--color-neutral-1000: #0F0F0F;
-	
+	--color-neutral-1000: #0f0f0f;
+
 	/* Custom indigo colors */
-	--color-indigo-1100: #0D0C3C;
-	--color-indigo-1000: #1E1C5E;
+	--color-indigo-1100: #0d0c3c;
+	--color-indigo-1000: #1e1c5e;
+	--color-indigo-400: #6366f1;
+	--color-indigo-500: #6366f1;
+
+	/* Custom spacing */
+	--spacing-128: 32rem;
+	--spacing-112: 28rem;
+
+	/* Custom border width */
+	--border-width-40: 40px;
+	--border-width-20: 20px;
+
+	/* Custom skew */
+	--transform-skew-32: 32deg;
+	--transform-skew-30: 30deg;
+	--transform-skew-28: 28deg;
+	--transform-skew-24: 24deg;
+	--transform-skew-20: 20deg;
+	--transform-skew-17: 17deg;
+
+	/* Custom brightness */
+	--filter-brightness-25: 0.25;
+	--filter-brightness-10: 0.1;
 }
 
 @layer utilities {
@@ -727,7 +750,7 @@
 
 	/* Slide in */
 	.underline_custom {
-		overflow: hidden;
+		height: 3rem;
 	}
 
 	/*** icon animation ***/

@@ -91,7 +91,7 @@ function Nav({
 		<>
 			{isHome ? <LowGradientBackground /> : <GradientBackgroundWithoutAnimation />}
 			<header
-				className={`${!open ? 'sticky' : 'fixed'} left-0 top-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
+				className={`${!open ? 'sticky' : 'fixed'} top-0 left-0 z-50 mt-8 flex h-[40px] w-full flex-row-reverse items-center justify-between px-4 md:mt-0 md:h-[80px] md:flex-row md:px-20`}
 			>
 				<div>
 					<button
@@ -124,7 +124,7 @@ function Nav({
 				</Link>
 
 				<Link
-					className={`button-animated smoke hidden font-body text-sm md:block ${open ? 'pointer-events-none opacity-0' : ''}`}
+					className={`button-animated smoke font-body hidden text-sm md:block ${open ? 'pointer-events-none opacity-0' : ''}`}
 					href={'/contact'}
 				>
 					<h2>
@@ -144,12 +144,12 @@ function Nav({
 				className={`${!open ? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0' : 'pointer-events-auto z-40 -translate-y-0 opacity-100'} fixed flex h-screen w-screen transform transition-transform`}
 				id="nav-block"
 			>
-				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
+				<div className="from-indigo-1100 to-sky-1100 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-r-slate-50/10 bg-gradient-to-b p-4 pt-28 md:w-3/5 md:gap-18 md:border-r-40 md:p-20 md:pt-36">
 					{content_website?.attributes.menu?.map((item: { id: number; Link: LinkComponent }, index: number) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link className="relative text-indigo-400" href={item?.Link?.url} rel="noopener">
 								<svg
-									className="absolute left-0 top-1/2 h-8 w-8 -translate-x-[50px] -translate-y-1/2 transform md:h-10 md:w-10"
+									className="absolute top-1/2 left-0 h-8 w-8 -translate-x-[50px] -translate-y-1/2 transform md:h-10 md:w-10"
 									fill="currentColor"
 									viewBox="0 0 156 156"
 								>
@@ -158,7 +158,7 @@ function Nav({
 										opacity=".9"
 									/>
 								</svg>
-								<h2 className="text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
+								<h2 className="h-full text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
 							</Link>
 						) : (
 							<Link
@@ -167,7 +167,7 @@ function Nav({
 								key={index}
 								rel="noopener"
 							>
-								<h2 className="text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
+								<h2 className="h-full text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
 							</Link>
 						)
 					})}
@@ -276,7 +276,7 @@ function Nav({
 				</div>
 				<input
 					aria-label="Close Menu"
-					className="hidden h-full w-3/5 bg-black bg-opacity-90 lg:block"
+					className="hidden h-full w-3/5 bg-black/90 lg:block"
 					id="nav-right"
 					onClick={() => setOpen(!open)}
 					type={'button'}
@@ -294,7 +294,7 @@ function Nav({
 								</pattern>
 							</defs>
 							<text
-								className={'text-2xl font-semibold uppercase tracking-widest lg:text-5xl lg:text-8xl'}
+								className={'text-2xl font-semibold tracking-widest uppercase lg:text-5xl lg:text-8xl'}
 								textAnchor="middle"
 								x="50%"
 								y="60%"
@@ -306,7 +306,7 @@ function Nav({
 					</div>
 				)}
 				<h1
-					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold uppercase tracking-widest lg:text-5xl lg:text-8xl`}
+					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold tracking-widest uppercase lg:text-5xl lg:text-8xl`}
 				>
 					{}
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
@@ -326,7 +326,7 @@ function Nav({
 					</div>
 				)}
 				<div
-					className={`${isHome ? 'flex' : 'hidden'} absolute bottom-0 right-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 lg:mb-0 lg:gap-10 lg:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''}`}
+					className={`${isHome ? 'flex' : 'hidden'} absolute right-0 bottom-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 lg:mb-0 lg:gap-10 lg:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''}`}
 				>
 					<div className={'relative p-3'}>
 						<Link
