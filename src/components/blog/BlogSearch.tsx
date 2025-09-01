@@ -2,6 +2,14 @@ import { Command } from 'lucide-react'
 
 import { motion } from 'framer-motion'
 
+import type { Locale } from '@/types/strapi'
+
+interface BlogSearchProps {
+	value: string
+	onChange: (value: string) => void
+	locale: Locale
+}
+
 const containerVariants = {
 	visible: {
 		transition: {
@@ -31,7 +39,7 @@ const elementVariants = {
 	},
 }
 
-export function BlogSearch({ value, onChange, locale }) {
+export function BlogSearch({ value, onChange, locale }: BlogSearchProps) {
 	const placeholder = locale === 'en' ? 'Search articles...' : 'Rechercher des articles...'
 
 	return (

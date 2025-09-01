@@ -8,10 +8,17 @@ import { MasonryGrid } from './MasonryGrid'
 import { ArticleCard } from './ArticleCard'
 import { BlogSearch } from './BlogSearch'
 
-export function BlogContent({ locale, articles }) {
-	const [searchQuery, setSearchQuery] = useState('')
+import type { Article, Locale } from '@/types/strapi'
+
+interface BlogContentProps {
+	locale: Locale
+	articles: Article[]
+}
+
+export function BlogContent({ locale, articles }: BlogContentProps) {
+	const [searchQuery, setSearchQuery] = useState<string>('')
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [selectedType, setSelectedType] = useState('all')
+	const [selectedType, setSelectedType] = useState<string>('all')
 
 	const fuse = useMemo(
 		() =>
@@ -30,7 +37,7 @@ export function BlogContent({ locale, articles }) {
 		[articles]
 	)
 
-	const filteredArticles = useMemo(() => {
+	const filteredArticles = useMemo((): Article[] => {
 		let results = articles
 
 		if (searchQuery) {
@@ -65,7 +72,7 @@ export function BlogContent({ locale, articles }) {
 	)
 }
 
-function getInitialColumns() {
+function getInitialColumns(): number {
 	if (typeof window === 'undefined') return 3
 	const width = window.innerWidth
 	if (width < 640) return 1

@@ -16,7 +16,7 @@ import Cta from '@/components/Global/Cta'
 export const revalidate = 43200 // 12 hours
 
 interface PageParams {
-	locale: string
+	locale: Locale
 }
 
 interface SearchParams {
@@ -26,7 +26,7 @@ interface SearchParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
-	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website_response = await getContentWebsite(locale)
 	const content_website = getResponseData(content_website_response)
 
 	return {
@@ -55,13 +55,13 @@ interface BlogPageProps {
 export default async function Page({ searchParams, params }: BlogPageProps) {
 	const { locale } = await params
 	const { page } = await searchParams
-	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website_response = await getContentWebsite(locale)
 	const content_website = getResponseData(content_website_response)
 
 	const pageParams = page != null ? parseInt(page) : 1
 	const pageSize = 50
 
-	const articlesResponse = await getArticles(locale as Locale, pageParams, pageSize)
+	const articlesResponse = await getArticles(locale, pageParams, pageSize)
 	const articles = getResponseData(articlesResponse)
 
 	const hasMeta = articlesResponse != null && typeof articlesResponse === 'object' && 'meta' in articlesResponse

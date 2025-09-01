@@ -6,12 +6,19 @@ import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-const getArticleUrl = (locale, slug) => {
+import type { Article, Locale } from '@/types/strapi'
+
+interface ArticleCardProps {
+	locale: Locale
+	article: Article
+}
+
+const getArticleUrl = (locale: Locale, slug?: string): string => {
 	if (!slug) return `/${locale}/blog`
 	return `/${locale}/blog/${slug}`
 }
 
-export function ArticleCard({ locale, article }) {
+export function ArticleCard({ locale, article }: ArticleCardProps) {
 	// Reference to the card element for scroll animations
 	const ref = useRef(null)
 

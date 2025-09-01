@@ -1,8 +1,16 @@
 'use client'
 
-export function TagFilters({ selectedType, onTypeChange, articles }) {
+import type { Article } from '@/types/strapi'
+
+interface TagFiltersProps {
+	selectedType: string
+	onTypeChange: (type: string) => void
+	articles: Article[]
+}
+
+export function TagFilters({ selectedType, onTypeChange, articles }: TagFiltersProps) {
 	// Extract unique categories from the articles
-	const types = ['all', ...new Set(articles.map(article => article.attributes.type))]
+	const types: string[] = ['all', ...new Set(articles.map(article => article.attributes.type))]
 
 	return (
 		<div className="flex flex-wrap justify-center gap-2">

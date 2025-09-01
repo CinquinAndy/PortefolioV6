@@ -1,17 +1,26 @@
 'use client'
 
-import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState, ReactNode } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
+
+import type { Article, Locale } from '@/types/strapi'
 
 const BREAKPOINTS = {
 	xl: 1536,
 	sm: 640,
 	lg: 1024,
+} as const
+
+interface MasonryGridProps {
+	renderItem: (item: Article, index: number) => ReactNode
+	locale?: Locale
+	items: Article[]
+	initialColumns?: number
 }
 
 // Date formatting utilities
-const formatDate = (dateString, locale) => {
+const formatDate = (dateString: string, locale: Locale): string => {
 	try {
 		const date = new Date(dateString)
 
@@ -36,13 +45,13 @@ const formatDate = (dateString, locale) => {
 	}
 }
 
-export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns = 3 }) {
-	const [columns, setColumns] = useState(initialColumns)
-	const [isClient, setIsClient] = useState(false)
+export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns = 3 }: MasonryGridProps) {
+	const [columns, setColumns] = useState<number>(initialColumns)
+	const [isClient, setIsClient] = useState<boolean>(false)
 
 	useLayoutEffect(() => {
 		setIsClient(true)
-		const updateColumns = () => {
+		const updateColumns = (): void => {
 			const width = window.innerWidth
 			if (width < BREAKPOINTS.sm) setColumns(1)
 			else if (width < BREAKPOINTS.lg) setColumns(2)
@@ -56,7 +65,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 	}, [])
 
 	// Distribute items across columns efficiently
-	const getItemsByColumn = () => {
+	const getItemsByColumn = (): Article[][] => {
 		return Array.from({ length: columns }, (_, colIndex) =>
 			items.filter((_, itemIndex) => itemIndex % columns === colIndex)
 		)
@@ -66,7 +75,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 	const itemsByColumn = getItemsByColumn()
 
 	// Wrap renderItem to inject formatted date
-	const renderItemWithFormattedDate = (item, index) => {
+	const renderItemWithFormattedDate = (item: Article, index: number): ReactNode => {
 		if (item.attributes?.createdAt) {
 			const formattedItem = {
 				...item,
