@@ -49,7 +49,7 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 															'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 														}
 														dangerouslySetInnerHTML={{
-															__html: replaceTitle(title_galery),
+															__html: replaceTitle(title_galery || ''),
 														}}
 													/>
 												</Dialog.Title>
@@ -66,7 +66,7 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 											</div>
 										</div>
 										<div className="columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>div:not(:first-child)]:mt-8">
-											{galery.map((item, index) => (
+											{galery?.map((item: any, index: number) => (
 												<Link
 													className="cursor-pointer hover:filter-none"
 													href={pathname + '/' + index}

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const options = {
-	replace: domNode => {
+	replace: (domNode: any) => {
 		if (domNode?.type === 'tag') {
 			const { name, children, attribs } = domNode
 
@@ -79,7 +79,7 @@ interface LayoutProps {
 	className?: string
 }
 
-export function Layout({ value, className }: LayoutProps): React.JSX.Element {
+export function Layout({ value, className }: LayoutProps): React.JSX.Element | null {
 	if (!value) {
 		return null
 	}
