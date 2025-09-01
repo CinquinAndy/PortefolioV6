@@ -1,8 +1,6 @@
 import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
-import type { ReactNode } from 'react'
-
 import { getResponseData } from '@/types/strapi'
 
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
@@ -38,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
+export function generateStaticParams(): { params: PageParams }[] {
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))

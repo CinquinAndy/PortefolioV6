@@ -1,4 +1,4 @@
-import type { Locale } from '@/types/strapi'
+import type { Locale, Article, TagComponent } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
@@ -28,7 +28,7 @@ interface ArticleSlugParams {
 interface SlugsResult {
 	slugAlternate: string
 	slug: string
-	article: any
+	article: Article
 }
 
 export async function generateMetadata({ params }: { params: Promise<ArticleSlugParams> }): Promise<Metadata> {
@@ -59,7 +59,7 @@ export async function generateStaticParams(): Promise<{ params: ArticleSlugParam
 
 		if (articles) {
 			// Map over each article to create a path object for it
-			const localePaths = articles.map((article: any) => ({
+			const localePaths = articles.map((article: Article) => ({
 				params: { slug: article.attributes.slug, locale },
 			}))
 			paths = paths.concat(localePaths)
@@ -200,14 +200,14 @@ export default async function Page({ params }: ArticlePageProps) {
 												// processedArticle?.attributes?.createdAt
 												locale === 'fr'
 													? new Date(
-															processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt
+															processedArticle?.data?.attributes?.createdAt ?? processedArticle?.attributes?.createdAt
 														).toLocaleDateString('fr-FR', {
 															year: 'numeric',
 															month: 'long',
 															day: 'numeric',
 														})
 													: new Date(
-															processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt
+															processedArticle?.data?.attributes?.createdAt ?? processedArticle?.attributes?.createdAt
 														).toLocaleDateString('en-US', {
 															year: 'numeric',
 															month: 'long',
@@ -217,9 +217,9 @@ export default async function Page({ params }: ArticlePageProps) {
 											{locale === 'fr' ? ' par Andy Cinquin' : ' by Andy Cinquin'}
 										</div>
 										<h4 className={'my-2 mb-16 flex flex-wrap gap-2'}>
-											{(processedArticle?.data?.attributes?.tags || processedArticle?.attributes?.tags)?.map(
-												(tag: any, index: number) => {
-													if (tag?.name) {
+											{(processedArticle?.data?.attributes?.tags ?? processedArticle?.attributes?.tags)?.map(
+												(tag: TagComponent, index: number) => {
+													if (tag?.name != null && tag.name.length > 0) {
 														const colorIndex = getColorIndex(tag.name) % colors.length
 														const color = colors[colorIndex]
 														return (
@@ -231,7 +231,7 @@ export default async function Page({ params }: ArticlePageProps) {
 																	<circle cx="3" cy="3" r="3" />
 																</svg>
 																{/* make the name capitilize */}
-																{tag?.name.charAt(0).toUpperCase() + tag?.name.slice(1)}
+																{tag.name.charAt(0).toUpperCase() + tag.name.slice(1)}
 															</span>
 														)
 													}
@@ -305,5 +305,5 @@ async function getSlugs(params: Promise<ArticleSlugParams>): Promise<SlugsResult
 		_slug = article?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	}
 
-	return { slugAlternate, slug: _slug, article }
+	return { slugAlternate, slug: _slug, article: article as Article }
 }

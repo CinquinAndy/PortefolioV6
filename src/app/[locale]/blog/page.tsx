@@ -38,9 +38,10 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 
 	return {
-		title: hasAttributes
-			? (content_website.attributes?.content_blog?.seo?.title ?? defaultMetadata.title)
-			: defaultMetadata.title,
+		title:
+			hasAttributes === true
+				? (content_website.attributes?.content_blog?.seo?.title ?? defaultMetadata.title)
+				: defaultMetadata.title,
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		description: hasAttributes
 			? (content_website.attributes?.content_blog?.seo?.description ?? defaultMetadata.description)
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
+export function generateStaticParams(): { params: PageParams }[] {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },

@@ -5,16 +5,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 **Core development:**
+
 - `npm run dev` - Start development server
-- `npm run build` - Build for production  
+- `npm run build` - Build for production
 - `npm start` - Start production server
 
 **Code quality:**
+
 - `npm run lint` - Run ESLint
 - `npm run lint:fix` - Run ESLint with auto-fix
 - `npm run prettier` - Format code with Prettier
 
 **Testing:**
+
 - `pnpm run cypress:run` - Run Cypress e2e tests
 
 ## Architecture Overview
@@ -30,12 +33,13 @@ This is a Next.js 15 portfolio application with internationalization (i18n) supp
 - **Email Service**: Uses Mailgun for contact form functionality
 
 **Directory Structure:**
+
 ```
 src/
 ├── app/[locale]/           # App Router pages with internationalization
 ├── components/             # Reusable components
 │   ├── Global/            # Global components (animations, cursor, etc.)
-│   ├── blog/              # Blog-specific components  
+│   ├── blog/              # Blog-specific components
 │   └── ui/                # UI components
 ├── services/              # External service integrations
 ├── pages/api/             # API routes for server-side functionality
@@ -45,17 +49,20 @@ src/
 ```
 
 **i18n Configuration:**
-- Locales: `['fr', 'en']`  
+
+- Locales: `['fr', 'en']`
 - Default locale determined by domain via middleware
 - Uses `next-i18n-router` for routing
 
 **Styling:**
+
 - TailwindCSS for styling
-- Framer Motion for animations  
+- Framer Motion for animations
 - Headless UI for accessible components
 - Custom gradient backgrounds and Lottie animations
 
 **Code Quality:**
+
 - ESLint with strict configuration including perfectionist plugin for import sorting
 - Prettier for code formatting
 - Husky + lint-staged for pre-commit hooks

@@ -1,7 +1,7 @@
 import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
-import { getResponseData, isNotFoundResponse } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
 
 import { getContentWebsite } from '@/services/getContentWebsite'
 import { ContactForm } from '@/components/Global/ContactForm'
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
+export function generateStaticParams(): { params: PageParams }[] {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map((locale: string) => ({
 		params: { locale: locale as Locale },

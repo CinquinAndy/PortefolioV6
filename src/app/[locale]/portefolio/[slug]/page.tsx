@@ -1,4 +1,4 @@
-import type { Locale } from '@/types/strapi'
+import type { Locale, Realisation, Technology } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
@@ -73,7 +73,7 @@ export async function generateStaticParams(): Promise<{ params: RealisationSlugP
 
 		if (realisations) {
 			// Map over each realisation to create a path object for it
-			const localePaths = realisations.map((realisation: any) => ({
+			const localePaths = realisations.map((realisation: Realisation) => ({
 				params: { slug: realisation.attributes.slug, locale },
 			}))
 			paths = paths.concat(localePaths)
@@ -131,7 +131,7 @@ export default async function Page({ params }: RealisationPageProps) {
 							/>
 							<div className="grid w-full grid-cols-3 gap-2 xl:gap-6 md:grid-cols-4 md:gap-4 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
-								{processedRealisation?.data?.attributes?.techno?.map((technology: any) => {
+								{processedRealisation?.data?.attributes?.techno?.map((technology: Technology) => {
 									return <TechnologyDisplay key={technology.id} technology={technology} />
 								})}
 								<div className={'col-span-3 mt-8 flex flex-col gap-4 md:col-span-4 md:gap-8'}>

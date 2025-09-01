@@ -7,14 +7,24 @@ import Image from 'next/image'
 
 interface TechnologyIconProps {
 	name: string
-	image?: string
+	image?: unknown
 	className?: string
 }
 
+interface SimpleIconData {
+	path: string
+	[key: string]: unknown
+}
+
+interface ImageAttributes {
+	url?: string
+	name?: string
+}
+
 export function TechnologyIcon({ name, image, className }: TechnologyIconProps): React.JSX.Element | null {
-	const [icon, setIcon] = useState(null)
-	const [isLoading, setIsLoading] = useState(true)
-	const [fallbackImage, setFallbackImage] = useState(null)
+	const [icon, setIcon] = useState<SimpleIconData | null>(null)
+	const [isLoading, setIsLoading] = useState<boolean>(true)
+	const [fallbackImage, setFallbackImage] = useState<string | null>(null)
 
 	useEffect(() => {
 		// First try to use SimpleIcons if we have a name
@@ -23,21 +33,24 @@ export function TechnologyIcon({ name, image, className }: TechnologyIconProps):
 			const formattedName = name.toLowerCase().replace(/\s+/g, '')
 
 			// Try to find the icon in SimpleIcons
-			let iconData = null
+			let iconData: SimpleIconData | null = null
 			try {
 				// Try direct match
-				iconData = (SimpleIcons as any)[`si${formattedName}`]
+				const simpleIcons = SimpleIcons as unknown as Record<string, SimpleIconData>
+				iconData = simpleIcons[`si${formattedName}`] ?? null
 
 				// If not found, try searching through all keys
-				if (!iconData) {
+				if (iconData == null) {
 					const key = Object.keys(SimpleIcons).find(key => {
-						return key.toLowerCase() === `si${formattedName}`
+						return key != null && key.toLowerCase() === `si${formattedName}`
 					})
-					iconData = key ? (SimpleIcons as any)[key] : null
+					if (key != null && key.trim() !== '') {
+						iconData = simpleIcons[key] ?? null
+					}
 				}
 
 				// If we found an icon, set it in state
-				if (iconData) {
+				if (iconData != null) {
 					setIcon(iconData)
 				}
 			} catch (error) {
@@ -46,8 +59,12 @@ export function TechnologyIcon({ name, image, className }: TechnologyIconProps):
 		}
 
 		// If we have an image object but no icon found in SimpleIcons, prepare the fallback image
-		if (image && typeof image === 'object' && 'attributes' in image && (image as any).attributes?.url) {
-			setFallbackImage((image as any).attributes.url)
+		if (image != null && typeof image === 'object' && image !== null && 'attributes' in image) {
+			const imageObj = image as { attributes?: ImageAttributes }
+			const url = imageObj.attributes?.url
+			if (typeof url === 'string') {
+				setFallbackImage(url)
+			}
 		}
 
 		// Done loading
@@ -60,29 +77,34 @@ export function TechnologyIcon({ name, image, className }: TechnologyIconProps):
 	}
 
 	// If we found an icon in SimpleIcons, use it
-	if (icon) {
+	if (icon != null) {
 		// Render the SVG for the icon with a visible background and correct sizing
 		return (
 			<div className={`flex items-center justify-center ${className}`}>
-				<svg className="h-6 w-6" fill={`white`} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path d={(icon as any).path} />
+				<svg className="h-6 w-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path d={icon.path} />
 				</svg>
 			</div>
 		)
 	}
 
 	// If we have a fallback image, use it
-	if (fallbackImage) {
+	if (fallbackImage != null) {
+		let altText = name || 'Technology icon'
+
+		// Try to get a better alt text from the image object
+		if (image != null && typeof image === 'object' && image !== null && 'attributes' in image) {
+			const imageObj = image as { attributes?: ImageAttributes }
+			const imageName = imageObj.attributes?.name
+			if (typeof imageName === 'string' && imageName.trim()) {
+				altText = imageName
+			}
+		}
+
 		return (
 			<div className={`flex items-center justify-center ${className}`}>
 				<Image
-					alt={
-						name ||
-						(image && typeof image === 'object' && 'attributes' in image
-							? (image as any).attributes?.name
-							: undefined) ||
-						'Technology icon'
-					}
+					alt={altText}
 					className="h-6 w-6 brightness-0 invert-[1] filter"
 					height={24}
 					src={fallbackImage}

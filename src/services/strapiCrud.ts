@@ -236,11 +236,11 @@ export const ServiceCRUD = {
 
 // Technology CRUD operations
 export const TechnologyCRUD = {
-	create: (data: CreateTechnologyRequest) =>
-		createEntity<CreateTechnologyRequest, Technology>('api/technologies', data),
 	update: (id: number, data: UpdateTechnologyRequest) =>
 		updateEntity<UpdateTechnologyRequest, Technology>('api/technologies', id, data),
 	delete: (id: number) => deleteEntity('api/technologies', id),
+	create: (data: CreateTechnologyRequest) =>
+		createEntity<CreateTechnologyRequest, Technology>('api/technologies', data),
 	bulkDelete: (data: BulkDeleteRequest) => bulkDeleteEntities('api/technologies', data),
 }
 

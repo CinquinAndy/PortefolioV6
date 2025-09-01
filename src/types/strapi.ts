@@ -242,10 +242,14 @@ export interface Realisation {
 		image?: {
 			data: StrapiMedia
 		}
+		image_presentation?: {
+			data: StrapiMedia
+		}
 		galery?: {
 			data: StrapiMedia[]
 		}
 		technologies?: TechnologyComponent[]
+		techno?: TechnologyComponent[]
 		links?: LinkComponent[]
 		tags?: TagComponent[]
 		createdAt: string
@@ -292,6 +296,12 @@ export interface ContentHomeComponent {
 	title_secondary?: string
 	description?: string
 	btn_cta?: ButtonContent
+	title_realisation?: string
+	link?: Array<{
+		id: number
+		label: string
+		url: string
+	}>
 	vertical_nav?: Array<{
 		label?: string
 		href?: string
@@ -306,6 +316,7 @@ export interface ContentServiceComponent {
 }
 
 export interface ContentRealisationsComponent {
+	seo?: SeoContent
 	title_galery?: string
 	btn_galery?: ButtonContent
 	title_links?: string
@@ -380,17 +391,17 @@ export interface ContentWebsite {
 	attributes: {
 		// Social media links
 		socials?: SocialsComponent
-		
+
 		// Navigation menu
 		menu?: Array<{
 			id: number
 			label: string
 			href: string
 		}>
-		
+
 		// Contact information
 		contact?: ContactComponent
-		
+
 		// Page-specific content
 		content_home?: ContentHomeComponent
 		content_footer?: ContentFooterComponent
@@ -402,17 +413,17 @@ export interface ContentWebsite {
 		content_about?: ContentAboutComponent
 		content_notfound?: ContentNotFoundComponent
 		content_popup?: string
-		
+
 		// Site navigation structure
 		Sitemap?: Array<{
 			id: number
 			label: string
 			href: string
 		}>
-		
+
 		// Call-to-action component
 		cta?: CtaComponent
-		
+
 		// Standard Strapi fields
 		createdAt: string
 		updatedAt: string
@@ -479,6 +490,7 @@ export interface NotFound {
 	id: number
 	attributes: {
 		content: string
+		link?: ButtonContent
 		createdAt: string
 		updatedAt: string
 		createdBy?: StrapiRelation
