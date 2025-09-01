@@ -1,6 +1,6 @@
 import { Command } from 'lucide-react'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 
 import type { Locale } from '@/types/strapi'
 
@@ -10,7 +10,7 @@ interface BlogSearchProps {
 	locale: Locale
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
 	visible: {
 		transition: {
 			when: 'beforeChildren',
@@ -23,7 +23,7 @@ const containerVariants = {
 	},
 }
 
-const elementVariants = {
+const elementVariants: Variants = {
 	visible: {
 		y: 0,
 		transition: {

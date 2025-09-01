@@ -30,7 +30,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 					'attributes.description',
 					{
 						name: 'attributes.tags.name',
-						getFn: article => article.attributes.tags.map(tag => tag.name).join(' '),
+						getFn: article => article.attributes.tags?.map(tag => tag.name).join(' ') || '',
 					},
 				],
 			}),
