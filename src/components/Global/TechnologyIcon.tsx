@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 import * as SimpleIcons from 'simple-icons'
 import Image from 'next/image'
 
-export function TechnologyIcon({ name, image, className }) {
+interface TechnologyIconProps {
+	name: string
+	image?: string
+	className?: string
+}
+
+export function TechnologyIcon({ name, image, className }: TechnologyIconProps): JSX.Element {
 	const [icon, setIcon] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const [fallbackImage, setFallbackImage] = useState(null)

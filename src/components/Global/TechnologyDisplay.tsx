@@ -10,7 +10,11 @@ export const formatTechnologyName = name => {
 	return name.replace(/dot/i, '.').charAt(0).toUpperCase() + name.slice(1).replace(/dot/i, '.')
 }
 
-export function TechnologyDisplay({ technology }) {
+interface TechnologyDisplayProps {
+	technology?: any // TODO: Define proper type for technology
+}
+
+export function TechnologyDisplay({ technology }: TechnologyDisplayProps): JSX.Element {
 	if (!technology) return null
 
 	return (

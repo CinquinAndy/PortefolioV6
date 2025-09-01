@@ -5,7 +5,7 @@ import { HomeIcon } from '@heroicons/react/16/solid'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
-export function NavigationArticle() {
+export function NavigationArticle(): JSX.Element {
 	const pathname = usePathname() // usePathname hook to get the current path
 	const pathSegments = pathname.split('/').filter(Boolean) // Split the path into segments and remove any empty strings
 

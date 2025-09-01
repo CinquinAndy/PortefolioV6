@@ -47,7 +47,6 @@ export default function handler(
 				toast('An error occurred, please try again later', {
 					type: 'error',
 					toastId: 'toast-alert',
-					icon: '⛔',
 				})
 				res.status(500).json({ success: false, message: 'Failed to send email' })
 			})
