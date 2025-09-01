@@ -11,12 +11,13 @@ import Link from 'next/link'
 import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/GaleryItemSkeleton'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
+import type { StrapiMedia } from '@/types/strapi'
 
 interface GaleryProps {
 	title_galery?: string
 	open: boolean
 	handleClick: () => void
-	galery?: any[] // TODO: Define proper type for galery
+	galery?: StrapiMedia[]
 }
 
 function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React.JSX.Element {
@@ -66,7 +67,7 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 											</div>
 										</div>
 										<div className="columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>div:not(:first-child)]:mt-8">
-											{galery?.map((item: any, index: number) => (
+											{galery?.map((item: StrapiMedia, index: number) => (
 												<Link
 													className="cursor-pointer hover:filter-none"
 													href={pathname + '/' + index}

@@ -144,7 +144,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>
@@ -159,7 +159,7 @@ export default async function Page({ params }: ArticlePageProps) {
 									/>
 								</div>
 								<div className={'flex flex-col gap-4'}>
-									{processedArticle?.attributes?.links?.map((link: any, index: number) => {
+									{processedArticle?.attributes?.links?.map((link, index: number) => {
 										return (
 											<div className={'flex'} key={index}>
 												<Link

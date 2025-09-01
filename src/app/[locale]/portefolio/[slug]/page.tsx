@@ -144,7 +144,7 @@ export default async function Page({ params }: RealisationPageProps) {
 										}}
 									/>
 									<div className={'flex w-full gap-8'}>
-										{processedRealisation?.data?.attributes?.links?.map((link: any, index: number) => {
+										{processedRealisation?.data?.attributes?.links?.map((link, index: number) => {
 											return (
 												<div className={'flex'} key={index}>
 													<Link
