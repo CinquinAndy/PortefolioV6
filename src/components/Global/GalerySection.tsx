@@ -4,12 +4,14 @@ import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 import React from 'react'
 
+import { Realisation, ContentWebsite } from '@/types/strapi'
+
 import { replaceTitle } from '@/services/utils'
 import Galery from '@/components/Global/Galery'
 
 interface GalerySectionProps {
-	processedRealisation?: any // TODO: Define proper type for processedRealisation
-	content_website?: any // TODO: Define proper type for content_website
+	processedRealisation?: Realisation
+	content_website?: ContentWebsite
 }
 
 export function GalerySection({ processedRealisation, content_website }: GalerySectionProps): React.JSX.Element {
@@ -31,7 +33,7 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 							'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display [&>*]:font-black md:[&>*]:text-3xl'
 						}
 						dangerouslySetInnerHTML={{
-							__html: replaceTitle(content_website?.attributes?.content_realisations?.title_galery),
+							__html: replaceTitle(content_website?.attributes?.content_realisations?.title_galery ?? ''),
 						}}
 					/>
 					<div className={'hidden h-full items-center md:flex'}>
@@ -50,7 +52,6 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 					<CameraIcon className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'} />
 				</button>
 			</div>
-			{}
 			<Galery
 				galery={processedRealisation?.attributes?.galery?.data}
 				handleClick={handleClick}
