@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
 				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
 			},
-			canonical: processedRealisation?.data?.attributes?.seo?.canonical ?? '/',
+			canonical: processedRealisation?.data?.attributes?.seo_canonical ?? '/',
 		},
 	}
 }
