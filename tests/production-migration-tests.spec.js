@@ -133,7 +133,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(hasFooter).toBeGreaterThan(0)
 		expect(hasMainContent).toBeGreaterThan(5)
 
-		console.log(`✅ Homepage EN: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
+		console.info(`✅ Homepage EN: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
 	})
 
 	test('⚠️ Portfolio Page - Functional Test Only', async ({ page }) => {
@@ -163,7 +163,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 			expect(isClickable).toBeTruthy()
 		}
 
-		console.log(`✅ Portfolio: ${portfolioCards} projects found - functional test PASSED`)
+		console.info(`✅ Portfolio: ${portfolioCards} projects found - functional test PASSED`)
 	})
 })
 
@@ -204,11 +204,11 @@ test.describe('🔍 Production Validation', () => {
 		expect(failedPages.length).toBe(0)
 
 		// Afficher le résumé
-		console.log('\n🎉 MIGRATION BASELINE SUMMARY:')
+		console.info('\n🎉 MIGRATION BASELINE SUMMARY:')
 		results.forEach(r => {
-			console.log(`✅ ${r.name}: ${r.contentElements} elements`)
+			console.info(`✅ ${r.name}: ${r.contentElements} elements`)
 		})
-		console.log(`\n📊 Status: ${results.length}/6 pages ready for migration`)
+		console.info(`\n📊 Status: ${results.length}/6 pages ready for migration`)
 	})
 
 	test('✅ Navigation Links Present', async ({ page }) => {
@@ -233,7 +233,7 @@ test.describe('🔍 Production Validation', () => {
 		const totalLinks = Object.values(linksCount).reduce((a, b) => a + b, 0)
 		expect(totalLinks).toBeGreaterThanOrEqual(2)
 
-		console.log(`✅ Navigation: ${totalLinks} main links found`, linksCount)
+		console.info(`✅ Navigation: ${totalLinks} main links found`, linksCount)
 	})
 })
 

@@ -220,7 +220,7 @@ export default async function Page({ params }) {
 											{locale === 'fr' ? (
 												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
 													<p className="mb-3">
-														🚀 Merci d'avoir lu jusqu'ici !
+														🚀 Merci d&apos;avoir lu jusqu&apos;ici !
 														<br />
 														Si cet article vous a plu, partagez-le autour de vous.
 													</p>
@@ -242,7 +242,7 @@ export default async function Page({ params }) {
 													<p className="text-indigo-400">
 														💡 Got an idea?{' '}
 														<Link className="text-indigo-300 underline hover:text-indigo-200" href="/contact">
-															Let's talk !
+															Let&apos;s talk !
 														</Link>
 														☕
 													</p>

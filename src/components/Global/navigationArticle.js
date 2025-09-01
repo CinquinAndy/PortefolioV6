@@ -2,11 +2,11 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { HomeIcon } from '@heroicons/react/16/solid'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 export function NavigationArticle() {
-	const router = useRouter() // useRouter hook to get the router object
+
 	const pathname = usePathname() // usePathname hook to get the current path
 	const pathSegments = pathname.split('/').filter(Boolean) // Split the path into segments and remove any empty strings
 

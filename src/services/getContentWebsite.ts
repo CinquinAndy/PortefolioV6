@@ -18,14 +18,14 @@ import html from 'remark-html'
 /**
  * Fetch data from API
  */
-export async function fetchAPI<T = any>(
+export async function fetchAPI<T = unknown>(
 	path: string,
 	options: Partial<FetchOptions> = {}
 ): Promise<T | NotFoundResponse> {
 	try {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
 			next: { revalidate: 86400, ...options.next },
-			method: options.method || 'GET',
+			method: options.method ?? 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
@@ -96,7 +96,7 @@ export async function getArticlePaths(locale: Locale): Promise<Array<{ params: {
 			params: {
 				slug: record.attributes.slug,
 			},
-		})) || []
+		})) ?? []
 	)
 }
 
@@ -144,13 +144,13 @@ export async function getContentWebsite(
 		}
 
 		const processedContentFooter = await processMarkdown(
-			dataContentWebsite.data?.attributes?.content_footer?.content || ''
+			dataContentWebsite.data?.attributes?.content_footer?.content ?? ''
 		)
 
-		const processedContentCta = await processMarkdown(dataContentWebsite.data?.attributes?.cta?.content || '')
+		const processedContentCta = await processMarkdown(dataContentWebsite.data?.attributes?.cta?.content ?? '')
 
 		const processedContentSignature = await processMarkdown(
-			dataContentWebsite.data?.attributes?.content_footer?.content_signature || ''
+			dataContentWebsite.data?.attributes?.content_footer?.content_signature ?? ''
 		)
 
 		return updateNestedProperty(
@@ -207,7 +207,7 @@ export async function getRealisationPaths(locale: Locale): Promise<Array<{ param
 			params: {
 				slug: record.attributes.slug,
 			},
-		})) || []
+		})) ?? []
 	)
 }
 
@@ -288,16 +288,17 @@ export async function processRealisationData(
 /**
  * Update nested property
  */
-export function updateNestedProperty<T extends Record<string, any>>(obj: T, path: string | string[], newValue: any): T {
+export function updateNestedProperty<T extends Record<string, unknown>>(obj: T, path: string | string[], newValue: unknown): T {
 	const keys = Array.isArray(path) ? path : path.split('.')
 	const newObj = { ...obj }
-	let pointer: any = newObj
+	let pointer: Record<string, unknown> = newObj
 
 	for (let i = 0; i < keys.length - 1; i++) {
-		pointer[keys[i]] = { ...pointer[keys[i]] }
-		pointer = pointer[keys[i]]
+		const currentValue = pointer[keys[i]] as Record<string, unknown>
+		pointer[keys[i] as string] = { ...currentValue }
+		pointer = currentValue
 	}
 
-	pointer[keys[keys.length - 1]] = newValue
+	pointer[keys[keys.length - 1] as string] = newValue
 	return newObj
 }

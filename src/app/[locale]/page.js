@@ -2,7 +2,6 @@ import {
 	getArticles,
 	getContentWebsite,
 	getRealisations,
-	getServices,
 	getServicesGrid,
 } from '@/services/getContentWebsite'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'

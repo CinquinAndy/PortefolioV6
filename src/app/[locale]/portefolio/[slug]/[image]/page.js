@@ -57,7 +57,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-	const { slug, locale, image } = await params
+	const { slug, locale, image } = await params // image is used to index galery array
 	let realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)

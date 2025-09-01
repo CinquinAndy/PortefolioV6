@@ -10,7 +10,7 @@ import { BlogSearch } from './BlogSearch'
 
 export function BlogContent({ locale, articles }) {
 	const [searchQuery, setSearchQuery] = useState('')
-	const [selectedType, setSelectedType] = useState('all')
+	const [selectedType, setSelectedType] = useState('all') // eslint-disable-line no-unused-vars
 
 	const fuse = useMemo(
 		() =>

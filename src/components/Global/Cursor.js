@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const Cursor = () => {
 	const [isDesktop, setIsDesktop] = useState(false)
-	const [cursorVisible, setCursorVisible] = useState(true)
+	const [cursorVisible, setCursorVisible] = useState(true) // eslint-disable-line no-unused-vars
 	const [cursorEnlarged, setCursorEnlarged] = useState(false)
 	const [position, setPosition] = useState({ y: 0, x: 0 })
 	const [velocity, setVelocity] = useState({ y: 0, x: 0 })

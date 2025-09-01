@@ -90,7 +90,7 @@ export function Layout({ value, className }) {
 	// Convert the elements to a new array with updated children prop
 	replacedContent = replacedContent.map(child => {
 		if (React.isValidElement(child) && Array.isArray(child.props.children)) {
-			const updatedChildren = child.props.children.map((textChild, index) => {
+			const updatedChildren = child.props.children.map((textChild, index) => { // eslint-disable-line no-unused-vars
 				if (typeof textChild === 'string') {
 					const currentYear = new Date().getFullYear()
 					return textChild.replace(/{actualYear}/g, currentYear)

@@ -1,7 +1,6 @@
 import { toast } from 'react-toastify'
-
-const formData = require('form-data')
-const Mailgun = require('mailgun.js')
+import formData from 'form-data'
+import Mailgun from 'mailgun.js'
 const mailgun = new Mailgun(formData)
 const mg = mailgun.client({
 	username: 'api',
@@ -23,10 +22,10 @@ export default function handler(req, res) {
 				subject: 'Nouveau message de contact',
 				from: 'Andy Cinquin Website <contact@andy-cinquin.fr>',
 			})
-			.then(msg => {
+			.then(msg => { // eslint-disable-line no-unused-vars
 				res.status(200).json({ success: true })
 			})
-			.catch(err => {
+			.catch(err => { // eslint-disable-line no-unused-vars
 				toast('Une erreur est survenue, veuillez réessayer plus tard', {
 					type: 'error',
 					toastId: 'toast-alert',

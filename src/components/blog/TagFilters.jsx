@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 export function TagFilters({ selectedType, onTypeChange, articles }) {
 	// Extract unique categories from the articles
 	const types = ['all', ...new Set(articles.map(article => article.attributes.type))]

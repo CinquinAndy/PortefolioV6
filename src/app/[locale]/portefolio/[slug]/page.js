@@ -1,6 +1,5 @@
 import { LinkIcon } from '@heroicons/react/20/solid'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 import {
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }) {
 	realisation = realisation?.data[0]
 
 	// conditional slug, make en and fr slugs available
-	let _slug = ''
+	let _slug = '' // eslint-disable-line no-unused-vars
 	let slugAlternate = ''
 	if (locale === 'fr') {
 		_slug = realisation?.attributes?.slug
