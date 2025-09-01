@@ -198,6 +198,7 @@ export interface Article {
 		content: string
 		seo_title?: string
 		seo_description?: string
+		seo_canonical?: string
 		slug: string
 		excerpt?: string
 		image_presentation?: {
@@ -232,6 +233,7 @@ export interface Realisation {
 		slug: string
 		seo_title?: string
 		seo_description?: string
+		seo_canonical?: string
 		excerpt?: string
 		subtitle?: string
 		type?: string

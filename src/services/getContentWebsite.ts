@@ -235,9 +235,9 @@ export async function getServicesGrid(locale: Locale): Promise<StrapiResponse<Se
  * Process article data
  */
 export async function processArticleData(
-	articleData: Article
+	articleData: Article | NotFoundResponse
 ): Promise<Article & { data: { attributes: Article['attributes'] & { content: string } } }> {
-	if (articleData.attributes == null) {
+	if ('notFound' in articleData || articleData.attributes == null) {
 		redirect('/404')
 	}
 
@@ -266,9 +266,9 @@ export async function processMarkdown(markdownContent: string): Promise<string> 
  * Process realisation data
  */
 export async function processRealisationData(
-	realisationData: StrapiResponse<Realisation[]>
+	realisationData: StrapiResponse<Realisation[]> | NotFoundResponse
 ): Promise<{ data: { attributes: Realisation['attributes'] & { content: string } } }> {
-	if (realisationData.data?.[0]?.attributes == null) {
+	if ('notFound' in realisationData || realisationData.data?.[0]?.attributes == null) {
 		redirect('/404')
 	}
 

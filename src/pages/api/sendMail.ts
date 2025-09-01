@@ -20,9 +20,28 @@ interface ContactRequest extends NextApiRequest {
 	body: ContactFormData
 }
 
+// Type definitions for Mailgun
+interface MailgunMessages {
+	create(
+		domain: string,
+		data: {
+			to: string
+			text: string
+			subject: string
+			from: string
+		}
+	): Promise<unknown>
+}
+
+interface MailgunClient {
+	messages: MailgunMessages
+}
+
 // Initialize Mailgun client
-const mailgun = new Mailgun(formData)
-const mg = mailgun.client({
+const mailgun = new Mailgun(formData) as {
+	client(config: { username: string; key: string }): MailgunClient
+}
+const mg: MailgunClient = mailgun.client({
 	username: 'api',
 	key: process.env.MAILGUN_API_KEY ?? '',
 })
@@ -37,7 +56,7 @@ export default function handler(req: ContactRequest, res: NextApiResponse<ApiRes
 			return
 		}
 
-		if (!mg) {
+		if (mg == null) {
 			res.status(500).json({ success: false, message: 'Mailgun client not initialized' })
 			return
 		}
@@ -58,7 +77,7 @@ export default function handler(req: ContactRequest, res: NextApiResponse<ApiRes
 			.then(() => {
 				res.status(200).json({ success: true })
 			})
-			.catch(error => {
+			.catch((error: unknown) => {
 				console.error('Mailgun error:', error)
 				res.status(500).json({ success: false, message: 'Failed to send email' })
 			})
