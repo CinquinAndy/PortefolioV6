@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 	// fetch data
 	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
 	const realisations = getResponseData(realisationResponse)
-	const processedRealisation = realisations ? await processRealisationData({ data: realisations, meta: undefined } as any) : null
+	const processedRealisation = realisations
+		? await processRealisationData({ meta: undefined, data: realisations } as any)
+		: null
 
 	return {
 		title: processedRealisation?.data?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
@@ -44,7 +46,7 @@ export async function generateStaticParams(): Promise<{ params: ImagePageParams 
 
 	for (const locale of localesConstant) {
 		// Assuming these are your locales
-		const realisationsResponse = await getRealisations(locale as Locale)
+		const realisationsResponse = await getRealisations(locale)
 		const realisations = getResponseData(realisationsResponse)
 
 		if (realisations) {
@@ -78,7 +80,9 @@ export default async function Page({ params }: ImagePageProps) {
 	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
 	const realisations = getResponseData(realisationResponse)
 
-	const processedRealisation = realisations ? await processRealisationData({ data: realisations, meta: undefined } as any) : null
+	const processedRealisation = realisations
+		? await processRealisationData({ meta: undefined, data: realisations } as any)
+		: null
 	const galery = processedRealisation?.data?.attributes?.galery?.data
 	const imageData = galery?.[parseInt(image)]
 

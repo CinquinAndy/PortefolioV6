@@ -68,7 +68,7 @@ export async function generateStaticParams(): Promise<{ params: RealisationSlugP
 	let paths: { params: RealisationSlugParams }[] = []
 
 	for (const locale of localesConstant) {
-		const realisationsResponse = await getRealisations(locale as Locale)
+		const realisationsResponse = await getRealisations(locale)
 		const realisations = getResponseData(realisationsResponse)
 
 		if (realisations) {
@@ -120,7 +120,7 @@ export default async function Page({ params }: RealisationPageProps) {
 							</article>
 						</div>
 
-						<div className={'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'}>
+						<div className={'flex w-full flex-col gap-6 xl:gap-8 md:pr-20 2xl:mx-auto 2xl:max-w-2xl'}>
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
@@ -129,7 +129,7 @@ export default async function Page({ params }: RealisationPageProps) {
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology ?? ''),
 								}}
 							/>
-							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
+							<div className="grid w-full grid-cols-3 gap-2 xl:gap-6 md:grid-cols-4 md:gap-4 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
 								{processedRealisation?.data?.attributes?.techno?.map((technology: any) => {
 									return <TechnologyDisplay key={technology.id} technology={technology} />

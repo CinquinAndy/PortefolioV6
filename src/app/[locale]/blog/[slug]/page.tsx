@@ -54,7 +54,7 @@ export async function generateStaticParams(): Promise<{ params: ArticleSlugParam
 	let paths: { params: ArticleSlugParams }[] = []
 
 	for (const locale of localesConstant) {
-		const articlesResponse = await getArticles(locale as Locale)
+		const articlesResponse = await getArticles(locale)
 		const articles = getResponseData(articlesResponse)
 
 		if (articles) {
@@ -144,7 +144,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>
@@ -199,12 +199,16 @@ export default async function Page({ params }: ArticlePageProps) {
 												// get date from article and format it, to get "Publié le 9 novembre 2021" or "Posted on November 9, 2021
 												// processedArticle?.attributes?.createdAt
 												locale === 'fr'
-													? new Date(processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt).toLocaleDateString('fr-FR', {
+													? new Date(
+															processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt
+														).toLocaleDateString('fr-FR', {
 															year: 'numeric',
 															month: 'long',
 															day: 'numeric',
 														})
-													: new Date(processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt).toLocaleDateString('en-US', {
+													: new Date(
+															processedArticle?.data?.attributes?.createdAt || processedArticle?.attributes?.createdAt
+														).toLocaleDateString('en-US', {
 															year: 'numeric',
 															month: 'long',
 															day: 'numeric',
@@ -213,24 +217,26 @@ export default async function Page({ params }: ArticlePageProps) {
 											{locale === 'fr' ? ' par Andy Cinquin' : ' by Andy Cinquin'}
 										</div>
 										<h4 className={'my-2 mb-16 flex flex-wrap gap-2'}>
-											{(processedArticle?.data?.attributes?.tags || processedArticle?.attributes?.tags)?.map((tag: any, index: number) => {
-												if (tag?.name) {
-													const colorIndex = getColorIndex(tag.name) % colors.length
-													const color = colors[colorIndex]
-													return (
-														<span
-															className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-[0.6rem] font-medium text-gray-900 ring-1 ring-inset ring-gray-200 md:px-2 md:text-xs"
-															key={index}
-														>
-															<svg aria-hidden="true" className={`h-1.5 w-1.5 fill-${color}-500`} viewBox="0 0 6 6">
-																<circle cx="3" cy="3" r="3" />
-															</svg>
-															{/* make the name capitilize */}
-															{tag?.name.charAt(0).toUpperCase() + tag?.name.slice(1)}
-														</span>
-													)
+											{(processedArticle?.data?.attributes?.tags || processedArticle?.attributes?.tags)?.map(
+												(tag: any, index: number) => {
+													if (tag?.name) {
+														const colorIndex = getColorIndex(tag.name) % colors.length
+														const color = colors[colorIndex]
+														return (
+															<span
+																className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-[0.6rem] font-medium text-gray-900 ring-1 ring-inset ring-gray-200 md:px-2 md:text-xs"
+																key={index}
+															>
+																<svg aria-hidden="true" className={`h-1.5 w-1.5 fill-${color}-500`} viewBox="0 0 6 6">
+																	<circle cx="3" cy="3" r="3" />
+																</svg>
+																{/* make the name capitilize */}
+																{tag?.name.charAt(0).toUpperCase() + tag?.name.slice(1)}
+															</span>
+														)
+													}
 												}
-											})}
+											)}
 										</h4>
 										<Layout value={processedArticle?.attributes?.content.toString()} />
 										<br />
@@ -286,7 +292,7 @@ async function getSlugs(params: Promise<ArticleSlugParams>): Promise<SlugsResult
 	const { slug, locale } = await params
 	const articleResponse = await getArticleBySlug(slug, locale as Locale)
 	const articles = getResponseData(articleResponse)
-	const article = articles && articles.length > 0 ? articles[0] : null
+	const article = articles?.[0]
 
 	// conditional slug, make en and fr slugs available
 	let _slug = ''
