@@ -34,12 +34,9 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 		resolver: zodResolver(schema),
 	})
 
-	const {
-		reset,
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = form
+	const { reset, register, handleSubmit, formState } = form
+
+	const { errors } = formState
 
 	const onSubmit = async (data: { phone: string; name: string; email: string; content: string; company: string }) => {
 		const response = await fetch('/api/sendMail', {
