@@ -24,19 +24,31 @@ export async function generateMetadata(): Promise<Metadata> {
 	const content_website_response = await getContentWebsite('en' as const)
 	const content_website = getResponseData(content_website_response)
 
-	return {
-		title:
-			content_website?.attributes?.content_notfound?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
+	const defaultMetadata = {
+		title: 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.fr`),
 		description:
-			content_website?.attributes?.content_notfound?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
 			},
-			canonical: content_website?.attributes?.content_notfound?.seo?.canonical ?? '/',
+			canonical: '/',
+		},
+	}
+
+	if (!content_website) {
+		return defaultMetadata
+	}
+
+	return {
+		title: content_website.attributes?.content_notfound?.seo?.title ?? defaultMetadata.title,
+		metadataBase: defaultMetadata.metadataBase,
+		description: content_website.attributes?.content_notfound?.seo?.description ?? defaultMetadata.description,
+		alternates: {
+			languages: defaultMetadata.alternates.languages,
+			canonical: content_website.attributes?.content_notfound?.seo?.canonical ?? '/',
 		},
 	}
 }
@@ -48,6 +60,11 @@ export default async function NotFound() {
 	const notfound_response = await getNotFound('en' as const)
 	const notfound = getResponseData(notfound_response)
 
+	const defaultTitle = '404 Not Found'
+	const defaultContent = ''
+	const defaultLinkUrl = '/'
+	const defaultLinkLabel = 'Go Home'
+
 	return (
 		<html className={'overflow-y-hidden'} lang={`en`}>
 			<body className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}>
@@ -57,7 +74,7 @@ export default async function NotFound() {
 				{/*<Cursor />*/}
 
 				<div className="h-dvh">
-					<div className="flex h-full items-center justify-center px-4 xl:px-24 sm:px-6 lg:px-20">
+					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 						<div className="">
 							<Link href={'/'}>
 								<Image
@@ -69,18 +86,18 @@ export default async function NotFound() {
 							</Link>
 							<div className={'mt-8'}>
 								<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
-									{content_website?.attributes?.content_notfound?.seo?.h1 ?? '404 Not Found'}
+									{content_website?.attributes?.content_notfound?.seo?.h1 ?? defaultTitle}
 								</h1>
 								<div className="mx-auto max-w-3xl">
 									<article>
 										<div className={'prose prose-invert my-8'}>
-											<Layout value={notfound?.attributes?.content.toString()} />
+											<Layout value={notfound?.attributes?.content?.toString() ?? defaultContent} />
 										</div>
 									</article>
 								</div>
 
-								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url || '/'}>
-									{notfound?.attributes?.link?.label || 'Go Home'}
+								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url ?? defaultLinkUrl}>
+									{notfound?.attributes?.link?.label ?? defaultLinkLabel}
 								</Link>
 							</div>
 						</div>
