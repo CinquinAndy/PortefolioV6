@@ -12,7 +12,7 @@ export function ComponentLoadComponent({ FallBack, children }: ComponentLoadComp
 
 	// check if children is loaded
 	useEffect(() => {
-		if (children) {
+		if (children != null) {
 			setLoaded(true)
 		}
 	}, [children])

@@ -1,4 +1,4 @@
-import type { Locale } from '@/types/strapi'
+import type { Locale, Realisation, StrapiResponse } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { getResponseData } from '@/types/strapi'
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
 	const realisations = getResponseData(realisationResponse)
 	const processedRealisation = realisations
-		? await processRealisationData({ meta: undefined, data: realisations } as any)
+		? await processRealisationData({ meta: undefined, data: realisations } as StrapiResponse<Realisation[]>)
 		: null
 
 	return {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
 				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
 			},
-			canonical: processedRealisation?.data?.attributes?.seo_canonical ?? '/',
+			canonical: processedRealisation?.data?.attributes?.seo?.canonical ?? '/',
 		},
 	}
 }
@@ -54,7 +54,7 @@ export async function generateStaticParams(): Promise<{ params: ImagePageParams 
 				const images = realisation.attributes.galery?.data // Assuming this is where images are stored
 
 				if (images) {
-					for (const [index, image] of images.entries()) {
+					for (const [index] of images.entries()) {
 						paths.push({
 							params: {
 								slug: realisation.attributes.slug,
@@ -81,7 +81,7 @@ export default async function Page({ params }: ImagePageProps) {
 	const realisations = getResponseData(realisationResponse)
 
 	const processedRealisation = realisations
-		? await processRealisationData({ meta: undefined, data: realisations } as any)
+		? await processRealisationData({ meta: undefined, data: realisations } as StrapiResponse<Realisation[]>)
 		: null
 	const galery = processedRealisation?.data?.attributes?.galery?.data
 	const imageData = galery?.[parseInt(image)]
