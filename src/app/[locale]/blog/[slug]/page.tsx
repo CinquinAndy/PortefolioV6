@@ -32,7 +32,13 @@ interface SlugsResult {
 }
 
 export async function generateMetadata({ params }: { params: Promise<ArticleSlugParams> }): Promise<Metadata> {
+	const resolvedParams = await params
 	const { slugAlternate, slug, article } = await getSlugs(params)
+	const { locale } = resolvedParams
+
+	// Construire le canonical en fonction de la locale
+	const canonicalUrl =
+		locale === 'fr' ? `${process.env.NEXT_PUBLIC_URL}/blog/${slug}` : `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slug}`
 
 	return {
 		title: article?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
@@ -45,6 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<ArticleSlug
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
 			},
+			canonical: canonicalUrl,
 		},
 	}
 }
@@ -184,10 +191,9 @@ export default async function Page({ params }: ArticlePageProps) {
 									className={
 										'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
 									}
-									dangerouslySetInnerHTML={{
-										__html: replaceTitle(content_website?.attributes?.content_blog?.title_content ?? ''),
-									}}
-								/>
+								>
+									{locale === 'fr' ? "Contenu de l'article" : 'Article Content'}
+								</h2>
 								<article>
 									<div className={'prose prose-invert my-8 [&>*]:!decoration-auto'}>
 										<h2>{processedArticle?.data?.attributes?.title}</h2>

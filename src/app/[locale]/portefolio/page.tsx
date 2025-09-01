@@ -1,8 +1,6 @@
 import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
-import type { ReactNode } from 'react'
-
 import { getResponseData } from '@/types/strapi'
 
 import { getContentWebsite, getRealisations } from '@/services/getContentWebsite'

@@ -28,32 +28,16 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
-	const hasAttributes = content_website && typeof content_website === 'object' && 'attributes' in content_website
-
-	const defaultMetadata = {
-		title: 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		description:
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		canonical: '/',
-	}
-
 	return {
-		title:
-			hasAttributes === true
-				? (content_website.attributes?.content_blog?.seo?.title ?? defaultMetadata.title)
-				: defaultMetadata.title,
+		title: content_website?.attributes?.content_blog?.seo?.title,
 		metadataBase: new URL(`https://andy-cinquin.com`),
-		description: hasAttributes
-			? (content_website.attributes?.content_blog?.seo?.description ?? defaultMetadata.description)
-			: defaultMetadata.description,
+		description: content_website?.attributes?.content_blog?.seo?.description,
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
 			},
-			canonical: hasAttributes
-				? (content_website.attributes?.content_blog?.seo?.canonical ?? defaultMetadata.canonical)
-				: defaultMetadata.canonical,
+			canonical: content_website?.attributes?.content_blog?.seo?.canonical,
 		},
 	}
 }
