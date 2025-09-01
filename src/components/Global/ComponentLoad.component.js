@@ -1,7 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-export function ComponentLoadComponent({ FallBack, children }) {
+interface ComponentLoadComponentProps {
+	FallBack?: React.ComponentType
+	children?: React.ReactNode
+}
+
+export function ComponentLoadComponent({ FallBack, children }: ComponentLoadComponentProps): JSX.Element {
 	const [loaded, setLoaded] = useState(false)
 
 	// check if children is loaded

@@ -5,7 +5,14 @@ import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallbac
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
 
-function Realisations({ slice, realisations, isHome, content_website }) {
+interface RealisationsProps {
+	slice?: number
+	realisations?: any[] // TODO: Define proper type for realisations
+	isHome?: boolean
+	content_website?: any // TODO: Define proper type for content_website
+}
+
+function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): JSX.Element {
 	realisations = slice ? realisations.slice(0, slice) : realisations
 	const gridTemplateCustom = index => {
 		switch (index % 3) {

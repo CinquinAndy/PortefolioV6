@@ -11,7 +11,14 @@ import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/Galery
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
 
-function Galery({ title_galery, open, handleClick, galery }) {
+interface GaleryProps {
+	title_galery?: string
+	open: boolean
+	handleClick: () => void
+	galery?: any[] // TODO: Define proper type for galery
+}
+
+function Galery({ title_galery, open, handleClick, galery }: GaleryProps): JSX.Element {
 	// pathname
 	const pathname = usePathname()
 	return (

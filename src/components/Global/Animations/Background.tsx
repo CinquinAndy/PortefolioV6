@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 
-export function Background() {
+export function Background(): JSX.Element {
 	return (
 		<div className="video-background mask relative clear-both m-0 h-[100vh] w-[100vw] max-w-[100vw] overflow-x-hidden p-0">
 			<Image

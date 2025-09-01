@@ -74,7 +74,12 @@ const options = {
 	},
 }
 
-export function Layout({ value, className }) {
+interface LayoutProps {
+	value: string
+	className?: string
+}
+
+export function Layout({ value, className }: LayoutProps): JSX.Element {
 	if (!value) {
 		return null
 	}

@@ -9,7 +9,7 @@ const LottiePlayer = dynamic(
 	{ ssr: false } // This is critical - prevents any server-side rendering
 )
 
-export function LottieAnimation() {
+export function LottieAnimation(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {

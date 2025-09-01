@@ -5,7 +5,12 @@ import { useState } from 'react'
 import { replaceTitle } from '@/services/utils'
 import Galery from '@/components/Global/Galery'
 
-export function GalerySection({ processedRealisation, content_website }) {
+interface GalerySectionProps {
+	processedRealisation?: any // TODO: Define proper type for processedRealisation
+	content_website?: any // TODO: Define proper type for content_website
+}
+
+export function GalerySection({ processedRealisation, content_website }: GalerySectionProps): JSX.Element {
 	const [open, setOpen] = useState(false)
 
 	const handleClick = () => {

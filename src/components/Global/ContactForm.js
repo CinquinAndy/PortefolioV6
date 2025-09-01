@@ -5,7 +5,11 @@ import { toast } from 'react-toastify'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-export function ContactForm({ content_website }) {
+interface ContactFormProps {
+	content_website?: any // TODO: Define proper type for content_website
+}
+
+export function ContactForm({ content_website }: ContactFormProps): JSX.Element {
 	const schema = z
 		.object({
 			phone: z.string().min(1, {

@@ -4,7 +4,11 @@ import Link from 'next/link'
 import { Signature } from '@/components/Global/Signature'
 import { Layout } from '@/components/Global/Layout'
 
-function Footer({ content_website }) {
+interface FooterProps {
+	content_website?: any // TODO: Define proper type for content_website
+}
+
+function Footer({ content_website }: FooterProps): JSX.Element {
 	// Sitemap
 	const sitemap = content_website?.attributes?.Sitemap?.filter(item => item?.categorie === 'sitemap')
 	// Mentions légales

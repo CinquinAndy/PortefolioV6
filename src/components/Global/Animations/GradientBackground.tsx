@@ -1,6 +1,6 @@
 'use client'
 
-export function GradientBackground() {
+export function GradientBackground(): JSX.Element {
 	return (
 		<div className={`gradient-bg`}>
 			{/*<svg xmlns="http://www.w3.org/2000/svg" className={'gradient_svg'}>*/}

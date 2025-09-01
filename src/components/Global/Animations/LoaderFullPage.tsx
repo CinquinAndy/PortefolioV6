@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 
-function LoaderFullPage({ locale }) {
+interface LoaderFullPageProps {
+	locale?: string
+}
+
+function LoaderFullPage({ locale }: LoaderFullPageProps): JSX.Element {
 	// on load page
 	const [loading, setLoading] = useState(true)
 	const [hide, setHide] = useState(false)

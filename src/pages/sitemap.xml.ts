@@ -1,34 +1,35 @@
-const Sitemap = () => {
+import type { GetServerSideProps, NextPage } from 'next'
+
+interface SitemapProps {}
+
+const Sitemap: NextPage<SitemapProps> = () => {
 	return null
 }
 
-export const getServerSideProps = async ({ res }) => {
-	const baseUrl = process.env.NEXT_PUBLIC_URL
-	const alternateBaseUrl = process.env.NEXT_PUBLIC_URL_ALT
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const baseUrl = process.env.NEXT_PUBLIC_URL || ''
+	const alternateBaseUrl = process.env.NEXT_PUBLIC_URL_ALT || ''
 
 	// Define static paths manually or generate them dynamically
-	const staticPaths = [
+	const staticPaths: string[] = [
 		`${baseUrl}/`,
 		`${baseUrl}/about`,
 		`${baseUrl}/contact`,
 		`${baseUrl}/blog`,
 		`${baseUrl}/portefolio`,
 		`${baseUrl}/cgu`,
-		// Add more static paths if needed
 	]
 
 	const staticPathsAlt = staticPaths.map(path => path.replace(baseUrl, alternateBaseUrl))
 
 	// Fetch dynamic paths for blog posts and portfolio items via the Vercel API
-	let blogPaths = []
-	let portfolioPaths = []
+	let blogPaths: string[] = []
+	let portfolioPaths: string[] = []
 
 	try {
 		const resBlog = await fetch(`${baseUrl}/api/getBlogPaths`)
-		// console.log('resBlog:', resBlog)
 		if (resBlog.ok) {
 			blogPaths = await resBlog.json()
-			// console.log('Blog paths:', blogPaths)
 		} else {
 			console.error('Failed to fetch blog paths:', resBlog.statusText)
 		}

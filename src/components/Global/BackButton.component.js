@@ -3,7 +3,7 @@ import { BackwardIcon } from '@heroicons/react/20/solid'
 
 import { useRouter } from 'next/navigation'
 
-export function BackButtonComponent() {
+export function BackButtonComponent(): JSX.Element {
 	const router = useRouter()
 
 	return (

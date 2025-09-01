@@ -10,7 +10,16 @@ import Link from 'next/link'
 import { GradientBackgroundWithoutAnimation } from '@/components/Global/Animations/GradientBackgroundWithoutAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
-function Nav({ selectedMenu, isHome = true, h1, frRedirect, enRedirect, content_website }) {
+interface NavProps {
+	selectedMenu?: string
+	isHome?: boolean
+	h1?: string
+	frRedirect?: string
+	enRedirect?: string
+	content_website?: any // TODO: Define proper type for content_website
+}
+
+function Nav({ selectedMenu, isHome = true, h1, frRedirect, enRedirect, content_website }: NavProps): JSX.Element {
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
