@@ -8,24 +8,23 @@ import { MasonryGrid } from './MasonryGrid'
 import { ArticleCard } from './ArticleCard'
 import { BlogSearch } from './BlogSearch'
 
-export function BlogContent({ articles, locale }) {
+export function BlogContent({ locale, articles }) {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [selectedType, setSelectedType] = useState('all')
 
 	const fuse = useMemo(
 		() =>
 			new Fuse(articles, {
+				threshold: 0.3,
 				keys: [
 					'attributes.title',
 					'attributes.subtitle',
 					'attributes.description',
 					{
-						getFn: article =>
-							article.attributes.tags.map(tag => tag.name).join(' '),
 						name: 'attributes.tags.name',
+						getFn: article => article.attributes.tags.map(tag => tag.name).join(' '),
 					},
 				],
-				threshold: 0.3,
 			}),
 		[articles]
 	)
@@ -37,37 +36,26 @@ export function BlogContent({ articles, locale }) {
 			results = fuse.search(searchQuery).map(result => result.item)
 		}
 
-		return results.filter(
-			article =>
-				selectedType === 'all' || article.attributes.type === selectedType
-		)
+		return results.filter(article => selectedType === 'all' || article.attributes.type === selectedType)
 	}, [searchQuery, selectedType, articles, fuse])
 
 	return (
 		<section className="relative w-full">
 			<div className="mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="relative space-y-8 py-12 md:py-16 lg:py-20">
-					<BlogSearch
-						locale={locale}
-						onChange={setSearchQuery}
-						value={searchQuery}
-					/>
+					<BlogSearch locale={locale} onChange={setSearchQuery} value={searchQuery} />
 					{filteredArticles.length > 0 ? (
 						<div className="mx-auto max-w-[90rem]">
 							<MasonryGrid
 								initialColumns={getInitialColumns()}
 								items={filteredArticles}
 								locale={locale}
-								renderItem={article => (
-									<ArticleCard article={article} locale={locale} />
-								)}
+								renderItem={article => <ArticleCard article={article} locale={locale} />}
 							/>
 						</div>
 					) : (
 						<div className="py-12 text-center text-white">
-							<div>
-								{locale === 'fr' ? 'Aucun article trouvé' : 'No articles found'}
-							</div>
+							<div>{locale === 'fr' ? 'Aucun article trouvé' : 'No articles found'}</div>
 						</div>
 					)}
 				</div>
