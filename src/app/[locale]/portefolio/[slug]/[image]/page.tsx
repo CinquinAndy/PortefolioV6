@@ -1,10 +1,17 @@
+import type { Metadata } from 'next'
 import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
 import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
 import { localesConstant } from '@/services/localesConstant'
 
-export async function generateMetadata({ params }) {
+interface ImagePageParams {
+	slug: string
+	locale: string
+	image: string
+}
+
+export async function generateMetadata({ params }: { params: Promise<ImagePageParams> }): Promise<Metadata> {
 	const { slug, locale } = await params
 
 	// fetch data
@@ -29,8 +36,8 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
-	let paths = []
+export async function generateStaticParams(): Promise<{ params: ImagePageParams }[]> {
+	let paths: { params: ImagePageParams }[] = []
 
 	for (const locale of localesConstant) {
 		// Assuming these are your locales
@@ -56,7 +63,11 @@ export async function generateStaticParams() {
 	return paths
 }
 
-export default async function Page({ params }) {
+interface ImagePageProps {
+	params: Promise<ImagePageParams>
+}
+
+export default async function Page({ params }: ImagePageProps) {
 	const { slug, locale, image } = await params
 	let realisation = await getRealisationBySlug(slug, locale)
 

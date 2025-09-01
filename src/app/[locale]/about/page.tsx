@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { HoloComponent } from '@/components/Global/Animations/HoloComponent'
 import { getAbout, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
@@ -6,7 +7,11 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 
-export async function generateMetadata({ params }) {
+interface PageParams {
+	locale: string
+}
+
+export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
 	const content_website = await getContentWebsite(locale)
@@ -29,14 +34,18 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
 }
 
-export default async function Page({ params }) {
+interface AboutPageProps {
+	params: Promise<PageParams>
+}
+
+export default async function Page({ params }: AboutPageProps) {
 	const { locale } = await params
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data

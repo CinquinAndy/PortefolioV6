@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import { Pagination } from '@/components/Global/Pagination'
@@ -9,7 +10,15 @@ import Cta from '@/components/Global/Cta'
 // revalidate every 12 hours
 export const revalidate = 43200 // 12 hours
 
-export async function generateMetadata({ params }) {
+interface PageParams {
+	locale: string
+}
+
+interface SearchParams {
+	page?: string
+}
+
+export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
 	const content_website = await getContentWebsite(locale)
@@ -32,14 +41,19 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
 }
 
-export default async function Page({ searchParams, params }) {
+interface BlogPageProps {
+	searchParams: Promise<SearchParams>
+	params: Promise<PageParams>
+}
+
+export default async function Page({ searchParams, params }: BlogPageProps) {
 	const { locale } = await params
 	const { page } = await searchParams
 	let content_website = await getContentWebsite(locale)

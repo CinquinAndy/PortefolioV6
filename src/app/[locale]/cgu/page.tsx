@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import { Layout } from '@/components/Global/Layout'
@@ -5,7 +7,11 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 
-export async function generateMetadata({ params }) {
+interface PageParams {
+	locale: string
+}
+
+export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
 	const content_website = await getContentWebsite(locale)
@@ -27,13 +33,17 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ params: PageParams }[]>  {
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
 }
 
-export default async function Page({ params }) {
+interface PageProps {
+	params: Promise<PageParams>
+}
+
+export default async function Page({ params }: PageProps) {
 	const { locale } = await params
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data

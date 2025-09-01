@@ -1,4 +1,5 @@
 import { LinkIcon } from '@heroicons/react/20/solid'
+import type { Metadata } from 'next'
 
 import Script from 'next/script'
 import Link from 'next/link'
@@ -16,7 +17,18 @@ import Cta from '@/components/Global/Cta'
 // revalidate every 12 hours
 export const revalidate = 43200 // 12 hours
 
-export async function generateMetadata({ params }) {
+interface ArticleSlugParams {
+	slug: string
+	locale: string
+}
+
+interface SlugsResult {
+	slugAlternate: string
+	slug: string
+	article: any
+}
+
+export async function generateMetadata({ params }: { params: Promise<ArticleSlugParams> }): Promise<Metadata> {
 	let { slugAlternate, slug, article } = await getSlugs(params)
 
 	return {
@@ -35,14 +47,14 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
-	let paths = []
+export async function generateStaticParams(): Promise<{ params: ArticleSlugParams }[]> {
+	let paths: { params: ArticleSlugParams }[] = []
 
 	for (const locale of localesConstant) {
 		const articles = await getArticles(locale) // Use your service to fetch articles
 
 		// Map over each article to create a path object for it
-		const localePaths = articles.data.map(article => ({
+		const localePaths = articles.data.map((article: any) => ({
 			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
 		}))
 
@@ -52,19 +64,23 @@ export async function generateStaticParams() {
 	return paths
 }
 
-export default async function Page({ params }) {
+interface ArticlePageProps {
+	params: Promise<ArticleSlugParams>
+}
+
+export default async function Page({ params }: ArticlePageProps) {
 	const { locale } = await params
 	// fetch data
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let { slugAlternate, slug, article } = await getSlugs(await params)
+	let { slugAlternate, slug, article } = await getSlugs(params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
 
 	const colors = ['indigo', 'sky', 'lime', 'rose', 'amber', 'emerald', 'cyan', 'violet', 'fuchsia', 'orange', 'teal']
 
-	const getColorIndex = name => {
+	const getColorIndex = (name: string): number => {
 		let hash = 0
 		for (let i = 0; i < name.length; i++) {
 			hash = name.charCodeAt(i) + ((hash << 5) - hash)
@@ -262,7 +278,7 @@ export default async function Page({ params }) {
 	)
 }
 
-async function getSlugs(params) {
+async function getSlugs(params: Promise<ArticleSlugParams>): Promise<SlugsResult> {
 	const { slug, locale } = await params
 	let article = await getArticleBySlug(slug, locale)
 	article = article?.data[0]

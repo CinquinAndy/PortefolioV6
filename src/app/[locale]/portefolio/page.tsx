@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import { getContentWebsite, getRealisations } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import Realisations from '@/components/Global/Realisations'
@@ -5,10 +7,14 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 
+interface PageParams {
+	locale: string
+}
+
 // revalidate every 12 hours
 export const revalidate = 43200 // 12 hours
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	const content_website = await getContentWebsite(locale)
 
@@ -30,14 +36,18 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ params: PageParams }[]>  {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))
 }
 
-export default async function Page({ params }) {
+interface PageProps {
+	params: Promise<PageParams>
+}
+
+export default async function Page({ params }: PageProps) {
 	const { locale } = await params
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data

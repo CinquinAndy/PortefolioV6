@@ -1,4 +1,5 @@
 import { LinkIcon } from '@heroicons/react/20/solid'
+import type { Metadata } from 'next'
 
 import Link from 'next/link'
 
@@ -17,10 +18,15 @@ import { replaceTitle } from '@/services/utils'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
 
+interface RealisationSlugParams {
+	slug: string
+	locale: string
+}
+
 // revalidate every 12 hours
 export const revalidate = 43200 // 12 hours
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: Promise<RealisationSlugParams> }): Promise<Metadata> {
 	const { slug, locale } = await params
 	// fetch data
 	let realisation = await getRealisationBySlug(slug, locale)
@@ -54,15 +60,15 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-export async function generateStaticParams() {
-	let paths = []
+export async function generateStaticParams(): Promise<{ params: RealisationSlugParams }[]> {
+	let paths: { params: RealisationSlugParams }[] = []
 
 	for (const locale of localesConstant) {
 		const realisations = await getRealisations(locale) // Use your service to fetch realisations
 
 		// Map over each article to create a path object for it
-		const localePaths = realisations.data.map(article => ({
-			params: { slug: article.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
+		const localePaths = realisations.data.map((realisation: any) => ({
+			params: { slug: realisation.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
 		}))
 
 		paths = paths.concat(localePaths)
@@ -71,7 +77,11 @@ export async function generateStaticParams() {
 	return paths
 }
 
-export default async function Page({ params }) {
+interface RealisationPageProps {
+	params: Promise<RealisationSlugParams>
+}
+
+export default async function Page({ params }: RealisationPageProps) {
 	const { slug, locale } = await params
 	// fetch data
 	let content_website = await getContentWebsite(locale)
