@@ -1,16 +1,23 @@
 import type { ContactFormData, ApiResponse } from '@/types/api-routes'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
 
 import formData from 'form-data'
 import Mailgun from 'mailgun.js'
 
-const mailgun = new Mailgun(formData)
-const mg = mailgun.client({
-	username: 'api',
-	key: process.env.MAILGUN_API_KEY ?? '',
-})
+// Type-safe Mailgun initialization
+let mg: ReturnType<Mailgun['client']> | null = null
+
+try {
+	const mailgun = new Mailgun(formData)
+	mg = mailgun.client({
+		username: 'api',
+		key: process.env.MAILGUN_API_KEY ?? '',
+	})
+} catch (error) {
+	console.error('Failed to initialize Mailgun client:', error)
+}
 
 interface ContactRequest extends NextApiRequest {
 	body: ContactFormData
