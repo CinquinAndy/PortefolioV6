@@ -2,6 +2,7 @@ import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { getResponseData } from '@/types/strapi'
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 
 import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
@@ -30,14 +31,11 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	return {
 		title: content_website?.attributes?.content_blog?.seo?.title,
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		metadataBase: getMetadataBase(locale),
 		description: content_website?.attributes?.content_blog?.seo?.description,
 		alternates: {
-			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
-			},
-			canonical: content_website?.attributes?.content_blog?.seo?.canonical,
+			languages: getLanguageAlternates('/blog'),
+			canonical: content_website?.attributes?.content_blog?.seo?.canonical ?? getCanonicalUrl(locale, '/blog'),
 		},
 	}
 }

@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 
 const noto_serif_display = Noto_Serif_Display({
 	variable: '--font-noto-serif-display',
@@ -26,15 +27,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	const defaultMetadata = {
 		title: 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.fr`),
+		metadataBase: getMetadataBase('en'),
 		description:
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
-			},
-			canonical: '/',
+			languages: getLanguageAlternates('/404'),
+			canonical: getCanonicalUrl('en', '/404'),
 		},
 	}
 
@@ -44,11 +42,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	return {
 		title: content_website.attributes?.content_notfound?.seo?.title ?? defaultMetadata.title,
-		metadataBase: defaultMetadata.metadataBase,
+		metadataBase: getMetadataBase('en'),
 		description: content_website.attributes?.content_notfound?.seo?.description ?? defaultMetadata.description,
 		alternates: {
-			languages: defaultMetadata.alternates.languages,
-			canonical: content_website.attributes?.content_notfound?.seo?.canonical ?? '/',
+			languages: getLanguageAlternates('/404'),
+			canonical: content_website.attributes?.content_notfound?.seo?.canonical ?? getCanonicalUrl('en', '/404'),
 		},
 	}
 }

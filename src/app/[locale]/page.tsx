@@ -2,6 +2,7 @@ import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { getResponseData } from '@/types/strapi'
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 
 import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
@@ -38,14 +39,11 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	return {
 		title: seoTitle ?? defaultTitle,
-		metadataBase: new URL(`https://andy-cinquin.fr`),
+		metadataBase: getMetadataBase(locale),
 		description: seoDescription ?? defaultDescription,
 		alternates: {
-			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}`,
-			},
-			canonical: seoCanonical ?? '/',
+			languages: getLanguageAlternates(),
+			canonical: seoCanonical ?? getCanonicalUrl(locale),
 		},
 	}
 }
