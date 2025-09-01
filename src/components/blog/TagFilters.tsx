@@ -10,7 +10,10 @@ interface TagFiltersProps {
 
 export function TagFilters({ selectedType, onTypeChange, articles }: TagFiltersProps) {
 	// Extract unique categories from the articles
-	const types: string[] = ['all', ...new Set(articles.map(article => article.attributes.type).filter(Boolean))]
+	const types: string[] = [
+		'all',
+		...new Set(articles.map(article => article.attributes.type).filter((type): type is string => type !== undefined)),
+	]
 
 	return (
 		<div className="flex flex-wrap justify-center gap-2">

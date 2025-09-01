@@ -3,7 +3,6 @@ import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-
 import { Badge } from '@/components/ui/badge'
 
 import type { Article, Locale } from '@/types/strapi'
@@ -34,7 +33,7 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 				ref={ref}
 				transition={{ duration: 0.3 }}
 			>
-				<div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl transition-all hover:bg-white/10">
+				<div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10">
 					{/* Animated background image container */}
 					<motion.div className="absolute inset-0 -z-10">
 						<div
@@ -48,7 +47,7 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 					</motion.div>
 
 					{/* Card Header with a gradient overlay behind the text */}
-					<div className="relative z-10 pt-48 flex flex-col space-y-1.5 p-6">
+					<div className="relative z-10 flex flex-col space-y-1.5 p-6 pt-48">
 						{/* Gradient overlay with blur for improved text readability */}
 						<div className="relative">
 							<div className="flex items-center justify-between text-sm">
@@ -57,10 +56,10 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 									{article.attributes.type}
 								</Badge>
 							</div>
-							<div className="mt-4 text-xl font-bold text-white transition-colors group-hover:text-purple-300 font-semibold leading-none tracking-tight">
+							<div className="mt-4 text-xl font-bold font-semibold leading-none tracking-tight text-white transition-colors group-hover:text-purple-300">
 								{article.attributes.title}
 							</div>
-							<div className="text-white/80 text-sm text-muted-foreground">{article.attributes.subtitle}</div>
+							<div className="text-sm text-muted-foreground text-white/80">{article.attributes.subtitle}</div>
 						</div>
 					</div>
 
