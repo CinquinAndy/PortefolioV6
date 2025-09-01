@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+
 import type { ReactNode } from 'react'
+
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import { Layout } from '@/components/Global/Layout'
@@ -33,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: PageParams }[]>  {
+export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
 	return localesConstant.map(locale => ({
 		params: { locale },
 	}))

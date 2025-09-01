@@ -22,7 +22,7 @@
 		"@eslint/js": "9.34.0",
 		"@headlessui/react": "2.2.7",
 		"@heroicons/react": "2.2.0",
-		"@hookform/resolvers": "3.10.0",
+		"@hookform/resolvers": "5.2.1",
 		"@lottiefiles/react-lottie-player": "3.6.0",
 		"@next/eslint-plugin-next": "15.5.2",
 		"@next/third-parties": "15.5.2",

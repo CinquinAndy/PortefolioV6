@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import { HoloComponent } from '@/components/Global/Animations/HoloComponent'
 import { getAbout, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'

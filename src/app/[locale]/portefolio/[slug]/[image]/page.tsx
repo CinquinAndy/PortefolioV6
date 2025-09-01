@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 	const { slug, locale } = await params
 
 	// fetch data
-	let realisation = await getRealisationBySlug(slug, locale)
+	const realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 }
 
 export async function generateStaticParams(): Promise<{ params: ImagePageParams }[]> {
-	let paths: { params: ImagePageParams }[] = []
+	const paths: { params: ImagePageParams }[] = []
 
 	for (const locale of localesConstant) {
 		// Assuming these are your locales
@@ -69,7 +70,7 @@ interface ImagePageProps {
 
 export default async function Page({ params }: ImagePageProps) {
 	const { slug, locale, image } = await params
-	let realisation = await getRealisationBySlug(slug, locale)
+	const realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data

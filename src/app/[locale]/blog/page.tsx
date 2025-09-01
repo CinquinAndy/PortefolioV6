@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import { Pagination } from '@/components/Global/Pagination'
@@ -62,8 +63,8 @@ export default async function Page({ searchParams, params }: BlogPageProps) {
 	const pageParams = page ? parseInt(page) : 1
 	const pageSize = 50
 
-	let articlesResponse = await getArticles(locale, pageParams, pageSize)
-	let articles = articlesResponse?.data
+	const articlesResponse = await getArticles(locale, pageParams, pageSize)
+	const articles = articlesResponse?.data
 
 	const totalArticles = articlesResponse?.meta?.pagination?.total
 	const totalPages = Math.ceil(totalArticles / pageSize)

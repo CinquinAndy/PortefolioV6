@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-
 import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'

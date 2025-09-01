@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+
 import type { ReactNode } from 'react'
+
 import { getContentWebsite, getRealisations } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
 import Realisations from '@/components/Global/Realisations'
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: PageParams }[]>  {
+export async function generateStaticParams(): Promise<{ params: PageParams }[]> {
 	// Map each locale to a params object expected by Next.js
 	return localesConstant.map(locale => ({
 		params: { locale },

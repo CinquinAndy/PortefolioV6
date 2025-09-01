@@ -1,5 +1,6 @@
-import { LinkIcon } from '@heroicons/react/20/solid'
 import type { Metadata } from 'next'
+
+import { LinkIcon } from '@heroicons/react/20/solid'
 
 import Script from 'next/script'
 import Link from 'next/link'
@@ -29,7 +30,7 @@ interface SlugsResult {
 }
 
 export async function generateMetadata({ params }: { params: Promise<ArticleSlugParams> }): Promise<Metadata> {
-	let { slugAlternate, slug, article } = await getSlugs(params)
+	const { slugAlternate, slug, article } = await getSlugs(params)
 
 	return {
 		title: article?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
@@ -73,7 +74,7 @@ export default async function Page({ params }: ArticlePageProps) {
 	// fetch data
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let { slugAlternate, slug, article } = await getSlugs(params)
+	const { slugAlternate, slug, article } = await getSlugs(params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
@@ -140,7 +141,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>

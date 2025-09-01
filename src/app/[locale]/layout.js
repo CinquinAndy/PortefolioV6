@@ -1,7 +1,6 @@
-import type { Metadata } from 'next'
-
 import { ToastContainer } from 'react-toastify'
 import type { ReactNode } from 'react'
+import type { Metadata } from 'next'
 
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
