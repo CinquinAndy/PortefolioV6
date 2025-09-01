@@ -69,7 +69,7 @@ export default async function NotFound() {
 				{/*<Cursor />*/}
 
 				<div className="h-dvh">
-					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
+					<div className="flex h-full items-center justify-center px-4 xl:px-24 sm:px-6 lg:px-20">
 						<div className="">
 							<Link href={'/'}>
 								<Image
