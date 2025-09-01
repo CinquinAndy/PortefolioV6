@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { toast } from 'react-toastify'
 import formData from 'form-data'
 import Mailgun from 'mailgun.js'
+import type { MailgunClientOptions } from 'mailgun.js/definitions'
 import type { ContactFormData, ApiResponse } from '@/types/api-routes'
 
 const mailgun = new Mailgun(formData)
