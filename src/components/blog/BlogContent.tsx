@@ -3,6 +3,7 @@
 import type { Article, Locale } from '@/types/strapi'
 
 import { useMemo, useState } from 'react'
+
 import Fuse from 'fuse.js'
 
 import { MasonryGrid } from './MasonryGrid'

@@ -1,6 +1,7 @@
 import type { Article, Locale } from '@/types/strapi'
 
 import { useLayoutEffect, useState, ReactNode } from 'react'
+
 import { AnimatePresence, motion } from 'framer-motion'
 
 const BREAKPOINTS = {
