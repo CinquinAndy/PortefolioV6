@@ -285,6 +285,7 @@ export interface ContactComponent {
 }
 
 export interface ContentHomeComponent {
+	seo?: SeoContent
 	title_principal?: string
 	title_secondary?: string
 	description?: string
@@ -503,17 +504,17 @@ export function isNotFoundResponse<T>(response: ApiResponse<T>): response is imp
 }
 
 // Safe accessor for response data
-export function getResponseData<T>(response: ApiResponse<T>): T | null {
+export function getResponseData<T>(response: ApiResponse<T>): T | undefined {
 	if (isStrapiResponse(response)) {
 		return response.data
 	}
-	return null
+	return undefined
 }
 
 // Safe accessor for response attributes
 export function getResponseAttributes<T extends { attributes: Record<string, unknown> }>(
 	response: ApiResponse<T>
-): T['attributes'] | null {
+): T['attributes'] | undefined {
 	const data = getResponseData(response)
-	return data?.attributes ?? null
+	return data?.attributes ?? undefined
 }

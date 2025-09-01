@@ -1,39 +1,49 @@
-import type { ContactFormData, ApiResponse } from '@/types/api-routes'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-// import { toast } from 'react-toastify'
 
 import formData from 'form-data'
 import Mailgun from 'mailgun.js'
 
-// Type-safe Mailgun initialization
-let mg: ReturnType<Mailgun['client']> | null = null
+interface ContactFormData {
+	phone?: string
+	name: string
+	email: string
+	content: string
+	company?: string
+}
 
-try {
-	const mailgun = new Mailgun(formData)
-	mg = mailgun.client({
-		username: 'api',
-		key: process.env.MAILGUN_API_KEY ?? '',
-	})
-} catch (error) {
-	console.error('Failed to initialize Mailgun client:', error)
+interface ApiResponse {
+	success: boolean
+	message?: string
 }
 
 interface ContactRequest extends NextApiRequest {
 	body: ContactFormData
 }
 
+// Initialize Mailgun client
+const mailgun = new Mailgun(formData)
+const mg = mailgun.client({
+	username: 'api',
+	key: process.env.MAILGUN_API_KEY ?? '',
+})
+
 export default function handler(req: ContactRequest, res: NextApiResponse<ApiResponse>): void {
 	if (req.method === 'POST') {
 		const { phone, name, email, content, company } = req.body
 
-		if (!process.env.MAILGUN_DOMAIN) {
+		const mailgunDomain = process.env.MAILGUN_DOMAIN ?? ''
+		if (!mailgunDomain.trim()) {
 			res.status(500).json({ success: false, message: 'Mailgun domain not configured' })
 			return
 		}
 
+		if (!mg) {
+			res.status(500).json({ success: false, message: 'Mailgun client not initialized' })
+			return
+		}
+
 		mg.messages
-			.create(process.env.MAILGUN_DOMAIN, {
+			.create(mailgunDomain, {
 				to: 'contact@andy-cinquin.fr',
 				text: `
                 Nom: ${name} \n
@@ -50,10 +60,6 @@ export default function handler(req: ContactRequest, res: NextApiResponse<ApiRes
 			})
 			.catch(error => {
 				console.error('Mailgun error:', error)
-				toast('An error occurred, please try again later', {
-					type: 'error',
-					toastId: 'toast-alert',
-				})
 				res.status(500).json({ success: false, message: 'Failed to send email' })
 			})
 	} else {
