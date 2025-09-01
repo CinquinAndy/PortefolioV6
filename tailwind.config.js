@@ -1,7 +1,4 @@
-import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette'
-import typography from '@tailwindcss/typography'
-import animate from 'tailwindcss-animate'
-import forms from '@tailwindcss/forms'
+const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
@@ -133,8 +130,19 @@ module.exports = {
 		'fill-teal-500',
 		'*:border-white',
 		'border-white',
+		'from-andy_purple-500',
+		'to-andy_blue-500',
+		'bg-andy_purple-500',
+		'bg-andy_blue-500',
+		'text-andy_purple-500',
+		'text-andy_blue-500',
 	],
-	plugins: [forms, typography, addVariablesForColors, animate],
+	plugins: [
+		require('@tailwindcss/forms'),
+		require('@tailwindcss/typography'),
+		require('tailwindcss-animate'),
+		addVariablesForColors,
+	],
 	darkMode: ['class'],
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
 }

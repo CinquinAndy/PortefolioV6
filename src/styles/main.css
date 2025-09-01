@@ -1050,6 +1050,35 @@ a:hover {
 	}
 }
 
+/* Force Tailwind to include our custom colors */
+@layer utilities {
+	.from-andy_purple-500 {
+		--tw-gradient-from: #6c00a2 var(--tw-gradient-from-position);
+		--tw-gradient-to: rgb(108 0 162 / 0)  var(--tw-gradient-to-position);
+		--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+	}
+	
+	.to-andy_blue-500 {
+		--tw-gradient-to: #001152 var(--tw-gradient-to-position);
+	}
+	
+	.bg-andy_purple-500 {
+		background-color: #6c00a2;
+	}
+	
+	.bg-andy_blue-500 {
+		background-color: #001152;
+	}
+	
+	.text-andy_purple-500 {
+		color: #6c00a2;
+	}
+	
+	.text-andy_blue-500 {
+		color: #001152;
+	}
+}
+
 .lottie-1 .lf-player-container,
 .lottie-2 .lf-player-container {
 	width: 100vw;
