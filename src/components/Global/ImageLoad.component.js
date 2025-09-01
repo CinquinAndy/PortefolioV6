@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-export function ImageLoadComponent({ className, height, width, src, alt }) {
+export function ImageLoadComponent({ width, src, height, className, alt }) {
 	const [loaded, setLoaded] = useState(false)
 
 	return (

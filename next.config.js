@@ -1,14 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	reactStrictMode: true,
-	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: '**',
-			},
-		],
-	},
 	webpack: config => {
 		let modularizeImports = null
 		config.module.rules.some(rule =>
@@ -17,9 +8,17 @@ const nextConfig = {
 				return modularizeImports
 			})
 		)
-		if (modularizeImports?.['@headlessui/react'])
-			delete modularizeImports['@headlessui/react']
+		if (modularizeImports?.['@headlessui/react']) delete modularizeImports['@headlessui/react']
 		return config
+	},
+	reactStrictMode: true,
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: '**',
+			},
+		],
 	},
 }
 

@@ -5,9 +5,9 @@ import { useLayoutEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const BREAKPOINTS = {
-	lg: 1024,
 	xl: 1536,
 	sm: 640,
+	lg: 1024,
 }
 
 // Date formatting utilities
@@ -19,16 +19,16 @@ const formatDate = (dateString, locale) => {
 		if (locale === 'fr') {
 			return new Intl.DateTimeFormat('fr-FR', {
 				year: 'numeric',
-				day: 'numeric',
 				month: 'long',
+				day: 'numeric',
 			}).format(date)
 		}
 
 		// Default to English
 		return new Intl.DateTimeFormat('en-US', {
 			year: 'numeric',
-			day: 'numeric',
 			month: 'long',
+			day: 'numeric',
 		}).format(date)
 	} catch (error) {
 		console.error('Error formatting date:', error)
@@ -36,7 +36,7 @@ const formatDate = (dateString, locale) => {
 	}
 }
 
-export function MasonryGrid({ initialColumns = 3, locale = 'en', renderItem, items }) {
+export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns = 3 }) {
 	const [columns, setColumns] = useState(initialColumns)
 	const [isClient, setIsClient] = useState(false)
 
@@ -87,15 +87,15 @@ export function MasonryGrid({ initialColumns = 3, locale = 'en', renderItem, ite
 					<AnimatePresence mode="popLayout">
 						{columnItems.map((item, index) => (
 							<motion.div
-								animate={{ opacity: 1, y: 0 }}
+								animate={{ y: 0, opacity: 1 }}
 								className="transform will-change-transform"
-								exit={{ opacity: 0, y: -20 }}
-								initial={isClient ? { opacity: 0, y: 20 } : false}
+								exit={{ y: -20, opacity: 0 }}
+								initial={isClient ? { y: 20, opacity: 0 } : false}
 								key={item.id}
 								layout
 								transition={{
-									delay: index * 0.05,
 									duration: 0.3,
+									delay: index * 0.05,
 								}}
 							>
 								{renderItemWithFormattedDate(item, index)}

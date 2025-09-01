@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-export function ComponentLoadComponent({ children, FallBack }) {
+export function ComponentLoadComponent({ FallBack, children }) {
 	const [loaded, setLoaded] = useState(false)
 
 	// check if children is loaded

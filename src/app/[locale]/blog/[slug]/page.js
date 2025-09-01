@@ -17,21 +17,21 @@ import Cta from '@/components/Global/Cta'
 export const revalidate = 43200 // 12 hours
 
 export async function generateMetadata({ params }) {
-	let { slugAlternate, article, slug } = await getSlugs(params)
+	let { slugAlternate, slug, article } = await getSlugs(params)
 
 	return {
-		alternates: {
-			languages: {
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
-			},
-			canonical: article?.attributes?.seo_canonical || '/',
-		},
+		title: article?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
 			article?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		title: article?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		alternates: {
+			languages: {
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
+			},
+			canonical: article?.attributes?.seo_canonical || '/',
+		},
 	}
 }
 
@@ -57,7 +57,7 @@ export default async function Page({ params }) {
 	// fetch data
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
-	let { slugAlternate, article, slug } = await getSlugs(await params)
+	let { slugAlternate, slug, article } = await getSlugs(await params)
 
 	let processedArticle = await processArticleData(article)
 	processedArticle = processedArticle?.data
@@ -79,26 +79,26 @@ export default async function Page({ params }) {
 				dangerouslySetInnerHTML={{
 					__html: JSON.stringify({
 						publisher: {
+							name: 'Andy Cinquin',
 							logo: {
 								url: `${process.env.NEXT_PUBLIC_URL}/favicon.ico`,
 								'@type': 'ImageObject',
 							},
 							'@type': 'Organization',
-							name: 'Andy Cinquin',
 						},
 						mainEntityOfPage: {
-							'@id': `${process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
 							'@type': 'WebPage',
+							'@id': `${process.env.NEXT_PUBLIC_URL}/blog/${processedArticle?.attributes?.slug}`,
 						},
+						headline: processedArticle?.attributes?.title,
+						datePublished: processedArticle?.attributes?.createdAt,
+						dateModified: processedArticle?.attributes?.updatedAt,
 						author: {
 							name: 'Andy Cinquin',
 							'@type': 'Person',
 						},
-						datePublished: processedArticle?.attributes?.createdAt,
-						dateModified: processedArticle?.attributes?.updatedAt,
-						headline: processedArticle?.attributes?.title,
-						'@context': 'https://schema.org',
 						'@type': 'Article',
+						'@context': 'https://schema.org',
 					}),
 				}}
 				id={'json-ld'}
@@ -181,13 +181,13 @@ export default async function Page({ params }) {
 												locale === 'fr'
 													? new Date(processedArticle?.attributes?.createdAt).toLocaleDateString('fr-FR', {
 															year: 'numeric',
-															day: 'numeric',
 															month: 'long',
+															day: 'numeric',
 														})
 													: new Date(processedArticle?.attributes?.createdAt).toLocaleDateString('en-US', {
 															year: 'numeric',
-															day: 'numeric',
 															month: 'long',
+															day: 'numeric',
 														})
 											}
 											{locale === 'fr' ? ' par Andy Cinquin' : ' by Andy Cinquin'}
@@ -263,7 +263,7 @@ export default async function Page({ params }) {
 }
 
 async function getSlugs(params) {
-	const { locale, slug } = await params
+	const { slug, locale } = await params
 	let article = await getArticleBySlug(slug, locale)
 	article = article?.data[0]
 

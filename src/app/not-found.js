@@ -13,8 +13,8 @@ const noto_serif_display = Noto_Serif_Display({
 const be_vietnam_pro = Be_Vietnam_Pro({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 	variable: '--font-be-vietnam-pro',
-	style: ['italic', 'normal'],
 	subsets: ['latin'],
+	style: ['italic', 'normal'],
 })
 
 export async function generateMetadata() {
@@ -23,19 +23,19 @@ export async function generateMetadata() {
 	content_website = content_website?.data
 
 	return {
-		alternates: {
-			languages: {
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
-			},
-			canonical: content_website?.attributes?.content_notfound?.seo?.canonical || '/',
-		},
-		description:
-			content_website?.attributes?.content_notfound?.seo?.description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		title:
 			content_website?.attributes?.content_notfound?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.fr`),
+		description:
+			content_website?.attributes?.content_notfound?.seo?.description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		alternates: {
+			languages: {
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
+			},
+			canonical: content_website?.attributes?.content_notfound?.seo?.canonical || '/',
+		},
 	}
 }
 

@@ -7,7 +7,7 @@ import { clsx } from 'clsx'
 
 import { replaceTitle } from '@/services/utils'
 
-export function ServicesGrid({ content_website, services }) {
+export function ServicesGrid({ services, content_website }) {
 	return (
 		<section className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]" id="services">
 			{/* Header Section */}
@@ -64,7 +64,7 @@ export function ServicesGrid({ content_website, services }) {
 }
 
 // BentoCard Component with hover animation
-function BentoCard({ description, fade = [], className, eyebrow, graphic, title }) {
+function BentoCard({ title, graphic, fade = [], eyebrow, description, className }) {
 	return (
 		<motion.div
 			className={clsx(
@@ -74,8 +74,8 @@ function BentoCard({ description, fade = [], className, eyebrow, graphic, title 
 			)}
 			initial="idle"
 			variants={{
-				hover: { scale: 1.02 },
 				idle: { scale: 1 },
+				hover: { scale: 1.02 },
 			}}
 			whileHover="hover"
 		>

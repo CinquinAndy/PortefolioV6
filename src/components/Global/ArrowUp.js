@@ -33,7 +33,7 @@ function ArrowUp() {
 			}
 			onClick={() => {
 				// Scroll to the top of the page smoothly when button is clicked
-				window.scrollTo({ behavior: 'smooth', top: 0 })
+				window.scrollTo({ top: 0, behavior: 'smooth' })
 			}}
 		>
 			<ChevronUpIcon className="h-8 w-8 text-white" />

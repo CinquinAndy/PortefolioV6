@@ -17,21 +17,21 @@ const containerVariants = {
 
 const elementVariants = {
 	visible: {
+		y: 0,
 		transition: {
 			type: 'spring',
 			stiffness: 100,
 			damping: 12,
 		},
 		opacity: 1,
-		y: 0,
 	},
 	hidden: {
-		opacity: 0,
 		y: -20,
+		opacity: 0,
 	},
 }
 
-export function BlogSearch({ onChange, locale, value }) {
+export function BlogSearch({ value, onChange, locale }) {
 	const placeholder = locale === 'en' ? 'Search articles...' : 'Rechercher des articles...'
 
 	return (

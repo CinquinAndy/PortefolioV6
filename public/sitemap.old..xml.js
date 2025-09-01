@@ -71,22 +71,16 @@ export const getServerSideProps = async ({ res }) => {
 	let staticPathsAltCopy = JSON.parse(JSON.stringify(staticPaths))
 	// Separate static paths for the alternative URL
 	let staticPathsAlt = staticPathsAltCopy.map(staticPath => {
-		return staticPath.replace(
-			`${process.env.NEXT_PUBLIC_URL}/`,
-			`${process.env.NEXT_PUBLIC_URL_ALT}/`
-		)
+		return staticPath.replace(`${process.env.NEXT_PUBLIC_URL}/`, `${process.env.NEXT_PUBLIC_URL_ALT}/`)
 	})
 
 	staticPaths = filterAndFormatPaths(staticPaths, process.env.NEXT_PUBLIC_URL)
-	staticPathsAlt = filterAndFormatPaths(
-		staticPathsAlt,
-		process.env.NEXT_PUBLIC_URL_ALT
-	)
+	staticPathsAlt = filterAndFormatPaths(staticPathsAlt, process.env.NEXT_PUBLIC_URL_ALT)
 
 	// get all article for dynamic paths
-	const resultBlog = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=deep`
-	).then(res => res.json())
+	const resultBlog = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=deep`).then(res =>
+		res.json()
+	)
 
 	let pathsBlog = []
 	let pathsBlogPagination = []
@@ -114,16 +108,14 @@ export const getServerSideProps = async ({ res }) => {
 
 		// Generate pagination paths for blog (alternative URL)
 		for (let i = 1; i <= totalPages; i++) {
-			pathsBlogPaginationAlt.push(
-				`${process.env.NEXT_PUBLIC_URL_ALT}/blog?page=${i}`
-			)
+			pathsBlogPaginationAlt.push(`${process.env.NEXT_PUBLIC_URL_ALT}/blog?page=${i}`)
 		}
 	}
 
 	// get all article for dynamic paths
-	const resultPortefolio = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`
-	).then(res => res.json())
+	const resultPortefolio = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/realisations?populate=deep`).then(res =>
+		res.json()
+	)
 
 	const pathsPortefolio = resultPortefolio?.data?.map(record => {
 		return `${process.env.NEXT_PUBLIC_URL}/portefolio/${record.attributes.slug}`

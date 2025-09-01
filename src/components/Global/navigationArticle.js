@@ -14,8 +14,8 @@ export function NavigationArticle() {
 		const href = `/${pathSegments.slice(0, index + 1).join('/')}` // Create the href for the link
 		return {
 			name: segment.charAt(0).toUpperCase() + segment.slice(1), // Capitalize the first letter of the segment
-			current: index === pathSegments.length - 1, // Determine if this is the current page
 			href,
+			current: index === pathSegments.length - 1, // Determine if this is the current page
 		}
 	})
 

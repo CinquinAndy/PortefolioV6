@@ -11,7 +11,7 @@ import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/Galery
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
 
-function Galery({ title_galery, handleClick, galery, open }) {
+function Galery({ title_galery, open, handleClick, galery }) {
 	// pathname
 	const pathname = usePathname()
 	return (

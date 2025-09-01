@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { GradientBackgroundWithoutAnimation } from '@/components/Global/Animations/GradientBackgroundWithoutAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 
-function Nav({ content_website, isHome = true, selectedMenu, frRedirect, enRedirect, h1 }) {
+function Nav({ selectedMenu, isHome = true, h1, frRedirect, enRedirect, content_website }) {
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()
@@ -57,12 +57,12 @@ function Nav({ content_website, isHome = true, selectedMenu, frRedirect, enRedir
 					</Link>
 				</div>,
 				{
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: false,
-					autoClose: 5000,
 					theme: 'dark',
+					pauseOnHover: true,
+					hideProgressBar: false,
+					draggable: false,
+					closeOnClick: true,
+					autoClose: 5000,
 				}
 			)
 
@@ -391,14 +391,14 @@ function Nav({ content_website, isHome = true, selectedMenu, frRedirect, enRedir
 								`‣ ${content_website?.content_home?.title_vertical_left_6}`,
 							]}
 							style={{
+								opacity: 0.75,
+								lineHeight: '1.25rem',
+								letterSpacing: '0.05em',
+								fontSize: '0.875rem',
 								'@media (minWidth: 768px)': {
 									lineHeight: '1.75rem',
 									fontSize: '1.25rem',
 								},
-								letterSpacing: '0.05em',
-								lineHeight: '1.25rem',
-								fontSize: '0.875rem',
-								opacity: 0.75,
 							}}
 							wrapper="span"
 						/>

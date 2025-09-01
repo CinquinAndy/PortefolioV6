@@ -8,7 +8,7 @@ import Link from 'next/link'
 const options = {
 	replace: domNode => {
 		if (domNode?.type === 'tag') {
-			const { children, attribs, name } = domNode
+			const { name, children, attribs } = domNode
 
 			if (name === 'p') {
 				const content = domNode.children[0]?.data || ''
@@ -74,7 +74,7 @@ const options = {
 	},
 }
 
-export function Layout({ className, value }) {
+export function Layout({ value, className }) {
 	if (!value) {
 		return null
 	}

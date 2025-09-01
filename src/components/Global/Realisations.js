@@ -5,7 +5,7 @@ import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallbac
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
 
-function Realisations({ content_website, realisations, isHome, slice }) {
+function Realisations({ slice, realisations, isHome, content_website }) {
 	realisations = slice ? realisations.slice(0, slice) : realisations
 	const gridTemplateCustom = index => {
 		switch (index % 3) {

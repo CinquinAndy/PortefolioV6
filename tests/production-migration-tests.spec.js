@@ -9,8 +9,8 @@ import { test, expect } from '@playwright/test'
 
 const CONFIG = {
 	waitTime: 4000,
-	screenshotTimeout: 20000,
 	threshold: 0.3, // Plus tolérant pour ignorer micro-animations
+	screenshotTimeout: 20000,
 }
 
 async function stabilizePage(page) {
@@ -65,9 +65,9 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		await stabilizePage(page)
 
 		await expect(page).toHaveScreenshot('prod-about-fr.png', {
-			fullPage: true,
 			timeout: CONFIG.screenshotTimeout,
 			threshold: CONFIG.threshold,
+			fullPage: true,
 		})
 	})
 
@@ -77,9 +77,9 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		await stabilizePage(page)
 
 		await expect(page).toHaveScreenshot('prod-blog-fr.png', {
-			fullPage: true,
 			timeout: CONFIG.screenshotTimeout,
 			threshold: CONFIG.threshold,
+			fullPage: true,
 		})
 	})
 
@@ -89,9 +89,9 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		await stabilizePage(page)
 
 		await expect(page).toHaveScreenshot('prod-contact-fr.png', {
-			fullPage: true,
 			timeout: CONFIG.screenshotTimeout,
 			threshold: CONFIG.threshold, // Même seuil que les autres
+			fullPage: true,
 		})
 	})
 
@@ -113,9 +113,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(hasFooter).toBeGreaterThan(0)
 		expect(hasMainContent).toBeGreaterThan(5) // Au moins 5 éléments de contenu
 
-		console.log(
-			`✅ Homepage FR: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`
-		)
+		console.info(`✅ Homepage FR: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
 	})
 
 	test('✅ Homepage EN - Content Focus', async ({ page }) => {
@@ -135,9 +133,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(hasFooter).toBeGreaterThan(0)
 		expect(hasMainContent).toBeGreaterThan(5)
 
-		console.log(
-			`✅ Homepage EN: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`
-		)
+		console.log(`✅ Homepage EN: nav=${hasNavigation}, footer=${hasFooter}, content=${hasMainContent}`)
 	})
 
 	test('⚠️ Portfolio Page - Functional Test Only', async ({ page }) => {
@@ -149,9 +145,7 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(title).toContain('Portfolio')
 
 		// Vérifier les éléments clés du portfolio
-		const portfolioCards = await page
-			.locator('[class*="card"], [class*="project"], article, .portfolio-item')
-			.count()
+		const portfolioCards = await page.locator('[class*="card"], [class*="project"], article, .portfolio-item').count()
 		expect(portfolioCards).toBeGreaterThan(5) // Au moins 5 projets
 
 		// Vérifier la navigation
@@ -163,17 +157,13 @@ test.describe('🚀 PRODUCTION Migration Tests', () => {
 		expect(hasFooter).toBeGreaterThan(0)
 
 		// Test de clic sur le premier projet (si présent)
-		const firstProject = page
-			.locator('[class*="card"], [class*="project"]')
-			.first()
+		const firstProject = page.locator('[class*="card"], [class*="project"]').first()
 		if ((await firstProject.count()) > 0) {
 			const isClickable = await firstProject.isVisible()
 			expect(isClickable).toBeTruthy()
 		}
 
-		console.log(
-			`✅ Portfolio: ${portfolioCards} projects found - functional test PASSED`
-		)
+		console.log(`✅ Portfolio: ${portfolioCards} projects found - functional test PASSED`)
 	})
 })
 
@@ -195,19 +185,17 @@ test.describe('🔍 Production Validation', () => {
 			await page.waitForTimeout(2000)
 
 			const title = await page.title()
-			const contentElements = await page
-				.locator('main, [role="main"], nav, h1, h2, article, section')
-				.count()
+			const contentElements = await page.locator('main, [role="main"], nav, h1, h2, article, section').count()
 			const hasErrors = (await page.locator('text=404').count()) > 0
 
 			const success = title !== '' && !hasErrors && contentElements > 2
 
 			results.push({
-				name: pageInfo.name,
-				path: pageInfo.path,
-				success,
-				contentElements,
 				title: title.substring(0, 50),
+				success,
+				path: pageInfo.path,
+				name: pageInfo.name,
+				contentElements,
 			})
 		}
 
@@ -229,20 +217,16 @@ test.describe('🔍 Production Validation', () => {
 
 		// Vérifier la présence des liens de navigation (sans cliquer)
 		const aboutLink = page.locator('a[href*="about"], a[href="/fr/about"]')
-		const portfolioLink = page.locator(
-			'a[href*="portefolio"], a[href="/fr/portefolio"]'
-		)
-		const contactLink = page.locator(
-			'a[href*="contact"], a[href="/fr/contact"]'
-		)
+		const portfolioLink = page.locator('a[href*="portefolio"], a[href="/fr/portefolio"]')
+		const contactLink = page.locator('a[href*="contact"], a[href="/fr/contact"]')
 		const blogLink = page.locator('a[href*="blog"], a[href="/fr/blog"]')
 
 		// Vérifier que les liens essentiels sont présents
 		const linksCount = {
-			about: await aboutLink.count(),
 			portfolio: await portfolioLink.count(),
 			contact: await contactLink.count(),
 			blog: await blogLink.count(),
+			about: await aboutLink.count(),
 		}
 
 		// Au moins 2 liens de navigation principaux doivent être présents

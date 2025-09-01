@@ -15,20 +15,20 @@ export async function generateMetadata({ params }) {
 	const content_website = await getContentWebsite(locale)
 
 	return {
-		alternates: {
-			languages: {
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
-			},
-			canonical: content_website?.data?.attributes?.content_blog?.seo?.canonical || '/',
-		},
-		description:
-			content_website?.data?.attributes?.content_blog?.seo?.description ||
-			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		title:
 			content_website?.data?.attributes?.content_blog?.seo?.title ||
 			'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
+		description:
+			content_website?.data?.attributes?.content_blog?.seo?.description ||
+			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		alternates: {
+			languages: {
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
+			},
+			canonical: content_website?.data?.attributes?.content_blog?.seo?.canonical || '/',
+		},
 	}
 }
 

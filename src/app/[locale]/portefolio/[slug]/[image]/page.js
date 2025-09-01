@@ -5,7 +5,7 @@ import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
 import { localesConstant } from '@/services/localesConstant'
 
 export async function generateMetadata({ params }) {
-	const { locale, slug } = await params
+	const { slug, locale } = await params
 
 	// fetch data
 	let realisation = await getRealisationBySlug(slug, locale)
@@ -14,18 +14,18 @@ export async function generateMetadata({ params }) {
 	processedRealisation = processedRealisation?.data
 
 	return {
-		alternates: {
-			languages: {
-				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
-				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
-			},
-			canonical: processedRealisation?.attributes?.seo_canonical || '/',
-		},
+		title: processedRealisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
 			processedRealisation?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		title: processedRealisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		alternates: {
+			languages: {
+				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
+				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.attributes?.slug}`,
+			},
+			canonical: processedRealisation?.attributes?.seo_canonical || '/',
+		},
 	}
 }
 
@@ -44,8 +44,8 @@ export async function generateStaticParams() {
 					paths.push({
 						params: {
 							slug: realisation.attributes.slug,
-							image: String(index),
 							locale,
+							image: String(index),
 						}, // Use index as a placeholder for image
 					})
 				}
@@ -57,7 +57,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-	const { locale, image, slug } = await params
+	const { slug, locale, image } = await params
 	let realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)

@@ -4,7 +4,7 @@ import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
-export function Pagination({ currentPage, totalPages }) {
+export function Pagination({ totalPages, currentPage }) {
 	const pathname = usePathname()
 	const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 

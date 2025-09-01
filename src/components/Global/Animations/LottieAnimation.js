@@ -25,7 +25,7 @@ export function LottieAnimation() {
 							autoplay
 							loop
 							src="/assets/background_animation/Animation - 1706890285931.json"
-							style={{ height: '1080px', width: '1920px' }}
+							style={{ width: '1920px', height: '1080px' }}
 						/>
 					</div>
 					<div className={'lottie-2'}>
@@ -33,7 +33,7 @@ export function LottieAnimation() {
 							autoplay
 							loop
 							src="/assets/background_animation/Animation - 1706890285931.json"
-							style={{ height: '1080px', width: '1920px' }}
+							style={{ width: '1920px', height: '1080px' }}
 						/>
 					</div>
 				</div>

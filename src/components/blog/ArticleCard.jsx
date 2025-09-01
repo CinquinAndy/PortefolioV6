@@ -11,7 +11,7 @@ const getArticleUrl = (locale, slug) => {
 	return `/${locale}/blog/${slug}`
 }
 
-export function ArticleCard({ article, locale }) {
+export function ArticleCard({ locale, article }) {
 	// Reference to the card element for scroll animations
 	const ref = useRef(null)
 
@@ -21,9 +21,9 @@ export function ArticleCard({ article, locale }) {
 	return (
 		<Link className="block" href={articleUrl}>
 			<motion.div
-				animate={{ opacity: 1, y: 0 }}
+				animate={{ y: 0, opacity: 1 }}
 				className="group"
-				initial={{ opacity: 0, y: 20 }}
+				initial={{ y: 20, opacity: 0 }}
 				ref={ref}
 				transition={{ duration: 0.3 }}
 			>

@@ -8,27 +8,27 @@ import { z } from 'zod'
 export function ContactForm({ content_website }) {
 	const schema = z
 		.object({
-			content: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_content,
-			}),
-			email: z.string().min(1, {
-				message: content_website?.attributes?.content_contact?.error_email,
-			}),
 			phone: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_phone,
 			}),
 			name: z.string().min(1, {
 				message: content_website?.attributes?.content_contact?.error_name,
 			}),
+			email: z.string().min(1, {
+				message: content_website?.attributes?.content_contact?.error_email,
+			}),
+			content: z.string().min(1, {
+				message: content_website?.attributes?.content_contact?.error_content,
+			}),
 			company: z.string(),
 		})
 		.required()
 
 	const {
-		formState: { errors },
-		handleSubmit,
-		register,
 		reset, // pour réinitialiser le formulaire
+		register,
+		handleSubmit,
+		formState: { errors },
 	} = useForm({
 		resolver: zodResolver(schema),
 	})
@@ -36,15 +36,15 @@ export function ContactForm({ content_website }) {
 	// Créez une nouvelle fonction pour gérer la soumission du formulaire
 	const onSubmit = async data => {
 		const response = await fetch('/api/sendMail', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				company: data.company,
-				content: data.content,
-				email: data.email,
 				phone: data.phone,
 				name: data.name,
+				email: data.email,
+				content: data.content,
+				company: data.company,
 			}),
-			headers: { 'Content-Type': 'application/json' },
-			method: 'POST',
 		})
 
 		if (response.ok) {

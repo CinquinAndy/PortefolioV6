@@ -22,7 +22,7 @@ import Cta from '@/components/Global/Cta'
 export const revalidate = 43200 // 12 hours
 
 export async function generateMetadata({ params }) {
-	const { locale, slug } = await params
+	const { slug, locale } = await params
 	// fetch data
 	let realisation = await getRealisationBySlug(slug, locale)
 	realisation = realisation?.data[0]
@@ -39,18 +39,18 @@ export async function generateMetadata({ params }) {
 	}
 
 	return {
-		alternates: {
-			languages: {
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${slug}`,
-			},
-			canonical: realisation?.attributes?.seo_canonical || '/',
-		},
+		title: realisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
 			realisation?.attributes?.seo_description ||
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
-		title: realisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		alternates: {
+			languages: {
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${slug}`,
+				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
+			},
+			canonical: realisation?.attributes?.seo_canonical || '/',
+		},
 	}
 }
 
@@ -72,7 +72,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-	const { locale, slug } = await params
+	const { slug, locale } = await params
 	// fetch data
 	let content_website = await getContentWebsite(locale)
 	content_website = content_website?.data
