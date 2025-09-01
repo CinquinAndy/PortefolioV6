@@ -57,13 +57,13 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-	const { slug, locale, image: _image } = await params
+	const { slug, locale, image } = await params
 	let realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data
 	const galery = processedRealisation?.attributes?.galery?.data
-	const _image = galery[_image]
+	const imageData = galery[image]
 
 	return (
 		<>
@@ -75,11 +75,11 @@ export default async function Page({ params }) {
 						<BackButtonComponent />
 					</div>
 					<ImageLoadComponent
-						alt={_image?.attributes?.alternativeText ?? 'Project Image'}
+						alt={imageData?.attributes?.alternativeText ?? 'Project Image'}
 						className={'rounded-xl p-2 sm:p-4 md:p-8 lg:p-32'}
-						height={_image?.attributes?.height}
-						src={_image?.attributes?.url}
-						width={_image?.attributes?.width}
+						height={imageData?.attributes?.height}
+						src={imageData?.attributes?.url}
+						width={imageData?.attributes?.width}
 					/>
 				</div>
 			</div>
