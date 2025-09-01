@@ -85,7 +85,7 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	}
 	const parsedContent = parse(value, options)
 	// if replaced content contains '{actualYear}' replace it with the current year
-	let replacedContent = domToReact(parsedContent, options)
+	let replacedContent = domToReact(parsedContent as any, options) as any
 
 	// Ensure replacedContent is an array
 	if (!Array.isArray(replacedContent)) {
@@ -93,10 +93,10 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	}
 
 	// Convert the elements to a new array with updated children prop
-	replacedContent = replacedContent.map(child => {
-		if (React.isValidElement(child) && Array.isArray(child.props.children)) {
+	replacedContent = replacedContent.map((child: any) => {
+		if (React.isValidElement(child) && Array.isArray((child.props as any).children)) {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const updatedChildren = child.props.children.map((textChild, index) => {
+			const updatedChildren = (child.props as any).children.map((textChild: any, index: number) => {
 				if (typeof textChild === 'string') {
 					const currentYear = new Date().getFullYear()
 					return textChild.replace(/{actualYear}/g, currentYear)
