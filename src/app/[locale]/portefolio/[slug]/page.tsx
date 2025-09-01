@@ -1,4 +1,4 @@
-import type { Locale, Realisation, Techno, Technology } from '@/types/strapi'
+import type { Locale, Realisation, Techno } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
@@ -48,6 +48,11 @@ export async function generateMetadata({ params }: { params: Promise<Realisation
 		_slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	}
 
+	const canonicalUrl =
+		locale === 'fr'
+			? `${process.env.NEXT_PUBLIC_URL}/portefolio/${_slug}`
+			: `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`
+
 	return {
 		title: realisation?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
@@ -59,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<Realisation
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${_slug}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
 			},
-			canonical: realisation?.attributes?.seo_canonical ?? '/',
+			canonical: canonicalUrl,
 		},
 	}
 }

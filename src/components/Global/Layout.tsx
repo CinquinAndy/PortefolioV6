@@ -39,7 +39,7 @@ const options = {
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
 							alt={alt}
-							className={`max-h-[300px] object-contain xl:max-h-[650px] sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px]`}
+							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 							height={1000}
 							quality={85}
 							src={src}
