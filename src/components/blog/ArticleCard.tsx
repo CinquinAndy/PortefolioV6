@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
 import { Badge } from '@/components/ui/badge'
 
 import type { Article, Locale } from '@/types/strapi'
@@ -20,7 +20,7 @@ const getArticleUrl = (locale: Locale, slug?: string): string => {
 
 export function ArticleCard({ locale, article }: ArticleCardProps) {
 	// Reference to the card element for scroll animations
-	const ref = useRef(null)
+	const ref = useRef<HTMLDivElement>(null)
 
 	// Generate the article URL
 	const articleUrl = getArticleUrl(locale, article.attributes.slug)
@@ -34,7 +34,7 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 				ref={ref}
 				transition={{ duration: 0.3 }}
 			>
-				<Card className="relative overflow-hidden border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10">
+				<div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm rounded-xl transition-all hover:bg-white/10">
 					{/* Animated background image container */}
 					<motion.div className="absolute inset-0 -z-10">
 						<div
@@ -48,7 +48,7 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 					</motion.div>
 
 					{/* Card Header with a gradient overlay behind the text */}
-					<CardHeader className="relative z-10 pt-48">
+					<div className="relative z-10 pt-48 flex flex-col space-y-1.5 p-6">
 						{/* Gradient overlay with blur for improved text readability */}
 						<div className="relative">
 							<div className="flex items-center justify-between text-sm">
@@ -57,15 +57,15 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 									{article.attributes.type}
 								</Badge>
 							</div>
-							<CardTitle className="mt-4 text-xl font-bold text-white transition-colors group-hover:text-purple-300">
+							<div className="mt-4 text-xl font-bold text-white transition-colors group-hover:text-purple-300 font-semibold leading-none tracking-tight">
 								{article.attributes.title}
-							</CardTitle>
-							<CardDescription className="text-white/80">{article.attributes.subtitle}</CardDescription>
+							</div>
+							<div className="text-white/80 text-sm text-muted-foreground">{article.attributes.subtitle}</div>
 						</div>
-					</CardHeader>
+					</div>
 
 					{/* Card Content displaying only the first 5 tags */}
-					<CardContent className="relative z-10">
+					<div className="relative z-10 p-6 pt-0">
 						<div className="flex flex-wrap gap-2">
 							{article.attributes.tags?.slice(0, 5).map(tag => (
 								<Badge className="border-purple-500/30 bg-purple-500/20 text-white" key={tag.id} variant="secondary">
@@ -73,8 +73,8 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 								</Badge>
 							))}
 						</div>
-					</CardContent>
-				</Card>
+					</div>
+				</div>
 			</motion.div>
 		</Link>
 	)
