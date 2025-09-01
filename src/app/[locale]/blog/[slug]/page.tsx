@@ -249,7 +249,7 @@ export default async function Page({ params }: ArticlePageProps) {
 										<br />
 										<div className={'mt-8 flex flex-col gap-4'}>
 											{locale === 'fr' ? (
-												<div className="rounded-lg border border-gray-700 bg-linear-to-r from-gray-900 to-gray-800 p-6">
+												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
 													<p className="mb-3">
 														🚀 Merci d&apos;avoir lu jusqu&apos;ici !
 														<br />
@@ -264,7 +264,7 @@ export default async function Page({ params }: ArticlePageProps) {
 													</p>
 												</div>
 											) : (
-												<div className="rounded-lg border border-gray-700 bg-linear-to-r from-gray-900 to-gray-800 p-6">
+												<div className="rounded-lg border border-gray-700 bg-gradient-to-r from-gray-900 to-gray-800 p-6">
 													<p className="mb-3">
 														🚀 Thanks for reading!
 														<br />
