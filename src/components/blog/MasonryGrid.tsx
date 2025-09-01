@@ -2,9 +2,9 @@
 
 import { useLayoutEffect, useState, ReactNode } from 'react'
 
-import { AnimatePresence, motion } from 'framer-motion'
-
 import type { Article, Locale } from '@/types/strapi'
+
+import { AnimatePresence, motion } from 'framer-motion'
 
 const BREAKPOINTS = {
 	xl: 1536,

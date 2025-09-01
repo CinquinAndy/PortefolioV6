@@ -3,9 +3,9 @@ import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-import { Badge } from '@/components/ui/badge'
-
 import type { Article, Locale } from '@/types/strapi'
+
+import { Badge } from '@/components/ui/badge'
 
 interface ArticleCardProps {
 	locale: Locale
@@ -13,7 +13,7 @@ interface ArticleCardProps {
 }
 
 const getArticleUrl = (locale: Locale, slug?: string): string => {
-	if (!slug) return `/${locale}/blog`
+	if (!slug || slug.length === 0) return `/${locale}/blog`
 	return `/${locale}/blog/${slug}`
 }
 
@@ -40,7 +40,7 @@ export function ArticleCard({ locale, article }: ArticleCardProps) {
 							// The image is set to cover and anchored at the top (bg-top)
 							className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
 							style={{
-								backgroundImage: `url(${article.attributes.image_presentation?.data?.attributes?.url || '/placeholder.svg'})`,
+								backgroundImage: `url(${article.attributes.image_presentation?.data?.attributes?.url ?? '/placeholder.svg'})`,
 							}}
 						/>
 						<div className="absolute inset-0 left-0 top-0 h-full w-full bg-gradient-to-b from-transparent via-black/80 to-black/95" />

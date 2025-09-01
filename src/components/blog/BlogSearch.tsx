@@ -1,8 +1,8 @@
 import { Command } from 'lucide-react'
 
-import { motion, Variants } from 'framer-motion'
-
 import type { Locale } from '@/types/strapi'
+
+import { motion, Variants } from 'framer-motion'
 
 interface BlogSearchProps {
 	value: string

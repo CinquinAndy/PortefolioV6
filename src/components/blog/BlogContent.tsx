@@ -4,11 +4,11 @@ import { useMemo, useState } from 'react'
 
 import Fuse from 'fuse.js'
 
+import type { Article, Locale } from '@/types/strapi'
+
 import { MasonryGrid } from './MasonryGrid'
 import { ArticleCard } from './ArticleCard'
 import { BlogSearch } from './BlogSearch'
-
-import type { Article, Locale } from '@/types/strapi'
 
 interface BlogContentProps {
 	locale: Locale
@@ -30,7 +30,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 					'attributes.description',
 					{
 						name: 'attributes.tags.name',
-						getFn: article => article.attributes.tags?.map(tag => tag.name).join(' ') || '',
+						getFn: article => article.attributes.tags?.map(tag => tag.name).join(' ') ?? '',
 					},
 				],
 			}),
