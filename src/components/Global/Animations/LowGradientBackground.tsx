@@ -1,4 +1,6 @@
-export function LowGradientBackground() {
+import React from 'react'
+
+export function LowGradientBackground(): React.JSX.Element {
 	return (
 		<div className={`gradient-bg`}>
 			<div className="gradients-container">

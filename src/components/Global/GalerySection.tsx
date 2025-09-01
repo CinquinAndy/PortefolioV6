@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 

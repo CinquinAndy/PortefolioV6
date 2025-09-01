@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
@@ -9,7 +10,7 @@ const LottiePlayer = dynamic(
 	{ ssr: false } // This is critical - prevents any server-side rendering
 )
 
-export function LottieAnimation(): JSX.Element {
+export function LottieAnimation(): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {

@@ -1,4 +1,5 @@
 import LoaderAnimation from '@/components/Global/Loader/LoaderAnimation'
+import React from 'react'
 
 function Loader() {
 	return (

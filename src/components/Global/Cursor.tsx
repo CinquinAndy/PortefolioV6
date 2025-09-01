@@ -1,7 +1,8 @@
 'use client'
+import React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-const Cursor = (): JSX.Element => {
+const Cursor = (): React.JSX.Element => {
 	const [isDesktop, setIsDesktop] = useState(false)
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [cursorVisible, setCursorVisible] = useState(true)

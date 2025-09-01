@@ -1,9 +1,10 @@
 'use client'
+import React from 'react'
 import { BackwardIcon } from '@heroicons/react/20/solid'
 
 import { useRouter } from 'next/navigation'
 
-export function BackButtonComponent(): JSX.Element {
+export function BackButtonComponent(): React.JSX.Element {
 	const router = useRouter()
 
 	return (

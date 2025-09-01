@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'

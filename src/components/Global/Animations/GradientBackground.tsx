@@ -1,6 +1,7 @@
 'use client'
+import React from 'react'
 
-export function GradientBackground(): JSX.Element {
+export function GradientBackground(): React.JSX.Element {
 	return (
 		<div className={`gradient-bg`}>
 			{/*<svg xmlns="http://www.w3.org/2000/svg" className={'gradient_svg'}>*/}

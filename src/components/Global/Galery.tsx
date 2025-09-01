@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment } from 'react'

@@ -1,7 +1,12 @@
 'use client'
+import React from 'react'
 import { HoloCard } from 'special-card'
 
-export function HoloComponent({ lang }) {
+interface HoloComponentProps {
+	lang?: string
+}
+
+export function HoloComponent({ lang }: HoloComponentProps): React.JSX.Element {
 	return lang === 'fr' ? (
 		<>
 			<div className="relative hidden w-full justify-center overflow-hidden rounded-lg p-4 md:p-8 lg:flex">
