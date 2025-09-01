@@ -230,31 +230,50 @@ export interface Realisation {
 	attributes: {
 		title: string
 		content: string
-		slug: string
 		seo_title?: string
 		seo_description?: string
-		seo_canonical?: string
 		excerpt?: string
-		subtitle?: string
-		type?: string
-		rank?: number
-		featured?: boolean
-		image?: {
-			data: StrapiMedia
-		}
 		image_presentation?: {
 			data: StrapiMedia
 		}
 		galery?: {
 			data: StrapiMedia[]
 		}
-		technologies?: TechnologyComponent[]
-		techno?: TechnologyComponent[]
-		links?: LinkComponent[]
-		tags?: TagComponent[]
+		slug: string
+		technologies?: {
+			data: Array<{
+				id: number
+				attributes: {
+					label: string
+					image?: {
+						data: StrapiMedia
+					}
+					rank?: number
+					createdAt: string
+					updatedAt: string
+					createdBy?: StrapiRelation
+					updatedBy?: StrapiRelation
+				}
+			}>
+		}
+		links?: Array<{
+			id: number
+			label: string
+			url: string
+		}>
+		subtitle?: string
+		type?: string
+		rank?: number
+		techno?: Array<{
+			id: number
+			name: string
+			icon?: {
+				data: StrapiMedia
+			}
+		}>
 		createdAt: string
 		updatedAt: string
-		publishedAt: string
+		publishedAt?: string
 		createdBy?: StrapiRelation
 		updatedBy?: StrapiRelation
 		localizations?: {
@@ -277,9 +296,11 @@ export interface ButtonContent {
 }
 
 export interface SocialsComponent {
-	github?: string
 	linkedin?: string
-	twitter?: string
+	facebook?: string
+	instagram?: string
+	github?: string
+	malt?: string
 	email?: string
 }
 
@@ -287,33 +308,30 @@ export interface ContactComponent {
 	email?: string
 	phone?: string
 	address?: string
-	name?: string
+	langage?: string
 }
 
 export interface ContentHomeComponent {
-	seo?: SeoContent
+	title_home?: string
 	title_service?: string
-	title_principal?: string
-	title_secondary?: string
-	description?: string
-	btn_cta?: ButtonContent
+	title_blog?: string
 	title_realisation?: string
 	link?: Array<{
 		id: number
 		label: string
 		url: string
 	}>
-	vertical_nav?: Array<{
-		label?: string
-		href?: string
-	}>
+	seo?: SeoContent
+	title_vertical_left_1?: string
+	title_vertical_left_2?: string
+	title_vertical_left_3?: string
+	title_vertical_left_4?: string
+	title_vertical_left_5?: string
+	title_vertical_left_6?: string
 }
 
 export interface ContentServiceComponent {
 	seo?: SeoContent
-	title?: string
-	description?: string
-	content?: string
 }
 
 export interface ContentRealisationsComponent {
@@ -326,65 +344,54 @@ export interface ContentRealisationsComponent {
 }
 
 export interface ContentBlogComponent {
-	title_content?: string
 	seo?: SeoContent
 }
 
 export interface ContentContactComponent {
-	seo?: SeoContent
 	title?: string
-	form_labels?: {
-		name?: string
-		email?: string
-		subject?: string
-		message?: string
-		submit?: string
-	}
-	error_messages?: {
-		required?: string
-		invalid_email?: string
-		send_error?: string
-		success?: string
-	}
+	title_name?: string
+	title_email?: string
+	title_phone?: string
+	title_company?: string
+	title_content?: string
+	error_name?: string
+	error_email?: string
+	error_phone?: string
+	error_company?: string
+	error_content?: string
+	informative_message?: string
+	btn_send?: string
+	seo?: SeoContent
+	toast_error?: string
+	toast_success?: string
 }
 
 export interface ContentAboutComponent {
 	seo?: SeoContent
-	content?: string
 }
 
 export interface ContentCguComponent {
 	seo?: SeoContent
-	content?: string
 }
 
 export interface ContentNotFoundComponent {
 	seo?: SeoContent
-	title?: string
-	description?: string
-	btn_home?: ButtonContent
 }
 
 export interface ContentFooterComponent {
-	content?: string
-	content_signature?: string
 	image?: {
 		data: StrapiMedia
 	}
-	sitemap?: Array<{
-		label?: string
-		href?: string
-	}>
-	legal_links?: Array<{
-		label?: string
-		href?: string
-	}>
+	content?: string
+	title_sitemap?: string
+	title_legals?: string
+	content_signature?: string
 }
 
 export interface CtaComponent {
-	content?: string
 	title?: string
-	btn_cta?: ButtonContent
+	content?: string
+	link?: ButtonContent
 }
 
 export interface ContentWebsite {
@@ -396,8 +403,7 @@ export interface ContentWebsite {
 		// Navigation menu
 		menu?: Array<{
 			id: number
-			label: string
-			href: string
+			Link: LinkComponent
 		}>
 
 		// Contact information
@@ -418,8 +424,8 @@ export interface ContentWebsite {
 		// Site navigation structure
 		Sitemap?: Array<{
 			id: number
-			label: string
-			href: string
+			Link: LinkComponent
+			categorie?: string
 		}>
 
 		// Call-to-action component

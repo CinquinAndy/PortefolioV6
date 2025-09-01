@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import React from 'react'
 
+import { ContentWebsite, LinkComponent } from '@/types/strapi'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,7 +18,7 @@ interface NavProps {
 	h1?: string
 	frRedirect?: string
 	enRedirect?: string
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 function Nav({
@@ -33,16 +34,16 @@ function Nav({
 	const pathname = usePathname()
 
 	// console.log(content_website)
-	content_website = content_website.attributes || content_website
-	const menu = content_website.menu
-	const socials = content_website.socials
+	content_website = content_website?.attributes ?? content_website
+	const menu = content_website?.menu ?? []
+	const socials = content_website?.socials ?? []
 
 	useEffect(() => {
 		setLinkToSwitchLanguage(
 			// check the location, if it start by https://andy-cinquin.fr, redirect to .com, else redirect to .fr
 			window.location.origin.includes('.fr')
-				? enRedirect || `https://andy-cinquin.com${pathname}`
-				: frRedirect || `https://andy-cinquin.fr${pathname}`
+				? (enRedirect ?? `https://andy-cinquin.com${pathname}`)
+				: (frRedirect ?? `https://andy-cinquin.fr${pathname}`)
 		)
 	}, [enRedirect, frRedirect, pathname])
 
@@ -148,7 +149,7 @@ function Nav({
 				id="nav-block"
 			>
 				<div className="md:gap-18 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 p-4 pt-28 md:w-3/5 md:border-r-40 md:p-20 md:pt-36">
-					{menu?.map((item: any, index: number) => {
+					{menu?.map((item: LinkComponent, index: number) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link className="relative text-indigo-400" href={item?.Link?.url} rel="noopener">
 								<svg
