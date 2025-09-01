@@ -750,7 +750,7 @@
 
 	/* Slide in */
 	.underline_custom {
-		height: 3rem;
+		overflow: auto;
 	}
 
 	/*** icon animation ***/
