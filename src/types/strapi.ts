@@ -256,6 +256,11 @@ export interface ContentRealisations {
 	title_links?: string
 }
 
+export interface ContentBlog {
+	title_content?: string
+	seo?: SeoContent
+}
+
 export interface ContentWebsite {
 	id: number
 	attributes: {
@@ -268,6 +273,7 @@ export interface ContentWebsite {
 		}
 		content_about?: ContentAbout
 		content_realisations?: ContentRealisations
+		content_blog?: ContentBlog
 		createdAt: string
 		updatedAt: string
 		publishedAt: string
@@ -347,12 +353,7 @@ export interface NotFound {
 export type Locale = 'fr' | 'en'
 
 // Utility types for handling API responses
-export interface NotFoundResponse {
-	notFound: true
-	message?: string
-}
-
-export type ApiResponse<T> = StrapiResponse<T> | NotFoundResponse
+export type ApiResponse<T> = StrapiResponse<T> | import('@/types/api').NotFoundResponse
 
 // Type guard to check if response is a StrapiResponse
 export function isStrapiResponse<T>(response: ApiResponse<T>): response is StrapiResponse<T> {
@@ -360,7 +361,7 @@ export function isStrapiResponse<T>(response: ApiResponse<T>): response is Strap
 }
 
 // Type guard to check if response is a NotFoundResponse
-export function isNotFoundResponse<T>(response: ApiResponse<T>): response is NotFoundResponse {
+export function isNotFoundResponse<T>(response: ApiResponse<T>): response is import('@/types/api').NotFoundResponse {
 	return 'notFound' in response
 }
 

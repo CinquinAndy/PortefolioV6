@@ -1,16 +1,4 @@
 import type {
-	Article,
-	Realisation,
-	Service,
-	About,
-	Cgu,
-	NotFound,
-	ContentWebsite,
-	Locale,
-	StrapiResponse,
-} from '@/types/strapi'
-import type { NotFoundResponse } from '@/types/api'
-import type {
 	CreateArticleRequest,
 	UpdateArticleRequest,
 	CreateRealisationRequest,
@@ -25,6 +13,17 @@ import type {
 	BulkOperationResponse,
 	BulkDeleteRequest,
 } from '@/types/strapi-requests'
+import type {
+	Article,
+	Realisation,
+	Service,
+	About,
+	Cgu,
+	NotFound,
+	ContentWebsite,
+	StrapiResponse,
+} from '@/types/strapi'
+import type { NotFoundResponse } from '@/types/api'
 
 /**
  * Generic CRUD operations for Strapi entities
@@ -38,30 +37,33 @@ export async function fetchWithParams<T = unknown>(
 	const queryParams = new URLSearchParams()
 
 	if (params) {
-		if (params.populate) {
+		if (params.populate != null) {
 			queryParams.append('populate', Array.isArray(params.populate) ? params.populate.join(',') : params.populate)
 		}
-		if (params.sort) {
+		if (params.sort != null) {
 			queryParams.append('sort', Array.isArray(params.sort) ? params.sort.join(',') : params.sort)
 		}
-		if (params.locale) {
+		if (params.locale != null) {
 			queryParams.append('locale', params.locale)
 		}
-		if (params.publicationState) {
+		if (params.publicationState != null) {
 			queryParams.append('publicationState', params.publicationState)
 		}
-		if (params.pagination) {
+		if (params.pagination != null) {
 			Object.entries(params.pagination).forEach(([key, value]) => {
 				queryParams.append(`pagination[${key}]`, value.toString())
 			})
 		}
-		if (params.filters) {
+		if (params.filters != null) {
 			Object.entries(params.filters).forEach(([key, value]) => {
-				if (typeof value === 'object') {
-					Object.entries(value).forEach(([operator, operatorValue]) => {
+				if (value != null && typeof value === 'object' && !Array.isArray(value)) {
+					Object.entries(value as Record<string, unknown>).forEach(([operator, operatorValue]) => {
 						queryParams.append(`filters[${key}][${operator}]`, String(operatorValue))
 					})
-				} else {
+				} else if (
+					value != null &&
+					(typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean')
+				) {
 					queryParams.append(`filters[${key}]`, String(value))
 				}
 			})
@@ -150,7 +152,7 @@ export async function updateEntity<TRequest, TResponse>(
 }
 
 // Generic delete operation
-export async function deleteEntity(endpoint: string, id: number): Promise<StrapiResponse<{}> | NotFoundResponse> {
+export async function deleteEntity(endpoint: string, id: number): Promise<StrapiResponse<null> | NotFoundResponse> {
 	try {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}/${id}`, {
 			method: 'DELETE',
@@ -166,7 +168,7 @@ export async function deleteEntity(endpoint: string, id: number): Promise<Strapi
 			return { notFound: true }
 		}
 
-		return (await res.json()) as StrapiResponse<{}>
+		return (await res.json()) as StrapiResponse<null>
 	} catch (error) {
 		console.error('Delete API Error:', error)
 		return { notFound: true }
@@ -203,29 +205,29 @@ export async function bulkDeleteEntities(
 
 // Article CRUD operations
 export const ArticleCRUD = {
-	create: (data: CreateArticleRequest) => createEntity<CreateArticleRequest, Article>('api/articles', data),
 	update: (id: number, data: UpdateArticleRequest) =>
 		updateEntity<UpdateArticleRequest, Article>('api/articles', id, data),
 	delete: (id: number) => deleteEntity('api/articles', id),
+	create: (data: CreateArticleRequest) => createEntity<CreateArticleRequest, Article>('api/articles', data),
 	bulkDelete: (data: BulkDeleteRequest) => bulkDeleteEntities('api/articles', data),
 }
 
 // Realisation CRUD operations
 export const RealisationCRUD = {
-	create: (data: CreateRealisationRequest) =>
-		createEntity<CreateRealisationRequest, Realisation>('api/realisations', data),
 	update: (id: number, data: UpdateRealisationRequest) =>
 		updateEntity<UpdateRealisationRequest, Realisation>('api/realisations', id, data),
 	delete: (id: number) => deleteEntity('api/realisations', id),
+	create: (data: CreateRealisationRequest) =>
+		createEntity<CreateRealisationRequest, Realisation>('api/realisations', data),
 	bulkDelete: (data: BulkDeleteRequest) => bulkDeleteEntities('api/realisations', data),
 }
 
 // Service CRUD operations
 export const ServiceCRUD = {
-	create: (data: CreateServiceRequest) => createEntity<CreateServiceRequest, Service>('api/services', data),
 	update: (id: number, data: UpdateServiceRequest) =>
 		updateEntity<UpdateServiceRequest, Service>('api/services', id, data),
 	delete: (id: number) => deleteEntity('api/services', id),
+	create: (data: CreateServiceRequest) => createEntity<CreateServiceRequest, Service>('api/services', data),
 	bulkDelete: (data: BulkDeleteRequest) => bulkDeleteEntities('api/services', data),
 }
 
@@ -237,8 +239,7 @@ export const ContentWebsiteCRUD = {
 
 // About operations
 export const AboutCRUD = {
-	update: (id: number, data: UpdateAboutRequest) =>
-		updateEntity<UpdateAboutRequest, About>('api/about', id, data),
+	update: (id: number, data: UpdateAboutRequest) => updateEntity<UpdateAboutRequest, About>('api/about', id, data),
 }
 
 // CGU operations

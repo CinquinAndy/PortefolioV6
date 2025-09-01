@@ -123,7 +123,7 @@ export interface UpdateNotFoundRequest {
 // Common Query Parameters
 export interface StrapiQueryParams {
 	populate?: string | string[]
-	filters?: Record<string, any>
+	filters?: Record<string, unknown>
 	sort?: string | string[]
 	pagination?: {
 		page?: number

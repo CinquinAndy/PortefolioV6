@@ -69,7 +69,7 @@ export default async function Page({ params }: AboutPageProps) {
 						<div className="">
 							<article>
 								<div className={'prose prose-invert my-8'}>
-									<Layout value={about?.attributes?.content.toString()} />
+									<Layout value={about?.attributes?.content?.toString() ?? ''} />
 								</div>
 							</article>
 						</div>

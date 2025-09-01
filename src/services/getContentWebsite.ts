@@ -131,9 +131,7 @@ export async function getCgu(locale: Locale): Promise<StrapiResponse<Cgu> | NotF
 /**
  * Get content website
  */
-export async function getContentWebsite(
-	locale: Locale
-): Promise<StrapiResponse<ContentWebsite> | NotFoundResponse> {
+export async function getContentWebsite(locale: Locale): Promise<StrapiResponse<ContentWebsite> | NotFoundResponse> {
 	try {
 		const dataContentWebsite = await fetchAPI<StrapiResponse<ContentWebsite>>(
 			`api/content-website?populate=deep&locale=${locale}`
@@ -318,7 +316,9 @@ export async function getFeaturedArticles(locale: Locale): Promise<StrapiRespons
 /**
  * Get featured realisations
  */
-export async function getFeaturedRealisations(locale: Locale): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
+export async function getFeaturedRealisations(
+	locale: Locale
+): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
 	return await fetchAPI<StrapiResponse<Realisation[]>>(
 		`api/realisations?populate=deep,2&sort=rank&filters[featured][$eq]=true&locale=${locale}`
 	)
@@ -367,7 +367,7 @@ export async function searchContent(
 		),
 	])
 
-	return { articles, realisations }
+	return { realisations, articles }
 }
 
 /**
