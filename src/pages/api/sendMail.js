@@ -23,11 +23,11 @@ export default function handler(req, res) {
 				subject: 'Nouveau message de contact',
 				from: 'Andy Cinquin Website <contact@andy-cinquin.fr>',
 			})
-			.then(msg => {
+			.then(() => {
 				res.status(200).json({ success: true })
 			})
-			.catch(err => {
-				toast('Une erreur est survenue, veuillez réessayer plus tard', {
+			.catch(() => {
+				toast('An error occurred, please try again later', {
 					type: 'error',
 					toastId: 'toast-alert',
 					icon: '⛔',

@@ -32,7 +32,7 @@ export async function fetchAPI<T = unknown>(
 				Accept: 'application/json',
 				...options.headers,
 			},
-			...(options.body && { body: options.body }),
+			...(options.body != null ? { body: options.body } : {}),
 		})
 
 		if (!res.ok) {
@@ -40,7 +40,7 @@ export async function fetchAPI<T = unknown>(
 			return { notFound: true }
 		}
 
-		return await res.json()
+		return (await res.json()) as T
 	} catch (error) {
 		console.error('Fetch API Error:', error)
 		return { notFound: true }
@@ -238,7 +238,7 @@ export async function getServicesGrid(locale: Locale): Promise<StrapiResponse<Se
 export async function processArticleData(
 	articleData: Article
 ): Promise<Article & { data: { attributes: Article['attributes'] & { content: string } } }> {
-	if (!articleData) {
+	if (articleData.attributes == null) {
 		redirect('/404')
 	}
 
@@ -269,7 +269,7 @@ export async function processMarkdown(markdownContent: string): Promise<string> 
 export async function processRealisationData(
 	realisationData: StrapiResponse<Realisation[]>
 ): Promise<{ data: { attributes: Realisation['attributes'] & { content: string } } }> {
-	if (!realisationData?.data?.[0]) {
+	if (realisationData.data?.[0]?.attributes == null) {
 		redirect('/404')
 	}
 

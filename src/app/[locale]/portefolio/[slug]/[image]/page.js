@@ -57,14 +57,13 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { slug, locale, image } = await params
+	const { slug, locale, image: _image } = await params
 	let realisation = await getRealisationBySlug(slug, locale)
 
 	let processedRealisation = await processRealisationData(realisation)
 	processedRealisation = processedRealisation?.data
 	const galery = processedRealisation?.attributes?.galery?.data
-	const _image = galery[image]
+	const _image = galery[_image]
 
 	return (
 		<>

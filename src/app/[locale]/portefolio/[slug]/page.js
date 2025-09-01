@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
 	realisation = realisation?.data[0]
 
 	// conditional slug, make en and fr slugs available
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 	let _slug = ''
 	let slugAlternate = ''
 	if (locale === 'fr') {
