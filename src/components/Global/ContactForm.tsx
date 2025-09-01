@@ -36,7 +36,6 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 
 	const { reset, register, handleSubmit, formState } = form
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const errors = formState.errors
 
 	const onSubmit = async (data: { phone: string; name: string; email: string; content: string; company: string }) => {

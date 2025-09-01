@@ -38,7 +38,7 @@ interface MailgunClient {
 }
 
 // Initialize Mailgun client
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
 const mailgun = new Mailgun(formData) as {
 	client(config: { username: string; key: string }): MailgunClient
 }
