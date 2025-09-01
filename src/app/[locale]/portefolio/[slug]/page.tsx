@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
 
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 import { getResponseData } from '@/types/strapi'
 import Link from 'next/link'
 
@@ -39,31 +40,22 @@ export async function generateMetadata({ params }: { params: Promise<Realisation
 	// conditional slug, make en and fr slugs available
 
 	let _slug = ''
-	let slugAlternate = ''
 	if (locale === 'fr') {
 		_slug = realisation?.attributes?.slug ?? ''
-		slugAlternate = realisation?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	} else {
-		slugAlternate = realisation?.attributes?.slug ?? ''
 		_slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	}
 
-	const canonicalUrl =
-		locale === 'fr'
-			? `${process.env.NEXT_PUBLIC_URL}/portefolio/${_slug}`
-			: `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`
+	const canonicalUrl = getCanonicalUrl(locale, `/portefolio/${_slug}`)
 
 	return {
 		title: realisation?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		metadataBase: getMetadataBase(locale),
 		description:
 			realisation?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${_slug}`,
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
-			},
+			languages: getLanguageAlternates(`/portefolio/${_slug}`),
 			canonical: canonicalUrl,
 		},
 	}
@@ -128,7 +120,7 @@ export default async function Page({ params }: RealisationPageProps) {
 							</article>
 						</div>
 
-						<div className={'flex w-full flex-col gap-6 xl:gap-8 md:pr-20 2xl:mx-auto 2xl:max-w-2xl'}>
+						<div className={'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'}>
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
@@ -137,7 +129,7 @@ export default async function Page({ params }: RealisationPageProps) {
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology ?? ''),
 								}}
 							/>
-							<div className="grid w-full grid-cols-3 gap-2 xl:gap-6 md:grid-cols-4 md:gap-4 2xl:gap-8">
+							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
 								{processedRealisation?.data?.attributes?.techno?.map((technology: Techno) => {
 									return <TechnologyDisplay key={technology.id} technology={technology} />

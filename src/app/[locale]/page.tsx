@@ -1,8 +1,8 @@
 import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
-import { getResponseData } from '@/types/strapi'
 import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
+import { getResponseData } from '@/types/strapi'
 
 import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'

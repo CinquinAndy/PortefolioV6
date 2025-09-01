@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 
 import { LinkIcon } from '@heroicons/react/20/solid'
 
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 import { getResponseData } from '@/types/strapi'
 import Script from 'next/script'
 import Link from 'next/link'
@@ -33,24 +34,19 @@ interface SlugsResult {
 
 export async function generateMetadata({ params }: { params: Promise<ArticleSlugParams> }): Promise<Metadata> {
 	const resolvedParams = await params
-	const { slugAlternate, slug, article } = await getSlugs(params)
+	const { slug, article } = await getSlugs(params)
 	const { locale } = resolvedParams
 
-	// Construire le canonical en fonction de la locale
-	const canonicalUrl =
-		locale === 'fr' ? `${process.env.NEXT_PUBLIC_URL}/blog/${slug}` : `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slug}`
+	const canonicalUrl = getCanonicalUrl(locale, `/blog/${slug}`)
 
 	return {
 		title: article?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		metadataBase: getMetadataBase(locale),
 		description:
 			article?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`,
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`,
-			},
+			languages: getLanguageAlternates(`/blog/${slug}`),
 			canonical: canonicalUrl,
 		},
 	}
@@ -150,7 +146,7 @@ export default async function Page({ params }: ArticlePageProps) {
 
 						<div
 							className={
-								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 xl:max-w-7xl md:col-span-2 md:p-20'
+								'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20 xl:max-w-7xl'
 							}
 						>
 							<div className={'flex w-full items-center justify-evenly gap-4 md:gap-8'}>

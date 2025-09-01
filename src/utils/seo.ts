@@ -5,7 +5,7 @@ import type { Locale } from '@/types/strapi'
  * @param locale - The locale ('fr' or 'en')
  * @returns The base URL for the locale
  */
-export function getBaseUrl(locale: Locale | string): string {
+export function getBaseUrl(locale: Locale): string {
 	if (locale === 'fr') {
 		return process.env.NEXT_PUBLIC_URL ?? 'https://andy-cinquin.fr'
 	}
@@ -17,7 +17,7 @@ export function getBaseUrl(locale: Locale | string): string {
  * @param locale - The locale ('fr' or 'en')
  * @returns URL object for metadataBase
  */
-export function getMetadataBase(locale: Locale | string): URL {
+export function getMetadataBase(locale: Locale): URL {
 	return new URL(getBaseUrl(locale))
 }
 
@@ -27,7 +27,7 @@ export function getMetadataBase(locale: Locale | string): URL {
  * @param path - The path (e.g., '/blog/article-slug')
  * @returns The full canonical URL
  */
-export function getCanonicalUrl(locale: Locale | string, path: string = ''): string {
+export function getCanonicalUrl(locale: Locale, path: string = ''): string {
 	const baseUrl = getBaseUrl(locale)
 	return path ? `${baseUrl}${path}` : baseUrl
 }

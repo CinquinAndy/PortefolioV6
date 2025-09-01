@@ -1,6 +1,7 @@
 import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 import { getResponseData } from '@/types/strapi'
 
 import { HoloComponent } from '@/components/Global/Animations/HoloComponent'
@@ -24,16 +25,13 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	return {
 		title:
 			content_website?.attributes?.content_about?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		metadataBase: getMetadataBase(locale),
 		description:
 			content_website?.attributes?.content_about?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/about`,
-				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/about`,
-			},
-			canonical: content_website?.attributes?.content_about?.seo?.canonical ?? '/',
+			languages: getLanguageAlternates('/about'),
+			canonical: content_website?.attributes?.content_about?.seo?.canonical ?? getCanonicalUrl(locale, '/about'),
 		},
 	}
 }

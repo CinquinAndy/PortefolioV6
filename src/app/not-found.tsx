@@ -1,3 +1,4 @@
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { getResponseData } from '@/types/strapi'
 import { Metadata } from 'next'
@@ -7,7 +8,6 @@ import Link from 'next/link'
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 
 const noto_serif_display = Noto_Serif_Display({
 	variable: '--font-noto-serif-display',
@@ -67,7 +67,7 @@ export default async function NotFound() {
 				{/*<Cursor />*/}
 
 				<div className="h-dvh">
-					<div className="flex h-full items-center justify-center px-4 xl:px-24 sm:px-6 lg:px-20">
+					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 						<div className="">
 							<Link href={'/'}>
 								<Image

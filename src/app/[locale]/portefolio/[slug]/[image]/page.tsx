@@ -1,6 +1,7 @@
 import type { Locale, Realisation, StrapiResponse } from '@/types/strapi'
 import type { Metadata } from 'next'
 
+import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 import { getResponseData } from '@/types/strapi'
 
 import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
@@ -27,16 +28,13 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 
 	return {
 		title: processedRealisation?.data?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+		metadataBase: getMetadataBase(locale),
 		description:
 			processedRealisation?.data?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
-			languages: {
-				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL : process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${processedRealisation?.data?.attributes?.slug}`,
-				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/portefolio/${processedRealisation?.data?.attributes?.slug}`,
-			},
-			canonical: '/',
+			languages: getLanguageAlternates(`/portefolio/${processedRealisation?.data?.attributes?.slug}`),
+			canonical: getCanonicalUrl(locale, `/portefolio/${processedRealisation?.data?.attributes?.slug}`),
 		},
 	}
 }
