@@ -11,8 +11,8 @@ const Cursor = (): React.JSX.Element => {
 	const [velocity, setVelocity] = useState({ y: 0, x: 0 })
 	const [outlinePosition, setOutlinePosition] = useState({ y: 0, x: 0 })
 
-	const requestRef = useRef()
-	const previousTimeRef = useRef()
+	const requestRef = useRef<number | null>(null)
+	const previousTimeRef = useRef<number | null>(null)
 	const acceleration = 0.1 // Control the acceleration rate
 	const damping = 0.815 // Adjust the damping for a smoother slowdown
 
