@@ -47,6 +47,7 @@ cypress.env.json
 
 yarn.lock
 bun.lockb
+tsconfig.tsbuildinfo
 
 # for export
 # .bruno

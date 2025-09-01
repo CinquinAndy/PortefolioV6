@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 		},
 	}
 
-	if (!content_website || !('attributes' in content_website)) {
+	if (!content_website || typeof content_website !== 'object' || !('attributes' in content_website)) {
 		return defaultMetadata
 	}
 
@@ -60,8 +60,9 @@ export default async function NotFound() {
 	const notfound_response = await getNotFound('en' as const)
 	const notfound = getResponseData(notfound_response)
 
-	const hasContentWebsiteAttributes = content_website && 'attributes' in content_website
-	const hasNotfoundAttributes = notfound && 'attributes' in notfound
+	const hasContentWebsiteAttributes =
+		content_website && typeof content_website === 'object' && 'attributes' in content_website
+	const hasNotfoundAttributes = notfound && typeof notfound === 'object' && 'attributes' in notfound
 
 	const defaultTitle = '404 Not Found'
 	const defaultContent = ''
@@ -89,18 +90,29 @@ export default async function NotFound() {
 							</Link>
 							<div className={'mt-8'}>
 								<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
-									{hasContentWebsiteAttributes ? content_website.attributes?.content_notfound?.seo?.h1 ?? defaultTitle : defaultTitle}
+									{hasContentWebsiteAttributes
+										? (content_website.attributes?.content_notfound?.seo?.h1 ?? defaultTitle)
+										: defaultTitle}
 								</h1>
 								<div className="mx-auto max-w-3xl">
 									<article>
 										<div className={'prose prose-invert my-8'}>
-											<Layout value={notfound?.attributes?.content?.toString() ?? defaultContent} />
+											<Layout
+												value={
+													hasNotfoundAttributes
+														? (notfound.attributes?.content?.toString() ?? defaultContent)
+														: defaultContent
+												}
+											/>
 										</div>
 									</article>
 								</div>
 
-								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url ?? defaultLinkUrl}>
-									{notfound?.attributes?.link?.label ?? defaultLinkLabel}
+								<Link
+									className="mt-8 text-slate-50 underline"
+									href={hasNotfoundAttributes ? (notfound.attributes?.link?.url ?? defaultLinkUrl) : defaultLinkUrl}
+								>
+									{hasNotfoundAttributes ? (notfound.attributes?.link?.label ?? defaultLinkLabel) : defaultLinkLabel}
 								</Link>
 							</div>
 						</div>

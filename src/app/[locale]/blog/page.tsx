@@ -28,18 +28,31 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
-	return {
-		title: content_website?.attributes?.content_blog?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
-		metadataBase: new URL(`https://andy-cinquin.com`),
+	const hasAttributes = content_website && typeof content_website === 'object' && 'attributes' in content_website
+
+	const defaultMetadata = {
+		title: 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		description:
-			content_website?.attributes?.content_blog?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
+		canonical: '/',
+	}
+
+	return {
+		title: hasAttributes
+			? (content_website.attributes?.content_blog?.seo?.title ?? defaultMetadata.title)
+			: defaultMetadata.title,
+		metadataBase: new URL(`https://andy-cinquin.com`),
+		description: hasAttributes
+			? (content_website.attributes?.content_blog?.seo?.description ?? defaultMetadata.description)
+			: defaultMetadata.description,
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
 			},
-			canonical: content_website?.attributes?.content_blog?.seo?.canonical ?? '/',
+			canonical: hasAttributes
+				? (content_website.attributes?.content_blog?.seo?.canonical ?? defaultMetadata.canonical)
+				: defaultMetadata.canonical,
 		},
 	}
 }
@@ -68,14 +81,22 @@ export default async function Page({ searchParams, params }: BlogPageProps) {
 	const articlesResponse = await getArticles(locale as Locale, pageParams, pageSize)
 	const articles = getResponseData(articlesResponse)
 
-	const totalArticles = articlesResponse?.meta?.pagination?.total || 0
+	const hasMeta = articlesResponse && typeof articlesResponse === 'object' && 'meta' in articlesResponse
+	const totalArticles = hasMeta ? articlesResponse.meta?.pagination?.total || 0 : 0
 	const totalPages = Math.ceil(totalArticles / pageSize)
 
 	const currentPage = Number(page) || 1
 
+	const contentWebsiteHasAttributes =
+		content_website && typeof content_website === 'object' && 'attributes' in content_website
+
 	return (
 		<>
-			<Nav content_website={content_website} h1={content_website?.attributes?.content_blog?.seo?.h1} isHome={false} />
+			<Nav
+				content_website={content_website}
+				h1={contentWebsiteHasAttributes ? content_website.attributes?.content_blog?.seo?.h1 : undefined}
+				isHome={false}
+			/>
 			<div>
 				<BlogContent articles={articles || []} content_website={content_website} locale={locale} />
 				{totalArticles > pageSize && (
