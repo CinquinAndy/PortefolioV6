@@ -292,6 +292,7 @@ export interface ContactComponent {
 
 export interface ContentHomeComponent {
 	seo?: SeoContent
+	title_service?: string
 	title_principal?: string
 	title_secondary?: string
 	description?: string
@@ -443,12 +444,16 @@ export interface Service {
 		title: string
 		description: string
 		icon?: string
+		eyebrow?: string
 		rank?: number
 		createdAt: string
 		updatedAt: string
 		publishedAt: string
 		createdBy?: StrapiRelation
 		updatedBy?: StrapiRelation
+		image?: {
+			data: StrapiMedia
+		}
 		localizations?: {
 			data: Service[]
 		}

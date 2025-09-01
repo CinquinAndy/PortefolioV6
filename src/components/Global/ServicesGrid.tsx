@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 
+import { ContentWebsite, Service } from '@/types/strapi'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,8 +10,8 @@ import { clsx } from 'clsx'
 import { replaceTitle } from '@/services/utils'
 
 interface ServicesGridProps {
-	services?: any[] // TODO: Define proper type for services
-	content_website?: any // TODO: Define proper type for content_website
+	services?: Service[]
+	content_website?: ContentWebsite
 }
 
 export function ServicesGrid({ services, content_website }: ServicesGridProps): React.JSX.Element {
@@ -19,25 +20,25 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 			{/* Header Section */}
 			<div className="mb-16 flex justify-between">
 				<h2
-					className="!font-display text-2xl normal-case leading-snug xl:text-5xl sm:text-2xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
+					className="!font-display text-2xl normal-case leading-snug sm:text-2xl xl:text-5xl [&>*]:!font-display [&>*]:text-2xl [&>*]:normal-case xl:[&>*]:text-5xl"
 					dangerouslySetInnerHTML={{
-						__html: replaceTitle(content_website?.attributes?.content_home?.title_service),
+						__html: replaceTitle(content_website?.attributes?.content_home?.title_service ?? ''),
 					}}
 				/>
 				{/* See All Projects Button */}
 				<Link
-					className="button-purple items-center justify-center rounded px-2 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm md:px-6 md:py-3"
-					href={content_website?.attributes?.content_home?.link[3]?.url || '/'}
+					className="button-purple items-center justify-center rounded px-2 py-3 text-xs md:px-6 md:py-3 xl:px-10 xl:py-4 xl:text-sm"
+					href={content_website?.attributes?.content_home?.link?.[3]?.url ?? '/'}
 				>
 					<span className={'button-purple-title text-center'}>
-						{content_website?.attributes?.content_home?.link[3]?.label || 'See all'}
+						{content_website?.attributes?.content_home?.link?.[3]?.label ?? 'See all'}
 					</span>
 				</Link>
 			</div>
 
 			{/* Bento Grid Layout */}
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
-				{services?.map((service: any, index: number) => (
+				{services?.map((service: Service, index: number) => (
 					<BentoCard
 						className={clsx(
 							// Last two items span 3 columns
@@ -56,7 +57,7 @@ export function ServicesGrid({ services, content_website }: ServicesGridProps): 
 									className="object-cover object-center"
 									fill
 									priority
-									src={service.attributes.image || `/assets/bento/bento_${index + 1}.png`}
+									src={service.attributes.image?.data?.attributes?.url ?? `/assets/bento/bento_${index + 1}.png`}
 								/>
 							</div>
 						}
