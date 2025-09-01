@@ -9,7 +9,7 @@ interface FooterProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-function Footer({ content_website }: FooterProps): JSX.Element {
+function Footer({ content_website }: FooterProps): React.JSX.Element {
 	// Sitemap
 	const sitemap = content_website?.attributes?.Sitemap?.filter(item => item?.categorie === 'sitemap')
 	// Mentions légales

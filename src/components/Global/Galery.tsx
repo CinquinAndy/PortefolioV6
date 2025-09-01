@@ -19,7 +19,7 @@ interface GaleryProps {
 	galery?: any[] // TODO: Define proper type for galery
 }
 
-function Galery({ title_galery, open, handleClick, galery }: GaleryProps): JSX.Element {
+function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React.JSX.Element {
 	// pathname
 	const pathname = usePathname()
 	return (

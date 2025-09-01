@@ -79,7 +79,7 @@ interface LayoutProps {
 	className?: string
 }
 
-export function Layout({ value, className }: LayoutProps): JSX.Element {
+export function Layout({ value, className }: LayoutProps): React.JSX.Element {
 	if (!value) {
 		return null
 	}

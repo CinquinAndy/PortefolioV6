@@ -13,7 +13,7 @@ interface RealisationsProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): JSX.Element {
+function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): React.JSX.Element {
 	realisations = slice ? realisations.slice(0, slice) : realisations
 	const gridTemplateCustom = index => {
 		switch (index % 3) {

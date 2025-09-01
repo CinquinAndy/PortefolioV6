@@ -10,7 +10,7 @@ interface PaginationProps {
 	currentPage: number
 }
 
-export function Pagination({ totalPages, currentPage }: PaginationProps): JSX.Element {
+export function Pagination({ totalPages, currentPage }: PaginationProps): React.JSX.Element {
 	const pathname = usePathname()
 	const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 

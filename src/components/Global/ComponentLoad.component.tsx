@@ -7,7 +7,7 @@ interface ComponentLoadComponentProps {
 	children?: React.ReactNode
 }
 
-export function ComponentLoadComponent({ FallBack, children }: ComponentLoadComponentProps): JSX.Element {
+export function ComponentLoadComponent({ FallBack, children }: ComponentLoadComponentProps): React.JSX.Element {
 	const [loaded, setLoaded] = useState(false)
 
 	// check if children is loaded

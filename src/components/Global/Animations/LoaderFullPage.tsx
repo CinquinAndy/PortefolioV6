@@ -8,7 +8,7 @@ interface LoaderFullPageProps {
 	locale?: string
 }
 
-function LoaderFullPage({ locale }: LoaderFullPageProps): JSX.Element {
+function LoaderFullPage({ locale }: LoaderFullPageProps): React.JSX.Element {
 	// on load page
 	const [loading, setLoading] = useState(true)
 	const [hide, setHide] = useState(false)

@@ -20,7 +20,7 @@ interface NavProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-function Nav({ selectedMenu, isHome = true, h1, frRedirect, enRedirect, content_website }: NavProps): JSX.Element {
+function Nav({ selectedMenu, isHome = true, h1, frRedirect, enRedirect, content_website }: NavProps): React.JSX.Element {
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
 	const pathname = usePathname()

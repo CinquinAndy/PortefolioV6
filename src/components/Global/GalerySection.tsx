@@ -11,7 +11,7 @@ interface GalerySectionProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-export function GalerySection({ processedRealisation, content_website }: GalerySectionProps): JSX.Element {
+export function GalerySection({ processedRealisation, content_website }: GalerySectionProps): React.JSX.Element {
 	const [open, setOpen] = useState(false)
 
 	const handleClick = () => {

@@ -13,7 +13,7 @@ interface ServicesGridProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-export function ServicesGrid({ services, content_website }: ServicesGridProps): JSX.Element {
+export function ServicesGrid({ services, content_website }: ServicesGridProps): React.JSX.Element {
 	return (
 		<section className="w-full p-4 pt-[100px] xl:p-20 xl:pt-[300px]" id="services">
 			{/* Header Section */}

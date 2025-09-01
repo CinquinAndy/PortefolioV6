@@ -15,7 +15,7 @@ interface TechnologyDisplayProps {
 	technology?: any // TODO: Define proper type for technology
 }
 
-export function TechnologyDisplay({ technology }: TechnologyDisplayProps): JSX.Element {
+export function TechnologyDisplay({ technology }: TechnologyDisplayProps): React.JSX.Element {
 	if (!technology) return null
 
 	return (

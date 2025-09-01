@@ -12,7 +12,7 @@ interface ImageLoadComponentProps {
 	alt: string
 }
 
-export function ImageLoadComponent({ width, src, height, className, alt }: ImageLoadComponentProps): JSX.Element {
+export function ImageLoadComponent({ width, src, height, className, alt }: ImageLoadComponentProps): React.JSX.Element {
 	const [loaded, setLoaded] = useState(false)
 
 	return (

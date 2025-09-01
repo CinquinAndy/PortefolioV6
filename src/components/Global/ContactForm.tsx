@@ -10,7 +10,7 @@ interface ContactFormProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-export function ContactForm({ content_website }: ContactFormProps): JSX.Element {
+export function ContactForm({ content_website }: ContactFormProps): React.JSX.Element {
 	const schema = z
 		.object({
 			phone: z.string().min(1, {

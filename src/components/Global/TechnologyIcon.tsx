@@ -11,7 +11,7 @@ interface TechnologyIconProps {
 	className?: string
 }
 
-export function TechnologyIcon({ name, image, className }: TechnologyIconProps): JSX.Element {
+export function TechnologyIcon({ name, image, className }: TechnologyIconProps): React.JSX.Element {
 	const [icon, setIcon] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const [fallbackImage, setFallbackImage] = useState(null)

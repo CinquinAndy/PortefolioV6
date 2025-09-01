@@ -8,7 +8,7 @@ interface CtaProps {
 	content_website?: any // TODO: Define proper type for content_website
 }
 
-function Cta({ content_website }: CtaProps): JSX.Element {
+function Cta({ content_website }: CtaProps): React.JSX.Element {
 	return (
 		<section className="w-full p-4 md:p-20">
 			<div className="shadow-innercustom relative mt-[100px] flex items-center justify-center rounded bg-slate-1000 p-12 xl:p-20">
