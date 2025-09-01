@@ -1,4 +1,7 @@
+import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
+
+import { getResponseData } from '@/types/strapi'
 
 import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
 import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
@@ -19,21 +22,21 @@ interface PageParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 
 	return {
-		title: content_website?.attributes?.content_home?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: content_website?.attributes?.content_home?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.fr`),
 		description:
-			content_website?.attributes?.content_home?.seo?.description ||
+			content_website?.attributes?.content_home?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}`,
 			},
-			canonical: content_website?.attributes?.content_home?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_home?.seo?.canonical ?? '/',
 		},
 	}
 }
@@ -51,14 +54,17 @@ interface HomePageProps {
 
 export default async function Page({ params }: HomePageProps) {
 	const { locale } = await params
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
-	let services = await getServicesGrid(locale)
-	services = services?.data
-	let realisations = await getRealisations(locale)
-	realisations = realisations?.data
-	let articles = await getArticles(locale)
-	articles = articles?.data
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
+
+	const services_response = await getServicesGrid(locale as Locale)
+	const services = getResponseData(services_response)
+
+	const realisations_response = await getRealisations(locale as Locale)
+	const realisations = getResponseData(realisations_response)
+
+	const articles_response = await getArticles(locale as Locale)
+	const articles = getResponseData(articles_response)
 
 	return (
 		<>
@@ -73,9 +79,9 @@ export default async function Page({ params }: HomePageProps) {
 			</div>
 
 			<div className={'relative'}>
-				<ServicesGrid content_website={content_website} services={services} />
-				<Realisations content_website={content_website} isHome={true} realisations={realisations} slice={3} />
-				<Articles articles={articles} content_website={content_website} isHome={true} slice={3} />
+				<ServicesGrid content_website={content_website} services={services || []} />
+				<Realisations content_website={content_website} isHome={true} realisations={realisations || []} slice={3} />
+				<Articles articles={articles || []} content_website={content_website} isHome={true} slice={3} />
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

@@ -1,4 +1,7 @@
+import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
+
+import { getResponseData } from '@/types/strapi'
 
 import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
@@ -22,22 +25,21 @@ interface SearchParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
-	const content_website = await getContentWebsite(locale)
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 
 	return {
-		title:
-			content_website?.data?.attributes?.content_blog?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: content_website?.attributes?.content_blog?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
-			content_website?.data?.attributes?.content_blog?.seo?.description ||
+			content_website?.attributes?.content_blog?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/blog`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/blog`,
 			},
-			canonical: content_website?.data?.attributes?.content_blog?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_blog?.seo?.canonical ?? '/',
 		},
 	}
 }
@@ -57,16 +59,16 @@ interface BlogPageProps {
 export default async function Page({ searchParams, params }: BlogPageProps) {
 	const { locale } = await params
 	const { page } = await searchParams
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 
 	const pageParams = page ? parseInt(page) : 1
 	const pageSize = 50
 
-	const articlesResponse = await getArticles(locale, pageParams, pageSize)
-	const articles = articlesResponse?.data
+	const articlesResponse = await getArticles(locale as Locale, pageParams, pageSize)
+	const articles = getResponseData(articlesResponse)
 
-	const totalArticles = articlesResponse?.meta?.pagination?.total
+	const totalArticles = articlesResponse?.meta?.pagination?.total || 0
 	const totalPages = Math.ceil(totalArticles / pageSize)
 
 	const currentPage = Number(page) || 1
@@ -75,8 +77,8 @@ export default async function Page({ searchParams, params }: BlogPageProps) {
 		<>
 			<Nav content_website={content_website} h1={content_website?.attributes?.content_blog?.seo?.h1} isHome={false} />
 			<div>
-				<BlogContent articles={articles} content_website={content_website} locale={locale} />
-				{articlesResponse.meta.pagination.total > pageSize && (
+				<BlogContent articles={articles || []} content_website={content_website} locale={locale} />
+				{totalArticles > pageSize && (
 					<Pagination baseUrl={`/${locale}/blog`} currentPage={currentPage} totalPages={totalPages} />
 				)}
 				<Cta content_website={content_website} />

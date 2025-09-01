@@ -160,3 +160,30 @@ export interface NotFound {
 }
 
 export type Locale = 'fr' | 'en'
+
+// Utility types for handling API responses
+export type ApiResponse<T> = StrapiResponse<T> | NotFoundResponse
+
+// Type guard to check if response is a StrapiResponse
+export function isStrapiResponse<T>(response: ApiResponse<T>): response is StrapiResponse<T> {
+	return 'data' in response && !('notFound' in response)
+}
+
+// Type guard to check if response is a NotFoundResponse
+export function isNotFoundResponse(response: ApiResponse<any>): response is NotFoundResponse {
+	return 'notFound' in response
+}
+
+// Safe accessor for response data
+export function getResponseData<T>(response: ApiResponse<T>): T | null {
+	if (isStrapiResponse(response) && response.data) {
+		return response.data
+	}
+	return null
+}
+
+// Safe accessor for response attributes
+export function getResponseAttributes<T extends { attributes: any }>(response: ApiResponse<T>): T['attributes'] | null {
+	const data = getResponseData(response)
+	return data?.attributes || null
+}

@@ -18,6 +18,8 @@ import Footer from '@/components/Global/Footer'
 import { replaceTitle } from '@/services/utils'
 import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
+import type { Locale } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
 
 interface RealisationSlugParams {
 	slug: string
@@ -30,33 +32,34 @@ export const revalidate = 43200 // 12 hours
 export async function generateMetadata({ params }: { params: Promise<RealisationSlugParams> }): Promise<Metadata> {
 	const { slug, locale } = await params
 	// fetch data
-	let realisation = await getRealisationBySlug(slug, locale)
-	realisation = realisation?.data[0]
+	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
+	const realisations = getResponseData(realisationResponse)
+	const realisation = realisations?.[0]
 
 	// conditional slug, make en and fr slugs available
 
 	let _slug = ''
 	let slugAlternate = ''
 	if (locale === 'fr') {
-		_slug = realisation?.attributes?.slug
-		slugAlternate = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
+		_slug = realisation?.attributes?.slug ?? ''
+		slugAlternate = realisation?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	} else {
-		slugAlternate = realisation?.attributes?.slug
-		_slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug
+		slugAlternate = realisation?.attributes?.slug ?? ''
+		_slug = realisation?.attributes?.localizations?.data[0]?.attributes?.slug ?? ''
 	}
 
 	return {
-		title: realisation?.attributes?.seo_title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: realisation?.attributes?.seo_title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
-			realisation?.attributes?.seo_description ||
+			realisation?.attributes?.seo_description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
-				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${slug}`,
+				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/portefolio/${_slug}`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${slugAlternate}`,
 			},
-			canonical: realisation?.attributes?.seo_canonical || '/',
+			canonical: realisation?.attributes?.seo_canonical ?? '/',
 		},
 	}
 }
@@ -65,14 +68,16 @@ export async function generateStaticParams(): Promise<{ params: RealisationSlugP
 	let paths: { params: RealisationSlugParams }[] = []
 
 	for (const locale of localesConstant) {
-		const realisations = await getRealisations(locale) // Use your service to fetch realisations
+		const realisationsResponse = await getRealisations(locale as Locale)
+		const realisations = getResponseData(realisationsResponse)
 
-		// Map over each article to create a path object for it
-		const localePaths = realisations.data.map((realisation: any) => ({
-			params: { slug: realisation.attributes.slug, locale }, // Ensure your API response structure is correctly referenced here
-		}))
-
-		paths = paths.concat(localePaths)
+		if (realisations) {
+			// Map over each realisation to create a path object for it
+			const localePaths = realisations.map((realisation) => ({
+				params: { slug: realisation.attributes.slug, locale },
+			}))
+			paths = paths.concat(localePaths)
+		}
 	}
 
 	return paths
@@ -116,7 +121,7 @@ export default async function Page({ params }: RealisationPageProps) {
 							</article>
 						</div>
 
-						<div className={'flex w-full flex-col gap-6 md:pr-20 xl:gap-8 2xl:mx-auto 2xl:max-w-2xl'}>
+						<div className={'flex w-full flex-col gap-6 xl:gap-8 md:pr-20 2xl:mx-auto 2xl:max-w-2xl'}>
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display [&>*]:text-lg [&>*]:font-black md:[&>*]:text-3xl'
@@ -125,7 +130,7 @@ export default async function Page({ params }: RealisationPageProps) {
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_technology),
 								}}
 							/>
-							<div className="grid w-full grid-cols-3 gap-2 md:grid-cols-4 md:gap-4 xl:gap-6 2xl:gap-8">
+							<div className="grid w-full grid-cols-3 gap-2 xl:gap-6 md:grid-cols-4 md:gap-4 2xl:gap-8">
 								{/*map on realisations?.attributes?.technologies?.data*/}
 								{processedRealisation?.attributes?.techno?.map(technology => {
 									return <TechnologyDisplay key={technology.id} technology={technology} />

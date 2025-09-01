@@ -1,4 +1,7 @@
+import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
+
+import { getResponseData } from '@/types/strapi'
 
 import { HoloComponent } from '@/components/Global/Animations/HoloComponent'
 import { getAbout, getContentWebsite } from '@/services/getContentWebsite'
@@ -15,22 +18,22 @@ interface PageParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
-	const content_website = await getContentWebsite(locale)
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 
 	return {
 		title:
-			content_website?.data?.attributes?.content_about?.seo?.title ||
-			'Andy Cinquin - Freelance Entrepreneur & Developer',
+			content_website?.attributes?.content_about?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
-			content_website?.data?.attributes?.content_about?.seo?.description ||
+			content_website?.attributes?.content_about?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/about`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/about`,
 			},
-			canonical: content_website?.data?.attributes?.content_about?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_about?.seo?.canonical ?? '/',
 		},
 	}
 }
@@ -48,10 +51,11 @@ interface AboutPageProps {
 
 export default async function Page({ params }: AboutPageProps) {
 	const { locale } = await params
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
-	let about = await getAbout(locale)
-	about = about?.data
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
+
+	const about_response = await getAbout(locale as Locale)
+	const about = getResponseData(about_response)
 
 	return (
 		<>

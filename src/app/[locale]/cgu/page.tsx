@@ -1,6 +1,9 @@
+import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
 import type { ReactNode } from 'react'
+
+import { getResponseData } from '@/types/strapi'
 
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
@@ -16,21 +19,21 @@ interface PageParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	// fetch data
-	const content_website = await getContentWebsite(locale)
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
 
 	return {
-		title:
-			content_website?.data?.attributes?.content_cgu?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+		title: content_website?.attributes?.content_cgu?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.com`),
 		description:
-			content_website?.data?.attributes?.content_cgu?.seo?.description ||
+			content_website?.attributes?.content_cgu?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/cgu`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/cgu`,
 			},
-			canonical: content_website?.data?.attributes?.content_cgu?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_cgu?.seo?.canonical ?? '/',
 		},
 	}
 }
@@ -47,10 +50,11 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
 	const { locale } = await params
-	let content_website = await getContentWebsite(locale)
-	content_website = content_website?.data
-	let cgu = await getCgu(locale)
-	cgu = cgu?.data
+	const content_website_response = await getContentWebsite(locale as Locale)
+	const content_website = getResponseData(content_website_response)
+
+	const cgu_response = await getCgu(locale as Locale)
+	const cgu = getResponseData(cgu_response)
 
 	return (
 		<>

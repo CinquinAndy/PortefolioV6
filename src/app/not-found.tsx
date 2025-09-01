@@ -1,4 +1,5 @@
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
+import { getResponseData } from '@/types/strapi'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,31 +21,32 @@ const be_vietnam_pro = Be_Vietnam_Pro({
 
 export async function generateMetadata(): Promise<Metadata> {
 	// fetch data
-	let content_website = await getContentWebsite('en')
-	content_website = content_website?.data
+	const content_website_response = await getContentWebsite('en' as const)
+	const content_website = getResponseData(content_website_response)
 
 	return {
 		title:
-			content_website?.attributes?.content_notfound?.seo?.title || 'Andy Cinquin - Freelance Entrepreneur & Developer',
+			content_website?.attributes?.content_notfound?.seo?.title ?? 'Andy Cinquin - Freelance Entrepreneur & Developer',
 		metadataBase: new URL(`https://andy-cinquin.fr`),
 		description:
-			content_website?.attributes?.content_notfound?.seo?.description ||
+			content_website?.attributes?.content_notfound?.seo?.description ??
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}/404`,
 				'en-US': `${process.env.NEXT_PUBLIC_URL_ALT}/404`,
 			},
-			canonical: content_website?.attributes?.content_notfound?.seo?.canonical || '/',
+			canonical: content_website?.attributes?.content_notfound?.seo?.canonical ?? '/',
 		},
 	}
 }
 
 export default async function NotFound() {
-	let content_website = await getContentWebsite('en')
-	content_website = content_website?.data
-	let notfound = await getNotFound('en')
-	notfound = notfound?.data
+	const content_website_response = await getContentWebsite('en' as const)
+	const content_website = getResponseData(content_website_response)
+
+	const notfound_response = await getNotFound('en' as const)
+	const notfound = getResponseData(notfound_response)
 
 	return (
 		<html className={'overflow-y-hidden'} lang={`en`}>
@@ -55,7 +57,7 @@ export default async function NotFound() {
 				{/*<Cursor />*/}
 
 				<div className="h-dvh">
-					<div className="flex h-full items-center justify-center px-4 xl:px-24 sm:px-6 lg:px-20">
+					<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
 						<div className="">
 							<Link href={'/'}>
 								<Image
@@ -77,8 +79,8 @@ export default async function NotFound() {
 									</article>
 								</div>
 
-								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url}>
-									{notfound?.attributes?.link?.label}
+								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url || '/'}>
+									{notfound?.attributes?.link?.label || 'Go Home'}
 								</Link>
 							</div>
 						</div>
