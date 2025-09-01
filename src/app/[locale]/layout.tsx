@@ -58,17 +58,18 @@ interface LocaleLayoutProps {
 	params: Promise<{ locale: string }>
 }
 
-export default async function RootLayout({ params, children }: LocaleLayoutProps) {
+export default async function LocaleLayout({ params, children }: LocaleLayoutProps) {
 	const { locale } = await params
 	return (
 		<html dir={dir(locale)} lang={locale}>
-			<Script
-				async
-				data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
-				src="https://umami.wadefade.fr/script.js"
-				strategy={'afterInteractive'}
-			/>
-
+			<head>
+				<Script
+					async
+					data-website-id="632b6be0-399d-453d-9f3a-b6774d10c081"
+					src="https://umami.wadefade.fr/script.js"
+					strategy={'afterInteractive'}
+				/>
+			</head>
 			<body className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}>
 				{/*<Cursor />*/}
 				<LottieAnimation />

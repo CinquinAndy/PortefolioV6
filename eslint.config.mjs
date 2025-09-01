@@ -80,6 +80,9 @@ const perfectionistRules = {
 			order: 'desc',
 		},
 	],
+	// Désactiver les règles perfectionist qui entrent en conflit avec prettier-plugin-tailwindcss
+	'perfectionist/sort-class-names': 'off',
+	'perfectionist/sort-jsx-props': 'off',
 }
 
 // Plugins communs (without @next/next as it's already included by compat.extends)
