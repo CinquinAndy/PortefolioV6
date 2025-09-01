@@ -26,15 +26,20 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
+	// Default values
+	const defaultTitle = 'Andy Cinquin - Freelance Entrepreneur & Developer'
+	const defaultDescription =
+		'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications'
+
 	// Extract SEO data safely
 	const seoTitle = content_website?.attributes?.content_home?.seo?.title
 	const seoDescription = content_website?.attributes?.content_home?.seo?.description
 	const seoCanonical = content_website?.attributes?.content_home?.seo?.canonical
 
 	return {
-		title: seoTitle ?? '',
+		title: seoTitle ?? defaultTitle,
 		metadataBase: new URL(`https://andy-cinquin.fr`),
-		description: seoDescription ?? '',
+		description: seoDescription ?? defaultDescription,
 		alternates: {
 			languages: {
 				'fr-FR': `${process.env.NEXT_PUBLIC_URL}`,

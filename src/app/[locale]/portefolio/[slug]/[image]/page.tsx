@@ -33,10 +33,10 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 			'Professional portfolio of Andy Cinquin, freelance software developer, Nantes and surrounding areas. Custom development, web, applications',
 		alternates: {
 			languages: {
-				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
-				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/blog/${processedRealisation?.data?.attributes?.slug}`,
+				'fr-FR': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL : process.env.NEXT_PUBLIC_URL_ALT}/portefolio/${processedRealisation?.data?.attributes?.slug}`,
+				'en-US': `${locale === 'fr' ? process.env.NEXT_PUBLIC_URL_ALT : process.env.NEXT_PUBLIC_URL}/portefolio/${processedRealisation?.data?.attributes?.slug}`,
 			},
-			canonical: processedRealisation?.data?.attributes?.seo_canonical ?? '/',
+			canonical: '/',
 		},
 	}
 }
