@@ -1,12 +1,13 @@
 import React from 'react'
 
+import { ContentWebsite } from '@/types/strapi'
 import Link from 'next/link'
 
 import { Layout } from '@/components/Global/Layout'
 import { replaceTitle } from '@/services/utils'
 
 interface CtaProps {
-	content_website?: any // TODO: Define proper type for content_website
+	content_website?: ContentWebsite
 }
 
 function Cta({ content_website }: CtaProps): React.JSX.Element {
@@ -18,20 +19,20 @@ function Cta({ content_website }: CtaProps): React.JSX.Element {
 						<h2
 							className="text-center !font-display text-xl font-bold xl:text-3xl [&>*]:!font-display [&>*]:text-xl [&>*]:font-bold xl:[&>*]:text-3xl"
 							dangerouslySetInnerHTML={{
-								__html: replaceTitle(content_website?.attributes?.cta?.title),
+								__html: replaceTitle(content_website?.attributes?.cta?.title ?? ''),
 							}}
 						/>
 					</div>
 					<div className="py-8 text-center text-sm xl:py-10 xl:text-sm">
 						<Layout
 							className={'prose-xs flex flex-col gap-4'}
-							value={content_website?.attributes?.cta?.content.toString()}
+							value={content_website?.attributes?.cta?.content?.toString() ?? ''}
 						/>
 					</div>
 					<div className="flex items-center justify-center">
 						<Link
 							className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
-							href={content_website?.attributes?.cta?.link?.url}
+							href={content_website?.attributes?.cta?.link?.url ?? ''}
 						>
 							<span className={'button-purple-title'}>{content_website?.attributes?.cta?.link?.label}</span>
 						</Link>
