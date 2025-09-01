@@ -20,14 +20,16 @@ npm run test:visual:update
 
 ## 🎯 Que testent ces scripts ?
 
-### Pages testées automatiquement :
+### Pages testées automatiquement
+
 - **Pages statiques** : `/`, `/about`, `/blog`, `/contact`, `/cgu`, `/portefolio`
 - **Deux langues** : Français (fr) et Anglais (en)
 - **Tests responsive** : Desktop (1920x1080), Tablet (768x1024), Mobile (375x667)
 - **Pages dynamiques** : Premier article de blog (si disponible)
 - **Tests d'accessibilité** : Vérifications de base
 
-### Éléments masqués pour stabilité :
+### Éléments masqués pour stabilité
+
 - Curseurs personnalisés
 - Animations CSS/Framer Motion
 - Vidéos et contenus variables
@@ -35,22 +37,28 @@ npm run test:visual:update
 
 ## 🚀 Processus de Migration
 
-### 1️⃣ AVANT toute migration :
+### 1️⃣ AVANT toute migration
+
 ```bash
 npm run test:visual
 ```
+
 → Crée les screenshots de référence
 
-### 2️⃣ APRÈS chaque étape de migration :
+### 2️⃣ APRÈS chaque étape de migration
+
 ```bash
 npm run test:visual
 ```
+
 → Compare avec les références
 
-### 3️⃣ Si des différences sont acceptables :
+### 3️⃣ Si des différences sont acceptables
+
 ```bash
 npm run test:visual:update
 ```
+
 → Met à jour les références
 
 ## 🔧 Configuration
@@ -82,12 +90,14 @@ tests/
 ## 🐛 Résolution des problèmes
 
 ### Test qui échoue ?
+
 1. Regarder le rapport HTML : `npx playwright show-report`
 2. Comparer visuellement les différences
 3. Si OK : `npm run test:visual:update`
 4. Si KO : Corriger le code et relancer
 
 ### Serveur qui ne démarre pas ?
+
 1. Vérifier que le port 3000 est libre
 2. Augmenter le timeout dans `playwright.config.js`
 3. Lancer `npm run dev` manuellement d'abord
