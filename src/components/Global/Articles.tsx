@@ -17,7 +17,11 @@ interface ArticlesProps {
 }
 
 function Articles({ slice, isHome, content_website, articles }: ArticlesProps): React.JSX.Element {
-	articles = slice && articles ? articles.slice(0, slice ?? 0) : (articles ?? [])
+	// Handle slice logic with explicit nullish/zero/NaN checks
+	let processedArticles = articles ?? []
+	if (slice !== null && slice !== undefined && slice > 0 && articles) {
+		processedArticles = articles.slice(0, slice)
+	}
 	const gridTemplateCustom = (index: number): string => {
 		switch (index % 3) {
 			case 0:
@@ -45,28 +49,34 @@ function Articles({ slice, isHome, content_website, articles }: ArticlesProps): 
 						></h2>
 					</div>
 					<div className="flex w-1/2 flex-col items-end gap-4 xl:flex-row xl:justify-end">
-						<Link
-							className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
-							href={content_website?.attributes?.content_home?.link[0]?.url ?? ''}
-						>
-							<span className={'button-purple-title'}>
-								{content_website?.attributes?.content_home?.link[0]?.label ?? ''}
-							</span>
-						</Link>
-						<Link
-							className="button-cyan rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
-							href={content_website?.attributes?.content_home?.link[2]?.url ?? ''}
-						>
-							<span className={'button-cyan-title'}>
-								{content_website?.attributes?.content_home?.link[2]?.label ?? ''}
-							</span>
-						</Link>
+						{content_website?.attributes?.content_home?.link &&
+							content_website.attributes.content_home.link.length > 0 && (
+								<Link
+									className="button-purple rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+									href={content_website.attributes.content_home.link[0]?.url ?? ''}
+								>
+									<span className={'button-purple-title'}>
+										{content_website.attributes.content_home.link[0]?.label ?? ''}
+									</span>
+								</Link>
+							)}
+						{content_website?.attributes?.content_home?.link &&
+							content_website.attributes.content_home.link.length > 2 && (
+								<Link
+									className="button-cyan rounded px-6 py-3 text-xs xl:px-10 xl:py-4 xl:text-sm"
+									href={content_website.attributes.content_home.link[2]?.url ?? ''}
+								>
+									<span className={'button-cyan-title'}>
+										{content_website.attributes.content_home.link[2]?.label ?? ''}
+									</span>
+								</Link>
+							)}
 					</div>
 				</div>
 			)}
 			<div className="mt-10 flex w-full justify-center xl:mt-20">
 				<div className="grid w-full grid-cols-12 gap-[20px] md:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
-					{articles.map((article, index) => {
+					{processedArticles.map((article, index) => {
 						return (
 							<Link
 								className={`${gridTemplateCustom(
