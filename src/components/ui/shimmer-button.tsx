@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { motion } from 'framer-motion'
+import { motion, HTMLMotionProps } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
 
-export interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ShimmerButtonProps extends HTMLMotionProps<'button'> {
 	shimmerColor?: string
 	className?: string
 	children?: React.ReactNode
@@ -58,6 +58,36 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 
 				{/* Inner highlight */}
 				<div className="absolute inset-0 rounded-full shadow-[inset_0_-8px_10px_#ffffff1f] transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]" />
+
+				{/* Rotating border */}
+				<motion.div
+					className="absolute inset-0"
+					style={{
+						zIndex: 4,
+						inset: '2px',
+						borderRadius: 'inherit',
+						background: `conic-gradient(from 0deg, transparent 0deg, ${shimmerColor} 30deg, ${shimmerColor} 60deg, transparent 90deg, transparent 360deg)`,
+					}}
+					animate={{
+						rotate: 360,
+					}}
+					transition={{
+						repeat: Infinity,
+						ease: 'linear',
+						duration: 2,
+					}}
+				/>
+
+				{/* Mask to hide inner part and show only border */}
+				<div
+					className="absolute inset-0"
+					style={{
+						zIndex: 5,
+						inset: '2px',
+						borderRadius: 'inherit',
+						background: '#000000',
+					}}
+				/>
 
 				{/* Content */}
 				<span className="relative z-10">{children}</span>
