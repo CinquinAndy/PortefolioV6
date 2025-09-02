@@ -1,103 +1,170 @@
-# Tests de Régression Visuelle
+# Tests de Régression Visuelle Complets
 
-Ce dossier contient les tests automatisés pour détecter les régressions visuelles lors des migrations.
+Ce dossier contient les tests automatisés complets pour détecter les régressions visuelles sur les pages principales du portfolio.
+
+## 🎯 Pages couvertes par les tests
+
+### 📝 Pages de Blog
+- **Page principale du blog** (`/fr/blog`, `/en/blog`)
+- **Pages d'articles individuels** (test dynamique du premier article disponible)
+- **Validation du contenu** et de la structure des articles
+
+### 🚀 Page Portfolio/Réalisations
+- **Page principale portfolio** (`/fr/portefolio`, `/en/portefolio`)
+- **Tests d'interaction** avec les projets
+- **Validation du nombre de projets affichés**
+
+### ⚖️ Pages Légales
+- **Conditions Générales d'Utilisation** (`/fr/cgu`, `/en/cgu`)
+- **Validation du contenu légal** et de la structure
 
 ## 📋 Commandes Disponibles
 
 ```bash
-# Lancer tous les tests visuels
-npm run test:visual
+# 🔄 Lancer TOUS les tests visuels (blog + portfolio + légales)
+npm run test:visual -- tests/visual-regression-tests.spec.js
 
-# Lancer les tests avec interface graphique
-npm run test:visual:ui
+# 🎨 Lancer les tests avec interface graphique Playwright
+npm run test:visual:ui -- tests/visual-regression-tests.spec.js
 
-# Lancer les tests en mode visible (voir le navigateur)
-npm run test:visual:headed
+# 👁️ Lancer les tests en mode visible (voir le navigateur)
+npm run test:visual:headed -- tests/visual-regression-tests.spec.js
 
-# Mettre à jour les screenshots de référence
-npm run test:visual:update
+# 📸 GÉNÉRER LES SCREENSHOTS DE BASE (première fois)
+npm run test:visual:update -- tests/visual-regression-tests.spec.js
 ```
 
-## 🎯 Que testent ces scripts ?
+## 🚀 Processus d'utilisation
 
-### Pages testées automatiquement
-
-- **Pages statiques** : `/`, `/about`, `/blog`, `/contact`, `/cgu`, `/portefolio`
-- **Deux langues** : Français (fr) et Anglais (en)
-- **Tests responsive** : Desktop (1920x1080), Tablet (768x1024), Mobile (375x667)
-- **Pages dynamiques** : Premier article de blog (si disponible)
-- **Tests d'accessibilité** : Vérifications de base
-
-### Éléments masqués pour stabilité
-
-- Curseurs personnalisés
-- Animations CSS/Framer Motion
-- Vidéos et contenus variables
-- Gradients animés
-
-## 🚀 Processus de Migration
-
-### 1️⃣ AVANT toute migration
+### 1️⃣ PREMIÈRE EXÉCUTION - Générer les baselines
 
 ```bash
-npm run test:visual
+npm run test:visual:update -- tests/visual-regression-tests.spec.js
 ```
 
-→ Crée les screenshots de référence
+→ Crée les 6 screenshots de référence pour toutes les pages
 
-### 2️⃣ APRÈS chaque étape de migration
+### 2️⃣ EXÉCUTIONS SUIVANTES - Détecter les régressions
 
 ```bash
-npm run test:visual
+npm run test:visual -- tests/visual-regression-tests.spec.js
 ```
 
-→ Compare avec les références
+→ Compare automatiquement avec les références
 
-### 3️⃣ Si des différences sont acceptables
+### 3️⃣ APRÈS MODIFICATIONS ACCEPTÉES
 
 ```bash
-npm run test:visual:update
+npm run test:visual:update -- tests/visual-regression-tests.spec.js
 ```
 
-→ Met à jour les références
+→ Met à jour les screenshots de référence
 
-## 🔧 Configuration
+## 🔧 Configuration technique
 
-- **Seuil de tolérance** : 20% pour les pages statiques, 30% pour le contenu dynamique
-- **Timeout** : 120s pour le démarrage du serveur
-- **Navigateur** : Chrome/Chromium uniquement (plus stable)
-- **Attente** : 2s pour les animations + attente networkidle
+### Paramètres des tests
+- **Résolution** : 1920x1080 (Full HD)
+- **Seuil de tolérance** : 10% pour les différences acceptables
+- **Timeout** : 90s par test (augmenté pour le contenu lourd)
+- **Stabilisation** : 6s d'attente + scroll automatique
+- **Navigateurs** : Chrome, Firefox, Safari
 
-## 📁 Structure des Screenshots
+### Éléments stabilisés/masqués
+- ✅ Curseurs personnalisés
+- ✅ Animations CSS/Framer Motion/Lottie
+- ✅ Vidéos de fond
+- ✅ Éléments dynamiques (timestamps, etc.)
+- ✅ Transitions et transforms
+
+## 📁 Structure des fichiers générés
 
 ```
 tests/
-├── visual-regression.spec.js-snapshots/
-│   ├── about-page-fr-visual-test-chromium-linux.png
-│   ├── home-page-fr-visual-test-chromium-linux.png
-│   └── ... (tous les autres screenshots)
-└── test-results/
-    └── (rapports d'erreurs si échecs)
+├── visual-regression-tests.spec.js              # Tests principaux
+├── visual-regression-tests.spec.js-snapshots/   # Screenshots de référence
+│   ├── blog-main-fr.png
+│   ├── blog-main-en.png
+│   ├── blog-article-detail-fr.png
+│   ├── blog-article-detail-en.png
+│   ├── portfolio-main-fr.png
+│   ├── portfolio-main-en.png
+│   ├── cgu-main-fr.png
+│   └── cgu-main-en.png
+├── archive-production-migration-tests.spec.js   # Anciens tests archivés
+└── README.md                                    # Cette documentation
 ```
 
-## ⚠️ Points d'attention
+## 📊 Résultats attendus
 
-1. **Première exécution** : Génère les baselines, pas d'échecs
-2. **Deuxième exécution** : Compare et peut échouer si différences
-3. **Contenu dynamique** : Articles de blog peuvent varier selon Strapi
-4. **Animations** : Désactivées mais peuvent parfois fuir
+Après exécution complète, vous devriez avoir :
 
-## 🐛 Résolution des problèmes
+### ✅ Tests réussis (12 tests au total)
+- **6 tests visuels** : Un screenshot par page/langue
+- **4 tests de validation** : Contenu et structure
+- **2 tests globaux** : Navigation et chargement
 
-### Test qui échoue ?
+### 📸 Screenshots générés (6 fichiers)
+- `blog-main-fr.png` / `blog-main-en.png`
+- `portfolio-main-fr.png` / `portfolio-main-en.png`
+- `cgu-main-fr.png` / `cgu-main-en.png`
 
-1. Regarder le rapport HTML : `npx playwright show-report`
-2. Comparer visuellement les différences
-3. Si OK : `npm run test:visual:update`
-4. Si KO : Corriger le code et relancer
+## ⚠️ Points importants
+
+### 🔄 Première exécution
+- Génère automatiquement tous les screenshots de base
+- **Ne peut pas échouer** (pas de comparaison possible)
+
+### 🔍 Exécutions suivantes
+- Compare pixel par pixel avec les références
+- **Échoue si différences > 10%** de tolérance
+- Utile pour détecter les régressions
+
+### 📝 Contenu dynamique
+- Les articles de blog peuvent varier selon Strapi
+- Le test s'adapte automatiquement au premier article disponible
+- Les screenshots sont nommés de façon générique
+
+## 🐛 Dépannage
+
+### Test qui échoue de façon inattendue ?
+
+1. **Vérifier le rapport** : `npx playwright show-report`
+2. **Comparer visuellement** : Différences dans le rapport HTML
+3. **Si les différences sont OK** : `npm run test:visual:update`
+4. **Si les différences sont KO** : Corriger le code source
 
 ### Serveur qui ne démarre pas ?
 
-1. Vérifier que le port 3000 est libre
-2. Augmenter le timeout dans `playwright.config.js`
-3. Lancer `npm run dev` manuellement d'abord
+```bash
+# Vérifier le port 3000
+lsof -i :3000
+
+# Lancer manuellement d'abord
+npm run dev
+
+# Puis lancer les tests dans un autre terminal
+npm run test:visual -- tests/visual-regression-tests.spec.js
+```
+
+### Contenu qui change trop souvent ?
+
+- Augmenter le seuil de tolérance dans `CONFIG.threshold`
+- Exclure certaines zones variables avec `mask` dans Playwright
+- Utiliser des tests fonctionnels au lieu de visuels pour le contenu dynamique
+
+## 🎯 Bonnes pratiques
+
+1. **Toujours générer les baselines** avant les modifications importantes
+2. **Vérifier les différences** avant de mettre à jour les références
+3. **Documenter les changements acceptés** dans le commit
+4. **Maintenir les screenshots à jour** régulièrement
+
+## 📈 Maintenance
+
+- **Fréquence** : Après chaque modification visuelle majeure
+- **Nettoyage** : Supprimer les anciens résultats régulièrement
+- **Archivage** : Les anciens tests sont sauvegardés dans `archive-*`
+
+---
+
+*Tests créés pour couvrir : Blog (principal + articles), Portfolio/Réalisations, et Pages légales (CGU)*
