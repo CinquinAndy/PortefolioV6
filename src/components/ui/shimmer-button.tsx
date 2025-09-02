@@ -23,14 +23,14 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 				{...props}
 			>
 				{/* spark container */}
-				<div className="absolute inset-0 -z-30 overflow-visible blur-[2px]">
+				<div className="absolute -inset-1 -z-30 overflow-hidden rounded-full">
 					{/* spark */}
-					<div className="shimmer-slide absolute inset-0 h-full w-full rounded-full">
-						{/* spark before */}
+					<div className="absolute inset-0">
+						{/* Border light effect */}
 						<div
-							className="spin-around absolute -inset-4 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 rotate-0"
+							className="shimmer-rotate absolute -inset-2 rounded-full opacity-70"
 							style={{
-								background: `conic-gradient(from 225deg, transparent 0, ${shimmerColor} 90deg, transparent 180deg)`,
+								background: `conic-gradient(from 0deg, transparent 0deg, ${shimmerColor} 30deg, transparent 60deg, transparent 180deg, ${shimmerColor} 210deg, transparent 240deg, transparent 360deg)`,
 							}}
 						/>
 					</div>

@@ -1379,6 +1379,10 @@
 	animation: spin-around 6s infinite linear;
 }
 
+.shimmer-rotate {
+	animation: shimmer-rotate 3s linear infinite;
+}
+
 @keyframes spin-around {
 	0% {
 		transform: translateZ(0) rotate(0deg);
@@ -1405,6 +1409,16 @@
 
 /* New shimmer around button animation */
 @keyframes shimmer-slide {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Border shimmer effect */
+@keyframes shimmer-rotate {
 	0% {
 		transform: rotate(0deg);
 	}
