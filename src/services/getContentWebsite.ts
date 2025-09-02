@@ -258,15 +258,7 @@ export async function processArticleData(
  * Process markdown content
  */
 export async function processMarkdown(markdownContent: string): Promise<string> {
-	// Pre-process to fix line breaks issues
-	const preprocessedContent = markdownContent
-		// Fix line breaks after dashes: if a dash is followed by text and then a newline,
-		// ensure it doesn't create unwanted list formatting
-		.replace(/^- (.+?)(\n)(?=[^-\s])/gm, '- $1<br/>$2')  // Add <br/> for line breaks after list items
-		// Also handle multiple consecutive dashes properly
-		.replace(/^- (.+?)(\n)- /gm, '- $1<br/>$2- ')
-	
-	const result = await remark().use(html).process(preprocessedContent)
+	const result = await remark().use(html).process(markdownContent)
 	return result.toString()
 }
 

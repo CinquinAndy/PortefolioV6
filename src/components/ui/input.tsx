@@ -2,7 +2,11 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Input = React.forwardRef(({ type, className, ...props }, ref) => {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	className?: string
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(({ type = 'text', className, ...props }, ref) => {
 	return (
 		<input
 			className={cn(
@@ -18,3 +22,4 @@ const Input = React.forwardRef(({ type, className, ...props }, ref) => {
 Input.displayName = 'Input'
 
 export { Input }
+export type { InputProps }

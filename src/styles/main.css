@@ -141,10 +141,6 @@
 		color: #fff;
 	}
 
-	.layout-custom * {
-		list-style: inside;
-	}
-
 	.Toastify__toast-body * {
 		font-family: var(--font-be-vietnam-pro);
 		font-weight: 400;

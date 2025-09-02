@@ -13,15 +13,35 @@ const options = {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		if (domNode?.type === 'tag') {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-			const { name, children, attribs } = domNode
+			const { name, children, attribs, parent } = domNode
 
 			if (name === 'p') {
+				// Check if this paragraph is inside a list item by walking up the parent tree
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+				let currentParent = parent
+				let isInListItem = false
+				
+				// Walk up the DOM tree to check if we're inside a list item
+				while (currentParent) {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+					if (currentParent.name === 'li' || currentParent.name === 'ul' || currentParent.name === 'ol') {
+						isInListItem = true
+						break
+					}
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+					currentParent = currentParent.parent
+				}
+				
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				const content = domNode.children?.[0]?.data ?? ''
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				if (isMarkdownTable(content)) {
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return markdownTableToHtml(content)
+				} else if (isInListItem) {
+					// Don't wrap paragraphs inside list items with additional divs
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+					return domToReact(children, options)
 				} else {
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return <div className={'my-5'}>{domToReact(children, options)}</div>
