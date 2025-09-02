@@ -3,8 +3,8 @@
 	"version": "9.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
+		"dev": "next dev --turbo",
+		"build": "next build --turbo",
 		"start": "next start",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
