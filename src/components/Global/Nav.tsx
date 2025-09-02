@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { GradientBackgroundWithoutAnimation } from '@/components/Global/Animations/GradientBackgroundWithoutAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { AnimatedUnderline } from '@/components/ui/animated-underline'
-import { StarButton } from '@/components/ui/star-button'
+import { ShimmerButton } from '@/components/ui/shimmer-button'
 
 interface NavProps {
 	selectedMenu?: string
@@ -312,9 +312,17 @@ function Nav({
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
 				</h1>
 				{isHome && (
-					<div className="absolute mt-8 flex flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6">
-						<StarButton lightColor="#6366f1">Mon Blog</StarButton>
-						<StarButton lightColor="#0ea5e9">Mes Réalisations</StarButton>
+					<div className="absolute top-1/2 left-1/2 mt-8 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6">
+						<ShimmerButton className="shadow-2xl">
+							<span className="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg">
+								Shimmer Button
+							</span>
+						</ShimmerButton>
+						<ShimmerButton className="shadow-2xl">
+							<span className="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg">
+								Shimmer Button
+							</span>
+						</ShimmerButton>
 					</div>
 				)}
 				{!isHome && (
