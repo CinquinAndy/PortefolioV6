@@ -1,6 +1,8 @@
 import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
 
+import { Suspense } from 'react'
+
 import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
 import { getResponseData } from '@/types/strapi'
 
@@ -67,10 +69,36 @@ export default async function Page({ params }: BlogPageProps) {
 				/>
 			)}
 			<div>
-				<BlogContent articles={articles ?? []} locale={locale} />
+				<Suspense fallback={<BlogContentSkeleton />}>
+					<BlogContent articles={articles ?? []} locale={locale} />
+				</Suspense>
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
 		</>
+	)
+}
+
+function BlogContentSkeleton() {
+	return (
+		<section className="relative w-full">
+			<div className="mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="relative space-y-8 py-12 md:py-16 lg:py-20">
+					{/* Search skeleton */}
+					<div className="mx-auto max-w-2xl">
+						<div className="h-12 bg-gray-300 rounded-lg animate-pulse" />
+					</div>
+					
+					{/* Grid skeleton */}
+					<div className="mx-auto max-w-360">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+							{Array.from({ length: 6 }).map((_, i) => (
+								<div key={i} className="bg-gray-300 rounded-lg h-64 animate-pulse" />
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 	)
 }
