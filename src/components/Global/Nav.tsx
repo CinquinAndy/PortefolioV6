@@ -7,7 +7,6 @@ import React from 'react'
 
 import { ContentWebsite, LinkComponent } from '@/types/strapi'
 import { usePathname } from 'next/navigation'
-import { Locale } from '@/i18n/config'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -23,7 +22,7 @@ interface NavProps {
 	frRedirect?: string
 	enRedirect?: string
 	content_website?: ContentWebsite
-	locale?: Locale
+	locale?: string
 }
 
 function Nav({
@@ -315,9 +314,9 @@ function Nav({
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
 				</h1>
 				{isHome && (
-					<div className="absolute top-1/2 left-1/2 mt-8 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6">
+					<div className="absolute bottom-0 left-1/2 mb-10 flex -translate-x-1/2 flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6 md:mb-20">
 						<ShimmerButton
-							className="shadow-2xl"
+							className="w-48 shadow-2xl"
 							shimmerColor="#0ea5e9"
 							onClick={() => (window.location.href = '/portefolio')}
 						>
@@ -326,7 +325,7 @@ function Nav({
 							</span>
 						</ShimmerButton>
 						<ShimmerButton
-							className="shadow-2xl"
+							className="w-48 shadow-2xl"
 							shimmerColor="#6366f1"
 							onClick={() => (window.location.href = '/blog')}
 						>

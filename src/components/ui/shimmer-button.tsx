@@ -60,7 +60,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 				<div className="absolute inset-[0px] z-30 rounded-full shadow-[inset_0_-8px_10px_#ffffff1f] transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]" />
 
 				<motion.div
-					className="absolute inset-[2px] z-0 scale-110"
+					className="absolute inset-[0px] z-0 scale-110"
 					style={{
 						borderRadius: 'inherit',
 						background: `conic-gradient(from 0deg, transparent 0deg, ${shimmerColor} 30deg, ${shimmerColor} 60deg, transparent 90deg, transparent 360deg)`,
@@ -77,11 +77,11 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 
 				{/* Mask to hide inner part and show only border */}
 				<div
-					className="absolute inset-0 z-10"
+					className="absolute z-10"
 					style={{
-						inset: '2px',
+						inset: '1px',
 						borderRadius: 'inherit',
-						background: '#000000',
+						background: '#14171c',
 					}}
 				/>
 
