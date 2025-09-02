@@ -279,8 +279,6 @@ test.describe('🚀 Portfolio/Realisations Visual Tests', () => {
 		// Vérifier la présence de projets/réalisations
 		const projects = await page.locator('[class*="card"], [class*="project"], [class*="realisation"], article').count()
 		expect(projects).toBeGreaterThan(0)
-
-		console.log(`✅ Portfolio FR: ${projects} projets trouvés`)
 	})
 
 	test('✅ Portfolio EN - Content Validation', async ({ page }) => {
@@ -291,8 +289,6 @@ test.describe('🚀 Portfolio/Realisations Visual Tests', () => {
 
 		const projects = await page.locator('[class*="card"], [class*="project"], [class*="realisation"], article').count()
 		expect(projects).toBeGreaterThan(0)
-
-		console.log(`✅ Portfolio EN: ${projects} projects found`)
 	})
 
 	test('✅ Portfolio - Project Interaction', async ({ page }) => {
@@ -309,8 +305,6 @@ test.describe('🚀 Portfolio/Realisations Visual Tests', () => {
 			// Tester le hover (si applicable)
 			await firstProject.hover()
 			await page.waitForTimeout(500)
-
-			console.log('✅ Premier projet interactif et visible')
 		}
 	})
 })
@@ -345,8 +339,6 @@ test.describe('⚖️ Legal Pages Visual Tests', () => {
 		// Vérifier la structure
 		const headings = await page.locator('h1, h2, h3, h4').count()
 		expect(headings).toBeGreaterThan(1)
-
-		console.log(`✅ CGU FR: ${legalContent?.length} caractères de contenu légal`)
 	})
 
 	test('✅ CGU EN - Content Validation', async ({ page }) => {
@@ -360,8 +352,6 @@ test.describe('⚖️ Legal Pages Visual Tests', () => {
 
 		const headings = await page.locator('h1, h2, h3, h4').count()
 		expect(headings).toBeGreaterThan(1)
-
-		console.log(`✅ CGU EN: ${legalContent?.length} characters of legal content`)
 	})
 })
 
@@ -404,18 +394,9 @@ test.describe('🎯 Global Validation Tests', () => {
 			})
 		}
 
-		// Afficher le résumé
-		console.log('\n🎨 VISUAL REGRESSION TEST SUMMARY:')
-		results.forEach(r => {
-			const status = r.success ? '✅' : '❌'
-			console.log(`${status} ${r.name}: ${r.contentElements} elements`)
-		})
-
 		// Vérifier que toutes les pages principales passent
 		const failedPages = results.filter(r => !r.success)
 		expect(failedPages.length).toBe(0)
-
-		console.log(`\n📊 Status: ${results.length}/6 target pages ready for visual testing`)
 	})
 
 	test('✅ Navigation Consistency Across Pages', async ({ page }) => {
@@ -434,8 +415,6 @@ test.describe('🎯 Global Validation Tests', () => {
 			expect(footer).toBeGreaterThan(0)
 			// Le header peut être dans nav ou séparé
 			expect(header + nav).toBeGreaterThan(0)
-
-			console.log(`✅ ${pagePath}: nav=${nav}, footer=${footer}, header=${header}`)
 		}
 	})
 
