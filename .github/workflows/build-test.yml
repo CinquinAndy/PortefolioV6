@@ -61,10 +61,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-
 
-      - name: Build with Turbopack
+      - name: Build
         if: steps.cache-nextjs.outputs.cache-hit != 'true'
         run: |
-          echo "🚀 Building with Turbopack..."
+          echo "🚀 Building"
           pnpm build
         env:
           NEXT_TELEMETRY_DISABLED: 1
