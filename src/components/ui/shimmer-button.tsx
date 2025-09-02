@@ -28,17 +28,18 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 			>
 				{/* Rotating border glow */}
 				<motion.div
-					className="absolute -inset-0.5 -z-10 rounded-full opacity-0 group-hover:opacity-100"
+					className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100"
 					style={{
-						background: `conic-gradient(from 0deg, transparent 0deg, ${shimmerColor} 60deg, transparent 120deg, transparent 180deg, ${shimmerColor} 240deg, transparent 300deg, transparent 360deg)`,
+						boxShadow: `0 0 0 1px ${shimmerColor}40`,
+						borderRadius: 'inherit',
 					}}
 					animate={{
-						rotate: 360,
+						boxShadow: [`0 0 0 1px ${shimmerColor}40`, `0 0 0 2px ${shimmerColor}80`, `0 0 0 1px ${shimmerColor}40`],
 					}}
 					transition={{
 						repeat: Infinity,
-						ease: 'linear',
-						duration: 3,
+						ease: 'easeInOut',
+						duration: 2,
 					}}
 				/>
 
