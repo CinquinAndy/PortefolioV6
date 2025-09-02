@@ -27,7 +27,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 			>
 				{/* Pulsing inner glow */}
 				<motion.div
-					className="absolute inset-0 -z-10 rounded-full"
+					className="absolute inset-[0px] z-30 rounded-full"
 					style={{
 						background: `radial-gradient(circle, ${shimmerColor}10 0%, transparent 70%)`,
 					}}
@@ -44,7 +44,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 
 				{/* Highlight overlay */}
 				<motion.div
-					className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
+					className="absolute inset-[0px] z-30 rounded-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
 					animate={{
 						x: ['-100%', '100%'],
 					}}
@@ -57,14 +57,11 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 				/>
 
 				{/* Inner highlight */}
-				<div className="absolute inset-0 rounded-full shadow-[inset_0_-8px_10px_#ffffff1f] transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]" />
+				<div className="absolute inset-[0px] z-30 rounded-full shadow-[inset_0_-8px_10px_#ffffff1f] transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]" />
 
-				{/* Rotating border */}
 				<motion.div
-					className="absolute inset-0"
+					className="absolute inset-[2px] z-0 scale-110"
 					style={{
-						zIndex: 4,
-						inset: '2px',
 						borderRadius: 'inherit',
 						background: `conic-gradient(from 0deg, transparent 0deg, ${shimmerColor} 30deg, ${shimmerColor} 60deg, transparent 90deg, transparent 360deg)`,
 					}}
@@ -74,15 +71,14 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 					transition={{
 						repeat: Infinity,
 						ease: 'linear',
-						duration: 2,
+						duration: 6,
 					}}
 				/>
 
 				{/* Mask to hide inner part and show only border */}
 				<div
-					className="absolute inset-0"
+					className="absolute inset-0 z-10"
 					style={{
-						zIndex: 5,
 						inset: '2px',
 						borderRadius: 'inherit',
 						background: '#000000',
