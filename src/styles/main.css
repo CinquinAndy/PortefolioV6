@@ -4,7 +4,7 @@
 @plugin 'tailwindcss-animate';
 
 /* Safelist for dynamically generated classes */
-@source inline("fill-indigo-500 fill-sky-500 fill-lime-500 fill-rose-500 fill-amber-500 fill-emerald-500 fill-cyan-500 fill-violet-500 fill-fuchsia-500 fill-orange-500 fill-teal-500");
+@source inline("fill-indigo-500 fill-sky-500 fill-lime-500 fill-rose-500 fill-amber-500 fill-emerald-500 fill-cyan-500 fill-violet-500 fill-fuchsia-500 fill-orange-500 fill-teal-500 animate-shimmer-slide animate-spin-around animate-star-btn animate-shimmer-simple");
 
 /* StarButton animations */
 @keyframes star-btn {
@@ -19,13 +19,7 @@
 /* Additional animations */
 @keyframes spin-around {
   0% {
-    transform: translateZ(0) rotate(0);
-  }
-  15%, 35% {
-    transform: translateZ(0) rotate(90deg);
-  }
-  65%, 85% {
-    transform: translateZ(0) rotate(270deg);
+    transform: translateZ(0) rotate(0deg);
   }
   100% {
     transform: translateZ(0) rotate(360deg);
@@ -33,8 +27,29 @@
 }
 
 @keyframes shimmer-slide {
-  to {
-    transform: translate(calc(100cqw - 100%), 0);
+  0% {
+    transform: translateX(-200%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+/* Alternative shimmer pour debug */
+@keyframes shimmer-simple {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
   }
 }
 
@@ -59,8 +74,9 @@
 	--animate-star-btn: star-btn calc(var(--duration, 3) * 1s) linear infinite;
 	
 	/* Additional animations */
-	--animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
-	--animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+	--animate-shimmer-slide: shimmer-slide var(--speed, 2.5s) ease-in-out infinite;
+	--animate-spin-around: spin-around var(--speed, 6s) linear infinite;
+	--animate-shimmer-simple: shimmer-simple var(--speed, 2s) linear infinite;
 
 	/* Custom slate colors */
 	--color-slate-1100: #090d16;
