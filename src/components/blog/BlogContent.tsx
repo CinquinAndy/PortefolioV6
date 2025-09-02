@@ -21,18 +21,18 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 	const searchParams = useSearchParams()
 	const router = useRouter()
 	const pathname = usePathname()
-	
+
 	const [searchQuery, setSearchQuery] = useState<string>('')
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [selectedType, setSelectedType] = useState<string>('all')
 	const [currentPage, setCurrentPage] = useState<number>(1)
-	
+
 	const pageSize = 12
 
 	// Update current page from URL params
 	useEffect(() => {
 		const page = searchParams?.get('page')
-		setCurrentPage(page !== null ? parseInt(page) : 1)
+		setCurrentPage(page != null && page !== '' ? parseInt(page) : 1)
 	}, [searchParams])
 
 	const fuse = useMemo(
@@ -72,16 +72,19 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 	const totalPages = Math.ceil(filteredArticles.length / pageSize)
 
 	// Handle page change
-	const handlePageChange = useCallback((page: number) => {
-		const params = new URLSearchParams(searchParams?.toString() ?? '')
-		if (page === 1) {
-			params.delete('page')
-		} else {
-			params.set('page', page.toString())
-		}
-		const newUrl = params.toString().length > 0 ? `${pathname}?${params.toString()}` : (pathname ?? '')
-		router.push(newUrl, { scroll: false })
-	}, [searchParams, pathname, router])
+	const handlePageChange = useCallback(
+		(page: number) => {
+			const params = new URLSearchParams(searchParams?.toString() ?? '')
+			if (page === 1) {
+				params.delete('page')
+			} else {
+				params.set('page', page.toString())
+			}
+			const newUrl = params.toString().length > 0 ? `${pathname}?${params.toString()}` : (pathname ?? '')
+			router.push(newUrl, { scroll: false })
+		},
+		[searchParams, pathname, router]
+	)
 
 	// Reset to first page when search changes
 	useEffect(() => {
@@ -106,11 +109,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 								/>
 							</div>
 							{totalPages > 1 && (
-								<PaginationClient 
-									currentPage={currentPage} 
-									totalPages={totalPages} 
-									onPageChange={handlePageChange}
-								/>
+								<PaginationClient currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
 							)}
 						</>
 					) : (
@@ -148,7 +147,7 @@ function PaginationClient({ totalPages, onPageChange, currentPage }: PaginationC
 				{currentPage > 1 && (
 					<button
 						type="button"
-						className="inline-flex h-full items-center border-t-2 border-transparent pr-1 pt-6 text-sm font-medium text-slate-50 hover:border-slate-300 hover:text-white"
+						className="inline-flex h-full items-center border-t-2 border-transparent pt-6 pr-1 text-sm font-medium text-slate-50 hover:border-slate-300 hover:text-white"
 						onClick={() => onPageChange(currentPage - 1)}
 					>
 						<ArrowLongLeftIcon aria-hidden="true" className="mr-3 h-5 w-5 text-slate-50" />
@@ -179,7 +178,7 @@ function PaginationClient({ totalPages, onPageChange, currentPage }: PaginationC
 				{currentPage < totalPages && (
 					<button
 						type="button"
-						className="inline-flex h-full items-center border-t-2 border-transparent pr-1 pt-6 text-sm font-medium text-slate-50 hover:border-slate-300 hover:text-white"
+						className="inline-flex h-full items-center border-t-2 border-transparent pt-6 pr-1 text-sm font-medium text-slate-50 hover:border-slate-300 hover:text-white"
 						onClick={() => onPageChange(currentPage + 1)}
 					>
 						Next
