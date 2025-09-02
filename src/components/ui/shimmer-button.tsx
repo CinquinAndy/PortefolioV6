@@ -46,17 +46,14 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 				ref={ref}
 				{...props}
 			>
-				{/* Shimmer effect */}
-				<div
-					className="animate-shimmer-around absolute inset-0 opacity-80"
-					style={{
-						WebkitMaskImage: 'radial-gradient(circle, transparent 65%, black 70%)',
-						maskImage: 'radial-gradient(circle, transparent 65%, black 70%)',
-						filter: 'blur(0.5px)',
-						borderRadius: borderRadius,
-						background: `conic-gradient(from 0deg, transparent 0deg, ${shimmerColor} 60deg, transparent 120deg, transparent 180deg, ${shimmerColor} 240deg, transparent 300deg, transparent 360deg)`,
-					}}
-				/>
+				{/* spark container */}
+				<div className={cn('-z-30 blur-[2px]', '[container-type:size] absolute inset-0 overflow-visible')}>
+					{/* spark */}
+					<div className="animate-shimmer-slide absolute inset-0 [aspect-ratio:1] h-[100cqh] [border-radius:0] [mask:none]">
+						{/* spark before */}
+						<div className="animate-spin-around absolute -inset-full w-auto [translate:0_0] rotate-0 [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
+					</div>
+				</div>
 				{children}
 
 				{/* Highlight */}

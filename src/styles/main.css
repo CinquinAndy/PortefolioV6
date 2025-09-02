@@ -21,25 +21,25 @@
 	0% {
 		transform: translateZ(0) rotate(0deg);
 	}
+	15%,
+	35% {
+		transform: translateZ(0) rotate(90deg);
+	}
+	65%,
+	85% {
+		transform: translateZ(0) rotate(270deg);
+	}
 	100% {
 		transform: translateZ(0) rotate(360deg);
 	}
 }
 
 @keyframes shimmer-slide {
-	0% {
-		transform: translateX(-200%);
-		opacity: 0;
+	from {
+		transform: translateX(-100%);
 	}
-	10% {
-		opacity: 1;
-	}
-	90% {
-		opacity: 1;
-	}
-	100% {
-		transform: translateX(200%);
-		opacity: 0;
+	to {
+		transform: translate(calc(100cqw - 100%), 0);
 	}
 }
 
@@ -111,13 +111,8 @@
 	--animate-star-btn: star-btn calc(var(--duration, 3) * 1s) linear infinite;
 
 	/* Additional animations */
-	--animate-shimmer-slide: shimmer-slide var(--speed, 2.5s) ease-in-out infinite;
-	--animate-spin-around: spin-around var(--speed, 6s) linear infinite;
-
-	/* Shimmer button specific animations */
-	--animate-shimmer-slide-button: shimmer-slide-button var(--speed, 3s) ease-in-out infinite;
-	--animate-spin-around-button: spin-around-button var(--speed, 6s) linear infinite;
-	--animate-shimmer-around: shimmer-around var(--speed, 3s) linear infinite;
+	--animate-shimmer-slide: shimmer-slide var(--speed, 3s) ease-in-out infinite alternate;
+	--animate-spin-around: spin-around calc(var(--speed) * 2) linear infinite;
 	--animate-shimmer-simple: shimmer-simple var(--speed, 2s) linear infinite;
 
 	/* Custom slate colors */
