@@ -2,12 +2,10 @@
 
 import type { Article, Locale } from '@/types/strapi'
 
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { useMemo, useState, useEffect, useCallback } from 'react'
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
-
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
-
 import Fuse from 'fuse.js'
 
 import { MasonryGrid } from './MasonryGrid'
@@ -141,7 +139,7 @@ interface PaginationClientProps {
 	totalPages: number
 }
 
-function PaginationClient({ currentPage, onPageChange, totalPages }: PaginationClientProps) {
+function PaginationClient({ totalPages, onPageChange, currentPage }: PaginationClientProps) {
 	const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
 	return (
