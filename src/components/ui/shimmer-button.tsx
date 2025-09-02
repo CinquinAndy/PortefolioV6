@@ -39,7 +39,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 					} as CSSProperties
 				}
 				className={cn(
-					'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden [border-radius:var(--radius)] border border-white/10 px-6 py-3 whitespace-nowrap text-white [background:var(--bg)] dark:text-black',
+					'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden rounded-[var(--radius)] border border-white/10 px-6 py-3 whitespace-nowrap text-white bg-[var(--bg)] dark:text-black',
 					'transform-gpu transition-transform duration-300 ease-in-out active:translate-y-px',
 					className
 				)}
@@ -47,11 +47,11 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 				{...props}
 			>
 				{/* spark container */}
-				<div className={cn('-z-30 blur-[2px]', '[container-type:size] absolute inset-0 overflow-visible')}>
+				<div className={cn('-z-30 blur-[2px] absolute inset-0 overflow-visible')}>
 					{/* spark */}
-					<div className="animate-shimmer-slide absolute inset-0 [aspect-ratio:1] h-[100cqh] [border-radius:0] [mask:none]">
+					<div className="shimmer-slide absolute inset-0 aspect-square h-full rounded-none">
 						{/* spark before */}
-						<div className="animate-spin-around absolute -inset-full w-auto [translate:0_0] rotate-0 [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
+						<div className="spin-around absolute -inset-full w-auto translate-x-0 translate-y-0 rotate-0 bg-[conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
 					</div>
 				</div>
 				{children}

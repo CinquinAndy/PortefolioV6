@@ -4,91 +4,7 @@
 @plugin 'tailwindcss-animate';
 
 /* Safelist for dynamically generated classes */
-@source inline("fill-indigo-500 fill-sky-500 fill-lime-500 fill-rose-500 fill-amber-500 fill-emerald-500 fill-cyan-500 fill-violet-500 fill-fuchsia-500 fill-orange-500 fill-teal-500 animate-shimmer-slide animate-spin-around animate-star-btn animate-shimmer-simple");
-
-/* StarButton animations */
-@keyframes star-btn {
-	0% {
-		offset-distance: 0%;
-	}
-	100% {
-		offset-distance: 100%;
-	}
-}
-
-/* Additional animations */
-@keyframes spin-around {
-	0% {
-		transform: translateZ(0) rotate(0deg);
-	}
-	15%,
-	35% {
-		transform: translateZ(0) rotate(90deg);
-	}
-	65%,
-	85% {
-		transform: translateZ(0) rotate(270deg);
-	}
-	100% {
-		transform: translateZ(0) rotate(360deg);
-	}
-}
-
-@keyframes shimmer-slide {
-	from {
-		transform: translateX(-100%);
-	}
-	to {
-		transform: translate(calc(100cqw - 100%), 0);
-	}
-}
-
-/* Alternative shimmer pour debug */
-@keyframes shimmer-simple {
-	0% {
-		left: -100%;
-	}
-	100% {
-		left: 100%;
-	}
-}
-
-/* Shimmer button specific keyframes */
-@keyframes shimmer-slide-button {
-	0% {
-		transform: translateX(-200%);
-		opacity: 0;
-	}
-	10% {
-		opacity: 1;
-	}
-	90% {
-		opacity: 1;
-	}
-	100% {
-		transform: translateX(200%);
-		opacity: 0;
-	}
-}
-
-@keyframes spin-around-button {
-	0% {
-		transform: translateZ(0) rotate(0deg);
-	}
-	100% {
-		transform: translateZ(0) rotate(360deg);
-	}
-}
-
-/* New shimmer around button animation */
-@keyframes shimmer-around {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
+@source inline("fill-indigo-500 fill-sky-500 fill-lime-500 fill-rose-500 fill-amber-500 fill-emerald-500 fill-cyan-500 fill-violet-500 fill-fuchsia-500 fill-orange-500 fill-teal-500");
 
 @theme {
 	/* Custom breakpoints - values in rem for Tailwind v4 */
@@ -106,14 +22,6 @@
 	/* Custom andy colors */
 	--color-andy-purple-500: #6c00a2;
 	--color-andy-blue-500: #001152;
-
-	/* StarButton animation */
-	--animate-star-btn: star-btn calc(var(--duration, 3) * 1s) linear infinite;
-
-	/* Additional animations */
-	--animate-shimmer-slide: shimmer-slide var(--speed, 3s) ease-in-out infinite alternate;
-	--animate-spin-around: spin-around calc(var(--speed) * 2) linear infinite;
-	--animate-shimmer-simple: shimmer-simple var(--speed, 2s) linear infinite;
 
 	/* Custom slate colors */
 	--color-slate-1100: #090d16;
@@ -1458,5 +1366,49 @@
 	}
 	100% {
 		transform: translateY(0);
+	}
+}
+
+/* Shimmer Button */
+
+.shimmer-slide {
+	animation: shimmer-slide 3s ease-in-out infinite alternate;
+}
+
+.spin-around {
+	animation: spin-around 6s infinite linear;
+}
+
+@keyframes spin-around {
+	0% {
+		transform: translateZ(0) rotate(0deg);
+	}
+	15% {
+		transform: translateZ(0) rotate(90deg);
+	}
+	35% {
+		transform: translateZ(0) rotate(90deg);
+	}
+	65% {
+		transform: translateZ(0) rotate(270deg);
+	}
+	85% {
+		transform: translateZ(0) rotate(270deg);
+	}
+	100% {
+		transform: translateZ(0) rotate(360deg);
+	}
+	100% {
+		transform: translateZ(0) rotate(360deg);
+	}
+}
+
+/* New shimmer around button animation */
+@keyframes shimmer-slide {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
 	}
 }
