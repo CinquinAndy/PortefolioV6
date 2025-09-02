@@ -21,3 +21,14 @@ export const replaceTitle = (title: string): string => {
 
 	return newTitle
 }
+
+export const replaceDynamicVariables = (content: string): string => {
+	if (!content) return ''
+
+	const currentYear = new Date().getFullYear()
+	
+	// Replace dynamic variables
+	return content
+		.replace(/{actualYear}/g, currentYear.toString())
+		.replace(/{currentYear}/g, currentYear.toString())
+}

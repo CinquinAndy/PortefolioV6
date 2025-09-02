@@ -5,6 +5,8 @@ import hljs from 'highlight.js'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { replaceDynamicVariables } from '@/services/utils'
+
 const options = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	replace: (domNode: any) => {
@@ -101,8 +103,9 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	if (!value) {
 		return null
 	}
-	const parsedContent = parse(value, options)
-	// if replaced content contains '{actualYear}' replace it with the current year
+	// Replace dynamic variables before parsing
+	const valueWithReplacements = replaceDynamicVariables(value)
+	const parsedContent = parse(valueWithReplacements, options)
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
 	const replacedContent: any = domToReact(parsedContent as any, options)
 
