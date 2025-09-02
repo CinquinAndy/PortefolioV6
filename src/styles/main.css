@@ -8,49 +8,86 @@
 
 /* StarButton animations */
 @keyframes star-btn {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
-    offset-distance: 100%;
-  }
+	0% {
+		offset-distance: 0%;
+	}
+	100% {
+		offset-distance: 100%;
+	}
 }
 
 /* Additional animations */
 @keyframes spin-around {
-  0% {
-    transform: translateZ(0) rotate(0deg);
-  }
-  100% {
-    transform: translateZ(0) rotate(360deg);
-  }
+	0% {
+		transform: translateZ(0) rotate(0deg);
+	}
+	100% {
+		transform: translateZ(0) rotate(360deg);
+	}
 }
 
 @keyframes shimmer-slide {
-  0% {
-    transform: translateX(-200%);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(200%);
-    opacity: 0;
-  }
+	0% {
+		transform: translateX(-200%);
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(200%);
+		opacity: 0;
+	}
 }
 
 /* Alternative shimmer pour debug */
 @keyframes shimmer-simple {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
+	0% {
+		left: -100%;
+	}
+	100% {
+		left: 100%;
+	}
+}
+
+/* Shimmer button specific keyframes */
+@keyframes shimmer-slide-button {
+	0% {
+		transform: translateX(-200%);
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(200%);
+		opacity: 0;
+	}
+}
+
+@keyframes spin-around-button {
+	0% {
+		transform: translateZ(0) rotate(0deg);
+	}
+	100% {
+		transform: translateZ(0) rotate(360deg);
+	}
+}
+
+/* New shimmer around button animation */
+@keyframes shimmer-around {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @theme {
@@ -72,10 +109,15 @@
 
 	/* StarButton animation */
 	--animate-star-btn: star-btn calc(var(--duration, 3) * 1s) linear infinite;
-	
+
 	/* Additional animations */
 	--animate-shimmer-slide: shimmer-slide var(--speed, 2.5s) ease-in-out infinite;
 	--animate-spin-around: spin-around var(--speed, 6s) linear infinite;
+
+	/* Shimmer button specific animations */
+	--animate-shimmer-slide-button: shimmer-slide-button var(--speed, 3s) ease-in-out infinite;
+	--animate-spin-around-button: spin-around-button var(--speed, 6s) linear infinite;
+	--animate-shimmer-around: shimmer-around var(--speed, 3s) linear infinite;
 	--animate-shimmer-simple: shimmer-simple var(--speed, 2s) linear infinite;
 
 	/* Custom slate colors */
