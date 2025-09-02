@@ -306,7 +306,7 @@ function Nav({
 					</div>
 				)}
 				<h1
-					className={`${isHome ? 'sr-only' : ''} z-20 px-20 text-center text-2xl font-semibold tracking-widest uppercase lg:text-5xl lg:text-8xl`}
+					className={`${isHome ? 'sr-only' : ''} z-20 text-center text-3xl font-semibold tracking-widest uppercase md:text-4xl lg:text-6xl 2xl:text-8xl`}
 				>
 					{}
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
