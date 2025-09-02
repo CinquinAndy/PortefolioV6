@@ -1,0 +1,357 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - region "Notifications Alt+T"
+  - banner [ref=e4]:
+    - button "Main Menu" [ref=e6] [cursor=pointer]:
+      - img [ref=e7] [cursor=pointer]
+    - link "Logo Cinquin Andy Signature" [ref=e10] [cursor=pointer]:
+      - /url: /
+      - img "Logo Cinquin Andy Signature" [ref=e11] [cursor=pointer]
+    - link "C O N T A C T" [ref=e12] [cursor=pointer]:
+      - /url: /contact
+      - heading "C O N T A C T" [level=2] [ref=e13] [cursor=pointer]:
+        - generic [ref=e14] [cursor=pointer]:
+          - generic [ref=e15] [cursor=pointer]: C
+          - generic [ref=e16] [cursor=pointer]: O
+          - generic [ref=e17] [cursor=pointer]: "N"
+          - generic [ref=e18] [cursor=pointer]: T
+          - generic [ref=e19] [cursor=pointer]: A
+          - generic [ref=e20] [cursor=pointer]: C
+          - generic [ref=e21] [cursor=pointer]: T
+  - navigation:
+    - generic:
+      - link "andy cinquin":
+        - /url: /
+        - generic:
+          - heading "andy cinquin" [level=2]
+      - link "mes réalisations":
+        - /url: /portefolio
+        - generic:
+          - heading "mes réalisations" [level=2]
+      - link "blog":
+        - /url: /blog
+        - generic:
+          - heading "blog" [level=2]
+      - link "à propos de moi":
+        - /url: /about
+        - generic:
+          - heading "à propos de moi" [level=2]
+      - link "contactez moi":
+        - /url: /contact
+        - generic:
+          - heading "contactez moi" [level=2]
+      - generic:
+        - separator
+        - generic:
+          - generic:
+            - link:
+              - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+              - img
+            - link:
+              - /url: https://www.instagram.com/cinquin.andy/
+              - img
+            - link:
+              - /url: https://www.linkedin.com/in/andy-cinquin/
+              - img
+            - link:
+              - /url: https://github.com/CinquinAndy/
+              - img
+            - link:
+              - /url: https://www.malt.fr/profile/andycinquin
+              - img
+      - generic:
+        - paragraph: 4 Impasse de la Marchaisière, 44115 Haute-Goulaine
+        - link "+33 6 21 58 26 84":
+          - /url: tel:+33621582684
+        - generic:
+          - link "→ go to english version":
+            - /url: ""
+    - button "Close Menu"
+  - generic [ref=e22]:
+    - heading "Mon portefolio" [level=1] [ref=e23]
+    - img "Développeur Freelance - Logo" [ref=e25]
+  - generic [ref=e26]:
+    - generic [ref=e29]:
+      - link "Beswib Marketplace C2C avec Next.js 15 et intégration PayPal Partner" [ref=e30] [cursor=pointer]:
+        - /url: /portefolio/beswib
+        - heading "Beswib" [level=2] [ref=e31] [cursor=pointer]
+        - heading "Marketplace C2C avec Next.js 15 et intégration PayPal Partner" [level=2] [ref=e36] [cursor=pointer]
+      - link "Neova Protocol Web3 Refactoring complet d'un écosystème Web3 de 30+ services" [ref=e37] [cursor=pointer]:
+        - /url: /portefolio/neova-protocol
+        - heading "Neova Protocol Web3" [level=2] [ref=e38] [cursor=pointer]
+        - heading "Refactoring complet d'un écosystème Web3 de 30+ services" [level=2] [ref=e43] [cursor=pointer]
+      - 'link "Forhives V2 : Un rafraîchissement créatif Création d''une expérience interactive inspirée par le jeu ''Split Fiction''" [ref=e44] [cursor=pointer]':
+        - /url: /portefolio/forhives-v2
+        - 'heading "Forhives V2 : Un rafraîchissement créatif" [level=2] [ref=e45] [cursor=pointer]'
+        - heading "Création d'une expérience interactive inspirée par le jeu 'Split Fiction'" [level=2] [ref=e50] [cursor=pointer]
+      - link "Autrice - Esperance M. CMS personnalisé avec shader WebGL et scrapper Wattpad" [ref=e51] [cursor=pointer]:
+        - /url: /portefolio/esperancem
+        - heading "Autrice - Esperance M." [level=2] [ref=e52] [cursor=pointer]
+        - heading "CMS personnalisé avec shader WebGL et scrapper Wattpad" [level=2] [ref=e57] [cursor=pointer]
+      - link "[Wildlife] - F1 Realtime race track Application F1 avec IA générative AWS" [ref=e58] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-realtime-racetrack-f1
+        - heading "[Wildlife] - F1 Realtime race track" [level=2] [ref=e59] [cursor=pointer]
+        - heading "Application F1 avec IA générative AWS" [level=2] [ref=e64] [cursor=pointer]
+      - link "[Wildlife] - AWS Marketing Studio Génération procédurale de 27 templates marketing avec AWS" [ref=e65] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-marketing-studio
+        - heading "[Wildlife] - AWS Marketing Studio" [level=2] [ref=e66] [cursor=pointer]
+        - heading "Génération procédurale de 27 templates marketing avec AWS" [level=2] [ref=e71] [cursor=pointer]
+      - link "[Wildlife] - AWS Sticker Generator De l'idée à la réalisation, un projet en pleine autonomie" [ref=e72] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-sticker-generator
+        - heading "[Wildlife] - AWS Sticker Generator" [level=2] [ref=e73] [cursor=pointer]
+        - heading "De l'idée à la réalisation, un projet en pleine autonomie" [level=2] [ref=e78] [cursor=pointer]
+      - link "[Wildlife] - AWS NRF Retail Experience Quand le physique rencontre le digital" [ref=e79] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-nrf-retail
+        - heading "[Wildlife] - AWS NRF Retail Experience" [level=2] [ref=e80] [cursor=pointer]
+        - heading "Quand le physique rencontre le digital" [level=2] [ref=e85] [cursor=pointer]
+      - link "[Wildlife] - AWS Bartender Mixologist L'art du cocktail rencontre l'intelligence artificielle" [ref=e86] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-bartender-mixologist
+        - heading "[Wildlife] - AWS Bartender Mixologist" [level=2] [ref=e87] [cursor=pointer]
+        - heading "L'art du cocktail rencontre l'intelligence artificielle" [level=2] [ref=e92] [cursor=pointer]
+      - link "[Wildlife] - AWS Portrait Gallery Transformation de photos en œuvres d'art via l'IA" [ref=e93] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-portrait-gallery
+        - heading "[Wildlife] - AWS Portrait Gallery" [level=2] [ref=e94] [cursor=pointer]
+        - heading "Transformation de photos en œuvres d'art via l'IA" [level=2] [ref=e99] [cursor=pointer]
+      - link "[Wildlife] - AWS Powered Portraits Une expérience immersive de transformation de portraits" [ref=e100] [cursor=pointer]:
+        - /url: /portefolio/wildlife-aws-powered-portraits
+        - heading "[Wildlife] - AWS Powered Portraits" [level=2] [ref=e101] [cursor=pointer]
+        - heading "Une expérience immersive de transformation de portraits" [level=2] [ref=e106] [cursor=pointer]
+      - link "ForVoyez - Plugin WordPress d'Analyse d'Images Automatisation intelligente de la gestion des médias WordPress" [ref=e107] [cursor=pointer]:
+        - /url: /portefolio/forvoyez-wordpress-plugin
+        - heading "ForVoyez - Plugin WordPress d'Analyse d'Images" [level=2] [ref=e108] [cursor=pointer]
+        - heading "Automatisation intelligente de la gestion des médias WordPress" [level=2] [ref=e113] [cursor=pointer]
+      - link "ForVoyez - Plugin Strapi d'Analyse d'Images Automatisation SEO intelligente pour Strapi" [ref=e114] [cursor=pointer]:
+        - /url: /portefolio/forvoyez-strapi-plugin
+        - heading "ForVoyez - Plugin Strapi d'Analyse d'Images" [level=2] [ref=e115] [cursor=pointer]
+        - heading "Automatisation SEO intelligente pour Strapi" [level=2] [ref=e120] [cursor=pointer]
+      - link "ForVoyez - Obsidian plugin Un plugin pour optimiser la gestion de contenu" [ref=e121] [cursor=pointer]:
+        - /url: /portefolio/forvoyez-obsidian-plugin
+        - heading "ForVoyez - Obsidian plugin" [level=2] [ref=e122] [cursor=pointer]
+        - heading "Un plugin pour optimiser la gestion de contenu" [level=2] [ref=e127] [cursor=pointer]
+      - link "La Taverne des Aventuriers Un site vitrine à la pointe de la technologie" [ref=e128] [cursor=pointer]:
+        - /url: /portefolio/latavernedesaventuriers
+        - heading "La Taverne des Aventuriers" [level=2] [ref=e129] [cursor=pointer]
+        - heading "Un site vitrine à la pointe de la technologie" [level=2] [ref=e134] [cursor=pointer]
+      - link "Cosi-Company Coaching et ressources pour les joueurs de BDO" [ref=e135] [cursor=pointer]:
+        - /url: /portefolio/cosi-company
+        - heading "Cosi-Company" [level=2] [ref=e136] [cursor=pointer]
+        - heading "Coaching et ressources pour les joueurs de BDO" [level=2] [ref=e141] [cursor=pointer]
+      - link "ForVoyez - SaaS d'auto génération d'ALT pour vos images Optimisez votre processus de rédaction avec ForVoyez" [ref=e142] [cursor=pointer]:
+        - /url: /portefolio/forvoyez
+        - heading "ForVoyez - SaaS d'auto génération d'ALT pour vos images" [level=2] [ref=e143] [cursor=pointer]
+        - heading "Optimisez votre processus de rédaction avec ForVoyez" [level=2] [ref=e148] [cursor=pointer]
+      - 'link "Plugin Strapi : Auto generate Alt, Title, Caption, on images with AI Plugin Strapi" [ref=e149] [cursor=pointer]':
+        - /url: /portefolio/plugin-strapi
+        - 'heading "Plugin Strapi : Auto generate Alt, Title, Caption, on images with AI" [level=2] [ref=e150] [cursor=pointer]'
+        - heading "Plugin Strapi" [level=2] [ref=e155] [cursor=pointer]
+      - link "Package npm - Script export repo vers LLM Package npm - Script" [ref=e156] [cursor=pointer]:
+        - /url: /portefolio/package-npm-exporter-repository-vers-llm
+        - heading "Package npm - Script export repo vers LLM" [level=2] [ref=e157] [cursor=pointer]
+        - heading "Package npm - Script" [level=2] [ref=e162] [cursor=pointer]
+      - 'link "Plugin Obsidian: Strapi Exporter Plugin Obsidian" [ref=e163] [cursor=pointer]':
+        - /url: /portefolio/plugin-obsidian
+        - 'heading "Plugin Obsidian: Strapi Exporter" [level=2] [ref=e164] [cursor=pointer]'
+        - heading "Plugin Obsidian" [level=2] [ref=e169] [cursor=pointer]
+      - link "V7 de mon portefolio Mon Portefolio !" [ref=e170] [cursor=pointer]:
+        - /url: /portefolio/portefolio-v7
+        - heading "V7 de mon portefolio" [level=2] [ref=e171] [cursor=pointer]
+        - heading "Mon Portefolio !" [level=2] [ref=e176] [cursor=pointer]
+      - link "Refonte de notre infrastructure Amélioration des performances et de la sécurité" [ref=e177] [cursor=pointer]:
+        - /url: /portefolio/refonte-infrastructure
+        - heading "Refonte de notre infrastructure" [level=2] [ref=e178] [cursor=pointer]
+        - heading "Amélioration des performances et de la sécurité" [level=2] [ref=e183] [cursor=pointer]
+      - link "ForMenu SaaS - Startup" [ref=e184] [cursor=pointer]:
+        - /url: /portefolio/formenu
+        - heading "ForMenu" [level=2] [ref=e185] [cursor=pointer]
+        - heading "SaaS - Startup" [level=2] [ref=e190] [cursor=pointer]
+      - link "My Makeup SaaS - Startup" [ref=e191] [cursor=pointer]:
+        - /url: /portefolio/my-makeup
+        - heading "My Makeup" [level=2] [ref=e192] [cursor=pointer]
+        - heading "SaaS - Startup" [level=2] [ref=e197] [cursor=pointer]
+      - link "Mariage Maeva Site web" [ref=e198] [cursor=pointer]:
+        - /url: /portefolio/wedding-maeva
+        - heading "Mariage Maeva" [level=2] [ref=e199] [cursor=pointer]
+        - heading "Site web" [level=2] [ref=e204] [cursor=pointer]
+      - link "Création d'un Template de Projet Next.js Package npm" [ref=e205] [cursor=pointer]:
+        - /url: /portefolio/template-next
+        - heading "Création d'un Template de Projet Next.js" [level=2] [ref=e206] [cursor=pointer]
+        - heading "Package npm" [level=2] [ref=e211] [cursor=pointer]
+      - link "Artriste E-commerce" [ref=e212] [cursor=pointer]:
+        - /url: /portefolio/artriste
+        - heading "Artriste" [level=2] [ref=e213] [cursor=pointer]
+        - heading "E-commerce" [level=2] [ref=e218] [cursor=pointer]
+      - link "Mon Infra Pro - Config" [ref=e219] [cursor=pointer]:
+        - /url: /portefolio/infra
+        - heading "Mon Infra" [level=2] [ref=e220] [cursor=pointer]
+        - heading "Pro - Config" [level=2] [ref=e225] [cursor=pointer]
+      - link "Second brain SaaS" [ref=e226] [cursor=pointer]:
+        - /url: /portefolio/second-brain
+        - heading "Second brain" [level=2] [ref=e227] [cursor=pointer]
+        - heading "SaaS" [level=2] [ref=e232] [cursor=pointer]
+      - link "Mon Portefolio ! Mon Portefolio !" [ref=e233] [cursor=pointer]:
+        - /url: /portefolio/mon-portefolio-v5
+        - heading "Mon Portefolio !" [level=2] [ref=e234] [cursor=pointer]
+        - heading "Mon Portefolio !" [level=2] [ref=e239] [cursor=pointer]
+      - link "Les YD Rangées Site Vitrine" [ref=e240] [cursor=pointer]:
+        - /url: /portefolio/les-yd-rangees
+        - heading "Les YD Rangées" [level=2] [ref=e241] [cursor=pointer]
+        - heading "Site Vitrine" [level=2] [ref=e246] [cursor=pointer]
+      - link "Cinquin Maeva Site Vitrine" [ref=e247] [cursor=pointer]:
+        - /url: /portefolio/cinquin-maeva
+        - heading "Cinquin Maeva" [level=2] [ref=e248] [cursor=pointer]
+        - heading "Site Vitrine" [level=2] [ref=e253] [cursor=pointer]
+      - link "ForMenu application admin SaaS - Startup" [ref=e254] [cursor=pointer]:
+        - /url: /portefolio/formenu-admin
+        - heading "ForMenu application admin" [level=2] [ref=e255] [cursor=pointer]
+        - heading "SaaS - Startup" [level=2] [ref=e260] [cursor=pointer]
+      - link "ForMenu application mobile SaaS - Startup" [ref=e261] [cursor=pointer]:
+        - /url: /portefolio/formenu-app
+        - heading "ForMenu application mobile" [level=2] [ref=e262] [cursor=pointer]
+        - heading "SaaS - Startup" [level=2] [ref=e267] [cursor=pointer]
+      - link "Maitresse Nanou Site vitrine" [ref=e268] [cursor=pointer]:
+        - /url: /portefolio/nanou
+        - heading "Maitresse Nanou" [level=2] [ref=e269] [cursor=pointer]
+        - heading "Site vitrine" [level=2] [ref=e274] [cursor=pointer]
+      - link "FESTIX Application mobile" [ref=e275] [cursor=pointer]:
+        - /url: /portefolio/festix
+        - heading "FESTIX" [level=2] [ref=e276] [cursor=pointer]
+        - heading "Application mobile" [level=2] [ref=e281] [cursor=pointer]
+      - link "Aquatair Application métier" [ref=e282] [cursor=pointer]:
+        - /url: /portefolio/aquatair
+        - heading "Aquatair" [level=2] [ref=e283] [cursor=pointer]
+        - heading "Application métier" [level=2] [ref=e288] [cursor=pointer]
+      - link "Isabelle Cinquin Site Vitrine" [ref=e289] [cursor=pointer]:
+        - /url: /portefolio/isabelle-cinquin
+        - heading "Isabelle Cinquin" [level=2] [ref=e290] [cursor=pointer]
+        - heading "Site Vitrine" [level=2] [ref=e295] [cursor=pointer]
+      - link "Julie Sommaro Site Portefolio" [ref=e296] [cursor=pointer]:
+        - /url: /portefolio/julie-sommaro
+        - heading "Julie Sommaro" [level=2] [ref=e297] [cursor=pointer]
+        - heading "Site Portefolio" [level=2] [ref=e302] [cursor=pointer]
+      - link "Générateur de groupes de classe Application web" [ref=e303] [cursor=pointer]:
+        - /url: /portefolio/groupes-nanou
+        - heading "Générateur de groupes de classe" [level=2] [ref=e304] [cursor=pointer]
+        - heading "Application web" [level=2] [ref=e309] [cursor=pointer]
+      - link "Scratch Underflow Application Web" [ref=e310] [cursor=pointer]:
+        - /url: /portefolio/scratch-underflow
+        - heading "Scratch Underflow" [level=2] [ref=e311] [cursor=pointer]
+        - heading "Application Web" [level=2] [ref=e316] [cursor=pointer]
+      - link "BidCardCoin Application Desktop" [ref=e317] [cursor=pointer]:
+        - /url: /portefolio/bidcardcoin
+        - heading "BidCardCoin" [level=2] [ref=e318] [cursor=pointer]
+        - heading "Application Desktop" [level=2] [ref=e323] [cursor=pointer]
+      - link "Pokezilla Application Web" [ref=e324] [cursor=pointer]:
+        - /url: /portefolio/pokezilla
+        - heading "Pokezilla" [level=2] [ref=e325] [cursor=pointer]
+        - heading "Application Web" [level=2] [ref=e330] [cursor=pointer]
+      - link "AUTRES PROJETS ! Petits projets !" [ref=e331] [cursor=pointer]:
+        - /url: /portefolio/autres-projets
+        - heading "AUTRES PROJETS !" [level=2] [ref=e332] [cursor=pointer]
+        - heading "Petits projets !" [level=2] [ref=e337] [cursor=pointer]
+      - link "MON SITE ! SON HISTOIRE ! Mon site !" [ref=e338] [cursor=pointer]:
+        - /url: /portefolio/portefolio
+        - heading "MON SITE ! SON HISTOIRE !" [level=2] [ref=e339] [cursor=pointer]
+        - heading "Mon site !" [level=2] [ref=e344] [cursor=pointer]
+      - link "Brain'z App Application Web" [ref=e345] [cursor=pointer]:
+        - /url: /portefolio/brainz-app
+        - heading "Brain'z App" [level=2] [ref=e346] [cursor=pointer]
+        - heading "Application Web" [level=2] [ref=e351] [cursor=pointer]
+      - link "Suite adobe Suite adobe" [ref=e352] [cursor=pointer]:
+        - /url: /portefolio/adobe
+        - heading "Suite adobe" [level=2] [ref=e353] [cursor=pointer]
+        - heading "Suite adobe" [level=2] [ref=e358] [cursor=pointer]
+    - generic [ref=e361]:
+      - heading "DÉVELOPPONS ENSEMBLE VOS PROJETS" [level=2] [ref=e363]:
+        - generic [ref=e364]: DÉVELOPPONS
+        - generic [ref=e365]: ENSEMBLE
+        - generic [ref=e366]: VOS PROJETS
+      - generic [ref=e368]:
+        - generic [ref=e369]: Une idée, un projet ? Je suis là pour répondre à vos demandes et vous accompagner.
+        - generic [ref=e370]: N’hésitez pas, je serais ravi d’échanger avec vous sur votre projet !
+      - link "Me contacter" [ref=e372] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e373] [cursor=pointer]: Me contacter
+  - contentinfo [ref=e374]:
+    - generic [ref=e375]:
+      - img "Andy Cinquin Logo Signature Icon" [ref=e376]
+      - generic [ref=e378]:
+        - link "contact@andy-cinquin.fr" [ref=e380] [cursor=pointer]:
+          - /url: mailto:contact@andy-cinquin.fr
+        - generic [ref=e381]: "Entrepreneur, et co-fondateur de :"
+        - list [ref=e382]:
+          - listitem [ref=e383]:
+            - link "Beswib" [ref=e384] [cursor=pointer]:
+              - /url: https://beswib.com
+            - text: ","
+          - listitem [ref=e385]:
+            - link "ForVoyez" [ref=e386] [cursor=pointer]:
+              - /url: https://forvoyez.com
+            - text: ","
+          - listitem [ref=e387]:
+            - link "ForHives.fr" [ref=e388] [cursor=pointer]:
+              - /url: https://forhives.fr
+            - text: ","
+          - listitem [ref=e389]:
+            - link "ForMenu.fr" [ref=e390] [cursor=pointer]:
+              - /url: https://formenu.fr
+            - text: ","
+          - listitem [ref=e391]:
+            - link "My-Makeup.fr" [ref=e392] [cursor=pointer]:
+              - /url: https://my-makeup.fr
+            - text: ","
+          - listitem [ref=e393]:
+            - link "Artriste.cc" [ref=e394] [cursor=pointer]:
+              - /url: https://artriste.cc
+            - text: ","
+        - generic [ref=e395]:
+          - text: CTO de
+          - link "Neova" [ref=e396] [cursor=pointer]:
+            - /url: https://neova.io
+        - generic [ref=e397]: Développeur Freelance, Web, mobile, applicatif, UI/UX, référencement (SEO/SEA).
+        - generic [ref=e398]: Création sur-mesure. Optimisation. Création et développement de site web.
+    - generic [ref=e399]:
+      - heading "SITEMAP" [level=2] [ref=e400]
+      - link "À propos de moi" [ref=e401] [cursor=pointer]:
+        - /url: /about
+        - generic [ref=e402] [cursor=pointer]: À propos de moi
+      - link "Mes projets" [ref=e403] [cursor=pointer]:
+        - /url: /portefolio
+        - generic [ref=e404] [cursor=pointer]: Mes projets
+      - link "Blog" [ref=e405] [cursor=pointer]:
+        - /url: /blog
+        - generic [ref=e406] [cursor=pointer]: Blog
+      - link "Contact" [ref=e407] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e408] [cursor=pointer]: Contact
+    - generic [ref=e409]:
+      - heading "LÉGALES" [level=2] [ref=e410]
+      - link "Mentions légales" [ref=e411] [cursor=pointer]:
+        - /url: /cgu
+        - generic [ref=e412] [cursor=pointer]: Mentions légales
+      - link "Politique de confidentialité" [ref=e413] [cursor=pointer]:
+        - /url: /cgu
+        - generic [ref=e414] [cursor=pointer]: Politique de confidentialité
+    - generic [ref=e417]:
+      - link [ref=e419] [cursor=pointer]:
+        - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+        - img [ref=e420] [cursor=pointer]
+      - link [ref=e423] [cursor=pointer]:
+        - /url: https://www.instagram.com/cinquin.andy/
+        - img [ref=e424] [cursor=pointer]
+      - link [ref=e429] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/andy-cinquin/
+        - img [ref=e430] [cursor=pointer]
+      - link [ref=e435] [cursor=pointer]:
+        - /url: https://github.com/CinquinAndy/
+        - img [ref=e436] [cursor=pointer]
+      - link [ref=e441] [cursor=pointer]:
+        - /url: https://www.malt.fr/profile/andycinquin
+        - img [ref=e442] [cursor=pointer]
+  - article [ref=e452]:
+    - generic [ref=e455]:
+      - text: © 2025 Andy Cinquin - Tous droits réservés - Developed & Designed with ❤️ 🐝
+      - link "ForHives co-founders" [ref=e456] [cursor=pointer]:
+        - /url: https://forhives.fr/
+```

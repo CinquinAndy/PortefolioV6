@@ -1,0 +1,209 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - img
+    - generic:
+      - generic:
+        - generic:
+          - img
+  - region "Notifications Alt+T"
+  - banner [ref=e4]:
+    - button "Main Menu" [ref=e6] [cursor=pointer]:
+      - img [ref=e7] [cursor=pointer]
+    - link "Logo Cinquin Andy Signature" [ref=e10] [cursor=pointer]:
+      - /url: /
+      - img "Logo Cinquin Andy Signature" [ref=e11] [cursor=pointer]
+    - link "C O N T A C T" [ref=e12] [cursor=pointer]:
+      - /url: /contact
+      - heading "C O N T A C T" [level=2] [ref=e13] [cursor=pointer]:
+        - generic [ref=e14] [cursor=pointer]:
+          - generic [ref=e15] [cursor=pointer]: C
+          - generic [ref=e16] [cursor=pointer]: O
+          - generic [ref=e17] [cursor=pointer]: "N"
+          - generic [ref=e18] [cursor=pointer]: T
+          - generic [ref=e19] [cursor=pointer]: A
+          - generic [ref=e20] [cursor=pointer]: C
+          - generic [ref=e21] [cursor=pointer]: T
+  - navigation:
+    - generic:
+      - link "andy cinquin":
+        - /url: /
+        - generic:
+          - heading "andy cinquin" [level=2]
+      - link "portfolio":
+        - /url: /portefolio
+        - generic:
+          - heading "portfolio" [level=2]
+      - link "blog":
+        - /url: /blog
+        - generic:
+          - heading "blog" [level=2]
+      - link "about me":
+        - /url: /about
+        - generic:
+          - heading "about me" [level=2]
+      - link "contact me":
+        - /url: /contact
+        - generic:
+          - heading "contact me" [level=2]
+      - generic:
+        - separator
+        - generic:
+          - generic:
+            - link:
+              - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+              - img
+            - link:
+              - /url: https://www.instagram.com/cinquin.andy/
+              - img
+            - link:
+              - /url: https://www.linkedin.com/in/andy-cinquin/
+              - img
+            - link:
+              - /url: https://github.com/CinquinAndy/
+              - img
+            - link:
+              - /url: https://www.malt.fr/profile/andycinquin
+              - img
+      - generic:
+        - paragraph: 4 Impasse de la Marchaisière, 44115 Haute-Goulaine
+        - link "+33 6 21 58 26 84":
+          - /url: tel:+33621582684
+        - generic:
+          - link "→ aller à la version française":
+            - /url: https://andy-cinquin.fr/cgu
+    - button "Close Menu"
+  - generic [ref=e22]:
+    - heading "CGU - Legal notice" [level=1] [ref=e23]
+    - img "Développeur Freelance - Logo" [ref=e25]
+    - text: "|"
+  - article [ref=e30]:
+    - generic [ref=e32]:
+      - heading "Who are we?" [level=2] [ref=e33]
+      - generic [ref=e34]: "My website address is: https://andy-cinquin.com"
+      - heading "COPYRIGHT" [level=2] [ref=e35]
+      - generic [ref=e36]: This entire site is protected by copyright in accordance with Articles L335-2 et seq. of the French Intellectual Property Code. Any total or partial reproduction or representation of its content, images, texts, sounds, by any process, without the prior authorization of 'Cinquin Andy' is strictly forbidden. Any violation will constitute a sanction and will be prosecuted.
+      - generic [ref=e37]:
+        - text: Cinquin Andy
+        - text: "SIRET : 880 505 276 00019"
+        - text: 4 Impasse de la Marchaisière
+        - text: 44115 Haute-Goulaine
+        - text: "Tel : +33 6 21 58 26 84"
+        - link "https://andy-cinquin.com" [ref=e38] [cursor=pointer]:
+          - /url: https://andy-cinquin.com/
+      - heading "WEBSITE" [level=2] [ref=e39]
+      - heading "Creation :" [level=3] [ref=e40]
+      - generic [ref=e41]: Custom theme creation, branding, SEO, and hosting of everything, 'turnkey' service.
+      - generic [ref=e42]:
+        - text: Cinquin Andy
+        - text: "SIRET : 880 505 276 00019"
+        - text: 4 Impasse de la Marchaisière
+        - text: 44115 Haute-Goulaine
+        - text: "Tel : +33 6 21 58 26 84"
+        - link "https://andy-cinquin.com" [ref=e43] [cursor=pointer]:
+          - /url: https://andy-cinquin.com/
+      - heading "Hosting :" [level=3] [ref=e44]
+      - generic [ref=e45]: Company details
+      - generic [ref=e46]: Company details
+      - generic [ref=e47]:
+        - text: netcup GmbH
+        - text: Daimlerstraße 25
+        - text: 76185 Karlsruhe
+        - text: Germany
+  - generic [ref=e50]:
+    - heading "DEVELOP YOUR PROJECTS TOGETHER" [level=2] [ref=e52]:
+      - generic [ref=e53]: DEVELOP YOUR PROJECTS
+      - generic [ref=e54]: TOGETHER
+    - generic [ref=e56]:
+      - generic [ref=e57]: An idea, a project? I'm here to answer your questions and help you.
+      - generic [ref=e58]: I'd be delighted to discuss your project with you!
+    - link "Contact me" [ref=e60] [cursor=pointer]:
+      - /url: /contact
+      - generic [ref=e61] [cursor=pointer]: Contact me
+  - contentinfo [ref=e62]:
+    - generic [ref=e63]:
+      - img "Andy Cinquin Logo Signature Icon" [ref=e64]
+      - generic [ref=e66]:
+        - link "contact@andy-cinquin.fr" [ref=e68] [cursor=pointer]:
+          - /url: mailto:contact@andy-cinquin.fr
+        - generic [ref=e69]: "Entrepreneur and co-founder of :"
+        - list [ref=e70]:
+          - listitem [ref=e71]:
+            - link "Beswib" [ref=e72] [cursor=pointer]:
+              - /url: https://beswib.com
+            - text: ","
+          - listitem [ref=e73]:
+            - link "ForVoyez" [ref=e74] [cursor=pointer]:
+              - /url: https://forvoyez.com
+            - text: ","
+          - listitem [ref=e75]:
+            - link "ForHives.fr" [ref=e76] [cursor=pointer]:
+              - /url: https://forhives.fr
+            - text: ","
+          - listitem [ref=e77]:
+            - link "ForMenu.fr" [ref=e78] [cursor=pointer]:
+              - /url: https://formenu.fr
+            - text: ","
+          - listitem [ref=e79]:
+            - link "My-Makeup.fr" [ref=e80] [cursor=pointer]:
+              - /url: https://my-makeup.fr
+            - text: ","
+          - listitem [ref=e81]:
+            - link "Artriste.cc" [ref=e82] [cursor=pointer]:
+              - /url: https://artriste.cc
+            - text: ","
+        - generic [ref=e83]: Actually CTO at @(Neova)[https://neova.io]
+        - generic [ref=e84]: Freelance developer, Web, mobile, application, UI/UX, SEO/SEA.
+        - generic [ref=e85]: Custom design. Optimization. Website design and development.
+    - generic [ref=e86]:
+      - heading "SITEMAP" [level=2] [ref=e87]
+      - link "About me" [ref=e88] [cursor=pointer]:
+        - /url: /about
+        - generic [ref=e89] [cursor=pointer]: About me
+      - link "My projects" [ref=e90] [cursor=pointer]:
+        - /url: /portefolio
+        - generic [ref=e91] [cursor=pointer]: My projects
+      - link "Blog" [ref=e92] [cursor=pointer]:
+        - /url: /blog
+        - generic [ref=e93] [cursor=pointer]: Blog
+      - link "Contact" [ref=e94] [cursor=pointer]:
+        - /url: /contact
+        - generic [ref=e95] [cursor=pointer]: Contact
+    - generic [ref=e96]:
+      - heading "LEGAL" [level=2] [ref=e97]
+      - link "Terms of use" [ref=e98] [cursor=pointer]:
+        - /url: /cgu
+        - generic [ref=e99] [cursor=pointer]: Terms of use
+      - link "Privacy policy" [ref=e100] [cursor=pointer]:
+        - /url: /cgu
+        - generic [ref=e101] [cursor=pointer]: Privacy policy
+    - generic [ref=e104]:
+      - link [ref=e106] [cursor=pointer]:
+        - /url: https://www.facebook.com/Cinquin.Andy.Developpeur.Freelance
+        - img [ref=e107] [cursor=pointer]
+      - link [ref=e110] [cursor=pointer]:
+        - /url: https://www.instagram.com/cinquin.andy/
+        - img [ref=e111] [cursor=pointer]
+      - link [ref=e116] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/andy-cinquin/
+        - img [ref=e117] [cursor=pointer]
+      - link [ref=e122] [cursor=pointer]:
+        - /url: https://github.com/CinquinAndy/
+        - img [ref=e123] [cursor=pointer]
+      - link [ref=e128] [cursor=pointer]:
+        - /url: https://www.malt.fr/profile/andycinquin
+        - img [ref=e129] [cursor=pointer]
+  - article [ref=e139]:
+    - generic [ref=e142]:
+      - text: © 2025 Andy Cinquin - All rights reserved - Developed & Designed with 🐝
+      - link "ForHives co-founders" [ref=e143] [cursor=pointer]:
+        - /url: https://forhives.fr/
+  - button "Open Next.js Dev Tools" [ref=e149] [cursor=pointer]:
+    - img [ref=e150] [cursor=pointer]
+  - alert [ref=e153]: CGU - LEGAL NOTICE
+```

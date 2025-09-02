@@ -20,9 +20,9 @@ const options = {
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				let currentParent = parent
 				let isInListItem = false
-				
+
 				// Walk up the DOM tree to check if we're inside a list item
-				while (currentParent) {
+				while (currentParent != null) {
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					if (currentParent.name === 'li' || currentParent.name === 'ul' || currentParent.name === 'ol') {
 						isInListItem = true
@@ -31,7 +31,7 @@ const options = {
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 					currentParent = currentParent.parent
 				}
-				
+
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				const content = domNode.children?.[0]?.data ?? ''
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -73,7 +73,7 @@ const options = {
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
 							alt={alt as string}
-							className={`max-h-[300px] object-contain xl:max-h-[650px] sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px]`}
+							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 							height={1000}
 							quality={85}
 							src={src as string}

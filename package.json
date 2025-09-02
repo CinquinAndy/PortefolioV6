@@ -15,7 +15,12 @@
 		"test:visual": "playwright test",
 		"test:visual:ui": "playwright test --ui",
 		"test:visual:headed": "playwright test --headed",
-		"test:visual:update": "playwright test --update-snapshots"
+		"test:visual:update": "playwright test --update-snapshots",
+		"test:visual:blog": "playwright test tests/visual-regression-tests.spec.js --grep 'Blog Pages'",
+		"test:visual:portfolio": "playwright test tests/visual-regression-tests.spec.js --grep 'Portfolio'",
+		"test:visual:legal": "playwright test tests/visual-regression-tests.spec.js --grep 'Legal Pages'",
+		"test:visual:generate-baselines": "playwright test tests/visual-regression-tests.spec.js --update-snapshots",
+		"test:visual:check-regressions": "playwright test tests/visual-regression-tests.spec.js"
 	},
 	"dependencies": {
 		"@eslint/eslintrc": "3.3.1",
