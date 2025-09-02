@@ -145,7 +145,7 @@ function Nav({
 				className={`${!open ? 'pointer-events-none -z-10 -translate-y-[100vh] opacity-0' : 'pointer-events-auto z-40 -translate-y-0 opacity-100'} fixed flex h-screen w-screen transform transition-transform`}
 				id="nav-block"
 			>
-				<div className="from-indigo-1100 to-sky-1100 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-r-slate-50/10 bg-gradient-to-b p-4 pt-28 md:w-3/5 md:gap-18 md:border-r-40 md:p-20 md:pt-36">
+				<div className="from-indigo-1100 to-sky-1100 flex h-full w-full flex-col justify-around gap-4 border-r-0 border-r-slate-50/10 bg-gradient-to-b p-4 pt-20 md:w-3/5 md:gap-10 md:border-r-40 md:p-20 md:pt-20">
 					{content_website?.attributes.menu?.map((item: { id: number; Link: LinkComponent }, index: number) => {
 						return selectedMenu === item?.Link?.url ? (
 							<Link className="relative text-indigo-400" href={item?.Link?.url} rel="noopener">
@@ -162,11 +162,7 @@ function Nav({
 								<h2 className="h-full text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
 							</Link>
 						) : (
-							<Link
-								href={item?.Link?.url}
-								key={index}
-								rel="noopener"
-							>
+							<Link href={item?.Link?.url} key={index} rel="noopener">
 								<AnimatedUnderline className="hover:text-indigo-400">
 									<h2 className="h-full text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
 								</AnimatedUnderline>
@@ -296,19 +292,20 @@ function Nav({
 								</pattern>
 							</defs>
 							<text
-								className={'text-2xl font-semibold tracking-widest uppercase lg:text-5xl lg:text-8xl'}
+								className={
+									'text-2xl font-semibold tracking-widest uppercase sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl'
+								}
 								textAnchor="middle"
 								x="50%"
 								y="60%"
 							>
-								{}
 								{content_website?.attributes?.content_home?.title_home}
 							</text>
 						</svg>
 					</div>
 				)}
 				<h1
-					className={`${isHome ? 'sr-only' : ''} z-20 text-center text-3xl font-semibold tracking-widest uppercase md:text-4xl lg:text-6xl 2xl:text-8xl`}
+					className={`${isHome ? 'sr-only' : ''} z-20 text-center text-3xl font-semibold tracking-widest uppercase md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl`}
 				>
 					{}
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
