@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import { Signature } from '@/components/Global/Signature'
 import { Layout } from '@/components/Global/Layout'
+import { AnimatedUnderline } from '@/components/ui/animated-underline'
 
 interface FooterProps {
 	content_website?: ContentWebsite
@@ -49,8 +50,10 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					</h2>
 					{sitemap?.map((item: Sitemap, index: number) => {
 						return (
-							<Link className="underline_custom text-xs xl:text-sm" href={item?.Link?.url ?? '/'} key={index}>
-								{item?.Link?.label}
+							<Link href={item?.Link?.url ?? '/'} key={index}>
+								<AnimatedUnderline className="text-xs xl:text-sm">
+									{item?.Link?.label}
+								</AnimatedUnderline>
 							</Link>
 						)
 					})}
@@ -61,8 +64,10 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					</h2>
 					{legals?.map((item: Sitemap, index: number) => {
 						return (
-							<Link className="underline_custom text-xs xl:text-sm" href={item?.Link?.url ?? '/'} key={index}>
-								{item?.Link?.label}
+							<Link href={item?.Link?.url ?? '/'} key={index}>
+								<AnimatedUnderline className="text-xs xl:text-sm">
+									{item?.Link?.label}
+								</AnimatedUnderline>
 							</Link>
 						)
 					})}

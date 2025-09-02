@@ -12,6 +12,7 @@ import Link from 'next/link'
 
 import { GradientBackgroundWithoutAnimation } from '@/components/Global/Animations/GradientBackgroundWithoutAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
+import { AnimatedUnderline } from '@/components/ui/animated-underline'
 
 interface NavProps {
 	selectedMenu?: string
@@ -162,12 +163,13 @@ function Nav({
 							</Link>
 						) : (
 							<Link
-								className="underline_custom hover:text-indigo-400"
 								href={item?.Link?.url}
 								key={index}
 								rel="noopener"
 							>
-								<h2 className="h-full text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
+								<AnimatedUnderline className="hover:text-indigo-400">
+									<h2 className="h-full text-xl font-semibold uppercase lg:text-3xl">{item?.Link?.label}</h2>
+								</AnimatedUnderline>
 							</Link>
 						)
 					})}
