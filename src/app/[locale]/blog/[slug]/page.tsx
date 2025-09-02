@@ -243,7 +243,7 @@ export default async function Page({ params }: ArticlePageProps) {
 												}
 											)}
 										</h4>
-										<Layout value={processedArticle?.attributes?.content.toString()} />
+										<Layout value={processedArticle?.data?.attributes?.content?.toString() ?? ''} />
 										<br />
 										<hr />
 										<br />
