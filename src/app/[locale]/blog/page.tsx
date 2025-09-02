@@ -6,7 +6,6 @@ import { getResponseData } from '@/types/strapi'
 
 import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
-import { Pagination } from '@/components/Global/Pagination'
 import { BlogContent } from '@/components/blog/BlogContent'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
@@ -19,9 +18,6 @@ interface PageParams {
 	locale: Locale
 }
 
-interface SearchParams {
-	page?: string
-}
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
@@ -48,27 +44,17 @@ export function generateStaticParams(): { params: PageParams }[] {
 }
 
 interface BlogPageProps {
-	searchParams: Promise<SearchParams>
 	params: Promise<PageParams>
 }
 
-export default async function Page({ searchParams, params }: BlogPageProps) {
+export default async function Page({ params }: BlogPageProps) {
 	const { locale } = await params
-	const { page } = await searchParams
 	const content_website_response = await getContentWebsite(locale)
 	const content_website = getResponseData(content_website_response)
 
-	const pageParams = page != null ? parseInt(page) : 1
-	const pageSize = 50
-
-	const articlesResponse = await getArticles(locale, pageParams, pageSize)
+	// Fetch all articles without pagination for client-side handling
+	const articlesResponse = await getArticles(locale, 1, 1000) // Large page size to get all articles
 	const articles = getResponseData(articlesResponse)
-
-	const hasMeta = articlesResponse != null && typeof articlesResponse === 'object' && 'meta' in articlesResponse
-	const totalArticles = hasMeta ? (articlesResponse.meta?.pagination?.total ?? 0) : 0
-	const totalPages = Math.ceil(totalArticles / pageSize)
-
-	const currentPage = Number(page) || 1
 
 	return (
 		<>
@@ -82,7 +68,6 @@ export default async function Page({ searchParams, params }: BlogPageProps) {
 			)}
 			<div>
 				<BlogContent articles={articles ?? []} locale={locale} />
-				{totalArticles > pageSize && <Pagination currentPage={currentPage} totalPages={totalPages} />}
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
