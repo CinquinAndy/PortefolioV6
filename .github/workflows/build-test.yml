@@ -1,4 +1,4 @@
-name: Build
+name: Build & Test with Turbopack
 env:
   TOTAL_RUNNERS: 1
   NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -13,39 +13,110 @@ env:
 on:
   pull_request:
     branches: ['main']
+  push:
+    branches: ['main']
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
         uses: actions/setup-node@v4
         with:
-          cache: 'npm'
           node-version: 20.x
-      - name: Install dependencies in production
-        run: npm ci --ignore-scripts
-      - name: Cache next.js build
-        id: cache-npm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
         uses: actions/cache@v4
         with:
-          path: .next/
-          key: ${{ runner.os }}-next-build-${{ hashFiles('src/','public/','next*','package*','jsconfig.json') }}
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Build the app
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Cache Next.js build
+        id: cache-nextjs
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+            .turbo
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('src/**','public/**','next*','package*','pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-
+
+      - name: Build with Turbopack
+        if: steps.cache-nextjs.outputs.cache-hit != 'true'
+        run: |
+          echo "🚀 Building with Turbopack..."
+          pnpm build
+        env:
+          TURBOPACK: 1
+          NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+          NEXT_PUBLIC_URL_ALT: ${{ secrets.NEXT_PUBLIC_URL_ALT }}
+
+      - name: Lint code
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm tsc
+
+      - name: Setup Playwright
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Start Next.js server
+        run: |
+          pnpm start &
+          sleep 10
+
+      - name: Run visual tests
+        run: pnpm test:visual:check-regressions
         continue-on-error: true
-        run: npm run build
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
+        env:
+          TURBOPACK: 1
+          NEXT_TELEMETRY_DISABLED: 1
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-test-results
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Just Build
+
+      - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: false
           tags: ${{ secrets.APP_IMAGE }}
-          build-args: NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_URL }}
             NEXT_PUBLIC_URL_ALT=${{ secrets.NEXT_PUBLIC_URL_ALT }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
