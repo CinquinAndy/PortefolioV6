@@ -1,5 +1,4 @@
 import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
 import { getResponseData } from '@/types/strapi'
 import { Metadata } from 'next'
 import Image from 'next/image'
@@ -8,17 +7,6 @@ import Link from 'next/link'
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 import { getContentWebsite, getNotFound } from '@/services/getContentWebsite'
 import { Layout } from '@/components/Global/Layout'
-
-const noto_serif_display = Noto_Serif_Display({
-	variable: '--font-noto-serif-display',
-	subsets: ['latin'],
-})
-const be_vietnam_pro = Be_Vietnam_Pro({
-	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-	variable: '--font-be-vietnam-pro',
-	subsets: ['latin'],
-	style: ['italic', 'normal'],
-})
 
 export async function generateMetadata(): Promise<Metadata> {
 	// fetch data
@@ -59,44 +47,38 @@ export default async function NotFound() {
 	const notfound = getResponseData(notfound_response)
 
 	return (
-		<html className={'overflow-y-hidden'} lang={`en`}>
-			<body className={`relative text-slate-50 ${noto_serif_display.variable} ${be_vietnam_pro.variable}`}>
-				{/*<LowGradientBackground />*/}
-				<LottieAnimation />
-
-				{/*<Cursor />*/}
-
-				<div className="h-dvh">
-					<div className="flex h-full items-center justify-center px-4 xl:px-24 sm:px-6 lg:px-20">
-						<div className="">
-							<Link href={'/'}>
-								<Image
-									alt="Logo Andy Cinquin"
-									height={50}
-									src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
-									width={50}
-								/>
-							</Link>
-							<div className={'mt-8'}>
-								<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
-									{content_website?.attributes?.content_notfound?.seo?.h1}
-								</h1>
-								<div className="mx-auto max-w-3xl">
-									<article>
-										<div className={'prose prose-invert my-8'}>
-											<Layout value={notfound?.attributes?.content?.toString() ?? ''} />
-										</div>
-									</article>
-								</div>
-
-								<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url ?? '/'}>
-									{notfound?.attributes?.link?.label ?? 'Go Home'}
-								</Link>
+		<>
+			<LottieAnimation />
+			<div className="h-dvh">
+				<div className="flex h-full items-center justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
+					<div className="">
+						<Link href={'/'}>
+							<Image
+								alt="Logo Andy Cinquin"
+								height={50}
+								src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/logov2.svg`}
+								width={50}
+							/>
+						</Link>
+						<div className={'mt-8'}>
+							<h1 className={'my-8 text-2xl font-semibold text-slate-50'}>
+								{content_website?.attributes?.content_notfound?.seo?.h1}
+							</h1>
+							<div className="mx-auto max-w-3xl">
+								<article>
+									<div className={'prose prose-invert my-8'}>
+										<Layout value={notfound?.attributes?.content?.toString() ?? ''} />
+									</div>
+								</article>
 							</div>
+
+							<Link className="mt-8 text-slate-50 underline" href={notfound?.attributes?.link?.url ?? '/'}>
+								{notfound?.attributes?.link?.label ?? 'Go Home'}
+							</Link>
 						</div>
 					</div>
 				</div>
-			</body>
-		</html>
+			</div>
+		</>
 	)
 }
