@@ -11,7 +11,9 @@ const nextConfig = {
 		if (modularizeImports?.['@headlessui/react']) delete modularizeImports['@headlessui/react']
 		return config
 	},
+	trailingSlash: false,
 	reactStrictMode: true,
+	output: 'standalone',
 	images: {
 		remotePatterns: [
 			{
@@ -19,6 +21,9 @@ const nextConfig = {
 				hostname: '**',
 			},
 		],
+	},
+	experimental: {
+		optimizeCss: true,
 	},
 }
 
