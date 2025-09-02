@@ -42,13 +42,13 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 								leaveTo="translate-x-full"
 							>
 								<Dialog.Panel className="pointer-events-auto relative h-screen w-screen">
-									<div className="flex h-full flex-col overflow-y-scroll border-slate-50 border-opacity-10 bg-gradient-to-b from-indigo-1100 to-sky-1100 py-6 text-slate-50 shadow-xl md:border-l-40">
+									<div className="from-indigo-1100 to-sky-1100 flex h-full flex-col overflow-y-scroll border-slate-50/10 bg-gradient-to-b py-6 text-slate-50 shadow-xl md:border-l-40">
 										<div className="px-4 sm:px-6">
 											<div className="flex items-start justify-between">
 												<Dialog.Title>
 													<div
 														className={
-															'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
+															'!font-display [&>*]:!font-display text-lg font-black *:text-lg *:font-black md:text-3xl md:*:text-3xl'
 														}
 														dangerouslySetInnerHTML={{
 															__html: replaceTitle(title_galery ?? ''),

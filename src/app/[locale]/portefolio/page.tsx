@@ -66,7 +66,7 @@ export default async function Page({ params }: PageProps) {
 				isHome={false}
 			/>
 			<div>
-				<Realisations content_website={content_website} isHome={false} realisations={realisations ?? []} slice={0} />
+				<Realisations content_website={content_website} isHome={false} realisations={realisations ?? []} />
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
