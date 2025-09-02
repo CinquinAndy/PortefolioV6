@@ -16,33 +16,15 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
 			<motion.button
 				className={cn(
 					'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden',
-					'rounded-full border border-white/10 bg-black px-6 py-3 whitespace-nowrap text-white',
+					'rounded-full bg-black px-6 py-3 whitespace-nowrap text-white',
 					'shadow-2xl',
 					className
 				)}
 				ref={ref}
-				whileHover={{ scale: 1.02 }}
 				whileTap={{ scale: 0.98 }}
 				transition={{ type: 'spring', stiffness: 400, damping: 17 }}
 				{...props}
 			>
-				{/* Rotating border glow */}
-				<motion.div
-					className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100"
-					style={{
-						boxShadow: `0 0 0 1px ${shimmerColor}40`,
-						borderRadius: 'inherit',
-					}}
-					animate={{
-						boxShadow: [`0 0 0 1px ${shimmerColor}40`, `0 0 0 2px ${shimmerColor}80`, `0 0 0 1px ${shimmerColor}40`],
-					}}
-					transition={{
-						repeat: Infinity,
-						ease: 'easeInOut',
-						duration: 2,
-					}}
-				/>
-
 				{/* Pulsing inner glow */}
 				<motion.div
 					className="absolute inset-0 -z-10 rounded-full"
