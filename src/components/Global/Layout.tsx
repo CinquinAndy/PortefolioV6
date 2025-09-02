@@ -13,7 +13,7 @@ const options = {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		if (domNode?.type === 'tag') {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-			const { name, children, attribs, parent } = domNode
+			const { parent, name, children, attribs } = domNode
 
 			if (name === 'p') {
 				// Check if this paragraph is inside a list item by walking up the parent tree

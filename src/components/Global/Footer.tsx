@@ -4,9 +4,9 @@ import { ContentWebsite, Sitemap } from '@/types/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { AnimatedUnderline } from '@/components/ui/animated-underline'
 import { Signature } from '@/components/Global/Signature'
 import { Layout } from '@/components/Global/Layout'
-import { AnimatedUnderline } from '@/components/ui/animated-underline'
 
 interface FooterProps {
 	content_website?: ContentWebsite

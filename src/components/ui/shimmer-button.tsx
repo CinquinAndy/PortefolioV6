@@ -1,81 +1,47 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 
 import { cn } from '@/lib/utils'
 
 export interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	shimmerColor?: string
-	shimmerSize?: string
-	borderRadius?: string
-	shimmerDuration?: string
-	background?: string
 	className?: string
 	children?: React.ReactNode
 }
 
 const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
-	(
-		{
-			shimmerSize = '0.05em',
-			shimmerDuration = '3s',
-			shimmerColor = '#ffffff',
-			className,
-			children,
-			borderRadius = '100px',
-			background = 'rgba(0, 0, 0, 1)',
-			...props
-		},
-		ref
-	) => {
+	({ shimmerColor = '#0ea5e9', className, children, ...props }, ref) => {
 		return (
 			<button
-				style={
-					{
-						'--spread': '90deg',
-						'--speed': shimmerDuration,
-						'--shimmer-color': shimmerColor,
-						'--radius': borderRadius,
-						'--cut': shimmerSize,
-						'--bg': background,
-					} as CSSProperties
-				}
 				className={cn(
-					'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden rounded-[var(--radius)] border border-white/10 px-6 py-3 whitespace-nowrap text-white bg-[var(--bg)] dark:text-black',
+					'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden',
+					'rounded-full border border-white/10 bg-black px-6 py-3 whitespace-nowrap text-white',
 					'transform-gpu transition-transform duration-300 ease-in-out active:translate-y-px',
+					'shadow-2xl',
 					className
 				)}
 				ref={ref}
 				{...props}
 			>
 				{/* spark container */}
-				<div className={cn('-z-30 blur-[2px] absolute inset-0 overflow-visible')}>
+				<div className="absolute inset-0 -z-30 overflow-visible blur-[2px]">
 					{/* spark */}
 					<div className="shimmer-slide absolute inset-0 aspect-square h-full rounded-none">
 						{/* spark before */}
-						<div className="spin-around absolute -inset-full w-auto translate-x-0 translate-y-0 rotate-0 bg-[conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
+						<div
+							className="spin-around absolute -inset-full w-auto translate-x-0 translate-y-0 rotate-0"
+							style={{
+								background: `conic-gradient(from 225deg, transparent 0, ${shimmerColor} 90deg, transparent 180deg)`,
+							}}
+						/>
 					</div>
 				</div>
 				{children}
 
 				{/* Highlight */}
-				<div
-					className={cn(
-						'insert-0 absolute size-full',
-
-						'rounded-2xl px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#ffffff1f]',
-
-						// transition
-						'transform-gpu transition-all duration-300 ease-in-out',
-
-						// on hover
-						'group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]',
-
-						// on click
-						'group-active:shadow-[inset_0_-10px_10px_#ffffff3f]'
-					)}
-				/>
+				<div className="absolute inset-0 size-full transform-gpu rounded-2xl px-4 py-1.5 text-sm font-medium shadow-[inset_0_-8px_10px_#ffffff1f] transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_#ffffff3f] group-active:shadow-[inset_0_-10px_10px_#ffffff3f]" />
 
 				{/* backdrop */}
-				<div className={cn('absolute [inset:var(--cut)] -z-20 [border-radius:var(--radius)] [background:var(--bg)]')} />
+				<div className="absolute inset-[0.05em] -z-20 rounded-full bg-black" />
 			</button>
 		)
 	}
