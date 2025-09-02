@@ -314,7 +314,7 @@ function Nav({
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
 				</h1>
 				{isHome && (
-					<div className="absolute bottom-0 left-1/2 mb-10 flex -translate-x-1/2 flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6 md:mb-20">
+					<div className="absolute bottom-0 left-1/2 mb-22 flex -translate-x-1/2 flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6 md:mb-20">
 						<ShimmerButton
 							className="w-48 shadow-2xl"
 							shimmerColor="#0ea5e9"
