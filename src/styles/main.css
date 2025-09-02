@@ -6,6 +6,16 @@
 /* Safelist for dynamically generated classes */
 @source inline("fill-indigo-500 fill-sky-500 fill-lime-500 fill-rose-500 fill-amber-500 fill-emerald-500 fill-cyan-500 fill-violet-500 fill-fuchsia-500 fill-orange-500 fill-teal-500");
 
+/* StarButton animations */
+@keyframes star-btn {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
 @theme {
 	/* Custom breakpoints - values in rem for Tailwind v4 */
 	--breakpoint-xs: 20rem; /* 320px */
@@ -22,6 +32,9 @@
 	/* Custom andy colors */
 	--color-andy-purple-500: #6c00a2;
 	--color-andy-blue-500: #001152;
+
+	/* StarButton animation */
+	--animate-star-btn: star-btn calc(var(--duration, 3) * 1s) linear infinite;
 
 	/* Custom slate colors */
 	--color-slate-1100: #090d16;
