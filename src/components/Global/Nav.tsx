@@ -7,6 +7,7 @@ import React from 'react'
 
 import { ContentWebsite, LinkComponent } from '@/types/strapi'
 import { usePathname } from 'next/navigation'
+import { Locale } from '@/i18n/config'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -22,10 +23,12 @@ interface NavProps {
 	frRedirect?: string
 	enRedirect?: string
 	content_website?: ContentWebsite
+	locale?: Locale
 }
 
 function Nav({
 	selectedMenu,
+	locale,
 	isHome = true,
 	h1,
 	frRedirect,
@@ -313,22 +316,22 @@ function Nav({
 				</h1>
 				{isHome && (
 					<div className="absolute top-1/2 left-1/2 mt-8 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:gap-6">
-						<ShimmerButton 
-							className="shadow-2xl"
-							shimmerColor="#6366f1"
-							onClick={() => window.location.href = '/blog'}
-						>
-							<span className="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg">
-								Mon Blog
-							</span>
-						</ShimmerButton>
-						<ShimmerButton 
+						<ShimmerButton
 							className="shadow-2xl"
 							shimmerColor="#0ea5e9"
-							onClick={() => window.location.href = '/portefolio'}
+							onClick={() => (window.location.href = '/portefolio')}
 						>
-							<span className="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white lg:text-lg">
-								Mes Réalisations
+							<span className="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white/90">
+								{locale === 'fr' ? 'Mes Réalisations' : 'My Projects'}
+							</span>
+						</ShimmerButton>
+						<ShimmerButton
+							className="shadow-2xl"
+							shimmerColor="#6366f1"
+							onClick={() => (window.location.href = '/blog')}
+						>
+							<span className="text-center text-sm leading-none font-medium tracking-tight whitespace-pre-wrap text-white/90">
+								{locale === 'fr' ? 'Mon Blog' : 'My Blog'}
 							</span>
 						</ShimmerButton>
 					</div>

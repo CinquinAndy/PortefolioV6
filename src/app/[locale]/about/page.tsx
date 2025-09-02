@@ -57,7 +57,12 @@ export default async function Page({ params }: AboutPageProps) {
 
 	return (
 		<>
-			<Nav content_website={content_website} h1={content_website?.attributes?.content_about?.seo?.h1} isHome={false} />
+			<Nav
+				locale={locale}
+				content_website={content_website}
+				h1={content_website?.attributes?.content_about?.seo?.h1}
+				isHome={false}
+			/>
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 px-6 md:my-48 md:grid-cols-2 2xl:px-0'}>

@@ -74,6 +74,7 @@ export default async function Page({ searchParams, params }: BlogPageProps) {
 		<>
 			{content_website && (
 				<Nav
+					locale={locale}
 					content_website={content_website}
 					h1={content_website.attributes?.content_blog?.seo?.h1 ?? ''}
 					isHome={false}

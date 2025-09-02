@@ -134,6 +134,7 @@ export default async function Page({ params }: ArticlePageProps) {
 			<ArrowUp />
 
 			<Nav
+				locale={locale}
 				content_website={content_website}
 				enRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slugAlternate}
 				frRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slug}

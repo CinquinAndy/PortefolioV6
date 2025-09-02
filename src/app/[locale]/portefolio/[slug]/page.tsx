@@ -100,7 +100,7 @@ export default async function Page({ params }: RealisationPageProps) {
 
 	return (
 		<>
-			<Nav content_website={content_website} h1={processedRealisation?.data?.attributes?.title} isHome={false} />
+			<Nav locale={locale} content_website={content_website} h1={processedRealisation?.data?.attributes?.title} isHome={false} />
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:grid-cols-2 2xl:px-0'}>

@@ -79,11 +79,11 @@ export default async function Page({ params }: HomePageProps) {
 	return (
 		<>
 			<LoaderFullPage locale={locale} />
-			<Nav content_website={content_website} />
+			<Nav locale={locale} content_website={content_website} />
 			<PopupMainCat content_website={content_website} />
 
-			<div className={'mask absolute left-0 top-0 -z-10 h-screen w-screen'}>
-				<div className="mask absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center">
+			<div className={'mask absolute top-0 left-0 -z-10 h-screen w-screen'}>
+				<div className="mask absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center">
 					<VideoBackground />
 				</div>
 			</div>
