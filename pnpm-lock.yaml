@@ -54,7 +54,7 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       critters:
-        specifier: ^0.0.25
+        specifier: 0.0.25
         version: 0.0.25
       eslint:
         specifier: 9.34.0
