@@ -168,8 +168,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@4.1.13)
       zod:
-        specifier: 4.1.9
-        version: 4.1.9
+        specifier: 4.1.10
+        version: 4.1.10
     devDependencies:
       '@playwright/test':
         specifier: 1.55.0
@@ -3003,8 +3003,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@4.1.9:
-    resolution: {integrity: sha512-HI32jTq0AUAC125z30E8bQNz0RQ+9Uc+4J7V97gLYjZVKRjeydPgGt6dvQzFrav7MYOUGFqqOGiHpA/fdbd0cQ==}
+  zod@4.1.10:
+    resolution: {integrity: sha512-XuQhz4bDMHS66VWMD/ZQI+BT4DYbOYGjhV/sIlSA4vAzMuxjLT31Oa7m6Z7lEdCGDkt1VCt0x4Ro2PHonEdKFA==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -6054,6 +6054,6 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@4.1.9: {}
+  zod@4.1.10: {}
 
   zwitch@2.0.4: {}
