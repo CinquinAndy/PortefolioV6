@@ -57,7 +57,7 @@
 		"i18next": "25.5.2",
 		"lodash": "4.17.21",
 		"lucide-react": "0.542.0",
-		"mailgun.js": "12.0.3",
+		"mailgun.js": "12.1.0",
 		"next": "15.5.4",
 		"next-i18n-router": "5.5.3",
 		"next-transpile-modules": "10.0.1",

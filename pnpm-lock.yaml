@@ -111,8 +111,8 @@ importers:
         specifier: 0.542.0
         version: 0.542.0(react@19.1.1)
       mailgun.js:
-        specifier: 12.0.3
-        version: 12.0.3
+        specifier: 12.1.0
+        version: 12.1.0
       next:
         specifier: 15.5.4
         version: 15.5.4(@playwright/test@1.55.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1165,8 +1165,8 @@ packages:
     resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
     engines: {node: '>=4'}
 
-  axios@1.11.0:
-    resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
+  axios@1.12.2:
+    resolution: {integrity: sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -2132,8 +2132,8 @@ packages:
   magic-string@0.30.18:
     resolution: {integrity: sha512-yi8swmWbO17qHhwIBNeeZxTceJMeBvWJaId6dyvTSOwTipqeHhMhOrz6513r1sOKnpvQ7zkhlG8tPrpilwTxHQ==}
 
-  mailgun.js@12.0.3:
-    resolution: {integrity: sha512-ki4+xNDA/MjIQAWHB2TK5t5lJN99l45iIRU4SmTqhkY2RCfwQD04s59R3I5YCKdkY/Y5598XRKdkQOj29+eydw==}
+  mailgun.js@12.1.0:
+    resolution: {integrity: sha512-Cd6rD/aYosAuKcHI9iHdgF6n65nNB63ClQrpsvNVxDeks49SMOuh1euFXV/JUNB27n4jMZhprXSKnftcV2Bm9Q==}
     engines: {node: '>=18.0.0'}
 
   math-intrinsics@1.1.0:
@@ -3896,7 +3896,7 @@ snapshots:
 
   axe-core@4.10.3: {}
 
-  axios@1.11.0:
+  axios@1.12.2:
     dependencies:
       follow-redirects: 1.15.11
       form-data: 4.0.4
@@ -5019,9 +5019,9 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  mailgun.js@12.0.3:
+  mailgun.js@12.1.0:
     dependencies:
-      axios: 1.11.0
+      axios: 1.12.2
       base-64: 1.0.0
       url-join: 4.0.1
     transitivePeerDependencies:
