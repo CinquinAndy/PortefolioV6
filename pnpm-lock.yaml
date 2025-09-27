@@ -117,8 +117,8 @@ importers:
         specifier: 15.5.4
         version: 15.5.4(@playwright/test@1.55.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       next-i18n-router:
-        specifier: 5.5.3
-        version: 5.5.3
+        specifier: 5.5.4
+        version: 5.5.4(next@15.5.4(@playwright/test@1.55.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       next-transpile-modules:
         specifier: 10.0.1
         version: 10.0.1
@@ -2291,8 +2291,10 @@ packages:
     resolution: {integrity: sha512-myRT3DiWPHqho5PrJaIRyaMv2kgYf0mUVgBNOYMuCH5Ki1yEiQaf/ZJuQ62nvpc44wL5WDbTX7yGJi1Neevw8w==}
     engines: {node: '>= 0.6'}
 
-  next-i18n-router@5.5.3:
-    resolution: {integrity: sha512-btKVR/Mup05scxJp3EdPNALlufnZ/BO/zkIZc8a5ESdu+CNnmLW1AOkziTfRawXiZcznACCQtyfKNobC/WBTEA==}
+  next-i18n-router@5.5.4:
+    resolution: {integrity: sha512-CxIjtLnOxE8fGp670jSfQVU41lCDN73KgN6NBr3Y8GN96tvYX3To+WNhmIz8QYiFwi3P2Di6cULymsn6PWJM6A==}
+    peerDependencies:
+      next: ^13 || ^14 || ^15
 
   next-transpile-modules@10.0.1:
     resolution: {integrity: sha512-4VX/LCMofxIYAVV58UmD+kr8jQflpLWvas/BQ4Co0qWLWzVh06FoZkECkrX5eEZT6oJFqie6+kfbTA3EZCVtdQ==}
@@ -5263,10 +5265,11 @@ snapshots:
 
   negotiator@0.6.4: {}
 
-  next-i18n-router@5.5.3:
+  next-i18n-router@5.5.4(next@15.5.4(@playwright/test@1.55.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 0.6.4
+      next: 15.5.4(@playwright/test@1.55.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
   next-transpile-modules@10.0.1:
     dependencies:
