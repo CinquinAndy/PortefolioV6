@@ -410,8 +410,9 @@
 
 	.gradient-bg .g1 {
 		position: absolute;
-		background: -o-radial-gradient(center, circle, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
-		background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+		background:
+			-o-radial-gradient(center, circle, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat,
+			radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
 		mix-blend-mode: var(--blending);
 
 		-webkit-transform: translate3d(0, 0, 0);
@@ -435,8 +436,9 @@
 
 	.gradient-bg .g2 {
 		position: absolute;
-		background: -o-radial-gradient(center, circle, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
-		background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+		background:
+			-o-radial-gradient(center, circle, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat,
+			radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
 		mix-blend-mode: var(--blending);
 
 		-webkit-transform: translate3d(0, 0, 0);
@@ -460,8 +462,9 @@
 
 	.gradient-bg .g3 {
 		position: absolute;
-		background: -o-radial-gradient(center, circle, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
-		background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+		background:
+			-o-radial-gradient(center, circle, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat,
+			radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
 		mix-blend-mode: var(--blending);
 
 		-webkit-transform: translate3d(0, 0, 0);
@@ -485,8 +488,9 @@
 
 	.gradient-bg .g4 {
 		position: absolute;
-		background: -o-radial-gradient(center, circle, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
-		background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+		background:
+			-o-radial-gradient(center, circle, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat,
+			radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
 		mix-blend-mode: var(--blending);
 
 		-webkit-transform: translate3d(0, 0, 0);
@@ -510,8 +514,9 @@
 
 	.gradient-bg .g5 {
 		position: absolute;
-		background: -o-radial-gradient(center, circle, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
-		background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+		background:
+			-o-radial-gradient(center, circle, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat,
+			radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
 		mix-blend-mode: var(--blending);
 		-webkit-transform: translate3d(0, 0, 0);
 		transform: translate3d(0, 0, 0);
@@ -534,8 +539,6 @@
 	/******************************************************** Hovers effect ********************************************************/
 	/* purple */
 	.button-purple {
-		display: -webkit-box;
-		display: -ms-flexbox;
 		display: flex;
 		text-decoration: none;
 		color: inherit;
@@ -589,8 +592,6 @@
 
 	/* sky */
 	.button-cyan {
-		display: -webkit-box;
-		display: -ms-flexbox;
 		display: flex;
 		text-decoration: none;
 		color: inherit;
