@@ -1,22 +1,19 @@
-import type { Locale, Article, TagComponent } from '@/types/strapi'
-import type { Metadata } from 'next'
-
 import { LinkIcon } from '@heroicons/react/20/solid'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
-import Script from 'next/script'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-
-import { getArticleBySlug, getArticles, getContentWebsite, processArticleData } from '@/services/getContentWebsite'
-import { NavigationArticle } from '@/components/Global/navigationArticle'
-import { localesConstant } from '@/services/localesConstant'
-import { Layout } from '@/components/Global/Layout'
+import Script from 'next/script'
 import ArrowUp from '@/components/Global/ArrowUp'
-import Footer from '@/components/Global/Footer'
-import { replaceTitle } from '@/services/utils'
-import Nav from '@/components/Global/Nav'
 import Cta from '@/components/Global/Cta'
+import Footer from '@/components/Global/Footer'
+import { Layout } from '@/components/Global/Layout'
+import Nav from '@/components/Global/Nav'
+import { NavigationArticle } from '@/components/Global/navigationArticle'
+import { getArticleBySlug, getArticles, getContentWebsite, processArticleData } from '@/services/getContentWebsite'
+import { localesConstant } from '@/services/localesConstant'
+import { replaceTitle } from '@/services/utils'
+import type { Article, Locale, TagComponent } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 12 hours
 export const revalidate = 43200 // 12 hours
@@ -136,8 +133,8 @@ export default async function Page({ params }: ArticlePageProps) {
 			<Nav
 				locale={locale}
 				content_website={content_website}
-				enRedirect={process.env.NEXT_PUBLIC_URL_ALT + '/blog/' + slugAlternate}
-				frRedirect={process.env.NEXT_PUBLIC_URL + '/blog/' + slug}
+				enRedirect={`${process.env.NEXT_PUBLIC_URL_ALT}/blog/${slugAlternate}`}
+				frRedirect={`${process.env.NEXT_PUBLIC_URL}/blog/${slug}`}
 				h1={processedArticle?.attributes?.title}
 				isHome={false}
 			/>

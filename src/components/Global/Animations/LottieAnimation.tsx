@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useState } from 'react'
-import React from 'react'
 
 import dynamic from 'next/dynamic'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 
 // Dynamically import the Player component with SSR disabled
 const LottiePlayer = dynamic(

@@ -1,13 +1,12 @@
 'use client'
 
 import { CameraIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import type React from 'react'
 import { useState } from 'react'
-import React from 'react'
-
-import { Realisation, ContentWebsite } from '@/types/strapi'
+import Galery from '@/components/Global/Galery'
 
 import { replaceTitle } from '@/services/utils'
-import Galery from '@/components/Global/Galery'
+import type { ContentWebsite, Realisation } from '@/types/strapi'
 
 interface GalerySectionProps {
 	processedRealisation?: Realisation

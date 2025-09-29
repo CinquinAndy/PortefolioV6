@@ -1,17 +1,14 @@
-import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
-
 import { Suspense } from 'react'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
-
-import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
-import { localesConstant } from '@/services/localesConstant'
 import { BlogContent } from '@/components/blog/BlogContent'
+import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
-import Cta from '@/components/Global/Cta'
+import { getArticles, getContentWebsite } from '@/services/getContentWebsite'
+import { localesConstant } from '@/services/localesConstant'
+import type { Locale } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 12 hours
 export const revalidate = 43200 // 12 hours
@@ -19,7 +16,6 @@ export const revalidate = 43200 // 12 hours
 interface PageParams {
 	locale: Locale
 }
-
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
@@ -88,7 +84,7 @@ function BlogContentSkeleton() {
 					<div className="mx-auto max-w-2xl">
 						<div className="h-12 bg-gray-300 rounded-lg animate-pulse" />
 					</div>
-					
+
 					{/* Grid skeleton */}
 					<div className="mx-auto max-w-360">
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

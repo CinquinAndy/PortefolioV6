@@ -1,9 +1,9 @@
 'use client'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
-import React from 'react'
+import Link from 'next/link'
 
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import type React from 'react'
 
 interface PaginationProps {
 	totalPages: number

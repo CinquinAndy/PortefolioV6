@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import type React from 'react'
 
 export const GaleryItemSkeleton = (): React.JSX.Element => (
 	<div className="m-2 animate-pulse rounded-lg object-cover p-1">

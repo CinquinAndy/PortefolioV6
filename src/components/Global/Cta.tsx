@@ -1,10 +1,8 @@
-import React from 'react'
-
-import { ContentWebsite } from '@/types/strapi'
 import Link from 'next/link'
-
+import type React from 'react'
 import { Layout } from '@/components/Global/Layout'
 import { replaceTitle } from '@/services/utils'
+import type { ContentWebsite } from '@/types/strapi'
 
 interface CtaProps {
 	content_website?: ContentWebsite

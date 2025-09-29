@@ -1,9 +1,8 @@
-import parse, { domToReact } from 'html-react-parser'
-import React from 'react'
-
 import hljs from 'highlight.js'
+import parse, { domToReact } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
 import { replaceDynamicVariables } from '@/services/utils'
 

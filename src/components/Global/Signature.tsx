@@ -1,8 +1,6 @@
-import React from 'react'
-
-import { ContentWebsite } from '@/types/strapi'
-
+import type React from 'react'
 import { Layout } from '@/components/Global/Layout'
+import type { ContentWebsite } from '@/types/strapi'
 
 interface SignatureProps {
 	content_website?: ContentWebsite

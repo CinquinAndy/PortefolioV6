@@ -1,19 +1,17 @@
 'use client'
 
-import { TypeAnimation } from 'react-type-animation'
-import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
-import React from 'react'
-
-import { ContentWebsite, LinkComponent } from '@/types/strapi'
-import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { usePathname } from 'next/navigation'
+import type React from 'react'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { TypeAnimation } from 'react-type-animation'
 import { GradientBackgroundWithoutAnimation } from '@/components/Global/Animations/GradientBackgroundWithoutAnimation'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { AnimatedUnderline } from '@/components/ui/animated-underline'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
+import type { ContentWebsite, LinkComponent } from '@/types/strapi'
 
 interface NavProps {
 	selectedMenu?: string

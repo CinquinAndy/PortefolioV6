@@ -1,4 +1,4 @@
-import type { Locale, LinkComponent, TagComponent, TechnologyComponent } from './strapi'
+import type { LinkComponent, Locale, TagComponent, TechnologyComponent } from './strapi'
 
 // Article Request Types
 export interface CreateArticleRequest {

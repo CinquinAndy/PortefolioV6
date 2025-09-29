@@ -1,8 +1,8 @@
 'use client'
+import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import React from 'react'
 
-import { ContentWebsite } from '@/types/strapi'
+import type { ContentWebsite } from '@/types/strapi'
 
 interface PopupMainCatProps {
 	content_website?: ContentWebsite

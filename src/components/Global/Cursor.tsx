@@ -1,11 +1,11 @@
 'use client'
+import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import React from 'react'
 
 const Cursor = (): React.JSX.Element => {
 	const [isDesktop, setIsDesktop] = useState(false)
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [cursorVisible, setCursorVisible] = useState(true)
+	const [_cursorVisible, setCursorVisible] = useState(true)
 	const [cursorEnlarged, setCursorEnlarged] = useState(false)
 	const [position, setPosition] = useState({ y: 0, x: 0 })
 	const [velocity, setVelocity] = useState({ y: 0, x: 0 })
@@ -55,7 +55,7 @@ const Cursor = (): React.JSX.Element => {
 
 	const animate = (time: number) => {
 		if (!isDesktop) return
-		if (previousTimeRef.current != undefined) {
+		if (previousTimeRef.current !== undefined && previousTimeRef.current !== null) {
 			const deltaTime = time - previousTimeRef.current
 
 			// Update logic goes here

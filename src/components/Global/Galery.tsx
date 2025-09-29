@@ -1,18 +1,17 @@
 'use client'
-import type { StrapiMedia } from '@/types/strapi'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
-import { Fragment } from 'react'
-import React from 'react'
-
-import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import type React from 'react'
+import { Fragment } from 'react'
+import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 
 import { GaleryItemSkeleton } from '@/components/Global/SkeletonsFallback/GaleryItemSkeleton'
-import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
+import type { StrapiMedia } from '@/types/strapi'
 
 interface GaleryProps {
 	title_galery?: string
@@ -71,7 +70,7 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 											{galery?.map((item: StrapiMedia, index: number) => (
 												<Link
 													className="cursor-pointer hover:filter-none"
-													href={pathname + '/' + index}
+													href={`${pathname}/${index}`}
 													key={index}
 													type="button"
 												>

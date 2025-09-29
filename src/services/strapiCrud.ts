@@ -1,32 +1,32 @@
+import type { NotFoundResponse } from '@/types/api'
 import type {
-	CreateArticleRequest,
-	UpdateArticleRequest,
-	CreateRealisationRequest,
-	UpdateRealisationRequest,
-	CreateServiceRequest,
-	UpdateServiceRequest,
-	CreateTechnologyRequest,
-	UpdateTechnologyRequest,
-	UpdateAboutRequest,
-	UpdateCguRequest,
-	UpdateNotFoundRequest,
-	UpdateContentWebsiteRequest,
-	StrapiQueryParams,
-	BulkOperationResponse,
-	BulkDeleteRequest,
-} from '@/types/strapi-requests'
-import type {
+	About,
 	Article,
+	Cgu,
+	ContentWebsite,
+	NotFound,
 	Realisation,
 	Service,
-	Technology,
-	About,
-	Cgu,
-	NotFound,
-	ContentWebsite,
 	StrapiResponse,
+	Technology,
 } from '@/types/strapi'
-import type { NotFoundResponse } from '@/types/api'
+import type {
+	BulkDeleteRequest,
+	BulkOperationResponse,
+	CreateArticleRequest,
+	CreateRealisationRequest,
+	CreateServiceRequest,
+	CreateTechnologyRequest,
+	StrapiQueryParams,
+	UpdateAboutRequest,
+	UpdateArticleRequest,
+	UpdateCguRequest,
+	UpdateContentWebsiteRequest,
+	UpdateNotFoundRequest,
+	UpdateRealisationRequest,
+	UpdateServiceRequest,
+	UpdateTechnologyRequest,
+} from '@/types/strapi-requests'
 
 /**
  * Generic CRUD operations for Strapi entities

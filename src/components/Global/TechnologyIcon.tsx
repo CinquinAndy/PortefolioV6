@@ -1,9 +1,8 @@
 'use client'
-import { useEffect, useState } from 'react'
-import React from 'react'
-
-import * as SimpleIcons from 'simple-icons'
 import Image from 'next/image'
+import type React from 'react'
+import { useEffect, useState } from 'react'
+import * as SimpleIcons from 'simple-icons'
 
 interface TechnologyIconProps {
 	name: string

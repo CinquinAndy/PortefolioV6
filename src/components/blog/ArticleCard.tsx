@@ -1,11 +1,8 @@
-import type { Article, Locale } from '@/types/strapi'
-
-import { useRef } from 'react'
-
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-
+import { useRef } from 'react'
 import { Badge } from '@/components/ui/badge'
+import type { Article, Locale } from '@/types/strapi'
 
 interface ArticleCardProps {
 	locale: Locale

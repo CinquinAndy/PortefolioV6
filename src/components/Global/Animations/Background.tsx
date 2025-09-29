@@ -1,7 +1,7 @@
 'use client'
-import React from 'react'
 
 import Image from 'next/image'
+import type React from 'react'
 
 export function Background(): React.JSX.Element {
 	return (

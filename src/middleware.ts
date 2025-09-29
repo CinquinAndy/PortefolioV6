@@ -1,7 +1,6 @@
 import type { NextRequest, NextResponse } from 'next/server'
-import type { I18nConfig } from '@/types/middleware'
-
 import { i18nRouter } from 'next-i18n-router'
+import type { I18nConfig } from '@/types/middleware'
 
 export function middleware(request: NextRequest): NextResponse {
 	let newLocale: string

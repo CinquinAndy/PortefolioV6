@@ -1,9 +1,9 @@
 'use client'
-import type { Techno } from '@/types/strapi'
-
-import React from 'react'
 
 import Image from 'next/image'
+
+import type React from 'react'
+import type { Techno } from '@/types/strapi'
 
 import { TechnologyIcon } from './TechnologyIcon'
 

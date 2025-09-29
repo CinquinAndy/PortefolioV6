@@ -1,14 +1,13 @@
-import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
-
-import { getContentWebsite } from '@/services/getContentWebsite'
 import { ContactForm } from '@/components/Global/ContactForm'
-import { localesConstant } from '@/services/localesConstant'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
+
+import { getContentWebsite } from '@/services/getContentWebsite'
+import { localesConstant } from '@/services/localesConstant'
+import type { Locale } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 interface PageParams {
 	locale: Locale

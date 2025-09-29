@@ -1,14 +1,13 @@
-import type { Locale, Realisation, StrapiResponse } from '@/types/strapi'
 import type { Metadata } from 'next'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
-
-import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
 import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
+
+import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
+import type { Locale, Realisation, StrapiResponse } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 interface ImagePageParams {
 	slug: string
@@ -90,7 +89,7 @@ export default async function Page({ params }: ImagePageProps) {
 		? await processRealisationData({ meta: undefined, data: realisations } as StrapiResponse<Realisation[]>)
 		: null
 	const galery = processedRealisation?.data?.attributes?.galery?.data
-	const imageData = galery?.[parseInt(image)]
+	const imageData = galery?.[parseInt(image, 10)]
 
 	return (
 		<>

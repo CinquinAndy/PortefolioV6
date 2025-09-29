@@ -1,12 +1,10 @@
-import React from 'react'
-
-import { ContentWebsite, Sitemap } from '@/types/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { AnimatedUnderline } from '@/components/ui/animated-underline'
-import { Signature } from '@/components/Global/Signature'
+import type React from 'react'
 import { Layout } from '@/components/Global/Layout'
+import { Signature } from '@/components/Global/Signature'
+import { AnimatedUnderline } from '@/components/ui/animated-underline'
+import type { ContentWebsite, Sitemap } from '@/types/strapi'
 
 interface FooterProps {
 	content_website?: ContentWebsite
@@ -51,9 +49,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					{sitemap?.map((item: Sitemap, index: number) => {
 						return (
 							<Link href={item?.Link?.url ?? '/'} key={index}>
-								<AnimatedUnderline className="text-xs xl:text-sm">
-									{item?.Link?.label}
-								</AnimatedUnderline>
+								<AnimatedUnderline className="text-xs xl:text-sm">{item?.Link?.label}</AnimatedUnderline>
 							</Link>
 						)
 					})}
@@ -65,9 +61,7 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					{legals?.map((item: Sitemap, index: number) => {
 						return (
 							<Link href={item?.Link?.url ?? '/'} key={index}>
-								<AnimatedUnderline className="text-xs xl:text-sm">
-									{item?.Link?.label}
-								</AnimatedUnderline>
+								<AnimatedUnderline className="text-xs xl:text-sm">{item?.Link?.label}</AnimatedUnderline>
 							</Link>
 						)
 					})}

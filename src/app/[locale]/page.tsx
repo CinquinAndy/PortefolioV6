@@ -1,20 +1,18 @@
-import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
-
-import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
-import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import LoaderFullPage from '@/components/Global/Animations/LoaderFullPage'
-import { PopupMainCat } from '@/components/Global/PopupMainCat'
-import { ServicesGrid } from '@/components/Global/ServicesGrid'
-import { localesConstant } from '@/services/localesConstant'
-import Realisations from '@/components/Global/Realisations'
+import { VideoBackground } from '@/components/Global/Animations/VideoBackground'
 import Articles from '@/components/Global/Articles'
+import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
-import Cta from '@/components/Global/Cta'
+import { PopupMainCat } from '@/components/Global/PopupMainCat'
+import Realisations from '@/components/Global/Realisations'
+import { ServicesGrid } from '@/components/Global/ServicesGrid'
+import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
+import { localesConstant } from '@/services/localesConstant'
+import type { Locale } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 interface PageParams {
 	locale: string

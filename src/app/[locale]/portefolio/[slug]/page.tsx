@@ -1,26 +1,23 @@
-import type { Locale, Realisation, Techno } from '@/types/strapi'
-import type { Metadata } from 'next'
-
 import { LinkIcon } from '@heroicons/react/20/solid'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-
+import Cta from '@/components/Global/Cta'
+import Footer from '@/components/Global/Footer'
+import { GalerySection } from '@/components/Global/GalerySection'
+import { Layout } from '@/components/Global/Layout'
+import Nav from '@/components/Global/Nav'
+import { TechnologyDisplay } from '@/components/Global/TechnologyDisplay'
 import {
 	getContentWebsite,
 	getRealisationBySlug,
 	getRealisations,
 	processRealisationData,
 } from '@/services/getContentWebsite'
-import { TechnologyDisplay } from '@/components/Global/TechnologyDisplay'
-import { GalerySection } from '@/components/Global/GalerySection'
 import { localesConstant } from '@/services/localesConstant'
-import { Layout } from '@/components/Global/Layout'
-import Footer from '@/components/Global/Footer'
 import { replaceTitle } from '@/services/utils'
-import Nav from '@/components/Global/Nav'
-import Cta from '@/components/Global/Cta'
+import type { Locale, Realisation, Techno } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 interface RealisationSlugParams {
 	slug: string
@@ -100,7 +97,12 @@ export default async function Page({ params }: RealisationPageProps) {
 
 	return (
 		<>
-			<Nav locale={locale} content_website={content_website} h1={processedRealisation?.data?.attributes?.title} isHome={false} />
+			<Nav
+				locale={locale}
+				content_website={content_website}
+				h1={processedRealisation?.data?.attributes?.title}
+				isHome={false}
+			/>
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 gap-[100px] px-6 md:my-48 md:grid-cols-2 2xl:px-0'}>

@@ -1,15 +1,13 @@
-import type { Locale } from '@/types/strapi'
 import type { Metadata } from 'next'
-
-import { getMetadataBase, getCanonicalUrl, getLanguageAlternates } from '@/utils/seo'
-import { getResponseData } from '@/types/strapi'
-
+import Cta from '@/components/Global/Cta'
+import Footer from '@/components/Global/Footer'
+import { Layout } from '@/components/Global/Layout'
+import Nav from '@/components/Global/Nav'
 import { getCgu, getContentWebsite } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
-import { Layout } from '@/components/Global/Layout'
-import Footer from '@/components/Global/Footer'
-import Nav from '@/components/Global/Nav'
-import Cta from '@/components/Global/Cta'
+import type { Locale } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 interface PageParams {
 	locale: string
@@ -54,7 +52,12 @@ export default async function Page({ params }: PageProps) {
 
 	return (
 		<>
-			<Nav locale={locale} content_website={content_website} h1={content_website?.attributes?.content_cgu?.seo?.h1} isHome={false} />
+			<Nav
+				locale={locale}
+				content_website={content_website}
+				h1={content_website?.attributes?.content_cgu?.seo?.h1}
+				isHome={false}
+			/>
 			<div>
 				<div className={'relative'}>
 					<div className={'my-24 grid grid-cols-1 px-6 md:my-48 2xl:px-0'}>

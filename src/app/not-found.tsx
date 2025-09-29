@@ -1,5 +1,5 @@
+import type { Metadata } from 'next'
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
-import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 

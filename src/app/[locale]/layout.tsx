@@ -1,10 +1,10 @@
-import { ToastContainer } from 'react-toastify'
-import type { ReactNode } from 'react'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { dir } from 'i18next'
 
 import { Be_Vietnam_Pro, Noto_Serif_Display } from 'next/font/google'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
-import { dir } from 'i18next'
+import type { ReactNode } from 'react'
+import { ToastContainer } from 'react-toastify'
 
 import { LottieAnimation } from '@/components/Global/Animations/LottieAnimation'
 

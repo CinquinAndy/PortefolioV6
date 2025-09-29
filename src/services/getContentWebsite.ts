@@ -1,20 +1,19 @@
-import type {
-	StrapiResponse,
-	Article,
-	Realisation,
-	ContentWebsite,
-	Service,
-	Technology,
-	About,
-	Cgu,
-	NotFound,
-	Locale,
-} from '@/types/strapi'
-import type { FetchOptions, NotFoundResponse } from '@/types/api'
-
 import { redirect } from 'next/navigation'
 import { remark } from 'remark'
 import html from 'remark-html'
+import type { FetchOptions, NotFoundResponse } from '@/types/api'
+import type {
+	About,
+	Article,
+	Cgu,
+	ContentWebsite,
+	Locale,
+	NotFound,
+	Realisation,
+	Service,
+	StrapiResponse,
+	Technology,
+} from '@/types/strapi'
 
 /**
  * Fetch data from API

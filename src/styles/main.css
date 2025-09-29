@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 @plugin 'tailwindcss-animate';
@@ -81,13 +81,13 @@
 		--blending: hard-light;
 	}
 
-	@media (min-aspect-ratio: 16/9) {
+	@media (min-aspect-ratio: 16 / 9) {
 		:root {
 			--video-height: 56.25vw;
 		}
 	}
 
-	@media (max-aspect-ratio: 16/9) {
+	@media (max-aspect-ratio: 16 / 9) {
 		:root {
 			--video-width: 177.78vh;
 		}
@@ -131,7 +131,7 @@
 	}
 
 	blockquote {
-		border-left: #fff !important;
+		border-left: #fff;
 	}
 
 	body {
@@ -181,7 +181,7 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		content: '';
+		content: "";
 		z-index: -11;
 		width: 100vw;
 		height: 100vh;
@@ -554,7 +554,7 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		content: '';
+		content: "";
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -613,7 +613,7 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		content: '';
+		content: "";
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -701,7 +701,7 @@
 		-webkit-animation: 1.5s linear 0s normal none infinite focuse;
 		animation: 1.5s linear 0s normal none infinite focuse;
 		position: absolute;
-		content: '';
+		content: "";
 		height: calc(100% + 16px);
 		width: calc(100% + 16px);
 		top: -8px;
@@ -765,10 +765,10 @@
 	}
 
 	/**
- * ----------------------------------------
- * animation jello-horizontal
- * ----------------------------------------
- */
+	 * ----------------------------------------
+	 * animation jello-horizontal
+	 * ----------------------------------------
+	 */
 	@-webkit-keyframes jello-horizontal {
 		0% {
 			-webkit-transform: scale3d(1, 1, 1);
@@ -1051,8 +1051,8 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	margin: 0 !important;
-	padding: 0 !important;
+	margin: 0;
+	padding: 0;
 	z-index: 0;
 	opacity: 0.15;
 	mix-blend-mode: overlay;
@@ -1191,7 +1191,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	content: '';
+	content: "";
 	width: 100%;
 	height: 100%;
 	z-index: 31;
@@ -1205,7 +1205,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	content: '';
+	content: "";
 	width: 100%;
 	height: 100%;
 	z-index: 31;
@@ -1219,7 +1219,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	content: '';
+	content: "";
 	width: 100%;
 	height: 100%;
 	z-index: 31;
@@ -1232,7 +1232,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	content: '';
+	content: "";
 	width: 100%;
 	height: 100%;
 	z-index: 31;
@@ -1292,7 +1292,7 @@
 
 /*** custom popup ***/
 .custom-popup > div:first-child::before {
-	content: '';
+	content: "";
 	position: absolute;
 	right: -26px;
 	top: 15px;
@@ -1308,7 +1308,7 @@
 
 /*** custom popup ***/
 .custom-popup > div:first-child::after {
-	content: '';
+	content: "";
 	position: absolute;
 	right: -30px;
 	top: 15px;

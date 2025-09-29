@@ -1,16 +1,13 @@
 'use client'
 
-import type { Article, Locale } from '@/types/strapi'
-
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
-import { useMemo, useState, useEffect, useCallback } from 'react'
-
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Fuse from 'fuse.js'
-
-import { MasonryGrid } from './MasonryGrid'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import type { Article, Locale } from '@/types/strapi'
 import { ArticleCard } from './ArticleCard'
 import { BlogSearch } from './BlogSearch'
+import { MasonryGrid } from './MasonryGrid'
 
 interface BlogContentProps {
 	locale: Locale
@@ -24,7 +21,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 
 	const [searchQuery, setSearchQuery] = useState<string>('')
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [selectedType, setSelectedType] = useState<string>('all')
+	const [selectedType, _setSelectedType] = useState<string>('all')
 	const [currentPage, setCurrentPage] = useState<number>(1)
 
 	const pageSize = 12
@@ -32,7 +29,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 	// Update current page from URL params
 	useEffect(() => {
 		const page = searchParams?.get('page')
-		setCurrentPage(page != null && page !== '' ? parseInt(page) : 1)
+		setCurrentPage(page != null && page !== '' ? parseInt(page, 10) : 1)
 	}, [searchParams])
 
 	const fuse = useMemo(

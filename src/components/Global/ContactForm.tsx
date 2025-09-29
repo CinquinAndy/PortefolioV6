@@ -1,13 +1,13 @@
 'use client'
+
 /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any */
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import type React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import React from 'react'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ContentWebsite } from '@/types/strapi'
 import { z } from 'zod'
+import type { ContentWebsite } from '@/types/strapi'
 
 interface ContactFormProps {
 	content_website?: ContentWebsite

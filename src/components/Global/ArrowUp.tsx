@@ -1,7 +1,7 @@
 'use client'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
+import type React from 'react'
 import { useEffect, useState } from 'react'
-import React from 'react'
 
 function ArrowUp(): React.JSX.Element {
 	// State to manage whether the button is shown or not

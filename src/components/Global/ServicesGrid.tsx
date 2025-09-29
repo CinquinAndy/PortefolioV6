@@ -1,13 +1,11 @@
 'use client'
-import React from 'react'
-
-import { ContentWebsite, Service } from '@/types/strapi'
+import { clsx } from 'clsx'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { clsx } from 'clsx'
-
+import type React from 'react'
 import { replaceTitle } from '@/services/utils'
+import type { ContentWebsite, Service } from '@/types/strapi'
 
 interface ServicesGridProps {
 	services?: Service[]

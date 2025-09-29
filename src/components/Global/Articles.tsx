@@ -1,13 +1,10 @@
-import React from 'react'
-
-import { ContentWebsite } from '@/types/strapi'
-import { Article } from '@/types/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
+import type React from 'react'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
+import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
 import { replaceTitle } from '@/services/utils'
+import type { Article, ContentWebsite } from '@/types/strapi'
 
 interface ArticlesProps {
 	slice?: number
@@ -38,7 +35,7 @@ function Articles({ slice, isHome, content_website, articles }: ArticlesProps): 
 	return (
 		<section className="w-full p-4 md:p-20">
 			{/*// <!--     Derniers articles -->*/}
-			{isHome == true && (
+			{isHome === true && (
 				<div className="mt-[100px] flex justify-between">
 					<div className="w-1/2">
 						<h2
@@ -83,7 +80,7 @@ function Articles({ slice, isHome, content_website, articles }: ArticlesProps): 
 								className={`${gridTemplateCustom(
 									index
 								)} relative flex aspect-video h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
-								href={'/blog/' + article?.attributes?.slug}
+								href={`/blog/${article?.attributes?.slug}`}
 								key={article?.id}
 							>
 								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">

@@ -26,9 +26,7 @@ export const replaceDynamicVariables = (content: string): string => {
 	if (!content) return ''
 
 	const currentYear = new Date().getFullYear()
-	
+
 	// Replace dynamic variables
-	return content
-		.replace(/{actualYear}/g, currentYear.toString())
-		.replace(/{currentYear}/g, currentYear.toString())
+	return content.replace(/{actualYear}/g, currentYear.toString()).replace(/{currentYear}/g, currentYear.toString())
 }

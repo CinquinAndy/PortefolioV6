@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import type React from 'react'
 
 export const ArticleRealisationSkeleton = (): React.JSX.Element => (
 	<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full animate-pulse brightness-90">

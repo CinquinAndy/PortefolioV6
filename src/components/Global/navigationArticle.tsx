@@ -1,10 +1,10 @@
 'use client'
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { HomeIcon } from '@heroicons/react/16/solid'
-import React from 'react'
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link'
 
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import type React from 'react'
 
 export function NavigationArticle(): React.JSX.Element {
 	const pathname = usePathname() // usePathname hook to get the current path

@@ -1,12 +1,11 @@
-import React from 'react'
-
-import { ContentWebsite, Realisation } from '@/types/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
+import type React from 'react'
+import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 
 import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
-import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { replaceTitle } from '@/services/utils'
+import type { ContentWebsite, Realisation } from '@/types/strapi'
 
 interface RealisationsProps {
 	slice?: number
@@ -67,7 +66,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 						return (
 							<Link
 								className={`${gridTemplateCustom(index)} relative flex aspect-video h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
-								href={'/portefolio/' + realisation?.attributes?.slug}
+								href={`/portefolio/${realisation?.attributes?.slug}`}
 								key={realisation?.id}
 							>
 								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
