@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+build/
+next-env.d.ts
+*.config.js
+*.config.mjs
+playwright-report/
+test-results/
+public/
+dev-assets/
+pnpm-lock.yaml
