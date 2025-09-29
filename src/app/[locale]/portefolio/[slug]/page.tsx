@@ -151,9 +151,9 @@ export default async function Page({ params }: RealisationPageProps) {
 										}}
 									/>
 									<div className={'flex w-full gap-8'}>
-										{processedRealisation?.data?.attributes?.links?.map((link, index: number) => {
+										{processedRealisation?.data?.attributes?.links?.map(link => {
 											return (
-												<div className={'flex'} key={index}>
+												<div className={'flex'} key={link?.id || link?.url}>
 													<Link
 														className={
 															'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'

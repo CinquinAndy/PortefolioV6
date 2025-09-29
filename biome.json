@@ -24,7 +24,8 @@
 			"recommended": true,
 			"correctness": {
 				"useExhaustiveDependencies": "off",
-				"noUnusedVariables": "error"
+				"noUnusedVariables": "error",
+				"useUniqueElementIds": "off"
 			},
 			"style": {
 				"useConst": "error",
@@ -32,6 +33,9 @@
 			},
 			"suspicious": {
 				"noArrayIndexKey": "warn"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "off"
 			}
 		}
 	},

@@ -61,7 +61,6 @@ const options = {
 						<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
 					</pre>
 				)
-				
 			}
 
 			if (name === 'img') {

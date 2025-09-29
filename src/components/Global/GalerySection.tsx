@@ -21,9 +21,17 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 	}
 
 	return (
-		<div
+		<button
+			type="button"
+			tabIndex={0}
 			className={'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'}
 			onClick={handleClick}
+			onKeyDown={e => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault()
+					handleClick()
+				}
+			}}
 		>
 			<div className={'flex w-full items-start gap-4 md:gap-8'}>
 				<div className={'flex items-center gap-2'}>
@@ -40,6 +48,7 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 					</div>
 				</div>
 				<button
+					type="button"
 					className={
 						'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
 					}
@@ -57,6 +66,6 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 				open={open}
 				title_galery={content_website?.attributes?.content_realisations?.title_galery}
 			/>
-		</div>
+		</button>
 	)
 }

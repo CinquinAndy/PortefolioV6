@@ -163,9 +163,9 @@ export default async function Page({ params }: ArticlePageProps) {
 									/>
 								</div>
 								<div className={'flex flex-col gap-4'}>
-									{processedArticle?.attributes?.links?.map((link, index: number) => {
+									{processedArticle?.attributes?.links?.map(link => {
 										return (
-											<div className={'flex'} key={index}>
+											<div className={'flex'} key={link?.id || link?.url}>
 												<Link
 													className={
 														'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
@@ -221,14 +221,14 @@ export default async function Page({ params }: ArticlePageProps) {
 										</div>
 										<h4 className={'my-2 mb-16 flex flex-wrap gap-2'}>
 											{(processedArticle?.data?.attributes?.tags ?? processedArticle?.attributes?.tags)?.map(
-												(tag: TagComponent, index: number) => {
+												(tag: TagComponent) => {
 													if (tag?.name != null && tag.name.length > 0) {
 														const colorIndex = getColorIndex(tag.name) % colors.length
 														const color = colors[colorIndex]
 														return (
 															<span
 																className="inline-flex items-center gap-x-1.5 rounded-full bg-white px-2 py-1 text-[0.6rem] font-medium text-gray-900 ring-1 ring-inset ring-gray-200 md:px-2 md:text-xs"
-																key={index}
+																key={tag?.id || tag?.name}
 															>
 																<svg aria-hidden="true" className={`h-1.5 w-1.5 fill-${color}-500`} viewBox="0 0 6 6">
 																	<circle cx="3" cy="3" r="3" />
@@ -238,6 +238,7 @@ export default async function Page({ params }: ArticlePageProps) {
 															</span>
 														)
 													}
+													return null
 												}
 											)}
 										</h4>

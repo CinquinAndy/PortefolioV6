@@ -28,6 +28,7 @@ function ArrowUp(): React.JSX.Element {
 
 	return (
 		<button
+			type="button"
 			className={
 				'fixed bottom-0 right-0 z-50 m-4 flex cursor-pointer items-center justify-center rounded-xl border border-white bg-white/5 p-2 transition-opacity ' +
 				`backdrop-blur-sm lg:m-8 ${showButton ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`

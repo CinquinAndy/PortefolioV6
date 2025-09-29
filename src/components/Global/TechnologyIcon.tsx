@@ -80,7 +80,8 @@ export function TechnologyIcon({ name, image, className }: TechnologyIconProps):
 		// Render the SVG for the icon with a visible background and correct sizing
 		return (
 			<div className={`flex items-center justify-center ${className}`}>
-				<svg className="h-6 w-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+				<svg className="h-6 w-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label={name}>
+					<title>{name}</title>
 					<path d={icon.path} />
 				</svg>
 			</div>

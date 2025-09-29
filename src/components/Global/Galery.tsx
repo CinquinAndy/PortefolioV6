@@ -71,7 +71,7 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 												<Link
 													className="cursor-pointer hover:filter-none"
 													href={`${pathname}/${index}`}
-													key={index}
+													key={item?.id || index}
 													type="button"
 												>
 													<ComponentLoadComponent FallBack={GaleryItemSkeleton}>

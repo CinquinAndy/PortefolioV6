@@ -97,9 +97,7 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								})}
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
-							{Boolean((errors as any)?.name) && (
-								<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).name.message)}</p>
-							)}
+							{Boolean(errors.name) && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.name?.message)}</p>}
 						</div>
 					</div>
 					<div>
@@ -116,9 +114,7 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
 						</div>
-						{Boolean((errors as any)?.email) && (
-							<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).email.message)}</p>
-						)}
+						{Boolean(errors.email) && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.email?.message)}</p>}
 					</div>
 					<div>
 						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="phone">
@@ -134,9 +130,7 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
 						</div>
-						{Boolean((errors as any)?.phone) && (
-							<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).phone.message)}</p>
-						)}
+						{Boolean(errors.phone) && <p className={'mt-2 text-xs text-red-500/80'}>{String(errors.phone?.message)}</p>}
 					</div>
 					<div>
 						<label className="block text-sm font-semibold leading-6 text-slate-50" htmlFor="company">
@@ -151,8 +145,8 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								})}
 								className="block w-full rounded-md border-0 bg-slate-1000 px-3.5 py-2 text-slate-50 shadow-sm ring-1 ring-inset ring-slate-900 placeholder:text-slate-900 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6"
 							/>
-							{Boolean((errors as any)?.company) && (
-								<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).company.message)}</p>
+							{Boolean(errors.company) && (
+								<p className={'mt-2 text-xs text-red-500/80'}>{String(errors.company?.message)}</p>
 							)}
 						</div>
 					</div>
@@ -171,8 +165,8 @@ export function ContactForm({ content_website }: ContactFormProps): React.JSX.El
 								defaultValue={''}
 							/>
 						</div>
-						{Boolean((errors as any)?.content) && (
-							<p className={'mt-2 text-xs text-red-500/80'}>{String((errors as any).content.message)}</p>
+						{Boolean(errors.content) && (
+							<p className={'mt-2 text-xs text-red-500/80'}>{String(errors.content?.message)}</p>
 						)}
 					</div>
 					<div className={'sm:col-span-2'}>
