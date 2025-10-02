@@ -46,9 +46,9 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					<h2 className="font-display text-sm font-bold! xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_sitemap}
 					</h2>
-					{sitemap?.map((item: Sitemap, index: number) => {
+					{sitemap?.map((item: Sitemap) => {
 						return (
-							<Link href={item?.Link?.url ?? '/'} key={index}>
+							<Link href={item?.Link?.url ?? '/'} key={item?.Link?.url ?? item?.Link?.label}>
 								<AnimatedUnderline className="text-xs xl:text-sm">{item?.Link?.label}</AnimatedUnderline>
 							</Link>
 						)
@@ -58,9 +58,9 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 					<h2 className="font-display text-sm font-bold! xl:text-xl">
 						{content_website?.attributes?.content_footer?.title_legals}
 					</h2>
-					{legals?.map((item: Sitemap, index: number) => {
+					{legals?.map((item: Sitemap) => {
 						return (
-							<Link href={item?.Link?.url ?? '/'} key={index}>
+							<Link href={item?.Link?.url ?? '/'} key={item?.Link?.url ?? item?.Link?.label}>
 								<AnimatedUnderline className="text-xs xl:text-sm">{item?.Link?.label}</AnimatedUnderline>
 							</Link>
 						)

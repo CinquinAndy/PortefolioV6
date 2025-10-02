@@ -32,8 +32,8 @@ export function NavigationArticle(): React.JSX.Element {
 								</Link>
 							</div>
 						</li>
-						{breadcrumbLinks.map((link, index) => (
-							<li key={index}>
+						{breadcrumbLinks.map((link) => (
+							<li key={link.href}>
 								<div className="flex items-center">
 									<ChevronRightIcon aria-hidden="true" className="h-5 w-5 shrink-0 text-gray-50" />
 									<Link

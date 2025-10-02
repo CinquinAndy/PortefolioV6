@@ -89,7 +89,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 	return (
 		<div className="flex w-full gap-6">
 			{itemsByColumn.map((columnItems, columnIndex) => (
-				<div className="flex flex-col gap-6" key={columnIndex} style={{ width: columnWidth }}>
+				<div className="flex flex-col gap-6" key={`col-${columnIndex}`} style={{ width: columnWidth }}>
 					<AnimatePresence mode="popLayout">
 						{columnItems.map((item, index) => (
 							<motion.div
