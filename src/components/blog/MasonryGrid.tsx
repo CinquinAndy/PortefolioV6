@@ -89,6 +89,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 	return (
 		<div className="flex w-full gap-6">
 			{itemsByColumn.map((columnItems, columnIndex) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: Columns are stable structural elements that never reorder
 				<div className="flex flex-col gap-6" key={`col-${columnIndex}`} style={{ width: columnWidth }}>
 					<AnimatePresence mode="popLayout">
 						{columnItems.map((item, index) => (

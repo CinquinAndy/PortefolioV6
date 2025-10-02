@@ -33,9 +33,9 @@ const options = {
 					return markdownTableToHtml(content)
 				} else if (isInListItem) {
 					// Don't wrap paragraphs inside list items with additional divs
-					return domToReact(children, options)
+					return domToReact(children as DOMNode[], options)
 				} else {
-					return <div className={'my-5'}>{domToReact(children, options)}</div>
+					return <div className={'my-5'}>{domToReact(children as DOMNode[], options)}</div>
 				}
 			}
 
@@ -92,7 +92,7 @@ const options = {
 				}
 				return (
 					<Link className={'underline'} href={href}>
-						{domToReact(children, options)}
+						{domToReact(children as DOMNode[], options)}
 					</Link>
 				)
 			}
@@ -114,7 +114,9 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	// Replace dynamic variables before parsing
 	const valueWithReplacements = replaceDynamicVariables(value)
 	const parsedContent = parse(valueWithReplacements, options)
-	const replacedContent = Array.isArray(parsedContent) ? domToReact(parsedContent, options) : parsedContent
+	const replacedContent = Array.isArray(parsedContent)
+		? domToReact(parsedContent as unknown as DOMNode[], options)
+		: parsedContent
 
 	return <div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
 }
