@@ -83,7 +83,7 @@
 		"@playwright/test": "1.55.1",
 		"@tailwindcss/forms": "0.5.10",
 		"@tailwindcss/postcss": "4.1.14",
-		"@types/node": "24.6.1",
+		"@types/node": "24.6.2",
 		"@types/react": "19.2.0",
 		"@types/react-dom": "19.2.0",
 		"@typescript-eslint/eslint-plugin": "8.45.0",
