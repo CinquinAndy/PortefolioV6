@@ -3,10 +3,11 @@ export const replaceTitle = (title: string): string => {
 
 	// Regex to identify words with * or _, and other text segments
 	const regex = /(\*([^*]+)\*)|(_([^_]+)_)|([^*_]+)/g
-	let matches: RegExpExecArray | null
+	let matches: RegExpExecArray | null = null
 	let newTitle = ''
 
-	while ((matches = regex.exec(title)) !== null) {
+	matches = regex.exec(title)
+	while (matches !== null) {
 		if (matches[2]) {
 			// Match for text wrapped in *
 			newTitle += `<span class="text-fuchsia-500 font-semibold">${matches[2]}</span>`
@@ -17,6 +18,7 @@ export const replaceTitle = (title: string): string => {
 			// Match for text without * or _
 			newTitle += `<span>${matches[5]}</span>`
 		}
+		matches = regex.exec(title)
 	}
 
 	return newTitle
