@@ -1,5 +1,5 @@
 import hljs from 'highlight.js'
-import parse, { domToReact } from 'html-react-parser'
+import parse, { type DOMNode, domToReact, type Element } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -7,75 +7,67 @@ import React from 'react'
 import { replaceDynamicVariables } from '@/services/utils'
 
 const options = {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	replace: (domNode: any) => {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		if (domNode?.type === 'tag') {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-			const { parent, name, children, attribs } = domNode
+	replace: (domNode: DOMNode) => {
+		if (domNode.type === 'tag') {
+			const elementNode = domNode as Element
+			const { parent, name, children, attribs } = elementNode
 
 			if (name === 'p') {
 				// Check if this paragraph is inside a list item by walking up the parent tree
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				let currentParent = parent
 				let isInListItem = false
 
 				// Walk up the DOM tree to check if we're inside a list item
 				while (currentParent != null) {
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-					if (currentParent.name === 'li' || currentParent.name === 'ul' || currentParent.name === 'ol') {
+					const parentElement = currentParent as Element
+					if (parentElement.name === 'li' || parentElement.name === 'ul' || parentElement.name === 'ol') {
 						isInListItem = true
 						break
 					}
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-					currentParent = currentParent.parent
+					currentParent = parentElement.parent
 				}
 
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-				const content = domNode.children?.[0]?.data ?? ''
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+				const firstChild = children?.[0]
+				const content = firstChild && 'data' in firstChild ? (firstChild.data as string) : ''
 				if (isMarkdownTable(content)) {
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return markdownTableToHtml(content)
 				} else if (isInListItem) {
 					// Don't wrap paragraphs inside list items with additional divs
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return domToReact(children, options)
 				} else {
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return <div className={'my-5'}>{domToReact(children, options)}</div>
 				}
 			}
 
 			// Specific processing for code blocks
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			if (name === 'pre' && children?.length > 0 && children[0].name === 'code') {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-				const codeContent = children[0].children?.[0]?.data ?? ''
-				// Use highlight.js for code highlighting
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-				const highlightedContent = hljs.highlightAuto(codeContent).value
+			if (name === 'pre' && children?.length > 0) {
+				const firstChild = children[0] as Element
+				if (firstChild.name === 'code') {
+					const codeChild = firstChild.children?.[0]
+					const codeContent = codeChild && 'data' in codeChild ? (codeChild.data as string) : ''
+					// Use highlight.js for code highlighting
+					const highlightedContent = hljs.highlightAuto(codeContent).value
 
-				return (
-					<pre className={'code max-w-[calc(100vw-2.5rem-10px)] overflow-x-auto rounded-md p-5 text-white'}>
-						<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
-					</pre>
-				)
+					return (
+						<pre className={'code max-w-[calc(100vw-2.5rem-10px)] overflow-x-auto rounded-md p-5 text-white'}>
+							<code dangerouslySetInnerHTML={{ __html: highlightedContent }} />
+						</pre>
+					)
+				}
 			}
 
 			if (name === 'img') {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				const { src, alt } = attribs
 
-				if (!(src as string) || !(alt as string)) return null
+				if (!src || !alt) return null
 				return (
 					<div className={'flex w-full items-center justify-center'}>
 						<Image
-							alt={alt as string}
+							alt={alt}
 							className={`max-h-[300px] object-contain sm:max-h-[450px] md:max-h-[350px] lg:max-h-[550px] xl:max-h-[650px]`}
 							height={1000}
 							quality={85}
-							src={src as string}
+							src={src}
 							width={1000}
 						/>
 					</div>
@@ -87,28 +79,25 @@ const options = {
 			}
 
 			if (name === 'a') {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				const href = attribs?.href
 
-				if (!(href as string)) return null
+				if (!href) return null
 
-				if ((href as string).includes('.mp4')) {
+				if (href.includes('.mp4')) {
 					return (
 						<video className={'w-full'} controls muted>
-							<source src={href as string} type="video/mp4" />
+							<source src={href} type="video/mp4" />
 						</video>
 					)
 				}
 				return (
-					<Link className={'underline'} href={href as string}>
-						{/* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */}
+					<Link className={'underline'} href={href}>
 						{domToReact(children, options)}
 					</Link>
 				)
 			}
 		}
 
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return domNode
 	},
 }
@@ -125,8 +114,7 @@ export function Layout({ value, className }: LayoutProps): React.JSX.Element | n
 	// Replace dynamic variables before parsing
 	const valueWithReplacements = replaceDynamicVariables(value)
 	const parsedContent = parse(valueWithReplacements, options)
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
-	const replacedContent: any = domToReact(parsedContent as any, options)
+	const replacedContent = Array.isArray(parsedContent) ? domToReact(parsedContent, options) : parsedContent
 
 	return <div className={`${className ?? ''} layout-custom`}>{replacedContent}</div>
 }
