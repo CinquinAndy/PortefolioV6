@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "./typography.css";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-sans--font-feature-settings: "cv11";
+  --font-mono: var(--font-geist-mono);
+}
+
+@theme {
+  --text-xs: 0.75rem; /* 12px */
+  --text-xs--line-height: calc(1 / 0.75); /* 16px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-sm--line-height: calc(1.25 / 0.875); /* 20px */
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: calc(1.5 / 1); /* 24px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-lg--line-height: calc(1.75 / 1.125); /* 28px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: calc(1.75 / 1.25); /* 28px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-2xl--line-height: calc(2 / 1.5); /* 32px */
+  --text-3xl: 2rem; /* 32px */
+  --text-3xl--line-height: calc(2.5 / 2); /* 40px */
+  --text-4xl: 2.5rem; /* 40px */
+  --text-4xl--line-height: 1; /* 48px */
+  --text-5xl: 3rem; /* 48px */
+  --text-5xl--line-height: 1; /* 48px */
+  --text-6xl: 3.75rem; /* 60px */
+  --text-6xl--line-height: 1; /* 60px */
+  --text-7xl: 4.5rem; /* 72px */
+  --text-7xl--line-height: 1; /* 72px */
+  --text-8xl: 6rem; /* 96px */
+  --text-8xl--line-height: 1; /* 96px */
+  --text-9xl: 8rem; /* 128px */
+  --text-9xl--line-height: 1; /* 128px */
+
+  --animate-caret-blink: caret-blink 1.1s infinite;
+
+  @keyframes caret-blink {
+    0% {
+      visibility: visible;
+    }
+    50%,
+    100% {
+      visibility: hidden;
+    }
+  }
+}
