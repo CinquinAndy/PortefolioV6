@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { type ReactNode, useLayoutEffect, useState } from 'react'
-import type { Article, Locale } from '@/types/strapi'
+import type { Locale } from '@/types/strapi'
 
 const BREAKPOINTS = {
 	xl: 1536,
@@ -9,10 +9,10 @@ const BREAKPOINTS = {
 	lg: 1024,
 } as const
 
-interface MasonryGridProps {
-	renderItem: (item: Article, index: number) => ReactNode
+interface MasonryGridProps<T> {
+	renderItem: (item: T, index: number) => ReactNode
 	locale?: Locale
-	items: Article[]
+	items: T[]
 	initialColumns?: number
 }
 
@@ -42,7 +42,7 @@ const formatDate = (dateString: string, locale: Locale): string => {
 	}
 }
 
-export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns = 3 }: MasonryGridProps) {
+export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumns = 3 }: MasonryGridProps<T>) {
 	const [columns, setColumns] = useState<number>(initialColumns)
 	const [isClient, setIsClient] = useState<boolean>(false)
 
@@ -62,7 +62,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 	}, [])
 
 	// Distribute items across columns efficiently
-	const getItemsByColumn = (): Article[][] => {
+	const getItemsByColumn = (): T[][] => {
 		return Array.from({ length: columns }, (_, colIndex) =>
 			items.filter((_, itemIndex) => itemIndex % columns === colIndex)
 		)
@@ -71,9 +71,18 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 	const columnWidth = `${100 / columns}%`
 	const itemsByColumn = getItemsByColumn()
 
-	// Wrap renderItem to inject formatted date
-	const renderItemWithFormattedDate = (item: Article, index: number): ReactNode => {
-		if (item.attributes?.createdAt) {
+	// Wrap renderItem to inject formatted date for Articles
+	const renderItemWithFormattedDate = (item: T, index: number): ReactNode => {
+		// Check if item has Article-like structure with createdAt
+		if (
+			typeof item === 'object' &&
+			item !== null &&
+			'attributes' in item &&
+			typeof item.attributes === 'object' &&
+			item.attributes !== null &&
+			'createdAt' in item.attributes &&
+			typeof item.attributes.createdAt === 'string'
+		) {
 			const formattedItem = {
 				...item,
 				attributes: {
@@ -81,7 +90,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 					createdAt: formatDate(item.attributes.createdAt, locale),
 				},
 			}
-			return renderItem(formattedItem, index)
+			return renderItem(formattedItem as T, index)
 		}
 		return renderItem(item, index)
 	}
@@ -98,7 +107,7 @@ export function MasonryGrid({ renderItem, locale = 'en', items, initialColumns =
 								className="transform will-change-transform"
 								exit={{ y: -20, opacity: 0 }}
 								initial={isClient ? { y: 20, opacity: 0 } : false}
-								key={item.id}
+								key={typeof item === 'object' && item !== null && 'id' in item ? (item.id as number | string) : index}
 								layout
 								transition={{
 									duration: 0.3,
