@@ -71,7 +71,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 	return (
 		<>
-			<Nav locale={locale} content_website={content_website} />
+			<Nav locale={locale} content_website={content_website} isHome={false} />
 
 			<div className="relative min-h-screen">
 				{/* Background gradient animé */}
