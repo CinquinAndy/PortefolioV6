@@ -5,9 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 function useTableOfContents(contentId: string) {
-	const [headings, setHeadings] = useState<
-		{ id: string; text: string; level: number; active: boolean }[]
-	>([])
+	const [headings, setHeadings] = useState<{ id: string; text: string; level: number; active: boolean }[]>([])
 	const pathname = usePathname()
 
 	useEffect(() => {
@@ -15,10 +13,10 @@ function useTableOfContents(contentId: string) {
 		if (!root) return
 
 		setHeadings(
-			Array.from(root.querySelectorAll('h2, h3')).map((heading) => ({
+			Array.from(root.querySelectorAll('h2, h3')).map(heading => ({
 				id: heading.id,
 				text: heading.textContent || '',
-				level: Number.parseInt(heading.tagName[1]),
+				level: Number.parseInt(heading.tagName[1], 10),
 				active: false,
 			}))
 		)
@@ -26,7 +24,7 @@ function useTableOfContents(contentId: string) {
 		const contentElements = new Map<Element, string>()
 		let currentHeadingId: string | null = null
 
-		Array.from(root.children).forEach((element) => {
+		Array.from(root.children).forEach(element => {
 			if (element.id && (element.tagName === 'H2' || element.tagName === 'H3')) {
 				currentHeadingId = element.id
 			}
@@ -37,7 +35,7 @@ function useTableOfContents(contentId: string) {
 		const visibleElements = new Set<Element>()
 
 		const observer = new IntersectionObserver(
-			(entries) => {
+			entries => {
 				for (const entry of entries) {
 					if (entry.isIntersecting) {
 						visibleElements.add(entry.target)
@@ -50,8 +48,8 @@ function useTableOfContents(contentId: string) {
 					visibleElements.has(element)
 				)
 
-				setHeadings((current) =>
-					current.map((heading) => ({
+				setHeadings(current =>
+					current.map(heading => ({
 						...heading,
 						active: heading.id === firstVisibleContentElement?.[1],
 					}))
@@ -79,7 +77,7 @@ export default function TableOfContents({ contentId }: { contentId: string }) {
 		<nav className="sticky top-16">
 			<h2 className="text-sm/6 font-semibold text-slate-50">Sur cette page</h2>
 			<ul className="mt-3 flex flex-col gap-3 border-l border-slate-50/10 text-sm/6 text-slate-300">
-				{headings.map((heading) => (
+				{headings.map(heading => (
 					<li
 						key={heading.id}
 						className={clsx(

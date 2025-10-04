@@ -8,7 +8,10 @@ export function Breadcrumbs(props: React.ComponentProps<'nav'>) {
 
 export function BreadcrumbHome({ locale }: { locale: string }) {
 	return (
-		<Link href={`/${locale}/course`} className="min-w-0 shrink-0 text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-400">
+		<Link
+			href={`/${locale}/course`}
+			className="min-w-0 shrink-0 text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-400"
+		>
 			Cours
 		</Link>
 	)
@@ -25,14 +28,27 @@ export function Breadcrumb({
 }) {
 	if (href) {
 		return (
-			<Link href={href} className={clsx(className, 'min-w-0 truncate text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-400')}>
+			<Link
+				href={href}
+				className={clsx(
+					className,
+					'min-w-0 truncate text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-400'
+				)}
+			>
 				{children}
 			</Link>
 		)
 	}
 
 	return (
-		<span className={clsx(className, 'min-w-0 truncate text-gray-950 last:text-gray-600 dark:text-white dark:last:text-gray-400')}>{children}</span>
+		<span
+			className={clsx(
+				className,
+				'min-w-0 truncate text-gray-950 last:text-gray-600 dark:text-white dark:last:text-gray-400'
+			)}
+		>
+			{children}
+		</span>
 	)
 }
 

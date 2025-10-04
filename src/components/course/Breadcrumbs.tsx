@@ -31,9 +31,7 @@ export function Breadcrumb({
 		)
 	}
 
-	return (
-		<span className={clsx(className, 'min-w-0 truncate text-slate-50 last:text-slate-400')}>{children}</span>
-	)
+	return <span className={clsx(className, 'min-w-0 truncate text-slate-50 last:text-slate-400')}>{children}</span>
 }
 
 export function BreadcrumbSeparator({ className }: { className?: string }) {

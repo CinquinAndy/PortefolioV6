@@ -1,15 +1,7 @@
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
-export function NextPageLink({
-	title,
-	description,
-	href,
-}: {
-	title: string
-	description: string
-	href: string
-}) {
+export function NextPageLink({ title, description, href }: { title: string; description: string; href: string }) {
 	return (
 		<div className="flow-root">
 			<Link

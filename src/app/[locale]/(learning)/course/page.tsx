@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Breadcrumb, BreadcrumbHome, Breadcrumbs, BreadcrumbSeparator } from '@/components/course/Breadcrumbs'
+import { Breadcrumb, BreadcrumbHome, BreadcrumbSeparator, Breadcrumbs } from '@/components/course/Breadcrumbs'
 import { ContentLink } from '@/components/course/ContentLink'
-import { PageSection } from '@/components/course/PageSection'
 import { BookIcon } from '@/components/course/icons/BookIcon'
 import { ClockIcon } from '@/components/course/icons/ClockIcon'
 import { LessonsIcon } from '@/components/course/icons/LessonsIcon'
 import { PlayIcon } from '@/components/course/icons/PlayIcon'
+import { PageSection } from '@/components/course/PageSection'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
-import { getParentCourses } from '@/services/getCourses'
 import { getContentWebsite } from '@/services/getContentWebsite'
+import { getParentCourses } from '@/services/getCourses'
 import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
@@ -117,12 +117,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 						<div className="mx-auto max-w-6xl">
 							<div className="relative px-4 pt-48 pb-12 lg:py-24">
-								<h1 className="text-4xl font-bold text-slate-50 md:text-5xl lg:text-6xl">
-									Mes Cours
-								</h1>
+								<h1 className="text-4xl font-bold text-slate-50 md:text-5xl lg:text-6xl">Mes Cours</h1>
 								<p className="mt-7 max-w-lg text-base/7 text-pretty text-slate-300">
-									Un parcours complet pour vous aider à maîtriser le développement web moderne et
-									les meilleures pratiques.
+									Un parcours complet pour vous aider à maîtriser le développement web moderne et les meilleures
+									pratiques.
 								</p>
 
 								{/* Stats */}
@@ -177,32 +175,58 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 												{/* Chapters List */}
 												<div className="mt-6 space-y-8">
-													{chapters.map((chapter, chapterIndex) => {
-														const lessons = chapter.attributes.lessons?.data ?? []
+													{chapters.map(
+														(
+															chapter: {
+																id: number
+																attributes: {
+																	slug: string
+																	title: string
+																	description: string
+																	lessons?: { data?: unknown[] }
+																}
+															},
+															chapterIndex: number
+														) => {
+															const lessons = (chapter.attributes.lessons?.data ?? []) as {
+																id: number
+																attributes: { slug: string; title: string; description: string; video_duration: number }
+															}[]
 
-														return (
-															<div key={chapter.id}>
-																<h3 className="text-lg font-semibold text-cyan-400">
-																	{chapterIndex + 1}. {chapter.attributes.title}
-																</h3>
-																<p className="mt-2 text-sm text-slate-400">{chapter.attributes.description}</p>
+															return (
+																<div key={chapter.id}>
+																	<h3 className="text-lg font-semibold text-cyan-400">
+																		{chapterIndex + 1}. {chapter.attributes.title}
+																	</h3>
+																	<p className="mt-2 text-sm text-slate-400">{chapter.attributes.description}</p>
 
-																<ol className="mt-4 space-y-3">
-																	{lessons.map((lesson) => (
-																		<li key={lesson.id}>
-																			<ContentLink
-																				title={lesson.attributes.title}
-																				description={lesson.attributes.description}
-																				href={`${chapter.attributes.slug}/${lesson.attributes.slug}`}
-																				duration={lesson.attributes.video_duration}
-																				locale={locale}
-																			/>
-																		</li>
-																	))}
-																</ol>
-															</div>
-														)
-													})}
+																	<ol className="mt-4 space-y-3">
+																		{lessons.map(
+																			(lesson: {
+																				id: number
+																				attributes: {
+																					slug: string
+																					title: string
+																					description: string
+																					video_duration: number
+																				}
+																			}) => (
+																				<li key={lesson.id}>
+																					<ContentLink
+																						title={lesson.attributes.title}
+																						description={lesson.attributes.description}
+																						href={`${chapter.attributes.slug}/${lesson.attributes.slug}`}
+																						duration={lesson.attributes.video_duration}
+																						locale={locale}
+																					/>
+																				</li>
+																			)
+																		)}
+																	</ol>
+																</div>
+															)
+														}
+													)}
 												</div>
 											</div>
 										</PageSection>

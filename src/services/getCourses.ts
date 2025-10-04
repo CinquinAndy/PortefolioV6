@@ -7,7 +7,7 @@ import { fetchAPI, processMarkdown } from './getContentWebsite'
 /**
  * Get all parent courses (courses without parent_course)
  */
-export async function getParentCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+export async function getParentCourses(_locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
 		`api/courses?populate[chapters][populate]=lessons&populate[chapters][sort][0]=order:asc&populate=thumbnail,tags,seo&filters[parent_course][id][$null]=true&filters[is_published][$eq]=true&sort=order:asc`
 	)
@@ -16,10 +16,8 @@ export async function getParentCourses(locale: Locale): Promise<CoursesResponse 
 /**
  * Get all courses (for backward compatibility)
  */
-export async function getCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
-	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,3&sort=order&filters[is_published][$eq]=true`
-	)
+export async function getCourses(_locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+	return await fetchAPI<CoursesResponse>(`api/courses?populate=deep,3&sort=order&filters[is_published][$eq]=true`)
 }
 
 /**
@@ -27,7 +25,7 @@ export async function getCourses(locale: Locale): Promise<CoursesResponse | NotF
  */
 export async function getChaptersByCourseId(
 	courseId: number,
-	locale: Locale
+	_locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
 		`api/courses?populate=lessons,parent_course&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc`
@@ -39,7 +37,7 @@ export async function getChaptersByCourseId(
  */
 export async function getParentCourseBySlug(
 	slug: string,
-	locale: Locale
+	_locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
 		`api/courses?populate[chapters][populate][lessons][sort][0]=order:asc&populate[chapters][sort][0]=order:asc&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true`
@@ -49,7 +47,7 @@ export async function getParentCourseBySlug(
 /**
  * Get course/chapter by slug (can be parent or chapter)
  */
-export async function getCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+export async function getCourseBySlug(slug: string, _locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
 		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate=parent_course,thumbnail,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true`
 	)
@@ -75,7 +73,7 @@ export async function getCoursePaths(locale: Locale): Promise<Array<{ params: { 
 	}
 
 	return (
-		data.data?.map(record => ({
+		data.data?.map((record: { attributes: { slug: string } }) => ({
 			params: {
 				slug: record.attributes.slug,
 			},
@@ -86,7 +84,7 @@ export async function getCoursePaths(locale: Locale): Promise<Array<{ params: { 
 /**
  * Get lesson by slug with attachments
  */
-export async function getLessonBySlug(slug: string, locale: Locale): Promise<LessonResponse | NotFoundResponse> {
+export async function getLessonBySlug(slug: string, _locale: Locale): Promise<LessonResponse | NotFoundResponse> {
 	return fetchAPI<LessonResponse>(`api/lessons?populate=attachments&filters[slug][$eq]=${slug}`)
 }
 
@@ -133,7 +131,7 @@ export async function processCourseData(
 	// Traiter le markdown des leçons si nécessaire
 	if (course.attributes.lessons?.data) {
 		const processedLessons = await Promise.all(
-			course.attributes.lessons.data.map(async lesson => {
+			course.attributes.lessons.data.map(async (lesson: { attributes: { content?: string } }) => {
 				if (lesson.attributes.content) {
 					const processedContent = await processMarkdown(lesson.attributes.content)
 					return {
@@ -154,7 +152,7 @@ export async function processCourseData(
 				attributes: {
 					...course.attributes,
 					lessons: {
-						data: processedLessons,
+						data: processedLessons as Lesson[],
 					},
 				},
 			},
@@ -248,7 +246,7 @@ export async function getNextLesson(
 
 	const currentChapter = chapterData.data[0]
 	const lessons = currentChapter.attributes.lessons?.data ?? []
-	const currentIndex = lessons.findIndex((lesson) => lesson.attributes.slug === currentLessonSlug)
+	const currentIndex = lessons.findIndex((lesson: { attributes: { slug: string } }) => lesson.attributes.slug === currentLessonSlug)
 
 	// If there's a next lesson in the same chapter
 	if (currentIndex !== -1 && currentIndex < lessons.length - 1) {
@@ -269,8 +267,8 @@ export async function getNextLesson(
 		return null
 	}
 
-	const chapters = chaptersData.data.sort((a, b) => a.attributes.order - b.attributes.order)
-	const currentChapterIndex = chapters.findIndex((ch) => ch.attributes.slug === currentChapterSlug)
+	const chapters = chaptersData.data.sort((a: { attributes: { order: number } }, b: { attributes: { order: number } }) => a.attributes.order - b.attributes.order)
+	const currentChapterIndex = chapters.findIndex((ch: { attributes: { slug: string } }) => ch.attributes.slug === currentChapterSlug)
 
 	// If there's a next chapter
 	if (currentChapterIndex !== -1 && currentChapterIndex < chapters.length - 1) {

@@ -1,18 +1,13 @@
 'use client'
 
-import type { Course, Lesson } from '@/types/course'
-import {
-	CloseButton,
-	Dialog,
-	DialogBackdrop,
-	DialogPanel,
-} from '@headlessui/react'
+import { CloseButton, Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { clsx } from 'clsx'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
 import { createContext, useContext, useState } from 'react'
+import type { Course, Lesson } from '@/types/course'
 
 export const SidebarContext = createContext<{
 	isSidebarOpen: boolean
@@ -46,13 +41,13 @@ function CourseNavigation({
 
 	return (
 		<div className={clsx(className, 'space-y-8')}>
-			{modules.map((module) => (
+			{modules.map(module => (
 				<div key={module.course.id}>
 					<h2 className="text-base/7 font-semibold text-pretty text-slate-50 sm:text-sm/6">
 						{module.course.attributes.title}
 					</h2>
 					<ul className="mt-4 flex flex-col gap-4 border-l border-slate-50/10 text-base/7 text-slate-300 sm:mt-3 sm:gap-3 sm:text-sm/6">
-						{module.lessons.map((lesson) => {
+						{module.lessons.map(lesson => {
 							const lessonHref = `/${locale}/course/${module.course.attributes.slug}/${lesson.attributes.slug}`
 							return (
 								<li
@@ -81,7 +76,7 @@ function CourseNavigation({
 	)
 }
 
-function MobileNavigation({
+function _MobileNavigation({
 	open,
 	onClose,
 	modules,
@@ -104,12 +99,7 @@ function MobileNavigation({
 						</CloseButton>
 					</div>
 				</div>
-				<CourseNavigation
-					modules={modules}
-					onNavigate={onClose}
-					className="px-4 pb-4 sm:px-6"
-					locale={locale}
-				/>
+				<CourseNavigation modules={modules} onNavigate={onClose} className="px-4 pb-4 sm:px-6" locale={locale} />
 			</DialogPanel>
 		</Dialog>
 	)
@@ -147,6 +137,7 @@ export function SidebarLayout({
 								Cours
 							</Link>
 							<button
+								type="button"
 								onClick={() => setIsSidebarOpen(!isSidebarOpen)}
 								className="rounded-lg p-1.5 hover:bg-slate-50/10 transition-colors"
 							>
@@ -171,14 +162,14 @@ export function SidebarLayoutContent({
 	breadcrumbs: React.ReactNode
 	children: React.ReactNode
 }) {
-	const { isSidebarOpen, setIsSidebarOpen, setIsMobileDialogOpen, isMobileDialogOpen } =
-		useContext(SidebarContext)
+	const { isSidebarOpen, setIsSidebarOpen, setIsMobileDialogOpen, isMobileDialogOpen } = useContext(SidebarContext)
 
 	return (
 		<>
 			<nav className="sticky top-0 z-10 border-b border-slate-50/10 bg-slate-900/80 backdrop-blur-md px-4 sm:px-6">
 				<div className="flex min-w-0 shrink items-center gap-x-4 py-4">
 					<button
+						type="button"
 						onClick={() => setIsMobileDialogOpen(!isMobileDialogOpen)}
 						className="rounded-lg p-1.5 hover:bg-slate-50/10 transition-colors xl:hidden"
 					>
@@ -186,6 +177,7 @@ export function SidebarLayoutContent({
 					</button>
 					{!isSidebarOpen && (
 						<button
+							type="button"
 							onClick={() => setIsSidebarOpen(!isSidebarOpen)}
 							className="rounded-lg p-1.5 hover:bg-slate-50/10 transition-colors max-xl:hidden"
 						>

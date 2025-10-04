@@ -10,6 +10,10 @@ export interface StrapiResponse<T> {
 	}
 }
 
+// Helper types for Strapi responses
+export type StrapiResponseArray<T> = StrapiResponse<T[]>
+export type StrapiResponseSingle<T> = StrapiResponse<T>
+
 export interface StrapiEntity {
 	id: number
 	attributes: Record<string, unknown>
@@ -136,6 +140,9 @@ export interface StrapiMedia {
 		updatedBy?: StrapiRelation
 	}
 }
+
+// Alias for StrapiMedia to make it more semantic
+export type StrapiImage = StrapiMedia
 
 export interface StrapiImageFormat {
 	name: string

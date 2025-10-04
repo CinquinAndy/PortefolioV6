@@ -1,17 +1,18 @@
 'use client'
 
-import type { Course, Lesson } from '@/types/course'
 import { CloseButton, Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { clsx } from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
 import { createContext, useContext, useState } from 'react'
+import type { Course, Lesson } from '@/types/course'
 
 // Simple icon components matching compass-ts
 function SidebarIcon({ className }: { className?: string }) {
 	return (
-		<svg viewBox="0 0 16 16" fill="none" className={clsx('h-4 w-4', className)}>
+		<svg viewBox="0 0 16 16" fill="none" className={clsx('h-4 w-4', className)} aria-label="Menu">
+			<title>Menu</title>
 			<path d="M2 4h12M2 8h12M2 12h12" strokeWidth="1.5" strokeLinecap="round" />
 		</svg>
 	)
@@ -76,13 +77,13 @@ function CourseNavigation({
 
 	return (
 		<div className={clsx(className, 'space-y-8')}>
-			{modules.map((module) => (
+			{modules.map(module => (
 				<div key={module.course.id}>
 					<h2 className="text-base/7 font-semibold text-pretty text-gray-950 sm:text-sm/6 dark:text-white">
 						{module.course.attributes.title}
 					</h2>
 					<ul className="mt-4 flex flex-col gap-4 border-l border-gray-950/10 text-base/7 text-gray-700 sm:mt-3 sm:gap-3 sm:text-sm/6 dark:border-white/10 dark:text-gray-400">
-						{module.lessons.map((lesson) => {
+						{module.lessons.map(lesson => {
 							const lessonHref = `/${locale}/course/${module.course.attributes.slug}/${lesson.attributes.slug}`
 							return (
 								<li
@@ -192,8 +193,7 @@ export function SidebarLayoutContent({
 	breadcrumbs: React.ReactNode
 	children: React.ReactNode
 }) {
-	const { isSidebarOpen, setIsSidebarOpen, isMobileDialogOpen, setIsMobileDialogOpen } =
-		useContext(SidebarContext)
+	const { isSidebarOpen, setIsSidebarOpen, isMobileDialogOpen, setIsMobileDialogOpen } = useContext(SidebarContext)
 
 	return (
 		<>

@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
-import html from 'remark-html'
 import remarkRehype from 'remark-rehype'
 import type { FetchOptions, NotFoundResponse } from '@/types/api'
 import type {

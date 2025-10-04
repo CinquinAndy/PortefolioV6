@@ -1,11 +1,11 @@
-import { Breadcrumb, BreadcrumbHome, Breadcrumbs, BreadcrumbSeparator } from '@/components/course/Breadcrumbs-learning'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { Breadcrumb, BreadcrumbHome, BreadcrumbSeparator, Breadcrumbs } from '@/components/course/Breadcrumbs-learning'
 import { NextPageLink } from '@/components/course/NextPageLink-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
 import TableOfContents from '@/components/course/TableOfContents-learning'
 import { getCourseBySlug, getLessonBySlug, getNextLesson, processLessonData } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 interface PageParams {
 	locale: Locale
@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 						<div id="content" className="prose">
 							{lesson.attributes.content && (
 								<div
-									// biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted Strapi content
+									// biome-ignore lint/security/noDangerouslySetInnerHTML: Trusted Strapi content
 									dangerouslySetInnerHTML={{ __html: lesson.attributes.content }}
 								/>
 							)}
@@ -84,21 +84,23 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 								<div className="mt-12 rounded-lg border border-gray-200 p-6 dark:border-white/10">
 									<h2>Pièces jointes</h2>
 									<ul className="mt-4 space-y-2">
-										{lesson.attributes.attachments.data.map((attachment: { id: number; attributes: { url: string; name: string; size: number } }) => (
-											<li key={attachment.id}>
-												<a
-													href={attachment.attributes.url}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="flex items-center gap-2"
-												>
-													{attachment.attributes.name}
-													<span className="text-xs text-gray-500">
-														({(attachment.attributes.size / 1024).toFixed(1)} KB)
-													</span>
-												</a>
-											</li>
-										))}
+										{lesson.attributes.attachments.data.map(
+											(attachment: { id: number; attributes: { url: string; name: string; size: number } }) => (
+												<li key={attachment.id}>
+													<a
+														href={attachment.attributes.url}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="flex items-center gap-2"
+													>
+														{attachment.attributes.name}
+														<span className="text-xs text-gray-500">
+															({(attachment.attributes.size / 1024).toFixed(1)} KB)
+														</span>
+													</a>
+												</li>
+											)
+										)}
 									</ul>
 								</div>
 							)}

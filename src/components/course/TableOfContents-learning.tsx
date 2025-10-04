@@ -5,9 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 function useTableOfContents(contentId: string) {
-	const [headings, setHeadings] = useState<
-		{ id: string; text: string; level: number; active: boolean }[]
-	>([])
+	const [headings, setHeadings] = useState<{ id: string; text: string; level: number; active: boolean }[]>([])
 	const pathname = usePathname()
 
 	useEffect(() => {
@@ -16,11 +14,11 @@ function useTableOfContents(contentId: string) {
 
 		setHeadings(
 			Array.from(root.querySelectorAll('h2, h3'))
-				.filter((heading) => heading.id) // Only keep headings with IDs
+				.filter(heading => heading.id) // Only keep headings with IDs
 				.map((heading, index) => ({
 					id: heading.id || `heading-${index}`,
 					text: heading.textContent || '',
-					level: Number.parseInt(heading.tagName[1]),
+					level: Number.parseInt(heading.tagName[1], 10),
 					active: false,
 				}))
 		)
@@ -39,7 +37,7 @@ function useTableOfContents(contentId: string) {
 		const visibleElements = new Set<Element>()
 
 		const observer = new IntersectionObserver(
-			(entries) => {
+			entries => {
 				for (const entry of entries) {
 					if (entry.isIntersecting) {
 						visibleElements.add(entry.target)
@@ -52,8 +50,8 @@ function useTableOfContents(contentId: string) {
 					visibleElements.has(element)
 				)
 
-				setHeadings((current) =>
-					current.map((heading) => ({
+				setHeadings(current =>
+					current.map(heading => ({
 						...heading,
 						active: heading.id === firstVisibleContentElement?.[1],
 					}))
