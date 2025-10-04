@@ -5,20 +5,53 @@ import type { Locale } from '@/types/strapi'
 import { fetchAPI, processMarkdown } from './getContentWebsite'
 
 /**
- * Get all courses
+ * Get all parent courses (courses without parent_course)
  */
-export async function getCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+export async function getParentCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,3&sort=order&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[chapters][populate]=lessons&populate[chapters][sort][0]=order:asc&populate=thumbnail,tags,seo&filters[parent_course][id][$null]=true&filters[is_published][$eq]=true&sort=order:asc`
 	)
 }
 
 /**
- * Get course by slug
+ * Get all courses (for backward compatibility)
+ */
+export async function getCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+	return await fetchAPI<CoursesResponse>(
+		`api/courses?populate=deep,3&sort=order&filters[is_published][$eq]=true`
+	)
+}
+
+/**
+ * Get chapters for a parent course
+ */
+export async function getChaptersByCourseId(
+	courseId: number,
+	locale: Locale
+): Promise<CoursesResponse | NotFoundResponse> {
+	return await fetchAPI<CoursesResponse>(
+		`api/courses?populate=lessons,parent_course&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc`
+	)
+}
+
+/**
+ * Get parent course by slug with all chapters and lessons
+ */
+export async function getParentCourseBySlug(
+	slug: string,
+	locale: Locale
+): Promise<CoursesResponse | NotFoundResponse> {
+	return fetchAPI<CoursesResponse>(
+		`api/courses?populate[chapters][populate][lessons][sort][0]=order:asc&populate[chapters][sort][0]=order:asc&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true`
+	)
+}
+
+/**
+ * Get course/chapter by slug (can be parent or chapter)
  */
 export async function getCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,4&sort=order&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate=parent_course,thumbnail,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true`
 	)
 }
 
@@ -51,12 +84,10 @@ export async function getCoursePaths(locale: Locale): Promise<Array<{ params: { 
 }
 
 /**
- * Get lesson by slug
+ * Get lesson by slug with attachments
  */
 export async function getLessonBySlug(slug: string, locale: Locale): Promise<LessonResponse | NotFoundResponse> {
-	return fetchAPI<LessonResponse>(
-		`api/lessons?populate=deep,3&filters[slug][$eq]=${slug}&locale=${locale}`
-	)
+	return fetchAPI<LessonResponse>(`api/lessons?populate=attachments&filters[slug][$eq]=${slug}`)
 }
 
 /**
@@ -145,9 +176,14 @@ export async function processLessonData(
 		redirect('/404')
 	}
 
-	const lesson = lessonData.data
+	// Handle both array and single object responses
+	const lesson = Array.isArray(lessonData.data) ? lessonData.data[0] : lessonData.data
 
-	if (lesson.attributes.content) {
+	if (!lesson) {
+		redirect('/404')
+	}
+
+	if (lesson.attributes?.content) {
 		const processedContent = await processMarkdown(lesson.attributes.content)
 
 		return {
@@ -162,7 +198,13 @@ export async function processLessonData(
 	}
 
 	return {
-		data: lesson,
+		data: {
+			...lesson,
+			attributes: {
+				...lesson.attributes,
+				content: '',
+			},
+		},
 	}
 }
 
@@ -190,34 +232,56 @@ export async function getCourseWithLessons(
 }
 
 /**
- * Get next lesson in a course
- * Trouve la prochaine leçon après celle donnée
+ * Get next lesson in current chapter or first lesson of next chapter
  */
 export async function getNextLesson(
 	currentLessonSlug: string,
+	currentChapterSlug: string,
 	locale: Locale
-): Promise<Lesson | null> {
-	// Récupérer tous les cours
-	const coursesData = await getCourses(locale)
+): Promise<{ lesson: Lesson; chapterSlug: string } | null> {
+	// Get current chapter with lessons
+	const chapterData = await getCourseBySlug(currentChapterSlug, locale)
 
-	if ('notFound' in coursesData || !coursesData.data) {
+	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		return null
 	}
 
-	// Trouver le cours contenant la leçon actuelle
-	for (const course of coursesData.data) {
-		const lessons = course.attributes.lessons?.data ?? []
-		const currentIndex = lessons.findIndex(
-			lesson => lesson.attributes.slug === currentLessonSlug
-		)
+	const currentChapter = chapterData.data[0]
+	const lessons = currentChapter.attributes.lessons?.data ?? []
+	const currentIndex = lessons.findIndex((lesson) => lesson.attributes.slug === currentLessonSlug)
 
-		if (currentIndex !== -1) {
-			// Si on a trouvé la leçon et qu'il y a une suivante
-			if (currentIndex < lessons.length - 1) {
-				return lessons[currentIndex + 1]
+	// If there's a next lesson in the same chapter
+	if (currentIndex !== -1 && currentIndex < lessons.length - 1) {
+		return {
+			lesson: lessons[currentIndex + 1],
+			chapterSlug: currentChapterSlug,
+		}
+	}
+
+	// Try to find next chapter
+	const parentCourseId = currentChapter.attributes.parent_course?.data?.id
+	if (!parentCourseId) {
+		return null
+	}
+
+	const chaptersData = await getChaptersByCourseId(parentCourseId, locale)
+	if ('notFound' in chaptersData || !chaptersData.data) {
+		return null
+	}
+
+	const chapters = chaptersData.data.sort((a, b) => a.attributes.order - b.attributes.order)
+	const currentChapterIndex = chapters.findIndex((ch) => ch.attributes.slug === currentChapterSlug)
+
+	// If there's a next chapter
+	if (currentChapterIndex !== -1 && currentChapterIndex < chapters.length - 1) {
+		const nextChapter = chapters[currentChapterIndex + 1]
+		const nextChapterLessons = nextChapter.attributes.lessons?.data ?? []
+
+		if (nextChapterLessons.length > 0) {
+			return {
+				lesson: nextChapterLessons[0],
+				chapterSlug: nextChapter.attributes.slug,
 			}
-			// Sinon on peut retourner null ou la première leçon du cours suivant
-			return null
 		}
 	}
 

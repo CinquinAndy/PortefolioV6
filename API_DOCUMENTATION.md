@@ -1,4 +1,4 @@
-# 📖 API Documentation - Frameworks JavaScript
+S# 📖 API Documentation - Frameworks JavaScript
 
 Documentation complète pour consommer l'API Strapi des cours Frameworks JavaScript.
 

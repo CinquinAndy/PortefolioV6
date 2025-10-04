@@ -1,212 +1,329 @@
 # Implémentation du système de cours
 
-## 📁 Structure créée
+## 📁 Structure hiérarchique Strapi
+
+```
+Cours Parent (ID: 83 - "Frameworks JavaScript")
+  └── Chapitres (24 cours enfants via relation parent_course)
+      └── Leçons (66 lessons)
+```
+
+## 🗂️ Structure des routes créée
 
 ```
 src/
 ├── app/[locale]/course/
 │   ├── layout.tsx                          # Layout de base (pass-through)
-│   ├── page.tsx                            # Liste de tous les cours (existait déjà)
-│   ├── [courseSlug]/
-│   │   ├── layout.tsx                      # Layout avec sidebar pour navigation
-│   │   ├── page.tsx                        # Détails d'un cours + liste des leçons
-│   │   └── [lessonSlug]/
-│   │       └── page.tsx                    # Affichage d'une leçon individuelle
+│   ├── page.tsx                            # Liste des cours parents avec tous les chapitres
+│   └── [chapterSlug]/
+│       ├── layout.tsx                      # Layout avec sidebar pour navigation
+│       ├── page.tsx                        # Détails d'un chapitre + liste des leçons
+│       └── [lessonSlug]/
+│           └── page.tsx                    # Affichage d'une leçon individuelle
 │
 ├── components/course/
-│   ├── Breadcrumbs.tsx                     # Navigation fil d'Ariane (existait)
-│   ├── ContentLink.tsx                     # Lien vers leçon/cours (existait)
-│   ├── PageSection.tsx                     # Section de page (existait)
-│   ├── SidebarLayout.tsx                   # ✨ Nouveau: Layout avec sidebar
-│   ├── NextPageLink.tsx                    # ✨ Nouveau: Lien "Suivant"
-│   ├── TableOfContents.tsx                 # ✨ Nouveau: Table des matières
-│   └── icons/                              # Icônes (existaient)
-│       ├── BookIcon.tsx
-│       ├── ClockIcon.tsx
-│       ├── LessonsIcon.tsx
-│       ├── PlayIcon.tsx
-│       └── CirclePlayIcon.tsx
+│   ├── Breadcrumbs.tsx                     # Navigation fil d'Ariane
+│   ├── ContentLink.tsx                     # Lien vers leçon/chapitre
+│   ├── PageSection.tsx                     # Section de page
+│   ├── SidebarLayout.tsx                   # Layout avec sidebar
+│   ├── NextPageLink.tsx                    # Lien "Suivant"
+│   ├── TableOfContents.tsx                 # Table des matières
+│   └── icons/                              # Icônes
+│
+└── services/
+    └── getCourses.ts                       # Services adaptés pour parent/chapters/lessons
 ```
 
-## 🎨 Design et Architecture
+## 🎨 Architecture des pages
 
-### Inspiration compass-ts
-Le système s'inspire du template TailwindUI "compass-ts" mais adapté pour:
-- ✅ Utiliser les données Strapi au lieu de MDX statique
-- ✅ Respecter le design sombre (dark theme) de votre portfolio
-- ✅ Utiliser les couleurs cyan comme accent (au lieu de gray/blue)
-- ✅ Intégrer avec votre système de navigation existant
+### 1. `/[locale]/course` - Vue d'ensemble
+- **Affiche**: Tous les cours parents (ex: "Frameworks JavaScript")
+- **Structure**: Pour chaque cours parent →
+  - Titre et description du cours
+  - Liste des chapitres (ex: "Hello", "JS", "React"...)
+  - Pour chaque chapitre → liste des leçons
+- **Navigation**: Nav et Footer globaux
+- **Sidebar**: Pas de sidebar (vue marketing)
 
-### Niveaux de navigation
+### 2. `/[locale]/course/[chapterSlug]` - Page de chapitre
+- **Affiche**: Détails d'un chapitre spécifique (ex: `/course/js`)
+- **Contenu**:
+  - Titre du chapitre (ex: "Chapitre 2: JS")
+  - Description
+  - Badge du cours parent
+  - Liste complète des leçons du chapitre
+- **Navigation**: Sidebar avec tous les chapitres et leçons
+- **URL Exemple**: `/fr/course/js`
 
-1. **`/[locale]/course`** - Vue d'ensemble
-   - Liste tous les cours disponibles
-   - Statistiques globales (nombre de cours, leçons, durée)
-   - Utilise Nav et Footer globaux
-   - **Pas de sidebar** (vue marketing)
+### 3. `/[locale]/course/[chapterSlug]/[lessonSlug]` - Page de leçon
+- **Affiche**: Contenu d'une leçon (ex: `/course/js/variables`)
+- **Contenu**:
+  - Titre et description de la leçon
+  - Contenu markdown/HTML
+  - Pièces jointes (PDFs, images)
+  - Table des matières (h2/h3)
+  - Lien vers leçon suivante
+- **Navigation**: Sidebar + breadcrumbs + ToC
+- **URL Exemple**: `/fr/course/js/variables`
 
-2. **`/[locale]/course/[courseSlug]`** - Page de cours
-   - Détails du cours (titre, description, niveau)
-   - Liste complète des leçons
-   - **Avec sidebar** pour navigation entre cours
-   - Breadcrumbs pour orientation
+## 🔧 Services créés/adaptés
 
-3. **`/[locale]/course/[courseSlug]/[lessonSlug]`** - Page de leçon
-   - Vidéo de la leçon (si disponible)
-   - Contenu markdown/HTML
-   - Table des matières (sur grand écran)
-   - Lien vers leçon suivante
-   - **Avec sidebar** pour navigation
+### getParentCourses(locale)
+Récupère tous les cours parents avec leurs chapitres et leçons imbriqués.
 
-## 🔧 Composants créés
-
-### SidebarLayout.tsx
-Composant inspiré de compass-ts avec:
-- Navigation sidebar collapsible (desktop)
-- Dialog mobile pour navigation
-- Liste des cours avec leurs leçons
-- Indication de la page active
-- Thème sombre avec accents cyan
-
-**Utilisation:**
-```tsx
-<SidebarLayout modules={modules} locale={locale}>
-  {children}
-</SidebarLayout>
+**API Call:**
+```
+/api/courses?populate[chapters][populate]=lessons&filters[parent_course][id][$null]=true
 ```
 
-### NextPageLink.tsx
-Lien vers la prochaine leçon/page:
-- Style card avec hover effect
-- Affiche titre et description
-- Icône chevron right
+**Retourne:**
+```typescript
+[
+  {
+    id: 83,
+    attributes: {
+      slug: "frameworks-javascript",
+      title: "Frameworks JavaScript - Formation Complète",
+      chapters: {
+        data: [
+          {
+            id: 84,
+            attributes: {
+              slug: "hello",
+              title: "Hello",
+              order: 1,
+              lessons: { data: [...] }
+            }
+          },
+          // ... 23 autres chapitres
+        ]
+      }
+    }
+  }
+]
+```
 
-### TableOfContents.tsx
-Table des matières interactive:
-- Détecte automatiquement les h2/h3 dans le contenu
+### getCourseBySlug(slug, locale)
+Récupère un chapitre spécifique avec ses leçons.
+
+**API Call:**
+```
+/api/courses?populate[lessons][sort][0]=order:asc&populate=parent_course&filters[slug][$eq]=js
+```
+
+### getLessonBySlug(slug, locale)
+Récupère une leçon avec ses attachments.
+
+**API Call:**
+```
+/api/lessons?populate=attachments&filters[slug][$eq]=variables
+```
+
+### getNextLesson(currentLessonSlug, currentChapterSlug, locale)
+Trouve la prochaine leçon (même chapitre ou premier leçon du chapitre suivant).
+
+**Retourne:**
+```typescript
+{
+  lesson: Lesson,
+  chapterSlug: string
+} | null
+```
+
+## 🎯 Flux utilisateur
+
+### Parcours type :
+
+1. **Page d'accueil cours** (`/course`)
+   - L'utilisateur voit "Frameworks JavaScript"
+   - 24 chapitres avec toutes leurs leçons
+   - Clique sur "Commencer" → va à la première leçon
+
+2. **Page de chapitre** (`/course/js`)
+   - Voit le chapitre "JS" avec ses 16 leçons
+   - Sidebar montrant tous les chapitres
+   - Peut naviguer entre chapitres ou commencer les leçons
+
+3. **Page de leçon** (`/course/js/variables`)
+   - Lit le contenu de la leçon "Variables"
+   - Sidebar pour naviguer vers autres leçons
+   - Breadcrumbs pour remonter
+   - Table des matières pour sections de la page
+   - Bouton "Suivant" → leçon suivante ou prochain chapitre
+
+## 📊 Données Strapi utilisées
+
+### Course Parent
+```typescript
+{
+  id: 83,
+  slug: "frameworks-javascript",
+  title: "Frameworks JavaScript - Formation Complète",
+  description: "Formation complète...",
+  order: 0,
+  is_published: true,
+  featured: true,
+  category: "Web Development",
+  tags: [...],
+  chapters: { data: [24 chapitres] }
+}
+```
+
+### Chapter (Cours enfant)
+```typescript
+{
+  id: 85,
+  slug: "js",
+  title: "JS",
+  description: "Chapitre 2: JS de la formation...",
+  order: 2,
+  is_published: true,
+  parent_course: { data: { id: 83 } },
+  lessons: { data: [16 leçons] }
+}
+```
+
+### Lesson
+```typescript
+{
+  id: 215,
+  slug: "0-setup",
+  title: "0 Setup",
+  description: "Vous pouvez setup votre projet !",
+  order: 1,
+  content: "# Setup JavaScript\\n\\n...", // Markdown
+  attachments: { data: [...] }
+}
+```
+
+## 🎨 Composants UI
+
+### SidebarLayout
+- Navigation latérale avec liste de tous les chapitres
+- Chaque chapitre montre ses leçons
+- Highlight de la page active
+- Collapsible sur desktop
+- Dialog mobile
+
+### ContentLink
+Affiche un lien vers une leçon avec :
+- Icône Play
+- Titre et description
+- Durée (si disponible)
+- Hover effects
+
+### NextPageLink
+Affiche le lien vers la leçon suivante :
+- "Suivant" avec icône chevron
+- Titre et description de la prochaine leçon
+- Style card
+
+### TableOfContents
+- Détecte h2/h3 dans le contenu
 - Suit la position de scroll
-- Met en évidence la section active
 - Sticky positioning
 
-## 📊 Intégration Strapi
+## 🚀 Exemple d'URLs
 
-Le système utilise les services existants:
+```
+/fr/course
+  → Affiche "Frameworks JavaScript" avec 24 chapitres
 
-### getCourses.ts
-Fonctions utilisées:
-- `getCourses(locale)` - Liste tous les cours
-- `getCourseBySlug(slug, locale)` - Détails d'un cours
-- `getLessonBySlug(slug, locale)` - Détails d'une leçon
-- `getNextLesson(currentSlug, locale)` - Leçon suivante
+/fr/course/hello
+  → Chapitre 1: Hello
 
-### Structure des données
-Basée sur `src/types/course.ts`:
-```typescript
-Course {
-  slug, title, description, order
-  thumbnail, category, level
-  duration_total, lessons[]
-  is_published, featured
-  ...
-}
+/fr/course/js
+  → Chapitre 2: JS (16 leçons)
 
-Lesson {
-  slug, title, description, order
-  content (HTML/Markdown)
-  video, video_thumbnail, video_duration
-  attachments[], quiz
-  ...
-}
+/fr/course/js/0-setup
+  → Leçon "Setup" du chapitre JS
+
+/fr/course/js/1-variables
+  → Leçon "Variables" du chapitre JS
+
+/fr/course/react
+  → Chapitre "React"
+
+/fr/course/react/hooks
+  → Leçon "Hooks" du chapitre React
 ```
 
 ## 🎯 Fonctionnalités
 
-### Page de cours individuel
-- ✅ Header avec image de fond (thumbnail)
-- ✅ Gradient overlay cyan
-- ✅ Stats (nombre de leçons, durée, niveau)
-- ✅ Bouton CTA "Commencer"
-- ✅ Liste numérotée des leçons
-- ✅ Navigation sidebar
+### Page de cours (overview)
+- ✅ Liste tous les cours parents
+- ✅ Affiche tous les chapitres par cours
+- ✅ Stats globales (chapitres, leçons)
+- ✅ Navigation hiérarchique (cours → chapitres → leçons)
+- ✅ Bouton CTA vers première leçon
+
+### Page de chapitre
+- ✅ Détails du chapitre
+- ✅ Badge du cours parent cliquable
+- ✅ Liste des leçons numérotées
+- ✅ Sidebar avec navigation globale
+- ✅ Breadcrumbs
 
 ### Page de leçon
-- ✅ Lecteur vidéo HTML5 avec poster
-- ✅ Support des sous-titres (captions)
-- ✅ Rendu du contenu HTML/Markdown
-- ✅ Liste des pièces jointes
-- ✅ Table des matières (h2/h3)
-- ✅ Navigation vers leçon suivante
+- ✅ Contenu markdown processsé en HTML
+- ✅ Pièces jointes téléchargeables
+- ✅ Table des matières interactive
+- ✅ Navigation vers leçon suivante (même chapitre ou suivant)
+- ✅ Sidebar avec tous les chapitres/leçons
 - ✅ Breadcrumbs complets
 
-### Navigation
-- ✅ Sidebar avec tous les cours et leçons
-- ✅ Highlight de la leçon active
-- ✅ Version mobile (dialog)
-- ✅ Collapsible sur desktop
-- ✅ Breadcrumbs sur toutes les pages
+## 🔄 Navigation entre leçons
+
+La fonction `getNextLesson()` gère intelligemment :
+
+1. **Leçon suivante dans le même chapitre**
+   - Si on est sur `/course/js/variables`
+   - Et qu'il y a une leçon suivante
+   - → Retourne la leçon suivante du même chapitre
+
+2. **Première leçon du chapitre suivant**
+   - Si on est sur la dernière leçon d'un chapitre
+   - → Trouve le chapitre suivant (par order)
+   - → Retourne sa première leçon
+
+3. **Fin du cours**
+   - Si on est sur la dernière leçon du dernier chapitre
+   - → Retourne null
+   - → Affiche lien "Retour aux cours"
+
+## 📝 Notes importantes
+
+### Structure parent_course
+- Les cours parents ont `parent_course = null`
+- Les chapitres ont `parent_course.id = 83` (ID du parent)
+- Filtre Strapi: `filters[parent_course][id][$null]=true` pour les parents
+
+### Ordre d'affichage
+- Cours parents: triés par `order`
+- Chapitres: triés par `order` (1-24)
+- Leçons: triées par `order` dans chaque chapitre
+
+### Performance
+- `getParentCourses()` fait 1 requête pour tout charger
+- Pagination possible si trop de données
+- Markdown processsé côté serveur avec `processMarkdown()`
 
 ## 🎨 Styling
 
-### Thème
-- **Background**: slate-900/slate-950 avec effets de blur
-- **Accent**: cyan-400/cyan-500
-- **Text**: slate-50 (titres), slate-300 (corps)
-- **Borders**: slate-50/10 pour subtilité
+### Thème global
+- Background: `slate-900/950` avec blur effects
+- Accent: `cyan-400/500`
+- Text: `slate-50` (titres), `slate-300` (corps)
+- Borders: `slate-50/10`
 
-### Composants UI
-- Boutons avec transitions smooth
-- Cards avec hover effects (bg-slate-50/10)
-- Gradients animés sur hero sections
-- Backdrop blur pour profondeur
-
-## 🚀 Prochaines étapes possibles
-
-1. **Système de progression**
-   - Tracker les leçons complétées
-   - Barre de progression du cours
-   - Certificat de complétion
-
-2. **Quiz interactifs**
-   - Utiliser les données `quiz` de Strapi
-   - Validation des réponses
-   - Score et feedback
-
-3. **Recherche et filtres**
-   - Recherche dans les cours
-   - Filtres par catégorie/niveau
-   - Tags
-
-4. **Vidéo améliorée**
-   - Marqueurs de progression
-   - Speed control
-   - Notes temporelles
-
-5. **Social**
-   - Commentaires par leçon
-   - Ratings
-   - Partage social
-
-## 📝 Notes techniques
-
-### Layouts imbriqués
-- Le layout `/course/layout.tsx` est un pass-through
-- Le vrai layout avec sidebar est dans `/course/[courseSlug]/layout.tsx`
-- Cela permet d'avoir la page overview sans sidebar
-
-### Performance
-- Pages générées statiquement quand possible
-- Images optimisées via Next.js Image
-- Lazy loading du contenu vidéo
-
-### Accessibilité
-- Navigation au clavier supportée
-- ARIA labels sur les composants
-- Breadcrumbs sémantiques
-- Headings hiérarchiques
+### Highlights
+- Chapitre actif dans sidebar: `border-cyan-400`
+- Links hover: `text-cyan-300`
+- Boutons CTA: `bg-cyan-500`
 
 ## 🔗 Références
 
-- Template inspiré de: `compass-ts/` (TailwindUI)
+- API Documentation: `API_DOCUMENTATION.md`
 - Types: `src/types/course.ts`
 - Services: `src/services/getCourses.ts`
-- Documentation Strapi: `src/data/courses/STRAPI_SETUP.md`
+- Template inspiré de: `compass-ts/` (TailwindUI)

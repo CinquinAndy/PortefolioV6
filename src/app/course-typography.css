@@ -1,0 +1,143 @@
+@layer components {
+  .prose {
+    @apply text-base/7 text-gray-700 dark:text-gray-400;
+  }
+
+  .prose :where(h2, h3, h4):not(:where([class~='not-prose'] *)) {
+    @apply scroll-mt-24 font-medium tracking-tight text-gray-950 dark:text-white;
+  }
+
+  .prose :where(h2):not(:where([class~='not-prose'] *)) {
+    @apply mt-12 text-2xl/8;
+  }
+
+  .prose :where(h2 + *):not(:where([class~='not-prose'] *)) {
+    @apply mt-4;
+  }
+
+  .prose :where(h3):not(:where([class~='not-prose'] *)) {
+    @apply mt-8 text-lg/7;
+  }
+
+  .prose :where(h3 + *):not(:where([class~='not-prose'] *)) {
+    @apply mt-4;
+  }
+
+  .prose :where(h4):not(:where([class~='not-prose'] *)) {
+    @apply mt-6 text-base/7;
+  }
+
+  .prose :where(h4 + *):not(:where([class~='not-prose'] *)) {
+    @apply mt-3;
+  }
+
+  .prose :where(hr):not(:where([class~='not-prose'] *)) {
+    @apply my-12 border-gray-950/10 dark:border-white/10;
+  }
+
+  .prose :where(p, li):not(:where([class~='not-prose'] *)) {
+    @apply text-base/7;
+  }
+
+  .prose :where(h2, h3, h4, hr, p + p, p + ul, p + ol, ul + p, ol + p):not(
+      :where([class~='not-prose'] *)
+    ) {
+    @apply mt-6;
+  }
+
+  .prose :where(ul, ol):not(:where([class~='not-prose'] *)) {
+    @apply list-outside;
+  }
+
+  .prose :where(ul):not(:where([class~='not-prose'] *)) {
+    @apply list-disc pl-6;
+  }
+
+  .prose :where(ol):not(:where([class~='not-prose'] *)) {
+    @apply list-decimal pl-6;
+  }
+
+  .prose :where(li):not(:where([class~='not-prose'] *)) {
+    @apply pl-2;
+  }
+
+  .prose :where(ol > li, ul > li):not(:where([class~='not-prose'] *)) {
+    @apply mt-2;
+  }
+
+  .prose :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~='not-prose'] *)) {
+    @apply mt-3;
+  }
+
+  .prose :where(a):not(:where([class~='not-prose'] *)) {
+    @apply font-semibold text-gray-950 underline decoration-gray-400 underline-offset-2 hover:decoration-gray-700 dark:text-white dark:decoration-gray-600 dark:hover:decoration-gray-400;
+  }
+
+  .prose :where(strong):not(:where([class~='not-prose'] *)) {
+    @apply font-semibold text-gray-950 dark:text-white;
+  }
+
+  .prose :where(code):not(:where([class~='not-prose'] *)) {
+    @apply rounded border border-gray-400/25 bg-gray-100 px-1 py-0.5 text-sm/6 font-medium text-gray-950 dark:border-white/20 dark:bg-white/5 dark:text-white;
+  }
+
+  .prose :where(pre):not(:where([class~='not-prose'] *)) {
+    @apply -mx-4 mt-8 overflow-x-auto bg-gray-950 px-4 py-5 text-xs/6 text-white sm:-mx-6 sm:rounded-lg sm:px-6 dark:bg-white/2.5 dark:ring-white/10 dark:ring-1 dark:ring-inset;
+  }
+
+  .prose :where(pre code):not(:where([class~='not-prose'] *)) {
+    @apply border-0 bg-transparent p-0 text-inherit;
+  }
+
+  .prose :where(table):not(:where([class~='not-prose'] *)) {
+    @apply mt-8 w-full text-left text-sm/6;
+  }
+
+  .prose :where(thead):not(:where([class~='not-prose'] *)) {
+    @apply border-b border-gray-200 dark:border-white/10;
+  }
+
+  .prose :where(th):not(:where([class~='not-prose'] *)) {
+    @apply px-0 pb-3 font-semibold text-gray-950 dark:text-white;
+  }
+
+  .prose :where(tbody):not(:where([class~='not-prose'] *)) {
+    @apply divide-y divide-gray-200 dark:divide-white/5;
+  }
+
+  .prose :where(td):not(:where([class~='not-prose'] *)) {
+    @apply px-0 py-4;
+  }
+
+  .prose :where(th:first-child, td:first-child):not(:where([class~='not-prose'] *)) {
+    @apply pl-0;
+  }
+
+  .prose :where(th:last-child, td:last-child):not(:where([class~='not-prose'] *)) {
+    @apply pr-0;
+  }
+
+  .prose :where(img, video):not(:where([class~='not-prose'] *)) {
+    @apply mt-8 rounded-lg;
+  }
+
+  .prose :where(figure):not(:where([class~='not-prose'] *)) {
+    @apply mt-8;
+  }
+
+  .prose :where(figure > img):not(:where([class~='not-prose'] *)) {
+    @apply mt-0;
+  }
+
+  .prose :where(figcaption):not(:where([class~='not-prose'] *)) {
+    @apply mt-3 text-sm/6 text-gray-600 dark:text-gray-400;
+  }
+
+  .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+    @apply mt-8 border-l-4 border-gray-200 pl-4 text-gray-600 dark:border-white/10 dark:text-gray-400;
+  }
+
+  .prose :where(blockquote p):not(:where([class~='not-prose'] *)) {
+    @apply mt-0 italic;
+  }
+}

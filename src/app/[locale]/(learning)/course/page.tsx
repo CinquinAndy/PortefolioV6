@@ -9,7 +9,7 @@ import { LessonsIcon } from '@/components/course/icons/LessonsIcon'
 import { PlayIcon } from '@/components/course/icons/PlayIcon'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
-import { getCourses } from '@/services/getCourses'
+import { getParentCourses } from '@/services/getCourses'
 import { getContentWebsite } from '@/services/getContentWebsite'
 import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
@@ -38,22 +38,36 @@ interface CoursePageProps {
 export default async function CoursePage({ params }: CoursePageProps) {
 	const { locale } = await params
 
-	// Récupérer les cours depuis Strapi
-	const courses_response = await getCourses(locale as Locale)
+	// Récupérer les cours parents depuis Strapi
+	const courses_response = await getParentCourses(locale as Locale)
 	const courses = getResponseData(courses_response)
 	const safeCourses = Array.isArray(courses) ? courses : []
 
-	// Calculer les statistiques globales
-	const totalLessons = safeCourses.reduce((sum, course) => sum + (course.attributes.lessons?.data?.length ?? 0), 0)
-	const totalDuration = safeCourses.reduce((sum, course) => sum + (course.attributes.duration_total ?? 0), 0)
+	// Calculer les statistiques globales (chapitres + leçons)
+	let totalChapters = 0
+	let totalLessons = 0
+	let totalDuration = 0
+
+	for (const course of safeCourses) {
+		const chapters = course.attributes.chapters?.data ?? []
+		totalChapters += chapters.length
+
+		for (const chapter of chapters) {
+			const lessons = chapter.attributes.lessons?.data ?? []
+			totalLessons += lessons.length
+		}
+
+		totalDuration += course.attributes.duration_total ?? 0
+	}
 
 	// Récupérer le contenu du site pour la navigation
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
-	// Trouver le premier cours et sa première leçon pour le bouton CTA
+	// Trouver le premier cours, son premier chapitre et sa première leçon pour le bouton CTA
 	const firstCourse = safeCourses[0]
-	const firstLesson = firstCourse?.attributes.lessons?.data?.[0]
+	const firstChapter = firstCourse?.attributes.chapters?.data?.[0]
+	const firstLesson = firstChapter?.attributes.lessons?.data?.[0]
 
 	return (
 		<>
@@ -115,25 +129,29 @@ export default async function CoursePage({ params }: CoursePageProps) {
 								<div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-slate-50 sm:gap-3">
 									<div className="flex items-center gap-1.5">
 										<BookIcon className="stroke-slate-50/40" />
-										{safeCourses.length} modules
+										{totalChapters} chapitres
 									</div>
 									<span className="hidden text-slate-50/25 sm:inline">&middot;</span>
 									<div className="flex items-center gap-1.5">
 										<LessonsIcon className="stroke-slate-50/40" />
 										{totalLessons} leçons
 									</div>
-									<span className="hidden text-slate-50/25 sm:inline">&middot;</span>
-									<div className="flex items-center gap-1.5">
-										<ClockIcon className="stroke-slate-50/40" />
-										{formatDuration(totalDuration)}
-									</div>
+									{totalDuration > 0 && (
+										<>
+											<span className="hidden text-slate-50/25 sm:inline">&middot;</span>
+											<div className="flex items-center gap-1.5">
+												<ClockIcon className="stroke-slate-50/40" />
+												{formatDuration(totalDuration)}
+											</div>
+										</>
+									)}
 								</div>
 
 								{/* CTA Button */}
-								{firstLesson && (
+								{firstChapter && firstLesson && (
 									<div className="mt-10">
 										<Link
-											href={`/${locale}/course/${firstLesson.attributes.slug}`}
+											href={`/${locale}/course/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`}
 											className="button-cyan inline-flex items-center gap-x-2 rounded-full px-6 py-3 text-sm/7 font-semibold shadow-lg transition-all hover:shadow-xl"
 										>
 											<span className="button-cyan-title flex items-center gap-x-2">
@@ -145,38 +163,47 @@ export default async function CoursePage({ params }: CoursePageProps) {
 								)}
 							</div>
 
-							{/* Modules List */}
+							{/* Courses List */}
 							<div className="grid grid-cols-1 gap-y-16 px-4 pb-10 sm:px-4">
-								{safeCourses.map((course: Course, index: number) => {
-									const lessons = course.attributes.lessons?.data ?? []
+								{safeCourses.map((course: Course) => {
+									const chapters = course.attributes.chapters?.data ?? []
 
 									return (
-										<PageSection
-											key={course.id}
-											id={course.attributes.slug}
-											title={`Partie ${index + 1}`}
-										>
+										<PageSection key={course.id} id={course.attributes.slug} title={course.attributes.title}>
 											<div className="max-w-2xl">
 												<h2 className="text-2xl/7 font-medium tracking-tight text-pretty text-slate-50">
-													{course.attributes.title}
-												</h2>
-												<p className="mt-4 text-base/7 text-slate-300 sm:text-sm/7">
 													{course.attributes.description}
-												</p>
+												</h2>
 
-												<ol className="mt-6 space-y-4">
-													{lessons.map(lesson => (
-														<li key={lesson.id}>
-															<ContentLink
-																title={lesson.attributes.title}
-																description={lesson.attributes.description}
-																href={lesson.attributes.slug}
-																duration={lesson.attributes.video_duration}
-																locale={locale}
-															/>
-														</li>
-													))}
-												</ol>
+												{/* Chapters List */}
+												<div className="mt-6 space-y-8">
+													{chapters.map((chapter, chapterIndex) => {
+														const lessons = chapter.attributes.lessons?.data ?? []
+
+														return (
+															<div key={chapter.id}>
+																<h3 className="text-lg font-semibold text-cyan-400">
+																	{chapterIndex + 1}. {chapter.attributes.title}
+																</h3>
+																<p className="mt-2 text-sm text-slate-400">{chapter.attributes.description}</p>
+
+																<ol className="mt-4 space-y-3">
+																	{lessons.map((lesson) => (
+																		<li key={lesson.id}>
+																			<ContentLink
+																				title={lesson.attributes.title}
+																				description={lesson.attributes.description}
+																				href={`${chapter.attributes.slug}/${lesson.attributes.slug}`}
+																				duration={lesson.attributes.video_duration}
+																				locale={locale}
+																			/>
+																		</li>
+																	))}
+																</ol>
+															</div>
+														)
+													})}
+												</div>
 											</div>
 										</PageSection>
 									)
