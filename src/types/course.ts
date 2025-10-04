@@ -190,6 +190,8 @@ export interface Course {
 		seo: CourseSEO
 		locale: string
 		localizations?: StrapiResponseArray<Partial<Course>>
+		parent_course?: StrapiResponseSingle<Course> // For hierarchical course structure
+		chapters?: StrapiResponseArray<Course> // Child chapters for parent courses
 		createdAt: string
 		updatedAt: string
 		publishedAt: string

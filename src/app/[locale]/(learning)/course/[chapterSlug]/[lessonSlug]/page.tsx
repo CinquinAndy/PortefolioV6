@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbHome, Breadcrumbs, BreadcrumbSeparator } from '@/components/course/Breadcrumbs-learning'
 import { NextPageLink } from '@/components/course/NextPageLink-learning'
-import { SidebarLayoutContent } from '@/components/course/SidebarLayout'
+import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
 import TableOfContents from '@/components/course/TableOfContents-learning'
 import { getCourseBySlug, getLessonBySlug, getNextLesson, processLessonData } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 								<div className="mt-12 rounded-lg border border-gray-200 p-6 dark:border-white/10">
 									<h2>Pièces jointes</h2>
 									<ul className="mt-4 space-y-2">
-										{lesson.attributes.attachments.data.map((attachment) => (
+										{lesson.attributes.attachments.data.map((attachment: { id: number; attributes: { url: string; name: string; size: number } }) => (
 											<li key={attachment.id}>
 												<a
 													href={attachment.attributes.url}

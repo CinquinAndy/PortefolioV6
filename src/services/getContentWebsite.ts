@@ -1,6 +1,9 @@
 import { redirect } from 'next/navigation'
+import rehypeSlug from 'rehype-slug'
+import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
 import html from 'remark-html'
+import remarkRehype from 'remark-rehype'
 import type { FetchOptions, NotFoundResponse } from '@/types/api'
 import type {
 	About,
@@ -254,10 +257,14 @@ export async function processArticleData(
 }
 
 /**
- * Process markdown content
+ * Process markdown content with automatic heading IDs
  */
 export async function processMarkdown(markdownContent: string): Promise<string> {
-	const result = await remark().use(html).process(markdownContent)
+	const result = await remark()
+		.use(remarkRehype) // Convert markdown to HTML AST
+		.use(rehypeSlug) // Add IDs to headings
+		.use(rehypeStringify) // Convert HTML AST to string
+		.process(markdownContent)
 	return result.toString()
 }
 

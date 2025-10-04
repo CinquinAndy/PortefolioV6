@@ -15,12 +15,14 @@ function useTableOfContents(contentId: string) {
 		if (!root) return
 
 		setHeadings(
-			Array.from(root.querySelectorAll('h2, h3')).map((heading) => ({
-				id: heading.id,
-				text: heading.textContent || '',
-				level: Number.parseInt(heading.tagName[1]),
-				active: false,
-			}))
+			Array.from(root.querySelectorAll('h2, h3'))
+				.filter((heading) => heading.id) // Only keep headings with IDs
+				.map((heading, index) => ({
+					id: heading.id || `heading-${index}`,
+					text: heading.textContent || '',
+					level: Number.parseInt(heading.tagName[1]),
+					active: false,
+				}))
 		)
 
 		const contentElements = new Map<Element, string>()
@@ -58,7 +60,7 @@ function useTableOfContents(contentId: string) {
 				)
 			},
 			{
-				rootMargin: `-${getComputedStyle(document.documentElement).scrollPaddingTop} 0px 0px`,
+				rootMargin: '-80px 0px 0px 0px',
 			}
 		)
 
@@ -75,13 +77,17 @@ function useTableOfContents(contentId: string) {
 export default function TableOfContents({ contentId }: { contentId: string }) {
 	const headings = useTableOfContents(contentId)
 
+	if (headings.length === 0) {
+		return null
+	}
+
 	return (
 		<nav className="sticky top-16">
 			<h2 className="text-sm/6 font-semibold text-gray-950 dark:text-white">On this page</h2>
 			<ul className="mt-3 flex flex-col gap-3 border-l border-gray-950/10 text-sm/6 text-gray-700 dark:border-white/10 dark:text-gray-400">
-				{headings.map((heading) => (
+				{headings.map((heading, index) => (
 					<li
-						key={heading.id}
+						key={`${heading.id}-${index}`}
 						className={clsx(
 							'-ml-px border-l border-transparent pl-4',
 							'hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white',
