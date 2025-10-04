@@ -81,15 +81,15 @@ export default function TableOfContents({ contentId }: { contentId: string }) {
 
 	return (
 		<nav className="sticky top-16">
-			<h2 className="text-sm/6 font-semibold text-gray-950 dark:text-white">On this page</h2>
-			<ul className="mt-3 flex flex-col gap-3 border-l border-gray-950/10 text-sm/6 text-gray-700 dark:border-white/10 dark:text-gray-400">
+			<h2 className="text-sm/6 font-semibold text-slate-50 font-sans">On this page</h2>
+			<ul className="mt-3 flex flex-col gap-3 border-l border-white/10 text-sm/6 text-slate-300 font-sans">
 				{headings.map((heading, index) => (
 					<li
 						key={`${heading.id}-${index}`}
 						className={clsx(
 							'-ml-px border-l border-transparent pl-4',
-							'hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white',
-							'has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white'
+							'hover:text-slate-50 hover:not-has-aria-[current=location]:border-indigo-400',
+							'has-aria-[current=location]:border-indigo-400'
 						)}
 					>
 						<a
@@ -97,7 +97,7 @@ export default function TableOfContents({ contentId }: { contentId: string }) {
 							aria-current={heading.active ? 'location' : undefined}
 							className={clsx(
 								heading.level === 3 && 'pl-4',
-								'block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white'
+								'block aria-[current=location]:font-medium aria-[current=location]:text-indigo-400 font-sans'
 							)}
 						>
 							{heading.text}

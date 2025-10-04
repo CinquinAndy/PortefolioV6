@@ -1,12 +1,45 @@
 @reference "../styles/main.css";
 
 @layer components {
-	.prose {
-		@apply text-base/7 text-gray-700 dark:text-gray-400;
+	/* Override global serif font for learning section - use sans-serif */
+	/* Force Be Vietnam Pro for all learning section elements */
+	.prose,
+	.prose *,
+	aside nav,
+	aside nav *,
+	aside h2,
+	aside ul,
+	aside li,
+	aside a,
+	nav.sticky,
+	nav.sticky *,
+	nav.sticky h2,
+	nav.sticky ul,
+	nav.sticky li,
+	nav.sticky a,
+	nav[aria-label="Breadcrumb"],
+	nav[aria-label="Breadcrumb"] *,
+	nav[aria-label="Course"],
+	nav[aria-label="Course"] *,
+	nav[aria-label="Course"] h2,
+	nav[aria-label="Course"] ul,
+	nav[aria-label="Course"] li,
+	nav[aria-label="Course"] a {
+		font-family: var(--font-be-vietnam-pro), sans-serif !important;
 	}
 
-	.prose :where(h2, h3, h4):not(:where([class~="not-prose"] *)) {
-		@apply scroll-mt-24 font-medium tracking-tight text-gray-950 dark:text-white;
+	.prose {
+		@apply text-base/7 text-slate-300;
+		color: rgb(203 213 225); /* Force slate-300 */
+	}
+
+	.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
+		@apply scroll-mt-24 font-medium tracking-tight text-slate-50;
+		color: rgb(248 250 252) !important; /* Force slate-50 */
+	}
+
+	.prose :where(h1):not(:where([class~="not-prose"] *)) {
+		@apply mt-16 text-3xl/9;
 	}
 
 	.prose :where(h2):not(:where([class~="not-prose"] *)) {
@@ -34,7 +67,10 @@
 	}
 
 	.prose :where(hr):not(:where([class~="not-prose"] *)) {
-		@apply my-12 border-gray-950/10 dark:border-white/10;
+		@apply my-12;
+		border: none;
+		height: 2px;
+		background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.5), transparent);
 	}
 
 	.prose :where(p, li):not(:where([class~="not-prose"] *)) {
@@ -70,19 +106,34 @@
 	}
 
 	.prose :where(a):not(:where([class~="not-prose"] *)) {
-		@apply font-semibold text-gray-950 underline decoration-gray-400 underline-offset-2 hover:decoration-gray-700 dark:text-white dark:decoration-gray-600 dark:hover:decoration-gray-400;
+		@apply font-semibold text-indigo-400 underline decoration-indigo-400/40 underline-offset-2 hover:decoration-indigo-400 hover:text-indigo-300;
+		color: rgb(129 140 248) !important; /* Force indigo-400 */
+		text-decoration-color: rgba(129, 140, 248, 0.4);
+	}
+
+	.prose :where(a):not(:where([class~="not-prose"] *)):hover {
+		color: rgb(165 180 252) !important; /* Force indigo-300 */
+		text-decoration-color: rgb(129 140 248);
 	}
 
 	.prose :where(strong):not(:where([class~="not-prose"] *)) {
-		@apply font-semibold text-gray-950 dark:text-white;
+		@apply font-semibold text-slate-50;
+		color: rgb(248 250 252) !important; /* Force slate-50 */
 	}
 
 	.prose :where(code):not(:where([class~="not-prose"] *)) {
-		@apply rounded border border-gray-400/25 bg-gray-100 px-1 py-0.5 text-sm/6 font-medium text-gray-950 dark:border-white/20 dark:bg-white/5 dark:text-white;
+		@apply rounded border border-white/20 bg-white/5 px-1 py-0.5 text-sm/6 font-medium text-indigo-300;
+		color: rgb(165 180 252) !important; /* Force indigo-300 */
+		background-color: rgba(255, 255, 255, 0.05);
+		border-color: rgba(255, 255, 255, 0.2);
 	}
 
 	.prose :where(pre):not(:where([class~="not-prose"] *)) {
-		@apply -mx-4 mt-8 overflow-x-auto bg-gray-950 px-4 py-5 text-xs/6 text-white sm:-mx-6 sm:rounded-lg sm:px-6 dark:bg-white/2.5 dark:ring-white/10 dark:ring-1 dark:ring-inset;
+		@apply -mx-4 mt-8 overflow-x-auto px-4 py-5 text-xs/6 text-slate-50 sm:-mx-6 sm:rounded-lg sm:px-6;
+		background-color: rgba(49, 46, 129, 0.3);
+		border: 2px solid rgba(99, 102, 241, 0.2);
+		color: rgb(248 250 252);
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 2px 4px 0 rgba(99, 102, 241, 0.05);
 	}
 
 	.prose :where(pre code):not(:where([class~="not-prose"] *)) {
@@ -91,30 +142,45 @@
 
 	.prose :where(table):not(:where([class~="not-prose"] *)) {
 		@apply mt-8 w-full text-left text-sm/6;
+		border: 2px solid rgba(99, 102, 241, 0.2); /* indigo-500/20 */
+		border-radius: 0.5rem;
+		overflow: hidden;
 	}
 
 	.prose :where(thead):not(:where([class~="not-prose"] *)) {
-		@apply border-b border-gray-200 dark:border-white/10;
+		@apply border-b-2;
+		border-bottom-color: rgba(99, 102, 241, 0.3) !important; /* indigo-500/30 */
+		background: rgba(99, 102, 241, 0.05);
 	}
 
 	.prose :where(th):not(:where([class~="not-prose"] *)) {
-		@apply px-0 pb-3 font-semibold text-gray-950 dark:text-white;
+		@apply px-4 py-3 font-semibold text-slate-50;
+		color: rgb(248 250 252) !important;
 	}
 
 	.prose :where(tbody):not(:where([class~="not-prose"] *)) {
-		@apply divide-y divide-gray-200 dark:divide-white/5;
+		@apply divide-y;
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.prose :where(tbody tr):not(:where([class~="not-prose"] *)) {
+		transition: background-color 0.2s ease;
+	}
+
+	.prose :where(tbody tr):not(:where([class~="not-prose"] *)):hover {
+		background: rgba(99, 102, 241, 0.05);
 	}
 
 	.prose :where(td):not(:where([class~="not-prose"] *)) {
-		@apply px-0 py-4;
+		@apply px-4 py-4;
 	}
 
 	.prose :where(th:first-child, td:first-child):not(:where([class~="not-prose"] *)) {
-		@apply pl-0;
+		@apply pl-4;
 	}
 
 	.prose :where(th:last-child, td:last-child):not(:where([class~="not-prose"] *)) {
-		@apply pr-0;
+		@apply pr-4;
 	}
 
 	.prose :where(img, video):not(:where([class~="not-prose"] *)) {
@@ -130,14 +196,44 @@
 	}
 
 	.prose :where(figcaption):not(:where([class~="not-prose"] *)) {
-		@apply mt-3 text-sm/6 text-gray-600 dark:text-gray-400;
+		@apply mt-3 text-sm/6 text-slate-400;
+		color: rgb(148 163 184);
 	}
 
 	.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
-		@apply mt-8 border-l-4 border-gray-200 pl-4 text-gray-600 dark:border-white/10 dark:text-gray-400;
+		@apply mt-8 border-l-4 pl-6 pr-4 py-4 text-slate-300 italic rounded-r-lg;
+		color: rgb(203 213 225);
+		border-left-color: rgba(99, 102, 241, 0.5);
+		background: rgba(99, 102, 241, 0.05);
+		box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1);
 	}
 
 	.prose :where(blockquote p):not(:where([class~="not-prose"] *)) {
 		@apply mt-0 italic;
+	}
+
+	.prose :where(p):not(:where([class~="not-prose"] *)) {
+		color: rgb(203 213 225); /* Force slate-300 for paragraphs */
+	}
+
+	.prose :where(li):not(:where([class~="not-prose"] *)) {
+		color: rgb(203 213 225); /* Force slate-300 for list items */
+	}
+
+	.prose :where(br):not(:where([class~="not-prose"] *)) {
+		content: "";
+		display: block;
+		margin: 0.5em 0;
+	}
+
+	/* Support for GitHub Flavored Markdown features */
+	.prose :where(del):not(:where([class~="not-prose"] *)) {
+		@apply text-slate-400 line-through;
+		color: rgb(148 163 184);
+		text-decoration: line-through;
+	}
+
+	.prose :where(input[type="checkbox"]):not(:where([class~="not-prose"] *)) {
+		@apply mr-2;
 	}
 }

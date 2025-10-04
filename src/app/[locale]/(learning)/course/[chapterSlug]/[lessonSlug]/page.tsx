@@ -81,8 +81,8 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 
 							{/* Attachments */}
 							{lesson.attributes.attachments?.data && lesson.attributes.attachments.data.length > 0 && (
-								<div className="mt-12 rounded-lg border border-gray-200 p-6 dark:border-white/10">
-									<h2>Pièces jointes</h2>
+								<div className="mt-12 rounded-lg border border-white/10 bg-indigo-950/20 p-6">
+									<h2 className="font-sans">Pièces jointes</h2>
 									<ul className="mt-4 space-y-2">
 										{lesson.attributes.attachments.data.map(
 											(attachment: { id: number; attributes: { url: string; name: string; size: number } }) => (
@@ -91,10 +91,10 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 														href={attachment.attributes.url}
 														target="_blank"
 														rel="noopener noreferrer"
-														className="flex items-center gap-2"
+														className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300"
 													>
 														{attachment.attributes.name}
-														<span className="text-xs text-gray-500">
+														<span className="text-xs text-slate-400">
 															({(attachment.attributes.size / 1024).toFixed(1)} KB)
 														</span>
 													</a>
@@ -105,7 +105,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 								</div>
 							)}
 						</div>
-						<div className="mt-16 border-t border-gray-200 pt-8 dark:border-white/10">
+						<div className="mt-16 pt-8" style={{ borderTop: '2px solid rgba(99, 102, 241, 0.2)' }}>
 							{nextLessonData ? (
 								<NextPageLink
 									title={nextLessonData.lesson.attributes.title}

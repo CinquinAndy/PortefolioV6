@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
+import remarkBreaks from 'remark-breaks'
+import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import type { FetchOptions, NotFoundResponse } from '@/types/api'
 import type {
@@ -256,10 +258,12 @@ export async function processArticleData(
 }
 
 /**
- * Process markdown content with automatic heading IDs
+ * Process markdown content with automatic heading IDs and line breaks
  */
 export async function processMarkdown(markdownContent: string): Promise<string> {
 	const result = await remark()
+		.use(remarkGfm) // Support GitHub Flavored Markdown (tables, strikethrough, etc.)
+		.use(remarkBreaks) // Convert line breaks to <br> tags
 		.use(remarkRehype) // Convert markdown to HTML AST
 		.use(rehypeSlug) // Add IDs to headings
 		.use(rehypeStringify) // Convert HTML AST to string

@@ -1,10 +1,8 @@
 'use client'
 
-import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Suspense, use } from 'react'
-import { CourseCard } from '@/components/course/CourseCard'
 import { MasonryGrid } from '@/components/blog/MasonryGrid'
+import { CourseCard } from '@/components/course/CourseCard'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
@@ -93,12 +91,10 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 				<section className="relative w-full pt-32 pb-16">
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="text-center">
-							<h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
-								Mes Cours de Développement
-							</h1>
+							<h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">Mes Cours de Développement</h1>
 							<p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-								Découvrez mes cours complets pour maîtriser le développement web moderne. Du JavaScript aux
-								frameworks les plus populaires.
+								Découvrez mes cours complets pour maîtriser le développement web moderne. Du JavaScript aux frameworks
+								les plus populaires.
 							</p>
 
 							{/* Stats */}

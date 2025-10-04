@@ -10,7 +10,7 @@ export function BreadcrumbHome({ locale }: { locale: string }) {
 	return (
 		<Link
 			href={`/${locale}/course`}
-			className="min-w-0 shrink-0 text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-400"
+			className="min-w-0 shrink-0 text-slate-50 hover:text-indigo-400 font-sans"
 		>
 			Cours
 		</Link>
@@ -32,7 +32,7 @@ export function Breadcrumb({
 				href={href}
 				className={clsx(
 					className,
-					'min-w-0 truncate text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-400'
+					'min-w-0 truncate text-slate-50 hover:text-indigo-400 font-sans'
 				)}
 			>
 				{children}
@@ -44,7 +44,7 @@ export function Breadcrumb({
 		<span
 			className={clsx(
 				className,
-				'min-w-0 truncate text-gray-950 last:text-gray-600 dark:text-white dark:last:text-gray-400'
+				'min-w-0 truncate text-slate-50 last:text-slate-300 font-sans'
 			)}
 		>
 			{children}
@@ -53,5 +53,5 @@ export function Breadcrumb({
 }
 
 export function BreadcrumbSeparator({ className }: { className?: string }) {
-	return <span className={clsx(className, 'text-gray-950/25 dark:text-white/25')}>/</span>
+	return <span className={clsx(className, 'text-slate-50/25')}>/</span>
 }

@@ -34,9 +34,9 @@ function IconButton({
 			className={clsx(
 				'relative *:relative',
 				'before:absolute before:top-1/2 before:left-1/2 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-md',
-				'before:bg-white/75 before:backdrop-blur-sm dark:before:bg-gray-950/75',
-				'hover:before:bg-gray-950/5 dark:hover:before:bg-white/5',
-				'focus:outline-none data-[focus]:before:outline-2 data-[focus]:before:outline-blue-700',
+				'before:bg-white/5 before:backdrop-blur-sm',
+				'hover:before:bg-white/10',
+				'focus:outline-none data-[focus]:before:outline-2 data-[focus]:before:outline-indigo-500',
 				className
 			)}
 		>
@@ -79,10 +79,10 @@ function CourseNavigation({
 		<div className={clsx(className, 'space-y-8')}>
 			{modules.map(module => (
 				<div key={module.course.id}>
-					<h2 className="text-base/7 font-semibold text-pretty text-gray-950 sm:text-sm/6 dark:text-white">
+					<h2 className="text-base/7 font-semibold text-pretty text-slate-50 sm:text-sm/6 font-sans">
 						{module.course.attributes.title}
 					</h2>
-					<ul className="mt-4 flex flex-col gap-4 border-l border-gray-950/10 text-base/7 text-gray-700 sm:mt-3 sm:gap-3 sm:text-sm/6 dark:border-white/10 dark:text-gray-400">
+					<ul className="mt-4 flex flex-col gap-4 border-l border-white/10 text-base/7 text-slate-300 sm:mt-3 sm:gap-3 sm:text-sm/6">
 						{module.lessons.map(lesson => {
 							const lessonHref = `/${locale}/course/${module.course.attributes.slug}/${lesson.attributes.slug}`
 							return (
@@ -90,15 +90,15 @@ function CourseNavigation({
 									key={lesson.id}
 									className={clsx(
 										'-ml-px flex border-l border-transparent pl-4',
-										'hover:text-gray-950 hover:not-has-aria-[current=page]:border-gray-400 dark:hover:text-white',
-										'has-aria-[current=page]:border-gray-950 dark:has-aria-[current=page]:border-white'
+										'hover:text-slate-50 hover:not-has-aria-[current=page]:border-indigo-400',
+										'has-aria-[current=page]:border-indigo-400'
 									)}
 								>
 									<Link
 										href={lessonHref}
 										aria-current={lessonHref === pathname ? 'page' : undefined}
 										onClick={onNavigate}
-										className="aria-[current=page]:font-medium aria-[current=page]:text-gray-950 dark:aria-[current=page]:text-white"
+										className="aria-[current=page]:font-medium aria-[current=page]:text-indigo-400 font-sans"
 									>
 										{lesson.attributes.title}
 									</Link>
@@ -125,12 +125,12 @@ function MobileNavigation({
 }) {
 	return (
 		<Dialog open={open} onClose={onClose} className="xl:hidden">
-			<DialogBackdrop className="fixed inset-0 bg-gray-950/25" />
-			<DialogPanel className="fixed inset-y-0 left-0 isolate w-sm max-w-[calc(100%-(--spacing(11)))] overflow-y-auto bg-white ring ring-gray-950/10 sm:w-xs dark:bg-gray-950 dark:ring-white/10">
+			<DialogBackdrop className="fixed inset-0 bg-gray-950/50 backdrop-blur-sm" />
+			<DialogPanel className="fixed inset-y-0 left-0 isolate w-sm max-w-[calc(100%-(--spacing(11)))] overflow-y-auto bg-gradient-to-b from-indigo-950/90 to-sky-950/90 backdrop-blur-lg ring ring-white/10 sm:w-xs">
 				<div className="sticky top-0 z-10 px-4 py-4 sm:px-6">
 					<div className="flex h-6 shrink-0">
 						<CloseButton as={IconButton}>
-							<SidebarIcon className="shrink-0 stroke-gray-950 dark:stroke-white" />
+							<SidebarIcon className="shrink-0 stroke-slate-50" />
 						</CloseButton>
 					</div>
 				</div>
@@ -162,11 +162,11 @@ export function SidebarLayout({
 			}}
 		>
 			<div data-sidebar-collapsed={isSidebarOpen ? undefined : ''} className="group">
-				<aside className="fixed inset-y-0 left-0 w-2xs overflow-y-auto border-r border-gray-950/10 group-data-sidebar-collapsed:hidden max-xl:hidden dark:border-white/10">
+				<aside className="fixed inset-y-0 left-0 w-2xs overflow-y-auto border-r border-white/10 bg-gradient-to-b from-indigo-950/20 to-sky-950/20 backdrop-blur-sm group-data-sidebar-collapsed:hidden max-xl:hidden">
 					<nav aria-label="Course" className="px-6 py-4">
 						<div className="sticky top-4 flex h-6">
 							<IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-								<SidebarIcon className="shrink-0 stroke-gray-950 dark:stroke-white" />
+								<SidebarIcon className="shrink-0 stroke-slate-50" />
 							</IconButton>
 							<MobileNavigation
 								open={isMobileDialogOpen}
@@ -197,14 +197,14 @@ export function SidebarLayoutContent({
 
 	return (
 		<>
-			<div className="sticky top-0 z-10 flex items-center justify-between gap-x-8 bg-white/90 px-4 py-4 backdrop-blur-sm sm:px-6 dark:bg-gray-950/90">
+			<div className="sticky top-0 z-10 flex items-center justify-between gap-x-8 bg-gradient-to-r from-indigo-950/30 via-purple-950/30 to-sky-950/30 px-4 py-4 backdrop-blur-md border-b border-white/5 sm:px-6">
 				<div className="flex min-w-0 shrink items-center gap-x-4">
 					<IconButton onClick={() => setIsMobileDialogOpen(!isMobileDialogOpen)} className="xl:hidden">
-						<SidebarIcon className="shrink-0 stroke-gray-950 dark:stroke-white" />
+						<SidebarIcon className="shrink-0 stroke-slate-50" />
 					</IconButton>
 					{!isSidebarOpen && (
 						<IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="max-xl:hidden">
-							<SidebarIcon className="shrink-0 stroke-gray-950 dark:stroke-white" />
+							<SidebarIcon className="shrink-0 stroke-slate-50" />
 						</IconButton>
 					)}
 					<div className="min-w-0">{breadcrumbs}</div>
