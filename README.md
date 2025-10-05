@@ -14,11 +14,39 @@
 
 ```bash
 git clone
--> add .env file
+# 1. Create your .env.local file from the example
+cp .env.local.example .env.local
+
+# 2. Edit .env.local and add your Strapi API configuration:
+#    - NEXT_PUBLIC_API_URL: URL of your Strapi API (e.g., http://localhost:1337)
+#    - NEXT_PUBLIC_API_TOKEN: Your Strapi API token (generate in Strapi admin panel)
+
+# 3. Install dependencies
 pnpm install
+
+# 4. Run development server
 pnpm run dev
+
+# 5. Build for production
 pnpm run build
 ```
+
+#### Environment Variables
+
+Create a `.env.local` file with the following variables:
+
+```env
+NEXT_PUBLIC_API_URL=http://your-strapi-url:port
+NEXT_PUBLIC_API_TOKEN=your_strapi_api_token_here
+```
+
+To generate a Strapi API token:
+1. Open your Strapi admin panel
+2. Go to Settings > API Tokens
+3. Click "Create new API Token"
+4. Give it a name (e.g., "Portfolio Frontend")
+5. Set the token type to "Read-only" or "Full access" depending on your needs
+6. Copy the generated token to your `.env.local` file
 
 ### _tests_
 

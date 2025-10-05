@@ -40,13 +40,14 @@ export async function fetchAPI<T = unknown>(
 		})
 
 		if (!res.ok) {
-			console.error(`API Error: ${res.status} ${res.statusText}`)
+			console.error(`API Error: ${res.status} ${res.statusText} - URL: ${process.env.NEXT_PUBLIC_API_URL}/${path}`)
 			return { notFound: true }
 		}
 
-		return (await res.json()) as T
+		const data = (await res.json()) as T
+		return data
 	} catch (error) {
-		console.error('Fetch API Error:', error)
+		console.error('Fetch API Error:', error, `- URL: ${process.env.NEXT_PUBLIC_API_URL}/${path}`)
 		return { notFound: true }
 	}
 }

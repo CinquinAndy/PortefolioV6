@@ -46,15 +46,19 @@ function CourseContentSkeleton() {
 export default function CoursePage({ params, coursesData, content_website }: PageProps) {
 	const { locale } = use(params)
 
-	// Calculate total stats
-	const totalChapters = coursesData.reduce((acc, course) => acc + (course.attributes.chapters?.data?.length ?? 0), 0)
+	// Calculate total stats with safe navigation
+	const totalChapters = coursesData.reduce((acc, course) => {
+		const chaptersCount = course.attributes.chapters?.data?.length ?? 0
+		return acc + chaptersCount
+	}, 0)
+	
 	const totalLessons = coursesData.reduce((acc, course) => {
-		return (
-			acc +
-			(course.attributes.chapters?.data?.reduce((chapterAcc, chapter) => {
-				return chapterAcc + (chapter.attributes.lessons?.data?.length ?? 0)
-			}, 0) ?? 0)
-		)
+		const chapters = course.attributes.chapters?.data ?? []
+		const lessonsInCourse = chapters.reduce((chapterAcc, chapter) => {
+			const lessonsCount = chapter.attributes?.lessons?.data?.length ?? 0
+			return chapterAcc + lessonsCount
+		}, 0)
+		return acc + lessonsInCourse
 	}, 0)
 
 	return (
@@ -131,7 +135,14 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 								</div>
 							) : (
 								<div className="py-12 text-center text-white">
-									<div>{locale === 'fr' ? 'Aucun cours disponible' : 'No courses available'}</div>
+									<div className="text-xl font-semibold mb-2">
+										{locale === 'fr' ? 'Aucun cours disponible' : 'No courses available'}
+									</div>
+									<div className="text-sm text-white/70">
+										{locale === 'fr' 
+											? 'Vérifiez que votre API Strapi est bien lancée et accessible.' 
+											: 'Please check that your Strapi API is running and accessible.'}
+									</div>
 								</div>
 							)}
 						</Suspense>

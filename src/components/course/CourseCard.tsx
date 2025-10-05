@@ -12,16 +12,17 @@ interface CourseCardProps {
 	course: Course
 }
 
-const getCourseUrl = (locale: Locale, course: Course): string => {
+const getCourseUrl = (locale: Locale, course: Course): string | undefined => {
 	// Get first chapter and first lesson
 	const firstChapter = course.attributes.chapters?.data?.[0]
-	const firstLesson = firstChapter?.attributes.lessons?.data?.[0]
+	const firstLesson = firstChapter?.attributes?.lessons?.data?.[0]
 
-	if (firstChapter && firstLesson) {
+	if (firstChapter?.attributes?.slug && firstLesson?.attributes?.slug) {
 		return `/${locale}/course/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`
 	}
 
-	return `/${locale}/course`
+	// If no chapter/lesson structure, fallback to undefined to signal incomplete data
+	return undefined
 }
 
 export function CourseCard({ locale, course }: CourseCardProps) {
@@ -32,8 +33,14 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 	const totalChapters = course.attributes.chapters?.data?.length ?? 0
 	const totalLessons =
 		course.attributes.chapters?.data?.reduce((acc, chapter) => {
-			return acc + (chapter.attributes.lessons?.data?.length ?? 0)
+			return acc + (chapter.attributes?.lessons?.data?.length ?? 0)
 		}, 0) ?? 0
+
+	// Don't render card if no valid URL
+	if (!courseUrl) {
+		console.warn(`Course ${course.attributes.title} has no chapters/lessons, skipping card`)
+		return null
+	}
 
 	return (
 		<Link className="block" href={courseUrl}>
@@ -73,7 +80,7 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 									</span>
 								</div>
 							</div>
-							<div className="mt-4 text-xl font-bold font-semibold leading-none tracking-tight text-white transition-colors group-hover:text-cyan-300">
+							<div className="mt-4 text-xl font-bold leading-none tracking-tight text-white transition-colors group-hover:text-cyan-300">
 								{course.attributes.title}
 							</div>
 							<div className="text-sm text-muted-foreground text-white/80">{course.attributes.description}</div>

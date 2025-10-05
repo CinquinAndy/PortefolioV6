@@ -41,7 +41,25 @@ export default async function Page({ params }: CoursePageProps) {
 
 	// Fetch parent courses (courses without parent_course)
 	const coursesResponse = await getParentCourses(locale)
+	
+	// Debug logging
+	if ('notFound' in coursesResponse) {
+		console.error('Courses API returned notFound')
+	} else {
+		console.log(`Fetched ${coursesResponse.data?.length ?? 0} courses from API`)
+		if (coursesResponse.data && coursesResponse.data.length > 0) {
+			const firstCourse = coursesResponse.data[0]
+			console.log('First course structure:', {
+				title: firstCourse.attributes.title,
+				hasChapters: !!firstCourse.attributes.chapters,
+				chaptersDataType: Array.isArray(firstCourse.attributes.chapters?.data) ? 'array' : typeof firstCourse.attributes.chapters?.data,
+				chaptersCount: firstCourse.attributes.chapters?.data?.length ?? 0,
+			})
+		}
+	}
+	
 	const courses = 'notFound' in coursesResponse ? [] : (coursesResponse.data ?? [])
+	
 	if (!content_website) {
 		return <div>Error loading content</div>
 	}
