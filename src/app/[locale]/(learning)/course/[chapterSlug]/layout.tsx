@@ -20,9 +20,9 @@ export default async function ChapterSlugLayout({
 	const modules =
 		'notFound' in coursesData || !coursesData.data
 			? []
-			: coursesData.data.flatMap((parentCourse) => {
+			: coursesData.data.flatMap(parentCourse => {
 					const chapters = parentCourse.attributes.chapters?.data ?? []
-					return chapters.map((chapter) => ({
+					return chapters.map(chapter => ({
 						course: chapter as Course,
 						lessons: (chapter.attributes.lessons?.data ?? []) as Lesson[],
 					}))

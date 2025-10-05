@@ -15,7 +15,7 @@ interface PageParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
 	const content_website_response = await getContentWebsite(locale)
-	const content_website = getResponseData(content_website_response)
+	const _content_website = getResponseData(content_website_response)
 
 	return {
 		title: 'Mes Cours - Développement Web',
@@ -41,8 +41,7 @@ export default async function Page({ params }: CoursePageProps) {
 
 	// Fetch parent courses (courses without parent_course)
 	const coursesResponse = await getParentCourses(locale)
-	const courses = 'notFound' in coursesResponse ? [] : coursesResponse.data ?? []
-
+	const courses = 'notFound' in coursesResponse ? [] : (coursesResponse.data ?? [])
 	if (!content_website) {
 		return <div>Error loading content</div>
 	}

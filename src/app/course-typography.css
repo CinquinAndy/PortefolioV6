@@ -3,28 +3,19 @@
 @layer components {
 	/* Override global serif font for learning section - use sans-serif */
 	/* Force Be Vietnam Pro for all learning section elements */
-	.prose,
-	.prose *,
-	aside nav,
-	aside nav *,
-	aside h2,
-	aside ul,
-	aside li,
-	aside a,
-	nav.sticky,
-	nav.sticky *,
-	nav.sticky h2,
-	nav.sticky ul,
-	nav.sticky li,
-	nav.sticky a,
-	nav[aria-label="Breadcrumb"],
-	nav[aria-label="Breadcrumb"] *,
-	nav[aria-label="Course"],
-	nav[aria-label="Course"] *,
-	nav[aria-label="Course"] h2,
-	nav[aria-label="Course"] ul,
-	nav[aria-label="Course"] li,
-	nav[aria-label="Course"] a {
+	.learning-section *,
+	.learning-section .prose,
+	.learning-section .prose *,
+	.learning-section aside,
+	.learning-section aside *,
+	.learning-section nav,
+	.learning-section nav *,
+	.learning-section h1,
+	.learning-section h2,
+	.learning-section h3,
+	.learning-section h4,
+	.learning-section h5,
+	.learning-section h6 {
 		font-family: var(--font-be-vietnam-pro), sans-serif !important;
 	}
 
@@ -133,7 +124,9 @@
 		background-color: rgba(49, 46, 129, 0.3);
 		border: 2px solid rgba(99, 102, 241, 0.2);
 		color: rgb(248 250 252);
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 2px 4px 0 rgba(99, 102, 241, 0.05);
+		box-shadow:
+			0 4px 6px -1px rgba(0, 0, 0, 0.3),
+			inset 0 2px 4px 0 rgba(99, 102, 241, 0.05);
 	}
 
 	.prose :where(pre code):not(:where([class~="not-prose"] *)) {

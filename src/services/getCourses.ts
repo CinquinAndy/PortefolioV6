@@ -246,7 +246,9 @@ export async function getNextLesson(
 
 	const currentChapter = chapterData.data[0]
 	const lessons = currentChapter.attributes.lessons?.data ?? []
-	const currentIndex = lessons.findIndex((lesson: { attributes: { slug: string } }) => lesson.attributes.slug === currentLessonSlug)
+	const currentIndex = lessons.findIndex(
+		(lesson: { attributes: { slug: string } }) => lesson.attributes.slug === currentLessonSlug
+	)
 
 	// If there's a next lesson in the same chapter
 	if (currentIndex !== -1 && currentIndex < lessons.length - 1) {
@@ -267,8 +269,13 @@ export async function getNextLesson(
 		return null
 	}
 
-	const chapters = chaptersData.data.sort((a: { attributes: { order: number } }, b: { attributes: { order: number } }) => a.attributes.order - b.attributes.order)
-	const currentChapterIndex = chapters.findIndex((ch: { attributes: { slug: string } }) => ch.attributes.slug === currentChapterSlug)
+	const chapters = chaptersData.data.sort(
+		(a: { attributes: { order: number } }, b: { attributes: { order: number } }) =>
+			a.attributes.order - b.attributes.order
+	)
+	const currentChapterIndex = chapters.findIndex(
+		(ch: { attributes: { slug: string } }) => ch.attributes.slug === currentChapterSlug
+	)
 
 	// If there's a next chapter
 	if (currentChapterIndex !== -1 && currentChapterIndex < chapters.length - 1) {

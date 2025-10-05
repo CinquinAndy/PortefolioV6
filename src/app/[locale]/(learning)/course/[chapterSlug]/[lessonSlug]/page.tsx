@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Breadcrumb, BreadcrumbHome, BreadcrumbSeparator, Breadcrumbs } from '@/components/course/Breadcrumbs-learning'
+import { Breadcrumb, BreadcrumbBackButton, BreadcrumbSeparator, Breadcrumbs } from '@/components/course/Breadcrumbs-learning'
 import { NextPageLink } from '@/components/course/NextPageLink-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
 import TableOfContents from '@/components/course/TableOfContents-learning'
@@ -58,11 +58,12 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 		<SidebarLayoutContent
 			breadcrumbs={
 				<Breadcrumbs>
-					<BreadcrumbHome locale={locale} />
-					<BreadcrumbSeparator className="max-md:hidden" />
-					<Breadcrumb href={`/${locale}/course`} className="max-md:hidden">
-						{chapter.attributes.parent_course?.data?.attributes?.title ?? 'Cours'}
+					<BreadcrumbBackButton locale={locale} />
+					<Breadcrumb href={`/${locale}/course/${chapter.attributes.parent_course?.data?.attributes?.slug}`}>
+						{chapter.attributes.parent_course?.data?.attributes?.title}
 					</Breadcrumb>
+					<BreadcrumbSeparator />
+					<Breadcrumb href={`/${locale}/course/${chapterSlug}`}>{chapter.attributes.title}</Breadcrumb>
 					<BreadcrumbSeparator />
 					<Breadcrumb>{lesson.attributes.title}</Breadcrumb>
 				</Breadcrumbs>
@@ -72,12 +73,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 				<div className="mx-auto flex max-w-2xl gap-x-10 py-10 sm:py-14 lg:max-w-5xl">
 					<div className="w-full flex-1">
 						<div id="content" className="prose">
-							{lesson.attributes.content && (
-								<div
-									// biome-ignore lint/security/noDangerouslySetInnerHTML: Trusted Strapi content
-									dangerouslySetInnerHTML={{ __html: lesson.attributes.content }}
-								/>
-							)}
+							{lesson.attributes.content && <div dangerouslySetInnerHTML={{ __html: lesson.attributes.content }} />}
 
 							{/* Attachments */}
 							{lesson.attributes.attachments?.data && lesson.attributes.attachments.data.length > 0 && (
