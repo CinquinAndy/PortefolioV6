@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { Badge } from '@/components/ui/badge'
+import { StarRating } from '@/components/course/StarRating'
 import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
 
@@ -13,16 +14,28 @@ interface CourseCardProps {
 }
 
 const getCourseUrl = (locale: Locale, course: Course): string | undefined => {
-	// Get first chapter and first lesson
-	const firstChapter = course.attributes.chapters?.data?.[0]
-	const firstLesson = firstChapter?.attributes?.lessons?.data?.[0]
+	// Get the parent course slug (this course is the parent)
+	const parentCourseSlug = course.attributes.slug
 
-	if (firstChapter?.attributes?.slug && firstLesson?.attributes?.slug) {
-		return `/${locale}/course/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`
+	// Get first chapter
+	const firstChapter = course.attributes.chapters?.data?.[0]
+
+	if (!firstChapter?.attributes?.slug) {
+		// No chapters at all
+		return undefined
 	}
 
-	// If no chapter/lesson structure, fallback to undefined to signal incomplete data
-	return undefined
+	// Get first lesson if it exists
+	const firstLesson = firstChapter?.attributes?.lessons?.data?.[0]
+
+	if (firstLesson?.attributes?.slug) {
+		// If we have a lesson, link directly to it with parent course slug
+		return `/${locale}/course/${parentCourseSlug}/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`
+	}
+
+	// If we have chapters but no lessons yet, link to the chapter page
+	// (This allows displaying courses that are being built)
+	return `/${locale}/course/${parentCourseSlug}/${firstChapter.attributes.slug}`
 }
 
 export function CourseCard({ locale, course }: CourseCardProps) {
@@ -36,9 +49,9 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 			return acc + (chapter.attributes?.lessons?.data?.length ?? 0)
 		}, 0) ?? 0
 
-	// Don't render card if no valid URL
+	// Don't render card if no valid URL (no chapters at all)
 	if (!courseUrl) {
-		console.warn(`Course ${course.attributes.title} has no chapters/lessons, skipping card`)
+		console.warn(`Course ${course.attributes.title} has no chapters, skipping card`)
 		return null
 	}
 
@@ -54,12 +67,16 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 				<div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10">
 					{/* Animated background image container */}
 					<motion.div className="absolute inset-0 -z-10">
-						<div
-							className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-							style={{
-								backgroundImage: `url(${course.attributes.thumbnail?.attributes?.url ?? '/placeholder.svg'})`,
-							}}
-						/>
+						{course.attributes.thumbnail?.attributes?.url ? (
+							<div
+								className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+								style={{
+									backgroundImage: `url(${course.attributes.thumbnail.attributes.url})`,
+								}}
+							/>
+						) : (
+							<div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20" />
+						)}
 						<div className="absolute inset-0 left-0 top-0 h-full w-full bg-gradient-to-b from-transparent via-black/80 to-black/95" />
 					</motion.div>
 
@@ -67,9 +84,13 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 					<div className="relative z-10 flex flex-col space-y-1.5 p-6 pt-48">
 						<div className="relative">
 							<div className="flex items-center justify-between text-sm">
-								<Badge className="border-cyan-500/30 bg-cyan-500/20 text-white" variant="outline">
-									{course.attributes.level ?? 'Débutant'}
-								</Badge>
+								{course.attributes.difficulty ? (
+									<StarRating rating={course.attributes.difficulty} />
+								) : (
+									<Badge className="border-cyan-500/30 bg-cyan-500/20 text-white" variant="outline">
+										{course.attributes.level ?? 'Débutant'}
+									</Badge>
+								)}
 								<div className="flex items-center gap-2 text-white/90">
 									<span>
 										{totalChapters} chapitre{totalChapters > 1 ? 's' : ''}

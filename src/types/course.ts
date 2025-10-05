@@ -175,6 +175,7 @@ export interface Course {
 		thumbnail: StrapiImage
 		category: StrapiResponseSingle<CourseCategory>
 		level: 'Débutant' | 'Intermédiaire' | 'Avancé' | 'Expert'
+		difficulty?: number // Difficulty rating (1-5 stars) for parent courses only
 		duration_total: number // en secondes
 		is_published: boolean
 		featured: boolean

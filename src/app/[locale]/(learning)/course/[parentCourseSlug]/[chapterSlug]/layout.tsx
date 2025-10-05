@@ -1,6 +1,6 @@
 import type React from 'react'
 import { SidebarLayout } from '@/components/course/SidebarLayout-learning'
-import { getParentCourses } from '@/services/getCourses'
+import { getParentCourseBySlug } from '@/services/getCourses'
 import type { Course, Lesson } from '@/types/course'
 import type { Locale } from '@/types/strapi'
 
@@ -9,24 +9,30 @@ export default async function ChapterSlugLayout({
 	params,
 }: {
 	children: React.ReactNode
-	params: Promise<{ locale: string; chapterSlug: string }>
+	params: Promise<{ locale: string; parentCourseSlug: string; chapterSlug: string }>
 }) {
-	const { locale } = (await params) as { locale: Locale; chapterSlug: string }
+	const { locale, parentCourseSlug } = (await params) as {
+		locale: Locale
+		parentCourseSlug: string
+		chapterSlug: string
+	}
 
-	// Fetch all parent courses with chapters for sidebar
-	const coursesData = await getParentCourses(locale)
+	// Fetch parent course with all chapters for sidebar
+	const parentCourseData = await getParentCourseBySlug(parentCourseSlug, locale)
 
 	// Prepare modules (chapters) for sidebar
 	const modules =
-		'notFound' in coursesData || !coursesData.data
+		'notFound' in parentCourseData || !parentCourseData.data || parentCourseData.data.length === 0
 			? []
-			: coursesData.data.flatMap(parentCourse => {
+			: (() => {
+					const parentCourse = parentCourseData.data[0]
 					const chapters = parentCourse.attributes.chapters?.data ?? []
 					return chapters.map(chapter => ({
 						course: chapter as Course,
 						lessons: (chapter.attributes.lessons?.data ?? []) as Lesson[],
+						parentCourseSlug,
 					}))
-				})
+				})()
 
 	return (
 		<SidebarLayout modules={modules} locale={locale}>

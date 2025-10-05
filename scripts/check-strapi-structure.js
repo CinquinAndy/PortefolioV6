@@ -77,14 +77,25 @@ async function analyzeStructure() {
 		const chapters = []
 
 		for (const course of allCourses.data ?? []) {
-			const hasParent = course.attributes.parent_course?.data != null
+			const parentCourseField = course.attributes.parent_course
+			const hasParentData = parentCourseField?.data != null
 			
-			if (hasParent) {
+			// Check for both id and documentId (Strapi v5)
+			const parentId = parentCourseField?.data?.id || parentCourseField?.data?.documentId
+			
+			console.log(`Course "${course.attributes.title}" (order: ${course.attributes.order}):`)
+			console.log(`  - parent_course.data:`, JSON.stringify(parentCourseField?.data))
+			console.log(`  - Detected parent ID: ${parentId ?? 'null/undefined'}`)
+			console.log('')
+			
+			if (hasParentData) {
 				chapters.push(course)
 			} else {
 				parentCourses.push(course)
 			}
 		}
+		
+		console.log('---\n')
 
 		console.log('📊 Structure breakdown:')
 		console.log(`  ✓ Parent courses (parent_course = null): ${parentCourses.length}`)

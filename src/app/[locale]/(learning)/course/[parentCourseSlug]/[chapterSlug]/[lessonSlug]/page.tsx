@@ -14,6 +14,7 @@ import type { Locale } from '@/types/strapi'
 
 interface PageParams {
 	locale: Locale
+	parentCourseSlug: string
 	chapterSlug: string
 	lessonSlug: string
 }
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 }
 
 export default async function Page({ params }: { params: Promise<PageParams> }) {
-	const { locale, chapterSlug, lessonSlug } = await params
+	const { locale, parentCourseSlug, chapterSlug, lessonSlug } = await params
 
 	// Fetch lesson data
 	const lessonData = await getLessonBySlug(lessonSlug, locale)
@@ -56,6 +57,13 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 	}
 	const chapter = chapterData.data[0]
 
+	// Fetch parent course data
+	const parentCourseData = await getCourseBySlug(parentCourseSlug, locale)
+	if ('notFound' in parentCourseData || !parentCourseData.data || parentCourseData.data.length === 0) {
+		notFound()
+	}
+	const parentCourse = parentCourseData.data[0]
+
 	// Get next lesson
 	const nextLessonData = await getNextLesson(lessonSlug, chapterSlug, locale)
 
@@ -64,11 +72,11 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 			breadcrumbs={
 				<Breadcrumbs>
 					<BreadcrumbBackButton locale={locale} />
-					<Breadcrumb href={`/${locale}/course/${chapter.attributes.parent_course?.data?.attributes?.slug}`}>
-						{chapter.attributes.parent_course?.data?.attributes?.title}
-					</Breadcrumb>
+					<Breadcrumb href={`/${locale}/course/${parentCourseSlug}`}>{parentCourse.attributes.title}</Breadcrumb>
 					<BreadcrumbSeparator />
-					<Breadcrumb href={`/${locale}/course/${chapterSlug}`}>{chapter.attributes.title}</Breadcrumb>
+					<Breadcrumb href={`/${locale}/course/${parentCourseSlug}/${chapterSlug}`}>
+						{chapter.attributes.title}
+					</Breadcrumb>
 					<BreadcrumbSeparator />
 					<Breadcrumb>{lesson.attributes.title}</Breadcrumb>
 				</Breadcrumbs>
@@ -111,7 +119,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 								<NextPageLink
 									title={nextLessonData.lesson.attributes.title}
 									description={nextLessonData.lesson.attributes.description}
-									href={`/${locale}/course/${nextLessonData.chapterSlug}/${nextLessonData.lesson.attributes.slug}`}
+									href={`/${locale}/course/${parentCourseSlug}/${nextLessonData.chapterSlug}/${nextLessonData.lesson.attributes.slug}`}
 								/>
 							) : (
 								<NextPageLink

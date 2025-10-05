@@ -60,6 +60,7 @@ export const SidebarContext = createContext<{
 interface CourseModule {
 	course: Course
 	lessons: Lesson[]
+	parentCourseSlug: string
 }
 
 function CourseNavigation({
@@ -84,7 +85,7 @@ function CourseNavigation({
 					</h2>
 					<ul className="mt-4 flex flex-col gap-4 border-l border-white/10 text-base/7 text-slate-300 sm:mt-3 sm:gap-3 sm:text-sm/6">
 						{module.lessons.map(lesson => {
-							const lessonHref = `/${locale}/course/${module.course.attributes.slug}/${lesson.attributes.slug}`
+							const lessonHref = `/${locale}/course/${module.parentCourseSlug}/${module.course.attributes.slug}/${lesson.attributes.slug}`
 							return (
 								<li
 									key={lesson.id}

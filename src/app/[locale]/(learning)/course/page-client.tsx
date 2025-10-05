@@ -54,6 +54,17 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 
 	const totalLessons = coursesData.reduce((acc, course) => {
 		const chapters = course.attributes.chapters?.data ?? []
+
+		// Debug: Log first chapter structure to see lessons
+		if (chapters.length > 0 && course.attributes.title.includes('Frameworks')) {
+			console.log('First chapter lessons structure:', {
+				chapterTitle: chapters[0].attributes?.title,
+				hasLessons: !!chapters[0].attributes?.lessons,
+				lessonsData: chapters[0].attributes?.lessons?.data,
+				lessonsCount: chapters[0].attributes?.lessons?.data?.length ?? 0,
+			})
+		}
+
 		const lessonsInCourse = chapters.reduce((chapterAcc, chapter) => {
 			const lessonsCount = chapter.attributes?.lessons?.data?.length ?? 0
 			return chapterAcc + lessonsCount

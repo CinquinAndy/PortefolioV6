@@ -8,21 +8,39 @@ import { fetchAPI, processMarkdown } from './getContentWebsite'
  * Get all parent courses (courses without parent_course)
  */
 export async function getParentCourses(_locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
-	// Try deep populate first - this should get all nested relations
+	// Note: In Strapi, parent_course.data can be either an array or object depending on configuration
+	// We need to filter client-side for courses where parent_course.data is empty (array) or null
+	// Use explicit populate to ensure we get chapters and their lessons
 	const deepResult = await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,3&filters[parent_course][id][$null]=true&filters[is_published][$eq]=true&sort=order:asc`
+		`api/courses?populate[chapters][populate][lessons][populate]=*&populate[chapters][sort][0]=order:asc&populate=thumbnail,tags,seo&filters[is_published][$eq]=true&sort=order:asc`
 	)
 
-	// Log the structure for debugging
-	if (!('notFound' in deepResult) && deepResult.data && deepResult.data.length > 0) {
-		console.log('Deep populate result - first course chapters:', {
-			title: deepResult.data[0].attributes.title,
-			chaptersExists: !!deepResult.data[0].attributes.chapters,
-			chaptersDataType: Array.isArray(deepResult.data[0].attributes.chapters?.data)
-				? 'array'
-				: typeof deepResult.data[0].attributes.chapters?.data,
-			chaptersCount: deepResult.data[0].attributes.chapters?.data?.length ?? 0,
+	// Filter client-side for parent courses (those with no parent_course or empty parent_course.data array)
+	if (!('notFound' in deepResult) && deepResult.data) {
+		const parentCourses = deepResult.data.filter(course => {
+			const parentCourseData = course.attributes.parent_course?.data
+			// Check if parent_course.data is empty (null, undefined, empty array, or empty object)
+			const hasNoParent = !parentCourseData || (Array.isArray(parentCourseData) && parentCourseData.length === 0)
+			return hasNoParent
 		})
+
+		console.log(`Filtered ${parentCourses.length} parent courses from ${deepResult.data.length} total courses`)
+
+		if (parentCourses.length > 0) {
+			console.log('First parent course chapters:', {
+				title: parentCourses[0].attributes.title,
+				chaptersExists: !!parentCourses[0].attributes.chapters,
+				chaptersDataType: Array.isArray(parentCourses[0].attributes.chapters?.data)
+					? 'array'
+					: typeof parentCourses[0].attributes.chapters?.data,
+				chaptersCount: parentCourses[0].attributes.chapters?.data?.length ?? 0,
+			})
+		}
+
+		return {
+			...deepResult,
+			data: parentCourses,
+		}
 	}
 
 	return deepResult
@@ -251,7 +269,7 @@ export async function getNextLesson(
 	currentLessonSlug: string,
 	currentChapterSlug: string,
 	locale: Locale
-): Promise<{ lesson: Lesson; chapterSlug: string } | null> {
+): Promise<{ lesson: Lesson; chapterSlug: string; parentCourseSlug: string } | null> {
 	// Get current chapter with lessons
 	const chapterData = await getCourseBySlug(currentChapterSlug, locale)
 
@@ -265,11 +283,18 @@ export async function getNextLesson(
 		(lesson: { attributes: { slug: string } }) => lesson.attributes.slug === currentLessonSlug
 	)
 
+	// Get parent course slug
+	const parentCourseSlug = currentChapter.attributes.parent_course?.data?.attributes?.slug
+	if (!parentCourseSlug) {
+		return null
+	}
+
 	// If there's a next lesson in the same chapter
 	if (currentIndex !== -1 && currentIndex < lessons.length - 1) {
 		return {
 			lesson: lessons[currentIndex + 1],
 			chapterSlug: currentChapterSlug,
+			parentCourseSlug,
 		}
 	}
 
@@ -301,6 +326,7 @@ export async function getNextLesson(
 			return {
 				lesson: nextChapterLessons[0],
 				chapterSlug: nextChapter.attributes.slug,
+				parentCourseSlug,
 			}
 		}
 	}
