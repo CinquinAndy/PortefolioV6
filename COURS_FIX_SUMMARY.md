@@ -16,11 +16,16 @@ First course structure: {
 
 **Ce n'est PAS un problème de code frontend**, c'est un problème de données dans Strapi :
 
-1. Les cours existent dans Strapi
-2. La structure de relation `chapters` existe
-3. **MAIS aucun chapitre n'est lié aux cours parents**
+Selon tes explications, tu devrais avoir :
+- **1 cours parent** (course avec `parent_course = null` et `is_published = true`)
+- **21-22 chapitres** (courses avec `parent_course` pointant vers le cours parent)
+- **X leçons** dans ces chapitres
 
-C'est comme avoir une bibliothèque (cours) sans livres (chapitres) dedans.
+**MAIS** l'API retourne **22 cours avec `parent_course = null`**, ce qui signifie que :
+1. Tous tes "chapitres" ont `parent_course = null` au lieu de pointer vers le parent
+2. Ou la relation `chapters` n'est pas configurée dans Strapi pour populer les enfants
+
+C'est comme avoir 22 bibliothèques (cours parents) au lieu d'avoir 1 bibliothèque avec 22 étagères (chapitres).
 
 ## ✅ Corrections appliquées
 
@@ -74,12 +79,23 @@ C'est comme avoir une bibliothèque (cours) sans livres (chapitres) dedans.
            └─ 📄 Leçon 2 : "Composants React"
    ```
 
-5. **Pour chaque cours parent** :
-   - Crée des entrées Course qui sont des "chapitres"
-   - Définis `parent_course` pour pointer vers le cours parent
-   - Définis `order` pour l'ordre d'affichage
-   - Active `is_published = true`
-   - Crée des lessons et lie-les au chapitre
+5. **Diagnostic d'abord** :
+   ```bash
+   pnpm run check:structure
+   ```
+   Ce script va analyser ta structure Strapi et te dire exactement quels cours ont `parent_course = null`.
+
+6. **Corrige les relations** :
+   - Identifie le cours parent (probablement "Frameworks JavaScript - Formation Complète")
+   - Pour chaque autre cours (EXO 01, Typescript, Testing, etc.) :
+     - Ouvre dans Strapi Content Manager > Course
+     - Définis `parent_course` pour pointer vers le cours parent
+     - Définis `order` (1, 2, 3, etc.)
+     - Sauvegarde
+
+7. **Vérifie la configuration de relation** dans Content-Type Builder :
+   - Course doit avoir un champ `parent_course` (Many-to-One with Course)
+   - Course doit avoir un champ `chapters` (One-to-Many with Course, mapped by `parent_course`)
 
 ### Option 2 : Alternative de structure (plus simple pour 2-3 personnes)
 
@@ -104,15 +120,18 @@ Si tu veux cette approche, on peut simplifier le code.
 ## 🧪 Tester les corrections
 
 ```bash
-# 1. Vérifie la connexion API
+# 1. Analyse la structure Strapi (IMPORTANT!)
+pnpm run check:structure
+
+# 2. Vérifie la connexion API
 pnpm run check:api
 
-# 2. Lance le serveur de dev
+# 3. Lance le serveur de dev
 pnpm run dev
 
-# 3. Ouvre http://localhost:3000/fr/course
+# 4. Ouvre http://localhost:3000/fr/course
 
-# 4. Regarde les logs dans le terminal
+# 5. Regarde les logs dans le terminal
 ```
 
 Tu devrais voir dans les logs :
@@ -123,9 +142,9 @@ Tu devrais voir dans les logs :
 ## 📊 Compteurs attendus
 
 Une fois les données corrigées, tu verras :
-- **Nombre de cours** : Nombre de cours parents (sans parent_course)
-- **Nombre de chapitres** : Total des chapitres liés à tous les cours
-- **Nombre de leçons** : Total des leçons dans tous les chapitres
+- **Nombre de cours** : 1 (le cours parent "Frameworks JavaScript")
+- **Nombre de chapitres** : 21-22 (tous les chapitres liés au parent)
+- **Nombre de leçons** : X (total des leçons dans tous les chapitres)
 
 ## 🚨 Erreurs restantes possibles
 

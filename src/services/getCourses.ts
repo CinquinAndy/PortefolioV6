@@ -12,17 +12,19 @@ export async function getParentCourses(_locale: Locale): Promise<CoursesResponse
 	const deepResult = await fetchAPI<CoursesResponse>(
 		`api/courses?populate=deep,3&filters[parent_course][id][$null]=true&filters[is_published][$eq]=true&sort=order:asc`
 	)
-	
+
 	// Log the structure for debugging
 	if (!('notFound' in deepResult) && deepResult.data && deepResult.data.length > 0) {
 		console.log('Deep populate result - first course chapters:', {
 			title: deepResult.data[0].attributes.title,
 			chaptersExists: !!deepResult.data[0].attributes.chapters,
-			chaptersDataType: Array.isArray(deepResult.data[0].attributes.chapters?.data) ? 'array' : typeof deepResult.data[0].attributes.chapters?.data,
+			chaptersDataType: Array.isArray(deepResult.data[0].attributes.chapters?.data)
+				? 'array'
+				: typeof deepResult.data[0].attributes.chapters?.data,
 			chaptersCount: deepResult.data[0].attributes.chapters?.data?.length ?? 0,
 		})
 	}
-	
+
 	return deepResult
 }
 

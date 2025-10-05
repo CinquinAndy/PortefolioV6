@@ -51,7 +51,7 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 		const chaptersCount = course.attributes.chapters?.data?.length ?? 0
 		return acc + chaptersCount
 	}, 0)
-	
+
 	const totalLessons = coursesData.reduce((acc, course) => {
 		const chapters = course.attributes.chapters?.data ?? []
 		const lessonsInCourse = chapters.reduce((chapterAcc, chapter) => {
@@ -139,8 +139,8 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 										{locale === 'fr' ? 'Aucun cours disponible' : 'No courses available'}
 									</div>
 									<div className="text-sm text-white/70">
-										{locale === 'fr' 
-											? 'Vérifiez que votre API Strapi est bien lancée et accessible.' 
+										{locale === 'fr'
+											? 'Vérifiez que votre API Strapi est bien lancée et accessible.'
 											: 'Please check that your Strapi API is running and accessible.'}
 									</div>
 								</div>

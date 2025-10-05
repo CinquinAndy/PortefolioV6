@@ -30,8 +30,16 @@ function loadEnv(filePath) {
 	return env
 }
 
-const envPath = path.join(process.cwd(), '.env.local')
-const env = loadEnv(envPath)
+// Try .env.local first, then .env
+let env = {}
+const envLocalPath = path.join(process.cwd(), '.env.local')
+const envPath = path.join(process.cwd(), '.env')
+
+if (fs.existsSync(envLocalPath)) {
+	env = loadEnv(envLocalPath)
+} else if (fs.existsSync(envPath)) {
+	env = loadEnv(envPath)
+}
 
 const API_URL = env.NEXT_PUBLIC_API_URL
 const API_TOKEN = env.NEXT_PUBLIC_API_TOKEN

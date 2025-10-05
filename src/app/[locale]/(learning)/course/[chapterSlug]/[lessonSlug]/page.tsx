@@ -1,6 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Breadcrumb, BreadcrumbBackButton, BreadcrumbSeparator, Breadcrumbs } from '@/components/course/Breadcrumbs-learning'
+import {
+	Breadcrumb,
+	BreadcrumbBackButton,
+	BreadcrumbSeparator,
+	Breadcrumbs,
+} from '@/components/course/Breadcrumbs-learning'
 import { NextPageLink } from '@/components/course/NextPageLink-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
 import TableOfContents from '@/components/course/TableOfContents-learning'
