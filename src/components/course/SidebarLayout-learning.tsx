@@ -78,37 +78,48 @@ function CourseNavigation({
 
 	return (
 		<div className={clsx(className, 'space-y-8')}>
-			{modules.map(module => (
-				<div key={module.course.id}>
-					<h2 className="text-base/7 font-semibold text-pretty text-slate-50 sm:text-sm/6 font-sans">
-						{module.course.attributes.title}
-					</h2>
-					<ul className="mt-4 flex flex-col gap-4 border-l border-white/10 text-base/7 text-slate-300 sm:mt-3 sm:gap-3 sm:text-sm/6">
-						{module.lessons.map(lesson => {
-							const lessonHref = `/${locale}/course/${module.parentCourseSlug}/${module.course.attributes.slug}/${lesson.attributes.slug}`
-							return (
-								<li
-									key={lesson.id}
-									className={clsx(
-										'-ml-px flex border-l border-transparent pl-4',
-										'hover:text-slate-50 hover:not-has-aria-[current=page]:border-indigo-400',
-										'has-aria-[current=page]:border-indigo-400'
-									)}
-								>
-									<Link
-										href={lessonHref}
-										aria-current={lessonHref === pathname ? 'page' : undefined}
-										onClick={onNavigate}
-										className="aria-[current=page]:font-medium aria-[current=page]:text-indigo-400 font-sans"
+			{modules.map(module => {
+				const chapterHref = `/${locale}/course/${module.parentCourseSlug}/${module.course.attributes.slug}`
+				return (
+					<div key={module.course.id}>
+						<Link
+							href={chapterHref}
+							onClick={onNavigate}
+							className={clsx(
+								'block text-base/7 font-semibold text-pretty text-slate-50 sm:text-sm/6 font-sans',
+								'hover:text-indigo-300 transition-colors',
+								pathname === chapterHref && 'text-indigo-400'
+							)}
+						>
+							{module.course.attributes.title}
+						</Link>
+						<ul className="mt-4 flex flex-col gap-4 border-l border-white/10 text-base/7 text-slate-300 sm:mt-3 sm:gap-3 sm:text-sm/6">
+							{module.lessons.map(lesson => {
+								const lessonHref = `/${locale}/course/${module.parentCourseSlug}/${module.course.attributes.slug}/${lesson.attributes.slug}`
+								return (
+									<li
+										key={lesson.id}
+										className={clsx(
+											'-ml-px flex border-l border-transparent pl-4',
+											'hover:text-slate-50 hover:not-has-aria-[current=page]:border-indigo-400',
+											'has-aria-[current=page]:border-indigo-400'
+										)}
 									>
-										{lesson.attributes.title}
-									</Link>
-								</li>
-							)
-						})}
-					</ul>
-				</div>
-			))}
+										<Link
+											href={lessonHref}
+											aria-current={lessonHref === pathname ? 'page' : undefined}
+											onClick={onNavigate}
+											className="aria-[current=page]:font-medium aria-[current=page]:text-indigo-400 font-sans"
+										>
+											{lesson.attributes.title}
+										</Link>
+									</li>
+								)
+							})}
+						</ul>
+					</div>
+				)
+			})}
 		</div>
 	)
 }
