@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { Article, Locale } from '@/types/strapi'
 import { ArticleCard } from './ArticleCard'
 import { BlogSearch } from './BlogSearch'
+import { CourseHighlightCard } from './CourseHighlightCard'
 import { MasonryGrid } from './MasonryGrid'
 
 interface BlogContentProps {
@@ -95,6 +96,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 			<div className="mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="relative space-y-8 py-12 md:py-16 lg:py-20">
 					<BlogSearch locale={locale} onChange={setSearchQuery} value={searchQuery} />
+					<CourseHighlightCard locale={locale} />
 					{paginatedArticles.length > 0 ? (
 						<>
 							<div className="mx-auto max-w-360">
