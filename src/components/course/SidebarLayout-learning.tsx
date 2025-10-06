@@ -173,7 +173,7 @@ export function SidebarLayout({
 				setIsMobileDialogOpen,
 			}}
 		>
-			<div data-sidebar-collapsed={isSidebarOpen ? undefined : ''} className="group">
+			<div data-sidebar-collapsed={isSidebarOpen ? undefined : ''} className="group learning-section">
 				<aside className="fixed inset-y-0 left-0 w-2xs overflow-y-auto border-r border-white/10 bg-gradient-to-b from-indigo-950/20 to-sky-950/20 backdrop-blur-sm group-data-sidebar-collapsed:hidden max-xl:hidden">
 					<nav aria-label="Course" className="px-6 py-4">
 						<div className="sticky top-4 flex h-6">

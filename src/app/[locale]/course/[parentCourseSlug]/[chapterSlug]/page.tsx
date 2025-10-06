@@ -7,7 +7,7 @@ import {
 	Breadcrumbs,
 } from '@/components/course/Breadcrumbs-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
-import { getCourseBySlug } from '@/services/getCourses'
+import { getChapterBySlug } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 import Link from 'next/link'
 
@@ -19,7 +19,7 @@ interface PageParams {
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { chapterSlug, locale } = await params
-	const chapterData = await getCourseBySlug(chapterSlug, locale)
+	const chapterData = await getChapterBySlug(chapterSlug, locale)
 
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		return {
@@ -39,13 +39,24 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 	const { locale, parentCourseSlug, chapterSlug } = await params
 
 	// Fetch chapter data
-	const chapterData = await getCourseBySlug(chapterSlug, locale)
+	const chapterData = await getChapterBySlug(chapterSlug, locale)
 
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		notFound()
 	}
 
 	const chapter = chapterData.data[0]
+
+	// Debug logging
+	console.log('Chapter data:', {
+		title: chapter.attributes.title,
+		hasLessons: !!chapter.attributes.lessons,
+		lessonsType: typeof chapter.attributes.lessons,
+		lessonsDataType: Array.isArray(chapter.attributes.lessons?.data) ? 'array' : typeof chapter.attributes.lessons?.data,
+		lessonsCount: chapter.attributes.lessons?.data?.length ?? 0,
+		firstLesson: chapter.attributes.lessons?.data?.[0]?.attributes?.title,
+	})
+
 	const lessons = chapter.attributes.lessons?.data ?? []
 	const parentCourse = chapter.attributes.parent_course?.data
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, use } from 'react'
+import { Suspense, use, useEffect } from 'react'
 import { MasonryGrid } from '@/components/blog/MasonryGrid'
 import { CourseCard } from '@/components/course/CourseCard'
 import Cta from '@/components/Global/Cta'
@@ -46,6 +46,7 @@ function CourseContentSkeleton() {
 export default function CoursePage({ params, coursesData, content_website }: PageProps) {
 	const { locale } = use(params)
 
+	// coursesData already contains only parent courses (filtered by API)
 	// Calculate total stats with safe navigation
 	const totalChapters = coursesData.reduce((acc, course) => {
 		const chaptersCount = course.attributes.chapters?.data?.length ?? 0
@@ -55,16 +56,6 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 	const totalLessons = coursesData.reduce((acc, course) => {
 		const chapters = course.attributes.chapters?.data ?? []
 
-		// Debug: Log first chapter structure to see lessons
-		if (chapters.length > 0 && course.attributes.title.includes('Frameworks')) {
-			console.log('First chapter lessons structure:', {
-				chapterTitle: chapters[0].attributes?.title,
-				hasLessons: !!chapters[0].attributes?.lessons,
-				lessonsData: chapters[0].attributes?.lessons?.data,
-				lessonsCount: chapters[0].attributes?.lessons?.data?.length ?? 0,
-			})
-		}
-
 		const lessonsInCourse = chapters.reduce((chapterAcc, chapter) => {
 			const lessonsCount = chapter.attributes?.lessons?.data?.length ?? 0
 			return chapterAcc + lessonsCount
@@ -72,6 +63,11 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 		return acc + lessonsInCourse
 	}, 0)
 
+	
+	useEffect(() => {
+		console.log('coursesData', coursesData)
+	}, [coursesData])
+	
 	return (
 		<>
 			<Nav locale={locale} content_website={content_website} isHome={false} />

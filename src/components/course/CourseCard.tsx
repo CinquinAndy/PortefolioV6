@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { StarRating } from '@/components/course/StarRating'
 import type { Course } from '@/types/course'
@@ -42,6 +43,9 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const courseUrl = getCourseUrl(locale, course)
 
+	useEffect(() => {
+		console.log('course', course)
+	}, [course])
 	// Calculate stats
 	const totalChapters = course.attributes.chapters?.data?.length ?? 0
 	const totalLessons =
@@ -67,13 +71,17 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 				<div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10">
 					{/* Animated background image container */}
 					<motion.div className="absolute inset-0 -z-10">
-						{course.attributes.thumbnail?.attributes?.url ? (
-							<div
-								className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-								style={{
-									backgroundImage: `url(${course.attributes.thumbnail.attributes.url})`,
-								}}
-							/>
+						{course.attributes.thumbnail?.data?.attributes?.url ? (
+							<div className="relative h-full w-full overflow-hidden">
+								<Image
+									alt={course.attributes.thumbnail.data.attributes.alternativeText || course.attributes.title}
+									className="object-cover transition-transform duration-300 group-hover:scale-105"
+									fill
+									priority={false}
+									sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+									src={course.attributes.thumbnail.data.attributes.url}
+								/>
+							</div>
 						) : (
 							<div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20" />
 						)}

@@ -9,7 +9,13 @@ import {
 import { NextPageLink } from '@/components/course/NextPageLink-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
 import TableOfContents from '@/components/course/TableOfContents-learning'
-import { getCourseBySlug, getLessonBySlug, getNextLesson, processLessonData } from '@/services/getCourses'
+import {
+	getChapterBySlug,
+	getCourseBySlug,
+	getLessonBySlug,
+	getNextLesson,
+	processLessonData,
+} from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 
 interface PageParams {
@@ -51,7 +57,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 	const lesson = processedLesson.data
 
 	// Fetch chapter data
-	const chapterData = await getCourseBySlug(chapterSlug, locale)
+	const chapterData = await getChapterBySlug(chapterSlug, locale)
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		notFound()
 	}
