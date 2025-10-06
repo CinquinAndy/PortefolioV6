@@ -1,8 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { StarRating } from '@/components/course/StarRating'
+import Cta from '@/components/Global/Cta'
+import Footer from '@/components/Global/Footer'
+import Nav from '@/components/Global/Nav'
+import { getContentWebsite } from '@/services/getContentWebsite'
 import { getParentCourseBySlug } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
+import { getResponseData } from '@/types/strapi'
 
 interface PageParams {
 	locale: Locale
@@ -30,6 +35,10 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 export default async function ParentCoursePage({ params }: { params: Promise<PageParams> }) {
 	const { locale, parentCourseSlug } = await params
 
+	// Fetch content_website for Nav and Footer
+	const content_website_response = await getContentWebsite(locale)
+	const content_website = getResponseData(content_website_response)
+
 	// Fetch parent course data
 	const courseData = await getParentCourseBySlug(parentCourseSlug, locale)
 
@@ -41,8 +50,11 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 	const chapters = course.attributes.chapters?.data ?? []
 
 	return (
-		<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-			<div className="mx-auto max-w-3xl">
+		<>
+			<Nav locale={locale} content_website={content_website} isHome={false} />
+
+			<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+				<div className="mx-auto max-w-3xl">
 				{/* Course Header */}
 				<div className="mb-12">
 					<h1 className="text-4xl font-bold text-white sm:text-5xl">{course.attributes.title}</h1>
@@ -146,5 +158,9 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 				</div>
 			</div>
 		</div>
+
+			<Cta content_website={content_website} />
+			<Footer content_website={content_website} />
+		</>
 	)
 }

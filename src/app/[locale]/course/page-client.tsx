@@ -76,32 +76,7 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 		<>
 			<Nav locale={locale} content_website={content_website} isHome={false} />
 
-			<div className="relative min-h-screen">
-				{/* Background gradient */}
-				<div className="gradient-bg">
-					<svg xmlns="http://www.w3.org/2000/svg" className="svg" aria-hidden="true">
-						<defs>
-							<filter id="goo">
-								<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-								<feColorMatrix
-									in="blur"
-									mode="matrix"
-									values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-									result="goo"
-								/>
-								<feComposite in="SourceGraphic" in2="goo" operator="atop" />
-							</filter>
-						</defs>
-					</svg>
-					<div className="gradients-container">
-						<div className="g1" />
-						<div className="g2" />
-						<div className="g3" />
-						<div className="g4" />
-						<div className="g5" />
-					</div>
-				</div>
-
+			<div>
 				{/* Hero Section */}
 				<section className="relative w-full pt-32 pb-16">
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
