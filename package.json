@@ -56,7 +56,7 @@
 		"html-react-parser": "5.2.6",
 		"i18next": "25.5.3",
 		"lodash": "4.17.21",
-		"lucide-react": "0.542.0",
+		"lucide-react": "0.545.0",
 		"mailgun.js": "12.1.0",
 		"next": "15.5.4",
 		"next-i18n-router": "5.5.4",
