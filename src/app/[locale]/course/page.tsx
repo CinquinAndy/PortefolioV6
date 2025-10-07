@@ -39,32 +39,41 @@ export default async function Page({ params }: CoursePageProps) {
 	const content_website_response = await getContentWebsite(locale)
 	const content_website = getResponseData(content_website_response)
 
-	// Fetch parent courses (courses without parent_course)
+	// Fetch parent courses with their chapters and lessons
+	// API call: https://api.andy-cinquin.fr/api/courses?locale=fr&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true
 	const coursesResponse = await getParentCourses(locale)
 
-	// Debug logging
-	if ('notFound' in coursesResponse) {
-		console.error('Courses API returned notFound')
-	} else {
-		console.log(`Fetched ${coursesResponse.data?.length ?? 0} courses from API`)
-		if (coursesResponse.data && coursesResponse.data.length > 0) {
-			const firstCourse = coursesResponse.data[0]
-			console.log('First course structure:', {
-				title: firstCourse.attributes.title,
-				hasChapters: !!firstCourse.attributes.chapters,
-				chaptersDataType: Array.isArray(firstCourse.attributes.chapters?.data)
-					? 'array'
-					: typeof firstCourse.attributes.chapters?.data,
-				chaptersCount: firstCourse.attributes.chapters?.data?.length ?? 0,
-			})
-		}
-	}
+	const parentCourses = 'notFound' in coursesResponse ? [] : (coursesResponse.data ?? [])
 
-	const courses = 'notFound' in coursesResponse ? [] : (coursesResponse.data ?? [])
+	// Calculate stats from parent courses
+	const totalChapters = parentCourses.reduce((acc, course) => {
+		return acc + (course.attributes.chapters?.data?.length ?? 0)
+	}, 0)
+
+	const totalLessons = parentCourses.reduce((acc, course) => {
+		const chapters = course.attributes.chapters?.data ?? []
+		const lessonsInCourse = chapters.reduce((chapterAcc, chapter) => {
+			return chapterAcc + (chapter.attributes?.lessons?.data?.length ?? 0)
+		}, 0)
+		return acc + lessonsInCourse
+	}, 0)
+
+	// Debug logging
+	console.log(`Fetched ${parentCourses.length} parent courses from API`)
+	console.log(`Total chapters: ${totalChapters}`)
+	console.log(`Total lessons: ${totalLessons}`)
 
 	if (!content_website) {
 		return <div>Error loading content</div>
 	}
 
-	return <CoursePage params={params} coursesData={courses} content_website={content_website} />
+	return (
+		<CoursePage
+			params={params}
+			coursesData={parentCourses}
+			totalChapters={totalChapters}
+			totalLessons={totalLessons}
+			content_website={content_website}
+		/>
+	)
 }

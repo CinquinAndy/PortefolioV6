@@ -13,6 +13,8 @@ import { getCourseTranslations } from '@/utils/courseTranslations'
 interface PageProps {
 	params: Promise<{ locale: Locale }>
 	coursesData: Course[]
+	totalChapters: number
+	totalLessons: number
 	content_website: ContentWebsite
 }
 
@@ -44,31 +46,15 @@ function CourseContentSkeleton() {
 	)
 }
 
-export default function CoursePage({ params, coursesData, content_website }: PageProps) {
+export default function CoursePage({ params, coursesData, totalChapters, totalLessons, content_website }: PageProps) {
 	const { locale } = use(params)
 	const t = getCourseTranslations(locale)
 
-	// coursesData already contains only parent courses (filtered by API)
-	// Calculate total stats with safe navigation
-	const totalChapters = coursesData.reduce((acc, course) => {
-		const chaptersCount = course.attributes.chapters?.data?.length ?? 0
-		return acc + chaptersCount
-	}, 0)
-
-	const totalLessons = coursesData.reduce((acc, course) => {
-		const chapters = course.attributes.chapters?.data ?? []
-
-		const lessonsInCourse = chapters.reduce((chapterAcc, chapter) => {
-			const lessonsCount = chapter.attributes?.lessons?.data?.length ?? 0
-			return chapterAcc + lessonsCount
-		}, 0)
-		return acc + lessonsInCourse
-	}, 0)
-
-
 	useEffect(() => {
 		console.log('coursesData', coursesData)
-	}, [coursesData])
+		console.log('totalChapters', totalChapters)
+		console.log('totalLessons', totalLessons)
+	}, [coursesData, totalChapters, totalLessons])
 	
 	return (
 		<>

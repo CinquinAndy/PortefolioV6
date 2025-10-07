@@ -76,7 +76,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 				</Breadcrumbs>
 			}
 		>
-			<div className="mx-auto max-w-7xl">
+			<div className="mx-auto max-w-7xl min-h-screen">
 				<div className="mx-auto max-w-2xl lg:max-w-5xl py-10 sm:py-14">
 					{/* Chapter Header */}
 					<div className="mb-12">

@@ -65,7 +65,7 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 				</div>
 
 				{/* Course Stats */}
-				<div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
+				<div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 ">
 					<div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
 						<div className="text-sm text-slate-400">{t.difficulty}</div>
 						<div className="mt-2">
