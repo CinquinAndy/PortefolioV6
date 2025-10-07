@@ -10,6 +10,7 @@ import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning
 import { getChapterBySlug } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 import Link from 'next/link'
+import { getCourseTranslations } from '@/utils/courseTranslations'
 
 interface PageParams {
 	locale: Locale
@@ -19,24 +20,26 @@ interface PageParams {
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { chapterSlug, locale } = await params
+	const t = getCourseTranslations(locale)
 	const chapterData = await getChapterBySlug(chapterSlug, locale)
 
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		return {
-			title: 'Chapitre non trouvé',
+			title: t.chapterPage.notFound,
 		}
 	}
 
 	const chapter = chapterData.data[0]
 
 	return {
-		title: `${chapter.attributes.title} - Cours`,
+		title: `${chapter.attributes.title} - ${t.course}`,
 		description: chapter.attributes.description,
 	}
 }
 
 export default async function ChapterPage({ params }: { params: Promise<PageParams> }) {
 	const { locale, parentCourseSlug, chapterSlug } = await params
+	const t = getCourseTranslations(locale)
 
 	// Fetch chapter data
 	const chapterData = await getChapterBySlug(chapterSlug, locale)
@@ -66,7 +69,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 				<Breadcrumbs>
 					<BreadcrumbBackButton locale={locale} />
 					<Breadcrumb href={`/${locale}/course/${parentCourseSlug}`}>
-						{parentCourse?.attributes?.title || 'Cours'}
+						{parentCourse?.attributes?.title || t.course}
 					</Breadcrumb>
 					<BreadcrumbSeparator />
 					<Breadcrumb>{chapter.attributes.title}</Breadcrumb>
@@ -86,22 +89,22 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 					{/* Chapter Stats */}
 					<div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-2">
 						<div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-							<div className="text-sm text-slate-400">Leçons</div>
+							<div className="text-sm text-slate-400">{t.lessons}</div>
 							<div className="mt-1 text-2xl font-semibold text-white">{lessons.length}</div>
 						</div>
 						<div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-							<div className="text-sm text-slate-400">Niveau</div>
-							<div className="mt-1 text-lg font-semibold text-white">{chapter.attributes.level || 'Débutant'}</div>
+							<div className="text-sm text-slate-400">{t.chapterPage.level}</div>
+							<div className="mt-1 text-lg font-semibold text-white">{chapter.attributes.level || t.level.beginner}</div>
 						</div>
-						
+
 					</div>
 
 					{/* Lessons Tree */}
 					<div>
-						<h2 className="mb-6 text-2xl font-bold text-white">Leçons du chapitre</h2>
+						<h2 className="mb-6 text-2xl font-bold text-white">{t.chapterPage.lessonsTitle}</h2>
 						{lessons.length === 0 ? (
 							<div className="rounded-lg border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm">
-								<p className="text-slate-400">Aucune leçon disponible pour le moment</p>
+								<p className="text-slate-400">{t.chapterPage.noLessonsAvailable}</p>
 							</div>
 						) : (
 							<div className="space-y-3">
@@ -138,7 +141,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 															>
 																<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 															</svg>
-															{Math.floor(lesson.attributes.video_duration / 60)} min
+															{Math.floor(lesson.attributes.video_duration / 60)} {t.chapterPage.min}
 														</span>
 													)}
 													{lesson.attributes.is_free && (
@@ -154,7 +157,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 															>
 																<path d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
 															</svg>
-															Gratuit
+															{t.chapterPage.free}
 														</span>
 													)}
 												</div>
@@ -194,7 +197,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 							>
 								<path d="M15 19l-7-7 7-7" />
 							</svg>
-							Retour au cours
+							{t.chapterPage.backToParentCourse}
 						</a>
 					</div>
 				</div>

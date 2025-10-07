@@ -17,6 +17,7 @@ import {
 	processLessonData,
 } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
+import { getCourseTranslations } from '@/utils/courseTranslations'
 
 interface PageParams {
 	locale: Locale
@@ -26,25 +27,27 @@ interface PageParams {
 }
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
-	const { lessonSlug } = await params
-	const lessonData = await getLessonBySlug(lessonSlug, 'fr')
+	const { lessonSlug, locale } = await params
+	const t = getCourseTranslations(locale)
+	const lessonData = await getLessonBySlug(lessonSlug, locale)
 
 	if ('notFound' in lessonData || !lessonData.data) {
 		return {
-			title: 'Leçon non trouvée',
+			title: t.lessonPage.notFound,
 		}
 	}
 
 	const lesson = Array.isArray(lessonData.data) ? lessonData.data[0] : lessonData.data
 
 	return {
-		title: `${lesson?.attributes?.title ?? 'Leçon'} - Cours`,
+		title: `${lesson?.attributes?.title ?? t.lesson} - ${t.course}`,
 		description: lesson?.attributes?.description,
 	}
 }
 
 export default async function Page({ params }: { params: Promise<PageParams> }) {
 	const { locale, parentCourseSlug, chapterSlug, lessonSlug } = await params
+	const t = getCourseTranslations(locale)
 
 	// Fetch lesson data
 	const lessonData = await getLessonBySlug(lessonSlug, locale)
@@ -97,7 +100,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 							{/* Attachments */}
 							{lesson.attributes.attachments?.data && lesson.attributes.attachments.data.length > 0 && (
 								<div className="mt-12 rounded-lg border border-white/10 bg-indigo-950/20 p-6">
-									<h2 className="font-sans">Pièces jointes</h2>
+									<h2 className="font-sans">{t.lessonPage.attachments}</h2>
 									<ul className="mt-4 space-y-2">
 										{lesson.attributes.attachments.data.map(
 											(attachment: { id: number; attributes: { url: string; name: string; size: number } }) => (
@@ -129,8 +132,8 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 								/>
 							) : (
 								<NextPageLink
-									title="Retour aux cours"
-									description="Découvrez d'autres chapitres"
+									title={t.lessonPage.nextLesson.backToCourses}
+									description={t.lessonPage.nextLesson.discoverOtherChapters}
 									href={`/${locale}/course`}
 								/>
 							)}

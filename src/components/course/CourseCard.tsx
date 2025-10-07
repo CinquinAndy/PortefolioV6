@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { StarRating } from '@/components/course/StarRating'
 import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
+import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
 
 interface CourseCardProps {
 	locale: Locale
@@ -42,6 +43,7 @@ const getCourseUrl = (locale: Locale, course: Course): string | undefined => {
 export function CourseCard({ locale, course }: CourseCardProps) {
 	const ref = useRef<HTMLDivElement>(null)
 	const courseUrl = getCourseUrl(locale, course)
+	const t = getCourseTranslations(locale)
 
 	useEffect(() => {
 		console.log('course', course)
@@ -96,16 +98,16 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 									<StarRating rating={course.attributes.difficulty} />
 								) : (
 									<Badge className="border-cyan-500/30 bg-cyan-500/20 text-white" variant="outline">
-										{course.attributes.level ?? 'Débutant'}
+										{course.attributes.level ?? t.level.beginner}
 									</Badge>
 								)}
 								<div className="flex items-center gap-2 text-white/90">
 									<span>
-										{totalChapters} chapitre{totalChapters > 1 ? 's' : ''}
+										{totalChapters} {pluralize(totalChapters, t.chapter, t.chapters)}
 									</span>
 									<span>•</span>
 									<span>
-										{totalLessons} leçon{totalLessons > 1 ? 's' : ''}
+										{totalLessons} {pluralize(totalLessons, t.lesson, t.lessons)}
 									</span>
 								</div>
 							</div>

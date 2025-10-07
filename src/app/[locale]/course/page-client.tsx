@@ -8,6 +8,7 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import type { Course } from '@/types/course'
 import type { ContentWebsite, Locale } from '@/types/strapi'
+import { getCourseTranslations } from '@/utils/courseTranslations'
 
 interface PageProps {
 	params: Promise<{ locale: Locale }>
@@ -45,6 +46,7 @@ function CourseContentSkeleton() {
 
 export default function CoursePage({ params, coursesData, content_website }: PageProps) {
 	const { locale } = use(params)
+	const t = getCourseTranslations(locale)
 
 	// coursesData already contains only parent courses (filtered by API)
 	// Calculate total stats with safe navigation
@@ -63,7 +65,7 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 		return acc + lessonsInCourse
 	}, 0)
 
-	
+
 	useEffect(() => {
 		console.log('coursesData', coursesData)
 	}, [coursesData])
@@ -77,25 +79,24 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 				<section className="relative w-full pt-32 pb-16">
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="text-center">
-							<h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">Mes Cours de Développement</h1>
+							<h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">{t.coursesPage.title}</h1>
 							<p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-								Découvrez mes cours complets pour maîtriser le développement web moderne. Du JavaScript aux frameworks
-								les plus populaires.
+								{t.coursesPage.description}
 							</p>
 
 							{/* Stats */}
 							<div className="mt-10 flex flex-wrap justify-center gap-8 text-white">
 								<div className="text-center">
 									<div className="text-4xl font-bold text-cyan-400">{coursesData.length}</div>
-									<div className="text-sm text-white/70">Cours complets</div>
+									<div className="text-sm text-white/70">{t.coursesPage.stats.completeCourses}</div>
 								</div>
 								<div className="text-center">
 									<div className="text-4xl font-bold text-indigo-400">{totalChapters}</div>
-									<div className="text-sm text-white/70">Chapitres</div>
+									<div className="text-sm text-white/70">{t.coursesPage.stats.chapters}</div>
 								</div>
 								<div className="text-center">
 									<div className="text-4xl font-bold text-purple-400">{totalLessons}</div>
-									<div className="text-sm text-white/70">Leçons</div>
+									<div className="text-sm text-white/70">{t.coursesPage.stats.lessons}</div>
 								</div>
 							</div>
 						</div>
@@ -118,12 +119,10 @@ export default function CoursePage({ params, coursesData, content_website }: Pag
 							) : (
 								<div className="py-12 text-center text-white">
 									<div className="text-xl font-semibold mb-2">
-										{locale === 'fr' ? 'Aucun cours disponible' : 'No courses available'}
+										{t.coursesPage.noCourses}
 									</div>
 									<div className="text-sm text-white/70">
-										{locale === 'fr'
-											? 'Vérifiez que votre API Strapi est bien lancée et accessible.'
-											: 'Please check that your Strapi API is running and accessible.'}
+										{t.coursesPage.noCoursesDescription}
 									</div>
 								</div>
 							)}
