@@ -89,9 +89,24 @@ export async function getParentCourseBySlug(slug: string, locale: Locale): Promi
 }
 
 /**
- * Get parent course for sidebar with explicit chapter and lesson population
+ * Get parent course for display page - OPTIMIZED VERSION
+ * Loads chapters with basic lesson info (for counting), plus seo and localizations
+ * Much lighter than deep populate because lessons don't include content, attachments, etc.
  */
 export async function getParentCourseForSidebar(
+	slug: string,
+	locale: Locale
+): Promise<CoursesResponse | NotFoundResponse> {
+	return fetchAPI<CoursesResponse>(
+		`api/courses?populate[chapters][populate][lessons]=*&populate[chapters][sort][0]=order:asc&populate[seo]=*&populate[localizations]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+	)
+}
+
+/**
+ * Get parent course for sidebar with full chapter and lesson data - FULL VERSION
+ * Use this when you need complete lesson data (e.g., for navigation sidebar with all lesson titles)
+ */
+export async function getParentCourseForSidebarFull(
 	slug: string,
 	locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {

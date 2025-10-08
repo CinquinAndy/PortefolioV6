@@ -7,7 +7,7 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { getContentWebsite } from '@/services/getContentWebsite'
-import { getParentCourseForSidebar, getParentCourses } from '@/services/getCourses'
+import { getParentCourseForSidebar, getParentCoursesLight } from '@/services/getCourses'
 import { localesConstant } from '@/services/localesConstant'
 import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
@@ -61,7 +61,8 @@ export async function generateStaticParams(): Promise<PageParams[]> {
 	let paths: PageParams[] = []
 
 	for (const locale of localesConstant) {
-		const coursesResponse = await getParentCourses(locale)
+		// Use light version for static params generation (we only need slugs)
+		const coursesResponse = await getParentCoursesLight(locale)
 
 		if (!('notFound' in coursesResponse) && coursesResponse.data) {
 			// For each parent course, we generate a static page
@@ -84,7 +85,9 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 	const content_website_response = await getContentWebsite(locale)
 	const content_website = getResponseData(content_website_response)
 
-	// Fetch parent course data
+	// Fetch parent course data (OPTIMIZED - light version)
+	// Only loads: title, description, slug, difficulty, seo, localizations
+	// Chapters: title, description, slug, lessons IDs only (for count)
 	const courseData = await getParentCourseForSidebar(parentCourseSlug, locale)
 
 	if ('notFound' in courseData || !courseData.data || courseData.data.length === 0) {
