@@ -126,9 +126,23 @@ export async function getCourseBySlug(slug: string, locale: Locale): Promise<Cou
 }
 
 /**
- * Get chapter by slug with explicit lessons and parent_course population
+ * Get chapter by slug - OPTIMIZED VERSION
+ * Only loads what's needed for the chapter display page:
+ * - Chapter: title, description, slug, level, seo, localizations
+ * - Lessons: title, description, slug, video_duration, is_free (NO content, NO attachments)
+ * - Parent course: title, slug only (for breadcrumb)
  */
 export async function getChapterBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+	return fetchAPI<CoursesResponse>(
+		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][fields][0]=title&populate[lessons][fields][1]=description&populate[lessons][fields][2]=slug&populate[lessons][fields][3]=video_duration&populate[lessons][fields][4]=is_free&populate[parent_course][fields][0]=title&populate[parent_course][fields][1]=slug&populate[seo]=*&populate[localizations]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+	)
+}
+
+/**
+ * Get chapter by slug - FULL VERSION with attachments
+ * Use this when you need complete lesson data with attachments
+ */
+export async function getChapterBySlugFull(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
 		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate[lessons][pagination][pageSize]=100&populate[parent_course][populate]=*&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)

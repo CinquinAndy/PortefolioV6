@@ -61,6 +61,8 @@ export async function generateStaticParams(): Promise<PageParams[]> {
 	const paths: PageParams[] = []
 
 	for (const locale of localesConstant) {
+		// Must use full version here because we need chapter slugs
+		// getParentCoursesLight() only loads chapter IDs, not full data
 		const coursesResponse = await getParentCourses(locale)
 
 		if (!('notFound' in coursesResponse) && coursesResponse.data) {
@@ -85,7 +87,10 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 	const { locale, parentCourseSlug, chapterSlug } = await params
 	const t = getCourseTranslations(locale)
 
-	// Fetch chapter data and parent course in parallel
+	// Fetch chapter data and parent course in parallel (OPTIMIZED)
+	// Chapter loads: title, description, slug, level, seo, localizations
+	// Lessons: title, description, slug, video_duration, is_free (NO content, NO attachments)
+	// Parent course: title, slug only (for breadcrumb)
 	const [chapterData, parentCourseData] = await Promise.all([
 		getChapterBySlug(chapterSlug, locale),
 		getChapterBySlug(parentCourseSlug, locale),
