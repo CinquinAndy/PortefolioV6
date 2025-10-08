@@ -25,6 +25,8 @@ export interface Lesson {
 		description: string
 		order: number
 		content: string // Markdown content
+		video_duration?: number
+		is_free?: boolean
 		attachments?: {
 			data: StrapiImage[]
 		}
@@ -63,6 +65,7 @@ export interface Course {
 		tags: CourseTag[]
 		seo?: CourseSEO
 		category: string
+		level?: string
 		lessons: StrapiResponseArray<Lesson>
 		parent_course?: {
 			data: Course[]

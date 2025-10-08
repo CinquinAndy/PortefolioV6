@@ -37,7 +37,10 @@ export function CourseHighlightCard({ locale }: CourseHighlightCardProps) {
 			className="mx-auto w-full max-w-5xl px-0 lg:px-8"
 		>
 			<Link href={`/${locale}/course`} className="block group">
-				<FancyCard variant="dots" className="bg-gradient-to-br from-indigo-950/40 via-purple-950/40 to-sky-950/40 backdrop-blur-sm border-indigo-500/30 dark:border-indigo-500/30 hover:border-indigo-400/50 transition-all duration-300">
+				<FancyCard
+					variant="dots"
+					className="bg-gradient-to-br from-indigo-950/40 via-purple-950/40 to-sky-950/40 backdrop-blur-sm border-indigo-500/30 dark:border-indigo-500/30 hover:border-indigo-400/50 transition-all duration-300"
+				>
 					<div className="flex flex-col md:flex-row items-start md:items-center gap-6">
 						{/* Content Section */}
 						<div className="flex-1 space-y-3">

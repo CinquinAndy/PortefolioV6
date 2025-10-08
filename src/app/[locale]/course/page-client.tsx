@@ -55,7 +55,7 @@ export default function CoursePage({ params, coursesData, totalChapters, totalLe
 		console.log('totalChapters', totalChapters)
 		console.log('totalLessons', totalLessons)
 	}, [coursesData, totalChapters, totalLessons])
-	
+
 	return (
 		<>
 			<Nav locale={locale} content_website={content_website} isHome={false} />
@@ -66,9 +66,7 @@ export default function CoursePage({ params, coursesData, totalChapters, totalLe
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="text-center">
 							<h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">{t.coursesPage.title}</h1>
-							<p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-								{t.coursesPage.description}
-							</p>
+							<p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">{t.coursesPage.description}</p>
 
 							{/* Stats */}
 							<div className="mt-10 flex flex-wrap justify-center gap-8 text-white">
@@ -104,12 +102,8 @@ export default function CoursePage({ params, coursesData, totalChapters, totalLe
 								</div>
 							) : (
 								<div className="py-12 text-center text-white">
-									<div className="text-xl font-semibold mb-2">
-										{t.coursesPage.noCourses}
-									</div>
-									<div className="text-sm text-white/70">
-										{t.coursesPage.noCoursesDescription}
-									</div>
+									<div className="text-xl font-semibold mb-2">{t.coursesPage.noCourses}</div>
+									<div className="text-sm text-white/70">{t.coursesPage.noCoursesDescription}</div>
 								</div>
 							)}
 						</Suspense>

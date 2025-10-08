@@ -10,6 +10,7 @@ export const courseTranslations = {
 		lesson: 'leçon',
 		lessons: 'leçons',
 		difficulty: 'Difficulté',
+		home: 'Accueil',
 		level: {
 			beginner: 'Débutant',
 			intermediate: 'Intermédiaire',
@@ -67,6 +68,7 @@ export const courseTranslations = {
 		lesson: 'lesson',
 		lessons: 'lessons',
 		difficulty: 'Difficulty',
+		home: 'Home',
 		level: {
 			beginner: 'Beginner',
 			intermediate: 'Intermediate',

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { StarRating } from '@/components/course/StarRating'
 import type { Course } from '@/types/course'
@@ -19,20 +19,31 @@ const getCourseUrl = (locale: Locale, course: Course): string | undefined => {
 	// Get the parent course slug (this course is the parent)
 	const parentCourseSlug = course.attributes.slug
 
-	// Get first chapter
-	const firstChapter = course.attributes.chapters?.data?.[0]
-
-	if (!firstChapter?.attributes?.slug) {
+	// Get all chapters and sort by order
+	const chapters = course.attributes.chapters?.data ?? []
+	if (chapters.length === 0) {
 		// No chapters at all
 		return undefined
 	}
 
-	// Get first lesson if it exists
-	const firstLesson = firstChapter?.attributes?.lessons?.data?.[0]
+	// Sort chapters by order and get the first one
+	const sortedChapters = [...chapters].sort((a, b) => a.attributes.order - b.attributes.order)
+	const firstChapter = sortedChapters[0]
 
-	if (firstLesson?.attributes?.slug) {
-		// If we have a lesson, link directly to it with parent course slug
-		return `/${locale}/course/${parentCourseSlug}/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`
+	if (!firstChapter?.attributes?.slug) {
+		return undefined
+	}
+
+	// Get all lessons from first chapter and sort by order
+	const lessons = firstChapter.attributes.lessons?.data ?? []
+	if (lessons.length > 0) {
+		const sortedLessons = [...lessons].sort((a, b) => a.attributes.order - b.attributes.order)
+		const firstLesson = sortedLessons[0]
+
+		if (firstLesson?.attributes?.slug) {
+			// If we have a lesson, link directly to it with parent course slug
+			return `/${locale}/course/${parentCourseSlug}/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`
+		}
 	}
 
 	// If we have chapters but no lessons yet, link to the chapter page
@@ -45,15 +56,8 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 	const courseUrl = getCourseUrl(locale, course)
 	const t = getCourseTranslations(locale)
 
-	useEffect(() => {
-		console.log('course', course)
-	}, [course])
 	// Calculate stats
 	const totalChapters = course.attributes.chapters?.data?.length ?? 0
-	const totalLessons =
-		course.attributes.chapters?.data?.reduce((acc, chapter) => {
-			return acc + (chapter.attributes?.lessons?.data?.length ?? 0)
-		}, 0) ?? 0
 
 	// Don't render card if no valid URL (no chapters at all)
 	if (!courseUrl) {
@@ -104,10 +108,6 @@ export function CourseCard({ locale, course }: CourseCardProps) {
 								<div className="flex items-center gap-2 text-white/90">
 									<span>
 										{totalChapters} {pluralize(totalChapters, t.chapter, t.chapters)}
-									</span>
-									<span>•</span>
-									<span>
-										{totalLessons} {pluralize(totalLessons, t.lesson, t.lessons)}
 									</span>
 								</div>
 							</div>

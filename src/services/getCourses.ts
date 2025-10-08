@@ -6,24 +6,20 @@ import { fetchAPI, processMarkdown } from './getContentWebsite'
 
 /**
  * Get all parent courses (courses without parent_course)
- * Uses populate=* to get all data including thumbnails, tags, chapters, lessons
- * Perfect for displaying course cards with complete information
- * API call: https://api.andy-cinquin.fr/api/courses?populate=*&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&sort=order:asc&locale=fr
+ * Populates: thumbnail, tags, chapters with their lessons for proper link generation
+ * API call: https://api.andy-cinquin.fr/api/courses?populate[thumbnail]=*&populate[tags]=*&populate[chapters][populate][lessons]=*&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&sort=order:asc&locale=fr
  */
 export async function getParentCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	const result = await fetchAPI<CoursesResponse>(
-		`api/courses?populate=*&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&sort=order:asc&locale=${locale}`
+		`api/courses?populate[thumbnail]=*&populate[tags]=*&populate[chapters][populate][lessons]=*&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 
 	if (!('notFound' in result) && result.data) {
-		console.log(`Fetched ${result.data.length} parent courses with full data`)
+		console.log(`Fetched ${result.data.length} parent courses (locale: ${locale})`)
 		if (result.data.length > 0) {
 			const firstCourse = result.data[0]
 			const totalChapters = firstCourse.attributes.chapters?.data?.length ?? 0
-			const totalLessons = firstCourse.attributes.chapters?.data?.reduce((acc, chapter) => {
-				return acc + (chapter.attributes?.lessons?.data?.length ?? 0)
-			}, 0) ?? 0
-			console.log(`First course: ${firstCourse.attributes.title} - ${totalChapters} chapters, ${totalLessons} lessons`)
+			console.log(`First course: ${firstCourse.attributes.title} - ${totalChapters} chapters`)
 		}
 	}
 
@@ -35,16 +31,16 @@ export async function getParentCourses(locale: Locale): Promise<CoursesResponse 
  * Returns all published courses (both parent courses and chapters)
  */
 export async function getCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
-	return await fetchAPI<CoursesResponse>(
-		`api/courses?filters[is_published][$eq]=true&sort=order:asc&locale=${locale}`
-	)
+	return await fetchAPI<CoursesResponse>(`api/courses?filters[is_published][$eq]=true&sort=order:asc&locale=${locale}`)
 }
 
 /**
  * Get all courses with deep populate (for backward compatibility when deep data is needed)
  */
 export async function getCoursesDeep(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
-	return await fetchAPI<CoursesResponse>(`api/courses?populate=deep,6&filters[is_published][$eq]=true&sort=order:asc&locale=${locale}`)
+	return await fetchAPI<CoursesResponse>(
+		`api/courses?populate=deep,6&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+	)
 }
 
 /**
@@ -55,19 +51,16 @@ export async function getChaptersByCourseId(
 	locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc&locale=${locale}`
+		`api/courses?populate=deep,6&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
 /**
  * Get parent course by slug with all chapters and lessons
  */
-export async function getParentCourseBySlug(
-	slug: string,
-	locale: Locale
-): Promise<CoursesResponse | NotFoundResponse> {
+export async function getParentCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&locale=${locale}`
+		`api/courses?populate=deep,6&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
@@ -79,7 +72,7 @@ export async function getParentCourseForSidebar(
 	locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[chapters][populate][lessons][sort][0]=order:asc&populate[chapters][sort][0]=order:asc&populate=thumbnail,tags&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[chapters][populate][lessons][sort][0]=order:asc&populate[chapters][populate][lessons][pagination][pageSize]=100&populate[chapters][sort][0]=order:asc&populate[chapters][pagination][pageSize]=100&populate=thumbnail,tags&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)
 }
 
@@ -88,19 +81,16 @@ export async function getParentCourseForSidebar(
  */
 export async function getCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&locale=${locale}`
+		`api/courses?populate=deep,6&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
 /**
  * Get chapter by slug with explicit lessons population
  */
-export async function getChapterBySlug(
-	slug: string,
-	locale: Locale
-): Promise<CoursesResponse | NotFoundResponse> {
+export async function getChapterBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate=parent_course,thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate[lessons][pagination][pageSize]=100&populate=parent_course,thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)
 }
 
@@ -109,7 +99,7 @@ export async function getChapterBySlug(
  */
 export async function getFeaturedCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[featured][$eq]=true&filters[is_published][$eq]=true&locale=${locale}&sort=order:asc`
+		`api/courses?populate=deep,6&filters[featured][$eq]=true&filters[is_published][$eq]=true&locale=${locale}&sort=order:asc&pagination[pageSize]=100`
 	)
 }
 
@@ -137,14 +127,16 @@ export async function getCoursePaths(locale: Locale): Promise<Array<{ params: { 
  * Returns all lessons for counting purposes
  */
 export async function getAllLessons(locale: Locale): Promise<LessonsResponse | NotFoundResponse> {
-	return fetchAPI<LessonsResponse>(`api/lessons?locale=${locale}`)
+	return fetchAPI<LessonsResponse>(`api/lessons?pagination[pageSize]=100&locale=${locale}`)
 }
 
 /**
  * Get lesson by slug with attachments
  */
 export async function getLessonBySlug(slug: string, locale: Locale): Promise<LessonResponse | NotFoundResponse> {
-	return fetchAPI<LessonResponse>(`api/lessons?populate=deep,2&filters[slug][$eq]=${slug}&locale=${locale}`)
+	return fetchAPI<LessonResponse>(
+		`api/lessons?populate=deep,2&filters[slug][$eq]=${slug}&pagination[pageSize]=100&locale=${locale}`
+	)
 }
 
 /**
@@ -310,7 +302,7 @@ export async function getNextLesson(
 	)
 
 	// Get parent course slug
-	const parentCourseSlug = currentChapter.attributes.parent_course?.data?.attributes?.slug
+	const parentCourseSlug = currentChapter.attributes.parent_course?.data?.[0]?.attributes?.slug
 	if (!parentCourseSlug) {
 		return null
 	}
@@ -325,7 +317,7 @@ export async function getNextLesson(
 	}
 
 	// Try to find next chapter
-	const parentCourseId = currentChapter.attributes.parent_course?.data?.id
+	const parentCourseId = currentChapter.attributes.parent_course?.data?.[0]?.id
 	if (!parentCourseId) {
 		return null
 	}
@@ -383,12 +375,13 @@ export async function getCoursesStatistics(locale: Locale): Promise<{
 
 	let totalLessons = 0
 	let totalDuration = 0
-	let totalStudents = 0
+	const totalStudents = 0
 
 	for (const course of coursesData.data) {
 		totalLessons += course.attributes.lessons?.data?.length ?? 0
 		totalDuration += course.attributes.duration_total ?? 0
-		totalStudents += course.attributes.statistics?.total_students ?? 0
+		// Note: statistics field is not available in the current API response
+		// totalStudents += course.attributes.statistics?.total_students ?? 0
 	}
 
 	return {

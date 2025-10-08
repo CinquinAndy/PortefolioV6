@@ -55,7 +55,9 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 		title: chapter.attributes.title,
 		hasLessons: !!chapter.attributes.lessons,
 		lessonsType: typeof chapter.attributes.lessons,
-		lessonsDataType: Array.isArray(chapter.attributes.lessons?.data) ? 'array' : typeof chapter.attributes.lessons?.data,
+		lessonsDataType: Array.isArray(chapter.attributes.lessons?.data)
+			? 'array'
+			: typeof chapter.attributes.lessons?.data,
 		lessonsCount: chapter.attributes.lessons?.data?.length ?? 0,
 		firstLesson: chapter.attributes.lessons?.data?.[0]?.attributes?.title,
 	})
@@ -69,7 +71,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 				<Breadcrumbs>
 					<BreadcrumbBackButton locale={locale} />
 					<Breadcrumb href={`/${locale}/course/${parentCourseSlug}`}>
-						{parentCourse?.attributes?.title || t.course}
+						{parentCourse?.[0]?.attributes?.title || t.course}
 					</Breadcrumb>
 					<BreadcrumbSeparator />
 					<Breadcrumb>{chapter.attributes.title}</Breadcrumb>
@@ -94,9 +96,10 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 						</div>
 						<div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
 							<div className="text-sm text-slate-400">{t.chapterPage.level}</div>
-							<div className="mt-1 text-lg font-semibold text-white">{chapter.attributes.level || t.level.beginner}</div>
+							<div className="mt-1 text-lg font-semibold text-white">
+								{chapter.attributes.level || t.level.beginner}
+							</div>
 						</div>
-
 					</div>
 
 					{/* Lessons Tree */}
@@ -123,9 +126,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 													{lesson.attributes.title}
 												</h3>
 												{lesson.attributes.description && (
-													<p className="mt-1 text-sm text-slate-400 line-clamp-2">
-														{lesson.attributes.description}
-													</p>
+													<p className="mt-1 text-sm text-slate-400 line-clamp-2">{lesson.attributes.description}</p>
 												)}
 												<div className="mt-2 flex items-center gap-3 text-xs text-slate-500">
 													{lesson.attributes.video_duration && (
