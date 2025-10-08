@@ -146,7 +146,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 				</Breadcrumbs>
 			}
 		>
-			<div className="mx-auto max-w-7xl">
+			<div className="mx-auto max-w-7xl min-h-screen">
 				<div className="mx-auto flex max-w-2xl gap-x-10 py-10 sm:py-14 lg:max-w-5xl">
 					<div className="w-full flex-1">
 						<div id="content" className="prose">
