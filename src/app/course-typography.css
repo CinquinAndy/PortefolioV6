@@ -229,4 +229,68 @@
 	.prose :where(input[type="checkbox"]):not(:where([class~="not-prose"] *)) {
 		@apply mr-2;
 	}
+
+	/* Syntax highlighting styles for code blocks */
+	.prose :where(pre code .hljs-comment, pre code .hljs-quote):not(:where([class~="not-prose"] *)) {
+		color: rgb(148 163 184); /* slate-400 */
+		font-style: italic;
+	}
+
+	.prose :where(pre code .hljs-keyword, pre code .hljs-selector-tag, pre code .hljs-subst):not(:where([class~="not-prose"] *)) {
+		color: rgb(251 146 60); /* orange-400 */
+		font-weight: bold;
+	}
+
+	.prose :where(pre code .hljs-number, pre code .hljs-literal, pre code .hljs-variable, pre code .hljs-template-variable):not(:where([class~="not-prose"] *)) {
+		color: rgb(52 211 153); /* emerald-400 */
+	}
+
+	.prose :where(pre code .hljs-string, pre code .hljs-doctag):not(:where([class~="not-prose"] *)) {
+		color: rgb(74 222 128); /* green-400 */
+	}
+
+	.prose :where(pre code .hljs-title, pre code .hljs-section, pre code .hljs-selector-id):not(:where([class~="not-prose"] *)) {
+		color: rgb(96 165 250); /* blue-400 */
+		font-weight: bold;
+	}
+
+	.prose :where(pre code .hljs-type, pre code .hljs-class .hljs-title):not(:where([class~="not-prose"] *)) {
+		color: rgb(253 224 71); /* yellow-300 */
+	}
+
+	.prose :where(pre code .hljs-tag, pre code .hljs-name, pre code .hljs-attribute):not(:where([class~="not-prose"] *)) {
+		color: rgb(129 140 248); /* indigo-400 */
+	}
+
+	.prose :where(pre code .hljs-regexp, pre code .hljs-link):not(:where([class~="not-prose"] *)) {
+		color: rgb(251 146 60); /* orange-400 */
+	}
+
+	.prose :where(pre code .hljs-symbol, pre code .hljs-bullet):not(:where([class~="not-prose"] *)) {
+		color: rgb(147 197 253); /* blue-300 */
+	}
+
+	.prose :where(pre code .hljs-built_in, pre code .hljs-builtin-name):not(:where([class~="not-prose"] *)) {
+		color: rgb(248 113 113); /* red-400 */
+	}
+
+	.prose :where(pre code .hljs-meta):not(:where([class~="not-prose"] *)) {
+		color: rgb(156 163 175); /* gray-400 */
+	}
+
+	.prose :where(pre code .hljs-deletion):not(:where([class~="not-prose"] *)) {
+		color: rgb(248 113 113); /* red-400 */
+	}
+
+	.prose :where(pre code .hljs-addition):not(:where([class~="not-prose"] *)) {
+		color: rgb(74 222 128); /* green-400 */
+	}
+
+	.prose :where(pre code .hljs-emphasis):not(:where([class~="not-prose"] *)) {
+		font-style: italic;
+	}
+
+	.prose :where(pre code .hljs-strong):not(:where([class~="not-prose"] *)) {
+		font-weight: bold;
+	}
 }

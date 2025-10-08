@@ -27,7 +27,7 @@ interface PageParams {
 }
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
-	const { lessonSlug, locale } = await params
+	const { lessonSlug, parentCourseSlug, chapterSlug, locale } = await params
 	const t = getCourseTranslations(locale)
 	const lessonData = await getLessonBySlug(lessonSlug, locale)
 
@@ -38,10 +38,24 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 
 	const lesson = Array.isArray(lessonData.data) ? lessonData.data[0] : lessonData.data
+	const seo = lesson?.attributes?.seo
+
+	// Fetch localizations for alternate links
+	const alternateLocale = locale === 'fr' ? 'en' : 'fr'
+	const lessonLocalizations = lesson?.attributes?.localizations?.data
+	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes ?
+		(typeof lessonLocalizations[0].attributes === 'string' ? lessonLocalizations[0].attributes : '') : lessonSlug
 
 	return {
-		title: `${lesson?.attributes?.title ?? t.lesson} - ${t.course}`,
-		description: lesson?.attributes?.description,
+		title: seo?.title ?? `${lesson?.attributes?.title ?? t.lesson} - ${t.course}`,
+		description: seo?.description ?? lesson?.attributes?.description,
+		alternates: {
+			canonical: seo?.canonical ?? `/${locale}/course/${parentCourseSlug}/${chapterSlug}/${lessonSlug}`,
+			languages: {
+				fr: `/fr/course/${locale === 'fr' ? parentCourseSlug : ''}/${locale === 'fr' ? chapterSlug : ''}/${locale === 'fr' ? lessonSlug : alternateLessonSlug}`,
+				en: `/en/course/${locale === 'en' ? parentCourseSlug : ''}/${locale === 'en' ? chapterSlug : ''}/${locale === 'en' ? lessonSlug : alternateLessonSlug}`,
+			},
+		},
 	}
 }
 

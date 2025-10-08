@@ -19,7 +19,7 @@ interface PageParams {
 }
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
-	const { chapterSlug, locale } = await params
+	const { chapterSlug, parentCourseSlug, locale } = await params
 	const t = getCourseTranslations(locale)
 	const chapterData = await getChapterBySlug(chapterSlug, locale)
 
@@ -30,10 +30,23 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 
 	const chapter = chapterData.data[0]
+	const seo = chapter.attributes.seo
+
+	// Fetch localizations for alternate links
+	const chapterLocalizations = chapter.attributes.localizations?.data
+	const alternateChapterSlug = chapterLocalizations?.[0]?.attributes ?
+		(typeof chapterLocalizations[0].attributes === 'string' ? chapterLocalizations[0].attributes : '') : chapterSlug
 
 	return {
-		title: `${chapter.attributes.title} - ${t.course}`,
-		description: chapter.attributes.description,
+		title: seo?.title ?? `${chapter.attributes.title} - ${t.course}`,
+		description: seo?.description ?? chapter.attributes.description,
+		alternates: {
+			canonical: seo?.canonical ?? `/${locale}/course/${parentCourseSlug}/${chapterSlug}`,
+			languages: {
+				fr: `/fr/course/${locale === 'fr' ? parentCourseSlug : ''}/${locale === 'fr' ? chapterSlug : alternateChapterSlug}`,
+				en: `/en/course/${locale === 'en' ? parentCourseSlug : ''}/${locale === 'en' ? chapterSlug : alternateChapterSlug}`,
+			},
+		},
 	}
 }
 
@@ -102,12 +115,12 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 
 					{/* Chapter Stats */}
 					<div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-2">
-						<div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-							<div className="text-sm text-slate-400">{t.lessons}</div>
+						<div className="rounded-lg border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+							<div className="text-sm font-medium text-slate-200">{t.lessons}</div>
 							<div className="mt-1 text-2xl font-semibold text-white">{lessons.length}</div>
 						</div>
-						<div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-							<div className="text-sm text-slate-400">{t.chapterPage.level}</div>
+						<div className="rounded-lg border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+							<div className="text-sm font-medium text-slate-200">{t.chapterPage.level}</div>
 							<div className="mt-1 text-lg font-semibold text-white">
 								{chapter.attributes.level || t.level.beginner}
 							</div>
@@ -127,10 +140,10 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 									<Link
 										key={lesson.id}
 										href={`/${locale}/course/${parentCourseSlug}/${chapterSlug}/${lesson.attributes.slug}`}
-										className="group block rounded-lg border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-indigo-500/50 hover:bg-white/10"
+										className="group block rounded-lg border border-white/20 bg-white/10 p-5 backdrop-blur-sm transition-all hover:border-indigo-400/50 hover:bg-white/15"
 									>
 										<div className="flex items-start gap-4">
-											<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-sm font-semibold text-indigo-200 transition-colors group-hover:bg-indigo-500/30">
+											<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-500/30 text-base font-bold text-indigo-200 transition-colors group-hover:bg-indigo-500/40">
 												{index + 1}
 											</div>
 											<div className="flex-1 min-w-0">
@@ -138,9 +151,9 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 													{lesson.attributes.title}
 												</h3>
 												{lesson.attributes.description && (
-													<p className="mt-1 text-sm text-slate-400 line-clamp-2">{lesson.attributes.description}</p>
+													<p className="mt-2 text-sm leading-relaxed text-slate-200 line-clamp-2">{lesson.attributes.description}</p>
 												)}
-												<div className="mt-2 flex items-center gap-3 text-xs text-slate-500">
+												<div className="mt-3 flex items-center gap-3 text-xs font-medium text-slate-300">
 													{lesson.attributes.video_duration && (
 														<span className="flex items-center gap-1">
 															<svg
@@ -158,7 +171,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 														</span>
 													)}
 													{lesson.attributes.is_free && (
-														<span className="flex items-center gap-1 text-green-400">
+														<span className="flex items-center gap-1 text-green-300">
 															<svg
 																className="h-4 w-4"
 																fill="none"
@@ -176,7 +189,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 												</div>
 											</div>
 											<svg
-												className="h-5 w-5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1"
+												className="h-6 w-6 shrink-0 text-slate-300 transition-transform group-hover:translate-x-1"
 												fill="none"
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -197,7 +210,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 					<div className="mt-12">
 						<a
 							href={`/${locale}/course/${parentCourseSlug}`}
-							className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300"
+							className="inline-flex items-center gap-2 rounded-lg border border-indigo-400/30 bg-indigo-500/10 px-4 py-2.5 font-medium text-indigo-200 transition-all hover:border-indigo-400/50 hover:bg-indigo-500/20 hover:text-indigo-100"
 						>
 							<svg
 								className="h-4 w-4"

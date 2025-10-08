@@ -28,10 +28,23 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	}
 
 	const course = courseData.data[0]
+	const seo = course.attributes.seo
+
+	// Fetch localizations for alternate links
+	const courseLocalizations = course.attributes.localizations?.data
+	const alternateCourseSlug = courseLocalizations?.[0]?.attributes ?
+		(typeof courseLocalizations[0].attributes === 'string' ? courseLocalizations[0].attributes : '') : parentCourseSlug
 
 	return {
-		title: `${course.attributes.title} - ${t.course}`,
-		description: course.attributes.description,
+		title: seo?.title ?? `${course.attributes.title} - ${t.course}`,
+		description: seo?.description ?? course.attributes.description,
+		alternates: {
+			canonical: seo?.canonical ?? `/${locale}/course/${parentCourseSlug}`,
+			languages: {
+				fr: `/fr/course/${locale === 'fr' ? parentCourseSlug : alternateCourseSlug}`,
+				en: `/en/course/${locale === 'en' ? parentCourseSlug : alternateCourseSlug}`,
+			},
+		},
 	}
 }
 

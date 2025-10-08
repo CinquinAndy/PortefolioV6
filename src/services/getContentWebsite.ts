@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
@@ -259,7 +260,7 @@ export async function processArticleData(
 }
 
 /**
- * Process markdown content with automatic heading IDs and line breaks
+ * Process markdown content with automatic heading IDs, line breaks, and syntax highlighting
  */
 export async function processMarkdown(markdownContent: string): Promise<string> {
 	const result = await remark()
@@ -267,6 +268,7 @@ export async function processMarkdown(markdownContent: string): Promise<string> 
 		.use(remarkBreaks) // Convert line breaks to <br> tags
 		.use(remarkRehype) // Convert markdown to HTML AST
 		.use(rehypeSlug) // Add IDs to headings
+		.use(rehypeHighlight) // Add syntax highlighting to code blocks
 		.use(rehypeStringify) // Convert HTML AST to string
 		.process(markdownContent)
 	return result.toString()
