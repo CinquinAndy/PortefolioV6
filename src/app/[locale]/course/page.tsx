@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getContentWebsite } from '@/services/getContentWebsite'
-import { getAllLessons, getParentCourses } from '@/services/getCourses'
+import { getAllLessonsCount, getParentCoursesLight } from '@/services/getCourses'
 import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
@@ -39,24 +39,25 @@ export default async function Page({ params }: CoursePageProps) {
 	const content_website_response = await getContentWebsite(locale)
 	const content_website = getResponseData(content_website_response)
 
-	// Fetch parent courses and lessons in parallel
-	// API calls:
-	// - Courses: https://api.andy-cinquin.fr/api/courses?populate=*&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&locale=fr
-	// - Lessons: https://api.andy-cinquin.fr/api/lessons?locale=fr
-	const [coursesResponse, lessonsResponse] = await Promise.all([getParentCourses(locale), getAllLessons(locale)])
+	// ULTRA OPTIMIZED API calls - Only loads what's needed:
+	// - Courses (light): title, slug, description, difficulty, thumbnail, tags, chapters IDs only
+	// - Lessons count: Only fetches total count from pagination metadata (1 lesson loaded)
+	const [coursesResponse, totalLessons] = await Promise.all([
+		getParentCoursesLight(locale),
+		getAllLessonsCount(locale),
+	])
 
 	const parentCourses = 'notFound' in coursesResponse ? [] : (coursesResponse.data ?? [])
-	const allLessons = 'notFound' in lessonsResponse ? [] : (lessonsResponse.data ?? [])
 
-	// Calculate chapters count from parent courses
+	// Calculate chapters count from parent courses (only chapter IDs are loaded, super light)
 	const totalChapters = parentCourses.reduce((acc, course) => {
 		return acc + (course.attributes.chapters?.data?.length ?? 0)
 	}, 0)
 
 	// Debug logging
-	console.log(`Fetched ${parentCourses.length} parent courses from API`)
+	console.log(`Fetched ${parentCourses.length} parent courses (light) from API`)
 	console.log(`Total chapters: ${totalChapters}`)
-	console.log(`Total lessons: ${allLessons.length}`)
+	console.log(`Total lessons: ${totalLessons}`)
 
 	if (!content_website) {
 		return <div>Error loading content</div>
@@ -67,7 +68,7 @@ export default async function Page({ params }: CoursePageProps) {
 			params={params}
 			coursesData={parentCourses}
 			totalChapters={totalChapters}
-			totalLessons={allLessons.length}
+			totalLessons={totalLessons}
 			content_website={content_website}
 		/>
 	)

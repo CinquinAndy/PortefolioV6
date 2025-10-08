@@ -5,9 +5,31 @@ import type { Locale } from '@/types/strapi'
 import { fetchAPI, processMarkdown } from './getContentWebsite'
 
 /**
- * Get all parent courses (courses without parent_course)
+ * Get all parent courses (courses without parent_course) - LIGHT VERSION
+ * Only loads essential data for the course listing page:
+ * - title, slug, description, difficulty (for stars)
+ * - thumbnail (url + alt)
+ * - tags (name only)
+ * - chapters count (without loading full chapter data)
+ *
+ * This is optimized for the /course page display
+ */
+export async function getParentCoursesLight(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+	const result = await fetchAPI<CoursesResponse>(
+		`api/courses?fields[0]=title&fields[1]=slug&fields[2]=description&fields[3]=difficulty&populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=alternativeText&populate[tags][fields][0]=name&populate[chapters][fields][0]=id&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+	)
+
+	if (!('notFound' in result) && result.data) {
+		console.log(`Fetched ${result.data.length} parent courses (light) (locale: ${locale})`)
+	}
+
+	return result
+}
+
+/**
+ * Get all parent courses (courses without parent_course) - FULL VERSION
  * Populates: thumbnail, tags, chapters with their lessons for proper link generation
- * API call: https://api.andy-cinquin.fr/api/courses?populate[thumbnail]=*&populate[tags]=*&populate[chapters][populate][lessons]=*&filters[is_published][$eq]=true&filters[parent_course][id][$null]=true&sort=order:asc&locale=fr
+ * Use this when you need full chapter/lesson data (e.g., for sidebar navigation)
  */
 export async function getParentCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	const result = await fetchAPI<CoursesResponse>(
@@ -15,7 +37,7 @@ export async function getParentCourses(locale: Locale): Promise<CoursesResponse 
 	)
 
 	if (!('notFound' in result) && result.data) {
-		console.log(`Fetched ${result.data.length} parent courses (locale: ${locale})`)
+		console.log(`Fetched ${result.data.length} parent courses (full) (locale: ${locale})`)
 		if (result.data.length > 0) {
 			const firstCourse = result.data[0]
 			const totalChapters = firstCourse.attributes.chapters?.data?.length ?? 0
@@ -45,22 +67,24 @@ export async function getCoursesDeep(locale: Locale): Promise<CoursesResponse | 
 
 /**
  * Get chapters for a parent course
+ * Optimized: Only populates what's needed (lessons with basic info, no deep populate)
  */
 export async function getChaptersByCourseId(
 	courseId: number,
 	locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+		`api/courses?populate[lessons][populate]=*&populate=thumbnail,tags&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
 /**
  * Get parent course by slug with all chapters and lessons
+ * Optimized: Only loads 2 levels instead of 6
  */
 export async function getParentCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+		`api/courses?populate[chapters][populate][lessons]=*&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
@@ -78,10 +102,11 @@ export async function getParentCourseForSidebar(
 
 /**
  * Get course/chapter by slug (can be parent or chapter)
+ * Optimized: Only loads necessary relations
  */
 export async function getCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+		`api/courses?populate[chapters][populate]=lessons&populate[lessons]=*&populate=thumbnail,tags,seo,parent_course&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
@@ -96,10 +121,11 @@ export async function getChapterBySlug(slug: string, locale: Locale): Promise<Co
 
 /**
  * Get featured courses
+ * Optimized: Only populates necessary fields
  */
 export async function getFeaturedCourses(locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate=deep,6&filters[featured][$eq]=true&filters[is_published][$eq]=true&locale=${locale}&sort=order:asc&pagination[pageSize]=100`
+		`api/courses?populate=thumbnail,tags&filters[featured][$eq]=true&filters[is_published][$eq]=true&locale=${locale}&sort=order:asc&pagination[pageSize]=100`
 	)
 }
 
@@ -123,11 +149,21 @@ export async function getCoursePaths(locale: Locale): Promise<Array<{ params: { 
 }
 
 /**
- * Get all lessons - simple call without populate
- * Returns all lessons for counting purposes
+ * Get all lessons - ultra light version for counting only
+ * Only loads the lesson ID, nothing else (super fast)
  */
 export async function getAllLessons(locale: Locale): Promise<LessonsResponse | NotFoundResponse> {
-	return fetchAPI<LessonsResponse>(`api/lessons?pagination[pageSize]=100&locale=${locale}`)
+	return fetchAPI<LessonsResponse>(`api/lessons?fields[0]=id&pagination[pageSize]=100&locale=${locale}`)
+}
+
+/**
+ * Get all lessons count only (even lighter)
+ * Returns pagination metadata with total count
+ */
+export async function getAllLessonsCount(locale: Locale): Promise<number> {
+	const response = await fetchAPI<LessonsResponse>(`api/lessons?fields[0]=id&pagination[pageSize]=1&locale=${locale}`)
+	if ('notFound' in response) return 0
+	return response.meta?.pagination?.total ?? 0
 }
 
 /**
