@@ -13,7 +13,7 @@ interface BreadcrumbProps {
 	locale: Locale
 }
 
-export function Breadcrumb({ items, locale }: BreadcrumbProps) {
+export function Breadcrumb({ items }: BreadcrumbProps) {
 	return (
 		<nav aria-label="Breadcrumb" className="mb-8">
 			<ol className="flex items-center gap-2 text-sm">
@@ -26,6 +26,7 @@ export function Breadcrumb({ items, locale }: BreadcrumbProps) {
 								<svg
 									className="h-4 w-4 text-slate-400"
 									fill="none"
+									aria-hidden="true"
 									strokeLinecap="round"
 									strokeLinejoin="round"
 									strokeWidth="2"
@@ -36,16 +37,11 @@ export function Breadcrumb({ items, locale }: BreadcrumbProps) {
 								</svg>
 							)}
 							{!isLast && item.href ? (
-								<Link
-									href={item.href}
-									className="text-slate-400 hover:text-white transition-colors"
-								>
+								<Link href={item.href} className="text-slate-400 hover:text-white transition-colors">
 									{item.label}
 								</Link>
 							) : (
-								<span className={isLast ? 'text-white font-medium' : 'text-slate-400'}>
-									{item.label}
-								</span>
+								<span className={isLast ? 'text-white font-medium' : 'text-slate-400'}>{item.label}</span>
 							)}
 						</li>
 					)

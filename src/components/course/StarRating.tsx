@@ -19,6 +19,7 @@ export function StarRating({ rating, maxStars = 5, className = '', showNumber = 
 
 					return (
 						<svg
+							aria-hidden="true"
 							key={index}
 							className={`h-4 w-4 ${
 								isFilled

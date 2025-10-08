@@ -1,6 +1,7 @@
 'use client'
 
 import { clsx } from 'clsx'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -92,7 +93,7 @@ export default function TableOfContents({ contentId }: { contentId: string }) {
 							'has-aria-[current=location]:border-indigo-400'
 						)}
 					>
-						<a
+						<Link
 							href={`#${heading.id}`}
 							aria-current={heading.active ? 'location' : undefined}
 							className={clsx(
@@ -101,7 +102,7 @@ export default function TableOfContents({ contentId }: { contentId: string }) {
 							)}
 						>
 							{heading.text}
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>

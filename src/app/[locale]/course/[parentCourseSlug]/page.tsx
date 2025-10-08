@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { StarRating } from '@/components/course/StarRating'
 import Cta from '@/components/Global/Cta'
@@ -7,10 +8,10 @@ import Nav from '@/components/Global/Nav'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { getContentWebsite } from '@/services/getContentWebsite'
 import { getParentCourseForSidebar, getParentCourses } from '@/services/getCourses'
+import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
-import { localesConstant } from '@/services/localesConstant'
 
 // revalidate every 12 hours
 export const revalidate = 43200
@@ -36,8 +37,11 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	// Fetch localizations for alternate links
 	const courseLocalizations = course.attributes.localizations?.data
-	const alternateCourseSlug = courseLocalizations?.[0]?.attributes ?
-		(typeof courseLocalizations[0].attributes === 'string' ? courseLocalizations[0].attributes : '') : parentCourseSlug
+	const alternateCourseSlug = courseLocalizations?.[0]?.attributes
+		? typeof courseLocalizations[0].attributes === 'string'
+			? courseLocalizations[0].attributes
+			: ''
+		: parentCourseSlug
 
 	return {
 		title: seo?.title ?? `${course.attributes.title} - ${t.course}`,
@@ -142,7 +146,7 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 								const lessonCount = chapter.attributes.lessons?.data?.length ?? 0
 
 								return (
-									<a
+									<Link
 										key={chapter.id}
 										href={`/${locale}/course/${parentCourseSlug}/${chapter.attributes.slug}`}
 										className="block rounded-lg border border-white/20 bg-white/10 p-6 backdrop-blur-sm transition-all hover:border-indigo-400/50 hover:bg-white/15"
@@ -156,7 +160,9 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 													<h3 className="text-xl font-bold text-white">{chapter.attributes.title}</h3>
 												</div>
 												{chapter.attributes.description && (
-													<p className="mt-4 text-base leading-relaxed text-slate-200">{chapter.attributes.description}</p>
+													<p className="mt-4 text-base leading-relaxed text-slate-200">
+														{chapter.attributes.description}
+													</p>
 												)}
 												<div className="mt-4 flex items-center gap-2 text-sm font-medium text-indigo-300">
 													<svg
@@ -167,10 +173,13 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 														strokeWidth="2"
 														viewBox="0 0 24 24"
 														stroke="currentColor"
+														aria-hidden="true"
 													>
 														<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
 													</svg>
-													<span>{lessonCount} {pluralize(lessonCount, t.lesson, t.lessons)}</span>
+													<span>
+														{lessonCount} {pluralize(lessonCount, t.lesson, t.lessons)}
+													</span>
 												</div>
 											</div>
 											<svg
@@ -181,11 +190,12 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 												strokeWidth="2"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
+												aria-hidden="true"
 											>
 												<path d="M9 5l7 7-7 7" />
 											</svg>
 										</div>
-									</a>
+									</Link>
 								)
 							})}
 						</div>
@@ -193,7 +203,7 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 
 					{/* Back Button */}
 					<div className="mt-12">
-						<a
+						<Link
 							href={`/${locale}/course`}
 							className="inline-flex items-center gap-2 rounded-lg border border-indigo-400/30 bg-indigo-500/10 px-4 py-2.5 font-medium text-indigo-200 transition-all hover:border-indigo-400/50 hover:bg-indigo-500/20 hover:text-indigo-100"
 						>
@@ -205,11 +215,12 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 								strokeWidth="2"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
+								aria-hidden="true"
 							>
 								<path d="M15 19l-7-7 7-7" />
 							</svg>
 							{t.parentCoursePage.backToCourses}
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

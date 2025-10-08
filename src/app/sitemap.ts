@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { getAllLessons, getParentCourses } from '@/services/getCourses'
 import { getArticles, getRealisations } from '@/services/getContentWebsite'
+import { getParentCourses } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

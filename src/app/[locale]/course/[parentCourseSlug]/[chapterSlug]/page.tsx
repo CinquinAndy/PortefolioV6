@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
 	Breadcrumb,
@@ -8,10 +9,9 @@ import {
 } from '@/components/course/Breadcrumbs-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
 import { getChapterBySlug, getParentCourses } from '@/services/getCourses'
-import type { Locale } from '@/types/strapi'
-import Link from 'next/link'
-import { getCourseTranslations } from '@/utils/courseTranslations'
 import { localesConstant } from '@/services/localesConstant'
+import type { Locale } from '@/types/strapi'
+import { getCourseTranslations } from '@/utils/courseTranslations'
 
 // revalidate every 12 hours
 export const revalidate = 43200
@@ -38,8 +38,11 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	// Fetch localizations for alternate links
 	const chapterLocalizations = chapter.attributes.localizations?.data
-	const alternateChapterSlug = chapterLocalizations?.[0]?.attributes ?
-		(typeof chapterLocalizations[0].attributes === 'string' ? chapterLocalizations[0].attributes : '') : chapterSlug
+	const alternateChapterSlug = chapterLocalizations?.[0]?.attributes
+		? typeof chapterLocalizations[0].attributes === 'string'
+			? chapterLocalizations[0].attributes
+			: ''
+		: chapterSlug
 
 	return {
 		title: seo?.title ?? `${chapter.attributes.title} - ${t.course}`,
@@ -55,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 }
 
 export async function generateStaticParams(): Promise<PageParams[]> {
-	let paths: PageParams[] = []
+	const paths: PageParams[] = []
 
 	for (const locale of localesConstant) {
 		const coursesResponse = await getParentCourses(locale)
@@ -85,7 +88,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 	// Fetch chapter data and parent course in parallel
 	const [chapterData, parentCourseData] = await Promise.all([
 		getChapterBySlug(chapterSlug, locale),
-		getChapterBySlug(parentCourseSlug, locale)
+		getChapterBySlug(parentCourseSlug, locale),
 	])
 
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
@@ -93,9 +96,10 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 	}
 
 	const chapter = chapterData.data[0]
-	const parentCourse = !('notFound' in parentCourseData) && parentCourseData.data && parentCourseData.data.length > 0
-		? parentCourseData.data[0]
-		: null
+	const parentCourse =
+		!('notFound' in parentCourseData) && parentCourseData.data && parentCourseData.data.length > 0
+			? parentCourseData.data[0]
+			: null
 
 	// Debug logging
 	console.log('Chapter data:', {
@@ -179,12 +183,15 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 													{lesson.attributes.title}
 												</h3>
 												{lesson.attributes.description && (
-													<p className="mt-2 text-sm leading-relaxed text-slate-200 line-clamp-2">{lesson.attributes.description}</p>
+													<p className="mt-2 text-sm leading-relaxed text-slate-200 line-clamp-2">
+														{lesson.attributes.description}
+													</p>
 												)}
 												<div className="mt-3 flex items-center gap-3 text-xs font-medium text-slate-300">
 													{lesson.attributes.video_duration && (
 														<span className="flex items-center gap-1">
 															<svg
+																aria-hidden="true"
 																className="h-4 w-4"
 																fill="none"
 																strokeLinecap="round"
@@ -201,6 +208,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 													{lesson.attributes.is_free && (
 														<span className="flex items-center gap-1 text-green-300">
 															<svg
+																aria-hidden="true"
 																className="h-4 w-4"
 																fill="none"
 																strokeLinecap="round"
@@ -217,6 +225,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 												</div>
 											</div>
 											<svg
+												aria-hidden="true"
 												className="h-6 w-6 shrink-0 text-slate-300 transition-transform group-hover:translate-x-1"
 												fill="none"
 												strokeLinecap="round"
@@ -236,11 +245,12 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 
 					{/* Back Button */}
 					<div className="mt-12">
-						<a
+						<Link
 							href={`/${locale}/course/${parentCourseSlug}`}
 							className="inline-flex items-center gap-2 rounded-lg border border-indigo-400/30 bg-indigo-500/10 px-4 py-2.5 font-medium text-indigo-200 transition-all hover:border-indigo-400/50 hover:bg-indigo-500/20 hover:text-indigo-100"
 						>
 							<svg
+								aria-hidden="true"
 								className="h-4 w-4"
 								fill="none"
 								strokeLinecap="round"
@@ -252,7 +262,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 								<path d="M15 19l-7-7 7-7" />
 							</svg>
 							{t.chapterPage.backToParentCourse}
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

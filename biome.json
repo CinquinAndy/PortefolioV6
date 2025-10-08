@@ -27,6 +27,9 @@
 				"noUnusedVariables": "error",
 				"useUniqueElementIds": "off"
 			},
+			"complexity": {
+				"noImportantStyles": "off"
+			},
 			"style": {
 				"useConst": "error",
 				"useTemplate": "error"

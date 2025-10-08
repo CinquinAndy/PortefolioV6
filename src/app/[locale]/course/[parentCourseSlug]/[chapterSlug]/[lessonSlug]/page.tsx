@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
 	Breadcrumb,
@@ -14,12 +15,12 @@ import {
 	getCourseBySlug,
 	getLessonBySlug,
 	getNextLesson,
-	processLessonData,
 	getParentCourses,
+	processLessonData,
 } from '@/services/getCourses'
+import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getCourseTranslations } from '@/utils/courseTranslations'
-import { localesConstant } from '@/services/localesConstant'
 
 // revalidate every 12 hours
 export const revalidate = 43200
@@ -46,10 +47,13 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const seo = lesson?.attributes?.seo
 
 	// Fetch localizations for alternate links
-	const alternateLocale = locale === 'fr' ? 'en' : 'fr'
+	const _alternateLocale = locale === 'fr' ? 'en' : 'fr'
 	const lessonLocalizations = lesson?.attributes?.localizations?.data
-	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes ?
-		(typeof lessonLocalizations[0].attributes === 'string' ? lessonLocalizations[0].attributes : '') : lessonSlug
+	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes
+		? typeof lessonLocalizations[0].attributes === 'string'
+			? lessonLocalizations[0].attributes
+			: ''
+		: lessonSlug
 
 	return {
 		title: seo?.title ?? `${lesson?.attributes?.title ?? t.lesson} - ${t.course}`,
@@ -65,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 }
 
 export async function generateStaticParams(): Promise<PageParams[]> {
-	let paths: PageParams[] = []
+	const paths: PageParams[] = []
 
 	for (const locale of localesConstant) {
 		const coursesResponse = await getParentCourses(locale)
@@ -156,7 +160,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 										{lesson.attributes.attachments.data.map(
 											(attachment: { id: number; attributes: { url: string; name: string; size: number } }) => (
 												<li key={attachment.id}>
-													<a
+													<Link
 														href={attachment.attributes.url}
 														target="_blank"
 														rel="noopener noreferrer"
@@ -166,7 +170,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 														<span className="text-xs text-slate-400">
 															({(attachment.attributes.size / 1024).toFixed(1)} KB)
 														</span>
-													</a>
+													</Link>
 												</li>
 											)
 										)}
