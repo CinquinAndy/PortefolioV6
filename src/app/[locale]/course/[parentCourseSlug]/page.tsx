@@ -6,10 +6,14 @@ import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { getContentWebsite } from '@/services/getContentWebsite'
-import { getParentCourseForSidebar } from '@/services/getCourses'
+import { getParentCourseForSidebar, getParentCourses } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
+import { localesConstant } from '@/services/localesConstant'
+
+// revalidate every 12 hours
+export const revalidate = 43200
 
 interface PageParams {
 	locale: Locale
@@ -46,6 +50,25 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 			},
 		},
 	}
+}
+
+export async function generateStaticParams(): Promise<PageParams[]> {
+	let paths: PageParams[] = []
+
+	for (const locale of localesConstant) {
+		const coursesResponse = await getParentCourses(locale)
+
+		if (!('notFound' in coursesResponse) && coursesResponse.data) {
+			// For each parent course, we generate a static page
+			const localePaths = coursesResponse.data.map((course: any) => ({
+				locale,
+				parentCourseSlug: course.attributes.slug,
+			}))
+			paths = paths.concat(localePaths)
+		}
+	}
+
+	return paths
 }
 
 export default async function ParentCoursePage({ params }: { params: Promise<PageParams> }) {

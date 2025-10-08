@@ -7,10 +7,14 @@ import {
 	Breadcrumbs,
 } from '@/components/course/Breadcrumbs-learning'
 import { SidebarLayoutContent } from '@/components/course/SidebarLayout-learning'
-import { getChapterBySlug } from '@/services/getCourses'
+import { getChapterBySlug, getParentCourses } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 import Link from 'next/link'
 import { getCourseTranslations } from '@/utils/courseTranslations'
+import { localesConstant } from '@/services/localesConstant'
+
+// revalidate every 12 hours
+export const revalidate = 43200
 
 interface PageParams {
 	locale: Locale
@@ -48,6 +52,30 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 			},
 		},
 	}
+}
+
+export async function generateStaticParams(): Promise<PageParams[]> {
+	let paths: PageParams[] = []
+
+	for (const locale of localesConstant) {
+		const coursesResponse = await getParentCourses(locale)
+
+		if (!('notFound' in coursesResponse) && coursesResponse.data) {
+			// For each parent course, get all chapters
+			for (const course of coursesResponse.data) {
+				const chapters = course.attributes.chapters?.data ?? []
+				for (const chapter of chapters) {
+					paths.push({
+						locale,
+						parentCourseSlug: course.attributes.slug,
+						chapterSlug: chapter.attributes.slug,
+					})
+				}
+			}
+		}
+	}
+
+	return paths
 }
 
 export default async function ChapterPage({ params }: { params: Promise<PageParams> }) {

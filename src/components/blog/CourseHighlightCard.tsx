@@ -12,17 +12,17 @@ interface CourseHighlightCardProps {
 export function CourseHighlightCard({ locale }: CourseHighlightCardProps) {
 	const content = {
 		fr: {
-			title: 'Découvrez nos Formations',
+			title: 'Découvrez mes Formations',
 			subtitle: 'Apprenez le développement web moderne',
 			description:
-				'Explorez notre plateforme de cours complets sur JavaScript, React, Next.js et bien plus. Des tutoriels structurés pour tous les niveaux.',
+				'Explorez ma plateforme de cours complets sur JavaScript, React, Next.js et bien plus. Des tutoriels structurés pour tous les niveaux.',
 			cta: 'Accéder aux cours',
 		},
 		en: {
-			title: 'Discover our Training Courses',
+			title: 'Discover my Training Courses',
 			subtitle: 'Learn modern web development',
 			description:
-				'Explore our platform of comprehensive courses on JavaScript, React, Next.js and more. Structured tutorials for all levels.',
+				'Explore my platform of comprehensive courses on JavaScript, React, Next.js and more. Structured tutorials for all levels.',
 			cta: 'Access courses',
 		},
 	}

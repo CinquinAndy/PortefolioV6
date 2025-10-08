@@ -15,9 +15,14 @@ import {
 	getLessonBySlug,
 	getNextLesson,
 	processLessonData,
+	getParentCourses,
 } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
 import { getCourseTranslations } from '@/utils/courseTranslations'
+import { localesConstant } from '@/services/localesConstant'
+
+// revalidate every 12 hours
+export const revalidate = 43200
 
 interface PageParams {
 	locale: Locale
@@ -57,6 +62,38 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 			},
 		},
 	}
+}
+
+export async function generateStaticParams(): Promise<PageParams[]> {
+	let paths: PageParams[] = []
+
+	for (const locale of localesConstant) {
+		const coursesResponse = await getParentCourses(locale)
+
+		if (!('notFound' in coursesResponse) && coursesResponse.data) {
+			// For each parent course, get all chapters and their lessons
+			for (const course of coursesResponse.data) {
+				const parentCourseSlug = course.attributes.slug
+				const chapters = course.attributes.chapters?.data ?? []
+
+				for (const chapter of chapters) {
+					const chapterSlug = chapter.attributes.slug
+					const lessons = chapter.attributes.lessons?.data ?? []
+
+					for (const lesson of lessons) {
+						paths.push({
+							locale,
+							parentCourseSlug,
+							chapterSlug,
+							lessonSlug: lesson.attributes.slug,
+						})
+					}
+				}
+			}
+		}
+	}
+
+	return paths
 }
 
 export default async function Page({ params }: { params: Promise<PageParams> }) {
