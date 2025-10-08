@@ -9,6 +9,7 @@ import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { getContentWebsite } from '@/services/getContentWebsite'
 import { getParentCourseForSidebar, getParentCourses } from '@/services/getCourses'
 import { localesConstant } from '@/services/localesConstant'
+import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
@@ -64,7 +65,7 @@ export async function generateStaticParams(): Promise<PageParams[]> {
 
 		if (!('notFound' in coursesResponse) && coursesResponse.data) {
 			// For each parent course, we generate a static page
-			const localePaths = coursesResponse.data.map((course: any) => ({
+			const localePaths = coursesResponse.data.map((course: Course) => ({
 				locale,
 				parentCourseSlug: course.attributes.slug,
 			}))

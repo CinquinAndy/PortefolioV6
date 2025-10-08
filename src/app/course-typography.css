@@ -1,24 +1,4 @@
-@reference "../styles/main.css";
-
 @layer components {
-	/* Override global serif font for learning section - use sans-serif */
-	/* Force Be Vietnam Pro for all learning section elements */
-	.learning-section *,
-	.learning-section .prose,
-	.learning-section .prose *,
-	.learning-section aside,
-	.learning-section aside *,
-	.learning-section nav,
-	.learning-section nav *,
-	.learning-section h1,
-	.learning-section h2,
-	.learning-section h3,
-	.learning-section h4,
-	.learning-section h5,
-	.learning-section h6 {
-		font-family: var(--font-be-vietnam-pro), sans-serif !important;
-	}
-
 	.prose {
 		@apply text-base/7 text-slate-300;
 		color: rgb(203 213 225); /* Force slate-300 */
@@ -236,12 +216,21 @@
 		font-style: italic;
 	}
 
-	.prose :where(pre code .hljs-keyword, pre code .hljs-selector-tag, pre code .hljs-subst):not(:where([class~="not-prose"] *)) {
+	.prose
+		:where(pre code .hljs-keyword, pre code .hljs-selector-tag, pre code .hljs-subst):not(
+			:where([class~="not-prose"] *)
+		) {
 		color: rgb(251 146 60); /* orange-400 */
 		font-weight: bold;
 	}
 
-	.prose :where(pre code .hljs-number, pre code .hljs-literal, pre code .hljs-variable, pre code .hljs-template-variable):not(:where([class~="not-prose"] *)) {
+	.prose
+		:where(
+			pre code .hljs-number,
+			pre code .hljs-literal,
+			pre code .hljs-variable,
+			pre code .hljs-template-variable
+		):not(:where([class~="not-prose"] *)) {
 		color: rgb(52 211 153); /* emerald-400 */
 	}
 
@@ -249,7 +238,10 @@
 		color: rgb(74 222 128); /* green-400 */
 	}
 
-	.prose :where(pre code .hljs-title, pre code .hljs-section, pre code .hljs-selector-id):not(:where([class~="not-prose"] *)) {
+	.prose
+		:where(pre code .hljs-title, pre code .hljs-section, pre code .hljs-selector-id):not(
+			:where([class~="not-prose"] *)
+		) {
 		color: rgb(96 165 250); /* blue-400 */
 		font-weight: bold;
 	}
@@ -292,5 +284,23 @@
 
 	.prose :where(pre code .hljs-strong):not(:where([class~="not-prose"] *)) {
 		font-weight: bold;
+	}
+
+	/* Override global serif font for learning section - use sans-serif */
+	/* Force Be Vietnam Pro for all learning section elements */
+	.learning-section *,
+	.learning-section .prose,
+	.learning-section .prose *,
+	.learning-section aside,
+	.learning-section aside *,
+	.learning-section nav,
+	.learning-section nav *,
+	.learning-section h1,
+	.learning-section h2,
+	.learning-section h3,
+	.learning-section h4,
+	.learning-section h5,
+	.learning-section h6 {
+		font-family: var(--font-be-vietnam-pro), sans-serif !important;
 	}
 }
