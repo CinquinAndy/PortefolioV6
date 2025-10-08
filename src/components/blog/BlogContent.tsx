@@ -25,7 +25,7 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 	const [selectedType, _setSelectedType] = useState<string>('all')
 	const [currentPage, setCurrentPage] = useState<number>(1)
 
-	const pageSize = 12
+	const pageSize = 24
 
 	// Update current page from URL params
 	useEffect(() => {

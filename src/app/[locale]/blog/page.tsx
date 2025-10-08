@@ -54,6 +54,15 @@ export default async function Page({ params }: BlogPageProps) {
 	const articlesResponse = await getArticles(locale, 1, 1000) // Large page size to get all articles
 	const articles = getResponseData(articlesResponse)
 
+	// Format dates on the server to prevent hydration mismatch
+	const articlesWithFormattedDates = articles?.map(article => ({
+		...article,
+		attributes: {
+			...article.attributes,
+			createdAt: formatDateForLocale(article.attributes.createdAt, locale),
+		},
+	})) ?? []
+
 	return (
 		<>
 			{content_website && (
@@ -66,13 +75,34 @@ export default async function Page({ params }: BlogPageProps) {
 			)}
 			<div>
 				<Suspense fallback={<BlogContentSkeleton />}>
-					<BlogContent articles={articles ?? []} locale={locale} />
+					<BlogContent articles={articlesWithFormattedDates} locale={locale} />
 				</Suspense>
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />
 		</>
 	)
+}
+
+function formatDateForLocale(dateString: string, locale: Locale): string {
+	try {
+		const date = new Date(dateString)
+		if (locale === 'fr') {
+			return new Intl.DateTimeFormat('fr-FR', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+			}).format(date)
+		}
+		return new Intl.DateTimeFormat('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		}).format(date)
+	} catch (error) {
+		console.error('Error formatting date:', error)
+		return dateString
+	}
 }
 
 function BlogContentSkeleton() {

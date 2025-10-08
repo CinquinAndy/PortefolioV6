@@ -1,3 +1,7 @@
+/* Reference main.css, this line is important and required */
+/* note to me: don't remove this line, it will break the /course part of the website */
+@reference "../styles/main.css";
+
 @layer components {
 	.prose {
 		@apply text-base/7 text-slate-300;

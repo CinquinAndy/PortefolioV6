@@ -16,38 +16,11 @@ interface MasonryGridProps<T> {
 	initialColumns?: number
 }
 
-// Date formatting utilities
-const formatDate = (dateString: string, locale: Locale): string => {
-	try {
-		const date = new Date(dateString)
-
-		// Return different formats based on locale
-		if (locale === 'fr') {
-			return new Intl.DateTimeFormat('fr-FR', {
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric',
-			}).format(date)
-		}
-
-		// Default to English
-		return new Intl.DateTimeFormat('en-US', {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		}).format(date)
-	} catch (error) {
-		console.error('Error formatting date:', error)
-		return dateString // Return original string if parsing fails
-	}
-}
-
 export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumns = 3 }: MasonryGridProps<T>) {
 	const [columns, setColumns] = useState<number>(initialColumns)
 	const [isClient, setIsClient] = useState<boolean>(false)
 
 	useLayoutEffect(() => {
-		setIsClient(true)
 		const updateColumns = (): void => {
 			const width = window.innerWidth
 			if (width < BREAKPOINTS.sm) setColumns(1)
@@ -57,6 +30,7 @@ export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumn
 		}
 
 		updateColumns()
+		setIsClient(true)
 		window.addEventListener('resize', updateColumns)
 		return () => window.removeEventListener('resize', updateColumns)
 	}, [])
@@ -71,28 +45,9 @@ export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumn
 	const columnWidth = `${100 / columns}%`
 	const itemsByColumn = getItemsByColumn()
 
-	// Wrap renderItem to inject formatted date for Articles
-	const renderItemWithFormattedDate = (item: T, index: number): ReactNode => {
-		// Check if item has Article-like structure with createdAt
-		if (
-			typeof item === 'object' &&
-			item !== null &&
-			'attributes' in item &&
-			typeof item.attributes === 'object' &&
-			item.attributes !== null &&
-			'createdAt' in item.attributes &&
-			typeof item.attributes.createdAt === 'string'
-		) {
-			const formattedItem = {
-				...item,
-				attributes: {
-					...item.attributes,
-					createdAt: formatDate(item.attributes.createdAt, locale),
-				},
-			}
-			return renderItem(formattedItem as T, index)
-		}
-		return renderItem(item, index)
+	// Don't render until client-side to avoid hydration mismatch
+	if (!isClient) {
+		return null
 	}
 
 	return (
@@ -106,7 +61,7 @@ export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumn
 								animate={{ y: 0, opacity: 1 }}
 								className="transform will-change-transform"
 								exit={{ y: -20, opacity: 0 }}
-								initial={isClient ? { y: 20, opacity: 0 } : false}
+								initial={{ y: 20, opacity: 0 }}
 								key={typeof item === 'object' && item !== null && 'id' in item ? (item.id as number | string) : index}
 								layout
 								transition={{
@@ -114,7 +69,7 @@ export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumn
 									delay: index * 0.05,
 								}}
 							>
-								{renderItemWithFormattedDate(item, index)}
+								{renderItem(item, index)}
 							</motion.div>
 						))}
 					</AnimatePresence>
