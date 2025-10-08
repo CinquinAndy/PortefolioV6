@@ -109,25 +109,36 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 									<a
 										key={chapter.id}
 										href={`/${locale}/course/${parentCourseSlug}/${chapter.attributes.slug}`}
-										className="block rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10"
+										className="block rounded-lg border border-white/20 bg-white/10 p-6 backdrop-blur-sm transition-all hover:border-indigo-400/50 hover:bg-white/15"
 									>
 										<div className="flex items-start justify-between">
 											<div className="flex-1">
 												<div className="flex items-center gap-3">
-													<span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500/20 text-sm font-semibold text-indigo-400">
+													<span className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/30 text-base font-bold text-indigo-200">
 														{index + 1}
 													</span>
-													<h3 className="text-lg font-semibold text-white">{chapter.attributes.title}</h3>
+													<h3 className="text-xl font-bold text-white">{chapter.attributes.title}</h3>
 												</div>
 												{chapter.attributes.description && (
-													<p className="mt-3 text-sm text-slate-300">{chapter.attributes.description}</p>
+													<p className="mt-4 text-base leading-relaxed text-slate-200">{chapter.attributes.description}</p>
 												)}
-												<div className="mt-3 text-sm text-slate-400">
-													{lessonCount} {pluralize(lessonCount, t.lesson, t.lessons)}
+												<div className="mt-4 flex items-center gap-2 text-sm font-medium text-indigo-300">
+													<svg
+														className="h-4 w-4"
+														fill="none"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth="2"
+														viewBox="0 0 24 24"
+														stroke="currentColor"
+													>
+														<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+													</svg>
+													<span>{lessonCount} {pluralize(lessonCount, t.lesson, t.lessons)}</span>
 												</div>
 											</div>
 											<svg
-												className="h-5 w-5 text-slate-400"
+												className="h-6 w-6 flex-shrink-0 text-slate-300 transition-transform group-hover:translate-x-1"
 												fill="none"
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -148,7 +159,7 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 					<div className="mt-12">
 						<a
 							href={`/${locale}/course`}
-							className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300"
+							className="inline-flex items-center gap-2 rounded-lg border border-indigo-400/30 bg-indigo-500/10 px-4 py-2.5 font-medium text-indigo-200 transition-all hover:border-indigo-400/50 hover:bg-indigo-500/20 hover:text-indigo-100"
 						>
 							<svg
 								className="h-4 w-4"
