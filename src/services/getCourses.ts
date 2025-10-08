@@ -86,11 +86,11 @@ export async function getCourseBySlug(slug: string, locale: Locale): Promise<Cou
 }
 
 /**
- * Get chapter by slug with explicit lessons population
+ * Get chapter by slug with explicit lessons and parent_course population
  */
 export async function getChapterBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate[lessons][pagination][pageSize]=100&populate=parent_course,thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate[lessons][pagination][pageSize]=100&populate[parent_course][populate]=*&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)
 }
 

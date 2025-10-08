@@ -2,19 +2,23 @@ import { ArrowLeft } from 'lucide-react'
 import { clsx } from 'clsx'
 import Link, { type LinkProps } from 'next/link'
 import type React from 'react'
+import type { Locale } from '@/types/strapi'
+import { getCourseTranslations } from '@/utils/courseTranslations'
 
 export function Breadcrumbs(props: React.ComponentProps<'nav'>) {
 	return <nav aria-label="Breadcrumb" className="flex items-center gap-x-3 text-sm/6" {...props} />
 }
 
-export function BreadcrumbBackButton({ locale }: { locale: string }) {
+export function BreadcrumbBackButton({ locale }: { locale: Locale }) {
+	const t = getCourseTranslations(locale)
+
 	return (
 		<Link
 			href={`/${locale}/course`}
 			className="flex items-center gap-2 rounded-lg border border-indigo-500/20 bg-indigo-950/10 px-3 py-1.5 text-slate-50 hover:bg-indigo-950/20 hover:border-indigo-400/40 hover:text-indigo-400 transition-all font-sans"
 		>
 			<ArrowLeft className="h-4 w-4" />
-			<span>Cours</span>
+			<span>{t.courses}</span>
 		</Link>
 	)
 }

@@ -19,36 +19,15 @@ const getCourseUrl = (locale: Locale, course: Course): string | undefined => {
 	// Get the parent course slug (this course is the parent)
 	const parentCourseSlug = course.attributes.slug
 
-	// Get all chapters and sort by order
+	// Check if course has chapters
 	const chapters = course.attributes.chapters?.data ?? []
 	if (chapters.length === 0) {
 		// No chapters at all
 		return undefined
 	}
 
-	// Sort chapters by order and get the first one
-	const sortedChapters = [...chapters].sort((a, b) => a.attributes.order - b.attributes.order)
-	const firstChapter = sortedChapters[0]
-
-	if (!firstChapter?.attributes?.slug) {
-		return undefined
-	}
-
-	// Get all lessons from first chapter and sort by order
-	const lessons = firstChapter.attributes.lessons?.data ?? []
-	if (lessons.length > 0) {
-		const sortedLessons = [...lessons].sort((a, b) => a.attributes.order - b.attributes.order)
-		const firstLesson = sortedLessons[0]
-
-		if (firstLesson?.attributes?.slug) {
-			// If we have a lesson, link directly to it with parent course slug
-			return `/${locale}/course/${parentCourseSlug}/${firstChapter.attributes.slug}/${firstLesson.attributes.slug}`
-		}
-	}
-
-	// If we have chapters but no lessons yet, link to the chapter page
-	// (This allows displaying courses that are being built)
-	return `/${locale}/course/${parentCourseSlug}/${firstChapter.attributes.slug}`
+	// Link to the parent course page which shows all chapters
+	return `/${locale}/course/${parentCourseSlug}`
 }
 
 export function CourseCard({ locale, course }: CourseCardProps) {

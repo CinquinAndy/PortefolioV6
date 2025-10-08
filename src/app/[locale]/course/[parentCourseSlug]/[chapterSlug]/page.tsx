@@ -41,14 +41,20 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 	const { locale, parentCourseSlug, chapterSlug } = await params
 	const t = getCourseTranslations(locale)
 
-	// Fetch chapter data
-	const chapterData = await getChapterBySlug(chapterSlug, locale)
+	// Fetch chapter data and parent course in parallel
+	const [chapterData, parentCourseData] = await Promise.all([
+		getChapterBySlug(chapterSlug, locale),
+		getChapterBySlug(parentCourseSlug, locale)
+	])
 
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		notFound()
 	}
 
 	const chapter = chapterData.data[0]
+	const parentCourse = !('notFound' in parentCourseData) && parentCourseData.data && parentCourseData.data.length > 0
+		? parentCourseData.data[0]
+		: null
 
 	// Debug logging
 	console.log('Chapter data:', {
@@ -63,7 +69,13 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 	})
 
 	const lessons = chapter.attributes.lessons?.data ?? []
-	const parentCourse = chapter.attributes.parent_course?.data
+
+	// Debug logging for parent course
+	console.log('Chapter breadcrumb data:', {
+		parentCourseSlug,
+		chapterSlug,
+		parentCourseTitle: parentCourse?.attributes?.title || 'no parent course found',
+	})
 
 	return (
 		<SidebarLayoutContent
@@ -71,7 +83,7 @@ export default async function ChapterPage({ params }: { params: Promise<PagePara
 				<Breadcrumbs>
 					<BreadcrumbBackButton locale={locale} />
 					<Breadcrumb href={`/${locale}/course/${parentCourseSlug}`}>
-						{parentCourse?.[0]?.attributes?.title || t.course}
+						{parentCourse?.attributes?.title || t.course}
 					</Breadcrumb>
 					<BreadcrumbSeparator />
 					<Breadcrumb>{chapter.attributes.title}</Breadcrumb>

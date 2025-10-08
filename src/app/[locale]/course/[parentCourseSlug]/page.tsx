@@ -103,17 +103,12 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 						<h2 className="mb-6 text-2xl font-bold text-white">{t.parentCoursePage.chaptersTitle}</h2>
 						<div className="space-y-4">
 							{chapters.map((chapter, index) => {
-								const firstLesson = chapter.attributes.lessons?.data?.[0]
 								const lessonCount = chapter.attributes.lessons?.data?.length ?? 0
 
 								return (
 									<a
 										key={chapter.id}
-										href={
-											firstLesson
-												? `/${locale}/course/${parentCourseSlug}/${chapter.attributes.slug}/${firstLesson.attributes.slug}`
-												: `/${locale}/course/${parentCourseSlug}/${chapter.attributes.slug}`
-										}
+										href={`/${locale}/course/${parentCourseSlug}/${chapter.attributes.slug}`}
 										className="block rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10"
 									>
 										<div className="flex items-start justify-between">
