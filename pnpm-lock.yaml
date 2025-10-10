@@ -60,8 +60,8 @@ importers:
         specifier: 5.2.6
         version: 5.2.6(@types/react@19.2.2)(react@19.2.0)
       i18next:
-        specifier: 25.5.3
-        version: 25.5.3(typescript@5.9.3)
+        specifier: 25.6.0
+        version: 25.6.0(typescript@5.9.3)
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -1140,8 +1140,8 @@ packages:
     resolution: {integrity: sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw==}
     engines: {node: '>= 14'}
 
-  i18next@25.5.3:
-    resolution: {integrity: sha512-joFqorDeQ6YpIXni944upwnuHBf5IoPMuqAchGVeQLdWC2JOjxgM9V8UGLhNIIH/Q8QleRxIi0BSRQehSrDLcg==}
+  i18next@25.6.0:
+    resolution: {integrity: sha512-tTn8fLrwBYtnclpL5aPXK/tAYBLWVvoHM1zdfXoRNLcI+RvtMsoZRV98ePlaW3khHYKuNh/Q65W/+NVFUeIwVw==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -2687,7 +2687,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  i18next@25.5.3(typescript@5.9.3):
+  i18next@25.6.0(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.3
     optionalDependencies:
