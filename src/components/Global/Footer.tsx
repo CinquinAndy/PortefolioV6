@@ -65,6 +65,12 @@ function Footer({ content_website }: FooterProps): React.JSX.Element {
 							</Link>
 						)
 					})}
+					<Link href="/sitemap.xml">
+						<AnimatedUnderline className="text-xs xl:text-sm">Sitemap</AnimatedUnderline>
+					</Link>
+					<Link href="/robots.txt">
+						<AnimatedUnderline className="text-xs xl:text-sm">Robots.txt</AnimatedUnderline>
+					</Link>
 				</div>
 				<div className="col-span-8 col-start-1 mt-10 flex justify-between text-xs xl:col-span-6 xl:col-start-2">
 					<div className="flex w-full justify-center gap-4">
