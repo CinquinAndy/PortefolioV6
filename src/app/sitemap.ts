@@ -1,5 +1,5 @@
-import { headers } from 'next/headers'
 import type { MetadataRoute } from 'next'
+import { headers } from 'next/headers'
 import { getArticles, getRealisations } from '@/services/getContentWebsite'
 import { getParentCourses } from '@/services/getCourses'
 import type { Locale } from '@/types/strapi'
@@ -10,7 +10,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	// Detect which domain is being accessed
 	const isFrDomain = host.includes('andy-cinquin.fr') || !host.includes('andy-cinquin.com')
-	const baseUrl = isFrDomain ? (process.env.NEXT_PUBLIC_URL ?? 'https://andy-cinquin.fr') : (process.env.NEXT_PUBLIC_URL_ALT ?? 'https://andy-cinquin.com')
+	const baseUrl = isFrDomain
+		? (process.env.NEXT_PUBLIC_URL ?? 'https://andy-cinquin.fr')
+		: (process.env.NEXT_PUBLIC_URL_ALT ?? 'https://andy-cinquin.com')
 	const locale: Locale = isFrDomain ? 'fr' : 'en'
 
 	console.log(`[Sitemap] Generated for domain: ${host} (${isFrDomain ? 'FR' : 'EN'})`)
@@ -100,7 +102,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		console.error('[Sitemap] Error generating portfolio paths:', error)
 	}
 
-	console.log(`[Sitemap] Added ${itemCounts.realisations} portfolio pages and ${itemCounts.portfolioImages} portfolio images`)
+	console.log(
+		`[Sitemap] Added ${itemCounts.realisations} portfolio pages and ${itemCounts.portfolioImages} portfolio images`
+	)
 
 	// Fetch and add courses with chapters and lessons
 	try {
@@ -144,7 +148,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		console.error('[Sitemap] Error generating course paths:', error)
 	}
 
-	console.log(`[Sitemap] Added ${itemCounts.courses} courses, ${itemCounts.chapters} chapters, and ${itemCounts.lessons} lessons`)
+	console.log(
+		`[Sitemap] Added ${itemCounts.courses} courses, ${itemCounts.chapters} chapters, and ${itemCounts.lessons} lessons`
+	)
 
 	const totalItems = Object.values(itemCounts).reduce((a, b) => a + b, 0)
 	console.log(`[Sitemap] Generated sitemap with ${totalItems} total entries for ${isFrDomain ? 'FR' : 'EN'} domain`)

@@ -218,8 +218,13 @@ export async function getRealisationPaths(locale: Locale): Promise<Array<{ param
 /**
  * Get realisations
  */
-export async function getRealisations(locale: Locale, pageSize: number = 100): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
-	return await fetchAPI<StrapiResponse<Realisation[]>>(`api/realisations?populate=deep,2&sort=rank&locale=${locale}&pagination[pageSize]=${pageSize}`)
+export async function getRealisations(
+	locale: Locale,
+	pageSize: number = 100
+): Promise<StrapiResponse<Realisation[]> | NotFoundResponse> {
+	return await fetchAPI<StrapiResponse<Realisation[]>>(
+		`api/realisations?populate=deep,2&sort=rank&locale=${locale}&pagination[pageSize]=${pageSize}`
+	)
 }
 
 /**
