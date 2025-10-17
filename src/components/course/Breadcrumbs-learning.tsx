@@ -1,5 +1,5 @@
-import { ArrowLeft } from 'lucide-react'
 import { clsx } from 'clsx'
+import { ArrowLeft } from 'lucide-react'
 import Link, { type LinkProps } from 'next/link'
 import type React from 'react'
 import type { Locale } from '@/types/strapi'

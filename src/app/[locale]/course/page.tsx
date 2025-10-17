@@ -42,10 +42,7 @@ export default async function Page({ params }: CoursePageProps) {
 	// ULTRA OPTIMIZED API calls - Only loads what's needed:
 	// - Courses (light): title, slug, description, difficulty, thumbnail, tags, chapters IDs only
 	// - Lessons count: Only fetches total count from pagination metadata (1 lesson loaded)
-	const [coursesResponse, totalLessons] = await Promise.all([
-		getParentCoursesLight(locale),
-		getAllLessonsCount(locale),
-	])
+	const [coursesResponse, totalLessons] = await Promise.all([getParentCoursesLight(locale), getAllLessonsCount(locale)])
 
 	const parentCourses = 'notFound' in coursesResponse ? [] : (coursesResponse.data ?? [])
 

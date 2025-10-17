@@ -55,13 +55,14 @@ export default async function Page({ params }: BlogPageProps) {
 	const articles = getResponseData(articlesResponse)
 
 	// Format dates on the server to prevent hydration mismatch
-	const articlesWithFormattedDates = articles?.map(article => ({
-		...article,
-		attributes: {
-			...article.attributes,
-			createdAt: formatDateForLocale(article.attributes.createdAt, locale),
-		},
-	})) ?? []
+	const articlesWithFormattedDates =
+		articles?.map(article => ({
+			...article,
+			attributes: {
+				...article.attributes,
+				createdAt: formatDateForLocale(article.attributes.createdAt, locale),
+			},
+		})) ?? []
 
 	return (
 		<>
