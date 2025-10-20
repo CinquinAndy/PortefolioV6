@@ -76,14 +76,14 @@
     "@biomejs/biome": "2.2.6",
     "@playwright/test": "1.56.1",
     "@tailwindcss/forms": "0.5.10",
-    "@tailwindcss/postcss": "4.1.14",
+    "@tailwindcss/postcss": "4.1.15",
     "@types/node": "24.8.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "autoprefixer": "10.4.21",
     "jsdom": "27.0.1",
     "postcss": "8.5.6",
-    "tailwindcss": "4.1.14",
+    "tailwindcss": "4.1.15",
     "typescript": "5.9.3"
   }
 }
