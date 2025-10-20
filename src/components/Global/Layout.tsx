@@ -49,12 +49,14 @@ const options = {
 						return nodes
 							.map(node => {
 								if ('data' in node) return node.data as string
-								if ('children' in node) return extractTextContent(node.children as DOMNode[])
+								if ('children' in node && Array.isArray(node.children)) {
+									return extractTextContent(node.children as unknown as DOMNode[])
+								}
 								return ''
 							})
 							.join('')
 					}
-					const codeContent = extractTextContent(firstChild.children)
+					const codeContent = extractTextContent(firstChild.children as unknown as DOMNode[])
 					// Use highlight.js for code highlighting
 					const highlightedContent = hljs.highlightAuto(codeContent).value
 
