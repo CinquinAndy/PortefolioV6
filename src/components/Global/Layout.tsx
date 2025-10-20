@@ -43,8 +43,18 @@ const options = {
 			if (name === 'pre' && children?.length > 0) {
 				const firstChild = children[0] as Element
 				if (firstChild.name === 'code') {
-					const codeChild = firstChild.children?.[0]
-					const codeContent = codeChild && 'data' in codeChild ? (codeChild.data as string) : ''
+					// Extract all text content from code children recursively
+					const extractTextContent = (nodes: DOMNode[] | undefined): string => {
+						if (!nodes) return ''
+						return nodes
+							.map(node => {
+								if ('data' in node) return node.data as string
+								if ('children' in node) return extractTextContent(node.children as DOMNode[])
+								return ''
+							})
+							.join('')
+					}
+					const codeContent = extractTextContent(firstChild.children)
 					// Use highlight.js for code highlighting
 					const highlightedContent = hljs.highlightAuto(codeContent).value
 
