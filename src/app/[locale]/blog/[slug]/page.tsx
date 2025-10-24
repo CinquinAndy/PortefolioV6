@@ -15,8 +15,8 @@ import type { Article, Locale, TagComponent } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
-// revalidate every 12 hours
-export const revalidate = 43200 // 12 hours
+// revalidate every 1 minute for faster updates from CMS
+export const revalidate = 60
 
 interface ArticleSlugParams {
 	slug: string

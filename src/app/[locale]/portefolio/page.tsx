@@ -13,8 +13,8 @@ interface PageParams {
 	locale: string
 }
 
-// revalidate every 12 hours
-export const revalidate = 43200 // 12 hours
+// revalidate every 1 minute for faster updates from CMS
+export const revalidate = 60
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params

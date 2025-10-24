@@ -28,8 +28,16 @@ export async function fetchAPI<T = unknown>(
 	options: Partial<FetchOptions> = {}
 ): Promise<T | NotFoundResponse> {
 	try {
+		// Extract resource type from path for tagging
+		const resourceMatch = path.match(/api\/([^?/]+)/)
+		const resourceType = resourceMatch?.[1] || 'content'
+
 		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${path}`, {
-			next: { revalidate: 86400, ...options.next },
+			next: {
+				revalidate: 60, // Changed from 86400 (24h) to 60 seconds
+				tags: [resourceType, 'strapi-content'], // Add cache tags for targeted revalidation
+				...options.next
+			},
 			method: options.method ?? 'GET',
 			headers: {
 				'Content-Type': 'application/json',

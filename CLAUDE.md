@@ -68,9 +68,31 @@ src/
 - Husky + lint-staged for pre-commit hooks
 - React Strict Mode enabled
 
+## ISR (Incremental Static Regeneration)
+
+**Revalidation Strategy:**
+
+- All content pages use time-based revalidation: `revalidate = 60` (1 minute)
+- API requests are tagged for targeted cache invalidation
+- On-demand revalidation available via `/api/revalidate` endpoint
+
+**Cache Tags:**
+
+- `courses` - Course-related content
+- `articles` - Blog articles
+- `realisations` - Portfolio projects
+- `content-website` - Global website content
+- `strapi-content` - All content from Strapi
+
+**Setup:**
+
+1. Set `REVALIDATION_SECRET` environment variable
+2. Configure Strapi webhooks to trigger on-demand revalidation
+3. See `ISR_SETUP.md` for detailed configuration instructions
+
 ## Important Notes
 
 - Uses package manager flexibility (pnpm/npm/yarn) but avoid pushing lock files
-- Environment variables required for domain-based locale switching
+- Environment variables required for domain-based locale switching and ISR revalidation
 - Images configured to accept remote patterns from any hostname
 - Custom webpack configuration for HeadlessUI compatibility

@@ -14,8 +14,8 @@ import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
 
-// revalidate every 12 hours
-export const revalidate = 43200
+// revalidate every 1 minute for faster updates from CMS
+export const revalidate = 60
 
 interface PageParams {
 	locale: Locale

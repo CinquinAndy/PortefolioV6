@@ -6,7 +6,7 @@ import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import CoursePage from './page-client'
 
-export const revalidate = 43200 // 12 hours
+export const revalidate = 60 // 1 minute for faster updates from CMS
 
 interface PageParams {
 	locale: Locale
