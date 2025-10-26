@@ -129,8 +129,8 @@ importers:
         specifier: 0.34.4
         version: 0.34.4
       simple-icons:
-        specifier: 15.17.0
-        version: 15.17.0
+        specifier: 15.18.0
+        version: 15.18.0
       special-card:
         specifier: 2.1.4
         version: 2.1.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1621,8 +1621,8 @@ packages:
     resolution: {integrity: sha512-FUH39xp3SBPnxWvd5iib1X8XY7J0K0X7d93sie9CJg2PO8/7gmg89Nve6OjItK53/MlAushNNxteBYfM6DEuoA==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
 
-  simple-icons@15.17.0:
-    resolution: {integrity: sha512-viOcugYj+JFYVWJvDh4Ph1xHk9iTGhzt+NoPrfAQYSCADvmZFSQUWyKEbSMuqVRUsaRgvADn+Cczysemsf1N3Q==}
+  simple-icons@15.18.0:
+    resolution: {integrity: sha512-lYpvaIuZZr6N50YSdYZQzrKccSSF3dqcgcoz2vMKVQCc/fJWD8nFszJVZz2tCDTSu082rqRYfuYRUPhjdixDAA==}
     engines: {node: '>=0.12.18'}
 
   source-map-js@1.2.1:
@@ -3370,7 +3370,7 @@ snapshots:
       '@img/sharp-win32-ia32': 0.34.4
       '@img/sharp-win32-x64': 0.34.4
 
-  simple-icons@15.17.0: {}
+  simple-icons@15.18.0: {}
 
   source-map-js@1.2.1: {}
 
