@@ -14,7 +14,7 @@ interface RealisationsSliderSectionProps {
 function RealisationsSliderSection({
 	realisations,
 	content_website,
-}: RealisationsSliderSectionProps): React.JSX.Element {
+}: RealisationsSliderSectionProps): React.JSX.Element | null {
 	// Filter out realisations without slug
 	const validRealisations = (realisations ?? []).filter(r => r?.attributes?.slug)
 
