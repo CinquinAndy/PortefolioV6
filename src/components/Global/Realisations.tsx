@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type React from 'react'
 import MasonryGrid from '@/components/ui/masonry-grid'
+import { RealisationsSlider } from '@/components/ui/realisations-slider'
 import { replaceTitle } from '@/services/utils'
 import type { ContentWebsite, Realisation } from '@/types/strapi'
 
@@ -12,9 +13,16 @@ interface RealisationsProps {
 	realisations?: Realisation[]
 	isHome?: boolean
 	content_website?: ContentWebsite
+	useSlider?: boolean
 }
 
-function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): React.JSX.Element {
+function Realisations({
+	slice,
+	realisations,
+	isHome,
+	content_website,
+	useSlider = false,
+}: RealisationsProps): React.JSX.Element {
 	// Filter out realisations without slug and then slice if needed
 	const validRealisations = (realisations ?? []).filter(r => r?.attributes?.slug)
 	const displayRealisations = slice != null && validRealisations ? validRealisations.slice(0, slice) : validRealisations
@@ -51,44 +59,48 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				</div>
 			)}
 			<div className="mt-10 flex w-full justify-center xl:mt-20">
-				<MasonryGrid
-					items={displayRealisations}
-					className="columns-1 md:columns-2 2xl:columns-3"
-					gap="8rem"
-					staggerDelay={0.08}
-					disable3DAnimation={false}
-					getItemHref={realisation => {
-						const slug = realisation?.attributes?.slug
-						return slug ? `/portefolio/${slug}` : undefined
-					}}
-					renderItem={realisation => (
-						<div className="relative flex w-full flex-col">
-							<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
-								{realisation?.attributes?.title}
-							</h2>
-							<div className={'w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'}>
-								<div className="custom-card shadow-innercustom relative z-10 my-2 aspect-video w-full brightness-90">
-									<Image
-										alt={realisation?.attributes?.image_presentation?.data?.attributes?.alternativeText ?? ''}
-										className="z-20 h-full w-full object-cover"
-										fill={true}
-										sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
-										src={realisation?.attributes?.image_presentation?.data?.attributes?.url ?? ''}
-										priority={false}
-									/>
-									<div
-										className={
-											'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
-										}
-									/>
+				{useSlider ? (
+					<RealisationsSlider realisations={displayRealisations} />
+				) : (
+					<MasonryGrid
+						items={displayRealisations}
+						className="columns-1 md:columns-2 2xl:columns-3"
+						gap="8rem"
+						staggerDelay={0.08}
+						disable3DAnimation={false}
+						getItemHref={realisation => {
+							const slug = realisation?.attributes?.slug
+							return slug ? `/portefolio/${slug}` : undefined
+						}}
+						renderItem={realisation => (
+							<div className="relative flex w-full flex-col">
+								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
+									{realisation?.attributes?.title}
+								</h2>
+								<div className={'w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'}>
+									<div className="custom-card shadow-innercustom relative z-10 my-2 aspect-video w-full brightness-90">
+										<Image
+											alt={realisation?.attributes?.image_presentation?.data?.attributes?.alternativeText ?? ''}
+											className="z-20 h-full w-full object-cover"
+											fill={true}
+											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+											src={realisation?.attributes?.image_presentation?.data?.attributes?.url ?? ''}
+											priority={false}
+										/>
+										<div
+											className={
+												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
+											}
+										/>
+									</div>
 								</div>
+								<h2 className="z-30 w-full pt-6 pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+									{realisation?.attributes?.subtitle}
+								</h2>
 							</div>
-							<h2 className="z-30 w-full pt-6 pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
-								{realisation?.attributes?.subtitle}
-							</h2>
-						</div>
-					)}
-				/>
+						)}
+					/>
+				)}
 			</div>
 		</section>
 	)
