@@ -55,7 +55,7 @@ export function BreadcrumbNav({ realisations, currentSlug, locale }: BreadcrumbN
 							<Link
 								aria-current={link.current ? 'page' : undefined}
 								className={`ml-2 text-xs font-bold lg:ml-4 lg:text-sm ${
-									link.current ? 'text-gray-400' : 'text-gray-50 hover:underline'
+									link.current ? 'text-white underline' : 'text-gray-50 hover:underline'
 								}`}
 								href={link.href}
 							>
