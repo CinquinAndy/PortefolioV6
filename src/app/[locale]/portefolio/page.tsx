@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
@@ -18,6 +19,12 @@ export const revalidate = 60
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
+	
+	// Validate locale
+	if (!localesConstant.includes(locale as Locale)) {
+		return {}
+	}
+	
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 
@@ -50,6 +57,12 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
 	const { locale } = await params
+	
+	// Validate locale - return 404 for invalid locales like .map files
+	if (!localesConstant.includes(locale as Locale)) {
+		notFound()
+	}
+	
 	const content_website_response = await getContentWebsite(locale as Locale)
 	const content_website = getResponseData(content_website_response)
 

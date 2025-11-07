@@ -3,8 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type React from 'react'
-import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
-import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
 import MasonryGrid from '@/components/ui/masonry-grid'
 import { replaceTitle } from '@/services/utils'
 import type { ContentWebsite, Realisation } from '@/types/strapi'
@@ -59,38 +57,43 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 					gap="8rem"
 					staggerDelay={0.08}
 					disable3DAnimation={false}
-					renderItem={(realisation, _index) => (
-						<Link
-							className="relative flex w-full flex-col"
-							href={`/portefolio/${realisation?.attributes?.slug}`}
-							key={realisation?.id}
-						>
+					renderItem={(realisation, _index) => {
+						const slug = realisation?.attributes?.slug
+						// Fallback to # if slug is missing (should not happen due to filter, but safety)
+						const href = slug ? `/portefolio/${slug}` : '#'
+						
+						return (
+							<Link
+								className="relative flex w-full flex-col"
+								href={href}
+								key={realisation?.id}
+							>
 							<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 								{realisation?.attributes?.title}
 							</h2>
 							<div className={'w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'}>
-								<ComponentLoadComponent FallBack={ArticleRealisationSkeleton}>
-									<div className="custom-card shadow-innercustom relative z-10 my-2 aspect-video w-full brightness-90">
-										<Image
-											alt={realisation?.attributes?.image_presentation?.data?.attributes?.alternativeText ?? ''}
-											className="z-20 h-full w-full object-cover"
-											fill={true}
-											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
-											src={realisation?.attributes?.image_presentation?.data?.attributes?.url ?? ''}
-										/>
-										<div
-											className={
-												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
-											}
-										/>
-									</div>
-								</ComponentLoadComponent>
+								<div className="custom-card shadow-innercustom relative z-10 my-2 aspect-video w-full brightness-90">
+									<Image
+										alt={realisation?.attributes?.image_presentation?.data?.attributes?.alternativeText ?? ''}
+										className="z-20 h-full w-full object-cover"
+										fill={true}
+										sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+										src={realisation?.attributes?.image_presentation?.data?.attributes?.url ?? ''}
+										priority={false}
+									/>
+									<div
+										className={
+											'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
+										}
+									/>
+								</div>
 							</div>
 							<h2 className="z-30 w-full pt-6 pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 								{realisation?.attributes?.subtitle}
 							</h2>
 						</Link>
-					)}
+						)
+					}}
 				/>
 			</div>
 		</section>
