@@ -47,18 +47,14 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 						<ChevronRightIcon className={'h-6 w-6 md:h-8 md:w-8'} />
 					</div>
 				</div>
-				<button
-					type="button"
+				<div
 					className={
 						'custom-button-icons relative flex items-center gap-4 rounded border border-indigo-600 bg-transparent px-6 py-2 text-xs xl:px-8 xl:py-2 xl:text-sm'
 					}
-					onClick={() => {
-						handleClick()
-					}}
 				>
 					{content_website?.attributes?.content_realisations?.btn_galery?.label}
 					<CameraIcon className={'absolute -right-2 -top-2 h-4 w-4 rotate-6'} />
-				</button>
+				</div>
 			</div>
 			<Galery
 				galery={processedRealisation?.attributes?.galery?.data}

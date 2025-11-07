@@ -20,6 +20,7 @@ import { replaceTitle } from '@/services/utils'
 import type { Locale, Realisation, Techno } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
+import Image from 'next/image'
 
 interface RealisationSlugParams {
 	slug: string
@@ -36,7 +37,6 @@ export async function generateMetadata({ params }: { params: Promise<Realisation
 	const realisations = getResponseData(realisationResponse)
 	const realisation = realisations?.[0]
 
-	// conditional slug, make en and fr slugs available
 	let _slug = ''
 	let slugAlternate = ''
 	if (locale === 'fr') {
@@ -108,6 +108,8 @@ export default async function Page({ params }: RealisationPageProps) {
 				content_website={content_website}
 				h1={processedRealisation?.data?.attributes?.title}
 				isHome={false}
+				image={processedRealisation?.data?.attributes?.image_presentation?.data?.attributes?.url}
+				alt={processedRealisation?.data?.attributes?.image_presentation?.data?.attributes?.alternativeText}
 			/>
 			<div>
 				<div className={'relative'}>
@@ -125,7 +127,7 @@ export default async function Page({ params }: RealisationPageProps) {
 
 							<h2
 								className={
-									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
+									'font-display! text-lg font-black md:text-3xl *:font-display! *:text-lg *:font-black md:*:text-3xl'
 								}
 								dangerouslySetInnerHTML={{
 									__html: replaceTitle(content_website?.attributes?.content_realisations?.title_content ?? ''),
