@@ -37,11 +37,11 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
 								</svg>
 							)}
 							{!isLast && item.href ? (
-								<Link href={item.href} className="text-slate-400 hover:text-white transition-colors">
+								<Link href={item.href} className="text-slate-50 hover:text-white transition-colors">
 									{item.label}
 								</Link>
 							) : (
-								<span className={isLast ? 'text-white font-medium' : 'text-slate-400'}>{item.label}</span>
+								<span className={isLast ? 'text-white font-medium' : 'text-slate-50'}>{item.label}</span>
 							)}
 						</li>
 					)
