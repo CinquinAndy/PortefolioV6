@@ -44,7 +44,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 	const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg'])
 	const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
 
-	const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement>) => {
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
 		const currentRef = href ? linkRef.current : divRef.current
 		if (!currentRef || !isHovered) return
 		const { left, top, width, height } = currentRef.getBoundingClientRect()
@@ -65,24 +65,16 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 		y.set(0)
 	}
 
-	// Shared styles and props
-	const sharedStyle = {
+	// Shared animation style for 3D effect (must be separate for framer-motion)
+	const innerMotionStyle = {
 		rotateX,
 		rotateY,
 		transformStyle: 'preserve-3d' as const,
 	}
 
-	const sharedProps = {
-		onMouseEnter: handleMouseEnter,
-		onMouseMove: handleMouseMove,
-		onMouseLeave: handleMouseLeave,
-		whileTap: { scale: 0.95 },
-		className: 'group relative block h-full w-full',
-		style: {
-			...sharedStyle,
-			pointerEvents: 'auto' as const,
-			cursor: 'pointer',
-		},
+	const containerStyle = {
+		perspective: '1000px',
+		transformStyle: 'preserve-3d' as const,
 	}
 
 	// If 3D is disabled, return simple wrapper with hover effect
@@ -119,18 +111,45 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 		)
 	}
 
-	// 3D animation enabled - Link or div handles all events directly
+	// 3D animation enabled - Link parent with perspective, div child with rotation
 	if (href) {
 		return (
-			<MotionLink href={href} ref={linkRef} {...sharedProps}>
-				{children}
+			<MotionLink 
+				href={href}
+				ref={linkRef}
+				style={containerStyle}
+				onMouseEnter={handleMouseEnter}
+				onMouseMove={handleMouseMove}
+				onMouseLeave={handleMouseLeave}
+				whileTap={{ scale: 0.95 }}
+				className="group relative block h-full w-full"
+			>
+				<motion.div 
+					style={innerMotionStyle}
+					className="h-full w-full"
+				>
+					{children}
+				</motion.div>
 			</MotionLink>
 		)
 	}
 
 	return (
-		<motion.div ref={divRef} {...sharedProps}>
-			{children}
+		<motion.div 
+			ref={divRef}
+			style={containerStyle}
+			onMouseEnter={handleMouseEnter}
+			onMouseMove={handleMouseMove}
+			onMouseLeave={handleMouseLeave}
+			whileTap={{ scale: 0.95 }}
+			className="group relative block h-full w-full"
+		>
+			<motion.div 
+				style={innerMotionStyle}
+				className="h-full w-full"
+			>
+				{children}
+			</motion.div>
 		</motion.div>
 	)
 }
