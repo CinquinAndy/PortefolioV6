@@ -20,7 +20,7 @@ function RealisationsCarousel({ realisations, content_website }: RealisationsCar
 	const validRealisations = (realisations ?? []).filter(r => r?.attributes?.slug)
 
 	if (validRealisations.length === 0) {
-		return <></>
+		return null
 	}
 
 	return (
