@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 				{
 					revalidated: false,
 					message: 'Invalid or missing secret token',
-					now: Date.now()
+					now: Date.now(),
 				},
 				{ status: 401 }
 			)
@@ -132,12 +132,6 @@ export async function GET(request: NextRequest) {
 			tag: 'POST /api/revalidate?secret=YOUR_SECRET&tag=courses',
 			tags: 'POST /api/revalidate?secret=YOUR_SECRET&tags=courses,articles',
 		},
-		availableTags: [
-			'courses',
-			'articles',
-			'realisations',
-			'content-website',
-			'strapi-content',
-		],
+		availableTags: ['courses', 'articles', 'realisations', 'content-website', 'strapi-content'],
 	})
 }

@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { type ReactNode, useLayoutEffect, useState } from 'react'
-import type { Locale } from '@/types/strapi'
 
 const BREAKPOINTS = {
 	xl: 1536,
@@ -11,12 +10,11 @@ const BREAKPOINTS = {
 
 interface MasonryGridProps<T> {
 	renderItem: (item: T, index: number) => ReactNode
-	locale?: Locale
 	items: T[]
 	initialColumns?: number
 }
 
-export function MasonryGrid<T>({ renderItem, locale = 'en', items, initialColumns = 3 }: MasonryGridProps<T>) {
+export function MasonryGrid<T>({ renderItem, items, initialColumns = 3 }: MasonryGridProps<T>) {
 	const [columns, setColumns] = useState<number>(initialColumns)
 	const [isClient, setIsClient] = useState<boolean>(false)
 

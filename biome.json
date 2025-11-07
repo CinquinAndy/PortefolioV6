@@ -1,10 +1,20 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
-	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+	"$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true,
+		"defaultBranch": "main"
+	},
 	"files": {
-		"ignoreUnknown": false,
+		"ignoreUnknown": true,
 		"includes": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx"],
-		"maxSize": 1048576
+		"maxSize": 10485760
+	},
+	"html": {
+		"formatter": {
+			"indentScriptAndStyle": true
+		}
 	},
 	"formatter": {
 		"enabled": true,
@@ -15,11 +25,18 @@
 		"lineWidth": 120,
 		"attributePosition": "auto",
 		"bracketSameLine": false,
-		"bracketSpacing": true,
-		"useEditorconfig": true
+		"bracketSpacing": true
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
 	},
 	"linter": {
 		"enabled": true,
+		"domains": {
+			"next": "recommended"
+		},
 		"rules": {
 			"recommended": true,
 			"correctness": {
@@ -32,7 +49,8 @@
 			},
 			"style": {
 				"useConst": "error",
-				"useTemplate": "error"
+				"useTemplate": "error",
+				"noNonNullAssertion": "off"
 			},
 			"suspicious": {
 				"noArrayIndexKey": "warn",
@@ -40,6 +58,9 @@
 			},
 			"security": {
 				"noDangerouslySetInnerHtml": "off"
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "off"
 			}
 		}
 	},
@@ -54,11 +75,6 @@
 			"quoteStyle": "single",
 			"attributePosition": "auto",
 			"bracketSpacing": true
-		}
-	},
-	"html": {
-		"formatter": {
-			"selfCloseVoidElements": "always"
 		}
 	},
 	"assist": {
