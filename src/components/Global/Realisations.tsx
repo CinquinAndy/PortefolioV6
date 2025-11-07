@@ -21,18 +21,6 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 	const validRealisations = (realisations ?? []).filter(r => r?.attributes?.slug)
 	const displayRealisations = slice != null && validRealisations ? validRealisations.slice(0, slice) : validRealisations
 
-	// Debug logs
-	console.log('=== Realisations Component Debug ===')
-	console.log('Realisations received:', realisations?.length ?? 0)
-	console.log('Valid realisations (with slug):', validRealisations.length)
-	console.log('Display realisations:', displayRealisations.length)
-	console.log('Slice value:', slice)
-	console.log('isHome:', isHome)
-	if (realisations && realisations.length > 0) {
-		console.log('First realisation slug:', realisations[0]?.attributes?.slug)
-	}
-	console.log('=== End Realisations Debug ===')
-
 	return (
 		<section className="w-full p-4 md:p-20">
 			{/*// <!-- Last projects -->*/}
@@ -70,6 +58,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 					className="columns-1 md:columns-2 2xl:columns-3"
 					gap="8rem"
 					staggerDelay={0.08}
+					disable3DAnimation={true}
 					renderItem={(realisation, _index) => (
 						<Link
 							className="relative flex w-full flex-col"

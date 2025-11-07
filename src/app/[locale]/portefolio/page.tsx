@@ -56,17 +56,6 @@ export default async function Page({ params }: PageProps) {
 	const realisations_response = await getRealisations(locale as Locale)
 	const realisations = getResponseData(realisations_response)
 
-	// Debug logs
-	console.log('=== Portfolio Page Debug ===')
-	console.log('Locale:', locale)
-	console.log('Realisations response:', JSON.stringify(realisations_response, null, 2))
-	console.log('Realisations data:', JSON.stringify(realisations, null, 2))
-	console.log('Realisations count:', realisations?.length ?? 0)
-	if (realisations && realisations.length > 0) {
-		console.log('First realisation:', JSON.stringify(realisations[0], null, 2))
-	}
-	console.log('=== End Debug ===')
-
 	return (
 		<>
 			<Nav
