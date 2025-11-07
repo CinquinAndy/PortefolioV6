@@ -103,7 +103,6 @@ export function BlogContent({ locale, articles }: BlogContentProps) {
 								<MasonryGrid
 									initialColumns={getInitialColumns()}
 									items={paginatedArticles}
-									locale={locale}
 									renderItem={article => <ArticleCard article={article} locale={locale} />}
 								/>
 							</div>
