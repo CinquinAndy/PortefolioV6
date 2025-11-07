@@ -22,7 +22,7 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	if (disable3D) {
 		return (
 			<motion.div
-				className="relative h-full w-full cursor-pointer"
+				className="relative h-full w-full"
 				whileHover={{
 					y: -8,
 					transition: { duration: 0.3, ease: 'easeOut' },
@@ -79,7 +79,7 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 				transformStyle: 'preserve-3d',
 				perspective: '1000px',
 			}}
-			className="group relative cursor-pointer"
+			className="group relative"
 		>
 			<motion.div
 				style={{
@@ -105,7 +105,7 @@ const MasonryGrid = <T,>({
 	disable3DAnimation = false,
 }: MasonryGridProps<T>) => {
 	const containerRef = React.useRef(null)
-	const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+	const isInView = useInView(containerRef, { once: true, amount: 0.05, margin: '0px 0px -100px 0px' })
 
 	const containerVariants = {
 		hidden: {},
