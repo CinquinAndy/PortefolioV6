@@ -6,7 +6,7 @@ import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import Nav from '@/components/Global/Nav'
 import { PopupMainCat } from '@/components/Global/PopupMainCat'
-import Realisations from '@/components/Global/Realisations'
+import RealisationsCarousel from '@/components/Global/RealisationsCarousel'
 import { ServicesGrid } from '@/components/Global/ServicesGrid'
 import { getArticles, getContentWebsite, getRealisations, getServicesGrid } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
@@ -88,7 +88,7 @@ export default async function Page({ params }: HomePageProps) {
 
 			<div className={'relative'}>
 				<ServicesGrid content_website={content_website} services={safeServices} />
-				<Realisations content_website={content_website} isHome={true} realisations={safeRealisations} slice={3} />
+				<RealisationsCarousel content_website={content_website} realisations={safeRealisations} />
 				<Articles articles={safeArticles} content_website={content_website} isHome={true} slice={3} />
 				<Cta content_website={content_website} />
 			</div>

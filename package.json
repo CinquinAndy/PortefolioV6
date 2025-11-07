@@ -26,6 +26,7 @@
     "test:visual:check-regressions": "playwright test tests/visual-regression-tests.spec.js"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.27.1",
     "@headlessui/react": "2.2.9",
     "@heroicons/react": "2.2.0",
     "@hookform/resolvers": "5.2.2",
@@ -35,6 +36,7 @@
     "@tailwindcss/typography": "0.5.19",
     "@vercel/analytics": "1.5.0",
     "@vercel/speed-insights": "1.2.0",
+    "carousel": "link:@ark-ui/react/carousel",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "critters": "0.0.25",

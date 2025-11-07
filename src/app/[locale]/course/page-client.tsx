@@ -96,7 +96,6 @@ export default function CoursePage({ params, coursesData, totalChapters, totalLe
 									<MasonryGrid
 										initialColumns={getInitialColumns()}
 										items={coursesData}
-										locale={locale}
 										renderItem={course => <CourseCard course={course} locale={locale} />}
 									/>
 								</div>

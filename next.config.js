@@ -20,7 +20,12 @@ const nextConfig = {
 				protocol: 'https',
 				hostname: '**',
 			},
+			{
+				protocol: 'http',
+				hostname: 'localhost',
+			},
 		],
+		qualities: [10, 85, 90, 100],
 	},
 	experimental: {
 		optimizeCss: true,

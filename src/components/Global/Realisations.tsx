@@ -1,9 +1,11 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import type React from 'react'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
-
 import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
+import MasonryGrid from '@/components/ui/masonry-grid'
 import { replaceTitle } from '@/services/utils'
 import type { ContentWebsite, Realisation } from '@/types/strapi'
 
@@ -15,19 +17,21 @@ interface RealisationsProps {
 }
 
 function Realisations({ slice, realisations, isHome, content_website }: RealisationsProps): React.JSX.Element {
-	realisations = slice != null && realisations ? realisations.slice(0, slice) : (realisations ?? [])
-	const gridTemplateCustom = (index: number): string => {
-		switch (index % 3) {
-			case 0:
-				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-10 2xl:col-start-1 2xl:col-end-6'
-			case 1:
-				return 'col-start-1 col-end-13 md:col-start-4 md:col-end-13 2xl:col-start-5 2xl:col-end-13'
-			case 2:
-				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-2 2xl:col-end-12'
-			default:
-				return 'col-start-1 col-end-13 md:col-start-1 md:col-end-13 2xl:col-start-1 2xl:col-end-13'
-		}
+	// Filter out realisations without slug and then slice if needed
+	const validRealisations = (realisations ?? []).filter(r => r?.attributes?.slug)
+	const displayRealisations = slice != null && validRealisations ? validRealisations.slice(0, slice) : validRealisations
+
+	// Debug logs
+	console.log('=== Realisations Component Debug ===')
+	console.log('Realisations received:', realisations?.length ?? 0)
+	console.log('Valid realisations (with slug):', validRealisations.length)
+	console.log('Display realisations:', displayRealisations.length)
+	console.log('Slice value:', slice)
+	console.log('isHome:', isHome)
+	if (realisations && realisations.length > 0) {
+		console.log('First realisation slug:', realisations[0]?.attributes?.slug)
 	}
+	console.log('=== End Realisations Debug ===')
 
 	return (
 		<section className="w-full p-4 md:p-20">
@@ -36,7 +40,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				<div className="mt-[100px] flex justify-between">
 					<div className="w-1/2">
 						<h2
-							className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display *:text-2xl *:normal-case xl:*:text-5xl"
+							className="font-display! text-2xl normal-case leading-snug xl:text-5xl *:font-display! *:text-2xl *:normal-case xl:*:text-5xl"
 							dangerouslySetInnerHTML={{
 								__html: replaceTitle(content_website?.attributes?.content_home?.title_realisation ?? ''),
 							}}
@@ -61,42 +65,44 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				</div>
 			)}
 			<div className="mt-10 flex w-full justify-center xl:mt-20">
-				<div className="grid w-full grid-cols-12 gap-[20px] xl:gap-[60px] md:gap-[40px] 2xl:gap-[80px] 2xl:gap-y-[150px]">
-					{realisations.map((realisation, index) => {
-						return (
-							<Link
-								className={`${gridTemplateCustom(index)} relative flex aspect-video h-[75vh] w-full flex-col items-center justify-center p-10 sm:h-[55vh] lg:h-auto`}
-								href={`/portefolio/${realisation?.attributes?.slug}`}
-								key={realisation?.id}
-							>
-								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
-									{realisation?.attributes?.title}
-								</h2>
-								<div className={'h-full w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'}>
-									<ComponentLoadComponent FallBack={ArticleRealisationSkeleton}>
-										<div className="custom-card shadow-innercustom relative z-10 my-2 h-full w-full brightness-90">
-											<Image
-												alt={realisation?.attributes?.image_presentation?.data?.attributes?.alternativeText ?? ''}
-												className="z-20 h-full w-full object-cover"
-												fill={true}
-												sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
-												src={realisation?.attributes?.image_presentation?.data?.attributes?.url ?? ''}
-											/>
-											<div
-												className={
-													'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
-												}
-											/>
-										</div>
-									</ComponentLoadComponent>
-								</div>
-								<h2 className="z-30 w-full pt-6 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
-									{realisation?.attributes?.subtitle}
-								</h2>
-							</Link>
-						)
-					})}
-				</div>
+				<MasonryGrid
+					items={displayRealisations}
+					className="columns-1 md:columns-2 2xl:columns-3"
+					gap="1.5rem"
+					staggerDelay={0.08}
+					renderItem={(realisation, _index) => (
+						<Link
+							className="relative flex w-full flex-col"
+							href={`/portefolio/${realisation?.attributes?.slug}`}
+							key={realisation?.id}
+						>
+							<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
+								{realisation?.attributes?.title}
+							</h2>
+							<div className={'w-full shadow-[0_0_35px_0_rgba(27,31,76,1)]'}>
+								<ComponentLoadComponent FallBack={ArticleRealisationSkeleton}>
+									<div className="custom-card shadow-innercustom relative z-10 my-2 aspect-video w-full brightness-90">
+										<Image
+											alt={realisation?.attributes?.image_presentation?.data?.attributes?.alternativeText ?? ''}
+											className="z-20 h-full w-full object-cover"
+											fill={true}
+											sizes="(min-width: 480px ) 50vw, (min-width: 728px) 33vw, (min-width: 976px) 25vw, 100vw"
+											src={realisation?.attributes?.image_presentation?.data?.attributes?.url ?? ''}
+										/>
+										<div
+											className={
+												'custom-image-hover absolute left-0 top-0 z-20 h-full w-full backdrop-brightness-75 backdrop-grayscale'
+											}
+										/>
+									</div>
+								</ComponentLoadComponent>
+							</div>
+							<h2 className="z-30 w-full pt-6 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+								{realisation?.attributes?.subtitle}
+							</h2>
+						</Link>
+					)}
+				/>
 			</div>
 		</section>
 	)
