@@ -57,17 +57,12 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 					gap="8rem"
 					staggerDelay={0.08}
 					disable3DAnimation={false}
-					renderItem={(realisation, _index) => {
+					getItemHref={realisation => {
 						const slug = realisation?.attributes?.slug
-						// Fallback to # if slug is missing (should not happen due to filter, but safety)
-						const href = slug ? `/portefolio/${slug}` : '#'
-						
-						return (
-							<Link
-								className="relative flex w-full flex-col"
-								href={href}
-								key={realisation?.id}
-							>
+						return slug ? `/portefolio/${slug}` : undefined
+					}}
+					renderItem={realisation => (
+						<div className="relative flex w-full flex-col">
 							<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 								{realisation?.attributes?.title}
 							</h2>
@@ -91,9 +86,8 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 							<h2 className="z-30 w-full pt-6 pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 								{realisation?.attributes?.subtitle}
 							</h2>
-						</Link>
-						)
-					}}
+						</div>
+					)}
 				/>
 			</div>
 		</section>

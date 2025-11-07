@@ -1,5 +1,6 @@
 'use client'
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import Link from 'next/link'
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
@@ -16,28 +17,21 @@ interface MasonryGridProps<T> {
 	disable3DAnimation?: boolean
 }
 
-// A self-contained GridItem component to handle advanced animations
-const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; disable3D?: boolean }) => {
-	// If 3D is disabled, return simple wrapper with hover effect
-	if (disable3D) {
-		return (
-			<motion.div
-				className="relative h-full w-full"
-				whileHover={{
-					y: -8,
-					transition: { duration: 0.3, ease: 'easeOut' },
-				}}
-				whileTap={{ scale: 0.98 }}
-			>
-				{children}
-			</motion.div>
-		)
-	}
+interface GridItemProps {
+	children: React.ReactNode
+	disable3D?: boolean
+	href?: string
+}
 
+// Create animated Link component
+const MotionLink = motion(Link)
+
+// A self-contained GridItem component to handle advanced animations
+const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 	const ref = React.useRef<HTMLDivElement>(null)
 	const [isHovered, setIsHovered] = React.useState(false)
 
-	// Motion values to track mouse position
+	// Motion values to track mouse position (always initialize hooks)
 	const x = useMotionValue(0)
 	const y = useMotionValue(0)
 
@@ -69,6 +63,30 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 		y.set(0)
 	}
 
+	// If 3D is disabled, return simple wrapper with hover effect
+	if (disable3D) {
+		const Component = href ? MotionLink : motion.div
+		const componentProps = href ? { href } : {}
+
+		return (
+			<Component
+				{...componentProps}
+				className="relative block h-full w-full"
+				whileHover={{
+					y: -8,
+					transition: { duration: 0.3, ease: 'easeOut' },
+				}}
+				whileTap={{ scale: 0.98 }}
+			>
+				{children}
+			</Component>
+		)
+	}
+
+	// 3D animation enabled
+	const InnerComponent = href ? MotionLink : motion.div
+	const innerProps = href ? { href } : {}
+
 	return (
 		<motion.div
 			ref={ref}
@@ -81,19 +99,24 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 			}}
 			className="group relative"
 		>
-			<motion.div
+			<InnerComponent
+				{...innerProps}
 				style={{
 					rotateX,
 					rotateY,
 					transformStyle: 'preserve-3d',
 				}}
 				whileTap={{ scale: 0.95 }}
-				className="h-full w-full"
+				className="block h-full w-full"
 			>
 				{children}
-			</motion.div>
+			</InnerComponent>
 		</motion.div>
 	)
+}
+
+interface ExtendedMasonryGridProps<T> extends MasonryGridProps<T> {
+	getItemHref?: (item: T, index: number) => string | undefined
 }
 
 const MasonryGrid = <T,>({
@@ -103,7 +126,8 @@ const MasonryGrid = <T,>({
 	gap = '1rem',
 	staggerDelay = 0.05,
 	disable3DAnimation = false,
-}: MasonryGridProps<T>) => {
+	getItemHref,
+}: ExtendedMasonryGridProps<T>) => {
 	const containerRef = React.useRef(null)
 	const isInView = useInView(containerRef, { once: true, amount: 0.05, margin: '0px 0px -100px 0px' })
 
@@ -139,17 +163,22 @@ const MasonryGrid = <T,>({
 			variants={containerVariants}
 			role="list"
 		>
-			{items.map((item, index) => (
-				<motion.div
-					// biome-ignore lint/suspicious/noArrayIndexKey: Items are dynamically rendered based on external data; no stable unique identifier available
-					key={index}
-					className="mb-4 break-inside-avoid"
-					variants={itemVariants}
-					role="listitem"
-				>
-					<GridItem disable3D={disable3DAnimation}>{renderItem(item, index)}</GridItem>
-				</motion.div>
-			))}
+			{items.map((item, index) => {
+				const href = getItemHref?.(item, index)
+				return (
+					<motion.div
+						// biome-ignore lint/suspicious/noArrayIndexKey: Items are dynamically rendered based on external data; no stable unique identifier available
+						key={index}
+						className="mb-4 break-inside-avoid"
+						variants={itemVariants}
+						role="listitem"
+					>
+						<GridItem disable3D={disable3DAnimation} href={href}>
+							{renderItem(item, index)}
+						</GridItem>
+					</motion.div>
+				)
+			})}
 		</motion.div>
 	)
 }

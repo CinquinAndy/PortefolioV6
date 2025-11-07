@@ -60,10 +60,7 @@ function RealisationsCarousel({ realisations, content_website }: RealisationsCar
 					<Carousel.ItemGroup className="overflow-hidden">
 						{validRealisations.map((realisation, index) => (
 							<Carousel.Item key={realisation.id} index={index}>
-								<Link
-									className="relative flex w-full flex-col"
-									href={`/portefolio/${realisation?.attributes?.slug}`}
-								>
+								<Link className="relative flex w-full flex-col" href={`/portefolio/${realisation?.attributes?.slug}`}>
 									<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 										{realisation?.attributes?.title}
 									</h2>
