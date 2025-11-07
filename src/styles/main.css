@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@plugin '@tailwindcss/typography';
-@plugin '@tailwindcss/forms';
-@plugin 'tailwindcss-animate';
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@plugin "tailwindcss-animate";
 
 /* Safelist for dynamically generated classes */
 @source inline("fill-indigo-500 fill-sky-500 fill-lime-500 fill-rose-500 fill-amber-500 fill-emerald-500 fill-cyan-500 fill-violet-500 fill-fuchsia-500 fill-orange-500 fill-teal-500");

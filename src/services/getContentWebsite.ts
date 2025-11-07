@@ -36,7 +36,7 @@ export async function fetchAPI<T = unknown>(
 			next: {
 				revalidate: 60, // Changed from 86400 (24h) to 60 seconds
 				tags: [resourceType, 'strapi-content'], // Add cache tags for targeted revalidation
-				...options.next
+				...options.next,
 			},
 			method: options.method ?? 'GET',
 			headers: {
