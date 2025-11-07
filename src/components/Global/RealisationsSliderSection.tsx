@@ -28,7 +28,7 @@ function RealisationsSliderSection({
 			<div className="mt-[100px] flex flex-col md:flex-row justify-between gap-8 md:gap-4">
 				<div className="w-full md:w-1/2">
 					<h2
-						className="!font-display text-2xl normal-case leading-snug xl:text-5xl [&>*]:!font-display *:text-2xl *:normal-case xl:*:text-5xl"
+						className="font-display! text-2xl normal-case leading-snug xl:text-5xl *:font-display! *:text-2xl *:normal-case xl:*:text-5xl"
 						dangerouslySetInnerHTML={{
 							__html: replaceTitle(content_website?.attributes?.content_home?.title_realisation ?? ''),
 						}}
