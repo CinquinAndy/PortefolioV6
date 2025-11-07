@@ -18,6 +18,22 @@ interface MasonryGridProps<T> {
 
 // A self-contained GridItem component to handle advanced animations
 const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; disable3D?: boolean }) => {
+	// If 3D is disabled, return simple wrapper with hover effect
+	if (disable3D) {
+		return (
+			<motion.div
+				className="relative h-full w-full"
+				whileHover={{
+					y: -8,
+					transition: { duration: 0.3, ease: 'easeOut' },
+				}}
+				whileTap={{ scale: 0.98 }}
+			>
+				{children}
+			</motion.div>
+		)
+	}
+
 	const ref = React.useRef<HTMLDivElement>(null)
 
 	// Motion values to track mouse position
@@ -33,7 +49,7 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
 
 	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		if (disable3D || !ref.current) return
+		if (!ref.current) return
 		const { left, top, width, height } = ref.current.getBoundingClientRect()
 		const mouseX = e.clientX - left
 		const mouseY = e.clientY - top
@@ -43,14 +59,8 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	}
 
 	const handleMouseLeave = () => {
-		if (disable3D) return
 		x.set(0)
 		y.set(0)
-	}
-
-	// If 3D is disabled, return simple wrapper
-	if (disable3D) {
-		return <div className="relative h-full w-full">{children}</div>
 	}
 
 	return (
