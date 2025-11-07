@@ -1,11 +1,13 @@
 import { LinkIcon } from '@heroicons/react/20/solid'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { BreadcrumbNav } from '@/components/Global/BreadcrumbNav'
 import Cta from '@/components/Global/Cta'
 import Footer from '@/components/Global/Footer'
 import { GalerySection } from '@/components/Global/GalerySection'
 import { Layout } from '@/components/Global/Layout'
 import Nav from '@/components/Global/Nav'
+import { PrevNextNav } from '@/components/Global/PrevNextNav'
 import { TechnologyDisplay } from '@/components/Global/TechnologyDisplay'
 import {
 	getContentWebsite,
@@ -95,6 +97,10 @@ export default async function Page({ params }: RealisationPageProps) {
 	const realisationResponse = await getRealisationBySlug(slug, locale as Locale)
 	const processedRealisation = await processRealisationData(realisationResponse)
 
+	// Fetch all realisations for navigation
+	const allRealisationsResponse = await getRealisations(locale as Locale)
+	const allRealisations = getResponseData(allRealisationsResponse) ?? []
+
 	return (
 		<>
 			<Nav
@@ -112,6 +118,11 @@ export default async function Page({ params }: RealisationPageProps) {
 						/>
 
 						<div className="mx-auto max-w-3xl md:pl-20">
+							{/* Breadcrumb Navigation */}
+							<div className="mb-8">
+								<BreadcrumbNav currentSlug={slug} locale={locale} realisations={allRealisations} />
+							</div>
+
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
@@ -128,6 +139,11 @@ export default async function Page({ params }: RealisationPageProps) {
 						</div>
 
 						<div className={'flex w-full flex-col gap-6 xl:gap-8 md:pr-20 2xl:mx-auto 2xl:max-w-2xl'}>
+							{/* Previous/Next Navigation */}
+							<div className="mb-4">
+								<PrevNextNav currentSlug={slug} locale={locale} realisations={allRealisations} />
+							</div>
+
 							<h2
 								className={
 									'!font-display text-lg font-black md:text-3xl [&>*]:!font-display *:text-lg *:font-black md:*:text-3xl'
