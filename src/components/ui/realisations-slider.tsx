@@ -104,9 +104,9 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 										key={realisation.id}
 										onClick={() => handleThumbnailClick(index)}
 										className={cn(
-											'relative overflow-hidden rounded-md h-24 w-full transition-all duration-300 focus:outline-none group',
+											'relative overflow-hidden rounded-md h-24 m-0.5 w-full transition-all duration-300 focus:outline-none group',
 											isActive
-												? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-background opacity-100'
+												? 'ring-2 ring-cyan-400 opacity-100'
 												: 'opacity-70 hover:opacity-100 hover:ring-2 hover:ring-purple-400'
 										)}
 										aria-label={`Voir la réalisation ${realisation.attributes.title}`}
@@ -142,14 +142,16 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 							transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
 							className="absolute inset-0 w-full h-full rounded-lg overflow-hidden"
 						>
-							<Image
-								src={activeRealisation.attributes.image_presentation?.data?.attributes?.url ?? ''}
-								alt={activeRealisation.attributes.image_presentation?.data?.attributes?.alternativeText ?? ''}
-								fill
-								className="object-cover"
-								sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-								priority={currentIndex === 0}
-							/>
+							<Link href={`/portefolio/${activeRealisation.attributes.slug}`} className="absolute inset-0 w-full h-full">
+								<Image
+									src={activeRealisation.attributes.image_presentation?.data?.attributes?.url ?? ''}
+									alt={activeRealisation.attributes.image_presentation?.data?.attributes?.alternativeText ?? ''}
+									fill
+									className="object-cover"
+									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
+									priority={currentIndex === 0}
+								/>
+							</Link>
 						</motion.div>
 					</AnimatePresence>
 				</div>
