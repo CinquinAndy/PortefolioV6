@@ -15,7 +15,7 @@ interface RealisationsCarouselProps {
 	content_website?: ContentWebsite
 }
 
-function RealisationsCarousel({ realisations, content_website }: RealisationsCarouselProps): React.JSX.Element {
+function RealisationsCarousel({ realisations, content_website }: RealisationsCarouselProps): React.JSX.Element | null {
 	// Filter out realisations without slug
 	const validRealisations = (realisations ?? []).filter(r => r?.attributes?.slug)
 

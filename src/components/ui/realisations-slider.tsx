@@ -43,8 +43,8 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 		setCurrentIndex(index)
 	}
 
-	// Get the next 3 realisations for the thumbnails, excluding the current one
-	const thumbnailRealisations = realisations.filter((_, i) => i !== currentIndex).slice(0, 3)
+	// All realisations for the scrollable grid
+	const thumbnailRealisations = realisations
 
 	// Animation variants for the main image
 	const imageVariants = {
@@ -93,29 +93,39 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 						</h2>
 					</div>
 
-					{/* Thumbnail Navigation */}
-					<div className="flex space-x-2 mt-8 md:mt-0">
-						{thumbnailRealisations.map(realisation => {
-							// Find the original index to navigate to
-							const originalIndex = realisations.findIndex(r => r.id === realisation.id)
-							return (
-								<button
-									type="button"
-									key={realisation.id}
-									onClick={() => handleThumbnailClick(originalIndex)}
-									className="overflow-hidden rounded-md w-16 h-20 md:w-20 md:h-24 opacity-70 hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-background relative"
-									aria-label={`Voir la réalisation ${realisation.attributes.title}`}
-								>
-									<Image
-										src={realisation.attributes.image_presentation?.data?.attributes?.url ?? ''}
-										alt={realisation.attributes.image_presentation?.data?.attributes?.alternativeText ?? ''}
-										fill
-										className="object-cover"
-										sizes="(max-width: 768px) 64px, 80px"
-									/>
-								</button>
-							)
-						})}
+					{/* Thumbnail Navigation - 2x3 Scrollable Grid */}
+					<div className="max-h-[300px] overflow-y-auto scrollbar-thin scrollbar-thumb-cyan-400 scrollbar-track-gray-800 pr-2">
+						<div className="grid grid-cols-2 gap-3">
+							{thumbnailRealisations.map((realisation, index) => {
+								const isActive = index === currentIndex
+								return (
+									<button
+										type="button"
+										key={realisation.id}
+										onClick={() => handleThumbnailClick(index)}
+										className={cn(
+											'relative overflow-hidden rounded-md h-24 w-full transition-all duration-300 focus:outline-none group',
+											isActive
+												? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-background opacity-100'
+												: 'opacity-70 hover:opacity-100 hover:ring-2 hover:ring-purple-400'
+										)}
+										aria-label={`Voir la réalisation ${realisation.attributes.title}`}
+									>
+										<Image
+											src={realisation.attributes.image_presentation?.data?.attributes?.url ?? ''}
+											alt={realisation.attributes.image_presentation?.data?.attributes?.alternativeText ?? ''}
+											fill
+											className="object-cover"
+											sizes="150px"
+										/>
+										{/* Numéro en bas à droite */}
+										<span className="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-1.5 py-0.5 rounded font-mono">
+											{String(index + 1).padStart(2, '0')}/{String(realisations.length).padStart(2, '0')}
+										</span>
+									</button>
+								)
+							})}
+						</div>
 					</div>
 				</div>
 
@@ -176,23 +186,19 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 					<div className="flex items-center space-x-2 mt-8 md:mt-0">
 						<button
 							type="button"
-							className="button-purple rounded-full w-12 h-12 flex items-center justify-center"
+							className="rounded-full w-12 h-12 flex items-center justify-center bg-indigo-600 text-white hover:bg-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg"
 							onClick={handlePrev}
 							aria-label="Réalisation précédente"
 						>
-							<span className="button-purple-title">
-								<ArrowLeft className="w-5 h-5" />
-							</span>
+							<ArrowLeft className="w-5 h-5" />
 						</button>
 						<button
 							type="button"
-							className="button-cyan rounded-full w-12 h-12 flex items-center justify-center"
+							className="rounded-full w-12 h-12 flex items-center justify-center bg-cyan-600 text-white hover:bg-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg"
 							onClick={handleNext}
 							aria-label="Réalisation suivante"
 						>
-							<span className="button-cyan-title">
-								<ArrowRight className="w-5 h-5" />
-							</span>
+							<ArrowRight className="w-5 h-5" />
 						</button>
 						{activeRealisation.attributes.slug && (
 							<Link
