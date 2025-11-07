@@ -92,6 +92,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 				<MotionLink
 					href={href}
 					className="relative block h-full w-full"
+					style={{ pointerEvents: 'auto', cursor: 'pointer' }}
 					whileHover={{
 						y: -8,
 						transition: { duration: 0.3, ease: 'easeOut' },
@@ -106,6 +107,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 		return (
 			<motion.div
 				className="relative block h-full w-full"
+				style={{ pointerEvents: 'auto' }}
 				whileHover={{
 					y: -8,
 					transition: { duration: 0.3, ease: 'easeOut' },
@@ -120,14 +122,14 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 	// 3D animation enabled - Link or div handles all events directly
 	if (href) {
 		return (
-			<MotionLink href={href} ref={linkRef} style={sharedStyle} {...sharedProps}>
+			<MotionLink href={href} ref={linkRef} {...sharedProps}>
 				{children}
 			</MotionLink>
 		)
 	}
 
 	return (
-		<motion.div ref={divRef} style={sharedStyle} {...sharedProps}>
+		<motion.div ref={divRef} {...sharedProps}>
 			{children}
 		</motion.div>
 	)
