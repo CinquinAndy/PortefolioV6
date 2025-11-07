@@ -58,7 +58,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 					className="columns-1 md:columns-2 2xl:columns-3"
 					gap="8rem"
 					staggerDelay={0.08}
-					disable3DAnimation={true}
+					disable3DAnimation={false}
 					renderItem={(realisation, _index) => (
 						<Link
 							className="relative flex w-full flex-col"

@@ -866,7 +866,7 @@
 		animation: ani2 0.7s steps(70) forwards;
 	}
 
-	.custom-image-hover:hover {
+	.group:hover .custom-image-hover {
 		-webkit-animation: ani 0.7s steps(70) forwards;
 		animation: ani 0.7s steps(70) forwards;
 	}
