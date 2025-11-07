@@ -353,31 +353,31 @@ function Nav({
 				)}
 				{!isHome && (
 					<>
-					{image && (
-						<div className='absolute top-0 left-0 w-full h-full mt-20'>
-							<div className='relative w-full h-full max-w-7xl mx-auto rounded-3xl shadow-2xl brightness-50'>
-								<Image
-									alt={alt ?? 'Developer Freelance - Cinquin Andy'}
-									className="object-cover w-full h-full rounded-3xl shadow-2xl"
-									height={1920}
-									src={image}
-									width={1920}
+						{image && (
+							<div className="absolute top-0 left-0 w-full h-full mt-20 p-4 md:p-8">
+								<div className="relative w-full h-full max-w-7xl mx-auto rounded-3xl shadow-2xl brightness-50">
+									<Image
+										alt={alt ?? 'Developer Freelance - Cinquin Andy'}
+										className="object-cover w-full h-full rounded-3xl shadow-2xl"
+										height={1920}
+										src={image}
+										width={1920}
 									/>
 								</div>
-						</div>
-					)}
-					<div
-						className={`${isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
+							</div>
+						)}
+						<div
+							className={`${isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
 						>
-						<Image
-							alt="Développeur Freelance - Logo"
-							className="mb-32 ml-16 h-112 w-md -rotate-12 opacity-20 brightness-75"
-							height={450}
-							loading={'lazy'}
-							src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/LogoCinquinAndy.svg`}
-							width={450}
+							<Image
+								alt="Développeur Freelance - Logo"
+								className="mb-32 ml-16 h-112 w-md -rotate-12 opacity-20 brightness-75"
+								height={450}
+								loading={'lazy'}
+								src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/LogoCinquinAndy.svg`}
+								width={450}
 							/>
-					</div>
+						</div>
 					</>
 				)}
 				<div

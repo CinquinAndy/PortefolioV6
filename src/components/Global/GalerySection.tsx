@@ -24,7 +24,7 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 		<button
 			type="button"
 			tabIndex={0}
-			className={'shadow-innercustom relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'}
+			className={'shadow-innercustom mt-8 md:mt-0 relative mx-auto max-w-5xl cursor-pointer p-8 md:col-span-2 md:p-20'}
 			onClick={handleClick}
 			onKeyDown={e => {
 				if (e.key === 'Enter' || e.key === ' ') {
@@ -37,7 +37,7 @@ export function GalerySection({ processedRealisation, content_website }: GaleryS
 				<div className={'flex items-center gap-2'}>
 					<h2
 						className={
-							'text-md [&>*]:text-md !font-display font-black md:text-3xl [&>*]:!font-display *:font-black md:*:text-3xl'
+							'text-md *:text-md font-display! font-black md:text-3xl *:font-display! *:font-black md:*:text-3xl'
 						}
 						dangerouslySetInnerHTML={{
 							__html: replaceTitle(content_website?.attributes?.content_realisations?.title_galery ?? ''),

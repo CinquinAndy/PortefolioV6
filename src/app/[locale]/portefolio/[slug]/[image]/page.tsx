@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { LowGradientBackground } from '@/components/Global/Animations/LowGradientBackground'
 import { BackButtonComponent } from '@/components/Global/BackButton.component'
 import { ImageLoadComponent } from '@/components/Global/ImageLoad.component'
+import { VideoLoadComponent } from '@/components/Global/VideoLoad.component'
 
 import { getRealisationBySlug, getRealisations, processRealisationData } from '@/services/getContentWebsite'
 import { localesConstant } from '@/services/localesConstant'
@@ -90,6 +91,7 @@ export default async function Page({ params }: ImagePageProps) {
 		: null
 	const galery = processedRealisation?.data?.attributes?.galery?.data
 	const imageData = galery?.[parseInt(image, 10)]
+	const isVideo = imageData?.attributes?.mime?.startsWith('video/')
 
 	return (
 		<>
@@ -100,13 +102,21 @@ export default async function Page({ params }: ImagePageProps) {
 					<div className={'absolute left-0 top-0 m-8'}>
 						<BackButtonComponent />
 					</div>
-					<ImageLoadComponent
-						alt={imageData?.attributes?.alternativeText ?? 'Project Image'}
-						className={'rounded-xl p-2 sm:p-4 md:p-8 lg:p-32'}
-						height={imageData?.attributes?.height ?? 800}
-						src={imageData?.attributes?.url ?? ''}
-						width={imageData?.attributes?.width ?? 1200}
-					/>
+					{isVideo ? (
+						<VideoLoadComponent
+							className={'p-2 sm:p-4 md:p-8 lg:p-32'}
+							mime={imageData?.attributes?.mime}
+							src={imageData?.attributes?.url ?? ''}
+						/>
+					) : (
+						<ImageLoadComponent
+							alt={imageData?.attributes?.alternativeText ?? 'Project Image'}
+							className={'rounded-xl p-2 sm:p-4 md:p-8 lg:p-32'}
+							height={imageData?.attributes?.height ?? 800}
+							src={imageData?.attributes?.url ?? ''}
+							width={imageData?.attributes?.width ?? 1200}
+						/>
+					)}
 				</div>
 			</div>
 		</>
