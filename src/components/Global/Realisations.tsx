@@ -68,7 +68,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 				<MasonryGrid
 					items={displayRealisations}
 					className="columns-1 md:columns-2 2xl:columns-3"
-					gap="1.5rem"
+					gap="8rem"
 					staggerDelay={0.08}
 					renderItem={(realisation, _index) => (
 						<Link
@@ -97,7 +97,7 @@ function Realisations({ slice, realisations, isHome, content_website }: Realisat
 									</div>
 								</ComponentLoadComponent>
 							</div>
-							<h2 className="z-30 w-full pt-6 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+							<h2 className="z-30 w-full pt-6 pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 								{realisation?.attributes?.subtitle}
 							</h2>
 						</Link>
