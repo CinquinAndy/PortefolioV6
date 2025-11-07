@@ -20,7 +20,6 @@ import { replaceTitle } from '@/services/utils'
 import type { Locale, Realisation, Techno } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
-import Image from 'next/image'
 
 interface RealisationSlugParams {
 	slug: string

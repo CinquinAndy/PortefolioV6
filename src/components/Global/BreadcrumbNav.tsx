@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
 import type { Realisation } from '@/types/strapi'
+import { t } from '@/utils/translations'
 
 interface BreadcrumbNavProps {
 	realisations: Realisation[]
@@ -44,7 +45,7 @@ export function BreadcrumbNav({ realisations, currentSlug, locale }: BreadcrumbN
 					<div>
 						<Link className="custom-button-icons text-gray-50" href={`/${locale}`}>
 							<HomeIcon aria-hidden="true" className="h-4 w-4 shrink-0 lg:h-5 lg:w-5" />
-							<span className="sr-only">Home</span>
+							<span className="sr-only">{t('home', locale)}</span>
 						</Link>
 					</div>
 				</li>
