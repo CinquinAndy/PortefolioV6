@@ -21,6 +21,8 @@ interface NavProps {
 	enRedirect?: string
 	content_website?: ContentWebsite
 	locale?: string
+	image?: string
+	alt?: string
 }
 
 function Nav({
@@ -31,6 +33,8 @@ function Nav({
 	frRedirect,
 	enRedirect,
 	content_website,
+	image,
+	alt,
 }: NavProps): React.JSX.Element {
 	const [open, setOpen] = useState(false)
 	const [linkToSwitchLanguage, setLinkToSwitchLanguage] = useState('')
@@ -319,7 +323,6 @@ function Nav({
 				<h1
 					className={`${isHome ? 'sr-only' : ''} z-20 px-4 text-center text-3xl font-semibold tracking-widest uppercase md:text-4xl lg:px-8 lg:text-5xl xl:text-6xl 2xl:text-8xl`}
 				>
-					{}
 					{isHome ? content_website?.attributes?.content_home?.title_home : h1}
 				</h1>
 				{isHome && (
@@ -349,9 +352,23 @@ function Nav({
 					</div>
 				)}
 				{!isHome && (
+					<>
+					{image && (
+						<div className='absolute top-0 left-0 w-full h-full mt-20'>
+							<div className='relative w-full h-full max-w-7xl mx-auto rounded-3xl shadow-2xl brightness-50'>
+								<Image
+									alt={alt ?? 'Developer Freelance - Cinquin Andy'}
+									className="object-cover w-full h-full rounded-3xl shadow-2xl"
+									height={1920}
+									src={image}
+									width={1920}
+									/>
+								</div>
+						</div>
+					)}
 					<div
 						className={`${isHome ? 'top-1/2' : 'top-[70%] lg:top-1/2 2xl:top-[60%]'} absolute left-1/2 -z-10 flex w-3/5 -translate-x-1/2 -translate-y-1/2 transform items-center justify-start`}
-					>
+						>
 						<Image
 							alt="Développeur Freelance - Logo"
 							className="mb-32 ml-16 h-112 w-md -rotate-12 opacity-20 brightness-75"
@@ -359,8 +376,9 @@ function Nav({
 							loading={'lazy'}
 							src={`${process.env.NEXT_PUBLIC_URL}/assets/icons/LogoCinquinAndy.svg`}
 							width={450}
-						/>
+							/>
 					</div>
+					</>
 				)}
 				<div
 					className={`${isHome ? 'flex' : 'hidden'} absolute right-0 bottom-0 mb-14 flex-col items-center justify-evenly gap-8 p-4 lg:mb-0 lg:gap-10 lg:p-20 ${open ? 'pointer-events-none bottom-[-40px]' : ''}`}
