@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import type { Realisation } from '@/types/strapi'
+import { t } from '@/utils/translations'
 
 // Define the props for the slider component
 interface RealisationsSliderProps {
@@ -21,6 +23,9 @@ interface RealisationsSliderProps {
  * the existing portfolio theme (cyan/purple).
  */
 export const RealisationsSlider = ({ realisations, className }: RealisationsSliderProps) => {
+	const params = useParams()
+	const locale = (params?.locale as string) || 'fr'
+
 	const [currentIndex, setCurrentIndex] = useState(0)
 	// 'direction' helps framer-motion understand slide direction (next vs. prev)
 	const [direction, setDirection] = useState<'left' | 'right'>('right')
@@ -89,7 +94,7 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 						</span>
 						{/* Vertical "Realisations" Text */}
 						<h2 className="text-sm font-medium tracking-widest uppercase [writing-mode:vertical-rl] md:rotate-180 hidden md:block">
-							Réalisations
+							{t('realisations', locale)}
 						</h2>
 					</div>
 
@@ -109,7 +114,7 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 												? 'ring-2 ring-cyan-400 opacity-100'
 												: 'opacity-70 hover:opacity-100 hover:ring-2 hover:ring-purple-400'
 										)}
-										aria-label={`Voir la réalisation ${realisation.attributes.title}`}
+										aria-label={`${t('viewRealisation', locale)} ${realisation.attributes.title}`}
 									>
 										<Image
 											src={realisation.attributes.image_presentation?.data?.attributes?.url ?? ''}
@@ -142,7 +147,10 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 							transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
 							className="absolute inset-0 w-full h-full rounded-lg overflow-hidden"
 						>
-							<Link href={`/portefolio/${activeRealisation.attributes.slug}`} className="absolute inset-0 w-full h-full">
+							<Link
+								href={`/portefolio/${activeRealisation.attributes.slug}`}
+								className="absolute inset-0 w-full h-full"
+							>
 								<Image
 									src={activeRealisation.attributes.image_presentation?.data?.attributes?.url ?? ''}
 									alt={activeRealisation.attributes.image_presentation?.data?.attributes?.alternativeText ?? ''}
@@ -190,7 +198,7 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 							type="button"
 							className="rounded-full w-12 h-12 flex items-center justify-center bg-indigo-600 text-white hover:bg-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg"
 							onClick={handlePrev}
-							aria-label="Réalisation précédente"
+							aria-label={t('previousProject', locale)}
 						>
 							<ArrowLeft className="w-5 h-5" />
 						</button>
@@ -198,16 +206,16 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 							type="button"
 							className="rounded-full w-12 h-12 flex items-center justify-center bg-cyan-600 text-white hover:bg-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg"
 							onClick={handleNext}
-							aria-label="Réalisation suivante"
+							aria-label={t('nextProject', locale)}
 						>
 							<ArrowRight className="w-5 h-5" />
 						</button>
 						{activeRealisation.attributes.slug && (
 							<Link
-								href={`/portefolio/${activeRealisation.attributes.slug}`}
+								href={`/${locale}/portefolio/${activeRealisation.attributes.slug}`}
 								className="button-cyan rounded px-6 py-3 text-xs ml-4"
 							>
-								<span className="button-cyan-title">Voir le projet</span>
+								<span className="button-cyan-title">{t('viewProject', locale)}</span>
 							</Link>
 						)}
 					</div>

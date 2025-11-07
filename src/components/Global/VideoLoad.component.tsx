@@ -35,5 +35,3 @@ export function VideoLoadComponent({ src, className, mime }: VideoLoadComponentP
 		</>
 	)
 }
-
-

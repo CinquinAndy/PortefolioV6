@@ -157,7 +157,6 @@ const MasonryGrid = <T,>({
 	renderItem,
 	className,
 	gap = '1rem',
-	staggerDelay = 0.05,
 	disable3DAnimation = false,
 	getItemHref,
 }: ExtendedMasonryGridProps<T>) => {

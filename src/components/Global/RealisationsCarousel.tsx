@@ -1,10 +1,10 @@
 'use client'
 
 import { Carousel } from '@ark-ui/react/carousel'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type React from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { ComponentLoadComponent } from '@/components/Global/ComponentLoad.component'
 import { ArticleRealisationSkeleton } from '@/components/Global/SkeletonsFallback/ArticleRealisationSkeleton'
 import { replaceTitle } from '@/services/utils'

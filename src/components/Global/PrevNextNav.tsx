@@ -3,6 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import type React from 'react'
 import type { Realisation } from '@/types/strapi'
+import { t } from '@/utils/translations'
 
 interface PrevNextNavProps {
 	realisations: Realisation[]
@@ -35,7 +36,7 @@ export function PrevNextNav({ realisations, currentSlug, locale }: PrevNextNavPr
 					title={previousRealisation.attributes.title}
 				>
 					<ChevronLeftIcon className="h-4 w-4 lg:h-5 lg:w-5" />
-					<span className="hidden sm:inline">Previous</span>
+					<span className="hidden sm:inline">{t('previous', locale)}</span>
 				</Link>
 			)}
 
@@ -46,7 +47,7 @@ export function PrevNextNav({ realisations, currentSlug, locale }: PrevNextNavPr
 					href={`/${locale}/portefolio/${nextRealisation.attributes.slug}`}
 					title={nextRealisation.attributes.title}
 				>
-					<span className="hidden sm:inline">Next</span>
+					<span className="hidden sm:inline">{t('next', locale)}</span>
 					<ChevronRightIcon className="h-4 w-4 lg:h-5 lg:w-5" />
 				</Link>
 			)}
