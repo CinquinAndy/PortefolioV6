@@ -22,7 +22,7 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	if (disable3D) {
 		return (
 			<motion.div
-				className="relative h-full w-full"
+				className="relative h-full w-full cursor-pointer"
 				whileHover={{
 					y: -8,
 					transition: { duration: 0.3, ease: 'easeOut' },
@@ -35,6 +35,7 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	}
 
 	const ref = React.useRef<HTMLDivElement>(null)
+	const [isHovered, setIsHovered] = React.useState(false)
 
 	// Motion values to track mouse position
 	const x = useMotionValue(0)
@@ -49,7 +50,7 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
 
 	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		if (!ref.current) return
+		if (!ref.current || !isHovered) return
 		const { left, top, width, height } = ref.current.getBoundingClientRect()
 		const mouseX = e.clientX - left
 		const mouseY = e.clientY - top
@@ -58,7 +59,12 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 		y.set(mouseY / height - 0.5)
 	}
 
+	const handleMouseEnter = () => {
+		setIsHovered(true)
+	}
+
 	const handleMouseLeave = () => {
+		setIsHovered(false)
 		x.set(0)
 		y.set(0)
 	}
@@ -66,13 +72,14 @@ const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; 
 	return (
 		<motion.div
 			ref={ref}
+			onMouseEnter={handleMouseEnter}
 			onMouseMove={handleMouseMove}
 			onMouseLeave={handleMouseLeave}
 			style={{
 				transformStyle: 'preserve-3d',
 				perspective: '1000px',
 			}}
-			className="relative"
+			className="group relative cursor-pointer"
 		>
 			<motion.div
 				style={{
