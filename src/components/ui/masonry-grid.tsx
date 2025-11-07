@@ -114,7 +114,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 	// 3D animation enabled - Link parent with perspective, div child with rotation
 	if (href) {
 		return (
-			<MotionLink 
+			<MotionLink
 				href={href}
 				ref={linkRef}
 				style={containerStyle}
@@ -124,10 +124,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 				whileTap={{ scale: 0.95 }}
 				className="group relative block h-full w-full"
 			>
-				<motion.div 
-					style={innerMotionStyle}
-					className="h-full w-full"
-				>
+				<motion.div style={innerMotionStyle} className="h-full w-full">
 					{children}
 				</motion.div>
 			</MotionLink>
@@ -135,7 +132,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 	}
 
 	return (
-		<motion.div 
+		<motion.div
 			ref={divRef}
 			style={containerStyle}
 			onMouseEnter={handleMouseEnter}
@@ -144,10 +141,7 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 			whileTap={{ scale: 0.95 }}
 			className="group relative block h-full w-full"
 		>
-			<motion.div 
-				style={innerMotionStyle}
-				className="h-full w-full"
-			>
+			<motion.div style={innerMotionStyle} className="h-full w-full">
 				{children}
 			</motion.div>
 		</motion.div>
