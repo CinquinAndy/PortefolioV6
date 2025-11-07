@@ -28,7 +28,8 @@ const MotionLink = motion(Link)
 
 // A self-contained GridItem component to handle advanced animations
 const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
-	const ref = React.useRef<HTMLDivElement>(null)
+	const linkRef = React.useRef<HTMLAnchorElement>(null)
+	const divRef = React.useRef<HTMLDivElement>(null)
 	const [isHovered, setIsHovered] = React.useState(false)
 
 	// Motion values to track mouse position (always initialize hooks)
@@ -43,9 +44,10 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 	const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg'])
 	const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
 
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		if (!ref.current || !isHovered) return
-		const { left, top, width, height } = ref.current.getBoundingClientRect()
+	const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement>) => {
+		const currentRef = href ? linkRef.current : divRef.current
+		if (!currentRef || !isHovered) return
+		const { left, top, width, height } = currentRef.getBoundingClientRect()
 		const mouseX = e.clientX - left
 		const mouseY = e.clientY - top
 		// Normalize mouse position to a range of -0.5 to 0.5
@@ -63,14 +65,46 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 		y.set(0)
 	}
 
+	// Shared styles and props
+	const sharedStyle = {
+		rotateX,
+		rotateY,
+		transformStyle: 'preserve-3d' as const,
+	}
+
+	const sharedProps = {
+		onMouseEnter: handleMouseEnter,
+		onMouseMove: handleMouseMove,
+		onMouseLeave: handleMouseLeave,
+		whileTap: { scale: 0.95 },
+		className: 'group relative block h-full w-full',
+		style: {
+			...sharedStyle,
+			pointerEvents: 'auto' as const,
+			cursor: 'pointer',
+		},
+	}
+
 	// If 3D is disabled, return simple wrapper with hover effect
 	if (disable3D) {
-		const Component = href ? MotionLink : motion.div
-		const componentProps = href ? { href } : {}
+		if (href) {
+			return (
+				<MotionLink
+					href={href}
+					className="relative block h-full w-full"
+					whileHover={{
+						y: -8,
+						transition: { duration: 0.3, ease: 'easeOut' },
+					}}
+					whileTap={{ scale: 0.98 }}
+				>
+					{children}
+				</MotionLink>
+			)
+		}
 
 		return (
-			<Component
-				{...componentProps}
+			<motion.div
 				className="relative block h-full w-full"
 				whileHover={{
 					y: -8,
@@ -79,38 +113,22 @@ const GridItem = ({ children, disable3D = false, href }: GridItemProps) => {
 				whileTap={{ scale: 0.98 }}
 			>
 				{children}
-			</Component>
+			</motion.div>
 		)
 	}
 
-	// 3D animation enabled
-	const InnerComponent = href ? MotionLink : motion.div
-	const innerProps = href ? { href } : {}
+	// 3D animation enabled - Link or div handles all events directly
+	if (href) {
+		return (
+			<MotionLink href={href} ref={linkRef} style={sharedStyle} {...sharedProps}>
+				{children}
+			</MotionLink>
+		)
+	}
 
 	return (
-		<motion.div
-			ref={ref}
-			onMouseEnter={handleMouseEnter}
-			onMouseMove={handleMouseMove}
-			onMouseLeave={handleMouseLeave}
-			style={{
-				transformStyle: 'preserve-3d',
-				perspective: '1000px',
-			}}
-			className="group relative"
-		>
-			<InnerComponent
-				{...innerProps}
-				style={{
-					rotateX,
-					rotateY,
-					transformStyle: 'preserve-3d',
-				}}
-				whileTap={{ scale: 0.95 }}
-				className="block h-full w-full"
-			>
-				{children}
-			</InnerComponent>
+		<motion.div ref={divRef} style={sharedStyle} {...sharedProps}>
+			{children}
 		</motion.div>
 	)
 }
@@ -133,21 +151,17 @@ const MasonryGrid = <T,>({
 
 	const containerVariants = {
 		hidden: {},
-		visible: {
-			transition: {
-				staggerChildren: staggerDelay,
-			},
-		},
+		visible: {},
 	}
 
 	const itemVariants = {
-		hidden: { opacity: 0, y: 30, scale: 0.95 },
+		hidden: { opacity: 0, y: 50, scale: 0.95 },
 		visible: {
 			opacity: 1,
 			y: 0,
 			scale: 1,
 			transition: {
-				duration: 0.5,
+				duration: 0.6,
 				ease: 'easeOut' as const,
 			},
 		},
