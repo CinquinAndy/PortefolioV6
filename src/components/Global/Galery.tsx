@@ -67,25 +67,42 @@ function Galery({ title_galery, open, handleClick, galery }: GaleryProps): React
 											</div>
 										</div>
 										<div className="columns-1 gap-5 p-4 sm:columns-2 sm:gap-8 md:columns-3 [&>div:not(:first-child)]:mt-8">
-											{galery?.map((item: StrapiMedia, index: number) => (
-												<Link
-													className="cursor-pointer hover:filter-none"
-													href={`${pathname}/${index}`}
-													key={item?.id || index}
-													type="button"
-												>
-													<ComponentLoadComponent FallBack={GaleryItemSkeleton}>
-														<div className="m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent">
-															<Image
-																alt={item?.attributes?.alternativeText ?? 'Project Image'}
-																height={item?.attributes?.height}
-																src={item?.attributes?.url}
-																width={item?.attributes?.width}
-															/>
-														</div>
-													</ComponentLoadComponent>
-												</Link>
-											))}
+											{galery?.map((item: StrapiMedia, index: number) => {
+												const isVideo = item?.attributes?.mime?.startsWith('video/')
+
+												return (
+													<Link
+														className="cursor-pointer hover:filter-none"
+														href={`${pathname}/${index}`}
+														key={item?.id || index}
+														type="button"
+													>
+														<ComponentLoadComponent FallBack={GaleryItemSkeleton}>
+															<div className="m-2 rounded-lg object-cover p-1 hover:ring-1 hover:ring-indigo-500 hover:ring-offset-2 hover:ring-offset-transparent">
+																{isVideo ? (
+																	<video
+																		className="h-auto w-full rounded"
+																		controls={false}
+																		muted
+																		playsInline
+																		preload="metadata"
+																	>
+																		<source src={item?.attributes?.url} type={item?.attributes?.mime} />
+																		<track kind="captions" />
+																	</video>
+																) : (
+																	<Image
+																		alt={item?.attributes?.alternativeText ?? 'Project Image'}
+																		height={item?.attributes?.height || 500}
+																		src={item?.attributes?.url}
+																		width={item?.attributes?.width || 500}
+																	/>
+																)}
+															</div>
+														</ComponentLoadComponent>
+													</Link>
+												)
+											})}
 										</div>
 									</div>
 								</Dialog.Panel>
