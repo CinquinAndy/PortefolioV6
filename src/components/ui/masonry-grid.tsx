@@ -13,10 +13,11 @@ interface MasonryGridProps<T> {
 	className?: string
 	gap?: string
 	staggerDelay?: number
+	disable3DAnimation?: boolean
 }
 
 // A self-contained GridItem component to handle advanced animations
-const GridItem = ({ children }: { children: React.ReactNode }) => {
+const GridItem = ({ children, disable3D = false }: { children: React.ReactNode; disable3D?: boolean }) => {
 	const ref = React.useRef<HTMLDivElement>(null)
 
 	// Motion values to track mouse position
@@ -32,7 +33,7 @@ const GridItem = ({ children }: { children: React.ReactNode }) => {
 	const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
 
 	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		if (!ref.current) return
+		if (disable3D || !ref.current) return
 		const { left, top, width, height } = ref.current.getBoundingClientRect()
 		const mouseX = e.clientX - left
 		const mouseY = e.clientY - top
@@ -42,8 +43,14 @@ const GridItem = ({ children }: { children: React.ReactNode }) => {
 	}
 
 	const handleMouseLeave = () => {
+		if (disable3D) return
 		x.set(0)
 		y.set(0)
+	}
+
+	// If 3D is disabled, return simple wrapper
+	if (disable3D) {
+		return <div className="relative h-full w-full">{children}</div>
 	}
 
 	return (
@@ -72,18 +79,16 @@ const GridItem = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-const MasonryGrid = <T,>({ items, renderItem, className, gap = '1rem', staggerDelay = 0.05 }: MasonryGridProps<T>) => {
+const MasonryGrid = <T,>({
+	items,
+	renderItem,
+	className,
+	gap = '1rem',
+	staggerDelay = 0.05,
+	disable3DAnimation = false,
+}: MasonryGridProps<T>) => {
 	const containerRef = React.useRef(null)
 	const isInView = useInView(containerRef, { once: true, amount: 0.2 })
-
-	// Debug logs
-	React.useEffect(() => {
-		console.log('=== MasonryGrid Debug ===')
-		console.log('Items count:', items.length)
-		console.log('Is in view:', isInView)
-		console.log('Container ref:', containerRef.current)
-		console.log('=== End MasonryGrid Debug ===')
-	}, [items, isInView])
 
 	const containerVariants = {
 		hidden: {},
@@ -113,7 +118,7 @@ const MasonryGrid = <T,>({ items, renderItem, className, gap = '1rem', staggerDe
 			className={cn('w-full', className)}
 			style={{ columnGap: gap }}
 			initial="hidden"
-			animate="visible" // Force visible pour debug
+			animate={isInView ? 'visible' : 'hidden'}
 			variants={containerVariants}
 			role="list"
 		>
@@ -125,7 +130,7 @@ const MasonryGrid = <T,>({ items, renderItem, className, gap = '1rem', staggerDe
 					variants={itemVariants}
 					role="listitem"
 				>
-					<GridItem>{renderItem(item, index)}</GridItem>
+					<GridItem disable3D={disable3DAnimation}>{renderItem(item, index)}</GridItem>
 				</motion.div>
 			))}
 		</motion.div>
