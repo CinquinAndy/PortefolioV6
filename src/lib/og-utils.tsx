@@ -270,6 +270,7 @@ export function OgImageWrapper({ children, useImageBackground = true }: OgImageW
 						width: '100%',
 						height: '100%',
 						objectFit: 'cover',
+						filter: 'brightness(0.5)',
 					}}
 				/>
 			) : (
