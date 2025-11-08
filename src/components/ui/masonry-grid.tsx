@@ -156,7 +156,6 @@ const MasonryGrid = <T,>({
 	items,
 	renderItem,
 	className,
-	gap = '1rem',
 	staggerDelay = 0.08,
 	disable3DAnimation = false,
 	getItemHref,
@@ -187,7 +186,6 @@ const MasonryGrid = <T,>({
 		<motion.div
 			ref={containerRef}
 			className={cn('w-full grid', className)}
-			style={{ gap }}
 			initial="hidden"
 			animate={isInView ? 'visible' : 'hidden'}
 			variants={containerVariants}

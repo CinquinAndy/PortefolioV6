@@ -64,8 +64,7 @@ function Realisations({
 				) : (
 					<MasonryGrid
 						items={displayRealisations}
-						className="grid-cols-1 md:grid-cols-2 2xl:grid-cols-3"
-						gap="8rem"
+						className="grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 md:gap-16 2xl:gap-32"
 						staggerDelay={0.08}
 						disable3DAnimation={false}
 						getItemHref={realisation => {
@@ -73,7 +72,7 @@ function Realisations({
 							return slug ? `/portefolio/${slug}` : undefined
 						}}
 						renderItem={realisation => (
-							<div className="relative flex w-full flex-col">
+							<div className="relative flex w-full flex-col px-2 md:px-0">
 								<h2 className="z-30 w-full pb-2 text-2xl font-black normal-case xl:mt-0 xl:text-3xl 2xl:text-4xl">
 									{realisation?.attributes?.title}
 								</h2>
@@ -94,7 +93,7 @@ function Realisations({
 										/>
 									</div>
 								</div>
-								<h2 className="z-30 w-full pt-6 pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
+								<h2 className="z-30 w-full pt-6 lg:pb-12 text-xl font-black text-cyan-400 xl:mt-0 xl:text-3xl xl:font-bold 2xl:text-4xl">
 									{realisation?.attributes?.subtitle}
 								</h2>
 							</div>
