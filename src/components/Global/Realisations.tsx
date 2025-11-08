@@ -64,7 +64,7 @@ function Realisations({
 				) : (
 					<MasonryGrid
 						items={displayRealisations}
-						className="columns-1 md:columns-2 2xl:columns-3"
+						className="grid-cols-1 md:grid-cols-2 2xl:grid-cols-3"
 						gap="8rem"
 						staggerDelay={0.08}
 						disable3DAnimation={false}

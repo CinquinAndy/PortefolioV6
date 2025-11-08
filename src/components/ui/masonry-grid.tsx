@@ -157,6 +157,7 @@ const MasonryGrid = <T,>({
 	renderItem,
 	className,
 	gap = '1rem',
+	staggerDelay = 0.08,
 	disable3DAnimation = false,
 	getItemHref,
 }: ExtendedMasonryGridProps<T>) => {
@@ -168,7 +169,7 @@ const MasonryGrid = <T,>({
 		visible: {},
 	}
 
-	const itemVariants = {
+	const getItemVariants = (index: number) => ({
 		hidden: { opacity: 0, y: 50, scale: 0.95 },
 		visible: {
 			opacity: 1,
@@ -177,15 +178,16 @@ const MasonryGrid = <T,>({
 			transition: {
 				duration: 0.6,
 				ease: 'easeOut' as const,
+				delay: index * staggerDelay,
 			},
 		},
-	}
+	})
 
 	return (
 		<motion.div
 			ref={containerRef}
-			className={cn('w-full', className)}
-			style={{ columnGap: gap }}
+			className={cn('w-full grid', className)}
+			style={{ gap }}
 			initial="hidden"
 			animate={isInView ? 'visible' : 'hidden'}
 			variants={containerVariants}
@@ -197,8 +199,7 @@ const MasonryGrid = <T,>({
 					<motion.div
 						// biome-ignore lint/suspicious/noArrayIndexKey: Items are dynamically rendered based on external data; no stable unique identifier available
 						key={index}
-						className="mb-4 break-inside-avoid"
-						variants={itemVariants}
+						variants={getItemVariants(index)}
 						role="listitem"
 					>
 						<GridItem disable3D={disable3DAnimation} href={href}>
