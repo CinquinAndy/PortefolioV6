@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { getNotoSerifDisplayFont, OgImageWrapper, OG_IMAGE_SIZE, getTitleStyle } from '@/lib/og-utils'
+import { getNotoSerifDisplayFont, getTitleStyle, OG_IMAGE_SIZE, OgImageWrapper } from '@/lib/og-utils'
 import { getContentWebsite } from '@/services/getContentWebsite'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
