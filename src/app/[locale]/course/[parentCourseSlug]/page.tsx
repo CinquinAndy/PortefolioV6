@@ -13,6 +13,7 @@ import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 1 minute for faster updates from CMS
 export const revalidate = 60
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	if ('notFound' in courseData || !courseData.data || courseData.data.length === 0) {
 		return {
 			title: t.parentCoursePage.notFound,
+			metadataBase: getMetadataBase(locale),
 		}
 	}
 
@@ -38,21 +40,18 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	// Fetch localizations for alternate links
 	const courseLocalizations = course.attributes.localizations?.data
-	const alternateCourseSlug = courseLocalizations?.[0]?.attributes
-		? typeof courseLocalizations[0].attributes === 'string'
-			? courseLocalizations[0].attributes
-			: ''
-		: parentCourseSlug
+	const alternateCourseSlug = courseLocalizations?.[0]?.attributes?.slug || parentCourseSlug
+
+	const frPath = `/course/${locale === 'fr' ? parentCourseSlug : alternateCourseSlug}`
+	const enPath = `/course/${locale === 'en' ? parentCourseSlug : alternateCourseSlug}`
 
 	return {
 		title: seo?.title ?? `${course.attributes.title} - ${t.course}`,
+		metadataBase: getMetadataBase(locale),
 		description: seo?.description ?? course.attributes.description,
 		alternates: {
-			canonical: seo?.canonical ?? `/${locale}/course/${parentCourseSlug}`,
-			languages: {
-				fr: `/fr/course/${locale === 'fr' ? parentCourseSlug : alternateCourseSlug}`,
-				en: `/en/course/${locale === 'en' ? parentCourseSlug : alternateCourseSlug}`,
-			},
+			canonical: seo?.canonical ?? getCanonicalUrl(locale, `/course/${parentCourseSlug}`),
+			languages: getLanguageAlternates('', frPath, enPath),
 		},
 	}
 }

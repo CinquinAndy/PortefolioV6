@@ -4,6 +4,7 @@ import { getAllLessonsCount, getParentCoursesLight } from '@/services/getCourses
 import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 import CoursePage from './page-client'
 
 export const revalidate = 60 // 1 minute for faster updates from CMS
@@ -14,13 +15,21 @@ interface PageParams {
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { locale } = await params
-	const content_website_response = await getContentWebsite(locale)
-	const _content_website = getResponseData(content_website_response)
+
+	const title = locale === 'fr' ? 'Mes Cours - Développement Web' : 'My Courses - Web Development'
+	const description =
+		locale === 'fr'
+			? 'Découvrez mes cours complets pour maîtriser le développement web moderne. JavaScript, React, et bien plus.'
+			: 'Discover my comprehensive courses to master modern web development. JavaScript, React, and more.'
 
 	return {
-		title: 'Mes Cours - Développement Web',
-		description:
-			'Découvrez mes cours complets pour maîtriser le développement web moderne. JavaScript, React, et bien plus.',
+		title,
+		metadataBase: getMetadataBase(locale),
+		description,
+		alternates: {
+			languages: getLanguageAlternates('/course'),
+			canonical: getCanonicalUrl(locale, '/course'),
+		},
 	}
 }
 

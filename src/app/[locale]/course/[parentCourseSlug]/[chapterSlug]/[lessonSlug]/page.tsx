@@ -21,6 +21,7 @@ import {
 import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getCourseTranslations } from '@/utils/courseTranslations'
+import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 1 minute for faster updates from CMS
 export const revalidate = 60
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	if ('notFound' in lessonData || !lessonData.data) {
 		return {
 			title: t.lessonPage.notFound,
+			metadataBase: getMetadataBase(locale),
 		}
 	}
 
@@ -47,23 +49,21 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const seo = lesson?.attributes?.seo
 
 	// Fetch localizations for alternate links
-	const _alternateLocale = locale === 'fr' ? 'en' : 'fr'
 	const lessonLocalizations = lesson?.attributes?.localizations?.data
-	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes
-		? typeof lessonLocalizations[0].attributes === 'string'
-			? lessonLocalizations[0].attributes
-			: ''
-		: lessonSlug
+	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes?.slug || lessonSlug
+
+	// Note: We keep the same parent course and chapter slugs for simplicity
+	// In a real scenario, you might want to fetch their localized slugs too
+	const frPath = `/course/${parentCourseSlug}/${chapterSlug}/${locale === 'fr' ? lessonSlug : alternateLessonSlug}`
+	const enPath = `/course/${parentCourseSlug}/${chapterSlug}/${locale === 'en' ? lessonSlug : alternateLessonSlug}`
 
 	return {
 		title: seo?.title ?? `${lesson?.attributes?.title ?? t.lesson} - ${t.course}`,
+		metadataBase: getMetadataBase(locale),
 		description: seo?.description ?? lesson?.attributes?.description,
 		alternates: {
-			canonical: seo?.canonical ?? `/${locale}/course/${parentCourseSlug}/${chapterSlug}/${lessonSlug}`,
-			languages: {
-				fr: `/fr/course/${locale === 'fr' ? parentCourseSlug : ''}/${locale === 'fr' ? chapterSlug : ''}/${locale === 'fr' ? lessonSlug : alternateLessonSlug}`,
-				en: `/en/course/${locale === 'en' ? parentCourseSlug : ''}/${locale === 'en' ? chapterSlug : ''}/${locale === 'en' ? lessonSlug : alternateLessonSlug}`,
-			},
+			canonical: seo?.canonical ?? getCanonicalUrl(locale, `/course/${parentCourseSlug}/${chapterSlug}/${lessonSlug}`),
+			languages: getLanguageAlternates('', frPath, enPath),
 		},
 	}
 }
