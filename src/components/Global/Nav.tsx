@@ -301,7 +301,6 @@ function Nav({
 				{isHome && (
 					<div className="patterns translate-y-[-140px] transform lg:px-20">
 						<svg height="100%" width="100%" aria-label="Background pattern">
-							<title>Background pattern</title>
 							<defs>
 								<pattern height="100" id="polka-dots" patternUnits="userSpaceOnUse" width="100" x="0" y="0">
 									<circle cx="25" cy="25" fill="#be9ddf" r="3"></circle>
