@@ -80,20 +80,20 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 	return (
 		<div
 			className={cn(
-				'relative w-full min-h-[650px] md:min-h-[600px] overflow-hidden bg-background text-foreground p-8 md:p-12',
+				'relative w-full min-h-[650px] lg:min-h-[600px] overflow-hidden bg-background text-foreground p-0 lg:p-12',
 				className
 			)}
 		>
-			<div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-full">
+			<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
 				{/* === Left Column: Meta and Thumbnails === */}
-				<div className="md:col-span-3 flex flex-col justify-between order-2 md:order-1">
-					<div className="flex flex-row md:flex-col justify-between md:justify-start space-x-4 md:space-x-0 md:space-y-4">
+				<div className="lg:col-span-3 flex flex-col justify-between order-1 lg:order-1">
+					<div className="flex flex-row lg:flex-col justify-between lg:justify-start space-x-4 lg:space-x-0 lg:space-y-4">
 						{/* Pagination */}
 						<span className="text-sm text-muted-foreground font-mono">
 							{String(currentIndex + 1).padStart(2, '0')} / {String(realisations.length).padStart(2, '0')}
 						</span>
 						{/* Vertical "Realisations" Text */}
-						<h2 className="text-sm font-medium tracking-widest uppercase [writing-mode:vertical-rl] md:rotate-180 hidden md:block">
+						<h2 className="text-sm font-medium tracking-widest uppercase [writing-mode:vertical-rl] lg:rotate-180 hidden lg:block">
 							{t('realisations', locale)}
 						</h2>
 					</div>
@@ -135,7 +135,7 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 				</div>
 
 				{/* === Center Column: Main Image === */}
-				<div className="md:col-span-4 relative h-80 min-h-[400px] md:min-h-[500px] order-1 md:order-2">
+				<div className="lg:col-span-4 relative h-80 min-h-[400px] lg:min-h-[500px] order-1 lg:order-2">
 					<AnimatePresence initial={false} custom={direction}>
 						<motion.div
 							key={currentIndex}
@@ -165,9 +165,9 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 				</div>
 
 				{/* === Right Column: Text and Navigation === */}
-				<div className="md:col-span-5 flex flex-col justify-between md:pl-8 order-3 md:order-3">
+				<div className="lg:col-span-5 flex flex-col justify-between lg:pl-8 order-3 lg:order-3">
 					{/* Text Content */}
-					<div className="relative overflow-hidden pt-4 md:pt-24 min-h-[200px]">
+					<div className="relative overflow-hidden pt-4 lg:pt-24 min-h-[200px]">
 						<AnimatePresence initial={false} custom={direction} mode="wait">
 							<motion.div
 								key={currentIndex}
@@ -180,7 +180,7 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 							>
 								<p className="text-sm font-medium text-cyan-400">{activeRealisation.attributes.type ?? 'Projet'}</p>
 								<h3 className="text-xl font-semibold mt-1">{activeRealisation.attributes.title}</h3>
-								<blockquote className="mt-6 text-2xl md:text-3xl font-medium leading-snug">
+								<blockquote className="mt-6 text-2xl lg:text-3xl font-medium leading-snug">
 									{activeRealisation.attributes.subtitle}
 								</blockquote>
 								{activeRealisation.attributes.excerpt && (
@@ -193,7 +193,7 @@ export const RealisationsSlider = ({ realisations, className }: RealisationsSlid
 					</div>
 
 					{/* Navigation Buttons */}
-					<div className="flex items-center space-x-2 mt-8 md:mt-0">
+					<div className="flex items-center space-x-2 mt-8 lg:mt-0">
 						<button
 							type="button"
 							className="rounded-full w-12 h-12 flex items-center justify-center bg-indigo-600 text-white hover:bg-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg"
