@@ -23,7 +23,7 @@ export function VideoBackground() {
 					window.dispatchEvent(new Event('videoBackgroundReady'))
 				}
 			} catch (e) {
-				// Ignorer les erreurs de parsing
+				console.error(e)
 			}
 		}
 
