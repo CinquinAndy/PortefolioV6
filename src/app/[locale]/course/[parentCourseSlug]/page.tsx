@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	// Fetch localizations for alternate links
 	const courseLocalizations = course.attributes.localizations?.data
-	const alternateCourseSlug = courseLocalizations?.[0]?.attributes?.slug || parentCourseSlug
+	const alternateCourseSlug = courseLocalizations?.[0]?.attributes || parentCourseSlug
 
 	const frPath = `/course/${locale === 'fr' ? parentCourseSlug : alternateCourseSlug}`
 	const enPath = `/course/${locale === 'en' ? parentCourseSlug : alternateCourseSlug}`

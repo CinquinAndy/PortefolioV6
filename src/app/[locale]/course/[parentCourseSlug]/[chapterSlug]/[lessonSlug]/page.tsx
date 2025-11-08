@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
 	// Fetch localizations for alternate links
 	const lessonLocalizations = lesson?.attributes?.localizations?.data
-	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes?.slug || lessonSlug
+	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes || lessonSlug
 
 	// Note: We keep the same parent course and chapter slugs for simplicity
 	// In a real scenario, you might want to fetch their localized slugs too
