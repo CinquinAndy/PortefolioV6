@@ -179,7 +179,7 @@ export function getDynamicSubtitleSize(text: string): {
 	// Short text (< 50 chars): Normal size
 	if (length < 50) {
 		return {
-			fontSize: '32px',
+			fontSize: '40px',
 			lineHeight: 1.4,
 		}
 	}
@@ -187,7 +187,7 @@ export function getDynamicSubtitleSize(text: string): {
 	// Medium text (50-100 chars): Slightly smaller
 	if (length < 100) {
 		return {
-			fontSize: '28px',
+			fontSize: '36px',
 			lineHeight: 1.45,
 		}
 	}
@@ -195,14 +195,14 @@ export function getDynamicSubtitleSize(text: string): {
 	// Long text (100-150 chars): Small
 	if (length < 150) {
 		return {
-			fontSize: '24px',
+			fontSize: '34px',
 			lineHeight: 1.5,
 		}
 	}
 
 	// Very long text (>= 150 chars): Extra small
 	return {
-		fontSize: '20px',
+		fontSize: '32px',
 		lineHeight: 1.55,
 	}
 }
@@ -258,7 +258,6 @@ export function OgImageWrapper({ children, useImageBackground = true }: OgImageW
 		>
 			{/* Background layer */}
 			{useImageBackground ? (
-				// eslint-disable-next-line @next/next/no-img-element
 				// biome-ignore lint/performance/noImgElement: Required for OG images (ImageResponse doesn't support Next.js Image)
 				<img
 					src={OG_BACKGROUND_IMAGE_URL}
