@@ -162,7 +162,7 @@ const MasonryGrid = <T,>({
 	getItemHref,
 }: ExtendedMasonryGridProps<T>) => {
 	const containerRef = React.useRef(null)
-	const isInView = useInView(containerRef, { once: true, amount: 0.05, margin: '0px 0px -100px 0px' })
+	const isInView = useInView(containerRef, { once: true, amount: 0, margin: '0px 0px 300px 0px' })
 
 	const containerVariants = {
 		hidden: {},
