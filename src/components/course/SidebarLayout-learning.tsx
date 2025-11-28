@@ -12,7 +12,6 @@ import type { Course, Lesson } from '@/types/course'
 function SidebarIcon({ className }: { className?: string }) {
 	return (
 		<svg viewBox="0 0 16 16" fill="none" className={clsx('h-4 w-4', className)} aria-label="Menu">
-			<title>Menu</title>
 			<path d="M2 4h12M2 8h12M2 12h12" strokeWidth="1.5" strokeLinecap="round" />
 		</svg>
 	)
