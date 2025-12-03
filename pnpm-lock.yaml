@@ -75,8 +75,8 @@ importers:
         specifier: 0.553.0
         version: 0.553.0(react@19.2.0)
       mailgun.js:
-        specifier: 12.3.0
-        version: 12.3.0
+        specifier: 12.3.1
+        version: 12.3.1
       next:
         specifier: 15.5.6
         version: 15.5.6(@playwright/test@1.57.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1584,8 +1584,8 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
-  mailgun.js@12.3.0:
-    resolution: {integrity: sha512-bBL6E8LwK657vDo0NRQAPFSrIbzjmwaAay9ixHQfFWMbxSHP4+anUXdei/oKj6zpSpt/hJZNqfTVGdVzZNSVdw==}
+  mailgun.js@12.3.1:
+    resolution: {integrity: sha512-3j9tArG179tAU8Jw1rzaBrnLGepnr1aG3ES1HqgC8YCG1obTvTGdgW8ynxhw2PKU90ulZ0IxQ0oIIuluB+KM9w==}
     engines: {node: '>=18.0.0'}
 
   markdown-table@3.0.4:
@@ -3832,7 +3832,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  mailgun.js@12.3.0:
+  mailgun.js@12.3.1:
     dependencies:
       axios: 1.12.2
       base-64: 1.0.0
