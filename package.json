@@ -26,7 +26,7 @@
     "test:visual:check-regressions": "playwright test tests/visual-regression-tests.spec.js"
   },
   "dependencies": {
-    "@ark-ui/react": "^5.27.1",
+    "@ark-ui/react": "^5.29.1",
     "@headlessui/react": "2.2.9",
     "@heroicons/react": "2.2.0",
     "@hookform/resolvers": "5.2.2",
@@ -47,7 +47,7 @@
     "html-react-parser": "5.2.10",
     "i18next": "25.7.2",
     "lodash": "4.17.21",
-    "lucide-react": "0.553.0",
+    "lucide-react": "0.556.0",
     "mailgun.js": "12.4.0",
     "next": "15.5.7",
     "next-i18n-router": "5.5.5",
