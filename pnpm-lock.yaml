@@ -63,8 +63,8 @@ importers:
         specifier: 11.11.1
         version: 11.11.1
       html-react-parser:
-        specifier: 5.2.10
-        version: 5.2.10(@types/react@19.2.7)(react@19.2.3)
+        specifier: 5.2.11
+        version: 5.2.11(@types/react@19.2.7)(react@19.2.3)
       i18next:
         specifier: 25.7.3
         version: 25.7.3(typescript@5.9.3)
@@ -1419,8 +1419,8 @@ packages:
     resolution: {integrity: sha512-Y22oTqIU4uuPgEemfz7NDJz6OeKf12Lsu+QC+s3BVpda64lTiMYCyGwg5ki4vFxkMwQdeZDl2adZoqUgdFuTgQ==}
     engines: {node: '>=18'}
 
-  html-react-parser@5.2.10:
-    resolution: {integrity: sha512-DjOLloguuDA+Ed7Q7PKhvMQmCl2+Yk/pfvvca68fvn15QFBbL4uHGxXwoXQ4sqS0UyuRH2lJb0S8yZCL3lvehQ==}
+  html-react-parser@5.2.11:
+    resolution: {integrity: sha512-WnSQVn/D1UTj64nSz5y8MriL+MrbsZH80Ytr1oqKqs8DGZnphWY1R1pl3t7TY3rpqTSu+FHA21P80lrsmrdNBA==}
     peerDependencies:
       '@types/react': 0.14 || 15 || 16 || 17 || 18 || 19
       react: 0.14 || 15 || 16 || 17 || 18 || 19
@@ -3674,7 +3674,7 @@ snapshots:
     dependencies:
       whatwg-encoding: 3.1.1
 
-  html-react-parser@5.2.10(@types/react@19.2.7)(react@19.2.3):
+  html-react-parser@5.2.11(@types/react@19.2.7)(react@19.2.3):
     dependencies:
       domhandler: 5.0.3
       html-dom-parser: 5.1.2
