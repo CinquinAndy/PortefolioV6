@@ -147,8 +147,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@4.1.18)
       zod:
-        specifier: 4.3.2
-        version: 4.3.2
+        specifier: 4.3.3
+        version: 4.3.3
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.10
@@ -2139,8 +2139,8 @@ packages:
   xmlchars@2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
 
-  zod@4.3.2:
-    resolution: {integrity: sha512-b8L8yn4rIVfiXyHAmnr52/ZEpDumlT0bmxiq3Ws1ybrinhflGpt12Hvv54kYnEsGPRs6o/Ka3/ppA2OWY21IVg==}
+  zod@4.3.3:
+    resolution: {integrity: sha512-bQ7Rxwfn04DCrTjjRfD9SavY2vWdmf3REjs/mkc1LdwI1KkcHClBRJmnvmA/6epGeqlHePtIRF1J4SrMMlW7IA==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -4606,6 +4606,6 @@ snapshots:
 
   xmlchars@2.2.0: {}
 
-  zod@4.3.2: {}
+  zod@4.3.3: {}
 
   zwitch@2.0.4: {}
