@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import Link from 'next/link'
 import type React from 'react'
 import { useState } from 'react'
 
@@ -13,43 +14,6 @@ interface ExpandableSectionProps {
 	className?: string
 	titleClassName?: string
 	icon?: React.ReactNode
-}
-
-// Animation variants for staggered text reveal
-const containerVariants = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.08,
-			delayChildren: 0.1,
-		},
-	},
-	exit: {
-		opacity: 0,
-		transition: {
-			staggerChildren: 0.02,
-			staggerDirection: -1,
-		},
-	},
-}
-
-const itemVariants = {
-	hidden: {
-		opacity: 0,
-		y: 20,
-		filter: 'blur(10px)',
-	},
-	visible: {
-		opacity: 1,
-		y: 0,
-		filter: 'blur(0px)',
-	},
-	exit: {
-		opacity: 0,
-		y: -10,
-		filter: 'blur(5px)',
-	},
 }
 
 export function ExpandableSection({
@@ -97,7 +61,7 @@ export function ExpandableSection({
 				</motion.div>
 			</button>
 
-			{/* Expandable content with vaporize-like reveal animation */}
+			{/* Expandable content */}
 			<AnimatePresence initial={false}>
 				{isExpanded && (
 					<motion.div
@@ -110,11 +74,7 @@ export function ExpandableSection({
 						}}
 						className="overflow-hidden"
 					>
-						<div className="border-t border-white/10 px-6 py-6 md:px-8 md:py-8">
-							<motion.div variants={containerVariants} initial="hidden" animate="visible" exit="exit">
-								{children}
-							</motion.div>
-						</div>
+						<div className="border-t border-white/10 px-6 py-6 md:px-8 md:py-8">{children}</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -122,18 +82,14 @@ export function ExpandableSection({
 	)
 }
 
-// Animated text item component for use inside ExpandableSection
+// Simple wrapper for content - no animation, just a div
 interface AnimatedItemProps {
 	children: React.ReactNode
 	className?: string
 }
 
 export function AnimatedItem({ children, className = '' }: AnimatedItemProps) {
-	return (
-		<motion.div variants={itemVariants} transition={{ duration: 0.5, ease: 'easeOut' }} className={className}>
-			{children}
-		</motion.div>
-	)
+	return <div className={className}>{children}</div>
 }
 
 // Export a simple link card for the links section
@@ -146,9 +102,7 @@ interface LinkCardProps {
 
 export function LinkCard({ href, icon, title, description }: LinkCardProps) {
 	return (
-		<motion.a
-			variants={itemVariants}
-			transition={{ duration: 0.5, ease: 'easeOut' }}
+		<Link
 			href={href}
 			target="_blank"
 			rel="noopener noreferrer"
@@ -159,10 +113,10 @@ export function LinkCard({ href, icon, title, description }: LinkCardProps) {
 			</div>
 			<div className="flex-1 overflow-hidden">
 				<h4 className="truncate font-medium text-white transition-colors group-hover:text-cyan-400">{title}</h4>
-				{description && <p className="truncate text-sm text-slate-500">{description}</p>}
+				{description && <p className="truncate text-sm text-slate-300">{description}</p>}
 			</div>
 			<ChevronDown className="h-4 w-4 -rotate-90 text-slate-500 transition-transform group-hover:translate-x-1 group-hover:text-cyan-400" />
-		</motion.a>
+		</Link>
 	)
 }
 
@@ -177,11 +131,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ href, githubUrl, title, description, highlight }: ProjectCardProps) {
 	return (
-		<motion.div
-			variants={itemVariants}
-			transition={{ duration: 0.5, ease: 'easeOut' }}
-			className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-indigo-950/30 to-slate-900/30 p-4 transition-all hover:border-cyan-500/30 md:p-5"
-		>
+		<div className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-indigo-950/30 to-slate-900/30 p-4 transition-all hover:border-cyan-500/30 md:p-5">
 			{highlight && (
 				<span className="mb-2 inline-block rounded-full bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 px-3 py-1 text-xs font-medium text-cyan-400">
 					{highlight}
@@ -209,6 +159,6 @@ export function ProjectCard({ href, githubUrl, title, description, highlight }: 
 					</a>
 				)}
 			</div>
-		</motion.div>
+		</div>
 	)
 }
