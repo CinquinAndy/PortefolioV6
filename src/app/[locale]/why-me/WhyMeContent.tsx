@@ -48,6 +48,69 @@ const itemVariants = {
 	},
 }
 
+// Helper function to calculate animation duration based on content
+// For chars: 0.03s stagger per char + transition time
+// For words: 0.05s stagger per word + transition time
+function calculateAnimationDuration(text: string, per: 'char' | 'word', transitionDuration = 0.3) {
+	if (per === 'char') {
+		const charCount = text.length
+		return charCount * 0.03 + transitionDuration
+	} else {
+		const wordCount = text.split(/\s+/).length
+		return wordCount * 0.05 + transitionDuration
+	}
+}
+
+// Cumulative delays for each TechItem
+// Each item waits for all previous items (title + description) to complete
+const techItemData = [
+	{
+		title: 'Linux',
+		description:
+			"I've been on Fedora as my daily driver for a few years now, so I know the environment well. I have my workflow habits and feel right at home in the terminal.",
+	},
+	{
+		title: 'Servers & Infrastructure',
+		description:
+			"Infra/archi-wise, I tinker often. I've tested plenty of PaaS and configured my own servers. Started with Apache and natively installed services, then migrated to CapRover, and now Coolify. Today, I have 55 services running on a €20/month VPS at Netcup!",
+	},
+	{
+		title: 'CI/CD',
+		description:
+			"GitHub Actions, Docker, Dockerfile, scripting, GitLab CI, self-hosted workers — I've touched a lot. Today, Coolify handles it for me with Nixpacks, so I worry less about this.",
+	},
+	{
+		title: 'Monitoring & Alerting',
+		description:
+			"BetterUptime, then Kuma self-hosted. Now using Coolify's built-in tools, plus Sentry on certain projects.",
+	},
+	{
+		title: 'Analytics',
+		description: 'Google Analytics then Umami self-hosted — sometimes both depending on clients and needs!',
+	},
+	{
+		title: 'UI/UX Design',
+		description:
+			"Front-end is what I prefer! I've learned Adobe Illustrator, Photoshop, Animate, Premiere Pro, After Effects. I master Figma, and I've used tools like Rive and Lottie for motion design.",
+	},
+	{
+		title: 'Frontend',
+		description:
+			"I've touched many technologies. Even if I'm able to adapt, I have a very strong preference for the React ecosystem, especially Next.js, with libs like Shadcn/TailwindCSS.",
+	},
+]
+
+// Pre-calculate cumulative delays for each item
+const techItemDelays: number[] = []
+let cumulativeDelay = 0
+for (const item of techItemData) {
+	techItemDelays.push(cumulativeDelay)
+	const titleDuration = calculateAnimationDuration(item.title, 'char', 0.3)
+	const descDuration = calculateAnimationDuration(item.description, 'word', 0.3)
+	// Add some buffer between items (0.2s)
+	cumulativeDelay += titleDuration + descDuration + 0.2
+}
+
 // Tech item component with animation
 function TechItem({
 	icon,
@@ -64,8 +127,10 @@ function TechItem({
 	description: string
 	index?: number
 }) {
-	// Délai basé sur l'index de l'item (1.5s entre chaque item)
-	const baseDelay = index * 1.5
+	// Get the pre-calculated delay for this item
+	const baseDelay = techItemDelays[index] || 0
+	// Calculate how long the title animation takes
+	const titleDuration = calculateAnimationDuration(title, 'char', 0.3)
 
 	return (
 		<motion.div variants={itemVariants} className="flex items-start gap-4">
@@ -80,7 +145,7 @@ function TechItem({
 					as="p"
 					per="word"
 					preset="fade"
-					delay={baseDelay + 0.3}
+					delay={baseDelay + titleDuration}
 					className="text-sm leading-relaxed text-slate-400"
 				>
 					{description}
@@ -277,20 +342,20 @@ export default function WhyMeContent() {
 					icon={<Users className="h-5 w-5" />}
 				>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={0}>
 							Being a freelancer for a long time, I have the ability to talk simply with anyone, gather client needs,
 							engineer them, think them through, and adapt to other people's fields. That's what I've done in dozens and
 							dozens of projects: websites, apps, e-commerce platforms...
 						</AnimatedParagraph>
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={2.5}>
 							I think one of my greatest qualities is knowing how to speak in front of people, being able to listen,
 							understand, adapt to my audience, and popularize technical skills.
 						</AnimatedParagraph>
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={4.0}>
 							I also have the ability to pass on my skills — I gave classes in an engineering school for 3rd-year
 							students.
 						</AnimatedParagraph>
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={5.2}>
 							I can also lead a project from a commercial and administrative standpoint — like when I went to sign a
 							specific contract to have the right to act as a marketplace by obtaining a partnership with PayPal US.
 						</AnimatedParagraph>
@@ -304,7 +369,9 @@ export default function WhyMeContent() {
 					icon={<GitBranch className="h-5 w-5" />}
 				>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph>I've participated in quite a few Open Source contributions, notably:</AnimatedParagraph>
+						<AnimatedParagraph delay={0}>
+							I've participated in quite a few Open Source contributions, notably:
+						</AnimatedParagraph>
 						<motion.ul variants={itemVariants} className="ml-4 list-disc space-y-2 text-slate-400 text-sm">
 							<li>Strapi CMS</li>
 							<li>Obsidian</li>
@@ -331,18 +398,20 @@ export default function WhyMeContent() {
 					icon={<Heart className="h-5 w-5" />}
 				>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={0}>
 							I'm athletic — I ran a marathon in 2024 🏃 and I plan on doing another one in 2026!
 						</AnimatedParagraph>
-						<AnimatedParagraph>I played Ice Hockey (even if I'm bad, I love this sport! 🏒)</AnimatedParagraph>
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={1.2}>
+							I played Ice Hockey (even if I'm bad, I love this sport! 🏒)
+						</AnimatedParagraph>
+						<AnimatedParagraph delay={2.0}>
 							I played way too many video games before these last 6 years, but I still finished Baldur's Gate 3 (wahou!)
 							and Clair Obscur (Wahou!!!).
 						</AnimatedParagraph>
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={3.5}>
 							I have a past on League of Legends where I created a semi-pro team back in the day! 🎮
 						</AnimatedParagraph>
-						<AnimatedParagraph>
+						<AnimatedParagraph delay={4.5}>
 							I listen to a lot of music (everything, except Rap!) and I'm originally from the Alps in France where I
 							grew up my whole childhood! 🏔️
 						</AnimatedParagraph>
