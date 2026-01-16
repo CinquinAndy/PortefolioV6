@@ -66,7 +66,7 @@ export default async function Page({ params }: PageProps) {
 		<>
 			<Nav locale={locale} content_website={content_website} h1="Why Me?" isHome={false} />
 			<div>
-				<WhyMeContent />
+				<WhyMeContent locale={locale as 'en' | 'fr'} />
 				<Cta content_website={content_website} />
 			</div>
 			<Footer content_website={content_website} />

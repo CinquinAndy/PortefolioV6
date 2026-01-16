@@ -22,6 +22,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ExpandableSection, LinkCard, ProjectCard } from '@/components/ui/expandable-section'
 import { TextEffect } from '@/components/ui/text-effect'
+import { getWhyMeTranslations, type WhyMeTranslations } from '@/utils/whyMeTranslations'
 
 // Container variants for staggered children appearing one by one
 const containerVariants = {
@@ -29,7 +30,7 @@ const containerVariants = {
 	visible: {
 		opacity: 1,
 		transition: {
-			staggerChildren: 1.5, // 1.5s entre chaque élément
+			staggerChildren: 1.5,
 			delayChildren: 0.1,
 		},
 	},
@@ -43,14 +44,12 @@ const itemVariants = {
 		y: 0,
 		transition: {
 			duration: 0.4,
-			ease: [0.25, 0.1, 0.25, 1] as const, // cubic-bezier for easeOut
+			ease: [0.25, 0.1, 0.25, 1] as const,
 		},
 	},
 }
 
 // Helper function to calculate animation duration based on content
-// For chars: 0.03s stagger per char + transition time
-// For words: 0.05s stagger per word + transition time
 function calculateAnimationDuration(text: string, per: 'char' | 'word', transitionDuration = 0.3) {
 	if (per === 'char') {
 		const charCount = text.length
@@ -61,54 +60,27 @@ function calculateAnimationDuration(text: string, per: 'char' | 'word', transiti
 	}
 }
 
-// Cumulative delays for each TechItem
-// Each item waits for all previous items (title + description) to complete
-const techItemData = [
-	{
-		title: 'Linux',
-		description:
-			"I've been on Fedora as my daily driver for a few years now, so I know the environment well. I have my workflow habits and feel right at home in the terminal.",
-	},
-	{
-		title: 'Servers & Infrastructure',
-		description:
-			"Infra/archi-wise, I tinker often. I've tested plenty of PaaS and configured my own servers. Started with Apache and natively installed services, then migrated to CapRover, and now Coolify. Today, I have 55 services running on a €20/month VPS at Netcup!",
-	},
-	{
-		title: 'CI/CD',
-		description:
-			"GitHub Actions, Docker, Dockerfile, scripting, GitLab CI, self-hosted workers — I've touched a lot. Today, Coolify handles it for me with Nixpacks, so I worry less about this.",
-	},
-	{
-		title: 'Monitoring & Alerting',
-		description:
-			"BetterUptime, then Kuma self-hosted. Now using Coolify's built-in tools, plus Sentry on certain projects.",
-	},
-	{
-		title: 'Analytics',
-		description: 'Google Analytics then Umami self-hosted — sometimes both depending on clients and needs!',
-	},
-	{
-		title: 'UI/UX Design',
-		description:
-			"Front-end is what I prefer! I've learned Adobe Illustrator, Photoshop, Animate, Premiere Pro, After Effects. I master Figma, and I've used tools like Rive and Lottie for motion design.",
-	},
-	{
-		title: 'Frontend',
-		description:
-			"I've touched many technologies. Even if I'm able to adapt, I have a very strong preference for the React ecosystem, especially Next.js, with libs like Shadcn/TailwindCSS.",
-	},
-]
+// Calculate cumulative delays for tech items based on translations
+function calculateTechItemDelays(t: WhyMeTranslations) {
+	const techItems = [
+		t.tech.linux,
+		t.tech.servers,
+		t.tech.cicd,
+		t.tech.monitoring,
+		t.tech.analytics,
+		t.tech.uiux,
+		t.tech.frontend,
+	]
 
-// Pre-calculate cumulative delays for each item
-const techItemDelays: number[] = []
-let cumulativeDelay = 0
-for (const item of techItemData) {
-	techItemDelays.push(cumulativeDelay)
-	const titleDuration = calculateAnimationDuration(item.title, 'char', 0.3)
-	const descDuration = calculateAnimationDuration(item.description, 'word', 0.3)
-	// Add some buffer between items (0.2s)
-	cumulativeDelay += titleDuration + descDuration + 0.2
+	const delays: number[] = []
+	let cumulative = 0
+	for (const item of techItems) {
+		delays.push(cumulative)
+		const titleDuration = calculateAnimationDuration(item.title, 'char', 0.3)
+		const descDuration = calculateAnimationDuration(item.description, 'word', 0.3)
+		cumulative += titleDuration + descDuration + 0.2
+	}
+	return delays
 }
 
 // Tech item component with animation
@@ -118,18 +90,15 @@ function TechItem({
 	iconColor,
 	title,
 	description,
-	index = 0,
+	delay = 0,
 }: {
 	icon: React.ReactNode
 	iconBgColor: string
 	iconColor: string
 	title: string
 	description: string
-	index?: number
+	delay?: number
 }) {
-	// Get the pre-calculated delay for this item
-	const baseDelay = techItemDelays[index] || 0
-	// Calculate how long the title animation takes
 	const titleDuration = calculateAnimationDuration(title, 'char', 0.3)
 
 	return (
@@ -138,14 +107,14 @@ function TechItem({
 				{icon}
 			</div>
 			<div className="flex-1">
-				<TextEffect as="h4" per="char" preset="blur" delay={baseDelay} className="mb-1 font-semibold text-white">
+				<TextEffect as="h4" per="char" preset="blur" delay={delay} className="mb-1 font-semibold text-white">
 					{title}
 				</TextEffect>
 				<TextEffect
 					as="p"
 					per="word"
 					preset="fade"
-					delay={baseDelay + titleDuration}
+					delay={delay + titleDuration}
 					className="text-sm leading-relaxed text-slate-400"
 				>
 					{description}
@@ -166,19 +135,32 @@ function AnimatedParagraph({ children, delay = 0 }: { children: string; delay?: 
 	)
 }
 
-export default function WhyMeContent() {
+interface WhyMeContentProps {
+	locale: 'en' | 'fr'
+}
+
+export default function WhyMeContent({ locale }: WhyMeContentProps) {
+	const t = getWhyMeTranslations(locale)
+	const techDelays = calculateTechItemDelays(t)
+
 	return (
 		<section className="relative w-full px-4 py-12 md:px-20 md:py-24">
 			{/* Hero Section */}
 			<div className="mx-auto mb-16 max-w-4xl text-center md:mb-24">
-				<p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
-					Andy, 27 years old, ultra-active enthusiast, and way too eager to learn and progress. Check out the crazy
-					activity on GitHub — it&apos;s 100% real!
+				<p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">{t.hero.intro}</p>
+
+				<p className="mt-4 text-sm text-slate-400">
+					{t.hero.moreInfo}{' '}
+					<Link href="https://andy-cinquin.com/portefolio" className="text-cyan-400 underline hover:text-cyan-300">
+						{t.hero.portfolioLink}
+					</Link>{' '}
+					{t.hero.portfolioSuffix}
 				</p>
 
 				<p className="mt-4 text-sm italic text-slate-500">
-					→ Yes, I know what Java is, and no, I don&apos;t want to touch it! (unless it&apos;s truly a matter of life or
-					death ❤️)
+					{t.hero.javaJoke}
+					<br />
+					{t.hero.javaException}
 				</p>
 			</div>
 
@@ -194,106 +176,97 @@ export default function WhyMeContent() {
 							unoptimized
 						/>
 					</div>
-					<p className="mt-4 text-center text-sm text-slate-500">
-						Just look at the number of &quot;grey&quot; days over the last year — not many! 🚀
-					</p>
+					<p className="mt-4 text-center text-sm text-slate-500">{t.github.caption}</p>
 					<Link
-						className="w-full flex justify-center mt-4 text-center text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
-						href={'https://github.com/CinquinAndy'}
+						className="mt-4 flex w-full justify-center text-center text-sm text-cyan-400 transition-colors hover:text-cyan-300"
+						href="https://github.com/CinquinAndy"
 					>
-						Check it out! →
+						{t.github.checkItOut}
 					</Link>
 				</div>
+			</div>
+
+			{/* Intro Text */}
+			<div className="mx-auto mb-8 max-w-4xl text-center">
+				<p className="text-sm text-slate-400">{t.intro.knowCantJudge}</p>
+				<p className="mt-2 text-sm italic text-slate-500">{t.intro.touchEverything}</p>
 			</div>
 
 			{/* Expandable Sections */}
 			<div className="mx-auto max-w-4xl space-y-6">
 				{/* Tech Section */}
-				<ExpandableSection
-					title="Tech Stack"
-					summary="Linux enthusiast, self-hosted infrastructure, and Next.js lover"
-					icon={<Code2 className="h-5 w-5" />}
-				>
+				<ExpandableSection title={t.tech.title} summary={t.tech.summary} icon={<Code2 className="h-5 w-5" />}>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
 						<TechItem
-							index={0}
+							delay={techDelays[0]}
 							icon={<Terminal className="h-4 w-4" />}
 							iconBgColor="bg-orange-500/20"
 							iconColor="text-orange-400"
-							title="Linux"
-							description="I've been on Fedora as my daily driver for a few years now, so I know the environment well. I have my workflow habits and feel right at home in the terminal."
+							title={t.tech.linux.title}
+							description={t.tech.linux.description}
 						/>
 						<TechItem
-							index={1}
+							delay={techDelays[1]}
 							icon={<Server className="h-4 w-4" />}
 							iconBgColor="bg-blue-500/20"
 							iconColor="text-blue-400"
-							title="Servers & Infrastructure"
-							description="Infra/archi-wise, I tinker often. I've tested plenty of PaaS and configured my own servers. Started with Apache and natively installed services, then migrated to CapRover, and now Coolify. Today, I have 55 services running on a €20/month VPS at Netcup!"
+							title={t.tech.servers.title}
+							description={t.tech.servers.description}
 						/>
 						<TechItem
-							index={2}
+							delay={techDelays[2]}
 							icon={<GitBranch className="h-4 w-4" />}
 							iconBgColor="bg-green-500/20"
 							iconColor="text-green-400"
-							title="CI/CD"
-							description="GitHub Actions, Docker, Dockerfile, scripting, GitLab CI, self-hosted workers — I've touched a lot. Today, Coolify handles it for me with Nixpacks, so I worry less about this."
+							title={t.tech.cicd.title}
+							description={t.tech.cicd.description}
 						/>
 						<TechItem
-							index={3}
+							delay={techDelays[3]}
 							icon={<Activity className="h-4 w-4" />}
 							iconBgColor="bg-red-500/20"
 							iconColor="text-red-400"
-							title="Monitoring & Alerting"
-							description="BetterUptime, then Kuma self-hosted. Now using Coolify's built-in tools, plus Sentry on certain projects."
+							title={t.tech.monitoring.title}
+							description={t.tech.monitoring.description}
 						/>
 						<TechItem
-							index={4}
+							delay={techDelays[4]}
 							icon={<BarChart3 className="h-4 w-4" />}
 							iconBgColor="bg-yellow-500/20"
 							iconColor="text-yellow-400"
-							title="Analytics"
-							description="Google Analytics then Umami self-hosted — sometimes both depending on clients and needs!"
+							title={t.tech.analytics.title}
+							description={t.tech.analytics.description}
 						/>
 						<TechItem
-							index={5}
+							delay={techDelays[5]}
 							icon={<Palette className="h-4 w-4" />}
 							iconBgColor="bg-pink-500/20"
 							iconColor="text-pink-400"
-							title="UI/UX Design"
-							description="Front-end is what I prefer! I've learned Adobe Illustrator, Photoshop, Animate, Premiere Pro, After Effects. I master Figma, and I've used tools like Rive and Lottie for motion design."
+							title={t.tech.uiux.title}
+							description={t.tech.uiux.description}
 						/>
 						<TechItem
-							index={6}
+							delay={techDelays[6]}
 							icon={<Monitor className="h-4 w-4" />}
 							iconBgColor="bg-indigo-500/20"
 							iconColor="text-indigo-400"
-							title="Frontend"
-							description="I've touched many technologies. Even if I'm able to adapt, I have a very strong preference for the React ecosystem, especially Next.js, with libs like Shadcn/TailwindCSS."
+							title={t.tech.frontend.title}
+							description={t.tech.frontend.description}
 						/>
 					</motion.div>
 				</ExpandableSection>
 
 				{/* Featured Projects */}
-				<ExpandableSection
-					title="Featured Projects"
-					summary="Repos that best represent my Next.js expertise"
-					icon={<Layers className="h-5 w-5" />}
-				>
-					<motion.div
-						variants={containerVariants}
-						initial="hidden"
-						animate="visible"
-						className="grid gap-4 md:grid-cols-2"
-					>
+				<ExpandableSection title={t.projects.title} summary={t.projects.summary} icon={<Layers className="h-5 w-5" />}>
+					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid gap-4 md:grid-cols-2">
 						<motion.div variants={itemVariants}>
 							<ProjectCard
 								portfolioUrl="https://andy-cinquin.fr/portefolio/beswib"
 								href="https://beswib.com/"
 								githubUrl="https://github.com/For-Hives/beswib"
 								title="Beswib"
-								description="The most complete: translations, preprod + prod, marketplace for running race bibs, designed from A to Z!"
-								highlight="Most Complete"
+								description={t.projects.beswib.description}
+								highlight={t.projects.beswib.highlight}
 							/>
 						</motion.div>
 						<motion.div variants={itemVariants}>
@@ -302,8 +275,8 @@ export default function WhyMeContent() {
 								href="https://forvoyez.com/"
 								githubUrl="https://github.com/For-Hives/ForVoyez"
 								title="ForVoyez"
-								description="A full SaaS environment built with Next.js, demonstrating my ability to build scalable applications."
-								highlight="SaaS"
+								description={t.projects.forvoyez.description}
+								highlight={t.projects.forvoyez.highlight}
 							/>
 						</motion.div>
 						<motion.div variants={itemVariants}>
@@ -312,24 +285,24 @@ export default function WhyMeContent() {
 								href="https://cinquin-maeva.com/"
 								githubUrl="https://github.com/CinquinAndy/MaevaSiteV2"
 								title="Maeva Site"
-								description="The prettiest one! Made for my little sister recently with lots of love and attention to detail."
-								highlight="Design Focus"
+								description={t.projects.maeva.description}
+								highlight={t.projects.maeva.highlight}
 							/>
 						</motion.div>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
-								portfolioUrl="https://andy-cinquin.com/portefolio/wildlife-aws-experiences-ia"
+								portfolioUrl="https://andy-cinquin.com/portefolio/wildlife-aws-realtime-racetrack-f1"
 								title="Wildlife F1 App"
-								description="I greatly participated in creating the app for F1 — Lewis Hamilton and Charles Leclerc both tested our app! 🏎️"
-								highlight="F1 Experience"
+								description={t.projects.wildlife.description}
+								highlight={t.projects.wildlife.highlight}
 							/>
 						</motion.div>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
-								portfolioUrl="https://andy-cinquin.com/portefolio/redesign-neova"
-								title="Neova Redesign"
-								description="Complete redesign of Neova's corporate identity and digital presence."
-								highlight="Corporate Redesign"
+								portfolioUrl="https://andy-cinquin.com/portefolio/wildlife-aws-sticker-generator"
+								title="Wildlife Sticker Generator"
+								description={t.projects.sticker.description}
+								highlight={t.projects.sticker.highlight}
 							/>
 						</motion.div>
 					</motion.div>
@@ -337,46 +310,51 @@ export default function WhyMeContent() {
 
 				{/* Client Relations */}
 				<ExpandableSection
-					title="Client Relations"
-					summary="Freelance experience, teaching, and project leadership"
+					title={t.clientRelations.title}
+					summary={t.clientRelations.summary}
 					icon={<Users className="h-5 w-5" />}
 				>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph delay={0}>
-							Being a freelancer for a long time, I have the ability to talk simply with anyone, gather client needs,
-							engineer them, think them through, and adapt to other people's fields. That's what I've done in dozens and
-							dozens of projects: websites, apps, e-commerce platforms...
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={2.5}>
-							I think one of my greatest qualities is knowing how to speak in front of people, being able to listen,
-							understand, adapt to my audience, and popularize technical skills.
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={4.0}>
-							I also have the ability to pass on my skills — I gave classes in an engineering school for 3rd-year
-							students.
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={5.2}>
-							I can also lead a project from a commercial and administrative standpoint — like when I went to sign a
-							specific contract to have the right to act as a marketplace by obtaining a partnership with PayPal US.
-						</AnimatedParagraph>
+						<AnimatedParagraph delay={0}>{t.clientRelations.p1}</AnimatedParagraph>
+						<motion.div variants={itemVariants}>
+							<p className="text-sm leading-relaxed text-slate-300">
+								{t.clientRelations.p2}{' '}
+								<Link
+									href={t.clientRelations.p2Link}
+									target="_blank"
+									className="text-cyan-400 underline hover:text-cyan-300"
+								>
+									<ExternalLink className="inline h-3 w-3" />
+								</Link>
+							</p>
+						</motion.div>
+						<motion.div variants={itemVariants}>
+							<p className="text-sm leading-relaxed text-slate-300">
+								{t.clientRelations.p3}{' '}
+								<Link
+									href={t.clientRelations.p3Link}
+									target="_blank"
+									className="text-cyan-400 underline hover:text-cyan-300"
+								>
+									<ExternalLink className="inline h-3 w-3" />
+								</Link>
+							</p>
+						</motion.div>
 					</motion.div>
 				</ExpandableSection>
 
 				{/* Open Source */}
 				<ExpandableSection
-					title="Open Source"
-					summary="Contributing to 21st, Strapi, Obsidian, and more"
+					title={t.openSource.title}
+					summary={t.openSource.summary}
 					icon={<GitBranch className="h-5 w-5" />}
 				>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph delay={0}>
-							I've participated in quite a few Open Source contributions, notably:
-						</AnimatedParagraph>
-						<motion.ul variants={itemVariants} className="ml-4 list-disc space-y-2 text-slate-400 text-sm">
-							<li>Strapi CMS</li>
-							<li>Obsidian</li>
-							<li>Components in 21st.dev (accepted to be listed publicly)</li>
-							<li>WordPress plugins</li>
+						<AnimatedParagraph delay={0}>{t.openSource.intro}</AnimatedParagraph>
+						<motion.ul variants={itemVariants} className="ml-4 list-disc space-y-2 text-sm text-slate-400">
+							{t.openSource.projects.map((project, i) => (
+								<li key={i}>{project}</li>
+							))}
 						</motion.ul>
 						<motion.p variants={itemVariants} className="text-sm">
 							<Link
@@ -385,68 +363,52 @@ export default function WhyMeContent() {
 								rel="noopener noreferrer"
 								className="inline-flex items-center gap-1 text-cyan-400 underline hover:text-cyan-300"
 							>
-								View my 21st.dev contributions <ExternalLink className="h-3 w-3" />
+								{t.openSource.viewContributions} <ExternalLink className="h-3 w-3" />
 							</Link>
 						</motion.p>
 					</motion.div>
 				</ExpandableSection>
 
 				{/* Personal */}
-				<ExpandableSection
-					title="Personal"
-					summary="Marathon runner, hockey player, and gamer"
-					icon={<Heart className="h-5 w-5" />}
-				>
+				<ExpandableSection title={t.personal.title} summary={t.personal.summary} icon={<Heart className="h-5 w-5" />}>
 					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph delay={0}>
-							I'm athletic — I ran a marathon in 2024 🏃 and I plan on doing another one in 2026!
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={1.2}>
-							I played Ice Hockey (even if I'm bad, I love this sport! 🏒)
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={2.0}>
-							I played way too many video games before these last 6 years, but I still finished Baldur's Gate 3 (wahou!)
-							and Clair Obscur (Wahou!!!).
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={3.5}>
-							I have a past on League of Legends where I created a semi-pro team back in the day! 🎮
-						</AnimatedParagraph>
-						<AnimatedParagraph delay={4.5}>
-							I listen to a lot of music (everything, except Rap!) and I'm originally from the Alps in France where I
-							grew up my whole childhood! 🏔️
-						</AnimatedParagraph>
+						<AnimatedParagraph delay={0}>{t.personal.p1}</AnimatedParagraph>
+						<AnimatedParagraph delay={1.2}>{t.personal.p2}</AnimatedParagraph>
+						<AnimatedParagraph delay={2.0}>{t.personal.p3}</AnimatedParagraph>
+						<AnimatedParagraph delay={3.5}>{t.personal.p4}</AnimatedParagraph>
+						<AnimatedParagraph delay={4.5}>{t.personal.p5}</AnimatedParagraph>
 					</motion.div>
 				</ExpandableSection>
 
 				{/* Links Section */}
 				<div className="mt-12 border-t border-white/10 pt-12">
 					<h3 className="mb-6 text-center font-serif text-2xl font-semibold text-white md:text-3xl">
-						Find Me Everywhere
+						{t.links.title}
 					</h3>
 					<div className="grid gap-4 md:grid-cols-2">
 						<LinkCard
 							href="https://andy-cinquin.com/portefolio"
 							icon={<ExternalLink className="h-5 w-5" />}
-							title="Portfolio"
-							description="View all my recent projects"
+							title={t.links.portfolio.title}
+							description={t.links.portfolio.description}
 						/>
 						<LinkCard
 							href="https://github.com/CinquinAndy"
 							icon={<Github className="h-5 w-5" />}
-							title="GitHub"
-							description="Check my activity and repos"
+							title={t.links.github.title}
+							description={t.links.github.description}
 						/>
 						<LinkCard
 							href="https://www.linkedin.com/in/andy-cinquin/"
 							icon={<Linkedin className="h-5 w-5" />}
-							title="LinkedIn"
-							description="Connect professionally"
+							title={t.links.linkedin.title}
+							description={t.links.linkedin.description}
 						/>
 						<LinkCard
 							href="https://andy-cinquin.com/blog"
 							icon={<BookOpen className="h-5 w-5" />}
-							title="Blog"
-							description="Random ramblings and tech articles"
+							title={t.links.blog.title}
+							description={t.links.blog.description}
 						/>
 					</div>
 				</div>
