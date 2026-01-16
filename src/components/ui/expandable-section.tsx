@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { Briefcase, ChevronDown, ExternalLink, Github } from 'lucide-react'
 import Link from 'next/link'
 import type React from 'react'
 import { useState } from 'react'
@@ -122,14 +122,15 @@ export function LinkCard({ href, icon, title, description }: LinkCardProps) {
 
 // Export a project card for featured projects
 interface ProjectCardProps {
-	href: string
+	href?: string
 	githubUrl?: string
+	portfolioUrl?: string
 	title: string
 	description: string
 	highlight?: string
 }
 
-export function ProjectCard({ href, githubUrl, title, description, highlight }: ProjectCardProps) {
+export function ProjectCard({ href, githubUrl, portfolioUrl, title, description, highlight }: ProjectCardProps) {
 	return (
 		<div className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-indigo-950/30 to-slate-900/30 p-4 transition-all hover:border-cyan-500/30 md:p-5">
 			{highlight && (
@@ -140,22 +141,37 @@ export function ProjectCard({ href, githubUrl, title, description, highlight }: 
 			<h4 className="mb-2 font-semibold text-white">{title}</h4>
 			<p className="mb-4 text-sm leading-relaxed text-slate-400">{description}</p>
 			<div className="flex flex-wrap gap-2">
-				<a
-					href={href}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="inline-flex items-center gap-1 text-sm text-cyan-400 transition-colors hover:text-cyan-300"
-				>
-					View Project →
-				</a>
+				{href && (
+					<a
+						href={href}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/20 px-3 py-1.5 text-xs font-medium text-cyan-400 transition-all hover:bg-cyan-500/30 hover:text-cyan-300"
+					>
+						<ExternalLink className="h-3.5 w-3.5" />
+						Website
+					</a>
+				)}
 				{githubUrl && (
 					<a
 						href={githubUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center gap-1 text-sm text-slate-400 transition-colors hover:text-white"
+						className="inline-flex items-center gap-1.5 rounded-full bg-slate-700/50 px-3 py-1.5 text-xs font-medium text-slate-300 transition-all hover:bg-slate-600/50 hover:text-white"
 					>
+						<Github className="h-3.5 w-3.5" />
 						GitHub
+					</a>
+				)}
+				{portfolioUrl && (
+					<a
+						href={portfolioUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/20 px-3 py-1.5 text-xs font-medium text-indigo-400 transition-all hover:bg-indigo-500/30 hover:text-indigo-300"
+					>
+						<Briefcase className="h-3.5 w-3.5" />
+						Case Study
 					</a>
 				)}
 			</div>
