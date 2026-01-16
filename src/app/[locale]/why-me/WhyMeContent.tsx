@@ -223,6 +223,7 @@ export default function WhyMeContent() {
 					>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
+								portfolioUrl="https://andy-cinquin.fr/portefolio/beswib"
 								href="https://beswib.com/"
 								githubUrl="https://github.com/For-Hives/beswib"
 								title="Beswib"
@@ -232,6 +233,7 @@ export default function WhyMeContent() {
 						</motion.div>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
+								portfolioUrl="https://andy-cinquin.fr/portefolio/forvoyez"
 								href="https://forvoyez.com/"
 								githubUrl="https://github.com/For-Hives/ForVoyez"
 								title="ForVoyez"
@@ -241,6 +243,7 @@ export default function WhyMeContent() {
 						</motion.div>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
+								portfolioUrl="https://andy-cinquin.fr/portefolio/mae"
 								href="https://cinquin-maeva.com/"
 								githubUrl="https://github.com/CinquinAndy/MaevaSiteV2"
 								title="Maeva Site"
@@ -250,7 +253,7 @@ export default function WhyMeContent() {
 						</motion.div>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
-								href="https://andy-cinquin.com/portefolio/wildlife-aws-realtime-racetrack-f1"
+								portfolioUrl="https://andy-cinquin.com/portefolio/wildlife-aws-experiences-ia"
 								title="Wildlife F1 App"
 								description="I greatly participated in creating the app for F1 — Lewis Hamilton and Charles Leclerc both tested our app! 🏎️"
 								highlight="F1 Experience"
@@ -258,10 +261,10 @@ export default function WhyMeContent() {
 						</motion.div>
 						<motion.div variants={itemVariants}>
 							<ProjectCard
-								href="https://andy-cinquin.com/portefolio/wildlife-aws-sticker-generator"
-								title="Wildlife AWS Sticker Generator"
-								description="Wildlife trusted me 200% and gave me full responsibility. Used at an AWS convention in Spain with fantastic feedback!"
-								highlight="Most Proud"
+								portfolioUrl="https://andy-cinquin.com/portefolio/redesign-neova"
+								title="Neova Redesign"
+								description="Complete redesign of Neova's corporate identity and digital presence."
+								highlight="Corporate Redesign"
 							/>
 						</motion.div>
 					</motion.div>
