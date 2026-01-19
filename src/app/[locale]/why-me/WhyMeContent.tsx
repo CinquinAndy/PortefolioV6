@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import {
 	Activity,
 	BarChart3,
@@ -21,116 +21,202 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { ExpandableSection, LinkCard, ProjectCard } from '@/components/ui/expandable-section'
-import { TextEffect } from '@/components/ui/text-effect'
-import { getWhyMeTranslations, type WhyMeTranslations } from '@/utils/whyMeTranslations'
+import { getWhyMeTranslations } from '@/utils/whyMeTranslations'
 
-// Container variants for staggered children appearing one by one
-const containerVariants = {
+// ============================================
+// Disney-Inspired Animation Principles:
+// - Anticipation: slight scale down before appearing
+// - Follow-through: overshoot on springs
+// - Slow in/slow out: custom easing curves
+// - Staging: staggered reveals to guide the eye
+// - Secondary action: icons have their own bounce
+// - Exaggeration: playful scale and rotation
+// ============================================
+
+// Custom spring configs for organic movement
+const springBouncy = { type: 'spring', stiffness: 400, damping: 25 } as const
+const springSmooth = { type: 'spring', stiffness: 200, damping: 20 } as const
+const springGentle = { type: 'spring', stiffness: 120, damping: 14 } as const
+
+// Container with staggered children - staging principle
+const containerVariants: Variants = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
 		transition: {
-			staggerChildren: 1.5,
-			delayChildren: 0.1,
+			staggerChildren: 0.12,
+			delayChildren: 0.05,
 		},
 	},
 }
 
-// Item variants - each element slides up and fades in
-const itemVariants = {
-	hidden: { opacity: 0, y: 20 },
+// Item with anticipation (slight scale down) and follow-through (overshoot)
+const itemVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		y: 30,
+		scale: 0.95,
+	},
 	visible: {
 		opacity: 1,
 		y: 0,
+		scale: 1,
 		transition: {
-			duration: 0.4,
-			ease: [0.25, 0.1, 0.25, 1] as const,
+			...springBouncy,
 		},
 	},
 }
 
-// Helper function to calculate animation duration based on content
-function calculateAnimationDuration(text: string, per: 'char' | 'word', transitionDuration = 0.3) {
-	if (per === 'char') {
-		const charCount = text.length
-		return charCount * 0.03 + transitionDuration
-	} else {
-		const wordCount = text.split(/\s+/).length
-		return wordCount * 0.05 + transitionDuration
-	}
+// Icon bounce - secondary action with exaggeration
+const iconVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		scale: 0.3,
+		rotate: -15,
+	},
+	visible: {
+		opacity: 1,
+		scale: 1,
+		rotate: 0,
+		transition: {
+			...springGentle,
+			delay: 0.1,
+		},
+	},
 }
 
-// Calculate cumulative delays for tech items based on translations
-function calculateTechItemDelays(t: WhyMeTranslations) {
-	const techItems = [
-		t.tech.linux,
-		t.tech.servers,
-		t.tech.cicd,
-		t.tech.monitoring,
-		t.tech.analytics,
-		t.tech.uiux,
-		t.tech.frontend,
-	]
-
-	const delays: number[] = []
-	let cumulative = 0
-	for (const item of techItems) {
-		delays.push(cumulative)
-		const titleDuration = calculateAnimationDuration(item.title, 'char', 0.3)
-		const descDuration = calculateAnimationDuration(item.description, 'word', 0.3)
-		cumulative += titleDuration + descDuration + 0.2
-	}
-	return delays
+// Text reveal with smooth slide and fade
+const textVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		x: -20,
+		filter: 'blur(4px)',
+	},
+	visible: {
+		opacity: 1,
+		x: 0,
+		filter: 'blur(0px)',
+		transition: {
+			...springSmooth,
+		},
+	},
 }
 
-// Tech item component with animation
+// Hero section - dramatic entrance
+const heroVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		y: 50,
+		scale: 0.98,
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		scale: 1,
+		transition: {
+			...springGentle,
+			staggerChildren: 0.15,
+		},
+	},
+}
+
+// Card pop with 3D feel
+const cardVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		y: 40,
+		scale: 0.9,
+		rotateX: 10,
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		scale: 1,
+		rotateX: 0,
+		transition: {
+			...springBouncy,
+		},
+	},
+}
+
+// List item stagger with playful offset
+const listItemVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		x: -15,
+		y: 10,
+	},
+	visible: {
+		opacity: 1,
+		x: 0,
+		y: 0,
+		transition: {
+			...springSmooth,
+		},
+	},
+}
+
+// GitHub image special reveal
+const imageRevealVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		scale: 0.95,
+		y: 20,
+	},
+	visible: {
+		opacity: 1,
+		scale: 1,
+		y: 0,
+		transition: {
+			...springGentle,
+			delay: 0.2,
+		},
+	},
+}
+
+// Tech item component with Disney-style animation
 function TechItem({
 	icon,
 	iconBgColor,
 	iconColor,
 	title,
 	description,
-	delay = 0,
 }: {
 	icon: React.ReactNode
 	iconBgColor: string
 	iconColor: string
 	title: string
 	description: string
-	delay?: number
 }) {
-	const titleDuration = calculateAnimationDuration(title, 'char', 0.3)
-
 	return (
 		<motion.div variants={itemVariants} className="flex items-start gap-4">
-			<div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${iconBgColor} ${iconColor}`}>
+			{/* Icon with secondary action (bounce) */}
+			<motion.div
+				variants={iconVariants}
+				className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${iconBgColor} ${iconColor}`}
+			>
 				{icon}
-			</div>
+			</motion.div>
+			{/* Text content with smooth reveal */}
 			<div className="flex-1">
-				<TextEffect as="h4" per="char" preset="blur" delay={delay} className="mb-1 font-semibold text-white">
+				<motion.h4 variants={textVariants} className="mb-1 font-semibold text-white">
 					{title}
-				</TextEffect>
-				<TextEffect
-					as="p"
-					per="word"
-					preset="fade"
-					delay={delay + titleDuration}
-					className="text-sm leading-relaxed text-slate-400"
-				>
+				</motion.h4>
+				<motion.p variants={textVariants} className="text-sm leading-relaxed text-slate-400">
 					{description}
-				</TextEffect>
+				</motion.p>
 			</div>
 		</motion.div>
 	)
 }
 
-// Animated paragraph for other sections
-function AnimatedParagraph({ children, delay = 0 }: { children: string; delay?: number }) {
+// Animated paragraph with smooth entrance
+function AnimatedParagraph({ children }: { children: React.ReactNode }) {
 	return (
 		<motion.div variants={itemVariants}>
-			<TextEffect as="p" per="word" preset="fade" delay={delay} className="text-sm leading-relaxed text-slate-300">
+			<motion.p variants={textVariants} className="text-sm leading-relaxed text-slate-300">
 				{children}
-			</TextEffect>
+			</motion.p>
 		</motion.div>
 	)
 }
@@ -141,31 +227,46 @@ interface WhyMeContentProps {
 
 export default function WhyMeContent({ locale }: WhyMeContentProps) {
 	const t = getWhyMeTranslations(locale)
-	const techDelays = calculateTechItemDelays(t)
 
 	return (
 		<section className="relative w-full px-4 py-12 md:px-20 md:py-24">
-			{/* Hero Section */}
-			<div className="mx-auto mb-16 max-w-4xl text-center md:mb-24">
-				<p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">{t.hero.intro}</p>
+			{/* Hero Section - Dramatic Entrance */}
+			<motion.div
+				className="mx-auto mb-16 max-w-4xl text-center md:mb-24"
+				initial="hidden"
+				animate="visible"
+				variants={heroVariants}
+			>
+				<motion.p
+					variants={itemVariants}
+					className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl"
+				>
+					{t.hero.intro}
+				</motion.p>
 
-				<p className="mt-4 text-sm text-slate-400">
+				<motion.p variants={itemVariants} className="mt-4 text-sm text-slate-400">
 					{t.hero.moreInfo}{' '}
 					<Link href="https://andy-cinquin.com/portefolio" className="text-cyan-400 underline hover:text-cyan-300">
 						{t.hero.portfolioLink}
 					</Link>{' '}
 					{t.hero.portfolioSuffix}
-				</p>
+				</motion.p>
 
-				<p className="mt-4 text-sm italic text-slate-500">
+				<motion.p variants={itemVariants} className="mt-4 text-sm italic text-slate-500">
 					{t.hero.javaJoke}
 					<br />
 					{t.hero.javaException}
-				</p>
-			</div>
+				</motion.p>
+			</motion.div>
 
-			{/* GitHub Activity Image */}
-			<div className="mx-auto mb-16 max-w-4xl md:mb-24">
+			{/* GitHub Activity Image - Special Reveal */}
+			<motion.div
+				className="mx-auto mb-16 max-w-4xl md:mb-24"
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, margin: '-50px' }}
+				variants={imageRevealVariants}
+			>
 				<div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-4 shadow-2xl backdrop-blur-sm md:p-6">
 					<div className="relative aspect-3/1 w-full overflow-hidden rounded-xl">
 						<Image
@@ -184,21 +285,36 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 						{t.github.checkItOut}
 					</Link>
 				</div>
-			</div>
+			</motion.div>
 
 			{/* Intro Text */}
-			<div className="mx-auto mb-8 max-w-4xl text-center">
-				<p className="text-sm text-slate-400">{t.intro.knowCantJudge}</p>
-				<p className="mt-2 text-sm italic text-slate-500">{t.intro.touchEverything}</p>
-			</div>
+			<motion.div
+				className="mx-auto mb-8 max-w-4xl text-center"
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true }}
+				variants={heroVariants}
+			>
+				<motion.p variants={itemVariants} className="text-sm text-slate-400">
+					{t.intro.knowCantJudge}
+				</motion.p>
+				<motion.p variants={itemVariants} className="mt-2 text-sm italic text-slate-500">
+					{t.intro.touchEverything}
+				</motion.p>
+			</motion.div>
 
 			{/* Expandable Sections */}
 			<div className="mx-auto max-w-4xl space-y-6">
 				{/* Tech Section */}
 				<ExpandableSection title={t.tech.title} summary={t.tech.summary} icon={<Code2 className="h-5 w-5" />}>
-					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
+					<motion.div
+						variants={containerVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+						className="space-y-6"
+					>
 						<TechItem
-							delay={techDelays[0]}
 							icon={<Terminal className="h-4 w-4" />}
 							iconBgColor="bg-orange-500/20"
 							iconColor="text-orange-400"
@@ -206,7 +322,6 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 							description={t.tech.linux.description}
 						/>
 						<TechItem
-							delay={techDelays[1]}
 							icon={<Server className="h-4 w-4" />}
 							iconBgColor="bg-blue-500/20"
 							iconColor="text-blue-400"
@@ -214,7 +329,6 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 							description={t.tech.servers.description}
 						/>
 						<TechItem
-							delay={techDelays[2]}
 							icon={<GitBranch className="h-4 w-4" />}
 							iconBgColor="bg-green-500/20"
 							iconColor="text-green-400"
@@ -222,7 +336,6 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 							description={t.tech.cicd.description}
 						/>
 						<TechItem
-							delay={techDelays[3]}
 							icon={<Activity className="h-4 w-4" />}
 							iconBgColor="bg-red-500/20"
 							iconColor="text-red-400"
@@ -230,7 +343,6 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 							description={t.tech.monitoring.description}
 						/>
 						<TechItem
-							delay={techDelays[4]}
 							icon={<BarChart3 className="h-4 w-4" />}
 							iconBgColor="bg-yellow-500/20"
 							iconColor="text-yellow-400"
@@ -238,7 +350,6 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 							description={t.tech.analytics.description}
 						/>
 						<TechItem
-							delay={techDelays[5]}
 							icon={<Palette className="h-4 w-4" />}
 							iconBgColor="bg-pink-500/20"
 							iconColor="text-pink-400"
@@ -246,7 +357,6 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 							description={t.tech.uiux.description}
 						/>
 						<TechItem
-							delay={techDelays[6]}
 							icon={<Monitor className="h-4 w-4" />}
 							iconBgColor="bg-indigo-500/20"
 							iconColor="text-indigo-400"
@@ -258,8 +368,15 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 
 				{/* Featured Projects */}
 				<ExpandableSection title={t.projects.title} summary={t.projects.summary} icon={<Layers className="h-5 w-5" />}>
-					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid gap-4 md:grid-cols-2">
-						<motion.div variants={itemVariants}>
+					<motion.div
+						variants={containerVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+						className="grid gap-4 md:grid-cols-2"
+						style={{ perspective: 1000 }}
+					>
+						<motion.div variants={cardVariants}>
 							<ProjectCard
 								portfolioUrl="https://andy-cinquin.fr/portefolio/beswib"
 								href="https://beswib.com/"
@@ -269,7 +386,7 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 								highlight={t.projects.beswib.highlight}
 							/>
 						</motion.div>
-						<motion.div variants={itemVariants}>
+						<motion.div variants={cardVariants}>
 							<ProjectCard
 								portfolioUrl="https://andy-cinquin.fr/portefolio/forvoyez"
 								href="https://forvoyez.com/"
@@ -279,7 +396,7 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 								highlight={t.projects.forvoyez.highlight}
 							/>
 						</motion.div>
-						<motion.div variants={itemVariants}>
+						<motion.div variants={cardVariants}>
 							<ProjectCard
 								portfolioUrl="https://andy-cinquin.fr/portefolio/mae"
 								href="https://cinquin-maeva.com/"
@@ -289,7 +406,7 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 								highlight={t.projects.maeva.highlight}
 							/>
 						</motion.div>
-						<motion.div variants={itemVariants}>
+						<motion.div variants={cardVariants}>
 							<ProjectCard
 								portfolioUrl="https://andy-cinquin.com/portefolio/wildlife-aws-realtime-racetrack-f1"
 								title="Wildlife F1 App"
@@ -297,7 +414,7 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 								highlight={t.projects.wildlife.highlight}
 							/>
 						</motion.div>
-						<motion.div variants={itemVariants}>
+						<motion.div variants={cardVariants}>
 							<ProjectCard
 								portfolioUrl="https://andy-cinquin.com/portefolio/wildlife-aws-sticker-generator"
 								title="Wildlife Sticker Generator"
@@ -314,8 +431,14 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 					summary={t.clientRelations.summary}
 					icon={<Users className="h-5 w-5" />}
 				>
-					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph delay={0}>{t.clientRelations.p1}</AnimatedParagraph>
+					<motion.div
+						variants={containerVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+						className="space-y-4"
+					>
+						<AnimatedParagraph>{t.clientRelations.p1}</AnimatedParagraph>
 						<motion.div variants={itemVariants}>
 							<p className="text-sm leading-relaxed text-slate-300">
 								{t.clientRelations.p2}{' '}
@@ -349,11 +472,19 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 					summary={t.openSource.summary}
 					icon={<GitBranch className="h-5 w-5" />}
 				>
-					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph delay={0}>{t.openSource.intro}</AnimatedParagraph>
-						<motion.ul variants={itemVariants} className="ml-4 list-disc space-y-2 text-sm text-slate-400">
+					<motion.div
+						variants={containerVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+						className="space-y-4"
+					>
+						<AnimatedParagraph>{t.openSource.intro}</AnimatedParagraph>
+						<motion.ul variants={containerVariants} className="ml-4 list-disc space-y-2 text-sm text-slate-400">
 							{t.openSource.projects.map((project, i) => (
-								<li key={i}>{project}</li>
+								<motion.li key={i} variants={listItemVariants}>
+									{project}
+								</motion.li>
 							))}
 						</motion.ul>
 						<motion.p variants={itemVariants} className="text-sm">
@@ -371,47 +502,70 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 
 				{/* Personal */}
 				<ExpandableSection title={t.personal.title} summary={t.personal.summary} icon={<Heart className="h-5 w-5" />}>
-					<motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
-						<AnimatedParagraph delay={0}>{t.personal.p1}</AnimatedParagraph>
-						<AnimatedParagraph delay={1.2}>{t.personal.p2}</AnimatedParagraph>
-						<AnimatedParagraph delay={2.0}>{t.personal.p3}</AnimatedParagraph>
-						<AnimatedParagraph delay={3.5}>{t.personal.p4}</AnimatedParagraph>
-						<AnimatedParagraph delay={4.5}>{t.personal.p5}</AnimatedParagraph>
+					<motion.div
+						variants={containerVariants}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+						className="space-y-4"
+					>
+						<AnimatedParagraph>{t.personal.p1}</AnimatedParagraph>
+						<AnimatedParagraph>{t.personal.p2}</AnimatedParagraph>
+						<AnimatedParagraph>{t.personal.p3}</AnimatedParagraph>
+						<AnimatedParagraph>{t.personal.p4}</AnimatedParagraph>
+						<AnimatedParagraph>{t.personal.p5}</AnimatedParagraph>
 					</motion.div>
 				</ExpandableSection>
 
 				{/* Links Section */}
-				<div className="mt-12 border-t border-white/10 pt-12">
-					<h3 className="mb-6 text-center font-serif text-2xl font-semibold text-white md:text-3xl">
+				<motion.div
+					className="mt-12 border-t border-white/10 pt-12"
+					initial="hidden"
+					whileInView="visible"
+					viewport={{ once: true }}
+					variants={heroVariants}
+				>
+					<motion.h3
+						variants={itemVariants}
+						className="mb-6 text-center font-serif text-2xl font-semibold text-white md:text-3xl"
+					>
 						{t.links.title}
-					</h3>
-					<div className="grid gap-4 md:grid-cols-2">
-						<LinkCard
-							href="https://andy-cinquin.com/portefolio"
-							icon={<ExternalLink className="h-5 w-5" />}
-							title={t.links.portfolio.title}
-							description={t.links.portfolio.description}
-						/>
-						<LinkCard
-							href="https://github.com/CinquinAndy"
-							icon={<Github className="h-5 w-5" />}
-							title={t.links.github.title}
-							description={t.links.github.description}
-						/>
-						<LinkCard
-							href="https://www.linkedin.com/in/andy-cinquin/"
-							icon={<Linkedin className="h-5 w-5" />}
-							title={t.links.linkedin.title}
-							description={t.links.linkedin.description}
-						/>
-						<LinkCard
-							href="https://andy-cinquin.com/blog"
-							icon={<BookOpen className="h-5 w-5" />}
-							title={t.links.blog.title}
-							description={t.links.blog.description}
-						/>
-					</div>
-				</div>
+					</motion.h3>
+					<motion.div variants={containerVariants} className="grid gap-4 md:grid-cols-2">
+						<motion.div variants={cardVariants}>
+							<LinkCard
+								href="https://andy-cinquin.com/portefolio"
+								icon={<ExternalLink className="h-5 w-5" />}
+								title={t.links.portfolio.title}
+								description={t.links.portfolio.description}
+							/>
+						</motion.div>
+						<motion.div variants={cardVariants}>
+							<LinkCard
+								href="https://github.com/CinquinAndy"
+								icon={<Github className="h-5 w-5" />}
+								title={t.links.github.title}
+								description={t.links.github.description}
+							/>
+						</motion.div>
+						<motion.div variants={cardVariants}>
+							<LinkCard
+								href="https://www.linkedin.com/in/andy-cinquin/"
+								icon={<Linkedin className="h-5 w-5" />}
+								title={t.links.linkedin.title}
+								description={t.links.linkedin.description}
+							/>
+						</motion.div>
+						<motion.div variants={cardVariants}>
+							<LinkCard
+								href="https://andy-cinquin.com/blog"
+								icon={<BookOpen className="h-5 w-5" />}
+								title={t.links.blog.title}
+								description={t.links.blog.description}
+							/>
+						</motion.div>
+					</motion.div>
+				</motion.div>
 			</div>
 		</section>
 	)
