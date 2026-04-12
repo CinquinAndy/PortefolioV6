@@ -56,5 +56,5 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(({ classNam
 ))
 CardFooter.displayName = 'CardFooter'
 
+export type { CardContentProps, CardDescriptionProps, CardFooterProps, CardHeaderProps, CardProps, CardTitleProps }
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
-export type { CardProps, CardContentProps, CardDescriptionProps, CardFooterProps, CardHeaderProps, CardTitleProps }

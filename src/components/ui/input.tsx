@@ -21,5 +21,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ type = 'text', c
 })
 Input.displayName = 'Input'
 
-export { Input }
 export type { InputProps }
+export { Input }
