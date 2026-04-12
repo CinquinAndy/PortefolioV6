@@ -579,6 +579,13 @@
 		transition: 0.4s ease-out;
 	}
 
+	.button-purple-title {
+		position: relative;
+		-webkit-transition: 0.4s ease-out;
+		-o-transition: 0.4s ease-out;
+		transition: 0.4s ease-out;
+	}
+
 	.button-purple:hover .button-purple-title {
 		color: rgb(79, 70, 229);
 	}
@@ -587,13 +594,6 @@
 		-webkit-transform: scaleY(1);
 		-ms-transform: scaleY(1);
 		transform: scaleY(1);
-	}
-
-	.button-purple-title {
-		position: relative;
-		-webkit-transition: 0.4s ease-out;
-		-o-transition: 0.4s ease-out;
-		transition: 0.4s ease-out;
 	}
 
 	/* sky */
@@ -636,6 +636,13 @@
 		transition: 0.4s ease-out;
 	}
 
+	.button-cyan-title {
+		position: relative;
+		-webkit-transition: 0.4s ease-out;
+		-o-transition: 0.4s ease-out;
+		transition: 0.4s ease-out;
+	}
+
 	.button-cyan:hover .button-cyan-title {
 		/*color: rgb(2, 132, 199);*/
 		color: rgb(8, 145, 178);
@@ -645,13 +652,6 @@
 		-webkit-transform: scaleY(1);
 		-ms-transform: scaleY(1);
 		transform: scaleY(1);
-	}
-
-	.button-cyan-title {
-		position: relative;
-		-webkit-transition: 0.4s ease-out;
-		-o-transition: 0.4s ease-out;
-		transition: 0.4s ease-out;
 	}
 
 	/*** title ***/

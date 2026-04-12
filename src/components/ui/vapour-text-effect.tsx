@@ -414,7 +414,7 @@ function renderCanvas({
 	particlesRef,
 	globalDpr,
 	currentTextIndex,
-	transformedDensity,
+	transformedDensity: _transformedDensity,
 }: {
 	framerProps: VaporizeTextCycleProps
 	canvasRef: React.RefObject<HTMLCanvasElement>
@@ -440,7 +440,7 @@ function renderCanvas({
 	const fontStr = `${framerProps.font?.fontWeight ?? 400} ${fontSize * globalDpr}px ${framerProps.font?.fontFamily ?? 'sans-serif'}`
 	const colorStr = parseColor(framerProps.color ?? 'rgb(153, 153, 153)')
 
-	let textX
+	let textX: number
 	const textY = canvas.height / 2
 	const currentText = framerProps.texts?.[currentTextIndex] || 'Next.js'
 
@@ -486,7 +486,7 @@ function createParticles(
 	ctx.imageSmoothingEnabled = true
 
 	const metrics = ctx.measureText(text)
-	let textLeft
+	let textLeft: number
 	const textWidth = metrics.width
 
 	if (alignment === 'center') {

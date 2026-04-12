@@ -84,9 +84,9 @@ export default function TableOfContents({ contentId }: { contentId: string }) {
 		<nav className="sticky top-16">
 			<h2 className="text-sm/6 font-semibold text-slate-50 font-sans">On this page</h2>
 			<ul className="mt-3 flex flex-col gap-3 border-l border-white/10 text-sm/6 text-slate-300 font-sans">
-				{headings.map((heading, index) => (
+				{headings.map(heading => (
 					<li
-						key={`${heading.id}-${index}`}
+						key={heading.id}
 						className={clsx(
 							'-ml-px border-l border-transparent pl-4',
 							'hover:text-slate-50 hover:not-has-aria-[current=location]:border-indigo-400',

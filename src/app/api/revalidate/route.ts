@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
 
 		// Revalidate by single tag
 		if (tag) {
-			revalidateTag(tag)
+			revalidateTag(tag, 'max')
 
 			return NextResponse.json({
 				revalidated: true,
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 		if (tags) {
 			const tagList = tags.split(',').map(t => t.trim())
 			for (const t of tagList) {
-				revalidateTag(t)
+				revalidateTag(t, 'max')
 			}
 
 			return NextResponse.json({

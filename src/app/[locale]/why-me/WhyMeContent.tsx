@@ -481,8 +481,8 @@ export default function WhyMeContent({ locale }: WhyMeContentProps) {
 					>
 						<AnimatedParagraph>{t.openSource.intro}</AnimatedParagraph>
 						<motion.ul variants={containerVariants} className="ml-4 list-disc space-y-2 text-sm text-slate-400">
-							{t.openSource.projects.map((project, i) => (
-								<motion.li key={i} variants={listItemVariants}>
+							{t.openSource.projects.map(project => (
+								<motion.li key={project} variants={listItemVariants}>
 									{project}
 								</motion.li>
 							))}
