@@ -1,6 +1,6 @@
 {
   "name": "portefolio_andy_cinquin",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
@@ -44,10 +44,8 @@
     "fuse.js": "7.3.0",
     "highlight.js": "11.11.1",
     "html-react-parser": "6.0.1",
-    "//i18next": "Pinned at v25 — v26 is a breaking release: removes interpolation.format, initImmediate, showSupportNotice. Risk of breaking next-i18n-router which depends on i18next internals. Migrate carefully.",
     "i18next": "25.10.10",
     "lodash": "4.18.1",
-    "//lucide-react": "Pinned at v0.x — v1.0 removed all brand icons (Github, Linkedin). These are used in WhyMeContent.tsx and expandable-section.tsx. To upgrade: replace with simple-icons equivalents, already a dep.",
     "lucide-react": "0.562.0",
     "mailgun.js": "12.7.1",
     "next": "16.2.3",
