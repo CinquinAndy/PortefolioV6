@@ -3,26 +3,20 @@ import { i18nRouter } from 'next-i18n-router'
 import type { I18nConfig } from '@/types/middleware'
 
 export function middleware(request: NextRequest): NextResponse {
-	let newLocale: string
-
 	const host = request.headers.get('host')
 	const frenchUrl = process.env.NEXT_PUBLIC_URL?.replace('https://', '') ?? ''
-	const englishUrl = process.env.NEXT_PUBLIC_URL_ALT?.replace('https://', '') ?? ''
 
-	if (host === frenchUrl) {
-		newLocale = 'fr'
-	} else if (host === englishUrl) {
-		newLocale = 'en'
-	} else {
-		newLocale = 'en'
-	}
-
-	request.headers.set('accept-language', newLocale)
-
+	// Locale is determined SOLELY by the domain (fr domain => fr, anything else => en).
+	// The NEXT_LOCALE cookie and the browser accept-language header must never influence
+	// routing: slugs are localized per locale (e.g. /course/javascript-frameworks-training
+	// only exists in "en"), so a stale "fr" cookie on the EN domain would redirect
+	// /course/<en-slug> to /fr/course/<en-slug> which 404s.
 	const i18nConfig: I18nConfig = {
-		serverSetCookie: 'always',
 		locales: ['en', 'fr'],
 		defaultLocale: host === frenchUrl ? 'fr' : 'en',
+		localeCookie: '',
+		localeDetector: false,
+		serverSetCookie: 'never',
 	}
 
 	return i18nRouter(request, i18nConfig)

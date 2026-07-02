@@ -24,6 +24,7 @@
     ],
     "types": [
       "node",
+      "bun",
       "react",
       "react-dom"
     ],
