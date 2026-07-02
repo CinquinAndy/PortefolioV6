@@ -53,17 +53,19 @@ export async function generateMetadata({ params }: { params: Promise<ArticleSlug
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: ArticleSlugParams }[]> {
-	let paths: { params: ArticleSlugParams }[] = []
+export async function generateStaticParams(): Promise<ArticleSlugParams[]> {
+	let paths: ArticleSlugParams[] = []
 
 	for (const locale of localesConstant) {
 		const articlesResponse = await getArticles(locale)
 		const articles = getResponseData(articlesResponse)
 
 		if (articles) {
-			// Map over each article to create a path object for it
+			// App Router expects segment values directly on each object —
+			// the Pages Router `{ params: {...} }` shape silently generates zero paths
 			const localePaths = articles.map((article: Article) => ({
-				params: { slug: article.attributes.slug, locale },
+				slug: article.attributes.slug,
+				locale,
 			}))
 			paths = paths.concat(localePaths)
 		}

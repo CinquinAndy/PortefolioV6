@@ -49,7 +49,28 @@ export async function fetchAPI<T = unknown>(
 		})
 
 		if (!res.ok) {
-			console.error(`API Error: ${res.status} ${res.statusText} - URL: ${process.env.NEXT_PUBLIC_API_URL}/${path}`)
+			// Surface the Strapi error body: a 400 almost always means the query
+			// references a field removed from the Strapi schema, a 500 an invalid
+			// query syntax. Both silently become 404 pages, so log them loudly.
+			let strapiError = ''
+			try {
+				const body = (await res.json()) as { error?: { message?: string; name?: string } }
+				if (body?.error) {
+					strapiError = ` - ${body.error.name ?? 'Error'}: ${body.error.message ?? 'unknown'}`
+				}
+			} catch {
+				// body was not JSON, nothing more to report
+			}
+			console.error(
+				`API Error: ${res.status} ${res.statusText}${strapiError} - URL: ${process.env.NEXT_PUBLIC_API_URL}/${path}`
+			)
+			if (res.status === 400 || res.status === 500) {
+				console.error(
+					'API Error: this query is rejected by Strapi (schema drift or invalid populate syntax). ' +
+						'The page will render as 404 until the query in src/services/ is fixed. ' +
+						'Run "bun run test:api" to check all queries against the API.'
+				)
+			}
 			return { notFound: true }
 		}
 
@@ -424,7 +445,8 @@ export async function getRecentRealisations(
  * Get technologies
  */
 export async function getTechnologies(locale: Locale): Promise<StrapiResponse<Technology[]> | NotFoundResponse> {
-	return await fetchAPI<StrapiResponse<Technology[]>>(`api/technologies?populate=deep&sort=order&locale=${locale}`)
+	// The technology content type sorts by "rank" (the old "order" field was removed from Strapi)
+	return await fetchAPI<StrapiResponse<Technology[]>>(`api/technologies?populate=deep&sort=rank&locale=${locale}`)
 }
 
 /**
@@ -445,7 +467,7 @@ export async function getTechnologiesByCategory(
 	locale: Locale
 ): Promise<StrapiResponse<Technology[]> | NotFoundResponse> {
 	return await fetchAPI<StrapiResponse<Technology[]>>(
-		`api/technologies?populate=deep&sort=order&filters[category][$eq]=${category}&locale=${locale}`
+		`api/technologies?populate=deep&sort=rank&filters[category][$eq]=${category}&locale=${locale}`
 	)
 }
 

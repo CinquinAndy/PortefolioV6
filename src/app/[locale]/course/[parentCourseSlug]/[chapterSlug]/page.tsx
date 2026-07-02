@@ -12,7 +12,7 @@ import { getChapterBySlug, getParentCourses } from '@/services/getCourses'
 import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getCourseTranslations } from '@/utils/courseTranslations'
-import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
+import { getAlternateCoursePath, getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 1 minute for faster updates from CMS
 export const revalidate = 60
@@ -26,7 +26,12 @@ interface PageParams {
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
 	const { chapterSlug, parentCourseSlug, locale } = await params
 	const t = getCourseTranslations(locale)
-	const chapterData = await getChapterBySlug(chapterSlug, locale)
+	// The parent course fetch is also made by the page component with the same
+	// URL, so Next.js deduplicates it — no extra API call
+	const [chapterData, parentCourseData] = await Promise.all([
+		getChapterBySlug(chapterSlug, locale),
+		getChapterBySlug(parentCourseSlug, locale),
+	])
 
 	if ('notFound' in chapterData || !chapterData.data || chapterData.data.length === 0) {
 		return {
@@ -38,14 +43,19 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const chapter = chapterData.data[0]
 	const seo = chapter.attributes.seo
 
-	// Fetch localizations for alternate links
-	const chapterLocalizations = chapter.attributes.localizations?.data
-	const alternateChapterSlug = chapterLocalizations?.[0]?.attributes || chapterSlug
+	// Localized slugs in the other locale (only set when the translations are
+	// linked as localizations in Strapi); the alternate URL needs BOTH the
+	// parent course and chapter localized slugs, otherwise fall back to /course
+	const alternateChapterSlug = chapter.attributes.localizations?.data?.[0]?.attributes?.slug
+	const alternateParentSlug =
+		'notFound' in parentCourseData
+			? undefined
+			: parentCourseData.data?.[0]?.attributes.localizations?.data?.[0]?.attributes?.slug
 
-	// Note: We keep the same parent course slug for simplicity
-	// In a real scenario, you might want to fetch the parent course's localized slug too
-	const frPath = `/course/${parentCourseSlug}/${locale === 'fr' ? chapterSlug : alternateChapterSlug}`
-	const enPath = `/course/${parentCourseSlug}/${locale === 'en' ? chapterSlug : alternateChapterSlug}`
+	const ownPath = `/course/${parentCourseSlug}/${chapterSlug}`
+	const alternatePath = getAlternateCoursePath(alternateParentSlug, alternateChapterSlug)
+	const frPath = locale === 'fr' ? ownPath : alternatePath
+	const enPath = locale === 'en' ? ownPath : alternatePath
 
 	return {
 		title: seo?.title ?? `${chapter.attributes.title} - ${t.course}`,

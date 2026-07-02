@@ -21,7 +21,7 @@ import {
 import { localesConstant } from '@/services/localesConstant'
 import type { Locale } from '@/types/strapi'
 import { getCourseTranslations } from '@/utils/courseTranslations'
-import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
+import { getAlternateCoursePath, getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 1 minute for faster updates from CMS
 export const revalidate = 60
@@ -48,14 +48,13 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const lesson = Array.isArray(lessonData.data) ? lessonData.data[0] : lessonData.data
 	const seo = lesson?.attributes?.seo
 
-	// Fetch localizations for alternate links
-	const lessonLocalizations = lesson?.attributes?.localizations?.data
-	const alternateLessonSlug = lessonLocalizations?.[0]?.attributes || lessonSlug
-
-	// Note: We keep the same parent course and chapter slugs for simplicity
-	// In a real scenario, you might want to fetch their localized slugs too
-	const frPath = `/course/${parentCourseSlug}/${chapterSlug}/${locale === 'fr' ? lessonSlug : alternateLessonSlug}`
-	const enPath = `/course/${parentCourseSlug}/${chapterSlug}/${locale === 'en' ? lessonSlug : alternateLessonSlug}`
+	// The alternate URL would need the localized parent course, chapter AND
+	// lesson slugs; those localizations are not linked in Strapi, so point the
+	// other locale to the course listing instead of a 404 (see getAlternateCoursePath)
+	const ownPath = `/course/${parentCourseSlug}/${chapterSlug}/${lessonSlug}`
+	const alternatePath = getAlternateCoursePath()
+	const frPath = locale === 'fr' ? ownPath : alternatePath
+	const enPath = locale === 'en' ? ownPath : alternatePath
 
 	return {
 		title: seo?.title ?? `${lesson?.attributes?.title ?? t.lesson} - ${t.course}`,

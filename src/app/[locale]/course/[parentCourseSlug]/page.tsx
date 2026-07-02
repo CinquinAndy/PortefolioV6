@@ -13,7 +13,7 @@ import type { Course } from '@/types/course'
 import type { Locale } from '@/types/strapi'
 import { getResponseData } from '@/types/strapi'
 import { getCourseTranslations, pluralize } from '@/utils/courseTranslations'
-import { getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
+import { getAlternateCoursePath, getCanonicalUrl, getLanguageAlternates, getMetadataBase } from '@/utils/seo'
 
 // revalidate every 1 minute for faster updates from CMS
 export const revalidate = 60
@@ -38,12 +38,14 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 	const course = courseData.data[0]
 	const seo = course.attributes.seo
 
-	// Fetch localizations for alternate links
-	const courseLocalizations = course.attributes.localizations?.data
-	const alternateCourseSlug = courseLocalizations?.[0]?.attributes || parentCourseSlug
+	// Localized slug of this course in the other locale (only set when the
+	// translation is linked as a localization in Strapi)
+	const alternateCourseSlug = course.attributes.localizations?.data?.[0]?.attributes?.slug
 
-	const frPath = `/course/${locale === 'fr' ? parentCourseSlug : alternateCourseSlug}`
-	const enPath = `/course/${locale === 'en' ? parentCourseSlug : alternateCourseSlug}`
+	const ownPath = `/course/${parentCourseSlug}`
+	const alternatePath = getAlternateCoursePath(alternateCourseSlug)
+	const frPath = locale === 'fr' ? ownPath : alternatePath
+	const enPath = locale === 'en' ? ownPath : alternatePath
 
 	return {
 		title: seo?.title ?? `${course.attributes.title} - ${t.course}`,
@@ -96,6 +98,14 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 	const course = courseData.data[0]
 	const chapters = course.attributes.chapters?.data ?? []
 
+	// Language switch targets: course slugs are localized, so the other domain
+	// needs the localized slug — or the course listing when it is not linked
+	const alternateCourseSlug = course.attributes.localizations?.data?.[0]?.attributes?.slug
+	const alternatePath = getAlternateCoursePath(alternateCourseSlug)
+	const ownPath = `/course/${parentCourseSlug}`
+	const frRedirect = `${process.env.NEXT_PUBLIC_URL}${locale === 'fr' ? ownPath : alternatePath}`
+	const enRedirect = `${process.env.NEXT_PUBLIC_URL_ALT}${locale === 'en' ? ownPath : alternatePath}`
+
 	const breadcrumbItems = [
 		{ label: t.home, href: `/${locale}` },
 		{ label: t.courses, href: `/${locale}/course` },
@@ -104,7 +114,13 @@ export default async function ParentCoursePage({ params }: { params: Promise<Pag
 
 	return (
 		<>
-			<Nav locale={locale} content_website={content_website} isHome={false} />
+			<Nav
+				locale={locale}
+				content_website={content_website}
+				isHome={false}
+				frRedirect={frRedirect}
+				enRedirect={enRedirect}
+			/>
 
 			<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
 				<div className="mx-auto max-w-3xl">

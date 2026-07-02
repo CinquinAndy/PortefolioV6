@@ -33,7 +33,7 @@ export interface Lesson {
 		seo?: CourseSEO
 		locale: string
 		localizations?: {
-			data: Array<{ id: number; attributes: string }>
+			data: Array<{ id: number; attributes: { slug: string; locale: string; title?: string } }>
 		}
 		createdAt: string
 		updatedAt: string
@@ -76,7 +76,7 @@ export interface Course {
 		difficulty?: number
 		locale: string
 		localizations?: {
-			data: Array<{ id: number; attributes: string }>
+			data: Array<{ id: number; attributes: { slug: string; locale: string; title?: string } }>
 		}
 		createdAt: string
 		updatedAt: string

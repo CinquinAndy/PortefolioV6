@@ -14,6 +14,7 @@
     "check": "biome check . --write",
     "check:fix": "biome check --write .",
     "test:unit": "bun test tests/unit",
+    "test:api": "bun test tests/integration",
     "tsc": "tsc --noEmit",
     "tsc:watch": "tsc --noEmit --watch",
     "test:visual": "playwright test",

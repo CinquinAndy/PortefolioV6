@@ -47,26 +47,25 @@ export async function generateMetadata({ params }: { params: Promise<ImagePagePa
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: ImagePageParams }[]> {
-	const paths: { params: ImagePageParams }[] = []
+export async function generateStaticParams(): Promise<ImagePageParams[]> {
+	// App Router expects segment values directly on each object —
+	// the Pages Router `{ params: {...} }` shape silently generates zero paths
+	const paths: ImagePageParams[] = []
 
 	for (const locale of localesConstant) {
-		// Assuming these are your locales
 		const realisationsResponse = await getRealisations(locale)
 		const realisations = getResponseData(realisationsResponse)
 
 		if (realisations) {
 			for (const realisation of realisations) {
-				const images = realisation.attributes.galery?.data // Assuming this is where images are stored
+				const images = realisation.attributes.galery?.data
 
 				if (images) {
 					for (const [index] of images.entries()) {
 						paths.push({
-							params: {
-								slug: realisation.attributes.slug,
-								locale,
-								image: String(index),
-							}, // Use index as a placeholder for image
+							slug: realisation.attributes.slug,
+							locale,
+							image: String(index),
 						})
 					}
 				}

@@ -64,17 +64,19 @@ export async function generateMetadata({ params }: { params: Promise<Realisation
 	}
 }
 
-export async function generateStaticParams(): Promise<{ params: RealisationSlugParams }[]> {
-	let paths: { params: RealisationSlugParams }[] = []
+export async function generateStaticParams(): Promise<RealisationSlugParams[]> {
+	let paths: RealisationSlugParams[] = []
 
 	for (const locale of localesConstant) {
 		const realisationsResponse = await getRealisations(locale)
 		const realisations = getResponseData(realisationsResponse)
 
 		if (realisations) {
-			// Map over each realisation to create a path object for it
+			// App Router expects segment values directly on each object —
+			// the Pages Router `{ params: {...} }` shape silently generates zero paths
 			const localePaths = realisations.map((realisation: Realisation) => ({
-				params: { slug: realisation.attributes.slug, locale },
+				slug: realisation.attributes.slug,
+				locale,
 			}))
 			paths = paths.concat(localePaths)
 		}

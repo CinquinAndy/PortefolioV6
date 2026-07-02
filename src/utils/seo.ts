@@ -53,3 +53,23 @@ export function getLanguageAlternates(
 		'en-US': finalEnPath && finalEnPath.length > 0 ? `${enUrl}${finalEnPath}` : enUrl,
 	}
 }
+
+/**
+ * Build the path of a course page in the other locale.
+ *
+ * Course, chapter and lesson slugs are localized in Strapi: reusing the
+ * current slug on the other domain leads to a 404. A deep path is only
+ * returned when EVERY localized slug of the URL is known (i.e. the entries
+ * are linked as localizations in Strapi); otherwise we fall back to the
+ * course listing, which exists on both domains.
+ *
+ * @param alternateSlugs - The localized slugs of each URL segment, in order
+ *   (parent course, then chapter, then lesson). Pass nothing for the fallback.
+ * @returns The path to use on the other domain (e.g. '/course/mon-cours' or '/course')
+ */
+export function getAlternateCoursePath(...alternateSlugs: Array<string | undefined>): string {
+	const allKnown =
+		alternateSlugs.length > 0 && alternateSlugs.every(slug => typeof slug === 'string' && slug.length > 0)
+
+	return allKnown ? `/course/${alternateSlugs.join('/')}` : '/course'
+}

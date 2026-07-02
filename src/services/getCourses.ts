@@ -74,7 +74,7 @@ export async function getChaptersByCourseId(
 	locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return await fetchAPI<CoursesResponse>(
-		`api/courses?populate[lessons][populate]=*&populate=thumbnail,tags&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+		`api/courses?populate[lessons][populate]=*&populate[thumbnail]=*&populate[tags]=*&filters[parent_course][id][$eq]=${courseId}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
@@ -84,7 +84,7 @@ export async function getChaptersByCourseId(
  */
 export async function getParentCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[chapters][populate][lessons]=*&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+		`api/courses?populate[chapters][populate][lessons]=*&populate[thumbnail]=*&populate[tags]=*&populate[seo]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
@@ -111,7 +111,7 @@ export async function getParentCourseForSidebarFull(
 	locale: Locale
 ): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[chapters][populate][lessons][sort][0]=order:asc&populate[chapters][populate][lessons][pagination][pageSize]=100&populate[chapters][sort][0]=order:asc&populate[chapters][pagination][pageSize]=100&populate=thumbnail,tags&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[chapters][populate][lessons][sort][0]=order:asc&populate[chapters][populate][lessons][pagination][pageSize]=100&populate[chapters][sort][0]=order:asc&populate[chapters][pagination][pageSize]=100&populate[thumbnail]=*&populate[tags]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)
 }
 
@@ -121,7 +121,7 @@ export async function getParentCourseForSidebarFull(
  */
 export async function getCourseBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[chapters][populate]=lessons&populate[lessons]=*&populate=thumbnail,tags,seo,parent_course&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
+		`api/courses?populate[chapters][populate]=lessons&populate[lessons]=*&populate[thumbnail]=*&populate[tags]=*&populate[seo]=*&populate[parent_course]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&sort=order:asc&pagination[pageSize]=100&locale=${locale}`
 	)
 }
 
@@ -133,8 +133,11 @@ export async function getCourseBySlug(slug: string, locale: Locale): Promise<Cou
  * - Parent course: title, slug only (for breadcrumb)
  */
 export async function getChapterBySlug(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
+	// NOTE: only request lesson fields that exist in the Strapi schema.
+	// Requesting a removed field (e.g. the old video_duration/is_free) makes
+	// Strapi return a 400, which this app translates into a 404 page.
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][fields][0]=title&populate[lessons][fields][1]=description&populate[lessons][fields][2]=slug&populate[lessons][fields][3]=video_duration&populate[lessons][fields][4]=is_free&populate[parent_course][fields][0]=title&populate[parent_course][fields][1]=slug&populate[seo]=*&populate[localizations]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][fields][0]=title&populate[lessons][fields][1]=description&populate[lessons][fields][2]=slug&populate[parent_course][fields][0]=title&populate[parent_course][fields][1]=slug&populate[seo]=*&populate[localizations]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)
 }
 
@@ -144,7 +147,7 @@ export async function getChapterBySlug(slug: string, locale: Locale): Promise<Co
  */
 export async function getChapterBySlugFull(slug: string, locale: Locale): Promise<CoursesResponse | NotFoundResponse> {
 	return fetchAPI<CoursesResponse>(
-		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate[lessons][pagination][pageSize]=100&populate[parent_course][populate]=*&populate=thumbnail,tags,seo&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
+		`api/courses?populate[lessons][sort][0]=order:asc&populate[lessons][populate]=attachments&populate[lessons][pagination][pageSize]=100&populate[parent_course][populate]=*&populate[thumbnail]=*&populate[tags]=*&populate[seo]=*&filters[slug][$eq]=${slug}&filters[is_published][$eq]=true&locale=${locale}`
 	)
 }
 
